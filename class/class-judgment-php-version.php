@@ -13,7 +13,7 @@ declare( strict_types = 1 );
 /**
  * Return true or false.
  */
-class Judgment_Php_Version {
+class Sct_Judgment_Php_Version {
 	/**
 	 * Argument.
 	 *
