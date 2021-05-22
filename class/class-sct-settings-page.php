@@ -50,3 +50,7 @@ class Sct_Settings_Page {
 		return $links;
 	}
 }
+
+if ( is_admin() ) {
+	$settings_page = new Sct_Settings_Page();
+}
