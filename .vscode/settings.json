@@ -1,0 +1,4 @@
+{
+    "phpcs.executablePath": "./vendor/bin/phpcs",
+    "editor.insertSpaces": false
+}
