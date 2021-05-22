@@ -19,6 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Settings_Page {
 	/**
+	 * WordPress hook.
+	 * Add settings page link in admin page.
+	 */
+	public function __construct() {
+		add_action( 'admin_menu', [ $this, 'add_menu' ] );
+	}
+
+	/**
 	 * Add configuration link to plugin page.
 	 *
 	 * @param array|string $links plugin page setting links.
