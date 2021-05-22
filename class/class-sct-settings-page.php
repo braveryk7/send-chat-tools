@@ -49,6 +49,62 @@ class Sct_Settings_Page {
 		array_unshift( $links, $add_link );
 		return $links;
 	}
+
+	/**
+	 * Settings page.
+	 */
+	public function settings_page() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You have no sufficient permissions to access this page.', 'send-chat-tools' ) );
+		}
+
+		$hidden_field_name = 'hiddenStatus';
+
+		?>
+<div class="wrap">
+		<?php if ( isset( $_POST[ $hidden_field_name ] ) && 'Y' === $_POST[ $hidden_field_name ] ) : ?>
+			<?php if ( check_admin_referer( 'sct_settings_nonce', 'sct_settings_nonce' ) ) : ?>
+	<div class="updated">
+		<p><?php esc_html_e( 'Your update has been successfully completed!!', 'send-chat-tools' ); ?></p>
+	</div>
+			<?php else : ?>
+	<div class="error">
+		<p><?php esc_html_e( 'An error has occurred. Please try again.', 'send-chat-tools' ); ?></p>
+	</div>
+			<?php endif ?>
+		<?php endif ?>
+	<h1><?php esc_html_e( 'Send Chat Tools Settings', 'send-chat-tools' ); ?></h1>
+	<h2><?php esc_html_e( 'Slack', 'send-chat-tools' ); ?></h2>
+	<form method="POST">
+		<input type="hidden" name="<?php echo esc_attr( $hidden_field_name ); ?>" value="Y">
+		<?php wp_nonce_field( 'sct_settings_nonce', 'sct_settings_nonce' ); ?>
+		<table class="form-table">
+			<tbody>
+				<tr>
+					<th>
+						<label><?php esc_html_e( 'API Key', 'send-chat-tools' ); ?></label>
+					</th>
+					<td>
+						<input type="text" name="slack_api_key" size="60" placeholder="<?php esc_html_e( 'Input Slack API Key', 'send-chat-tools' ); ?>">
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label><?php esc_html_e( 'Slack channel name', 'send-chat-tools' ); ?></label>
+					</th>
+					<td>
+						<input type="text" name="slack_channel_name" size="" placeholder="<?php esc_html_e( '@channnel', 'send-chat-tools' ); ?>">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p class="submit">
+			<input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" />
+		</p>
+	</form>
+</div>
+		<?php
+	}
 }
 
 if ( is_admin() ) {
