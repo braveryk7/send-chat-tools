@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 load_plugin_textdomain( 'send-chat-tools', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
-require_once dirname( __FILE__ ) . '/class/class-judgment-php-version.php';
+require_once dirname( __FILE__ ) . '/class/class-sct-judgment-php-version.php';
 
 $require_php_version  = '7.3.0';
 $get_php_version_bool = new Sct_Judgment_Php_Version();
@@ -41,5 +41,8 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 		exit;
 	}
 } elseif ( true === $get_php_version_bool->judgment( $require_php_version ) ) {
+	require_once dirname( __FILE__ ) . '/class/class-sct-settings-page.php';
+
+	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'Sct_Settings_Page::add_settings_links' );
 }
 
