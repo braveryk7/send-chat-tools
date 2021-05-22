@@ -27,6 +27,19 @@ class Sct_Settings_Page {
 	}
 
 	/**
+	 * Add Setting menu.
+	 */
+	public function add_menu() {
+		add_options_page(
+			__( 'Send Chat Tools', 'send-chat-tools' ),
+			__( 'Send Chat Tools', 'send-chat-tools' ),
+			'administrator',
+			'send-chat-tools-settings',
+			[ $this, 'settings_page' ],
+		);
+	}
+
+	/**
 	 * Add configuration link to plugin page.
 	 *
 	 * @param array|string $links plugin page setting links.
