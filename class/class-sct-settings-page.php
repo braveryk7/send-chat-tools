@@ -62,19 +62,14 @@ class Sct_Settings_Page {
 
 		if ( isset( $_POST[ $hidden_field_name ] ) && 'Y' === $_POST[ $hidden_field_name ] ) {
 			if ( check_admin_referer( 'sct_settings_nonce', 'sct_settings_nonce' ) ) {
-				if ( isset( $_POST['slack_api_key'] ) ) {
-					$slack_api_key = sanitize_text_field( wp_unslash( $_POST['slack_api_key'] ) );
-					update_option( 'sct_slack_api_key', $slack_api_key );
-				}
-				if ( isset( $_POST['slack_channel_name'] ) ) {
-					$slack_channel_name = sanitize_text_field( wp_unslash( $_POST['slack_channel_name'] ) );
-					update_option( 'sct_slack_channel_name', $slack_channel_name );
+				if ( isset( $_POST['slack_webhook_url'] ) ) {
+					$slack_webhook_url = sanitize_text_field( wp_unslash( $_POST['slack_webhook_url'] ) );
+					update_option( 'sct_slack_webhook_url', $slack_webhook_url );
 				}
 			}
 		}
 
-		$get_slack_api_key      = get_option( 'sct_slack_api_key' );
-		$get_slack_channel_name = get_option( 'sct_slack_channel_name' );
+		$get_slack_webhook_url = get_option( 'sct_slack_webhook_url' );
 
 		?>
 <div class="wrap">
@@ -98,18 +93,10 @@ class Sct_Settings_Page {
 			<tbody>
 				<tr>
 					<th>
-						<label><?php esc_html_e( 'API Key', 'send-chat-tools' ); ?></label>
+						<label><?php esc_html_e( 'Webhook URL', 'send-chat-tools' ); ?></label>
 					</th>
 					<td>
-						<input type="text" name="slack_api_key" size="60" value="<?php echo esc_attr( $get_slack_api_key ); ?>" placeholder="<?php esc_html_e( 'Input Slack API Key', 'send-chat-tools' ); ?>">
-					</td>
-				</tr>
-				<tr>
-					<th>
-						<label><?php esc_html_e( 'Slack channel name', 'send-chat-tools' ); ?></label>
-					</th>
-					<td>
-						<input type="text" name="slack_channel_name" size="" value="<?php echo esc_attr( $get_slack_channel_name ); ?>" placeholder="<?php esc_html_e( '@channnel', 'send-chat-tools' ); ?>">
+						<input type="text" name="slack_webhook_url" size="60" value="<?php echo esc_attr( $get_slack_webhook_url ); ?>" placeholder="<?php esc_html_e( 'Input Slack Webhook URL', 'send-chat-tools' ); ?>">
 					</td>
 				</tr>
 			</tbody>
