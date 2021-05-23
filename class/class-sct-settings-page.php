@@ -66,10 +66,17 @@ class Sct_Settings_Page {
 					$slack_webhook_url = sanitize_text_field( wp_unslash( $_POST['slack_webhook_url'] ) );
 					update_option( 'sct_slack_webhook_url', $slack_webhook_url );
 				}
+				if ( isset( $_POST['use_slack'] ) ) {
+					$use_slack = sanitize_text_field( wp_unslash( $_POST['use_slack'] ) );
+					update_option( 'sct_use_slack', $use_slack );
+				} else {
+					update_option( 'sct_use_slack', '0' );
+				}
 			}
 		}
 
 		$get_slack_webhook_url = get_option( 'sct_slack_webhook_url' );
+		$get_use_slack         = '1' === get_option( 'sct_use_slack' ) ? 'checked' : '';
 
 		?>
 <div class="wrap">
@@ -93,10 +100,18 @@ class Sct_Settings_Page {
 			<tbody>
 				<tr>
 					<th>
-						<label><?php esc_html_e( 'Webhook URL', 'send-chat-tools' ); ?></label>
+						<label for="use_slack"><?php esc_html_e( 'Use Slack', 'send-chat-tools' ); ?></label>
 					</th>
 					<td>
-						<input type="text" name="slack_webhook_url" size="60" value="<?php echo esc_attr( $get_slack_webhook_url ); ?>" placeholder="<?php esc_html_e( 'Input Slack Webhook URL', 'send-chat-tools' ); ?>">
+						<input type="checkbox" id="use_slack" name="use_slack" value="1" <?php echo esc_attr( $get_use_slack ); ?>>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label for="slack_webhook_url"><?php esc_html_e( 'Webhook URL', 'send-chat-tools' ); ?></label>
+					</th>
+					<td>
+						<input type="text" id="slack_webhook_url" name="slack_webhook_url" size="60" value="<?php echo esc_attr( $get_slack_webhook_url ); ?>" placeholder="<?php esc_html_e( 'Input Slack Webhook URL', 'send-chat-tools' ); ?>">
 					</td>
 				</tr>
 			</tbody>
