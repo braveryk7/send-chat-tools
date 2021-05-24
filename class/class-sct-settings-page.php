@@ -72,11 +72,11 @@ class Sct_Settings_Page {
 				if ( isset( $_POST['slack_webhook_url'] ) ) {
 					$slack_webhook_url = sanitize_text_field( wp_unslash( $_POST['slack_webhook_url'] ) );
 					$crypt_slack       = Sct_Encryption::encrypt( $slack_webhook_url );
-					update_option( 'sct_slack_webhook_url', $crypt_slack_webhook_url );
+					update_option( 'sct_slack_webhook_url', $crypt_slack );
 				}
 				if ( isset( $_POST['send_slack_author'] ) ) {
 					$send_slack_author = sanitize_text_field( wp_unslash( $_POST['send_slack_author'] ) );
-					update_option( 'sct_send_slack_author', $use_slack );
+					update_option( 'sct_send_slack_author', $send_slack_author );
 				} else {
 					update_option( 'sct_send_slack_author', '0' );
 				}
