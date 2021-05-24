@@ -17,6 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Send Slack.
  */
 class Sct_Slack {
+	/**
+	 * Send Slack.
+	 */
 	public static function send_slack() {
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
