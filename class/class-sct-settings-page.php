@@ -74,11 +74,18 @@ class Sct_Settings_Page {
 					$crypt_slack       = Sct_Encryption::encrypt( $slack_webhook_url );
 					update_option( 'sct_slack_webhook_url', $crypt_slack_webhook_url );
 				}
+				if ( isset( $_POST['send_slack_author'] ) ) {
+					$send_slack_author = sanitize_text_field( wp_unslash( $_POST['send_slack_author'] ) );
+					update_option( 'sct_send_slack_author', $use_slack );
+				} else {
+					update_option( 'sct_send_slack_author', '0' );
+				}
 			}
 		}
 
 		$get_slack_webhook_url = Sct_Encryption::decrypt( get_option( 'sct_slack_webhook_url' ) );
 		$get_use_slack         = '1' === get_option( 'sct_use_slack' ) ? 'checked' : '';
+		$get_send_slack_author = '1' === get_option( 'sct_send_slack_author' ) ? 'checked' : '';
 
 		?>
 <div class="wrap">
@@ -114,6 +121,14 @@ class Sct_Settings_Page {
 					</th>
 					<td>
 						<input type="text" id="slack_webhook_url" name="slack_webhook_url" size="60" value="<?php echo esc_attr( $get_slack_webhook_url ); ?>" placeholder="<?php esc_html_e( 'Input Slack Webhook URL', 'send-chat-tools' ); ?>">
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label for="send_slack_author"><?php esc_html_e( 'Don\'t send self comment', 'send-chat-tools' ); ?></label>
+					</th>
+					<td>
+						<input type="checkbox" id="send_slack_author" name="send_slack_author" value="1" <?php echo esc_attr( $get_send_slack_author ); ?>>
 					</td>
 				</tr>
 			</tbody>
