@@ -57,25 +57,27 @@ class Sct_Settings_Page {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( esc_html__( 'You have no sufficient permissions to access this page.', 'send-chat-tools' ) );
 		}
+		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
 		$hidden_field_name = 'hiddenStatus';
 
 		if ( isset( $_POST[ $hidden_field_name ] ) && 'Y' === $_POST[ $hidden_field_name ] ) {
 			if ( check_admin_referer( 'sct_settings_nonce', 'sct_settings_nonce' ) ) {
-				if ( isset( $_POST['slack_webhook_url'] ) ) {
-					$slack_webhook_url = sanitize_text_field( wp_unslash( $_POST['slack_webhook_url'] ) );
-					update_option( 'sct_slack_webhook_url', $slack_webhook_url );
-				}
 				if ( isset( $_POST['use_slack'] ) ) {
 					$use_slack = sanitize_text_field( wp_unslash( $_POST['use_slack'] ) );
 					update_option( 'sct_use_slack', $use_slack );
 				} else {
 					update_option( 'sct_use_slack', '0' );
 				}
+				if ( isset( $_POST['slack_webhook_url'] ) ) {
+					$slack_webhook_url = sanitize_text_field( wp_unslash( $_POST['slack_webhook_url'] ) );
+					$crypt_slack       = Sct_Encryption::encrypt( $slack_webhook_url );
+					update_option( 'sct_slack_webhook_url', $crypt_slack_webhook_url );
+				}
 			}
 		}
 
-		$get_slack_webhook_url = get_option( 'sct_slack_webhook_url' );
+		$get_slack_webhook_url = Sct_Encryption::decrypt( get_option( 'sct_slack_webhook_url' ) );
 		$get_use_slack         = '1' === get_option( 'sct_use_slack' ) ? 'checked' : '';
 
 		?>
