@@ -43,6 +43,7 @@ class Sct_Encryption {
 	public static function encrypt( string $value ): string {
 		$wpdb;
 		$new_iv = self::make_vector();
+		update_option( 'sct_use_user_id', wp_get_current_user()->ID );
 		update_option( 'sct_iv', $new_iv );
 		return openssl_encrypt( $value, self::METHOD, self::get_user_registered(), 0, $new_iv );
 	}
@@ -53,7 +54,10 @@ class Sct_Encryption {
 	 * @param string $value to decrypt.
 	 */
 	public static function decrypt( string $value ): string {
-		$iv = get_option( 'sct_iv' );
-		return openssl_decrypt( $value, self::METHOD, self::get_user_registered(), 0, $iv );
+		$wpdb;
+		$get_user_id = get_option( 'sct_use_user_id' );
+		$key         = get_userdata( $get_user_id )->user_registered;
+		$iv          = get_option( 'sct_iv' );
+		return openssl_decrypt( $value, self::METHOD, $key, 0, $iv );
 	}
 }
