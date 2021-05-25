@@ -41,6 +41,7 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 		exit;
 	}
 } elseif ( true === $get_php_version_bool->judgment( $require_php_version ) ) {
+	require_once dirname( __FILE__ ) . '/class/class-sct-connect-database.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-settings-page.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-slack.php';
 
@@ -49,6 +50,14 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	if ( '1' === get_option( 'sct_use_slack' ) ) {
 		add_action( 'comment_post', 'Sct_Slack::send_slack' );
 	}
+
+	/**
+	 * Uninstall Hook.
+	 */
+	function sct_uninstall() {
+		register_uninstall_hook( __FILE__, 'Sct_Connect_Database::delete_db' );
+	}
+	sct_uninstall();
 
 	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'Sct_Settings_Page::add_settings_links' );
 }
