@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-05-26 14:14+0900\n"
+"PO-Revision-Date: 2021-05-26 14:24+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e;esc_attr__;esc_attr_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
+
+#: class/class-sct-settings-page.php:34 class/class-sct-settings-page.php:35
+msgid "Send Chat Tools"
+msgstr "Send Chat Tools"
+
+#: class/class-sct-settings-page.php:48
+msgid "Settings"
+msgstr "設定"
+
+#: class/class-sct-settings-page.php:58
+msgid "You have no sufficient permissions to access this page."
+msgstr "このページにアクセスするための十分な権限がありません。"
+
+#: class/class-sct-settings-page.php:95
+msgid "Your update has been successfully completed!!"
+msgstr "設定が完了しました！"
+
+#: class/class-sct-settings-page.php:99
+msgid "An error has occurred. Please try again."
+msgstr "エラーが発生しました。もう一度やり直してください。"
+
+#: class/class-sct-settings-page.php:103
+msgid "Send Chat Tools Settings"
+msgstr "Send Chat Tools設定"
+
+#: class/class-sct-settings-page.php:104
+msgid "Slack"
+msgstr "Slack"
+
+#: class/class-sct-settings-page.php:112
+msgid "Use Slack"
+msgstr "Slackを使用"
+
+#: class/class-sct-settings-page.php:120
+msgid "Webhook URL"
+msgstr "Webhook URL"
+
+#: class/class-sct-settings-page.php:123
+msgid "Input Slack Webhook URL"
+msgstr "SlackのWebhook URLを入力"
+
+#: class/class-sct-settings-page.php:128
+msgid "Don't send self comment"
+msgstr "自分自身のコメントを送信しない"
+
+#: class/class-sct-settings-page.php:137
+msgid "Save Changes"
+msgstr "変更を保存"
+
+#: class/class-sct-slack.php:40
+msgid "Approved"
+msgstr "承認済み"
+
+#: class/class-sct-slack.php:42
+msgid "Unapproved"
+msgstr "未承認"
+
+#: class/class-sct-slack.php:42
+msgid "Click here to approve"
+msgstr "ここをクリックして承認"
+
+#: class/class-sct-slack.php:44
+msgid "Spam"
+msgstr "スパム"
+
+#: class/class-sct-slack.php:49
+msgid "new comment has been posted."
+msgstr "に新規コメントが投稿されました。"
+
+#: class/class-sct-slack.php:50
+msgid "Commented article:"
+msgstr "コメントされた記事："
+
+#: class/class-sct-slack.php:51
+msgid "Author:"
+msgstr "投稿者名："
+
+#: class/class-sct-slack.php:52
+msgid "Date and time:"
+msgstr "日時："
+
+#: class/class-sct-slack.php:53
+msgid "Text:"
+msgstr "本文："
+
+#: class/class-sct-slack.php:54
+msgid "Comment URL:"
+msgstr "コメントのURL："
+
+#: class/class-sct-slack.php:55
+msgid "Comment Status:"
+msgstr "コメントの状態："
+
+#: modules/cancel-activate.php:23
+msgid ""
+"[Plugin error] Send Chat Tools has been stopped because the PHP version is "
+"old."
+msgstr ""
+"[プラグインエラー] PHPのバージョンが古いため、Send Chat Toolsは停止されまし"
+"た。"
+
+#: modules/cancel-activate.php:25 send-chat-tools.php:40
+msgid "Send Chat Tools requires at least PHP 7.3.0 or later."
+msgstr "Send Chat Toolsには、少なくともPHP7.3以降が必要です。"
+
+#: modules/cancel-activate.php:26 send-chat-tools.php:40
+msgid "Please upgrade PHP."
+msgstr "PHPをアップグレードしてください。"
+
+#: modules/cancel-activate.php:29
+msgid "Current PHP version:"
+msgstr "現在のPHPバージョン："
