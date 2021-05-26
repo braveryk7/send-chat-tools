@@ -100,9 +100,9 @@ class Sct_Settings_Page {
 	</div>
 			<?php endif ?>
 		<?php endif ?>
-	<h1><?php esc_html_e( 'Send Chat Tools Settings', 'send-chat-tools' ); ?></h1>
-	<h2><?php esc_html_e( 'Slack', 'send-chat-tools' ); ?></h2>
 	<form method="POST">
+		<h1><?php esc_html_e( 'Send Chat Tools Settings', 'send-chat-tools' ); ?></h1>
+		<h2><?php esc_html_e( 'Slack', 'send-chat-tools' ); ?></h2>
 		<input type="hidden" name="<?php echo esc_attr( $hidden_field_name ); ?>" value="Y">
 		<?php wp_nonce_field( 'sct_settings_nonce', 'sct_settings_nonce' ); ?>
 		<table class="form-table">
