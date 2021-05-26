@@ -63,18 +63,18 @@ class Sct_Settings_Page {
 
 		if ( isset( $_POST[ $hidden_field_name ] ) && 'Y' === $_POST[ $hidden_field_name ] ) {
 			if ( check_admin_referer( 'sct_settings_nonce', 'sct_settings_nonce' ) ) {
-				if ( isset( $_POST['use_slack'] ) ) {
+				if ( ! empty( $_POST['use_slack'] ) ) {
 					$use_slack = sanitize_text_field( wp_unslash( $_POST['use_slack'] ) );
 					update_option( 'sct_use_slack', $use_slack );
 				} else {
 					update_option( 'sct_use_slack', '0' );
 				}
-				if ( isset( $_POST['slack_webhook_url'] ) ) {
+				if ( ! empty( $_POST['slack_webhook_url'] ) ) {
 					$slack_webhook_url = sanitize_text_field( wp_unslash( $_POST['slack_webhook_url'] ) );
 					$crypt_slack       = Sct_Encryption::encrypt( $slack_webhook_url );
 					update_option( 'sct_slack_webhook_url', $crypt_slack );
 				}
-				if ( isset( $_POST['send_slack_author'] ) ) {
+				if ( ! empty( $_POST['send_slack_author'] ) ) {
 					$send_slack_author = sanitize_text_field( wp_unslash( $_POST['send_slack_author'] ) );
 					update_option( 'sct_send_slack_author', $send_slack_author );
 				} else {
