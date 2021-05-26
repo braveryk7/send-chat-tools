@@ -52,8 +52,7 @@ class Sct_Slack {
 					esc_html__( 'Date and time:', 'send-chat-tools' ) . $comment->comment_date . "\n" .
 					esc_html__( 'Text:', 'send-chat-tools' ) . "\n" . $comment->comment_content . "\n\n" .
 					esc_html__( 'Comment URL:', 'send-chat-tools' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
-					esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status .
-					'send author?:' . $send_author . 'comment User ID:' . $comment->user_id,
+					esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status,
 			];
 
 			$options = [
