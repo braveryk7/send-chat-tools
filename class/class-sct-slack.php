@@ -1,6 +1,6 @@
 <?php
 /**
- * Admin settings page.
+ * Use Slack.
  *
  * @author Ken-chan
  * @package WordPress
