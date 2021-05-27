@@ -78,7 +78,7 @@ class Sct_Settings_Page {
 				} else {
 					update_option( 'sct_use_slack', '0' );
 				}
-				if ( ! empty( $_POST['slack_webhook_url'] ) ) {
+				if ( isset( $_POST['slack_webhook_url'] ) ) {
 					$slack_webhook_url = sanitize_text_field( wp_unslash( $_POST['slack_webhook_url'] ) );
 					$crypt_slack       = Sct_Encryption::encrypt( $slack_webhook_url );
 					update_option( 'sct_slack_webhook_url', $crypt_slack );
@@ -96,7 +96,7 @@ class Sct_Settings_Page {
 				} else {
 					update_option( 'sct_use_chatwork', '0' );
 				}
-				if ( ! empty( $_POST['chatwork_api_token'] ) ) {
+				if ( isset( $_POST['chatwork_api_token'] ) ) {
 					$chatwork_api_token = sanitize_text_field( wp_unslash( $_POST['chatwork_api_token'] ) );
 					$crypt_chatwork     = Sct_Encryption::encrypt( $chatwork_api_token );
 					update_option( 'sct_chatwork_api_token', $crypt_chatwork );
