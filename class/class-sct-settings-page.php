@@ -63,6 +63,7 @@ class Sct_Settings_Page {
 
 		if ( isset( $_POST[ $hidden_field_name ] ) && 'Y' === $_POST[ $hidden_field_name ] ) {
 			if ( check_admin_referer( 'sct_settings_nonce', 'sct_settings_nonce' ) ) {
+				/** Slack */
 				if ( ! empty( $_POST['use_slack'] ) ) {
 					$use_slack = sanitize_text_field( wp_unslash( $_POST['use_slack'] ) );
 					update_option( 'sct_use_slack', $use_slack );
@@ -80,12 +81,40 @@ class Sct_Settings_Page {
 				} else {
 					update_option( 'sct_send_slack_author', '0' );
 				}
+				/** Chatwork */
+				if ( ! empty( $_POST['use_chatwork'] ) ) {
+					$use_chatwork = sanitize_text_field( wp_unslash( $_POST['use_chatwork'] ) );
+					update_option( 'sct_use_chatwork', $use_chatwork );
+				} else {
+					update_option( 'sct_use_chatwork', '0' );
+				}
+				if ( ! empty( $_POST['chatwork_api_token'] ) ) {
+					$chatwork_api_token = sanitize_text_field( wp_unslash( $_POST['chatwork_api_token'] ) );
+					$crypt_chatwork     = Sct_Encryption::encrypt( $chatwork_api_token );
+					update_option( 'sct_chatwork_api_token', $crypt_chatwork );
+				}
+				if ( isset( $_POST['chatwork_room_id'] ) ) {
+					$chatwork_room_id = sanitize_text_field( wp_unslash( $_POST['chatwork_room_id'] ) );
+					$crypt_room_id    = Sct_Encryption::encrypt( $chatwork_room_id );
+					update_option( 'sct_chatwork_room_id', $crypt_room_id );
+				}
+				if ( ! empty( $_POST['send_chatwork_author'] ) ) {
+					$send_chatwork_author = sanitize_text_field( wp_unslash( $_POST['send_chatwork_author'] ) );
+					update_option( 'sct_send_chatwork_author', $send_chatwork_author );
+				} else {
+					update_option( 'sct_send_chatwork_author', '0' );
+				}
 			}
 		}
 
 		$get_slack_webhook_url = Sct_Encryption::decrypt( get_option( 'sct_slack_webhook_url' ) );
 		$get_use_slack         = '1' === get_option( 'sct_use_slack' ) ? 'checked' : '';
 		$get_send_slack_author = '1' === get_option( 'sct_send_slack_author' ) ? 'checked' : '';
+
+		$get_chatwork_api_token   = Sct_Encryption::decrypt( get_option( 'sct_chatwork_api_token' ) );
+		$get_chatwork_room_id     = Sct_Encryption::decrypt( get_option( 'sct_chatwork_room_id' ) );
+		$get_use_chatwork         = '1' === get_option( 'sct_use_chatwork' ) ? 'checked' : '';
+		$get_send_chatwork_author = '1' === get_option( 'sct_send_chatwork_author' ) ? 'checked' : '';
 
 		?>
 <div class="wrap">
@@ -104,35 +133,76 @@ class Sct_Settings_Page {
 	<form method="POST">
 		<input type="hidden" name="<?php echo esc_attr( $hidden_field_name ); ?>" value="Y">
 		<?php wp_nonce_field( 'sct_settings_nonce', 'sct_settings_nonce' ); ?>
-		<h2><?php esc_html_e( 'Slack', 'send-chat-tools' ); ?></h2>
-		<table class="form-table">
-			<tbody>
-				<tr>
-					<th>
-						<label for="use_slack"><?php esc_html_e( 'Use Slack', 'send-chat-tools' ); ?></label>
-					</th>
-					<td>
-						<input type="checkbox" id="use_slack" name="use_slack" value="1" <?php echo esc_attr( $get_use_slack ); ?>>
-					</td>
-				</tr>
-				<tr>
-					<th>
-						<label for="slack_webhook_url"><?php esc_html_e( 'Webhook URL', 'send-chat-tools' ); ?></label>
-					</th>
-					<td>
-						<input type="text" id="slack_webhook_url" name="slack_webhook_url" size="60" value="<?php echo esc_attr( $get_slack_webhook_url ); ?>" placeholder="<?php esc_html_e( 'Input Slack Webhook URL', 'send-chat-tools' ); ?>">
-					</td>
-				</tr>
-				<tr>
-					<th>
-						<label for="send_slack_author"><?php esc_html_e( 'Don\'t send self comment', 'send-chat-tools' ); ?></label>
-					</th>
-					<td>
-						<input type="checkbox" id="send_slack_author" name="send_slack_author" value="1" <?php echo esc_attr( $get_send_slack_author ); ?>>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="postbox">
+			<h2><?php esc_html_e( 'Slack', 'send-chat-tools' ); ?></h2>
+			<table class="form-table">
+				<tbody>
+					<tr>
+						<th>
+							<label for="use_slack"><?php esc_html_e( 'Use Slack', 'send-chat-tools' ); ?></label>
+						</th>
+						<td>
+							<input type="checkbox" id="use_slack" name="use_slack" value="1" <?php echo esc_attr( $get_use_slack ); ?>>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label for="slack_webhook_url"><?php esc_html_e( 'Webhook URL', 'send-chat-tools' ); ?></label>
+						</th>
+						<td>
+							<input type="text" id="slack_webhook_url" name="slack_webhook_url" size="60" value="<?php echo esc_attr( $get_slack_webhook_url ); ?>" placeholder="<?php esc_html_e( 'Input Slack Webhook URL', 'send-chat-tools' ); ?>">
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label for="send_slack_author"><?php esc_html_e( 'Don\'t send self comment', 'send-chat-tools' ); ?></label>
+						</th>
+						<td>
+							<input type="checkbox" id="send_slack_author" name="send_slack_author" value="1" <?php echo esc_attr( $get_send_slack_author ); ?>>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="postbox">
+			<h2><?php esc_html_e( 'Chatwork', 'send-chat-tools' ); ?></h2>
+			<table class="form-table">
+				<tbody>
+					<tr>
+						<th>
+							<label for="use_chatwork"><?php esc_html_e( 'Use Chatwork', 'send-chat-tools' ); ?></label>
+						</th>
+						<td>
+							<input type="checkbox" id="use_chatwork" name="use_chatwork" value="1" <?php echo esc_attr( $get_use_chatwork ); ?>>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label for="chatwork_api_token"><?php esc_html_e( 'API Token', 'send-chat-tools' ); ?></label>
+						</th>
+						<td>
+							<input type="text" id="chatwork_api_token" name="chatwork_api_token" size="60" value="<?php echo esc_attr( $get_chatwork_api_token ); ?>" placeholder="<?php esc_html_e( 'Input Chatwork API Token', 'send-chat-tools' ); ?>">
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label for="chatwork_room_id"><?php esc_html_e( 'Room ID', 'send-chat-tools' ); ?></label>
+						</th>
+						<td>
+							<input type="text" id="chatwork_room_id" name="chatwork_room_id" value="<?php echo esc_attr( $get_chatwork_room_id ); ?>" placeholder="<?php esc_html_e( 'Input Chatwork room ID', 'send-chat-tools' ); ?>">
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label for="send_chatwork_author"><?php esc_html_e( 'Don\'t send self comment', 'send-chat-tools' ); ?></label>
+						</th>
+						<td>
+							<input type="checkbox" id="send_chatwork_author" name="send_chatwork_author" value="1" <?php echo esc_attr( $get_send_chatwork_author ); ?>>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<p class="submit">
 			<input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" />
 		</p>
