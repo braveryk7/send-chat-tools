@@ -42,9 +42,13 @@ class Sct_Encryption {
 	 */
 	public static function encrypt( string $value ): string {
 		$wpdb;
-		$new_iv = self::make_vector();
+		if ( false === get_option( 'sct_iv' ) ) {
+			$new_iv = self::make_vector();
+			update_option( 'sct_iv', $new_iv );
+		} else {
+			$new_iv = get_option( 'sct_iv' );
+		}
 		update_option( 'sct_use_user_id', wp_get_current_user()->ID );
-		update_option( 'sct_iv', $new_iv );
 		return openssl_encrypt( $value, self::METHOD, self::get_user_registered(), 0, $new_iv );
 	}
 
