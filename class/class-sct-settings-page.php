@@ -24,6 +24,7 @@ class Sct_Settings_Page {
 	 */
 	public function __construct() {
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
+		add_action( 'admin_head-settings_page_send-chat-tools-settings', [ $this, 'include_css' ] );
 	}
 
 	/**
@@ -48,6 +49,13 @@ class Sct_Settings_Page {
 		$add_link = '<a href="options-general.php?page=send-chat-tools-settings">' . __( 'Settings', 'send-chat-tools' ) . '</a>';
 		array_unshift( $links, $add_link );
 		return $links;
+	}
+
+	/**
+	 * Include CSS in Send Chat Tools settings page.
+	 */
+	public function include_css() {
+			wp_enqueue_style( 'sct-admin-page.css', plugins_url( 'css/style.css', dirname( __FILE__ ) ), false, gmdate( 'Ymd', filemtime( __FILE__ ) ) );
 	}
 
 	/**
