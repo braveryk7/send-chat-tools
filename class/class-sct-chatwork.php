@@ -41,7 +41,7 @@ class Sct_Chatwork {
 			if ( '1' === $comment_approved ) {
 				$comment_status = esc_html__( 'Approved', 'send-chat-tools' );
 			} elseif ( '0' === $comment_approved ) {
-				$comment_status = esc_html__( 'Unapproved', 'send-chat-tools' ) . '<<' . $approved_url . '|' . esc_html__( 'Click here to approve', 'send-chat-tools' ) . '>>';
+				$comment_status = esc_html__( 'Unapproved', 'send-chat-tools' ) . "\n" . esc_html__( 'Click here to approve', 'send-chat-tools' ) . ' ' . $approved_url;
 			} elseif ( 'spam' === $comment_approved ) {
 				$comment_status = esc_html__( 'Spam', 'send-chat-tools' );
 			}
