@@ -159,6 +159,12 @@ class Sct_Settings_Page {
 						</th>
 						<td>
 							<input type="text" id="slack_webhook_url" name="slack_webhook_url" size="60" value="<?php echo esc_attr( $get_slack_webhook_url ); ?>" placeholder="<?php esc_html_e( 'Input Slack Webhook URL', 'send-chat-tools' ); ?>">
+							<p><?php esc_html_e( 'Get the webhook URL from the Slack API.', 'send-chat-tools' ); ?></p>
+							<p><?php esc_html_e( 'The URL is usually in https://hooks.slack.com/services/XXXXX/XXXXX format.', 'send-chat-tools' ); ?></p>
+							<p>
+								<?php esc_html_e( 'Explanation of getting the Slack Webhook URL:', 'send-chat-tools' ); ?>
+								<a href="https://www.braveryk7.com/portfolio/send-chat-tools/slack-webhook-url-settings/" target="_blank"><?php esc_html_e( 'Steps to add a Slack Webhook URL to Send Chat Tools | L\'7 Records(Japanese Only)', 'send-chat-tools' ); ?></a>
+							</p>
 						</td>
 					</tr>
 					<tr>
@@ -190,6 +196,8 @@ class Sct_Settings_Page {
 						</th>
 						<td>
 							<input type="text" id="chatwork_api_token" name="chatwork_api_token" size="60" value="<?php echo esc_attr( $get_chatwork_api_token ); ?>" placeholder="<?php esc_html_e( 'Input Chatwork API Token', 'send-chat-tools' ); ?>">
+							<p><?php esc_html_e( 'Get the API Toke from the Chatwork.', 'send-chat-tools' ); ?></p>
+							<p><?php esc_html_e( 'It is usually random alphanumeric.', 'send-chat-tools' ); ?></p>
 						</td>
 					</tr>
 					<tr>
@@ -198,6 +206,8 @@ class Sct_Settings_Page {
 						</th>
 						<td>
 							<input type="text" id="chatwork_room_id" name="chatwork_room_id" value="<?php echo esc_attr( $get_chatwork_room_id ); ?>" placeholder="<?php esc_html_e( 'Input Chatwork room ID', 'send-chat-tools' ); ?>">
+							<p><?php esc_html_e( 'Get the Room ID from the Chatwork chat URL.', 'send-chat-tools' ); ?></p>
+							<p><?php esc_html_e( 'The number after "rid" in the URL of the chat page you want to receive.', 'send-chat-tools' ); ?></p>
 						</td>
 					</tr>
 					<tr>
