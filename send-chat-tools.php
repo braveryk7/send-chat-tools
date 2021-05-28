@@ -44,11 +44,16 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-connect-database.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-settings-page.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-slack.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-chatwork.php';
 
 	global $wpdb;
 
 	if ( '1' === get_option( 'sct_use_slack' ) ) {
 		add_action( 'comment_post', 'Sct_Slack::send_slack' );
+	}
+
+	if ( '1' === get_option( 'sct_use_chatwork' ) ) {
+		add_action( 'comment_post', 'Sct_Chatwork::send_chatwork' );
 	}
 
 	/**
