@@ -198,6 +198,10 @@ class Sct_Settings_Page {
 							<input type="text" id="chatwork_api_token" name="chatwork_api_token" size="60" value="<?php echo esc_attr( $get_chatwork_api_token ); ?>" placeholder="<?php esc_html_e( 'Input Chatwork API Token', 'send-chat-tools' ); ?>">
 							<p><?php esc_html_e( 'Get the API Toke from the Chatwork.', 'send-chat-tools' ); ?></p>
 							<p><?php esc_html_e( 'It is usually random alphanumeric.', 'send-chat-tools' ); ?></p>
+							<p>
+								<?php esc_html_e( 'Explanation of getting the Chatwork API Token & Room ID:', 'send-chat-tools' ); ?>
+								<a href="https://www.braveryk7.com/portfolio/send-chat-tools/send-chat-tools-chatwork-api-token-and-room-id/" target="_blank"><?php esc_html_e( 'Steps to add a Chatwork API token and Room ID to Send Chat Tools | L\'7 Records(Japanese Only)', 'send-chat-tools' ); ?></a>
+							</p>
 						</td>
 					</tr>
 					<tr>
