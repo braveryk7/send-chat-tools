@@ -1,0 +1,11 @@
+.postbox {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+@media screen and (min-width: 783px) {
+	.form-table th {
+		padding-left: 25px;
+		min-width: 250px;
+	}
+}
