@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-05-28 22:50+0900\n"
-"PO-Revision-Date: 2021-05-28 22:53+0900\n"
+"POT-Creation-Date: 2021-05-29 03:29+0900\n"
+"PO-Revision-Date: 2021-05-29 03:30+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -119,7 +119,7 @@ msgid ""
 "Only)"
 msgstr "Send Chat ToolsにSlack Webhook URLを追加する手順 | L’7 Records"
 
-#: class/class-sct-settings-page.php:172 class/class-sct-settings-page.php:215
+#: class/class-sct-settings-page.php:172 class/class-sct-settings-page.php:219
 msgid "Don't send self comment"
 msgstr "自分自身のコメントを送信しない"
 
@@ -147,24 +147,35 @@ msgstr "ChatworkでAPIトークンを取得してください。"
 msgid "It is usually random alphanumeric."
 msgstr "通常ランダムな英数字です。"
 
-#: class/class-sct-settings-page.php:205
+#: class/class-sct-settings-page.php:202
+msgid "Explanation of getting the Chatwork API Token & Room ID:"
+msgstr "Chatwork APIトークンとルームIDの取得解説："
+
+#: class/class-sct-settings-page.php:203
+msgid ""
+"Steps to add a Chatwork API token and Room ID to Send Chat Tools | L'7 "
+"Records(Japanese Only)"
+msgstr ""
+"Send Chat ToolsにChatwork APIトークン/ルームIDを追加する手順 | L’7 Records"
+
+#: class/class-sct-settings-page.php:209
 msgid "Room ID"
 msgstr "ルームID"
 
-#: class/class-sct-settings-page.php:208
+#: class/class-sct-settings-page.php:212
 msgid "Input Chatwork room ID"
 msgstr "ChatworkのルームIDを入力"
 
-#: class/class-sct-settings-page.php:209
+#: class/class-sct-settings-page.php:213
 msgid "Get the Room ID from the Chatwork chat URL."
 msgstr "ChatworkのURLに含まれるルームIDを取得してください。"
 
-#: class/class-sct-settings-page.php:210
+#: class/class-sct-settings-page.php:214
 msgid ""
 "The number after \"rid\" in the URL of the chat page you want to receive."
 msgstr "受信したいチャットページのURLに含まれる”rid”以降の数字です。"
 
-#: class/class-sct-settings-page.php:225
+#: class/class-sct-settings-page.php:229
 msgid "Save Changes"
 msgstr "変更を保存"
 
