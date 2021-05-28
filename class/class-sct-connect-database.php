@@ -29,5 +29,9 @@ class Sct_Connect_Database {
 		delete_option( 'sct_send_slack_author' );
 		delete_option( 'sct_iv' );
 		delete_option( 'sct_use_user_id' );
+		delete_option( 'sct_use_chatwork' );
+		delete_option( 'sct_chatwork_api_token' );
+		delete_option( 'sct_chatwork_room_id' );
+		delete_option( 'sct_send_chatwork_author' );
 	}
 }
