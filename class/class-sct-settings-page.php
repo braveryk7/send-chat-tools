@@ -72,6 +72,19 @@ class Sct_Settings_Page {
 
 		if ( isset( $_POST[ $hidden_field_name ] ) && 'Y' === $_POST[ $hidden_field_name ] ) {
 			if ( check_admin_referer( 'sct_settings_nonce', 'sct_settings_nonce' ) ) {
+				/** WordPress */
+				if ( isset( $_POST['comments_notify'] ) ) {
+					$use_slack = sanitize_text_field( wp_unslash( $_POST['comments_notify'] ) );
+					update_option( 'comments_notify', '1' );
+				} else {
+					update_option( 'comments_notify', '' );
+				}
+				if ( isset( $_POST['moderation_notify'] ) ) {
+					$use_slack = sanitize_text_field( wp_unslash( $_POST['moderation_notify'] ) );
+					update_option( 'moderation_notify', '1' );
+				} else {
+					update_option( 'moderation_notify', '' );
+				}
 				/** Slack */
 				if ( ! empty( $_POST['use_slack'] ) ) {
 					$use_slack = sanitize_text_field( wp_unslash( $_POST['use_slack'] ) );
@@ -115,6 +128,8 @@ class Sct_Settings_Page {
 				}
 			}
 		}
+		$get_comments_notify   = '1' === get_option( 'comments_notify' ) ? 'checked' : '';
+		$get_moderation_notify = '1' === get_option( 'moderation_notify' ) ? 'checked' : '';
 
 		$get_slack_webhook_url = Sct_Encryption::decrypt( get_option( 'sct_slack_webhook_url' ) );
 		$get_use_slack         = '1' === get_option( 'sct_use_slack' ) ? 'checked' : '';
@@ -142,6 +157,31 @@ class Sct_Settings_Page {
 	<form method="POST">
 		<input type="hidden" name="<?php echo esc_attr( $hidden_field_name ); ?>" value="Y">
 		<?php wp_nonce_field( 'sct_settings_nonce', 'sct_settings_nonce' ); ?>
+		<div class="postbox">
+			<h2><?php esc_html_e( 'Standard WordPress settings', 'send-chat-tools' ); ?></h2>
+			<table class="form-table">
+				<tbody>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Email me whenever' ); ?></th>
+						<td>
+							<fieldset>
+								<label for="comments_notify">
+									<input name="comments_notify" type="checkbox" id="comments_notify" value="1" <?php echo esc_attr( $get_comments_notify ); ?>>
+									<?php esc_html_e( 'Anyone posts a comment' ); ?>
+								</label>
+								<br>
+								<label for="moderation_notify">
+								<input name="moderation_notify" type="checkbox" id="moderation_notify" value="1" <?php echo esc_attr( $get_moderation_notify ); ?>>
+									<?php esc_html_e( 'A comment is held for moderation' ); ?>
+								</label>
+							</fieldset>
+							<p><?php esc_html_e( 'Uncheck this box if you don\'t need the standard WordPress email notifications.', 'send-chat-tools' ); ?></p>
+							<p><?php esc_html_e( 'Even if this checkbox is unchecked, you will still be notified by email if the message was not successfully sent to the chat tool.', 'send-chat-tools' ); ?></p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<div class="postbox">
 			<h2><?php esc_html_e( 'Slack', 'send-chat-tools' ); ?></h2>
 			<table class="form-table">
