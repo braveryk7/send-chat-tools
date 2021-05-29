@@ -66,6 +66,7 @@ class Sct_Settings_Page {
 			wp_die( esc_html__( 'You have no sufficient permissions to access this page.', 'send-chat-tools' ) );
 		}
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
+		require_once dirname( __FILE__ ) . '/class-sct-check-update.php';
 
 		$hidden_field_name = 'hiddenStatus';
 
