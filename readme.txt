@@ -4,7 +4,7 @@ Tags: send chat tools, send, chat, slack
 Requires at least: 5.7.2
 Tested up to: 5.7.2
 Requires PHP: 7.3.0
-Stable tag: 0.1.2
+Stable tag: 0.1.3
 License: GpLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -15,6 +15,9 @@ Currently, it sends an announcement when a comment is received.
 You can instantly check comments that you didn't notice with the default email notification. 
 
 === Changelog ===
+
+= 0.1.3 =
+Add WordPress standard settings to admin page
 
 = 0.1.2 =
 Add send email if could not be sent successfully.
