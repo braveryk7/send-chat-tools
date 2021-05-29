@@ -24,14 +24,16 @@ class Sct_Connect_Database {
 	public static function delete_db() {
 		global $wpdb;
 
+		delete_option( 'sct_iv' );
+		delete_option( 'sct_use_user_id' );
 		delete_option( 'sct_use_slack' );
 		delete_option( 'sct_slack_webhook_url' );
 		delete_option( 'sct_send_slack_author' );
-		delete_option( 'sct_iv' );
-		delete_option( 'sct_use_user_id' );
+		delete_option( 'sct_slack_log' );
 		delete_option( 'sct_use_chatwork' );
 		delete_option( 'sct_chatwork_api_token' );
 		delete_option( 'sct_chatwork_room_id' );
 		delete_option( 'sct_send_chatwork_author' );
+		delete_option( 'sct_chatwork_log' );
 	}
 }
