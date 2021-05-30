@@ -49,7 +49,7 @@ class Sct_Encryption {
 			$new_iv = get_option( 'sct_iv' );
 		}
 		update_option( 'sct_use_user_id', wp_get_current_user()->ID );
-		return openssl_encrypt( $value, self::METHOD, self::get_user_registered(), 0, $new_iv );
+		return openssl_encrypt( $value, self::METHOD, self::get_user_registered(), 0, hex2bin( $new_iv ) );
 	}
 
 	/**
@@ -62,6 +62,6 @@ class Sct_Encryption {
 		$get_user_id = get_option( 'sct_use_user_id' );
 		$key         = get_userdata( $get_user_id )->user_registered;
 		$iv          = get_option( 'sct_iv' );
-		return openssl_decrypt( $value, self::METHOD, $key, 0, $iv );
+		return openssl_decrypt( $value, self::METHOD, $key, 0, hex2bin( $iv ) );
 	}
 }
