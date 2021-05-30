@@ -3,7 +3,7 @@
  * Plugin Name: Send Chat Tools
  * Plugin URI:  https://www.braveryk7.com/
  * Description: A plugin that allows you to send WordPress announcements to chat tools.
- * Version:     0.1.4
+ * Version:     0.1.5
  * Author:      Ken-chan
  * Author URI:  https://twitter.com/braveryk7
  * Text Domain: send-chat-tools
