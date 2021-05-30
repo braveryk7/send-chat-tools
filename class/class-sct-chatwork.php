@@ -69,11 +69,13 @@ class Sct_Chatwork {
 
 			if ( ! isset( $result->errors ) ) {
 				$states_code = $result['response']['code'];
-				if ( 200 !== $states_code ) {
-					require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
-					$send_mail = new Sct_Error_Mail( $states_code, $wpdb->insert_id );
-					$send_mail->make_contents();
-				}
+			} else {
+				$states_code = 1000;
+			}
+			if ( 200 !== $states_code ) {
+				require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
+				$send_mail = new Sct_Error_Mail( $states_code, $wpdb->insert_id );
+				$send_mail->make_contents();
 			}
 		}
 	}
