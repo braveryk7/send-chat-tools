@@ -65,11 +65,13 @@ class Sct_Slack {
 			$result = wp_remote_post( Sct_Encryption::decrypt( $url ), $options );
 			update_option( 'sct_slack_log', $result );
 
-			$states_code = $result['response']['code'];
-			if ( 200 !== $states_code ) {
-				require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
-				$send_mail = new Sct_Error_Mail( $states_code, $wpdb->insert_id );
-				$send_mail->make_contents();
+			if ( ! isset( $result->errors ) ) {
+				$states_code = $result['response']['code'];
+				if ( 200 !== $states_code ) {
+					require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
+					$send_mail = new Sct_Error_Mail( $states_code, $wpdb->insert_id );
+					$send_mail->make_contents();
+				}
 			}
 		}
 	}
