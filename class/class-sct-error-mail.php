@@ -70,7 +70,7 @@ class Sct_Error_Mail {
 		$mail_to      = get_option( 'admin_email' );
 		$mail_title   = esc_html__( 'You have received a new comment', 'send-chat-tools' );
 		$mail_message =
-			$site_name . '(' . $site_url . ')' . esc_html__( 'new comment has been posted.', 'send-chat-tools' ) . "\n\n" .
+			$site_name . '( ' . $site_url . ' )' . esc_html__( 'new comment has been posted.', 'send-chat-tools' ) . "\n\n" .
 			esc_html__( 'Commented article:', 'send-chat-tools' ) . $article_title . ' - ' . $article_url . "\n" .
 			esc_html__( 'Author:', 'send-chat-tools' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
 			esc_html__( 'Date and time:', 'send-chat-tools' ) . $comment->comment_date . "\n" .
