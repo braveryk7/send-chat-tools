@@ -21,14 +21,11 @@ class Sct_Slack {
 	 * Send Slack.
 	 */
 	public static function create_comment_contents() {
-		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
-
 		global $wpdb;
 		$comment     = get_comment( $wpdb->insert_id );
 		$send_author = get_option( 'sct_send_slack_author' );
 
 		if ( ( '0' === $send_author ) || ( '1' === $send_author && '0' === $comment->user_id ) ) {
-			$url              = get_option( 'sct_slack_webhook_url' );
 			$site_name        = get_bloginfo( 'name' );
 			$site_url         = get_bloginfo( 'url' );
 			$comment_approved = $comment->comment_approved;
@@ -62,18 +59,74 @@ class Sct_Slack {
 				'body'    => wp_json_encode( $message ),
 			];
 
-			self::send_slack( $url, $options, $wpdb->insert_id );
+			self::send_slack( $options, $wpdb->insert_id );
 		}
+	}
+
+	/**
+	 * Create update contents.
+	 *
+	 * @param array $result Update data.
+	 */
+	public static function create_update_contents( array $result ) {
+		$site_name = get_bloginfo( 'name' );
+		$site_url  = get_bloginfo( 'url' );
+		$admin_url = admin_url() . 'update-core.php';
+		$id        = 'update';
+		$add_plugins;
+		$add_themes;
+		$add_core;
+
+		foreach ( $result as $key => $value ) {
+			if ( 'plugin' === $value['attribute'] ) {
+				$add_plugins .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+			} elseif ( 'theme' === $value['attribute'] ) {
+				$add_themes .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+			} elseif ( 'core' === $value['attribute'] ) {
+				$add_core .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+			};
+		};
+
+		if ( isset( $add_core ) ) {
+			$core = esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n\n";
+		}
+		if ( isset( $add_themes ) ) {
+			$themes = esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n\n";
+		}
+		if ( isset( $add_plugins ) ) {
+			$plugins = esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n\n";
+		}
+
+		$message = [
+			'text' =>
+				$site_name . '(' . $site_url . ')' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
+				$core . $themes . $plugins .
+				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
+				esc_html__( 'Update Page:', 'send-chat-tools' ) . $admin_url . "\n\n" .
+				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
+				'https://wordpress.org/plugins/send-chat-tools/',
+		];
+
+		$options = [
+			'headers' => [
+				'Content-Type: application/json;charset=utf-8',
+			],
+			'body'    => wp_json_encode( $message ),
+		];
+
+		self::send_slack( $options, $id );
 	}
 
 	/**
 	 * Send Slack.
 	 *
-	 * @param string $url Slack Webhook URL.
 	 * @param array  $options Slack API options.
 	 * @param string $id Comment ID.
 	 */
-	private static function send_slack( string $url, array $options, string $id ) {
+	private static function send_slack( array $options, string $id ) {
+		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
+
+		$url    = get_option( 'sct_slack_webhook_url' );
 		$result = wp_remote_post( Sct_Encryption::decrypt( $url ), $options );
 		update_option( 'sct_slack_log', $result );
 
@@ -81,6 +134,10 @@ class Sct_Slack {
 			$states_code = $result['response']['code'];
 		} else {
 			$states_code = 1000;
+		}
+		if ( 200 !== $states_code && 'update' === $id ) {
+			$send_mail = new Sct_Error_mail( $states_code, $id );
+			$send_mail->update_contents();
 		}
 		if ( 200 !== $states_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
