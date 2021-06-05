@@ -62,7 +62,7 @@ class Sct_Slack {
 				'body'    => wp_json_encode( $message ),
 			];
 
-			self::send( $url, $options, $wpdb->insert_id );
+			self::send_slack( $url, $options, $wpdb->insert_id );
 		}
 	}
 
@@ -73,7 +73,7 @@ class Sct_Slack {
 	 * @param array  $options Slack API options.
 	 * @param string $id Comment ID.
 	 */
-	private static function send( string $url, array $options, string $id ) {
+	private static function send_slack( string $url, array $options, string $id ) {
 		$result = wp_remote_post( Sct_Encryption::decrypt( $url ), $options );
 		update_option( 'sct_slack_log', $result );
 
