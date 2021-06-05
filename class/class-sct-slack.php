@@ -20,7 +20,7 @@ class Sct_Slack {
 	/**
 	 * Send Slack.
 	 */
-	public static function make_comment_contents() {
+	public static function create_comment_contents() {
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
 		global $wpdb;
