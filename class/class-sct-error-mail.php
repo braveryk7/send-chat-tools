@@ -85,6 +85,19 @@ class Sct_Error_Mail {
 	}
 
 	/**
+	 * Create WordPress Core, Theme, Plugin update content.
+	 *
+	 * @param array $options The outgoing message is stored.
+	 */
+	public function update_contents( array $options ) {
+		$mail_to      = get_option( 'admin_email' );
+		$mail_title   = esc_html__( 'WordPress update notification.', 'send-chat-tools' );
+		$mail_message = json_decode( $options['body'], false )->text;
+
+		$this->send_mail( $mail_to, $mail_title, $mail_message );
+	}
+
+	/**
 	 * Send mail.
 	 *
 	 * @param string $mail_to mail to.
