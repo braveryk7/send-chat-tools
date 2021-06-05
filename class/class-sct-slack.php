@@ -99,7 +99,7 @@ class Sct_Slack {
 
 		$message = [
 			'text' =>
-				$site_name . '(' . $site_url . ')' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
+				$site_name . '( ' . $site_url . ' )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
 				$core . $themes . $plugins .
 				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
 				esc_html__( 'Update Page:', 'send-chat-tools' ) . $admin_url . "\n\n" .
@@ -135,14 +135,15 @@ class Sct_Slack {
 		} else {
 			$states_code = 1000;
 		}
-		if ( 200 !== $states_code && 'update' === $id ) {
-			$send_mail = new Sct_Error_mail( $states_code, $id );
-			$send_mail->update_contents();
-		}
 		if ( 200 !== $states_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
-			$send_mail = new Sct_Error_Mail( $states_code, $id );
-			$send_mail->make_contents();
+			if ( 'update' === $id ) {
+				$send_mail = new Sct_Error_mail( $states_code, $id );
+				$send_mail->update_contents( $options );
+			} else {
+				$send_mail = new Sct_Error_Mail( $states_code, $id );
+				$send_mail->make_contents();
+			}
 		}
 	}
 }
