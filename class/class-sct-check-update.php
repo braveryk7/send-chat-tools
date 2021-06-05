@@ -61,7 +61,6 @@ class Sct_Check_Update {
 				];
 			}
 		}
-		update_option( 'sct_plugin_check', $return );
 		$this->check_tools( $return, $id );
 	}
 
