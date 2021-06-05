@@ -20,7 +20,7 @@ class Sct_Slack {
 	/**
 	 * Send Slack.
 	 */
-	public static function send_slack() {
+	public static function make_comment_contents() {
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
 		global $wpdb;
@@ -62,19 +62,30 @@ class Sct_Slack {
 				'body'    => wp_json_encode( $message ),
 			];
 
-			$result = wp_remote_post( Sct_Encryption::decrypt( $url ), $options );
-			update_option( 'sct_slack_log', $result );
+			self::send( $url, $options, $wpdb->insert_id );
+		}
+	}
 
-			if ( ! isset( $result->errors ) ) {
-				$states_code = $result['response']['code'];
-			} else {
-				$states_code = 1000;
-			}
-			if ( 200 !== $states_code ) {
-				require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
-				$send_mail = new Sct_Error_Mail( $states_code, $wpdb->insert_id );
-				$send_mail->make_contents();
-			}
+	/**
+	 * Send Slack.
+	 *
+	 * @param string $url Slack Webhook URL.
+	 * @param array  $options Slack API options.
+	 * @param string $id Comment ID.
+	 */
+	private static function send( string $url, array $options, string $id ) {
+		$result = wp_remote_post( Sct_Encryption::decrypt( $url ), $options );
+		update_option( 'sct_slack_log', $result );
+
+		if ( ! isset( $result->errors ) ) {
+			$states_code = $result['response']['code'];
+		} else {
+			$states_code = 1000;
+		}
+		if ( 200 !== $states_code ) {
+			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
+			$send_mail = new Sct_Error_Mail( $states_code, $id );
+			$send_mail->make_contents();
 		}
 	}
 }
