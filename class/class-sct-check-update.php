@@ -24,21 +24,58 @@ class Sct_Check_Update {
 	 * Add WP-Cron.
 	 */
 	public function __construct() {
-		add_action( 'sct_plugin_check', [ $this, 'check_plugins' ] );
-		if ( ! wp_next_scheduled( 'sct_plugin_check' ) ) {
-			$my_time   = gmdate( 'Y-m-d 03:00:00', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-			$cron_time = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $my_time ) );
+		global $wpdb;
+		$my_time   = gmdate( 'Y-m-d 03:00:00', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+		$cron_time = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $my_time ) );
 
-			wp_schedule_event( $cron_time, 'daily', 'sct_plugin_check' );
+		add_action( 'sct_update_check', [ $this, 'controller' ] );
+		if ( ! wp_next_scheduled( 'sct_update_check' ) ) {
+			wp_schedule_event( $cron_time, 'daily', 'sct_update_check' );
 		}
+	}
+
+	/**
+	 * Call WordPress Core, Themes and Plugin check function.
+	 */
+	private function controller() {
+		$check_all = [];
+		$plugins   = $this->check_plugins();
+		$themes    = $this->check_themes();
+		if ( isset( $plugins ) ) {
+			$check_all = array_merge( $check_all, $plugins );
+		}
+		if ( isset( $themes ) ) {
+			$check_all = array_merge( $check_all, $themes );
+		}
+		$this->check_tools( $check_all );
+	}
+
+	/**
+	 * Themes.
+	 */
+	private function check_themes() {
+		$get_theme_states = get_option( '_site_transient_update_themes' );
+		$return           = [];
+		if ( ! empty( $get_theme_states->response ) ) {
+			$update_themes = $get_theme_states->response;
+			foreach ( $update_themes as $key => $value ) {
+				$theme_date                  = wp_get_theme( $key );
+				$return[ $theme_date->name ] = [
+					'name'            => $theme_date->name,
+					'attribute'       => 'theme',
+					'path'            => $theme_date->theme_root . '/' . $key,
+					'current_version' => $theme_date->version,
+					'new_version'     => $value['new_version'],
+				];
+			}
+		}
+		return $return;
 	}
 
 	/**
 	 * Plugins.
 	 */
-	public function check_plugins() {
-		global $wpdb;
-
+	private function check_plugins() {
 		$get_plugin_states = get_option( '_site_transient_update_plugins' );
 		$return            = [];
 		if ( ! empty( $get_plugin_states->response ) ) {
@@ -61,7 +98,7 @@ class Sct_Check_Update {
 				];
 			}
 		}
-		$this->check_tools( $return, $id );
+		return $return;
 	}
 
 	/**
