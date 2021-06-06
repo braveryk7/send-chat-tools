@@ -13,10 +13,15 @@ declare( strict_type = 1 );
 if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'You do not have access rights.' );
 }
+
+require_once dirname( __FILE__ ) . '/trait-sct-sending.php';
+
 /**
  * Send Slack.
  */
 class Sct_Slack {
+	use Sct_Sending;
+
 	/**
 	 * Send Slack.
 	 */
@@ -59,7 +64,7 @@ class Sct_Slack {
 				'body'    => wp_json_encode( $message ),
 			];
 
-			self::send_slack( $options, $wpdb->insert_id );
+			self::sending( $options, $wpdb->insert_id, 'slack' );
 		}
 	}
 
@@ -114,36 +119,6 @@ class Sct_Slack {
 			'body'    => wp_json_encode( $message ),
 		];
 
-		self::send_slack( $options, $id );
-	}
-
-	/**
-	 * Send Slack.
-	 *
-	 * @param array  $options Slack API options.
-	 * @param string $id Comment ID.
-	 */
-	private static function send_slack( array $options, string $id ) {
-		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
-
-		$url    = get_option( 'sct_slack_webhook_url' );
-		$result = wp_remote_post( Sct_Encryption::decrypt( $url ), $options );
-		update_option( 'sct_slack_log', $result );
-
-		if ( ! isset( $result->errors ) ) {
-			$states_code = $result['response']['code'];
-		} else {
-			$states_code = 1000;
-		}
-		if ( 200 !== $states_code ) {
-			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
-			if ( 'update' === $id ) {
-				$send_mail = new Sct_Error_mail( $states_code, $id );
-				$send_mail->update_contents( $options );
-			} else {
-				$send_mail = new Sct_Error_Mail( $states_code, $id );
-				$send_mail->make_contents();
-			}
-		}
+		self::sending( $options, $id, 'slack' );
 	}
 }
