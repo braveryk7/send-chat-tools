@@ -25,7 +25,7 @@ class Sct_Discord {
 	/**
 	 * Send Discord.
 	 */
-	public static function send_discord() {
+	public static function create_comment_contents() {
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
 		global $wpdb;
