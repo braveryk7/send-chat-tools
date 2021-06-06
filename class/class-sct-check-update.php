@@ -39,8 +39,12 @@ class Sct_Check_Update {
 	 */
 	public function controller() {
 		$check_all = [];
+		$core      = $this->check_core();
 		$themes    = $this->check_themes();
 		$plugins   = $this->check_plugins();
+		if ( isset( $core ) ) {
+			$check_all = array_merge( $check_all, $core );
+		}
 		if ( isset( $themes ) ) {
 			$check_all = array_merge( $check_all, $themes );
 		}
@@ -48,6 +52,24 @@ class Sct_Check_Update {
 			$check_all = array_merge( $check_all, $plugins );
 		}
 		$this->check_tools( $check_all );
+	}
+
+	/**
+	 * WordPress Core.
+	 */
+	private function check_core() {
+		$get_core_states = get_option( '_site_transient_update_core' );
+		$return          = [];
+		if ( ! empty( $get_core_states ) ) {
+			$update_core    = $get_core_states->updates[0];
+			$return['core'] = [
+				'name'            => 'WordPress Core',
+				'attribute'       => 'core',
+				'current_version' => get_bloginfo( 'version' ),
+				'new_version'     => $update_core->version,
+			];
+		}
+		return $return;
 	}
 
 	/**
