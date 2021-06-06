@@ -55,7 +55,7 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	}
 
 	if ( '1' === get_option( 'sct_use_chatwork' ) ) {
-		add_action( 'comment_post', 'Sct_Chatwork::send_chatwork' );
+		add_action( 'comment_post', 'Sct_Chatwork::create_comment_contents' );
 	}
 
 	if ( '1' === get_option( 'sct_use_discord' ) ) {
