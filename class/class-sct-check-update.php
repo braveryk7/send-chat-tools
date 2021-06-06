@@ -108,7 +108,7 @@ class Sct_Check_Update {
 	 */
 	private function check_tools( array $return ) {
 		if ( '1' === get_option( 'sct_use_slack' ) ) {
-			Sct_Slack::create_update_contents( $return, $id );
+			Sct_Slack::create_update_contents( $return );
 		}
 		if ( '1' === get_option( 'sct_use_chatwork' ) ) {
 			add_action( 'comment_post', 'Sct_Chatwork::send_chatwork' );
