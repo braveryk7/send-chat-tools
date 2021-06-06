@@ -46,11 +46,12 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-slack.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-chatwork.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-discord.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
 
 	global $wpdb;
 
 	if ( '1' === get_option( 'sct_use_slack' ) ) {
-		add_action( 'comment_post', 'Sct_Slack::send_slack' );
+		add_action( 'comment_post', 'Sct_Slack::create_comment_contents' );
 	}
 
 	if ( '1' === get_option( 'sct_use_chatwork' ) ) {
@@ -59,6 +60,14 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 
 	if ( '1' === get_option( 'sct_use_discord' ) ) {
 		add_action( 'comment_post', 'Sct_Discord::send_discord' );
+	}
+
+	if (
+		'1' === get_option( 'sct_send_slack_update' ) ||
+		'1' === get_option( 'sct_send_chatwork_update' ) ||
+		'1' === get_option( 'sct_send_discord_update' )
+	) {
+		$cron = new Sct_Check_Update();
 	}
 
 	/**
