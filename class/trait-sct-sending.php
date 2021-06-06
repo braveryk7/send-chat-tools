@@ -1,0 +1,54 @@
+<?php
+/**
+ * Send Chat logic.
+ *
+ * @author Ken-chan
+ * @package WordPress
+ * @subpackage Send Chat Tools
+ * @since 1.0.0
+ */
+
+/**
+ * Send Chat logic.
+ */
+trait Sct_Sending {
+	/**
+	 * Send Slack.
+	 *
+	 * @param array  $options API options.
+	 * @param string $id ID(Comment/Update).
+	 * @param string $tools Use chat tools prefix.
+	 */
+	private static function sending( array $options, string $id, string $tools ) {
+		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
+
+		if ( 'slack' === $tools ) {
+			$url = Sct_Encryption::decrypt( get_option( 'sct_slack_webhook_url' ) );
+			$log = 'sct_slack_log';
+		} elseif ( 'discord' === $tools ) {
+			$url = Sct_Encryption::decrypt( get_option( 'sct_discord_webhook_url' ) );
+			$log = 'sct_discord_log';
+		} elseif ( 'chatwork' === $tools ) {
+			$url = 'https://api.chatwork.com/v2/rooms/' . Sct_Encryption::decrypt( get_option( 'sct_chatwork_room_id' ) ) . '/messages';
+			$log = 'sct_chatwork_log';
+		}
+		$result = wp_remote_post( $url, $options );
+		update_option( $log, $result );
+
+		if ( ! isset( $result->errors ) ) {
+			$states_code = $result['response']['code'];
+		} else {
+			$states_code = 1000;
+		}
+		if ( 200 !== $states_code || 204 !== $states_code ) {
+			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
+			if ( 'update' === $id ) {
+				$send_mail = new Sct_Error_mail( $states_code, $id );
+				$send_mail->update_contents( $options );
+			} else {
+				$send_mail = new Sct_Error_Mail( $states_code, $id );
+				$send_mail->make_contents();
+			}
+		}
+	}
+}
