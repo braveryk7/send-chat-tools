@@ -13,10 +13,15 @@ declare( strict_type = 1 );
 if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'You do not have access rights.' );
 }
+
+require_once dirname( __FILE__ ) . '/trait-sct-sending.php';
+
 /**
  * Send Chatwork.
  */
 class Sct_Chatwork {
+	use Sct_Sending;
+
 	/**
 	 * Send Chatwork.
 	 */
@@ -29,8 +34,6 @@ class Sct_Chatwork {
 
 		if ( ( '0' === $send_author ) || ( '1' === $send_author && '0' === $comment->user_id ) ) {
 			$api_token        = get_option( 'sct_chatwork_api_token' );
-			$room_id          = get_option( 'sct_chatwork_room_id' );
-			$chatwork_api_url = 'https://api.chatwork.com/v2/rooms/' . Sct_Encryption::decrypt( $room_id ) . '/messages';
 			$site_name        = get_bloginfo( 'name' );
 			$site_url         = get_bloginfo( 'url' );
 			$comment_approved = $comment->comment_approved;
@@ -64,19 +67,8 @@ class Sct_Chatwork {
 				'body'    => $contents,
 			];
 
-			$result = wp_remote_post( $chatwork_api_url, $options );
-			update_option( 'sct_chatwork_log', $result );
-
-			if ( ! isset( $result->errors ) ) {
-				$states_code = $result['response']['code'];
-			} else {
-				$states_code = 1000;
-			}
-			if ( 200 !== $states_code ) {
-				require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
-				$send_mail = new Sct_Error_Mail( $states_code, $wpdb->insert_id );
-				$send_mail->make_contents();
-			}
+			/* Use trait_sct_sending */
+			self::sending( $options, $wpdb->insert_id, 'chatwork' );
 		}
 	}
 }

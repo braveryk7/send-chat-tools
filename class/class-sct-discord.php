@@ -13,10 +13,15 @@ declare( strict_type = 1 );
 if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'You do not have access rights.' );
 }
+
+require_once dirname( __FILE__ ) . '/trait-sct-sending.php';
+
 /**
  * Send Discord.
  */
 class Sct_Discord {
+	use Sct_Sending;
+
 	/**
 	 * Send Discord.
 	 */
@@ -28,7 +33,6 @@ class Sct_Discord {
 		$send_author = get_option( 'sct_send_discord_author' );
 
 		if ( ( '0' === $send_author ) || ( '1' === $send_author && '0' === $comment->user_id ) ) {
-			$url              = get_option( 'sct_discord_webhook_url' );
 			$site_name        = get_bloginfo( 'name' );
 			$site_url         = get_bloginfo( 'url' );
 			$comment_approved = $comment->comment_approved;
@@ -63,19 +67,8 @@ class Sct_Discord {
 				],
 			];
 
-			$result = wp_remote_post( Sct_Encryption::decrypt( $url ), $options );
-			update_option( 'sct_discord_log', $result );
-
-			if ( ! isset( $result->errors ) ) {
-				$states_code = $result['response']['code'];
-			} else {
-				$states_code = 1000;
-			}
-			if ( 204 !== $states_code ) {
-				require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
-				$send_mail = new Sct_Error_Mail( $states_code, $wpdb->insert_id );
-				$send_mail->make_contents();
-			}
+			/* Use trait_sct_sending */
+			self::sending( $options, $wpdb->insert_id, 'discord' );
 		}
 	}
 }
