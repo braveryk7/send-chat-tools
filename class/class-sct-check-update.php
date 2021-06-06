@@ -37,15 +37,15 @@ class Sct_Check_Update {
 	/**
 	 * Call WordPress Core, Themes and Plugin check function.
 	 */
-	private function controller() {
+	public function controller() {
 		$check_all = [];
-		$plugins   = $this->check_plugins();
 		$themes    = $this->check_themes();
-		if ( isset( $plugins ) ) {
-			$check_all = array_merge( $check_all, $plugins );
-		}
+		$plugins   = $this->check_plugins();
 		if ( isset( $themes ) ) {
 			$check_all = array_merge( $check_all, $themes );
+		}
+		if ( isset( $plugins ) ) {
+			$check_all = array_merge( $check_all, $plugins );
 		}
 		$this->check_tools( $check_all );
 	}
