@@ -26,7 +26,7 @@ class Sct_Chatwork {
 	/**
 	 * Send Chatwork.
 	 */
-	public static function send_chatwork() {
+	public static function create_comment_contents() {
 		global $wpdb;
 		$comment     = get_comment( $wpdb->insert_id );
 		$send_author = get_option( 'sct_send_chatwork_author' );
