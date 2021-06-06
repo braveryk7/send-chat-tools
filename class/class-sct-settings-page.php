@@ -103,6 +103,12 @@ class Sct_Settings_Page {
 				} else {
 					update_option( 'sct_send_slack_author', '0' );
 				}
+				if ( ! empty( $_POST['send_slack_update'] ) ) {
+					$send_slack_author = sanitize_text_field( wp_unslash( $_POST['send_slack_update'] ) );
+					update_option( 'sct_send_slack_update', $send_slack_author );
+				} else {
+					update_option( 'sct_send_slack_update', '0' );
+				}
 				/** Chatwork */
 				if ( ! empty( $_POST['use_chatwork'] ) ) {
 					$use_chatwork = sanitize_text_field( wp_unslash( $_POST['use_chatwork'] ) );
@@ -126,6 +132,12 @@ class Sct_Settings_Page {
 				} else {
 					update_option( 'sct_send_chatwork_author', '0' );
 				}
+				if ( ! empty( $_POST['send_chatwork_update'] ) ) {
+					$send_chatwork_author = sanitize_text_field( wp_unslash( $_POST['send_chatwork_update'] ) );
+					update_option( 'sct_send_chatwork_update', $send_chatwork_author );
+				} else {
+					update_option( 'sct_send_chatwork_update', '0' );
+				}
 				/** Discord */
 				if ( ! empty( $_POST['use_discord'] ) ) {
 					$use_discord = sanitize_text_field( wp_unslash( $_POST['use_discord'] ) );
@@ -144,6 +156,12 @@ class Sct_Settings_Page {
 				} else {
 					update_option( 'sct_send_discord_author', '0' );
 				}
+				if ( ! empty( $_POST['send_discord_update'] ) ) {
+					$send_discord_author = sanitize_text_field( wp_unslash( $_POST['send_discord_update'] ) );
+					update_option( 'sct_send_discord_update', $send_discord_author );
+				} else {
+					update_option( 'sct_send_discord_update', '0' );
+				}
 			}
 		}
 		$get_comments_notify   = '1' === get_option( 'comments_notify' ) ? 'checked' : '';
@@ -161,6 +179,10 @@ class Sct_Settings_Page {
 		$get_discord_webhook_url = Sct_Encryption::decrypt( get_option( 'sct_discord_webhook_url' ) );
 		$get_use_discord         = '1' === get_option( 'sct_use_discord' ) ? 'checked' : '';
 		$get_send_discord_author = '1' === get_option( 'sct_send_discord_author' ) ? 'checked' : '';
+
+		$get_slack_update    = '1' === get_option( 'sct_send_slack_update' ) ? 'checked' : '';
+		$get_chatwork_update = '1' === get_option( 'sct_send_chatwork_update' ) ? 'checked' : '';
+		$get_discord_update  = '1' === get_option( 'sct_send_discord_update' ) ? 'checked' : '';
 
 		?>
 <div class="wrap">
@@ -238,6 +260,14 @@ class Sct_Settings_Page {
 							<input type="checkbox" id="send_slack_author" name="send_slack_author" value="1" <?php echo esc_attr( $get_send_slack_author ); ?>>
 						</td>
 					</tr>
+					<tr>
+						<th>
+							<label for="send_slack_update"><?php esc_html_e( 'Use update notifications', 'send-chat-tools' ); ?></label>
+						</th>
+						<td>
+							<input type="checkbox" id="send_slack_update" name="send_slack_update" value="1" <?php echo esc_attr( $get_slack_update ); ?>>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -285,6 +315,14 @@ class Sct_Settings_Page {
 							<input type="checkbox" id="send_chatwork_author" name="send_chatwork_author" value="1" <?php echo esc_attr( $get_send_chatwork_author ); ?>>
 						</td>
 					</tr>
+					<tr>
+						<th>
+							<label for="send_chatwork_update"><?php esc_html_e( 'Use update notifications', 'send-chat-tools' ); ?></label>
+						</th>
+						<td>
+							<input type="checkbox" id="send_chatwork_update" name="send_chatwork_update" value="1" <?php echo esc_attr( $get_chatwork_update ); ?>>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
@@ -320,6 +358,14 @@ class Sct_Settings_Page {
 						</th>
 						<td>
 							<input type="checkbox" id="send_discord_author" name="send_discord_author" value="1" <?php echo esc_attr( $get_send_discord_author ); ?>>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label for="send_discord_update"><?php esc_html_e( 'Use update notifications', 'send-chat-tools' ); ?></label>
+						</th>
+						<td>
+							<input type="checkbox" id="send_discord_update" name="send_discord_update" value="1" <?php echo esc_attr( $get_discord_update ); ?>>
 						</td>
 					</tr>
 				</tbody>
