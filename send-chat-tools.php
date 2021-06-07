@@ -59,14 +59,10 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	}
 
 	if ( '1' === get_option( 'sct_use_discord' ) ) {
-		add_action( 'comment_post', 'Sct_Discord::send_discord' );
+		add_action( 'comment_post', 'Sct_Discord::create_comment_contents' );
 	}
 
-	if (
-		'1' === get_option( 'sct_send_slack_update' ) ||
-		'1' === get_option( 'sct_send_chatwork_update' ) ||
-		'1' === get_option( 'sct_send_discord_update' )
-	) {
+	if ( '1' === get_option( 'sct_send_slack_update' ) || '1' === get_option( 'sct_send_chatwork_update' ) || '1' === get_option( 'sct_send_discord_update' ) ) {
 		$cron = new Sct_Check_Update();
 	}
 
