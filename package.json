@@ -4,7 +4,9 @@
   "description": "=== Plugin Name === Contributors: braveryk7 Tags: send chat tools, send, chat, slack Requires at least: 5.7.2 Tested up to: 5.7.2 Requires PHP: 7.3.0 Stable tag: 0.1.6 License: GpLv2 or later License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production",
+    "dev" : "webpack --mode development",
+    "watch": "webpack --mode development --watch"
   },
   "repository": {
     "type": "git",
