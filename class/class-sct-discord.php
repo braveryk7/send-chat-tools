@@ -26,8 +26,6 @@ class Sct_Discord {
 	 * Send Discord.
 	 */
 	public static function create_comment_contents() {
-		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
-
 		global $wpdb;
 		$comment     = get_comment( $wpdb->insert_id );
 		$send_author = get_option( 'sct_send_discord_author' );
@@ -70,5 +68,60 @@ class Sct_Discord {
 			/* Use trait_sct_sending */
 			self::sending( $options, $wpdb->insert_id, 'discord' );
 		}
+	}
+
+	/**
+	 * Create update contents.
+	 *
+	 * @param array $result Update data.
+	 */
+	public static function create_update_contents( array $result ) {
+		$site_name = get_bloginfo( 'name' );
+		$site_url  = get_bloginfo( 'url' );
+		$admin_url = admin_url() . 'update-core.php';
+		$id        = 'update';
+		$add_plugins;
+		$add_themes;
+		$add_core;
+
+		foreach ( $result as $key => $value ) {
+			if ( 'plugin' === $value['attribute'] ) {
+				$add_plugins .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+			} elseif ( 'theme' === $value['attribute'] ) {
+				$add_themes .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+			} elseif ( 'core' === $value['attribute'] ) {
+				$add_core .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+			};
+		};
+
+		if ( isset( $add_core ) ) {
+			$core = esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n\n";
+		}
+		if ( isset( $add_themes ) ) {
+			$themes = esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n\n";
+		}
+		if ( isset( $add_plugins ) ) {
+			$plugins = esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n\n";
+		}
+
+		$message =
+				$site_name . '( ' . $site_url . ' )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
+				$core . $themes . $plugins .
+				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
+				esc_html__( 'Update Page:', 'send-chat-tools' ) . $admin_url . "\n\n" .
+				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
+				'https://wordpress.org/plugins/send-chat-tools/';
+
+		$options = [
+			'method'  => 'POST',
+			'headers' => [
+				'Content-Type: application/json;charset=utf-8',
+			],
+			'body'    => [
+				'content' => $message,
+			],
+		];
+
+		self::sending( $options, $id, 'discord' );
 	}
 }
