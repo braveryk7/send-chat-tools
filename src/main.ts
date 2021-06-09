@@ -1,4 +1,4 @@
-import '../src/sass/style.scss';
+import '../src/scss/style.scss';
 import { toggle } from './modules/accordion';
 
 const title = document.querySelectorAll<HTMLElement>('.accordion-title');
