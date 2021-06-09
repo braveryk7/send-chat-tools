@@ -25,6 +25,7 @@ class Sct_Settings_Page {
 	public function __construct() {
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
 		add_action( 'admin_head-settings_page_send-chat-tools-settings', [ $this, 'include_css' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'include_js' ] );
 	}
 
 	/**
@@ -55,7 +56,20 @@ class Sct_Settings_Page {
 	 * Include CSS in Send Chat Tools settings page.
 	 */
 	public function include_css() {
-			wp_enqueue_style( 'sct-admin-page.css', plugins_url( 'css/style.css', dirname( __FILE__ ) ), false, gmdate( 'Ymd', filemtime( __FILE__ ) ) );
+			wp_enqueue_style( 'sct-admin-page.css', plugins_url( 'dist/css/style.css', dirname( __FILE__ ) ), false, gmdate( 'Ymd', filemtime( __FILE__ ) ) );
+	}
+
+	/**
+	 * Include JS in Send Chat Tools settings page.
+	 */
+	public function include_js() {
+		wp_enqueue_script(
+			'sct-admin-page.js',
+			plugins_url( '/dist/main.js?', dirname( __FILE__ ) ),
+			false,
+			time(),
+			true,
+		);
 	}
 
 	/**
@@ -168,15 +182,42 @@ class Sct_Settings_Page {
 		$get_moderation_notify = '1' === get_option( 'moderation_notify' ) ? 'checked' : '';
 
 		$get_slack_webhook_url = Sct_Encryption::decrypt( get_option( 'sct_slack_webhook_url' ) );
-		$get_use_slack         = '1' === get_option( 'sct_use_slack' ) ? 'checked' : '';
+		$use_slack_flag        = get_option( 'sct_use_slack' );
+
+		if ( '1' === $use_slack_flag ) {
+			$get_use_slack       = 'checked';
+			$slack_is_active     = 'is-active';
+			$slack_window_status = 'is-open';
+		} else {
+			[ $get_use_slack, $slack_is_active, $slack_window_status ] = [ '', '', '' ];
+		}
+
 		$get_send_slack_author = '1' === get_option( 'sct_send_slack_author' ) ? 'checked' : '';
 
-		$get_chatwork_api_token   = Sct_Encryption::decrypt( get_option( 'sct_chatwork_api_token' ) );
-		$get_chatwork_room_id     = Sct_Encryption::decrypt( get_option( 'sct_chatwork_room_id' ) );
-		$get_use_chatwork         = '1' === get_option( 'sct_use_chatwork' ) ? 'checked' : '';
+		$get_chatwork_api_token = Sct_Encryption::decrypt( get_option( 'sct_chatwork_api_token' ) );
+		$get_chatwork_room_id   = Sct_Encryption::decrypt( get_option( 'sct_chatwork_room_id' ) );
+		$use_chatwork_flag      = get_option( 'sct_use_chatwork' );
+
+		if ( '1' === $use_chatwork_flag ) {
+			$get_use_chatwork       = 'checked';
+			$chatwork_is_active     = 'is-active';
+			$chatwork_window_status = 'is-open';
+		} else {
+			[ $get_use_chatwork, $chatwork_is_active, $chatwork_window_status ] = [ '', '', '' ];
+		}
+
 		$get_send_chatwork_author = '1' === get_option( 'sct_send_chatwork_author' ) ? 'checked' : '';
 
 		$get_discord_webhook_url = Sct_Encryption::decrypt( get_option( 'sct_discord_webhook_url' ) );
+		$use_discord_flag        = get_option( 'sct_use_discord' );
+
+		if ( '1' === $use_discord_flag ) {
+			$get_use_discord       = 'checked';
+			$discord_is_active     = 'is-active';
+			$discord_window_status = 'is-open';
+		} else {
+			[ $get_use_discord, $discord_is_active, $discord_window_status ] = [ '', '', '' ];
+		}
 		$get_use_discord         = '1' === get_option( 'sct_use_discord' ) ? 'checked' : '';
 		$get_send_discord_author = '1' === get_option( 'sct_send_discord_author' ) ? 'checked' : '';
 
@@ -201,8 +242,8 @@ class Sct_Settings_Page {
 	<form method="POST">
 		<input type="hidden" name="<?php echo esc_attr( $hidden_field_name ); ?>" value="Y">
 		<?php wp_nonce_field( 'sct_settings_nonce', 'sct_settings_nonce' ); ?>
-		<div class="postbox">
-			<h2><?php esc_html_e( 'Standard WordPress settings', 'send-chat-tools' ); ?></h2>
+		<h2 class="accordion-title is-active"><?php esc_html_e( 'Standard WordPress settings', 'send-chat-tools' ); ?></h2>
+		<div class="postbox accordion-content">
 			<table class="form-table">
 				<tbody>
 					<tr>
@@ -226,8 +267,8 @@ class Sct_Settings_Page {
 				</tbody>
 			</table>
 		</div>
-		<div class="postbox">
-			<h2><?php esc_html_e( 'Slack', 'send-chat-tools' ); ?></h2>
+		<h2 class="accordion-title <?php echo esc_attr( $slack_is_active ); ?>"><?php esc_html_e( 'Slack', 'send-chat-tools' ); ?></h2>
+		<div class="postbox accordion-content <?php echo esc_attr( $slack_window_status ); ?>">
 			<table class="form-table">
 				<tbody>
 					<tr>
@@ -271,8 +312,8 @@ class Sct_Settings_Page {
 				</tbody>
 			</table>
 		</div>
-		<div class="postbox">
-			<h2><?php esc_html_e( 'Chatwork', 'send-chat-tools' ); ?></h2>
+		<h2 class="accordion-title <?php echo esc_attr( $chatwork_is_active ); ?>"><?php esc_html_e( 'Chatwork', 'send-chat-tools' ); ?></h2>
+		<div class="postbox accordion-content <?php echo esc_attr( $chatwork_window_status ); ?>">
 			<table class="form-table">
 				<tbody>
 					<tr>
@@ -326,8 +367,8 @@ class Sct_Settings_Page {
 				</tbody>
 			</table>
 		</div>
-		<div class="postbox">
-			<h2><?php esc_html_e( 'Discord', 'send-chat-tools' ); ?></h2>
+		<h2 class="accordion-title <?php echo esc_attr( $discord_is_active ); ?>"><?php esc_html_e( 'Discord', 'send-chat-tools' ); ?></h2>
+		<div class="postbox accordion-content <?php echo esc_attr( $discord_window_status ); ?>">
 			<table class="form-table">
 				<tbody>
 					<tr>
