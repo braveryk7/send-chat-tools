@@ -1,0 +1,68 @@
+h1 {
+	padding-bottom: 20px!important;
+}
+
+.postbox {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+@media screen and (min-width: 783px) {
+	.form-table th {
+		padding-left: 25px;
+		min-width: 250px;
+	}
+	.form-table p {
+		padding-left: 10px;
+	}
+}
+
+.accordion-title {
+	background-color: #23282d;
+	border: 1px solid transparent;
+	color: #fff;
+	margin-bottom: 0;
+	padding: 1em .5em;
+	position: relative;
+	cursor: pointer;
+	user-select: none;
+
+	&::before, &::after {
+		content: '';
+		display: block;
+		background-color: #fff;
+		position: absolute;
+		top: 50%;
+		width: 15px;
+		height: 2px;
+		right: 25px;
+	}
+
+	&::after {
+		transform: rotate(90deg);
+		transition-duration: .3s;
+	}
+
+	&:hover, &:active, &.is-active {
+		background-color: #595959;
+	}
+
+	&.is-active::before {
+		opacity: 0;
+	}
+
+	&.is-active::after {
+		transform: rotate(0);
+	}
+}
+
+.accordion-content {
+	height: 0;
+	overflow: hidden;
+	opacity: 0;
+
+	&.is-open {
+		height: auto;
+		opacity: 1;
+	}
+}
