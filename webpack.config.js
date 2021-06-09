@@ -1,11 +1,11 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require( 'path' );
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 module.exports = {
 	entry: './src/main.ts',
 	output: {
 		filename: 'main.js',
-		path: path.resolve(__dirname, 'dist'),
+		path: path.resolve( __dirname, 'dist' ),
 	},
 	module: {
 		rules: [
@@ -29,9 +29,9 @@ module.exports = {
 					{
 						loader: 'sass-loader',
 						options: {
-							implementation: require('sass'),
+							implementation: require( 'sass' ),
 							sassOptions: {
-								fiber: require('fibers'),
+								fiber: require( 'fibers' ),
 							},
 							sourceMap: true,
 						},
@@ -42,17 +42,15 @@ module.exports = {
 	},
 
 	plugins: [
-		new MiniCssExtractPlugin({
+		new MiniCssExtractPlugin( {
 			filename: 'css/style.css',
-		}),
+		} ),
 	],
 	devtool: 'source-map',
 	watchOptions: {
-		ignored: /node_modules/
+		ignored: /node_modules/,
 	},
 	resolve: {
-		extensions: [
-			'.ts', '.js',
-		],
-	}
-}
+		extensions: [ '.ts', '.js' ],
+	},
+};
