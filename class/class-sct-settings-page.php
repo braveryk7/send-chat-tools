@@ -81,6 +81,7 @@ class Sct_Settings_Page {
 		}
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 		require_once dirname( __FILE__ ) . '/class-sct-check-update.php';
+		require_once dirname( __FILE__ ) . '/class-sct-settings-page-row.php';
 
 		$hidden_field_name = 'hiddenStatus';
 
@@ -178,52 +179,6 @@ class Sct_Settings_Page {
 				}
 			}
 		}
-		$get_comments_notify   = '1' === get_option( 'comments_notify' ) ? 'checked' : '';
-		$get_moderation_notify = '1' === get_option( 'moderation_notify' ) ? 'checked' : '';
-
-		$get_slack_webhook_url = Sct_Encryption::decrypt( get_option( 'sct_slack_webhook_url' ) );
-		$use_slack_flag        = get_option( 'sct_use_slack' );
-
-		if ( '1' === $use_slack_flag ) {
-			$get_use_slack       = 'checked';
-			$slack_is_active     = 'is-active';
-			$slack_window_status = 'is-open';
-		} else {
-			[ $get_use_slack, $slack_is_active, $slack_window_status ] = [ '', '', '' ];
-		}
-
-		$get_send_slack_author = '1' === get_option( 'sct_send_slack_author' ) ? 'checked' : '';
-
-		$get_chatwork_api_token = Sct_Encryption::decrypt( get_option( 'sct_chatwork_api_token' ) );
-		$get_chatwork_room_id   = Sct_Encryption::decrypt( get_option( 'sct_chatwork_room_id' ) );
-		$use_chatwork_flag      = get_option( 'sct_use_chatwork' );
-
-		if ( '1' === $use_chatwork_flag ) {
-			$get_use_chatwork       = 'checked';
-			$chatwork_is_active     = 'is-active';
-			$chatwork_window_status = 'is-open';
-		} else {
-			[ $get_use_chatwork, $chatwork_is_active, $chatwork_window_status ] = [ '', '', '' ];
-		}
-
-		$get_send_chatwork_author = '1' === get_option( 'sct_send_chatwork_author' ) ? 'checked' : '';
-
-		$get_discord_webhook_url = Sct_Encryption::decrypt( get_option( 'sct_discord_webhook_url' ) );
-		$use_discord_flag        = get_option( 'sct_use_discord' );
-
-		if ( '1' === $use_discord_flag ) {
-			$get_use_discord       = 'checked';
-			$discord_is_active     = 'is-active';
-			$discord_window_status = 'is-open';
-		} else {
-			[ $get_use_discord, $discord_is_active, $discord_window_status ] = [ '', '', '' ];
-		}
-		$get_use_discord         = '1' === get_option( 'sct_use_discord' ) ? 'checked' : '';
-		$get_send_discord_author = '1' === get_option( 'sct_send_discord_author' ) ? 'checked' : '';
-
-		$get_slack_update    = '1' === get_option( 'sct_send_slack_update' ) ? 'checked' : '';
-		$get_chatwork_update = '1' === get_option( 'sct_send_chatwork_update' ) ? 'checked' : '';
-		$get_discord_update  = '1' === get_option( 'sct_send_discord_update' ) ? 'checked' : '';
 
 		?>
 <div class="wrap">
@@ -241,177 +196,15 @@ class Sct_Settings_Page {
 	<h1><?php esc_html_e( 'Send Chat Tools Settings', 'send-chat-tools' ); ?></h1>
 	<form method="POST">
 		<input type="hidden" name="<?php echo esc_attr( $hidden_field_name ); ?>" value="Y">
-		<?php wp_nonce_field( 'sct_settings_nonce', 'sct_settings_nonce' ); ?>
-		<h2 class="accordion-title is-active"><?php esc_html_e( 'Standard WordPress settings', 'send-chat-tools' ); ?></h2>
-		<div class="postbox accordion-content">
-			<table class="form-table">
-				<tbody>
-					<tr>
-						<th scope="row"><?php esc_html_e( 'Email me whenever' ); ?></th>
-						<td>
-							<fieldset>
-								<label for="comments_notify">
-									<input name="comments_notify" type="checkbox" id="comments_notify" value="1" <?php echo esc_attr( $get_comments_notify ); ?>>
-									<?php esc_html_e( 'Anyone posts a comment' ); ?>
-								</label>
-								<br>
-								<label for="moderation_notify">
-								<input name="moderation_notify" type="checkbox" id="moderation_notify" value="1" <?php echo esc_attr( $get_moderation_notify ); ?>>
-									<?php esc_html_e( 'A comment is held for moderation' ); ?>
-								</label>
-							</fieldset>
-							<p><?php esc_html_e( 'Uncheck this box if you don\'t need the standard WordPress email notifications.', 'send-chat-tools' ); ?></p>
-							<p><?php esc_html_e( 'Even if this checkbox is unchecked, you will still be notified by email if the message was not successfully sent to the chat tool.', 'send-chat-tools' ); ?></p>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<h2 class="accordion-title <?php echo esc_attr( $slack_is_active ); ?>"><?php esc_html_e( 'Slack', 'send-chat-tools' ); ?></h2>
-		<div class="postbox accordion-content <?php echo esc_attr( $slack_window_status ); ?>">
-			<table class="form-table">
-				<tbody>
-					<tr>
-						<th>
-							<label for="use_slack"><?php esc_html_e( 'Use Slack', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="checkbox" id="use_slack" name="use_slack" value="1" <?php echo esc_attr( $get_use_slack ); ?>>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="slack_webhook_url"><?php esc_html_e( 'Webhook URL', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="text" id="slack_webhook_url" name="slack_webhook_url" size="60" value="<?php echo esc_attr( $get_slack_webhook_url ); ?>" placeholder="<?php esc_html_e( 'Input Slack Webhook URL', 'send-chat-tools' ); ?>">
-							<p><?php esc_html_e( 'Get the webhook URL from the Slack API.', 'send-chat-tools' ); ?></p>
-							<p><?php esc_html_e( 'The URL is usually in https://hooks.slack.com/services/XXXXX/XXXXX format.', 'send-chat-tools' ); ?></p>
-							<p>
-								<?php esc_html_e( 'Explanation of getting the Slack Webhook URL:', 'send-chat-tools' ); ?>
-								<a href="https://www.braveryk7.com/portfolio/send-chat-tools/slack-webhook-url-settings/" target="_blank"><?php esc_html_e( 'Steps to add a Slack Webhook URL to Send Chat Tools | L\'7 Records(Japanese Only)', 'send-chat-tools' ); ?></a>
-							</p>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="send_slack_author"><?php esc_html_e( 'Don\'t send self comment', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="checkbox" id="send_slack_author" name="send_slack_author" value="1" <?php echo esc_attr( $get_send_slack_author ); ?>>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="send_slack_update"><?php esc_html_e( 'Use update notifications', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="checkbox" id="send_slack_update" name="send_slack_update" value="1" <?php echo esc_attr( $get_slack_update ); ?>>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<h2 class="accordion-title <?php echo esc_attr( $chatwork_is_active ); ?>"><?php esc_html_e( 'Chatwork', 'send-chat-tools' ); ?></h2>
-		<div class="postbox accordion-content <?php echo esc_attr( $chatwork_window_status ); ?>">
-			<table class="form-table">
-				<tbody>
-					<tr>
-						<th>
-							<label for="use_chatwork"><?php esc_html_e( 'Use Chatwork', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="checkbox" id="use_chatwork" name="use_chatwork" value="1" <?php echo esc_attr( $get_use_chatwork ); ?>>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="chatwork_api_token"><?php esc_html_e( 'API Token', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="text" id="chatwork_api_token" name="chatwork_api_token" size="60" value="<?php echo esc_attr( $get_chatwork_api_token ); ?>" placeholder="<?php esc_html_e( 'Input Chatwork API Token', 'send-chat-tools' ); ?>">
-							<p><?php esc_html_e( 'Get the API Toke from the Chatwork.', 'send-chat-tools' ); ?></p>
-							<p><?php esc_html_e( 'It is usually random alphanumeric.', 'send-chat-tools' ); ?></p>
-							<p>
-								<?php esc_html_e( 'Explanation of getting the Chatwork API Token & Room ID:', 'send-chat-tools' ); ?>
-								<a href="https://www.braveryk7.com/portfolio/send-chat-tools/send-chat-tools-chatwork-api-token-and-room-id/" target="_blank"><?php esc_html_e( 'Steps to add a Chatwork API token and Room ID to Send Chat Tools | L\'7 Records(Japanese Only)', 'send-chat-tools' ); ?></a>
-							</p>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="chatwork_room_id"><?php esc_html_e( 'Room ID', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="text" id="chatwork_room_id" name="chatwork_room_id" value="<?php echo esc_attr( $get_chatwork_room_id ); ?>" placeholder="<?php esc_html_e( 'Input Chatwork room ID', 'send-chat-tools' ); ?>">
-							<p><?php esc_html_e( 'Get the Room ID from the Chatwork chat URL.', 'send-chat-tools' ); ?></p>
-							<p><?php esc_html_e( 'The number after "rid" in the URL of the chat page you want to receive.', 'send-chat-tools' ); ?></p>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="send_chatwork_author"><?php esc_html_e( 'Don\'t send self comment', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="checkbox" id="send_chatwork_author" name="send_chatwork_author" value="1" <?php echo esc_attr( $get_send_chatwork_author ); ?>>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="send_chatwork_update"><?php esc_html_e( 'Use update notifications', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="checkbox" id="send_chatwork_update" name="send_chatwork_update" value="1" <?php echo esc_attr( $get_chatwork_update ); ?>>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<h2 class="accordion-title <?php echo esc_attr( $discord_is_active ); ?>"><?php esc_html_e( 'Discord', 'send-chat-tools' ); ?></h2>
-		<div class="postbox accordion-content <?php echo esc_attr( $discord_window_status ); ?>">
-			<table class="form-table">
-				<tbody>
-					<tr>
-						<th>
-							<label for="use_discord"><?php esc_html_e( 'Use Discord', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="checkbox" id="use_discord" name="use_discord" value="1" <?php echo esc_attr( $get_use_discord ); ?>>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="discord_webhook_url"><?php esc_html_e( 'Webhook URL', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="text" id="discord_webhook_url" name="discord_webhook_url" size="60" value="<?php echo esc_attr( $get_discord_webhook_url ); ?>" placeholder="<?php esc_html_e( 'Input Discord Webhook URL', 'send-chat-tools' ); ?>">
-							<p><?php esc_html_e( 'Get the webhook URL from the Discord API.', 'send-chat-tools' ); ?></p>
-							<p><?php esc_html_e( 'The URL is usually in https://discord.com/api/webhooks/XXXXX/XXXXX format.', 'send-chat-tools' ); ?></p>
-							<p>
-								<?php esc_html_e( 'Explanation of getting the Discord Webhook URL:', 'send-chat-tools' ); ?>
-								<a href="https://www.braveryk7.com/portfolio/send-chat-tools/slack-webhook-url-settings/" target="_blank"><?php esc_html_e( 'Steps to add a Discord Webhook URL to Send Chat Tools | L\'7 Records(Japanese Only)', 'send-chat-tools' ); ?></a>
-							</p>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="send_discord_author"><?php esc_html_e( 'Don\'t send self comment', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="checkbox" id="send_discord_author" name="send_discord_author" value="1" <?php echo esc_attr( $get_send_discord_author ); ?>>
-						</td>
-					</tr>
-					<tr>
-						<th>
-							<label for="send_discord_update"><?php esc_html_e( 'Use update notifications', 'send-chat-tools' ); ?></label>
-						</th>
-						<td>
-							<input type="checkbox" id="send_discord_update" name="send_discord_update" value="1" <?php echo esc_attr( $get_discord_update ); ?>>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<?php
+			wp_nonce_field( 'sct_settings_nonce', 'sct_settings_nonce' );
+
+			$row = new Sct_Settings_Page_Row();
+			$row->settings( 'default' );
+			$row->settings( 'slack' );
+			$row->settings( 'discord' );
+			$row->settings( 'chatwork' );
+		?>
 		<p class="submit">
 			<input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" />
 		</p>
