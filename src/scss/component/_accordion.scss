@@ -3,13 +3,14 @@
 	border: 1px solid transparent;
 	color: #fff;
 	margin-bottom: 0;
-	padding: 1em .5em;
+	padding: 1em 0.5em;
 	position: relative;
 	cursor: pointer;
 	user-select: none;
 
-	&::before, &::after {
-		content: '';
+	&::before,
+	&::after {
+		content: "";
 		display: block;
 		background-color: #fff;
 		position: absolute;
@@ -21,10 +22,12 @@
 
 	&::after {
 		transform: rotate(90deg);
-		transition-duration: .3s;
+		transition-duration: 0.3s;
 	}
 
-	&:hover, &:active, &.is-active {
+	&:hover,
+	&:active,
+	&.is-active {
 		background-color: $main_color;
 	}
 

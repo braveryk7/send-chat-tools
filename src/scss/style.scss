@@ -1,8 +1,8 @@
-@import 'lib/const';
-@import 'component/accordion';
+@import "lib/const";
+@import "component/accordion";
 
 h1 {
-	padding-bottom: 20px!important;
+	padding-bottom: 20px !important;
 }
 
 .postbox {
@@ -11,10 +11,12 @@ h1 {
 }
 
 @media screen and (min-width: 783px) {
+
 	.form-table th {
 		padding-left: 25px;
 		min-width: 250px;
 	}
+
 	.form-table p {
 		padding-left: 10px;
 	}
