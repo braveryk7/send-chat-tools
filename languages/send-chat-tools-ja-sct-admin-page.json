@@ -1,0 +1,11 @@
+{
+	"domain": "send-chat-tools",
+	"locale_data": {
+	  "send-chat-tools": {
+		"": { "domain": "send-chat-tools" },
+		"Sent a test message.": ["テストメッセージを送信しました。"],
+		"Could not connect.": ["接続できませんでした。"],
+		"There is no URL format.": ["URLの形式が正しくありません。"]
+	  }
+	}
+  }
