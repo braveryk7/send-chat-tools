@@ -20,6 +20,7 @@ trait Sct_Sending {
 	 * @param string $tools Use chat tools prefix.
 	 */
 	private static function sending( array $options, string $id, string $tools ) {
+		update_option( 'sct_idd', $id );
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
 		if ( 'slack' === $tools ) {
@@ -50,5 +51,8 @@ trait Sct_Sending {
 				$send_mail->make_contents();
 			}
 		}
+
+		$logger = new Sct_Logger();
+		$logger->create_log( $states_code, $tools, $id );
 	}
 }
