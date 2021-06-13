@@ -5,7 +5,7 @@
  * @author Ken-chan
  * @package WordPress
  * @subpackage Send Chat Tools
- * @since 0.2.0
+ * @since 1.0.0
  */
 
 declare( strict_type = 1 );
