@@ -230,12 +230,12 @@ class Sct_Settings_Page {
 			$row->settings( 'discord' );
 			$row->settings( 'chatwork' );
 			$row->update_check_view();
+			$row->log_view();
 		?>
 		<p class="submit">
 			<input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" />
 		</p>
 	</form>
-		<?php $row->log_view(); ?>
 </div>
 		<?php
 	}
