@@ -243,7 +243,11 @@ class Sct_Settings_Page_Row {
 	public function log_view() {
 		$get_date = new Sct_Connect_Database();
 		$result   = $get_date->get_log();
-
+		?>
+		<section>
+			<h2 class="accordion-title">Log</h2>
+			<div class="postbox accordion-content accordion-content--log">
+		<?php
 		foreach ( $result as $key => $value ) {
 			if ( '1' === $value->tool ) {
 				$tool = 'Slack';
@@ -260,13 +264,18 @@ class Sct_Settings_Page_Row {
 			} elseif ( '2' === $value->type ) {
 				$type = 'Update';
 			}
-
-			echo '<p>';
-			echo '[' . esc_html( $value->send_date ) . '] ';
-			echo '[' . esc_html( $value->states ) . '] ';
-			echo '[' . esc_html( $tool ) . '] ';
-			echo '[' . esc_html( $type ) . ']';
-			echo '</p>';
+			?>
+				<p>
+					[ <?php echo esc_html( $value->send_date ); ?> ]
+					[ <?php echo esc_html( $value->states ); ?> ]
+					[ <?php echo esc_html( $tool ); ?> ]
+					[ <?php echo esc_html( $type ); ?> ]
+				</p>
+			<?php
 		}
+		?>
+			</div>
+		</section>
+		<?php
 	}
 }
