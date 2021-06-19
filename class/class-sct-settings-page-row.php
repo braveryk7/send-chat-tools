@@ -144,7 +144,10 @@ class Sct_Settings_Page_Row {
 								<label for="<?php echo esc_attr( $tool ); ?>_webhook_url"><?php esc_html_e( 'Webhook URL', 'send-chat-tools' ); ?></label>
 							</th>
 							<td>
-								<input type="text" id="<?php echo esc_attr( $tool ); ?>_webhook_url" name="<?php echo esc_attr( $tool ); ?>_webhook_url" size="60" value="<?php echo esc_attr( $get_webhook_url ); ?>" placeholder="<?php echo esc_html( $tool_webhook_attr ); ?>">
+								<div id="<?php echo esc_attr( $tool ); ?>_input">
+									<input type="text" id="<?php echo esc_attr( $tool ); ?>_webhook_url" name="<?php echo esc_attr( $tool ); ?>_webhook_url" size="60" value="<?php echo esc_attr( $get_webhook_url ); ?>" placeholder="<?php echo esc_html( $tool_webhook_attr ); ?>">
+									<span class="api-check" id="<?php echo esc_attr( $tool ); ?>-check"></span>
+								</div>
 								<p><?php echo esc_html( $tool_webhook_html ); ?></p>
 								<p><?php echo esc_html( $webhook_description_html ); ?></p>
 								<p>
@@ -159,6 +162,7 @@ class Sct_Settings_Page_Row {
 							</th>
 							<td>
 								<input type="text" id="<?php echo esc_attr( $tool ); ?>_api_token" name="<?php echo esc_attr( $tool ); ?>_api_token" size="60" value="<?php echo esc_attr( $get_api_token ); ?>" placeholder="<?php echo esc_attr( $tool_api_attr ); ?>">
+								<span class="api-check" id="<?php echo esc_attr( $tool ); ?>-check"></span>
 								<p><?php echo esc_html( $tool_api_html ); ?></p>
 								<p><?php echo esc_html( $api_description_html ); ?></p>
 								<p>
