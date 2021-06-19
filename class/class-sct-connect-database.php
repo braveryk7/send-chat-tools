@@ -78,7 +78,6 @@ class Sct_Connect_Database {
 				'send_date' => current_time( 'mysql' ),
 			]
 		); // db call ok.
-		update_option( 'sct_logger', 3 );
 	}
 
 	/**
@@ -99,16 +98,34 @@ class Sct_Connect_Database {
 	public static function delete_db() {
 		global $wpdb;
 
+		/* Remove columns from wp_options table */
+		delete_option( 'sct_db_version' );
 		delete_option( 'sct_iv' );
 		delete_option( 'sct_use_user_id' );
 		delete_option( 'sct_use_slack' );
 		delete_option( 'sct_slack_webhook_url' );
 		delete_option( 'sct_send_slack_author' );
+		delete_option( 'sct_send_slack_update' );
 		delete_option( 'sct_slack_log' );
 		delete_option( 'sct_use_chatwork' );
 		delete_option( 'sct_chatwork_api_token' );
 		delete_option( 'sct_chatwork_room_id' );
 		delete_option( 'sct_send_chatwork_author' );
+		delete_option( 'sct_send_chatwork_update' );
 		delete_option( 'sct_chatwork_log' );
+		delete_option( 'sct_use_discord' );
+		delete_option( 'sct_discord_webhook_url' );
+		delete_option( 'sct_send_discord_author' );
+		delete_option( 'sct_send_discord_update' );
+		delete_option( 'sct_cron_time' );
+
+		/* Remove wp_sct table */
+		$table_name = $wpdb->prefix . Sct_Const_Data::TABLE_NAME;
+
+		$sql = 'DROP TABLE IF EXISTS ' . $table_name;
+		$wpdb->query( "${sql}" ); // db call ok; no-cache ok.
+
+		/* Remove cron hooks */
+		wp_clear_scheduled_hook( 'sct_update_check' );
 	}
 }
