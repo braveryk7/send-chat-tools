@@ -205,4 +205,37 @@ class Sct_Settings_Page_Row {
 			<?php
 		endif;
 	}
+
+	/**
+	 * Log view.
+	 */
+	public function log_view() {
+		$get_date = new Sct_Connect_Database();
+		$result   = $get_date->get_log();
+
+		foreach ( $result as $key => $value ) {
+			if ( '1' === $value->tool ) {
+				$tool = 'Slack';
+			} elseif ( '2' === $value->tool ) {
+				$tool = 'Discord';
+			} elseif ( '3' === $value->tool ) {
+				$tool = 'Chatwork';
+			} else {
+				$tool = 'Microsoft Teams';
+			}
+
+			if ( '1' === $value->type ) {
+				$type = 'Comment';
+			} elseif ( '2' === $value->type ) {
+				$type = 'Update';
+			}
+
+			echo '<p>';
+			echo '[' . esc_html( $value->send_date ) . '] ';
+			echo '[' . esc_html( $value->states ) . '] ';
+			echo '[' . esc_html( $tool ) . '] ';
+			echo '[' . esc_html( $type ) . ']';
+			echo '</p>';
+		}
+	}
 }
