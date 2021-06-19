@@ -1,7 +1,7 @@
 import '../src/scss/style.scss';
-import { toggle } from './modules/accordion';
 import { ApiCheck } from './modules/_apiCheck';
 import { FormValidation } from './modules/_formValidation';
+import { toggle } from './modules/accordion';
 
 declare const wp: { i18n: { __: ( text: string, domain: string ) => string } };
 const __ = wp.i18n.__;
