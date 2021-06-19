@@ -188,6 +188,20 @@ class Sct_Settings_Page {
 				} else {
 					update_option( 'sct_send_discord_update', '0' );
 				}
+				/* Update check form. */
+				if ( ! empty( $_POST['notification_time'] ) ) {
+					$get_cron_time = sanitize_text_field( wp_unslash( $_POST['notification_time'] ) );
+					if ( get_option( 'sct_cron_time' ) !== $get_cron_time ) {
+						/** Remove current event */
+						wp_clear_scheduled_hook( 'sct_update_check' );
+
+						/** Set new event */
+						$my_time   = gmdate( 'Y-m-d ' . $get_cron_time, strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+						$cron_time = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $my_time ) );
+						wp_schedule_event( $cron_time, 'daily', 'sct_update_check' );
+						update_option( 'sct_cron_time', $get_cron_time );
+					}
+				}
 			}
 		}
 
@@ -215,6 +229,7 @@ class Sct_Settings_Page {
 			$row->settings( 'slack' );
 			$row->settings( 'discord' );
 			$row->settings( 'chatwork' );
+			$row->update_check_view();
 		?>
 		<p class="submit">
 			<input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" />
