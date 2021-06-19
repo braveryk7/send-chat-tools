@@ -25,13 +25,13 @@ class Sct_Check_Update {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$my_time   = gmdate( 'Y-m-d 03:00:00', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+		$my_time   = gmdate( 'Y-m-d 18:00:00', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
 		$cron_time = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $my_time ) );
 
 		add_action( 'sct_update_check', [ $this, 'controller' ] );
 		if ( ! wp_next_scheduled( 'sct_update_check' ) ) {
 			wp_schedule_event( $cron_time, 'daily', 'sct_update_check' );
-			update_option( 'sct_cron_time', '03:00' );
+			update_option( 'sct_cron_time', '18:00' );
 		}
 	}
 
