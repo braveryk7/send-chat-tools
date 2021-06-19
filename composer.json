@@ -2,6 +2,20 @@
     "require-dev": {
         "squizlabs/php_codesniffer": "*",
         "wp-coding-standards/wpcs": "*",
-        "wimg/php-compatibility": "*"
+        "phpcompatibility/php-compatibility": "*"
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "@wplint-path",
+            "@wplint-set",
+            "@wplint-rules",
+            "@pre-commit"
+        ],
+        "wplint": "./vendor/bin/phpcs",
+        "wplint-path": "./vendor/bin/phpcs --config-set installed_paths 'vendor/wp-coding-standards/wpcs'",
+        "wplint-set": "./vendor/bin/phpcs --config-set default_standard WordPress",
+        "wplint-rules": "./vendor/bin/phpcs -i",
+        "phpcb": "./vendor/bin/phpcs --standard=ruleset.xml",
+        "pre-commit": "cp conf/pre-commit .git/hooks"
     }
 }
