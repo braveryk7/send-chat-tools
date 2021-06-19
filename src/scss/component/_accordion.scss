@@ -49,4 +49,9 @@
 		height: auto;
 		opacity: 1;
 	}
+
+	&--log {
+		max-height: 300px;
+		overflow-y: scroll;
+	}
 }
