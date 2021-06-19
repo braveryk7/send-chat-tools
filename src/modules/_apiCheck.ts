@@ -13,12 +13,8 @@ export class ApiCheck {
 		let tool: string;
 		let options: {
 			method: string;
-			mode?: string;
-			contentType?: string;
 			headers?: {};
-			body?: any;
-			form?: {};
-			message?: any;
+			body: any;
 		};
 
 		if ( 'slack_webhook_url' === this.getApiId ) {
@@ -27,7 +23,7 @@ export class ApiCheck {
 			options = {
 				method: 'POST',
 				body: JSON.stringify( {
-					text: "Test message from Send Chat Tools.", //eslint-disable-line
+					text: 'Test message from Send Chat Tools.',
 				} ),
 			};
 		} else if ( 'discord_webhook_url' === this.getApiId ) {
@@ -39,7 +35,7 @@ export class ApiCheck {
 					'content-Type': 'application/json;charset=utf-8',
 				},
 				body: JSON.stringify( {
-					content: "Test message from Send Chat Tools.", //eslint-disable-line
+					content: 'Test message from Send Chat Tools.',
 				} ),
 			};
 		} else {
