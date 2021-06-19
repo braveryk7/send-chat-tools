@@ -24,3 +24,9 @@ node_modules/
 #   Created by webpack
 #-------------------------------
 dist/
+
+#-------------------------------
+#   Created by Linter
+#-------------------------------
+.eslintcache
+.stylelintcache
