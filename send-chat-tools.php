@@ -41,12 +41,14 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 		exit;
 	}
 } elseif ( true === $get_php_version_bool->judgment( $require_php_version ) ) {
+	require_once dirname( __FILE__ ) . '/class/class-sct-const-data.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-connect-database.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-settings-page.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-slack.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-chatwork.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-discord.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
 
 	global $wpdb;
 
@@ -65,6 +67,15 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	if ( '1' === get_option( 'sct_send_slack_update' ) || '1' === get_option( 'sct_send_chatwork_update' ) || '1' === get_option( 'sct_send_discord_update' ) ) {
 		$cron = new Sct_Check_Update();
 	}
+
+	/**
+	 * Activate Hook
+	 */
+	function sct_activate() {
+		$db_class = new Sct_Connect_Database();
+		register_activation_hook( __FILE__, [ $db_class, 'search_table' ] );
+	}
+	sct_activate();
 
 	/**
 	 * Uninstall Hook.
