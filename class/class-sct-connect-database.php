@@ -82,6 +82,18 @@ class Sct_Connect_Database {
 	}
 
 	/**
+	 * Get log data.
+	 *
+	 * @var array
+	 */
+	public function get_log(): array {
+		global $wpdb;
+		$result = $wpdb->get_results( "SELECT * FROM $this->table_name ORDER BY send_date DESC" ); // phpcs:ignore
+
+		return $result;
+	}
+
+	/**
 	 * Delete wp_option.
 	 */
 	public static function delete_db() {
