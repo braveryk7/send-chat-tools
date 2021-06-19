@@ -41,6 +41,8 @@ class Sct_Settings_Page_Row {
 	 * @param string $tool Tool name.
 	 */
 	private function row( string $tool ) {
+		$get_cron = get_option( 'sct_cron_time' );
+
 		if ( 'default' !== $tool ) {
 			$use_flag = get_option( 'sct_use_' . $tool );
 			if ( '1' === $use_flag ) {
@@ -204,6 +206,35 @@ class Sct_Settings_Page_Row {
 		</section>
 			<?php
 		endif;
+	}
+
+	/**
+	 * Update check settings.
+	 */
+	public function update_check_view() {
+		?>
+		<section>
+			<h2 class="accordion-title"><?php esc_html_e( 'Update check settings', 'send-chat-tools' ); ?></h2>
+			<div class="postbox accordion-content">
+				<table class="form-table">
+					<tbody>
+						<tr>
+							<th scope="row"><?php esc_html_e( 'Update notification time', 'send-chat-tools' ); ?></th>
+							<td>
+								<fieldset>
+									<label for="notification_time">
+										<input name="notification_time" type="time" id="notification_time" value="<?php echo esc_attr( get_option( 'sct_cron_time' ) ); ?>" >
+									</label>
+								</fieldset>
+								<p><?php esc_html_e( 'Select the time at which notifications of updates will be sent.', 'send-chat-tools' ); ?></p>
+								<p><?php esc_html_e( 'However, due to the nature of WordPress Cron, it will be sent the first time your site is accessed after this time.', 'send-chat-tools' ); ?></p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+		<?php
 	}
 
 	/**
