@@ -8,7 +8,7 @@
  * @since 0.0.1
  */
 
-declare( strict_type = 1 );
+declare( strict_types = 1 );
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'You do not have access rights.' );
@@ -56,7 +56,12 @@ class Sct_Settings_Page {
 	 * Include CSS in Send Chat Tools settings page.
 	 */
 	public function include_css() {
-			wp_enqueue_style( 'sct-admin-page.css', plugins_url( 'dist/css/style.css', dirname( __FILE__ ) ), false, gmdate( 'Ymd', filemtime( __FILE__ ) ) );
+		wp_enqueue_style(
+			'sct-admin-page.css',
+			plugins_url( 'dist/css/style.css', dirname( __FILE__ ) ),
+			false,
+			gmdate( 'Ymd', filemtime( __FILE__ ) )
+		);
 	}
 
 	/**
@@ -64,11 +69,17 @@ class Sct_Settings_Page {
 	 */
 	public function include_js() {
 		wp_enqueue_script(
-			'sct-admin-page.js',
+			'sct-admin-page',
 			plugins_url( '/dist/main.js?', dirname( __FILE__ ) ),
-			false,
+			[ 'wp-i18n' ],
 			time(),
 			true,
+		);
+
+		wp_set_script_translations(
+			'sct-admin-page',
+			'send-chat-tools',
+			dirname( __DIR__ ) . '/languages',
 		);
 	}
 
@@ -209,6 +220,7 @@ class Sct_Settings_Page {
 			<input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" />
 		</p>
 	</form>
+		<?php $row->log_view(); ?>
 </div>
 		<?php
 	}
