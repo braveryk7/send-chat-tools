@@ -22,7 +22,6 @@ trait Sct_Sending {
 	 * @param string $tools Use chat tools prefix.
 	 */
 	private static function sending( array $options, string $id, string $tools ) {
-		update_option( 'sct_idd', $id );
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
 		if ( 'slack' === $tools ) {
