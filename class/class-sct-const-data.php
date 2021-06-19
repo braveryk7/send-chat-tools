@@ -22,4 +22,9 @@ class Sct_Const_Data {
 	 * Database Table prefix.
 	 */
 	const TABLE_NAME = 'sct';
+
+	/**
+	 * Database version.
+	 */
+	const DB_VERSION = '1.0';
 }
