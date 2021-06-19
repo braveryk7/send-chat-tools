@@ -31,6 +31,7 @@ class Sct_Check_Update {
 		add_action( 'sct_update_check', [ $this, 'controller' ] );
 		if ( ! wp_next_scheduled( 'sct_update_check' ) ) {
 			wp_schedule_event( $cron_time, 'daily', 'sct_update_check' );
+			update_option( 'sct_cron_time', '03:00' );
 		}
 	}
 
