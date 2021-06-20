@@ -83,11 +83,14 @@ class Sct_Connect_Database {
 	/**
 	 * Get log data.
 	 *
+	 * @param int $limit Get column limit.
 	 * @var array
 	 */
-	public function get_log(): array {
+	public function get_log( int $limit = 100 ): array {
 		global $wpdb;
-		$result = $wpdb->get_results( "SELECT * FROM $this->table_name ORDER BY send_date DESC" ); // phpcs:ignore
+		$result = $wpdb->get_results( // phpcs:ignore
+			$wpdb->prepare( "SELECT * FROM $this->table_name ORDER BY send_date DESC LIMIT %d", $limit ) // phpcs:ignore
+		); // phpcs:ignore
 
 		return $result;
 	}
