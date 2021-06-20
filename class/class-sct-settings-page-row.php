@@ -242,7 +242,8 @@ class Sct_Settings_Page_Row {
 	 */
 	public function log_view() {
 		$get_date = new Sct_Connect_Database();
-		$result   = $get_date->get_log();
+		$limit    = 100;
+		$result   = $get_date->get_log( $limit );
 		?>
 		<section>
 			<h2 class="accordion-title">Log</h2>
