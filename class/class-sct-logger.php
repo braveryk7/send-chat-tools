@@ -21,11 +21,11 @@ class Sct_Logger {
 	/**
 	 * Create log format.
 	 *
-	 * @param string $states_code HTTP states code.
+	 * @param int    $states_code HTTP states code.
 	 * @param string $tool_name Use tool name.
 	 * @param string $notification_type Comment, Update.
 	 */
-	public function create_log( string $states_code, string $tool_name, string $notification_type ) {
+	public function create_log( int $states_code, string $tool_name, string $notification_type ) {
 		if ( 'slack' === $tool_name ) {
 			$tool = '1';
 		} elseif ( 'discord' === $tool_name ) {
