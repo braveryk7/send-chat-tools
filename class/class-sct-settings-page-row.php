@@ -269,7 +269,7 @@ class Sct_Settings_Page_Row {
 				$states_class   = '--alert';
 				$states_message = 'Could not communicate.';
 			} else {
-				$states_class = '--ok';
+				$states_class   = '--ok';
 				$states_message = 'Respons OK!';
 			}
 			?>
