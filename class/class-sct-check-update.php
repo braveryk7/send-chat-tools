@@ -61,7 +61,7 @@ class Sct_Check_Update {
 	private function check_core() {
 		$get_core_states = get_option( '_site_transient_update_core' );
 		$return          = [];
-		if ( ! empty( $get_core_states ) ) {
+		if ( ! empty( $get_core_states ) && 'upgrade' === $get_core_states->updates[0]->response ) {
 			$update_core    = $get_core_states->updates[0];
 			$return['core'] = [
 				'name'            => 'WordPress Core',
