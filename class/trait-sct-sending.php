@@ -42,7 +42,7 @@ trait Sct_Sending {
 		} else {
 			$states_code = 1000;
 		}
-		if ( 200 !== $states_code || 204 !== $states_code ) {
+		if ( 200 !== $states_code && 204 !== $states_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
 			if ( 'update' === $id ) {
 				$send_mail = new Sct_Error_mail( $states_code, $id );
