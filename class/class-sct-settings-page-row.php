@@ -264,12 +264,21 @@ class Sct_Settings_Page_Row {
 			} elseif ( '2' === $value->type ) {
 				$type = 'Update';
 			}
+
+			if ( '200' !== $value->states && '204' !== $value->states ) {
+				$states_class   = '--alert';
+				$states_message = 'Could not communicate.';
+			} else {
+				$states_class = '--ok';
+				$states_message = 'Respons OK!';
+			}
 			?>
-				<p>
+				<p class="log-row<?php echo esc_attr( $states_class ); ?>" >
 					[ <?php echo esc_html( $value->send_date ); ?> ]
-					[ <?php echo esc_html( $value->states ); ?> ]
 					[ <?php echo esc_html( $tool ); ?> ]
 					[ <?php echo esc_html( $type ); ?> ]
+					[ <?php echo esc_html( $value->states ); ?> ] 
+					<?php echo esc_html( $states_message ); ?>
 				</p>
 			<?php
 		}
