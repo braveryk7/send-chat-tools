@@ -62,11 +62,11 @@ class Sct_Connect_Database {
 	/**
 	 * Insert log.
 	 *
-	 * @param string $states_code States code.
+	 * @param int    $states_code States code.
 	 * @param string $tool Use tool number.
 	 * @param string $type Type.
 	 */
-	public function insert_log( string $states_code, string $tool, string $type ) {
+	public function insert_log( int $states_code, string $tool, string $type ) {
 		global $wpdb;
 
 		$wpdb->insert(
