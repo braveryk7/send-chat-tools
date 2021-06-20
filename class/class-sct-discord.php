@@ -66,7 +66,7 @@ class Sct_Discord {
 			];
 
 			/* Use trait_sct_sending */
-			self::sending( $options, $wpdb->insert_id, 'discord' );
+			self::sending( $options, (string) $wpdb->insert_id, 'discord' );
 		}
 	}
 

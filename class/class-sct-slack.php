@@ -64,7 +64,7 @@ class Sct_Slack {
 				'body'    => wp_json_encode( $message ),
 			];
 
-			self::sending( $options, $wpdb->insert_id, 'slack' );
+			self::sending( $options, (string) $wpdb->insert_id, 'slack' );
 		}
 	}
 

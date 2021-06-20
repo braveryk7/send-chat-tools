@@ -67,7 +67,7 @@ class Sct_Chatwork {
 			];
 
 			/* Use trait_sct_sending */
-			self::sending( $options, $wpdb->insert_id, 'chatwork' );
+			self::sending( $options, (string) $wpdb->insert_id, 'chatwork' );
 		}
 	}
 
