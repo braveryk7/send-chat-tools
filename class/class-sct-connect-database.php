@@ -56,7 +56,15 @@ class Sct_Connect_Database {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		dbDelta( $sql );
 
-		update_option( 'sct_db_version', Sct_Const_Data::DB_VERSION );
+		/* Create columns from wp_options table */
+		$options = Sct_Const_Data::OPTION_LIST;
+		foreach ( $options as $key => $value ) {
+			if ( 'sct_iv' === $key ) {
+				add_option( $key, Sct_Encryption::make_vector() );
+			} else {
+				add_option( $key, $value );
+			}
+		}
 	}
 
 	/**
@@ -102,25 +110,10 @@ class Sct_Connect_Database {
 		global $wpdb;
 
 		/* Remove columns from wp_options table */
-		delete_option( 'sct_db_version' );
-		delete_option( 'sct_iv' );
-		delete_option( 'sct_use_user_id' );
-		delete_option( 'sct_use_slack' );
-		delete_option( 'sct_slack_webhook_url' );
-		delete_option( 'sct_send_slack_author' );
-		delete_option( 'sct_send_slack_update' );
-		delete_option( 'sct_slack_log' );
-		delete_option( 'sct_use_chatwork' );
-		delete_option( 'sct_chatwork_api_token' );
-		delete_option( 'sct_chatwork_room_id' );
-		delete_option( 'sct_send_chatwork_author' );
-		delete_option( 'sct_send_chatwork_update' );
-		delete_option( 'sct_chatwork_log' );
-		delete_option( 'sct_use_discord' );
-		delete_option( 'sct_discord_webhook_url' );
-		delete_option( 'sct_send_discord_author' );
-		delete_option( 'sct_send_discord_update' );
-		delete_option( 'sct_cron_time' );
+		$options = Sct_Const_Data::OPTION_LIST;
+		foreach ( $options as $key => $value ) {
+			delete_option( $key );
+		}
 
 		/* Remove wp_sct table */
 		$table_name = $wpdb->prefix . Sct_Const_Data::TABLE_NAME;
