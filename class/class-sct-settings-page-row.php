@@ -68,7 +68,10 @@ class Sct_Settings_Page_Row {
 			$webhook_description_url_html = esc_html__( 'Explanation of getting the Slack Webhook URL:', 'send-chat-tools' );
 			$webhook_description_url_text = esc_html__( 'Steps to add a Slack Webhook URL to Send Chat Tools | L\'7 Records(Japanese Only)', 'send-chat-tools' );
 			$webhook_description_url      = 'https://www.braveryk7.com/portfolio/send-chat-tools/slack-webhook-url-settings/';
-			$get_webhook_url              = Sct_Encryption::decrypt( get_option( 'sct_' . $tool . '_webhook_url' ) );
+			$tool_status                  = get_option( 'sct_' . $tool . '_webhook_url' );
+			if ( $tool_status ) {
+				$get_webhook_url = Sct_Encryption::decrypt( $tool_status );
+			}
 		} elseif ( 'discord' === $tool ) {
 			$api_type                     = 1;
 			$tool_name_attr               = esc_html__( 'Discord', 'send-chat-tools' );
@@ -79,7 +82,10 @@ class Sct_Settings_Page_Row {
 			$webhook_description_url_html = esc_html__( 'Explanation of getting the Discord Webhook URL:', 'send-chat-tools' );
 			$webhook_description_url_text = esc_html__( 'Steps to add a Discord Webhook URL to Send Chat Tools | L\'7 Records(Japanese Only)', 'send-chat-tools' );
 			$webhook_description_url      = '';
-			$get_webhook_url              = Sct_Encryption::decrypt( get_option( 'sct_' . $tool . '_webhook_url' ) );
+			$tool_status                  = get_option( 'sct_' . $tool . '_webhook_url' );
+			if ( $tool_status ) {
+				$get_webhook_url = Sct_Encryption::decrypt( $tool_status );
+			}
 		} elseif ( 'chatwork' === $tool ) {
 			$api_type                 = 2;
 			$tool_name_attr           = esc_html__( 'Chatwork', 'send-chat-tools' );
@@ -93,8 +99,14 @@ class Sct_Settings_Page_Row {
 			$tool_room_attr           = esc_html__( 'Input Chatwork room ID', 'send-chat-tools' );
 			$tool_room_html           = esc_html__( 'Get the Room ID from the Chatwork chat URL.', 'send-chat-tools' );
 			$room_description_html    = esc_html__( 'The number after "rid" in the URL of the chat page you want to receive.', 'send-chat-tools' );
-			$get_api_token            = Sct_Encryption::decrypt( get_option( 'sct_chatwork_api_token' ) );
-			$get_room_id              = Sct_Encryption::decrypt( get_option( 'sct_chatwork_room_id' ) );
+			$api_status               = get_option( 'sct_chatwork_api_token' );
+			$room_status              = get_option( 'sct_chatwork_room_id' );
+			if ( $api_status ) {
+				$get_api_token = Sct_Encryption::decrypt( $api_status );
+			}
+			if ( $room_status ) {
+				$get_room_id = Sct_Encryption::decrypt( $room_status );
+			}
 		}
 
 		if ( 'default' === $tool ) :
