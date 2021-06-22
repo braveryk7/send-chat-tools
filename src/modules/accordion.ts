@@ -21,5 +21,3 @@ export class SctAccordion {
 		}
 	}
 }
-
-new SctAccordion();
