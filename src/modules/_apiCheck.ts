@@ -1,34 +1,88 @@
+import { FormValidation } from './_formValidation';
+
 declare const wp: { i18n: { __: ( text: string, domain: string ) => string } };
 const __ = wp.i18n.__;
 
 export class ApiCheck {
-	private getApiId: string;
+	constructor() {
+		const getApiInputSlack: HTMLInputElement = <HTMLInputElement>(
+			document.getElementById( 'slack_webhook_url' )
+		);
 
-	constructor( private getApiInput: HTMLInputElement ) {
-		this.getApiId = getApiInput.id;
+		const getApiInputDiscord: HTMLInputElement = <HTMLInputElement>(
+			document.getElementById( 'discord_webhook_url' )
+		);
+
+		getApiInputSlack.addEventListener(
+			'change',
+			( e ) => {
+				const eventValue: HTMLInputElement = <HTMLInputElement>e.target;
+				this.callValidation( eventValue );
+			},
+			false
+		);
+
+		getApiInputDiscord.addEventListener(
+			'change',
+			( e ) => {
+				const eventValue: HTMLInputElement = <HTMLInputElement>e.target;
+				this.callValidation( eventValue );
+			},
+			false
+		);
 	}
 
-	createContent(): void {
-		let textArea: HTMLElement;
+	callValidation( eventValue: HTMLInputElement ): void {
 		let tool: string;
+		let notifyHtmlClass: HTMLElement;
+		if ( 'slack_webhook_url' === eventValue.id ) {
+			tool = 'slack';
+			notifyHtmlClass = <HTMLElement>(
+				document.getElementById( 'slack-check' )
+			);
+		} else if ( 'discord_webhook_url' === eventValue.id ) {
+			tool = 'discord';
+			notifyHtmlClass = <HTMLElement>(
+				document.getElementById( 'discord-check' )
+			);
+		} else {
+			tool = 'teams';
+			notifyHtmlClass = <HTMLElement>(
+				document.getElementById( 'teams-check' )
+			);
+		}
+		const validation = new FormValidation( eventValue.value );
+		if ( validation.urlCheck( tool ) ) {
+			this.createContent( eventValue );
+		} else {
+			notifyHtmlClass.classList.remove( 'connect-true' );
+			notifyHtmlClass.classList.add( 'connect-false' );
+			const msg = __( 'Not an appropriate value.', 'send-chat-tools' );
+			notifyHtmlClass.innerHTML = msg;
+		}
+	}
+
+	createContent( eventValue: HTMLInputElement ): void {
+		let textArea: HTMLElement;
+		let url: string;
 		let options: {
 			method: string;
 			headers?: {};
 			body: any;
 		};
 
-		if ( 'slack_webhook_url' === this.getApiId ) {
+		if ( 'slack_webhook_url' === eventValue.id ) {
 			textArea = <HTMLElement>document.getElementById( 'slack-check' );
-			tool = 'slack';
+			url = eventValue.value;
 			options = {
 				method: 'POST',
 				body: JSON.stringify( {
 					text: 'Test message from Send Chat Tools.',
 				} ),
 			};
-		} else if ( 'discord_webhook_url' === this.getApiId ) {
+		} else if ( 'discord_webhook_url' === eventValue.id ) {
 			textArea = <HTMLElement>document.getElementById( 'discord-check' );
-			tool = 'discord';
+			url = eventValue.value;
 			options = {
 				method: 'POST',
 				headers: {
@@ -40,24 +94,17 @@ export class ApiCheck {
 			};
 		} else {
 			textArea = <HTMLElement>document.getElementById( '-check' );
-			tool = '';
+			url = eventValue.value;
 			options = {
 				method: 'POST',
 				headers: {},
 				body: '',
 			};
 		}
-		this.send( options, textArea, tool );
+		this.send( options, textArea, url );
 	}
 
-	send( options: object, textArea: HTMLElement, tool: string ) {
-		let url: string;
-		if ( 'chatwork' === tool ) {
-			// url = 'https://api.chatwork.com/v2/rooms/231052493/messages';
-			url = 'https://enwluxd1c6a0ipk.m.pipedream.net';
-		} else {
-			url = this.getApiInput.value;
-		}
+	send( options: object, textArea: HTMLElement, url: string ) {
 		fetch( url, options )
 			.then( ( res ) => {
 				const jsons: Response = res;
