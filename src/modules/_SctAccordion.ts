@@ -13,7 +13,7 @@ export class SctAccordion {
 		}
 	}
 
-	toggle( eleme: HTMLElement ) {
+	private toggle( eleme: HTMLElement ) {
 		if ( eleme !== null ) {
 			const content: HTMLElement = <HTMLElement>eleme.nextElementSibling;
 			eleme.classList.toggle( 'is-active' );
