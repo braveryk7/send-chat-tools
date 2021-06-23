@@ -32,7 +32,7 @@ export class SctApiCheck {
 		);
 	}
 
-	callValidation( eventValue: HTMLInputElement ): void {
+	private callValidation( eventValue: HTMLInputElement ): void {
 		let tool: string;
 		let notifyHtmlClass: HTMLElement;
 		if ( 'slack_webhook_url' === eventValue.id ) {
@@ -62,7 +62,7 @@ export class SctApiCheck {
 		}
 	}
 
-	createContent( eventValue: HTMLInputElement ): void {
+	private createContent( eventValue: HTMLInputElement ): void {
 		let textArea: HTMLElement;
 		let url: string;
 		let options: {
@@ -104,7 +104,7 @@ export class SctApiCheck {
 		this.send( options, textArea, url );
 	}
 
-	send( options: object, textArea: HTMLElement, url: string ) {
+	private send( options: object, textArea: HTMLElement, url: string ) {
 		fetch( url, options )
 			.then( ( res ) => {
 				const jsons: Response = res;
