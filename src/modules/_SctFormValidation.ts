@@ -1,4 +1,4 @@
-export class FormValidation {
+export class SctFormValidation {
 	constructor( private url: string ) {
 		this.url = url;
 	}
