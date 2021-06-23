@@ -1,5 +1,7 @@
+@use "./import_foundation" as f;
+
 .accordion-title {
-	background-color: $sub_color;
+	background-color: f.$sub_color;
 	border: 1px solid transparent;
 	color: #fff;
 	margin-bottom: 0;
@@ -28,7 +30,7 @@
 	&:hover,
 	&:active,
 	&.is-active {
-		background-color: $main_color;
+		background-color: f.$main_color;
 	}
 
 	&.is-active::before {
