@@ -53,22 +53,6 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 
 	global $wpdb;
 
-	if ( '1' === get_option( 'sct_use_slack' ) ) {
-		add_action( 'comment_post', 'Sct_Slack::create_comment_contents' );
-	}
-
-	if ( '1' === get_option( 'sct_use_chatwork' ) ) {
-		add_action( 'comment_post', 'Sct_Chatwork::create_comment_contents' );
-	}
-
-	if ( '1' === get_option( 'sct_use_discord' ) ) {
-		add_action( 'comment_post', 'Sct_Discord::create_comment_contents' );
-	}
-
-	if ( '1' === get_option( 'sct_send_slack_update' ) || '1' === get_option( 'sct_send_chatwork_update' ) || '1' === get_option( 'sct_send_discord_update' ) ) {
-		$cron = new Sct_Check_Update();
-	}
-
 	/**
 	 * Activate Hook
 	 */
@@ -87,5 +71,21 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	sct_uninstall();
 
 	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'Sct_Settings_Page::add_settings_links' );
+
+	if ( '1' === get_option( 'sct_use_slack' ) ) {
+		add_action( 'comment_post', 'Sct_Slack::create_comment_contents' );
+	}
+
+	if ( '1' === get_option( 'sct_use_chatwork' ) ) {
+		add_action( 'comment_post', 'Sct_Chatwork::create_comment_contents' );
+	}
+
+	if ( '1' === get_option( 'sct_use_discord' ) ) {
+		add_action( 'comment_post', 'Sct_Discord::create_comment_contents' );
+	}
+
+	if ( '1' === get_option( 'sct_send_slack_update' ) || '1' === get_option( 'sct_send_chatwork_update' ) || '1' === get_option( 'sct_send_discord_update' ) ) {
+		$cron = new Sct_Check_Update();
+	}
 }
 
