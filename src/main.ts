@@ -1,6 +1,6 @@
 import '../src/scss/style.scss';
+import { SctAccordion } from './modules/_SctAccordion';
 import { SctApiCheck } from './modules/_SctApiCheck';
-import { SctAccordion } from './modules/accordion';
 
 // Run Accordion.
 new SctAccordion();
