@@ -1,4 +1,4 @@
-import { FormValidation } from './_formValidation';
+import { SctFormValidation } from './_SctFormValidation';
 
 declare const wp: { i18n: { __: ( text: string, domain: string ) => string } };
 const __ = wp.i18n.__;
@@ -51,7 +51,7 @@ export class SctApiCheck {
 				document.getElementById( 'teams-check' )
 			);
 		}
-		const validation = new FormValidation( eventValue.value );
+		const validation = new SctFormValidation( eventValue.value );
 		if ( validation.urlCheck( tool ) ) {
 			this.createContent( eventValue );
 		} else {
