@@ -1,9 +1,9 @@
 import '../src/scss/style.scss';
-import { ApiCheck } from './modules/_apiCheck';
+import { SctApiCheck } from './modules/_SctApiCheck';
 import { SctAccordion } from './modules/accordion';
 
 // Run Accordion.
 new SctAccordion();
 
 // Run Api check.
-new ApiCheck();
+new SctApiCheck();
