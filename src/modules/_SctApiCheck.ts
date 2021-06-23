@@ -3,7 +3,7 @@ import { FormValidation } from './_formValidation';
 declare const wp: { i18n: { __: ( text: string, domain: string ) => string } };
 const __ = wp.i18n.__;
 
-export class ApiCheck {
+export class SctApiCheck {
 	constructor() {
 		const getApiInputSlack: HTMLInputElement = <HTMLInputElement>(
 			document.getElementById( 'slack_webhook_url' )
