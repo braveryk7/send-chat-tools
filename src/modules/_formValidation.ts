@@ -1,5 +1,7 @@
 export class FormValidation {
-	constructor( private url: string ) {}
+	constructor( private url: string ) {
+		this.url = url;
+	}
 
 	urlCheck( tool: string ): boolean {
 		if ( 'slack' === tool ) {
