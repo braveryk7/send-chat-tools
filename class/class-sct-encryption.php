@@ -30,7 +30,7 @@ class Sct_Encryption {
 	/**
 	 * Make IV for OpenSSL.
 	 */
-	private static function make_vector(): string {
+	public static function make_vector(): string {
 		$vector_length = openssl_cipher_iv_length( self::METHOD );
 		return bin2hex( openssl_random_pseudo_bytes( $vector_length ) );
 	}
