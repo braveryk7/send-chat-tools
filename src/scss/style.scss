@@ -1,7 +1,6 @@
-@import "lib/const";
-@import "component/accordion";
-@import "component/api_status";
-@import "component/logView";
+@use "component/accordion";
+@use "component/api_status";
+@use "component/logView";
 
 h1 {
 	padding-bottom: 20px !important;
