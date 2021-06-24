@@ -47,38 +47,40 @@ class Sct_Create_Content {
 		global $wpdb;
 		if ( 'comment' === $type ) {
 			$comment = $this->get_comment_data( $comment_id );
-			if ( '1' === get_option( 'sct_use_slack' ) ) {
-				$author = get_option( 'sct_send_slack_author' );
-				if ( ( '0' === $author ) || ( '1' === $author && '0' === $comment->user_id ) ) {
-					$options = $this->create_content( $type, 'slack', $comment );
-					self::sending( $options, (string) $wpdb->insert_id, 'slack' );
-				}
+			$tools   = [
+				get_option( 'sct_use_slack' ),
+				get_option( 'sct_use_discord' ),
+				get_option( 'sct_use_chatwork' ),
+			];
+			$author  = [
+				get_option( 'sct_send_slack_author' ),
+				get_option( 'sct_send_discord_author' ),
+				get_option( 'sct_send_chatwork_author' ),
+			];
+
+			if ( '1' === $tools[0] && ( ( '0' === $author[0] ) || ( '1' === $author[0] && '0' === $comment->user_id ) ) ) {
+				$options = $this->create_content( $type, 'slack', $comment );
+				self::sending( $options, (string) $wpdb->insert_id, 'slack' );
 			};
-			if ( '1' === get_option( 'sct_use_discord' ) ) {
-				$author = get_option( 'sct_send_discord_author' );
-				if ( ( '0' === $author ) || ( '1' === $author && '0' === $comment->user_id ) ) {
-					$options = $this->create_content( $type, 'discord', $comment );
-					self::sending( $options, (string) $wpdb->insert_id, 'discord' );
-				}
+			if ( '1' === $tools[1] && ( ( '0' === $author[1] ) || ( '1' === $author[1] && '0' === $comment->user_id ) ) ) {
+				$options = $this->create_content( $type, 'discord', $comment );
+				self::sending( $options, (string) $wpdb->insert_id, 'discord' );
 			}
-			if ( '1' === get_option( 'sct_use_chatwork' ) ) {
-				$author = get_option( 'sct_send_chatwork_author' );
-				if ( ( '0' === $author ) || ( '1' === $author && '0' === $comment->user_id ) ) {
-					$options = $this->create_content( $type, 'chatwork', $comment );
-					self::sending( $options, (string) $wpdb->insert_id, 'chatwork' );
-				}
+			if ( '1' === $tools[2] && ( ( '0' === $author[2] ) || ( '1' === $author[2] && '0' === $comment->user_id ) ) ) {
+				$options = $this->create_content( $type, 'chatwork', $comment );
+				self::sending( $options, (string) $wpdb->insert_id, 'chatwork' );
 			}
 		} elseif ( 'update' === $type ) {
 			if ( '1' === get_option( 'sct_use_slack' ) && '1' === get_option( 'sct_send_slack_update' ) ) {
-				$options = $this->create_content( 'update', 'slack', null, $check_date );
+				$options = $this->create_content( $type, 'slack', null, $check_date );
 				self::sending( $options, 'update', 'slack' );
 			}
 			if ( '1' === get_option( 'sct_use_discord' ) && '1' === get_option( 'sct_send_discord_update' ) ) {
-				$options = $this->create_content( 'update', 'discord', null, $check_date );
+				$options = $this->create_content( $type, 'discord', null, $check_date );
 				self::sending( $options, 'update', 'discord' );
 			}
 			if ( '1' === get_option( 'sct_use_chatwork' ) && '1' === get_option( 'sct_send_chatwork_update' ) ) {
-				$options = $this->create_content( 'update', 'chatwork', null, $check_date );
+				$options = $this->create_content( $type, 'chatwork', null, $check_date );
 				self::sending( $options, 'update', 'chatwork' );
 			}
 		}
