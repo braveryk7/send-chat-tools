@@ -43,16 +43,21 @@ class Sct_Check_Update {
 		$core       = $this->check_core();
 		$themes     = $this->check_themes();
 		$plugins    = $this->check_plugins();
+
 		if ( isset( $core ) ) {
-			$check_data = array_merge( $check_all, $core );
+			$check_data = array_merge( $check_data, $core );
 		}
 		if ( isset( $themes ) ) {
-			$check_data = array_merge( $check_all, $themes );
+			$check_data = array_merge( $check_data, $themes );
 		}
 		if ( isset( $plugins ) ) {
-			$check_data = array_merge( $check_all, $plugins );
+			$check_data = array_merge( $check_data, $plugins );
 		}
-		$this->check_tools( $check_data );
+
+		if ( ! empty( $check_data ) ) {
+			$next = new Sct_Create_Content();
+			$next->controller( 0, 'update', $check_data );
+		}
 	}
 
 	/**
@@ -122,15 +127,5 @@ class Sct_Check_Update {
 			}
 		}
 		return $return;
-	}
-
-	/**
-	 * Check tools use status and call.
-	 *
-	 * @param array $check_data Update info.
-	 */
-	private function check_tools( array $check_data ) {
-		$update = new Sct_Create_Content();
-		$update->controller( 0, 'update', $check_data );
 	}
 }
