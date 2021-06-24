@@ -96,7 +96,7 @@ class Sct_Create_Content {
 	}
 
 	/**
-	 * Create comments message.
+	 * Create send options.
 	 *
 	 * @param string $type Create type.
 	 * @param string $tool Tool name.
