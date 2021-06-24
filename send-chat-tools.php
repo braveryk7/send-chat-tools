@@ -45,9 +45,7 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-encryption.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-connect-database.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-settings-page.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-slack.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-chatwork.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-discord.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-create-content.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
 
@@ -72,20 +70,14 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 
 	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'Sct_Settings_Page::add_settings_links' );
 
-	if ( '1' === get_option( 'sct_use_slack' ) ) {
-		add_action( 'comment_post', 'Sct_Slack::create_comment_contents' );
-	}
+	/**
+	 * Start comment process.
+	 */
+	new Sct_Create_Content();
 
-	if ( '1' === get_option( 'sct_use_chatwork' ) ) {
-		add_action( 'comment_post', 'Sct_Chatwork::create_comment_contents' );
-	}
-
-	if ( '1' === get_option( 'sct_use_discord' ) ) {
-		add_action( 'comment_post', 'Sct_Discord::create_comment_contents' );
-	}
-
-	if ( '1' === get_option( 'sct_send_slack_update' ) || '1' === get_option( 'sct_send_chatwork_update' ) || '1' === get_option( 'sct_send_discord_update' ) ) {
-		$cron = new Sct_Check_Update();
-	}
+	/**
+	 * Start update process.
+	 */
+	new Sct_Check_Update();
 }
 
