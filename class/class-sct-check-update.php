@@ -39,20 +39,20 @@ class Sct_Check_Update {
 	 * Call WordPress Core, Themes and Plugin check function.
 	 */
 	public function controller() {
-		$check_all = [];
-		$core      = $this->check_core();
-		$themes    = $this->check_themes();
-		$plugins   = $this->check_plugins();
+		$check_data = [];
+		$core       = $this->check_core();
+		$themes     = $this->check_themes();
+		$plugins    = $this->check_plugins();
 		if ( isset( $core ) ) {
-			$check_all = array_merge( $check_all, $core );
+			$check_data = array_merge( $check_all, $core );
 		}
 		if ( isset( $themes ) ) {
-			$check_all = array_merge( $check_all, $themes );
+			$check_data = array_merge( $check_all, $themes );
 		}
 		if ( isset( $plugins ) ) {
-			$check_all = array_merge( $check_all, $plugins );
+			$check_data = array_merge( $check_all, $plugins );
 		}
-		$this->check_tools( $check_all );
+		$this->check_tools( $check_data );
 	}
 
 	/**
@@ -127,10 +127,10 @@ class Sct_Check_Update {
 	/**
 	 * Check tools use status and call.
 	 *
-	 * @param array $return Update info.
+	 * @param array $check_data Update info.
 	 */
-	private function check_tools( array $return ) {
+	private function check_tools( array $check_data ) {
 		$update = new Sct_Create_Content();
-		$update->controller( 0, 'update', $return );
+		$update->controller( 0, 'update', $check_data );
 	}
 }
