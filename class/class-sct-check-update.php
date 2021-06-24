@@ -130,16 +130,7 @@ class Sct_Check_Update {
 	 * @param array $return Update info.
 	 */
 	private function check_tools( array $return ) {
-		if ( '1' === get_option( 'sct_use_slack' ) && '1' === get_option( 'sct_send_slack_update' ) ) {
-			$slack = Sct_Slack::create_update_contents( $return );
-		}
-
-		if ( '1' === get_option( 'sct_use_discord' ) && '1' === get_option( 'sct_send_discord_update' ) ) {
-			$discord = Sct_Discord::create_update_contents( $return );
-		}
-
-		if ( '1' === get_option( 'sct_use_chatwork' ) && '1' === get_option( 'sct_send_chatwork_update' ) ) {
-			$chatwork = Sct_Chatwork::create_update_contents( $return );
-		}
+		$update = new Sct_Create_Content();
+		$update->controller( 0, 'update', $return );
 	}
 }
