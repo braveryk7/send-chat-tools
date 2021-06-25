@@ -68,8 +68,6 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	}
 	sct_uninstall();
 
-	add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'Sct_Settings_Page::add_settings_links' );
-
 	/**
 	 * Start comment process.
 	 */
@@ -79,5 +77,12 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	 * Start update process.
 	 */
 	new Sct_Check_Update();
+
+	/**
+	 * Settings page.
+	 */
+	if ( is_admin() ) {
+		new Sct_Settings_Page( __FILE__ );
+	}
 }
 
