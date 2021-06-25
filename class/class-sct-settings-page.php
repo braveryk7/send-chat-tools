@@ -21,11 +21,14 @@ class Sct_Settings_Page {
 	/**
 	 * WordPress hook.
 	 * Add settings page link in admin page.
+	 *
+	 * @param string $path send-chat-tools.php path.
 	 */
-	public function __construct() {
+	public function __construct( string $path ) {
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
 		add_action( 'admin_head-settings_page_send-chat-tools-settings', [ $this, 'include_css' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'include_js' ] );
+		add_filter( 'plugin_action_links_' . plugin_basename( $path ), [ $this, 'add_settings_links' ] );
 	}
 
 	/**
@@ -46,7 +49,7 @@ class Sct_Settings_Page {
 	 *
 	 * @param array|string $links plugin page setting links.
 	 */
-	public static function add_settings_links( array $links ): array {
+	public function add_settings_links( array $links ): array {
 		$add_link = '<a href="options-general.php?page=send-chat-tools-settings">' . __( 'Settings', 'send-chat-tools' ) . '</a>';
 		array_unshift( $links, $add_link );
 		return $links;
@@ -239,8 +242,4 @@ class Sct_Settings_Page {
 </div>
 		<?php
 	}
-}
-
-if ( is_admin() ) {
-	$settings_page = new Sct_Settings_Page();
 }
