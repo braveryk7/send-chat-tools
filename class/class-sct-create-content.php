@@ -45,13 +45,15 @@ class Sct_Create_Content {
 	 */
 	public function controller( int $comment_id = 0, string $type = 'comment', array $check_date = [] ) {
 		global $wpdb;
+
+		$tools = [
+			get_option( 'sct_use_slack' ),
+			get_option( 'sct_use_discord' ),
+			get_option( 'sct_use_chatwork' ),
+		];
+
 		if ( 'comment' === $type ) {
 			$comment = $this->get_comment_data( $comment_id );
-			$tools   = [
-				get_option( 'sct_use_slack' ),
-				get_option( 'sct_use_discord' ),
-				get_option( 'sct_use_chatwork' ),
-			];
 			$author  = [
 				get_option( 'sct_send_slack_author' ),
 				get_option( 'sct_send_discord_author' ),
@@ -71,15 +73,15 @@ class Sct_Create_Content {
 				self::sending( $options, (string) $wpdb->insert_id, 'chatwork' );
 			}
 		} elseif ( 'update' === $type ) {
-			if ( '1' === get_option( 'sct_use_slack' ) && '1' === get_option( 'sct_send_slack_update' ) ) {
+			if ( '1' === $tools[0] && '1' === get_option( 'sct_send_slack_update' ) ) {
 				$options = $this->create_content( $type, 'slack', null, $check_date );
 				self::sending( $options, 'update', 'slack' );
 			}
-			if ( '1' === get_option( 'sct_use_discord' ) && '1' === get_option( 'sct_send_discord_update' ) ) {
+			if ( '1' === $tools[1] && '1' === get_option( 'sct_send_discord_update' ) ) {
 				$options = $this->create_content( $type, 'discord', null, $check_date );
 				self::sending( $options, 'update', 'discord' );
 			}
-			if ( '1' === get_option( 'sct_use_chatwork' ) && '1' === get_option( 'sct_send_chatwork_update' ) ) {
+			if ( '1' === $tools[2] && '1' === get_option( 'sct_send_chatwork_update' ) ) {
 				$options = $this->create_content( $type, 'chatwork', null, $check_date );
 				self::sending( $options, 'update', 'chatwork' );
 			}
