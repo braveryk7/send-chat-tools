@@ -81,7 +81,7 @@ class Sct_Settings_Page_Row {
 			$webhook_description_html     = esc_html__( 'The URL is usually in https://discord.com/api/webhooks/XXXXX/XXXXX format.', 'send-chat-tools' );
 			$webhook_description_url_html = esc_html__( 'Explanation of getting the Discord Webhook URL:', 'send-chat-tools' );
 			$webhook_description_url_text = esc_html__( 'Steps to add a Discord Webhook URL to Send Chat Tools | L\'7 Records(Japanese Only)', 'send-chat-tools' );
-			$webhook_description_url      = '';
+			$webhook_description_url      = 'https://www.braveryk7.com/portfolio/send-chat-tools/discord-webhook-url-settings/';
 			$tool_status                  = get_option( 'sct_' . $tool . '_webhook_url' );
 			if ( $tool_status ) {
 				$get_webhook_url = Sct_Encryption::decrypt( $tool_status );
