@@ -20,7 +20,7 @@ You can instantly check comments that you didn't notice with the default email n
 Major update.
 
 Addition of functions.
-* Add Chatwork.
+* Add Discord.
 * Add WordPress Core, theme and plugin update notifications.
 * Add API value automatic check.
 * Add Communication log.
