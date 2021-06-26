@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: braveryk7
-Tags: send chat tools, send, chat, slack
+Tags: send chat tools, send, chat, slack, discord, chatwork, update
 Requires at least: 5.7.2
 Tested up to: 5.7.2
 Requires PHP: 7.3.0
-Stable tag: 0.1.6
+Stable tag: 1.0.0
 License: GpLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -15,6 +15,21 @@ Currently, it sends an announcement when a comment is received.
 You can instantly check comments that you didn't notice with the default email notification. 
 
 === Changelog ===
+
+= 1.0.0 =
+Major update.
+
+Addition of functions.
+* Add Chatwork.
+* Add WordPress Core, theme and plugin update notifications.
+* Add API value automatic check.
+* Add Communication log.
+
+Improvement.
+* UI of the admin panel
+
+Fix.
+* Problem that error mail may be sent even if the message is sent normally.
 
 = 0.1.6 =
 Fix crypt logic
