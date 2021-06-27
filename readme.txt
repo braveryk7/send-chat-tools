@@ -4,7 +4,7 @@ Tags: send chat tools, send, chat, slack, discord, chatwork, update
 Requires at least: 5.7.2
 Tested up to: 5.7.2
 Requires PHP: 7.3.0
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GpLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -15,6 +15,24 @@ Currently, it sends an announcement when a comment is received.
 You can instantly check comments that you didn't notice with the default email notification. 
 
 === Changelog ===
+
+= 1.1.0 =
+Miner update.
+
+Addition of functions.
+
+* Add Update notifications
+
+	* Themes:
+		* [Cocoon](https://wp-cocoon.com/)
+		* [SANGO](https://saruwakakun.design/)
+		* [THE SONIC](https://the-sonic.jp/)
+	* Plugins:
+		* [Rinker](https://oyakosodate.com/rinker/)
+
+Improvement.
+
+* Processing to go through sending process if API is not input.
 
 = 1.0.0 =
 Major update.
