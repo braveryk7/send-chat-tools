@@ -60,18 +60,39 @@ class Sct_Create_Content {
 				get_option( 'sct_send_chatwork_author' ),
 			];
 
-			if ( '1' === $tools[0] && ( ( '0' === $author[0] ) || ( '1' === $author[0] && '0' === $comment->user_id ) ) ) {
+			$api = [
+				'slack'    => Sct_Encryption::decrypt( get_option( 'sct_slack_webhook_url' ) ),
+				'discord'  => Sct_Encryption::decrypt( get_option( 'sct_discord_webhook_url' ) ),
+				'chatwork' => [
+					'api_token' => Sct_Encryption::decrypt( get_option( 'sct_chatwork_api_token' ) ),
+					'room_id'   => Sct_Encryption::decrypt( get_option( 'sct_chatwork_room_id' ) ),
+				],
+			];
+
+			if ( '1' === $tools[0] && ! empty( $api['slack'] ) && ( ( '0' === $author[0] ) || ( '1' === $author[0] && '0' === $comment->user_id ) ) ) {
 				$options = $this->create_content( $type, 'slack', $comment );
 				self::sending( $options, (string) $wpdb->insert_id, 'slack' );
+			} elseif ( '1' === $tools[0] && empty( $api['slack'] ) ) {
+				$logger = new Sct_Logger();
+				$logger->create_log( 1001, 'slack', '1' );
 			};
-			if ( '1' === $tools[1] && ( ( '0' === $author[1] ) || ( '1' === $author[1] && '0' === $comment->user_id ) ) ) {
+			if ( '1' === $tools[1] && ! empty( $api['discord'] ) && ( ( '0' === $author[1] ) || ( '1' === $author[1] && '0' === $comment->user_id ) ) ) {
 				$options = $this->create_content( $type, 'discord', $comment );
 				self::sending( $options, (string) $wpdb->insert_id, 'discord' );
-			}
-			if ( '1' === $tools[2] && ( ( '0' === $author[2] ) || ( '1' === $author[2] && '0' === $comment->user_id ) ) ) {
+			} elseif ( '1' === $tools[1] && empty( $api['discord'] ) ) {
+				$logger = new Sct_Logger();
+				$logger->create_log( 1001, 'discord', '1' );
+			};
+			if ( '1' === $tools[2] && ! empty( $api['chatwork']['api_token'] ) && ! empty( $api['chatwork']['room_id'] ) && ( ( '0' === $author[2] ) || ( '1' === $author[2] && '0' === $comment->user_id ) ) ) {
 				$options = $this->create_content( $type, 'chatwork', $comment );
 				self::sending( $options, (string) $wpdb->insert_id, 'chatwork' );
-			}
+			} elseif ( '1' === $tools[2] && empty( $api['chatwork']['api_token'] ) ) {
+				$logger = new Sct_Logger();
+				$logger->create_log( 1001, 'chatwork', '1' );
+			} elseif ( '1' === $tools[2] && empty( $api['chatwork']['room_id'] ) ) {
+				$logger = new Sct_Logger();
+				$logger->create_log( 1002, 'chatwork', '1' );
+			};
 		} elseif ( 'update' === $type ) {
 			if ( '1' === $tools[0] && '1' === get_option( 'sct_send_slack_update' ) ) {
 				$options = $this->create_content( $type, 'slack', null, $check_date );

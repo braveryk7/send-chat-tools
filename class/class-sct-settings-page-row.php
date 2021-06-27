@@ -278,7 +278,16 @@ class Sct_Settings_Page_Row {
 				$type = 'Update';
 			}
 
-			if ( '200' !== $value->states && '204' !== $value->states ) {
+			if ( '1000' === $value->states ) {
+				$states_class   = '--alert';
+				$states_message = 'Could not communicate.';
+			} elseif ( '1001' === $value->states ) {
+				$states_class   = '--alert';
+				$states_message = 'Webhook URL/API Token not entered.';
+			} elseif ( '1002' === $value->states ) {
+				$states_class   = '--alert';
+				$states_message = 'RoomID not entered.';
+			} elseif ( '200' !== $value->states && '204' !== $value->states ) {
 				$states_class   = '--alert';
 				$states_message = 'Could not communicate.';
 			} else {
