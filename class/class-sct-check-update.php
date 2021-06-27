@@ -153,6 +153,29 @@ class Sct_Check_Update {
 				];
 			}
 		}
+
+		$ex_plugins = [
+			'Rinker' => 'external_updates-yyi-rinker',
+		];
+
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		$current_plugins = get_plugins();
+		update_option( 'sct_plugins', $current_plugins );
+		foreach ( $current_plugins as $key => $value ) {
+			if ( array_key_exists( $value['Name'], $ex_plugins ) ) {
+				$get_update = get_option( $ex_plugins[ $value['Name'] ] );
+				if ( version_compare( $value['Version'], $get_update->update->version, '<' ) ) {
+					update_option( 'sct_plugin111', $get_update );
+					$return[ $value['Name'] ] = [
+						'name'            => $value['Name'],
+						'attribute'       => 'plugin',
+						'current_version' => $value['Version'],
+						'new_version'     => $get_update->update->version,
+					];
+				}
+			}
+		}
+
 		return $return;
 	}
 }
