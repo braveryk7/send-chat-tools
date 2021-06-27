@@ -97,6 +97,33 @@ class Sct_Check_Update {
 				];
 			}
 		}
+
+		$ex_themes = [
+			'Cocoon'    => 'external_theme_updates-cocoon-master',
+			'SANGO'     => 'puc_external_updates_theme-sango-theme',
+			'THE SONIC' => 'puc_external_updates_theme-tsnc-main-theme-updater',
+		];
+
+		if ( is_child_theme() ) {
+			$theme_name      = wp_get_theme()->parent()->Name;
+			$current_version = wp_get_theme()->parent()->Version;
+		} else {
+			$theme_name      = wp_get_theme()->Name;
+			$current_version = wp_get_theme()->Version;
+		}
+
+		if ( array_key_exists( $theme_name, $ex_themes ) ) {
+			$get_update = get_option( $ex_themes[ $theme_name ] );
+			if ( version_compare( $current_version, $get_update->update->version, '<' ) ) {
+				$return[ $theme_name ] = [
+					'name'            => $theme_name,
+					'attribute'       => 'theme',
+					'current_version' => $current_version,
+					'new_version'     => $get_update->update->version,
+				];
+			}
+		}
+
 		return $return;
 	}
 
@@ -126,6 +153,29 @@ class Sct_Check_Update {
 				];
 			}
 		}
+
+		$ex_plugins = [
+			'Rinker' => 'external_updates-yyi-rinker',
+		];
+
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		$current_plugins = get_plugins();
+		update_option( 'sct_plugins', $current_plugins );
+		foreach ( $current_plugins as $key => $value ) {
+			if ( array_key_exists( $value['Name'], $ex_plugins ) ) {
+				$get_update = get_option( $ex_plugins[ $value['Name'] ] );
+				if ( version_compare( $value['Version'], $get_update->update->version, '<' ) ) {
+					update_option( 'sct_plugin111', $get_update );
+					$return[ $value['Name'] ] = [
+						'name'            => $value['Name'],
+						'attribute'       => 'plugin',
+						'current_version' => $value['Version'],
+						'new_version'     => $get_update->update->version,
+					];
+				}
+			}
+		}
+
 		return $return;
 	}
 }
