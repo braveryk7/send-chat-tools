@@ -97,6 +97,33 @@ class Sct_Check_Update {
 				];
 			}
 		}
+
+		$ex_themes = [
+			'Cocoon'    => 'external_theme_updates-cocoon-master',
+			'SANGO'     => 'puc_external_updates_theme-sango-theme',
+			'THE SONIC' => 'puc_external_updates_theme-tsnc-main-theme-updater',
+		];
+
+		if ( is_child_theme() ) {
+			$theme_name      = wp_get_theme()->parent()->Name;
+			$current_version = wp_get_theme()->parent()->Version;
+		} else {
+			$theme_name      = wp_get_theme()->Name;
+			$current_version = wp_get_theme()->Version;
+		}
+
+		if ( array_key_exists( $theme_name, $ex_themes ) ) {
+			$get_update = get_option( $ex_themes[ $theme_name ] );
+			if ( version_compare( $current_version, $get_update->update->version, '<' ) ) {
+				$return[ $theme_name ] = [
+					'name'            => $theme_name,
+					'attribute'       => 'theme',
+					'current_version' => $current_version,
+					'new_version'     => $get_update->update->version,
+				];
+			}
+		}
+
 		return $return;
 	}
 
