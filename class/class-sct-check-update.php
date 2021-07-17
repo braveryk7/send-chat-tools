@@ -155,17 +155,20 @@ class Sct_Check_Update {
 		}
 
 		$ex_plugins = [
-			'Rinker' => 'external_updates-yyi-rinker',
+			'Rinker'                     => 'external_updates-yyi-rinker',
+			'THE SONIC SEO Plugin'       => 'external_updates-tsnc-seo-plugin',
+			'THE SONIC Gutenberg Blocks' => 'external_updates-tsnc-gutenberg-plugin',
+			'THE SONIC COPIA'            => 'external_updates-tsnc-cmp-plugin',
+			'SANGO Gutenberg'            => 'external_updates-sango-theme-gutenberg',
 		];
 
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		$current_plugins = get_plugins();
-		update_option( 'sct_plugins', $current_plugins );
 		foreach ( $current_plugins as $key => $value ) {
 			if ( array_key_exists( $value['Name'], $ex_plugins ) ) {
 				$get_update = get_option( $ex_plugins[ $value['Name'] ] );
-				if ( version_compare( $value['Version'], $get_update->update->version, '<' ) ) {
-					update_option( 'sct_plugin111', $get_update );
+				update_option( $value['Name'], $get_update );
+				if ( ! empty( $get_update ) && version_compare( $value['Version'], $get_update->update->version, '<' ) ) {
 					$return[ $value['Name'] ] = [
 						'name'            => $value['Name'],
 						'attribute'       => 'plugin',
