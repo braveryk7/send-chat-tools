@@ -167,7 +167,6 @@ class Sct_Check_Update {
 		foreach ( $current_plugins as $key => $value ) {
 			if ( array_key_exists( $value['Name'], $ex_plugins ) ) {
 				$get_update = get_option( $ex_plugins[ $value['Name'] ] );
-				update_option( $value['Name'], $get_update );
 				if ( ! empty( $get_update ) && version_compare( $value['Version'], $get_update->update->version, '<' ) ) {
 					$return[ $value['Name'] ] = [
 						'name'            => $value['Name'],
