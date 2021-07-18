@@ -84,5 +84,11 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	if ( is_admin() ) {
 		new Sct_Settings_Page( __FILE__ );
 	}
-}
 
+	/**
+	 * Delete wp_options column.
+	 * THIS ITEM WILL BE DELETED IN SEPTEMBER 2021!!
+	 */
+	delete_option( 'sct_plugins' );
+	delete_option( 'sct_plugin111' );
+}
