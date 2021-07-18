@@ -4,7 +4,7 @@ Tags: send chat tools, send, chat, slack, discord, chatwork, update
 Requires at least: 5.7.2
 Tested up to: 5.7.2
 Requires PHP: 7.3.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GpLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -15,6 +15,25 @@ Currently, it sends an announcement when a comment is received.
 You can instantly check comments that you didn't notice with the default email notification. 
 
 === Changelog ===
+
+= 1.1.1 =
+
+Support WordPress5.8.
+
+Addition of functions.
+
+* Add Update notifications
+
+	* Plugins:
+		* [THE SONIC SEO Plugin](https://the-sonic.jp/manual/start/plugin-install/)
+		* [THE SONIC Gutenberg Blocks](https://the-sonic.jp/manual/start/plugin-install/)
+		* [THE SONIC COPIA](https://the-sonic.jp/plugin-copia/)
+		* [SANGO Gutenberg](https://saruwakakun.com/sango/gutenberg-introduction)
+
+Improvement.
+
+* Fix to hide OGP in Discord.
+* Removed unnecessary option columns.
 
 = 1.1.0 =
 Miner update.
