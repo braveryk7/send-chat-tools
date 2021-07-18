@@ -212,12 +212,12 @@ class Sct_Create_Content {
 			}
 
 			$message =
-				$site_name . '( ' . $site_url . ' )' . esc_html__( 'new comment has been posted.', 'send-chat-tools' ) . "\n\n" .
-				esc_html__( 'Commented article:', 'send-chat-tools' ) . $article_title . ' - ' . $article_url . "\n" .
+				$site_name . '( <' . $site_url . '> )' . esc_html__( 'new comment has been posted.', 'send-chat-tools' ) . "\n\n" .
+				esc_html__( 'Commented article:', 'send-chat-tools' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
 				esc_html__( 'Author:', 'send-chat-tools' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
 				esc_html__( 'Date and time:', 'send-chat-tools' ) . $comment->comment_date . "\n" .
 				esc_html__( 'Text:', 'send-chat-tools' ) . "\n" . $comment->comment_content . "\n\n" .
-				esc_html__( 'Comment URL:', 'send-chat-tools' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
+				esc_html__( 'Comment URL:', 'send-chat-tools' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
 				esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status;
 		} elseif ( 'chatwork' === $tool ) {
 			if ( '1' === $comment->comment_approved ) {
@@ -291,12 +291,12 @@ class Sct_Create_Content {
 			];
 		} elseif ( 'discord' === $tool ) {
 			$message =
-				$site_name . '( ' . $site_url . ' )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
+				$site_name . '( <' . $site_url . '> )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
 				$core . $themes . $plugins .
 				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
-				esc_html__( 'Update Page:', 'send-chat-tools' ) . $admin_url . "\n\n" .
+				esc_html__( 'Update Page:', 'send-chat-tools' ) . '<' . $admin_url . '>' . "\n\n" .
 				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
-				'https://wordpress.org/plugins/send-chat-tools/';
+				'<https://wordpress.org/plugins/send-chat-tools/>';
 		} elseif ( 'chatwork' === $tool ) {
 			if ( isset( $core ) ) {
 				$core = $core . '[hr]';
@@ -314,7 +314,7 @@ class Sct_Create_Content {
 					esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
 					esc_html__( 'Update Page:', 'send-chat-tools' ) . $admin_url . "\n\n" .
 					esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
-					'https://wordpress.org/plugins/send-chat-tools/' .
+					'https://wordpress.org/plugins/send-chat-tools/' . "\n" .
 					'[/info]',
 			];
 		}
