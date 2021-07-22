@@ -56,4 +56,29 @@ class Sct_Slack_Blocks {
 
 		return $single;
 	}
+
+	/**
+	 * Create two column.
+	 *
+	 * @param array $content1st [ $type, $text ].
+	 * @param array $content2nd [ $type, $text ].
+	 */
+	public function two_column( array $content1st, array $content2nd ): array {
+		$column = [
+			'type'   => 'section',
+			'fields' => [
+				[
+					'type' => $content1st[0],
+					'text' => $content1st[1],
+				],
+				[
+					'type' => $content2nd[0],
+					'text' => $content2nd[1],
+				],
+			],
+		];
+		update_option( 'sct_column', $column );
+
+		return $column;
+	}
 }
