@@ -45,7 +45,7 @@ class Sct_Slack_Blocks {
 	 * @param string $type content type.
 	 * @param string $text content text.
 	 */
-	public function single( string $type, string $text ): array {
+	public function single_column( string $type, string $text ): array {
 		$single = [
 			'type' => 'section',
 			'text' => [
