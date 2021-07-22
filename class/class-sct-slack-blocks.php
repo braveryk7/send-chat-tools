@@ -81,4 +81,24 @@ class Sct_Slack_Blocks {
 
 		return $column;
 	}
+
+	/**
+	 * Create context.
+	 *
+	 * @param string $type content type.
+	 * @param string $text content text.
+	 */
+	public function context( string $type, string $text ): array {
+		$context = [
+			'type'     => 'context',
+			'elements' => [
+				[
+					'type' => $type,
+					'text' => $text,
+				],
+			],
+		];
+
+		return $context;
+	}
 }
