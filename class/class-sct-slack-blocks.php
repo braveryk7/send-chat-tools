@@ -101,4 +101,15 @@ class Sct_Slack_Blocks {
 
 		return $context;
 	}
+
+	/**
+	 * Create divider.
+	 */
+	public function divider(): array {
+		$divider = [
+			'type' => 'divider',
+		];
+
+		return $divider;
+	}
 }
