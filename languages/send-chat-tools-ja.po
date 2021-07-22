@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-06-19 23:34+0900\n"
-"PO-Revision-Date: 2021-06-19 23:35+0900\n"
+"POT-Creation-Date: 2021-07-23 00:19+0900\n"
+"PO-Revision-Date: 2021-07-23 00:21+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -17,95 +17,116 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: vendor\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 
-#: class/class-sct-chatwork.php:44 class/class-sct-discord.php:42
-#: class/class-sct-error-mail.php:63 class/class-sct-slack.php:42
+#: class/class-sct-create-content.php:189
+#: class/class-sct-create-content.php:224
+#: class/class-sct-create-content.php:241 class/class-sct-error-mail.php:63
 msgid "Approved"
 msgstr "承認済み"
 
-#: class/class-sct-chatwork.php:46 class/class-sct-discord.php:44
-#: class/class-sct-error-mail.php:65 class/class-sct-slack.php:44
+#: class/class-sct-create-content.php:191
+#: class/class-sct-create-content.php:226
+#: class/class-sct-create-content.php:243 class/class-sct-error-mail.php:65
 msgid "Unapproved"
 msgstr "未承認"
 
-#: class/class-sct-chatwork.php:46 class/class-sct-discord.php:44
-#: class/class-sct-error-mail.php:65 class/class-sct-slack.php:44
+#: class/class-sct-create-content.php:191
+#: class/class-sct-create-content.php:226
+#: class/class-sct-create-content.php:243 class/class-sct-error-mail.php:65
 msgid "Click here to approve"
 msgstr "ここをクリックして承認"
 
-#: class/class-sct-chatwork.php:48 class/class-sct-discord.php:46
-#: class/class-sct-error-mail.php:67 class/class-sct-slack.php:46
+#: class/class-sct-create-content.php:193
+#: class/class-sct-create-content.php:228
+#: class/class-sct-create-content.php:245 class/class-sct-error-mail.php:67
 msgid "Spam"
 msgstr "スパム"
 
-#: class/class-sct-chatwork.php:53 class/class-sct-discord.php:50
-#: class/class-sct-error-mail.php:73 class/class-sct-slack.php:51
+#: class/class-sct-create-content.php:197
+#: class/class-sct-create-content.php:232
+#: class/class-sct-create-content.php:250 class/class-sct-error-mail.php:73
 msgid "new comment has been posted."
 msgstr "に新規コメントが投稿されました。"
 
-#: class/class-sct-chatwork.php:54 class/class-sct-discord.php:51
-#: class/class-sct-error-mail.php:74 class/class-sct-slack.php:52
+#: class/class-sct-create-content.php:198
+#: class/class-sct-create-content.php:233
+#: class/class-sct-create-content.php:251 class/class-sct-error-mail.php:74
 msgid "Commented article:"
 msgstr "コメントされた記事："
 
-#: class/class-sct-chatwork.php:55 class/class-sct-discord.php:52
-#: class/class-sct-error-mail.php:75 class/class-sct-slack.php:53
+#: class/class-sct-create-content.php:199
+#: class/class-sct-create-content.php:234
+#: class/class-sct-create-content.php:252 class/class-sct-error-mail.php:75
 msgid "Author:"
 msgstr "投稿者名："
 
-#: class/class-sct-chatwork.php:56 class/class-sct-discord.php:53
-#: class/class-sct-error-mail.php:76 class/class-sct-slack.php:54
+#: class/class-sct-create-content.php:200
+#: class/class-sct-create-content.php:235
+#: class/class-sct-create-content.php:253 class/class-sct-error-mail.php:76
 msgid "Date and time:"
 msgstr "日時："
 
-#: class/class-sct-chatwork.php:57 class/class-sct-discord.php:54
-#: class/class-sct-error-mail.php:77 class/class-sct-slack.php:55
+#: class/class-sct-create-content.php:201
+#: class/class-sct-create-content.php:236
+#: class/class-sct-create-content.php:254 class/class-sct-error-mail.php:77
 msgid "Text:"
 msgstr "本文："
 
-#: class/class-sct-chatwork.php:58 class/class-sct-discord.php:55
-#: class/class-sct-error-mail.php:78 class/class-sct-slack.php:56
+#: class/class-sct-create-content.php:202
+#: class/class-sct-create-content.php:237
+#: class/class-sct-create-content.php:255 class/class-sct-error-mail.php:78
 msgid "Comment URL:"
 msgstr "コメントのURL："
 
-#: class/class-sct-chatwork.php:60 class/class-sct-discord.php:56
-#: class/class-sct-error-mail.php:79 class/class-sct-slack.php:57
+#: class/class-sct-create-content.php:203
+#: class/class-sct-create-content.php:238
+#: class/class-sct-create-content.php:257 class/class-sct-error-mail.php:79
 msgid "Comment Status:"
 msgstr "コメントの状態："
 
-#: class/class-sct-chatwork.php:100 class/class-sct-discord.php:98
-#: class/class-sct-slack.php:96
+#: class/class-sct-create-content.php:205
+#: class/class-sct-create-content.php:306
+#: class/class-sct-create-content.php:315
+#: class/class-sct-create-content.php:333
+msgid "This message was sent by Send Chat Tools: "
+msgstr "このメッセージはSend Chat Toolsにより送信されました。"
+
+#: class/class-sct-create-content.php:206
+msgid "WordPress Plugin Directory"
+msgstr "WordPressプラグインディレクトリ"
+
+#: class/class-sct-create-content.php:207
+msgid "Send Chat Tools Official Page"
+msgstr "Send Chat Tools公式ページ"
+
+#: class/class-sct-create-content.php:290
 msgid "WordPress Core:"
 msgstr "WordPressコア："
 
-#: class/class-sct-chatwork.php:103 class/class-sct-discord.php:101
-#: class/class-sct-slack.php:99
+#: class/class-sct-create-content.php:293
 msgid "Themes:"
 msgstr "テーマ："
 
-#: class/class-sct-chatwork.php:106 class/class-sct-discord.php:104
-#: class/class-sct-slack.php:102
+#: class/class-sct-create-content.php:296
 msgid "Plugins:"
 msgstr "プラグイン："
 
-#: class/class-sct-chatwork.php:111 class/class-sct-discord.php:108
-#: class/class-sct-slack.php:107
+#: class/class-sct-create-content.php:302
+#: class/class-sct-create-content.php:311
+#: class/class-sct-create-content.php:329
 msgid "Notification of new updates."
 msgstr "新しいアップデートがあります。"
 
-#: class/class-sct-chatwork.php:113 class/class-sct-discord.php:110
-#: class/class-sct-slack.php:109
+#: class/class-sct-create-content.php:304
+#: class/class-sct-create-content.php:313
+#: class/class-sct-create-content.php:331
 msgid "Please login to the admin panel to update."
 msgstr "管理画面にログインしてアップデートしてください。"
 
-#: class/class-sct-chatwork.php:114 class/class-sct-discord.php:111
-#: class/class-sct-slack.php:110
+#: class/class-sct-create-content.php:305
+#: class/class-sct-create-content.php:314
+#: class/class-sct-create-content.php:332
 msgid "Update Page:"
 msgstr "更新ページ："
-
-#: class/class-sct-chatwork.php:115 class/class-sct-discord.php:112
-#: class/class-sct-slack.php:111
-msgid "This message was sent by Send Chat Tools: "
-msgstr "このメッセージはSend Chat Toolsにより送信されました。"
 
 #: class/class-sct-error-mail.php:71
 msgid "You have received a new comment"
@@ -158,104 +179,104 @@ msgid ""
 "Only)"
 msgstr "Send Chat ToolsにSlack Webhook URLを追加する手順 | L’7 Records"
 
-#: class/class-sct-settings-page-row.php:74
+#: class/class-sct-settings-page-row.php:77
 msgid "Discord"
 msgstr "Discord"
 
-#: class/class-sct-settings-page-row.php:75
+#: class/class-sct-settings-page-row.php:78
 msgid "Use Discord"
 msgstr "Discordを使用"
 
-#: class/class-sct-settings-page-row.php:76
+#: class/class-sct-settings-page-row.php:79
 msgid "Input Discord Webhook URL"
 msgstr "DiscordのWebhook URLを入力"
 
-#: class/class-sct-settings-page-row.php:77
+#: class/class-sct-settings-page-row.php:80
 msgid "Get the webhook URL from the Discord API."
 msgstr "DiscordのWebhook URLを取得してください。"
 
-#: class/class-sct-settings-page-row.php:78
+#: class/class-sct-settings-page-row.php:81
 msgid ""
 "The URL is usually in https://discord.com/api/webhooks/XXXXX/XXXXX format."
 msgstr "通常https://discord.com/api/webhooks/XXXXX/XXXXX形式のURLです。"
 
-#: class/class-sct-settings-page-row.php:79
+#: class/class-sct-settings-page-row.php:82
 msgid "Explanation of getting the Discord Webhook URL:"
 msgstr "Discord Webhook URLの取得解説："
 
-#: class/class-sct-settings-page-row.php:80
+#: class/class-sct-settings-page-row.php:83
 msgid ""
 "Steps to add a Discord Webhook URL to Send Chat Tools | L'7 Records(Japanese "
 "Only)"
 msgstr "Send Chat ToolsにDiscord Webhook URLを追加する手順 | L’7 Records"
 
-#: class/class-sct-settings-page-row.php:85
+#: class/class-sct-settings-page-row.php:91
 msgid "Chatwork"
 msgstr "Chatwork"
 
-#: class/class-sct-settings-page-row.php:86
+#: class/class-sct-settings-page-row.php:92
 msgid "Use Chatwork"
 msgstr "Chatworkを使用"
 
-#: class/class-sct-settings-page-row.php:87
+#: class/class-sct-settings-page-row.php:93
 msgid "Input Chatwork API Token"
 msgstr "ChatworkのAPIトークンを入力"
 
-#: class/class-sct-settings-page-row.php:88
+#: class/class-sct-settings-page-row.php:94
 msgid "Get the API Toke from the Chatwork."
 msgstr "ChatworkでAPIトークンを取得してください。"
 
-#: class/class-sct-settings-page-row.php:89
+#: class/class-sct-settings-page-row.php:95
 msgid "It is usually random alphanumeric."
 msgstr "通常ランダムな英数字です。"
 
-#: class/class-sct-settings-page-row.php:90
+#: class/class-sct-settings-page-row.php:96
 msgid "Explanation of getting the Chatwork API Token & Room ID:"
 msgstr "Chatwork APIトークンとルームIDの取得解説："
 
-#: class/class-sct-settings-page-row.php:91
+#: class/class-sct-settings-page-row.php:97
 msgid ""
 "Steps to add a Chatwork API token and Room ID to Send Chat Tools | L'7 "
 "Records(Japanese Only)"
 msgstr ""
 "Send Chat ToolsにChatwork APIトークン/ルームIDを追加する手順 | L’7 Records"
 
-#: class/class-sct-settings-page-row.php:93
+#: class/class-sct-settings-page-row.php:99
 msgid "Input Chatwork room ID"
 msgstr "ChatworkのルームIDを入力"
 
-#: class/class-sct-settings-page-row.php:94
+#: class/class-sct-settings-page-row.php:100
 msgid "Get the Room ID from the Chatwork chat URL."
 msgstr "ChatworkのURLに含まれるルームIDを取得してください。"
 
-#: class/class-sct-settings-page-row.php:95
+#: class/class-sct-settings-page-row.php:101
 msgid ""
 "The number after \"rid\" in the URL of the chat page you want to receive."
 msgstr "受信したいチャットページのURLに含まれる”rid”以降の数字です。"
 
-#: class/class-sct-settings-page-row.php:103
+#: class/class-sct-settings-page-row.php:115
 msgid "Standard WordPress settings"
 msgstr "WordPress標準設定"
 
-#: class/class-sct-settings-page-row.php:108
+#: class/class-sct-settings-page-row.php:120
 msgid "Email me whenever"
 msgstr "自分宛のメール通知"
 
-#: class/class-sct-settings-page-row.php:113
+#: class/class-sct-settings-page-row.php:125
 msgid "Anyone posts a comment"
 msgstr "コメントが投稿されたとき"
 
-#: class/class-sct-settings-page-row.php:118
+#: class/class-sct-settings-page-row.php:130
 msgid "A comment is held for moderation"
 msgstr "コメントがモデレーションのために保留されたとき"
 
-#: class/class-sct-settings-page-row.php:121
+#: class/class-sct-settings-page-row.php:133
 msgid ""
 "Uncheck this box if you don't need the standard WordPress email "
 "notifications."
 msgstr "WordPressの標準メール通知が不要な場合チェックを外してください。"
 
-#: class/class-sct-settings-page-row.php:122
+#: class/class-sct-settings-page-row.php:134
 msgid ""
 "Even if this checkbox is unchecked, you will still be notified by email if "
 "the message was not successfully sent to the chat tool."
@@ -263,39 +284,39 @@ msgstr ""
 "このチェックを外した場合でも、チャットツールに正常な送信ができなかった場合"
 "メール通知されます。"
 
-#: class/class-sct-settings-page-row.php:146
+#: class/class-sct-settings-page-row.php:158
 msgid "Webhook URL"
 msgstr "Webhook URL"
 
-#: class/class-sct-settings-page-row.php:163
+#: class/class-sct-settings-page-row.php:175
 msgid "API Token"
 msgstr "APIトークン"
 
-#: class/class-sct-settings-page-row.php:178
+#: class/class-sct-settings-page-row.php:190
 msgid "Room ID"
 msgstr "ルームID"
 
-#: class/class-sct-settings-page-row.php:189
+#: class/class-sct-settings-page-row.php:201
 msgid "Don't send self comment"
 msgstr "自分自身のコメントを送信しない"
 
-#: class/class-sct-settings-page-row.php:197
+#: class/class-sct-settings-page-row.php:209
 msgid "Use update notifications"
 msgstr "アップデート通知を使用"
 
-#: class/class-sct-settings-page-row.php:217
+#: class/class-sct-settings-page-row.php:229
 msgid "Update check settings"
 msgstr "アップデート通知設定"
 
-#: class/class-sct-settings-page-row.php:222
+#: class/class-sct-settings-page-row.php:234
 msgid "Update notification time"
 msgstr "アップデート通知時刻"
 
-#: class/class-sct-settings-page-row.php:229
+#: class/class-sct-settings-page-row.php:241
 msgid "Select the time at which notifications of updates will be sent."
 msgstr "アップデートの通知を送信する時間を選択します。"
 
-#: class/class-sct-settings-page-row.php:230
+#: class/class-sct-settings-page-row.php:242
 msgid ""
 "However, due to the nature of WordPress Cron, it will be sent the first time "
 "your site is accessed after this time."
@@ -303,45 +324,33 @@ msgstr ""
 "ただしWordPress Cronの性質上、この時間以降の最初にサイトにアクセスがあった時"
 "に送信されます。"
 
-#: class/class-sct-settings-page.php:36 class/class-sct-settings-page.php:37
+#: class/class-sct-settings-page.php:39 class/class-sct-settings-page.php:40
 msgid "Send Chat Tools"
 msgstr "Send Chat Tools"
 
-#: class/class-sct-settings-page.php:50
+#: class/class-sct-settings-page.php:53
 msgid "Settings"
 msgstr "設定"
 
-#: class/class-sct-settings-page.php:91
+#: class/class-sct-settings-page.php:94
 msgid "You have no sufficient permissions to access this page."
 msgstr "このページにアクセスするための十分な権限がありません。"
 
-#: class/class-sct-settings-page.php:213
+#: class/class-sct-settings-page.php:216
 msgid "Your update has been successfully completed!!"
 msgstr "設定が完了しました！"
 
-#: class/class-sct-settings-page.php:217
+#: class/class-sct-settings-page.php:220
 msgid "An error has occurred. Please try again."
 msgstr "エラーが発生しました。もう一度やり直してください。"
 
-#: class/class-sct-settings-page.php:221
+#: class/class-sct-settings-page.php:224
 msgid "Send Chat Tools Settings"
 msgstr "Send Chat Tools設定"
 
-#: class/class-sct-settings-page.php:235
+#: class/class-sct-settings-page.php:239
 msgid "Save Changes"
 msgstr "変更を保存"
-
-#: dist/main.js:87
-msgid "Sent a test message."
-msgstr "テストメッセージを送信しました。"
-
-#: dist/main.js:93 dist/main.js:100
-msgid "Could not connect."
-msgstr "接続できませんでした。"
-
-#: dist/main.js:274
-msgid "Not an appropriate value."
-msgstr "適切な値ではありません。"
 
 #: modules/cancel-activate.php:23
 msgid ""
@@ -362,3 +371,17 @@ msgstr "PHPをアップグレードしてください。"
 #: modules/cancel-activate.php:29
 msgid "Current PHP version:"
 msgstr "現在のPHPバージョン："
+
+#, fuzzy
+#~| msgid "Author:"
+#~ msgid "Author<Address>:"
+#~ msgstr "投稿者名："
+
+#~ msgid "Sent a test message."
+#~ msgstr "テストメッセージを送信しました。"
+
+#~ msgid "Could not connect."
+#~ msgstr "接続できませんでした。"
+
+#~ msgid "Not an appropriate value."
+#~ msgstr "適切な値ではありません。"
