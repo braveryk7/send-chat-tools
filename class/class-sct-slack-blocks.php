@@ -38,4 +38,22 @@ class Sct_Slack_Blocks {
 
 		return $header;
 	}
+
+	/**
+	 * Create single column.
+	 *
+	 * @param string $type content type.
+	 * @param string $text content text.
+	 */
+	public function single( string $type, string $text ): array {
+		$single = [
+			'type' => 'section',
+			'text' => [
+				'type' => $type,
+				'text' => $text,
+			],
+		];
+
+		return $single;
+	}
 }
