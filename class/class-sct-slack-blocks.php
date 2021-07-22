@@ -46,7 +46,7 @@ class Sct_Slack_Blocks {
 	 * @param string $text content text.
 	 */
 	public function single_column( string $type, string $text ): array {
-		$single = [
+		$column = [
 			'type' => 'section',
 			'text' => [
 				'type' => $type,
@@ -54,7 +54,7 @@ class Sct_Slack_Blocks {
 			],
 		];
 
-		return $single;
+		return $column;
 	}
 
 	/**
@@ -64,7 +64,7 @@ class Sct_Slack_Blocks {
 	 * @param array $content2nd [ $type, $text ].
 	 */
 	public function two_column( array $content1st, array $content2nd ): array {
-		$column = [
+		$columns = [
 			'type'   => 'section',
 			'fields' => [
 				[
@@ -77,9 +77,8 @@ class Sct_Slack_Blocks {
 				],
 			],
 		];
-		update_option( 'sct_column', $column );
 
-		return $column;
+		return $columns;
 	}
 
 	/**
