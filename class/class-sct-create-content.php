@@ -208,6 +208,7 @@ class Sct_Create_Content {
 
 			$blocks  = new Sct_Slack_Blocks();
 			$message = [
+				'text'   => $header_message,
 				'blocks' => [
 					$blocks->header( 'plain_text', $header_message, true ),
 					$blocks->single_column( 'mrkdwn', $comment_article ),
