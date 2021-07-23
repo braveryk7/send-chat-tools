@@ -298,15 +298,63 @@ class Sct_Create_Content {
 		}
 
 		if ( 'slack' === $tool ) {
+			$header_emoji   = ':zap: ';
+			$header_message = "{$header_emoji} {$site_name}({$site_url})" . esc_html__( 'Notification of new updates.', 'send-chat-tools' );
+			$update_message =
+				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
+				esc_html__( 'Update Page:', 'send-chat-tools' ) . "<{$admin_url}>";
+			$context        =
+				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
+				'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
+				'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
+
+			$blocks  = new Sct_Slack_Blocks();
 			$message = [
-				'text' =>
-					$site_name . '( ' . $site_url . ' )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
-					$core . $themes . $plugins . "\n" .
-					esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
-					esc_html__( 'Update Page:', 'send-chat-tools' ) . $admin_url . "\n\n" .
-					esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
-					'https://wordpress.org/plugins/send-chat-tools/',
+				'text'   => $header_message,
+				'blocks' => [
+					$blocks->header( 'plain_text', $header_message, true ),
+				],
 			];
+
+			if ( isset( $core ) ) {
+				$core_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':star: ' . $core ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $core_message );
+			}
+
+			if ( isset( $themes ) ) {
+				$themes_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':art: ' . $themes ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $themes_message );
+			}
+
+			if ( isset( $plugins ) ) {
+				$plugins_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':wrench: ' . $plugins ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $plugins_message );
+			}
+
+			$fixed_phrase = [
+				'blocks' => [
+					$blocks->single_column( 'mrkdwn', $update_message ),
+					$blocks->divider(),
+					$blocks->context( 'mrkdwn', $context ),
+				],
+			];
+
+			$message = array_merge_recursive( $message, $fixed_phrase );
 		} elseif ( 'discord' === $tool ) {
 			$message =
 				$site_name . '( <' . $site_url . '> )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
