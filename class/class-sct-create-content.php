@@ -298,7 +298,7 @@ class Sct_Create_Content {
 		}
 
 		if ( 'slack' === $tool ) {
-			$header_emoji   = ':zap: ';
+			$header_emoji   = ':zap:';
 			$header_message = "{$header_emoji} {$site_name}({$site_url})" . esc_html__( 'Notification of new updates.', 'send-chat-tools' );
 			$update_message =
 				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
