@@ -34,6 +34,7 @@ class Sct_Create_Content {
 	 */
 	public function __construct() {
 		add_action( 'comment_post', [ $this, 'controller' ] );
+		require_once 'class-sct-slack-blocks.php';
 	}
 
 	/**
@@ -192,15 +193,32 @@ class Sct_Create_Content {
 				$comment_status = esc_html__( 'Spam', 'send-chat-tools' );
 			}
 
+			$header_emoji     = ':mailbox_with_mail:';
+			$header_message   = "{$header_emoji} {$site_name}({$site_url})" . esc_html__( 'new comment has been posted.', 'send-chat-tools' );
+			$comment_article  = '*' . esc_html__( 'Commented article:', 'send-chat-tools' ) . "*<{$article_url}|{$article_title}>";
+			$author           = '*' . esc_html__( 'Author:', 'send-chat-tools' ) . "*\n{$comment->comment_author}<{$comment->comment_author_email}>";
+			$date             = '*' . esc_html__( 'Date and time:', 'send-chat-tools' ) . "*\n{$comment->comment_date}";
+			$comment_content  = '*' . esc_html__( 'Text:', 'send-chat-tools' ) . "*\n{$comment->comment_content}";
+			$comment_url      = '*' . esc_html__( 'Comment URL:', 'send-chat-tools' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
+			$comment_statuses = '*' . esc_html__( 'Comment Status:', 'send-chat-tools' ) . "*\n{$comment_status}";
+			$context          =
+				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
+				'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
+				'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
+
+			$blocks  = new Sct_Slack_Blocks();
 			$message = [
-				'text' =>
-					$site_name . '(' . $site_url . ')' . esc_html__( 'new comment has been posted.', 'send-chat-tools' ) . "\n\n" .
-					esc_html__( 'Commented article:', 'send-chat-tools' ) . '<' . $article_url . '|' . $article_title . ">\n" .
-					esc_html__( 'Author:', 'send-chat-tools' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-					esc_html__( 'Date and time:', 'send-chat-tools' ) . $comment->comment_date . "\n" .
-					esc_html__( 'Text:', 'send-chat-tools' ) . "\n" . $comment->comment_content . "\n\n" .
-					esc_html__( 'Comment URL:', 'send-chat-tools' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
-					esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status,
+				'text'   => $header_message,
+				'blocks' => [
+					$blocks->header( 'plain_text', $header_message, true ),
+					$blocks->single_column( 'mrkdwn', $comment_article ),
+					$blocks->divider(),
+					$blocks->two_column( [ 'mrkdwn', $author ], [ 'mrkdwn', $date ] ),
+					$blocks->single_column( 'mrkdwn', $comment_content ),
+					$blocks->two_column( [ 'mrkdwn', $comment_url ], [ 'mrkdwn', $comment_statuses ] ),
+					$blocks->divider(),
+					$blocks->context( 'mrkdwn', $context ),
+				],
 			];
 		} elseif ( 'discord' === $tool ) {
 			if ( '1' === $comment->comment_approved ) {
@@ -280,15 +298,63 @@ class Sct_Create_Content {
 		}
 
 		if ( 'slack' === $tool ) {
+			$header_emoji   = ':zap:';
+			$header_message = "{$header_emoji} {$site_name}({$site_url})" . esc_html__( 'Notification of new updates.', 'send-chat-tools' );
+			$update_message =
+				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
+				esc_html__( 'Update Page:', 'send-chat-tools' ) . "<{$admin_url}>";
+			$context        =
+				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
+				'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
+				'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
+
+			$blocks  = new Sct_Slack_Blocks();
 			$message = [
-				'text' =>
-					$site_name . '( ' . $site_url . ' )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
-					$core . $themes . $plugins . "\n" .
-					esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
-					esc_html__( 'Update Page:', 'send-chat-tools' ) . $admin_url . "\n\n" .
-					esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
-					'https://wordpress.org/plugins/send-chat-tools/',
+				'text'   => $header_message,
+				'blocks' => [
+					$blocks->header( 'plain_text', $header_message, true ),
+				],
 			];
+
+			if ( isset( $core ) ) {
+				$core_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':star: ' . $core ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $core_message );
+			}
+
+			if ( isset( $themes ) ) {
+				$themes_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':art: ' . $themes ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $themes_message );
+			}
+
+			if ( isset( $plugins ) ) {
+				$plugins_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':wrench: ' . $plugins ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $plugins_message );
+			}
+
+			$fixed_phrase = [
+				'blocks' => [
+					$blocks->single_column( 'mrkdwn', $update_message ),
+					$blocks->divider(),
+					$blocks->context( 'mrkdwn', $context ),
+				],
+			];
+
+			$message = array_merge_recursive( $message, $fixed_phrase );
 		} elseif ( 'discord' === $tool ) {
 			$message =
 				$site_name . '( <' . $site_url . '> )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
