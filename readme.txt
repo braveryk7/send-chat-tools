@@ -4,7 +4,7 @@ Tags: send chat tools, send, chat, slack, discord, chatwork, update
 Requires at least: 5.7.2
 Tested up to: 5.8.0
 Requires PHP: 7.3.0
-Stable tag: 1.1.1
+Stable tag: 1.2.0
 License: GpLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -15,6 +15,18 @@ Currently, it sends an announcement when a comment is received.
 You can instantly check comments that you didn't notice with the default email notification. 
 
 === Changelog ===
+
+= 1.2.0 =
+
+Miner update.
+
+Improvement.
+
+* UI for Slack messages(Adopted Block Kit)
+
+Fix.
+
+* The problem that the corresponding WordPress version was not reflected.
 
 = 1.1.1 =
 
