@@ -7,6 +7,12 @@
         "source.fixAll.stylelint": true,
     },
     "editor.insertSpaces": false,
+    "phpsab.executablePathCBF": "./vendor/bin/phpcbf",
+    "phpsab.executablePathCS": "./vendor/bin/phpcs",
+    "phpsab.fixerEnable": true,
+    "phpsab.snifferEnable": true,
+    "phpsab.snifferMode": "onType",
+    "phpsab.standard": "ruleset.xml",
     "stylelint.stylelintPath": "node_modules/stylelint",
     "stylelint.validate": [
         "css",
