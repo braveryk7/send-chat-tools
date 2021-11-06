@@ -2,7 +2,9 @@
     "require-dev": {
         "squizlabs/php_codesniffer": "*",
         "wp-coding-standards/wpcs": "*",
-        "phpcompatibility/php-compatibility": "*"
+        "phpcompatibility/php-compatibility": "*",
+        "wp-cli/wp-cli": "^2.5",
+        "wp-cli/wp-cli-bundle": "^2.5"
     },
     "scripts": {
         "post-autoload-dump": [
