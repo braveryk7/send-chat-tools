@@ -1,27 +1,19 @@
 {
   "name": "send-chat-tools",
   "version": "1.0.0",
-  "description": "=== Plugin Name === Contributors: braveryk7 Tags: send chat tools, send, chat, slack Requires at least: 5.7.2 Tested up to: 5.7.2 Requires PHP: 7.3.0 Stable tag: 0.1.6 License: GpLv2 or later License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
-  "main": "index.js",
-  "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack --mode development",
-    "watch": "webpack --mode development --watch",
-    "eslint": "./node_modules/.bin/eslint",
-    "stylelint": "stylelint **/*.{css,scss,sass}",
-    "postinstall": "mkdir -p src dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/braveryk7/send-chat-tools.git"
-  },
-  "keywords": [],
+  "description": "",
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/braveryk7/send-chat-tools/issues"
+  "license": "GPL-2.0-or-later",
+  "main": "build/index.js",
+  "scripts": {
+		"build": "wp-scripts build",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"start": "wp-scripts start",
+		"packages-update": "wp-scripts packages-update",
+		"zip": "sh cmd/zip.sh"
   },
-  "homepage": "https://github.com/braveryk7/send-chat-tools#readme",
   "dependencies": {
     "@wordpress/block-editor": "^7.0.4",
     "@wordpress/blocks": "^11.1.2",
