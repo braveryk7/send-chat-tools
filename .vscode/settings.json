@@ -1,11 +1,12 @@
 {
     "css.validate": false,
     "scss.validate": false,
-    "editor.insertSpaces": false,
+    "editor.bracketPairColorization.enabled": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true,
         "source.fixAll.stylelint": true,
     },
+    "editor.insertSpaces": false,
     "stylelint.stylelintPath": "node_modules/stylelint",
     "stylelint.validate": [
         "css",
