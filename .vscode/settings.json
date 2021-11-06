@@ -1,12 +1,25 @@
 {
-    "phpcs.executablePath": "./vendor/bin/phpcs",
-    "editor.insertSpaces": false,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true,
-        "source.fixAll.styylelint": true,
-    },
     "css.validate": false,
     "scss.validate": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true,
+    },
+    "editor.insertSpaces": false,
+    "phpsab.executablePathCBF": "./vendor/bin/phpcbf",
+    "phpsab.executablePathCS": "./vendor/bin/phpcs",
+    "phpsab.fixerEnable": true,
+    "phpsab.snifferEnable": true,
+    "phpsab.snifferMode": "onType",
+    "phpsab.standard": "ruleset.xml",
+    "stylelint.stylelintPath": "node_modules/stylelint",
+    "stylelint.validate": [
+        "css",
+        "scss",
+        "less",
+        "postcss"
+    ],
     "[html]": {
         "editor.tabSize": 4,
         "editor.insertSpaces": true,
@@ -15,15 +28,22 @@
         "editor.tabSize": 4,
         "editor.insertSpaces": true,
     },
+    "[scss]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+    },
     "[php]": {
+        "editor.formatOnSave": true,
         "editor.tabSize": 4,
         "editor.insertSpaces": false,
     },
     "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.tabSize": 4,
         "editor.insertSpaces": true,
     },
     "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.tabSize": 4,
         "editor.insertSpaces": false,
     }
