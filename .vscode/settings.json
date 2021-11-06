@@ -3,7 +3,7 @@
     "editor.insertSpaces": false,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true,
-        "source.fixAll.styylelint": true,
+        "source.fixAll.stylelint": true,
     },
     "css.validate": false,
     "scss.validate": false,
