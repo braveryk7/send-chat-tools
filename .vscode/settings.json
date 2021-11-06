@@ -1,12 +1,12 @@
 {
+    "css.validate": false,
+    "scss.validate": false,
     "phpcs.executablePath": "./vendor/bin/phpcs",
     "editor.insertSpaces": false,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true,
         "source.fixAll.stylelint": true,
     },
-    "css.validate": false,
-    "scss.validate": false,
     "stylelint.stylelintPath": "node_modules/stylelint",
     "stylelint.validate": [
         "css",
