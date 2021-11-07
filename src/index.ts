@@ -1,4 +1,4 @@
-import '../src/scss/style.scss';
+import './scss/style.scss';
 import { SctAccordion } from './modules/_SctAccordion';
 import { SctApiCheck } from './modules/_SctApiCheck';
 

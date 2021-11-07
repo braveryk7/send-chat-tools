@@ -61,7 +61,7 @@ class Sct_Settings_Page {
 	public function include_css() {
 		wp_enqueue_style(
 			'sct-admin-page.css',
-			plugins_url( 'dist/css/style.css', dirname( __FILE__ ) ),
+			plugins_url( 'build/style-index.css', dirname( __FILE__ ) ),
 			false,
 			gmdate( 'Ymd', filemtime( __FILE__ ) )
 		);
@@ -73,7 +73,7 @@ class Sct_Settings_Page {
 	public function include_js() {
 		wp_enqueue_script(
 			'sct-admin-page',
-			plugins_url( '/dist/main.js?', dirname( __FILE__ ) ),
+			plugins_url( '/build/index.js?', dirname( __FILE__ ) ),
 			[ 'wp-i18n' ],
 			time(),
 			true,
