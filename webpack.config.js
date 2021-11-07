@@ -37,7 +37,7 @@ const cssLoaders = [
 module.exports = {
 	...defaultConfig,
 	entry: {
-		index: path.resolve( process.cwd(), 'src', 'index.tsx' ),
+		index: path.resolve( process.cwd(), 'src', 'index.ts' ),
 	},
 	resolve: {
 		...defaultConfig.resolve,
