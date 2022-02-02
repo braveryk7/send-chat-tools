@@ -27,8 +27,8 @@ class Sct_Settings_Page {
 	public function __construct( string $path ) {
 		$this->path = $path;
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'add_scripts' ] );
 		add_action( 'admin_head-settings_page_send-chat-tools-settings', [ $this, 'include_css' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'include_js' ] );
 		add_filter( 'plugin_action_links_' . plugin_basename( $path ), [ $this, 'add_settings_links' ] );
 	}
 
@@ -67,7 +67,7 @@ class Sct_Settings_Page {
 	 *
 	 * @param string $hook_shuffix WordPress hook_shuffix.
 	 */
-	public function include_js( string $hook_shuffix ) {
+	public function add_scripts( string $hook_shuffix ) {
 		if ( 'settings_page_send-chat-tools-settings' !== $hook_suffix ) {
 			return;
 		}
