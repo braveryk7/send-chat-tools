@@ -41,7 +41,7 @@ class Sct_Settings_Page extends Sct_Base {
 			__( 'Send Chat Tools', 'send-chat-tools' ),
 			__( 'Send Chat Tools', 'send-chat-tools' ),
 			'administrator',
-			'send-chat-tools-settings',
+			$this->create_option_group(),
 			[ $this, 'settings_page' ],
 		);
 	}
@@ -52,7 +52,7 @@ class Sct_Settings_Page extends Sct_Base {
 	 * @param array|string $links plugin page setting links.
 	 */
 	public function add_settings_links( array $links ): array {
-		$add_link = '<a href="options-general.php?page=send-chat-tools-settings">' . __( 'Settings', 'send-chat-tools' ) . '</a>';
+		$add_link = '<a href="options-general.php?page=' . self::PLUGIN_SLUG . '">' . __( 'Settings', 'send-chat-tools' ) . '</a>';
 		array_unshift( $links, $add_link );
 		return $links;
 	}
@@ -69,22 +69,22 @@ class Sct_Settings_Page extends Sct_Base {
 	 * @param string $hook_shuffix WordPress hook_shuffix.
 	 */
 	public function add_scripts( string $hook_shuffix ) {
-		if ( 'settings_page_send-chat-tools-settings' !== $hook_shuffix ) {
+		if ( 'settings_page_' . $this->create_option_group() !== $hook_shuffix ) {
 			return;
 		}
 
-		$assets = require_once dirname( $this->path ) . '/build/index.asset.php';
+		$assets = require_once $this->create_plugin_dir( 'send-chat-tools' ) . '/build/index.asset.php';
 
 		wp_enqueue_style(
-			'sct-style',
-			WP_PLUGIN_URL . '/send-chat-tools/build/index.css',
+			$this->add_prefix( 'style' ),
+			$this->create_plugin_url( self::PLUGIN_SLUG ) . '/build/index.css',
 			[ 'wp-components' ],
 			$assets['version'],
 		);
 
 		wp_enqueue_script(
-			'sct-script',
-			WP_PLUGIN_URL . '/send-chat-tools/build/index.js',
+			$this->add_prefix( 'script' ),
+			$this->create_plugin_url( self::PLUGIN_SLUG ) . '/build/index.js',
 			$assets['dependencies'],
 			$assets['version'],
 			true
@@ -96,92 +96,92 @@ class Sct_Settings_Page extends Sct_Base {
 	 */
 	public function register() {
 		register_setting(
-			'send-chat-tools-settings',
-			'sct_use_slack',
+			$this->create_option_group(),
+			$this->add_prefix( 'use_slack' ),
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
-				'default'      => get_option( 'sct_use_slack' ),
+				'default'      => get_option( $this->add_prefix( 'use_slack' ) ),
 			]
 		);
 
 		register_setting(
-			'send-chat-tools-settings',
-			'sct_send_slack_author',
+			$this->create_option_group(),
+			$this->add_prefix( 'send_slack_author' ),
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
-				'default'      => get_option( 'sct_send_slack_author' ),
+				'default'      => get_option( $this->add_prefix( 'send_slack_author' ) ),
 			]
 		);
 
 		register_setting(
-			'send-chat-tools-settings',
-			'sct_send_slack_update',
+			$this->create_option_group(),
+			$this->add_prefix( 'send_slack_update' ),
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
-				'default'      => get_option( 'sct_send_slack_update' ),
+				'default'      => get_option( $this->add_prefix( 'send_slack_update' ) ),
 			]
 		);
 
 		register_setting(
-			'send-chat-tools-settings',
-			'sct_use_discord',
+			$this->create_option_group(),
+			$this->add_prefix( 'use_discord' ),
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
-				'default'      => get_option( 'sct_use_discord' ),
+				'default'      => get_option( $this->add_prefix( 'use_discord' ) ),
 			]
 		);
 
 		register_setting(
-			'send-chat-tools-settings',
-			'sct_send_discord_author',
+			$this->create_option_group(),
+			$this->add_prefix( 'send_discord_author' ),
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
-				'default'      => get_option( 'sct_send_discord_author' ),
+				'default'      => get_option( $this->add_prefix( 'send_discord_author' ) ),
 			]
 		);
 
 		register_setting(
-			'send-chat-tools-settings',
-			'sct_send_discord_update',
+			$this->create_option_group(),
+			$this->add_prefix( 'send_discord_update' ),
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
-				'default'      => get_option( 'sct_send_discord_update' ),
+				'default'      => get_option( $this->add_prefix( 'send_discord_update' ) ),
 			]
 		);
 
 		register_setting(
-			'send-chat-tools-settings',
-			'sct_use_chatwork',
+			$this->create_option_group(),
+			$this->add_prefix( 'use_chatwork' ),
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
-				'default'      => get_option( 'sct_use_chatwork' ),
+				'default'      => get_option( $this->add_prefix( 'use_chatwork' ) ),
 			]
 		);
 
 		register_setting(
-			'send-chat-tools-settings',
-			'sct_send_chatwork_author',
+			$this->create_option_group(),
+			$this->add_prefix( 'send_chatwork_author' ),
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
-				'default'      => get_option( 'sct_send_chatwork_author' ),
+				'default'      => get_option( $this->add_prefix( 'send_chatwork_author' ) ),
 			]
 		);
 
 		register_setting(
-			'send-chat-tools-settings',
-			'sct_send_chatwork_update',
+			$this->create_option_group(),
+			$this->add_prefix( 'send_chatwork_update' ),
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
-				'default'      => get_option( 'sct_send_chatwork_update' ),
+				'default'      => get_option( $this->add_prefix( 'send_chatwork_update' ) ),
 			]
 		);
 	}
@@ -190,6 +190,6 @@ class Sct_Settings_Page extends Sct_Base {
 	 * Settings page.
 	 */
 	public function settings_page() {
-		echo '<div id="send-chat-tools-settings"></div>';
+		echo '<div id="' . esc_attr( $this->create_option_group() ) . '"></div>';
 	}
 }
