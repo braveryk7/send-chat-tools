@@ -30,4 +30,43 @@ class Sct_Base {
 	public static function add_prefix( string $value ): string {
 		return self::PREFIX . '_' . $value;
 	}
+
+	/**
+	 * Return plugin url.
+	 * e.g. https://expamle.com/wp-content/plugins/send-chat-tools
+	 *
+	 * @param string $plugin_name Plugin name.
+	 */
+	protected function create_plugin_url( string $plugin_name ): string {
+		return WP_PLUGIN_URL . '/' . $plugin_name;
+	}
+
+	/**
+	 * Return plugin directory.
+	 * e.g. /DocumentRoot/wp-content/plugins/send-chat-tools
+	 *
+	 * @param string $plugin_name Plugin name.
+	 */
+	protected function create_plugin_dir( string $plugin_name ): string {
+		return WP_PLUGIN_DIR . '/' . $plugin_name;
+	}
+
+	/**
+	 * Return option group.
+	 * Use register_setting.
+	 * e.g. send-chat-tools-settings
+	 */
+	protected function create_option_group(): string {
+		return self::PLUGIN_SLUG . '-settings';
+	}
+
+	/**
+	 * Output browser console.
+	 * WARNING: Use debag only!
+	 *
+	 * @param string|int|float|boolean|array|object $value Output data.
+	 */
+	protected function console( $value ): void {
+		echo '<script>console.log(' . wp_json_encode( $value ) . ');</script>';
+	}
 }
