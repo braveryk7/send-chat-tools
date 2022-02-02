@@ -21,4 +21,13 @@ class Sct_Base {
 	protected const PREFIX      = 'sct';
 	protected const PLUGIN_SLUG = 'send-chat-tools';
 	protected const PLUGIN_NAME = 'Send Chat Tools';
+
+	/**
+	 * Return add prefix.
+	 *
+	 * @param string $value After prefix value.
+	 */
+	public static function add_prefix( string $value ): string {
+		return self::PREFIX . '_' . $value;
+	}
 }
