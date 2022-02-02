@@ -6,20 +6,23 @@
   "license": "GPL-2.0-or-later",
   "main": "build/index.js",
   "scripts": {
-		"build": "wp-scripts build",
-		"format": "wp-scripts format",
-		"lint:css": "wp-scripts lint-style",
-		"lint:js": "wp-scripts lint-js",
-		"start": "wp-scripts start",
-		"packages-update": "wp-scripts packages-update",
-		"zip": "sh cmd/zip.sh"
+    "build": "wp-scripts build",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "start": "wp-scripts start",
+    "packages-update": "wp-scripts packages-update",
+    "zip": "sh cmd/zip.sh"
   },
   "dependencies": {
     "@wordpress/block-editor": "^7.0.4",
     "@wordpress/blocks": "^11.1.2",
+    "@wordpress/components": "^19.0.0",
+    "@wordpress/element": "^4.0.3",
     "@wordpress/i18n": "^4.2.3"
   },
   "devDependencies": {
+    "@types/wordpress__components": "^14.0.4",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
     "@wordpress/scripts": "^19.0.0",

@@ -81,9 +81,7 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	/**
 	 * Settings page.
 	 */
-	if ( is_admin() ) {
-		new Sct_Settings_Page( __FILE__ );
-	}
+	new Sct_Settings_Page( __FILE__ );
 
 	/**
 	 * Delete wp_options column.
