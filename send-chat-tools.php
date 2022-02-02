@@ -41,6 +41,7 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 		exit;
 	}
 } elseif ( true === $get_php_version_bool->judgment( $require_php_version ) ) {
+	require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-const-data.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-encryption.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-connect-database.php';
