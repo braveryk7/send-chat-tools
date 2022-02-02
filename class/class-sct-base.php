@@ -18,5 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Send Chat Tools base class.
  */
 class Sct_Base {
-	protected const PREFIX = 'sct';
+	protected const PREFIX      = 'sct';
+	protected const PLUGIN_SLUG = 'send-chat-tools';
 }
