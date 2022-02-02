@@ -167,7 +167,7 @@ class Sct_Settings_Page {
 
 		register_setting(
 			'send-chat-tools-settings',
-			'sct_send_chatowrk_author',
+			'sct_send_chatwork_author',
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
@@ -177,11 +177,11 @@ class Sct_Settings_Page {
 
 		register_setting(
 			'send-chat-tools-settings',
-			'sct_send_chatowrk_update',
+			'sct_send_chatwork_update',
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
-				'default'      => get_option( 'sct_send_chatowrk_update' ),
+				'default'      => get_option( 'sct_send_chatwork_update' ),
 			]
 		);
 	}
