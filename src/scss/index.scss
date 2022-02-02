@@ -10,3 +10,14 @@
 	right: 30px;
 	top: 50px;
 }
+
+.sct {
+
+	&_success {
+		background-color: #00a32a;
+	}
+
+	&_error {
+		background-color: #d63638;
+	}
+}
