@@ -28,6 +28,7 @@ class Sct_Settings_Page {
 		$this->path = $path;
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'add_scripts' ] );
+		add_action( 'rest_api_init', [ $this, 'register' ] );
 		add_action( 'admin_head-settings_page_send-chat-tools-settings', [ $this, 'include_css' ] );
 		add_filter( 'plugin_action_links_' . plugin_basename( $path ), [ $this, 'add_settings_links' ] );
 	}
@@ -87,6 +88,41 @@ class Sct_Settings_Page {
 			$assets['dependencies'],
 			$assets['version'],
 			true
+		);
+	}
+
+	/**
+	 * Set register.
+	 */
+	public function register() {
+		register_setting(
+			'send-chat-tools-settings',
+			'sct_use_slack',
+			[
+				'type'         => 'boolean',
+				'show_in_rest' => true,
+				'default'      => get_option( 'sct_use_slack' ),
+			]
+		);
+
+		register_setting(
+			'send-chat-tools-settings',
+			'sct_use_discord',
+			[
+				'type'         => 'boolean',
+				'show_in_rest' => true,
+				'default'      => get_option( 'sct_use_discord' ),
+			]
+		);
+
+		register_setting(
+			'send-chat-tools-settings',
+			'sct_use_chatwork',
+			[
+				'type'         => 'boolean',
+				'show_in_rest' => true,
+				'default'      => get_option( 'sct_use_chatwork' ),
+			]
 		);
 	}
 
