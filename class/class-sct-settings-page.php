@@ -69,7 +69,7 @@ class Sct_Settings_Page {
 	 * @param string $hook_shuffix WordPress hook_shuffix.
 	 */
 	public function add_scripts( string $hook_shuffix ) {
-		if ( 'settings_page_send-chat-tools-settings' !== $hook_suffix ) {
+		if ( 'settings_page_send-chat-tools-settings' !== $hook_shuffix ) {
 			return;
 		}
 
