@@ -107,6 +107,26 @@ class Sct_Settings_Page {
 
 		register_setting(
 			'send-chat-tools-settings',
+			'sct_send_slack_author',
+			[
+				'type'         => 'boolean',
+				'show_in_rest' => true,
+				'default'      => get_option( 'sct_send_slack_author' ),
+			]
+		);
+
+		register_setting(
+			'send-chat-tools-settings',
+			'sct_send_slack_update',
+			[
+				'type'         => 'boolean',
+				'show_in_rest' => true,
+				'default'      => get_option( 'sct_send_slack_update' ),
+			]
+		);
+
+		register_setting(
+			'send-chat-tools-settings',
 			'sct_use_discord',
 			[
 				'type'         => 'boolean',
@@ -117,11 +137,51 @@ class Sct_Settings_Page {
 
 		register_setting(
 			'send-chat-tools-settings',
+			'sct_send_discord_author',
+			[
+				'type'         => 'boolean',
+				'show_in_rest' => true,
+				'default'      => get_option( 'sct_send_discord_author' ),
+			]
+		);
+
+		register_setting(
+			'send-chat-tools-settings',
+			'sct_send_discord_update',
+			[
+				'type'         => 'boolean',
+				'show_in_rest' => true,
+				'default'      => get_option( 'sct_send_discord_update' ),
+			]
+		);
+
+		register_setting(
+			'send-chat-tools-settings',
 			'sct_use_chatwork',
 			[
 				'type'         => 'boolean',
 				'show_in_rest' => true,
 				'default'      => get_option( 'sct_use_chatwork' ),
+			]
+		);
+
+		register_setting(
+			'send-chat-tools-settings',
+			'sct_send_chatowrk_author',
+			[
+				'type'         => 'boolean',
+				'show_in_rest' => true,
+				'default'      => get_option( 'sct_send_chatwork_author' ),
+			]
+		);
+
+		register_setting(
+			'send-chat-tools-settings',
+			'sct_send_chatowrk_update',
+			[
+				'type'         => 'boolean',
+				'show_in_rest' => true,
+				'default'      => get_option( 'sct_send_chatowrk_update' ),
 			]
 		);
 	}
