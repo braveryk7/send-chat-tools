@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Return admin settings page.
  */
-class Sct_Settings_Page {
+class Sct_Settings_Page extends Sct_Base {
 	/**
 	 * WordPress hook.
 	 * Add settings page link in admin page.
