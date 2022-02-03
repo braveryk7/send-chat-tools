@@ -25,6 +25,19 @@ class Sct_Base {
 
 	protected const TABLE_NAME = self::PREFIX;
 
+	protected const THEME_OPTION_NAME  = [
+		'Cocoon'    => 'external_theme_updates-cocoon-master',
+		'SANGO'     => 'puc_external_updates_theme-sango-theme',
+		'THE SONIC' => 'puc_external_updates_theme-tsnc-main-theme-updater',
+	];
+	protected const PLUGIN_OPTION_NAME = [
+		'Rinker'                     => 'external_updates-yyi-rinker',
+		'THE SONIC SEO Plugin'       => 'external_updates-tsnc-seo-plugin',
+		'THE SONIC Gutenberg Blocks' => 'external_updates-tsnc-gutenberg-plugin',
+		'THE SONIC COPIA'            => 'external_updates-tsnc-cmp-plugin',
+		'SANGO Gutenberg'            => 'external_updates-sango-theme-gutenberg',
+	];
+
 	/**
 	 * Return add prefix.
 	 *
