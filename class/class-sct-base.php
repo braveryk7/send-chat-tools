@@ -67,7 +67,7 @@ class Sct_Base {
 	 * Use register_setting.
 	 * e.g. send-chat-tools-settings
 	 */
-	protected function create_option_group(): string {
+	protected function return_option_group(): string {
 		return self::PLUGIN_SLUG . '-settings';
 	}
 

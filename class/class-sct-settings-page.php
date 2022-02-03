@@ -38,7 +38,7 @@ class Sct_Settings_Page extends Sct_Base {
 			__( 'Send Chat Tools', 'send-chat-tools' ),
 			__( 'Send Chat Tools', 'send-chat-tools' ),
 			'administrator',
-			$this->create_option_group(),
+			$this->return_option_group(),
 			[ $this, 'settings_page' ],
 		);
 	}
@@ -66,7 +66,7 @@ class Sct_Settings_Page extends Sct_Base {
 	 * @param string $hook_shuffix WordPress hook_shuffix.
 	 */
 	public function add_scripts( string $hook_shuffix ) {
-		if ( 'settings_page_' . $this->create_option_group() !== $hook_shuffix ) {
+		if ( 'settings_page_' . $this->return_option_group() !== $hook_shuffix ) {
 			return;
 		}
 
@@ -93,7 +93,7 @@ class Sct_Settings_Page extends Sct_Base {
 	 */
 	public function register() {
 		register_setting(
-			$this->create_option_group(),
+			$this->return_option_group(),
 			$this->add_prefix( 'use_slack' ),
 			[
 				'type'         => 'boolean',
@@ -103,7 +103,7 @@ class Sct_Settings_Page extends Sct_Base {
 		);
 
 		register_setting(
-			$this->create_option_group(),
+			$this->return_option_group(),
 			$this->add_prefix( 'send_slack_author' ),
 			[
 				'type'         => 'boolean',
@@ -113,7 +113,7 @@ class Sct_Settings_Page extends Sct_Base {
 		);
 
 		register_setting(
-			$this->create_option_group(),
+			$this->return_option_group(),
 			$this->add_prefix( 'send_slack_update' ),
 			[
 				'type'         => 'boolean',
@@ -123,7 +123,7 @@ class Sct_Settings_Page extends Sct_Base {
 		);
 
 		register_setting(
-			$this->create_option_group(),
+			$this->return_option_group(),
 			$this->add_prefix( 'use_discord' ),
 			[
 				'type'         => 'boolean',
@@ -133,7 +133,7 @@ class Sct_Settings_Page extends Sct_Base {
 		);
 
 		register_setting(
-			$this->create_option_group(),
+			$this->return_option_group(),
 			$this->add_prefix( 'send_discord_author' ),
 			[
 				'type'         => 'boolean',
@@ -143,7 +143,7 @@ class Sct_Settings_Page extends Sct_Base {
 		);
 
 		register_setting(
-			$this->create_option_group(),
+			$this->return_option_group(),
 			$this->add_prefix( 'send_discord_update' ),
 			[
 				'type'         => 'boolean',
@@ -153,7 +153,7 @@ class Sct_Settings_Page extends Sct_Base {
 		);
 
 		register_setting(
-			$this->create_option_group(),
+			$this->return_option_group(),
 			$this->add_prefix( 'use_chatwork' ),
 			[
 				'type'         => 'boolean',
@@ -163,7 +163,7 @@ class Sct_Settings_Page extends Sct_Base {
 		);
 
 		register_setting(
-			$this->create_option_group(),
+			$this->return_option_group(),
 			$this->add_prefix( 'send_chatwork_author' ),
 			[
 				'type'         => 'boolean',
@@ -173,7 +173,7 @@ class Sct_Settings_Page extends Sct_Base {
 		);
 
 		register_setting(
-			$this->create_option_group(),
+			$this->return_option_group(),
 			$this->add_prefix( 'send_chatwork_update' ),
 			[
 				'type'         => 'boolean',
@@ -187,6 +187,6 @@ class Sct_Settings_Page extends Sct_Base {
 	 * Settings page.
 	 */
 	public function settings_page() {
-		echo '<div id="' . esc_attr( $this->create_option_group() ) . '"></div>';
+		echo '<div id="' . esc_attr( $this->return_option_group() ) . '"></div>';
 	}
 }
