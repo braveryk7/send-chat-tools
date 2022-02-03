@@ -17,14 +17,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Connect Database.
  */
-class Sct_Connect_Database {
+class Sct_Connect_Database extends Sct_Base {
 	/**
 	 * Constructor.
 	 * Gave prefix.
 	 */
 	public function __construct() {
-		global $wpdb;
-		$this->table_name = $wpdb->prefix . Sct_Const_Data::TABLE_NAME;
+		$this->table_name = $this->create_table_name();
 	}
 
 	/**
@@ -32,7 +31,7 @@ class Sct_Connect_Database {
 	 */
 	public function search_table() {
 		global $wpdb;
-		$get_table = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->table_name ) ); // db call ok; no-cache ok.
+		$get_table = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->create_table_name() ) ); // db call ok; no-cache ok.
 		if ( null === $get_table ) {
 			$this->create_table();
 		}
@@ -59,7 +58,7 @@ class Sct_Connect_Database {
 		/* Create columns from wp_options table */
 		$options = Sct_Const_Data::OPTION_LIST;
 		foreach ( $options as $key => $value ) {
-			if ( 'sct_iv' === $key ) {
+			if ( $this->add_prefx( 'iv' ) === $key ) {
 				add_option( $key, Sct_Encryption::make_vector() );
 			} else {
 				add_option( $key, $value );
@@ -78,7 +77,7 @@ class Sct_Connect_Database {
 		global $wpdb;
 
 		$wpdb->insert(
-			$this->table_name,
+			$this->create_table_name(),
 			[
 				'states'    => $states_code,
 				'tool'      => $tool,
@@ -118,7 +117,7 @@ class Sct_Connect_Database {
 		/* Remove wp_sct table */
 		$table_name = $wpdb->prefix . Sct_Const_Data::TABLE_NAME;
 
-		$sql = 'DROP TABLE IF EXISTS ' . $table_name;
+		$sql = 'DROP TABLE IF EXISTS ' . $this->create_table_name();
 		$wpdb->query( "${sql}" ); // db call ok; no-cache ok.
 
 		/* Remove cron hooks */
