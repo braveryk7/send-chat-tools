@@ -55,6 +55,14 @@ class Sct_Base {
 	}
 
 	/**
+	 * Return plugin file path.
+	 * e.g. /DocumentRoot/wp-content/plugins/send-chat-tools/send-chat-tools.php
+	 */
+	protected function return_plugin_path(): string {
+		return $this->create_plugin_dir( self::PLUGIN_SLUG ) . '/' . self::PLUGIN_FILE;
+	}
+
+	/**
 	 * Return option group.
 	 * Use register_setting.
 	 * e.g. send-chat-tools-settings
