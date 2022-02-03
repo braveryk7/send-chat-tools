@@ -38,22 +38,22 @@ trait Sct_Sending {
 		update_option( $log, $result );
 
 		if ( ! isset( $result->errors ) ) {
-			$states_code = $result['response']['code'];
+			$status_code = $result['response']['code'];
 		} else {
-			$states_code = 1000;
+			$status_code = 1000;
 		}
-		if ( 200 !== $states_code && 204 !== $states_code ) {
+		if ( 200 !== $status_code && 204 !== $status_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
 			if ( 'update' === $id ) {
-				$send_mail = new Sct_Error_mail( $states_code, $id );
+				$send_mail = new Sct_Error_mail( $status_code, $id );
 				$send_mail->update_contents( $options );
 			} else {
-				$send_mail = new Sct_Error_Mail( $states_code, $id );
+				$send_mail = new Sct_Error_Mail( $status_code, $id );
 				$send_mail->make_contents();
 			}
 		}
 
 		$logger = new Sct_Logger();
-		$logger->create_log( $states_code, $tools, $id );
+		$logger->create_log( $status_code, $tools, $id );
 	}
 }

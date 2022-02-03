@@ -69,17 +69,17 @@ class Sct_Connect_Database extends Sct_Base {
 	/**
 	 * Insert log.
 	 *
-	 * @param int    $states_code States code.
+	 * @param int    $status_code Status code.
 	 * @param string $tool Use tool number.
 	 * @param string $type Type.
 	 */
-	public function insert_log( int $states_code, string $tool, string $type ) {
+	public function insert_log( int $status_code, string $tool, string $type ) {
 		global $wpdb;
 
 		$wpdb->insert(
 			$this->create_table_name(),
 			[
-				'states'    => $states_code,
+				'states'    => $status_code,
 				'tool'      => $tool,
 				'type'      => $type,
 				'send_date' => current_time( 'mysql' ),
