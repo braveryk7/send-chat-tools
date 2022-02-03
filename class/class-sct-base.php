@@ -63,6 +63,14 @@ class Sct_Base {
 	}
 
 	/**
+	 * Return Database table name.
+	 */
+	protected function create_table_name(): string {
+		global $wpdb;
+		return $wpdb->prefix . self::TABLE_NAME;
+	}
+
+	/**
 	 * Output browser console.
 	 * WARNING: Use debag only!
 	 *
