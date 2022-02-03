@@ -21,16 +21,13 @@ class Sct_Settings_Page extends Sct_Base {
 	/**
 	 * WordPress hook.
 	 * Add settings page link in admin page.
-	 *
-	 * @param string $path send-chat-tools.php path.
 	 */
-	public function __construct( string $path ) {
-		$this->path = $path;
+	public function __construct() {
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'add_scripts' ] );
 		add_action( 'rest_api_init', [ $this, 'register' ] );
 		add_action( 'admin_head-settings_page_send-chat-tools-settings', [ $this, 'include_css' ] );
-		add_filter( 'plugin_action_links_' . plugin_basename( $path ), [ $this, 'add_settings_links' ] );
+		add_filter( 'plugin_action_links_' . plugin_basename( $this->return_plugin_path() ), [ $this, 'add_settings_links' ] );
 	}
 
 	/**
@@ -77,14 +74,14 @@ class Sct_Settings_Page extends Sct_Base {
 
 		wp_enqueue_style(
 			$this->add_prefix( 'style' ),
-			$this->create_plugin_url( self::PLUGIN_SLUG ) . '/build/index.css',
+			$this->return_plugin_url( self::PLUGIN_SLUG ) . '/build/index.css',
 			[ 'wp-components' ],
 			$assets['version'],
 		);
 
 		wp_enqueue_script(
 			$this->add_prefix( 'script' ),
-			$this->create_plugin_url( self::PLUGIN_SLUG ) . '/build/index.js',
+			$this->return_plugin_url( self::PLUGIN_SLUG ) . '/build/index.js',
 			$assets['dependencies'],
 			$assets['version'],
 			true
