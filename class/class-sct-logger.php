@@ -26,18 +26,26 @@ class Sct_Logger {
 	 * @param string $notification_type Comment, Update.
 	 */
 	public function create_log( int $status_code, string $tool_name, string $notification_type ) {
-		if ( 'slack' === $tool_name ) {
-			$tool = '1';
-		} elseif ( 'discord' === $tool_name ) {
-			$tool = '2';
-		} elseif ( 'chatwork' === $tool_name ) {
-			$tool = '3';
+
+		switch ( $tool_name ) {
+			case 'slack':
+				$tool = '1';
+				break;
+			case 'discord':
+				$tool = '2';
+				break;
+			case 'chatwork':
+				$tool = '3';
+				break;
 		}
 
-		if ( ctype_digit( $notification_type ) ) {
-			$type = '1';
-		} elseif ( 'update' === $notification_type ) {
-			$type = '2';
+		switch ( $notification_type ) {
+			case ctype_digit( $notification_type ):
+				$type = '1';
+				break;
+			case 'update':
+				$type = '2';
+				break;
 		}
 
 		if ( isset( $tool ) && isset( $type ) ) {
