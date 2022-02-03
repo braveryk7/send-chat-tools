@@ -21,6 +21,7 @@ class Sct_Base {
 	protected const PREFIX      = 'sct';
 	protected const PLUGIN_SLUG = 'send-chat-tools';
 	protected const PLUGIN_NAME = 'Send Chat Tools';
+	protected const PLUGIN_FILE = self::PLUGIN_SLUG . '.php';
 
 	protected const TABLE_NAME = self::PREFIX;
 
