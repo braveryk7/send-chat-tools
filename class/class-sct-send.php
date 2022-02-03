@@ -1,6 +1,6 @@
 <?php
 /**
- * Use Slack.
+ * Send tools & email.
  *
  * @author Ken-chan
  * @package WordPress
