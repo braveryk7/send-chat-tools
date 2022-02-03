@@ -25,6 +25,36 @@ class Sct_Base {
 
 	protected const TABLE_NAME = self::PREFIX;
 
+	public const OPTIONS_COLUMN = [
+		// Use database.
+		'db_version',
+		'iv',
+		'use_user_id',
+		// Use tools.
+		'use_slack',
+		'use_discord',
+		'use_chatwork',
+		// Tools API.
+		'slack_webhook_url',
+		'discord_webhook_url',
+		'chatwork_api_token',
+		'chatwork_room_id',
+		// Send author.
+		'send_slack_author',
+		'send_discord_author',
+		'send_chatwork_author',
+		// Send update notification.
+		'send_slack_update',
+		'send_discord_update',
+		'send_chatwork_update',
+		// Send log.
+		'slack_log',
+		'discord_log',
+		'chatwork_log',
+		// Cron time.
+		'cron_time',
+	];
+
 	protected const THEME_OPTION_NAME  = [
 		'Cocoon'    => 'external_theme_updates-cocoon-master',
 		'SANGO'     => 'puc_external_updates_theme-sango-theme',
