@@ -14,14 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'You do not have access rights.' );
 }
 
-require_once dirname( __FILE__ ) . '/trait-sct-sending.php';
-
 /**
  * Assemble the content before sending.
  */
-class Sct_Create_Content {
-	use Sct_Sending;
-
+class Sct_Create_Content extends Sct_Base {
 	/**
 	 * Comment ID.
 	 *
@@ -70,23 +66,23 @@ class Sct_Create_Content {
 				],
 			];
 
-			if ( '1' === $tools[0] && ! empty( $api['slack'] ) && ( ( '0' === $author[0] ) || ( '1' === $author[0] && '0' === $comment->user_id ) ) ) {
+			if ( '1' === $tools[0] && ! empty( $api['slack'] ) && ( ( ! $author[0] ) || ( $author[0] && '0' === $comment->user_id ) ) ) {
 				$options = $this->create_content( $type, 'slack', $comment );
-				self::sending( $options, (string) $wpdb->insert_id, 'slack' );
+				$this->send_tools( $options, (string) $wpdb->insert_id, 'slack' );
 			} elseif ( '1' === $tools[0] && empty( $api['slack'] ) ) {
 				$logger = new Sct_Logger();
 				$logger->create_log( 1001, 'slack', '1' );
 			};
-			if ( '1' === $tools[1] && ! empty( $api['discord'] ) && ( ( '0' === $author[1] ) || ( '1' === $author[1] && '0' === $comment->user_id ) ) ) {
+			if ( '1' === $tools[1] && ! empty( $api['discord'] ) && ( ( ! $author[1] ) || ( $author[1] && '0' === $comment->user_id ) ) ) {
 				$options = $this->create_content( $type, 'discord', $comment );
-				self::sending( $options, (string) $wpdb->insert_id, 'discord' );
+				$this->send_tools( $options, (string) $wpdb->insert_id, 'discord' );
 			} elseif ( '1' === $tools[1] && empty( $api['discord'] ) ) {
 				$logger = new Sct_Logger();
 				$logger->create_log( 1001, 'discord', '1' );
 			};
-			if ( '1' === $tools[2] && ! empty( $api['chatwork']['api_token'] ) && ! empty( $api['chatwork']['room_id'] ) && ( ( '0' === $author[2] ) || ( '1' === $author[2] && '0' === $comment->user_id ) ) ) {
+			if ( '1' === $tools[2] && ! empty( $api['chatwork']['api_token'] ) && ! empty( $api['chatwork']['room_id'] ) && ( ( ! $author[2] ) || ( $author[2] && '0' === $comment->user_id ) ) ) {
 				$options = $this->create_content( $type, 'chatwork', $comment );
-				self::sending( $options, (string) $wpdb->insert_id, 'chatwork' );
+				$this->send_tools( $options, (string) $wpdb->insert_id, 'chatwork' );
 			} elseif ( '1' === $tools[2] && empty( $api['chatwork']['api_token'] ) ) {
 				$logger = new Sct_Logger();
 				$logger->create_log( 1001, 'chatwork', '1' );
@@ -97,15 +93,15 @@ class Sct_Create_Content {
 		} elseif ( 'update' === $type ) {
 			if ( '1' === $tools[0] && '1' === get_option( 'sct_send_slack_update' ) ) {
 				$options = $this->create_content( $type, 'slack', null, $check_date );
-				self::sending( $options, 'update', 'slack' );
+				$this->send_tools( $options, 'update', 'slack' );
 			}
 			if ( '1' === $tools[1] && '1' === get_option( 'sct_send_discord_update' ) ) {
 				$options = $this->create_content( $type, 'discord', null, $check_date );
-				self::sending( $options, 'update', 'discord' );
+				$this->send_tools( $options, 'update', 'discord' );
 			}
 			if ( '1' === $tools[2] && '1' === get_option( 'sct_send_chatwork_update' ) ) {
 				$options = $this->create_content( $type, 'chatwork', null, $check_date );
-				self::sending( $options, 'update', 'chatwork' );
+				$this->send_tools( $options, 'update', 'chatwork' );
 			}
 		}
 	}
