@@ -26,6 +26,8 @@ class Sct_Base {
 
 	protected const TABLE_NAME = self::PREFIX;
 
+	protected const ENCRYPT_METHOD = 'AES-256-CBC';
+
 	public const OPTIONS_COLUMN = [
 		// Use database.
 		'db_version',
