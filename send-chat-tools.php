@@ -82,7 +82,7 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	/**
 	 * Settings page.
 	 */
-	new Sct_Settings_Page( __FILE__ );
+	new Sct_Settings_Page();
 
 	/**
 	 * Delete wp_options column.
