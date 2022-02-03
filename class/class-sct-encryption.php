@@ -17,8 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Encrypt value
  */
 class Sct_Encryption extends Sct_Base {
-	const METHOD = 'AES-256-CBC';
-
 	/**
 	 * Get current user registered date and time.
 	 */
@@ -31,7 +29,7 @@ class Sct_Encryption extends Sct_Base {
 	 * Make IV for OpenSSL.
 	 */
 	public static function make_vector(): string {
-		$vector_length = openssl_cipher_iv_length( self::METHOD );
+		$vector_length = openssl_cipher_iv_length( self::ENCRYPT_METHOD );
 		return bin2hex( openssl_random_pseudo_bytes( $vector_length ) );
 	}
 
@@ -62,6 +60,6 @@ class Sct_Encryption extends Sct_Base {
 		$get_user_id = get_option( $this->add_method( 'use_user_id' ) );
 		$key         = get_userdata( $get_user_id )->user_registered;
 		$iv          = get_option( $this->add_method( 'iv' ) );
-		return openssl_decrypt( $value, self::METHOD, $key, 0, hex2bin( $iv ) );
+		return openssl_decrypt( $value, self::ENCRYPT_METHOD, $key, 0, hex2bin( $iv ) );
 	}
 }
