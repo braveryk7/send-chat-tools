@@ -70,7 +70,7 @@ class Sct_Settings_Page extends Sct_Base {
 			return;
 		}
 
-		$assets = require_once $this->create_plugin_dir( 'send-chat-tools' ) . '/build/index.asset.php';
+		$assets = require_once $this->return_plugin_dir( 'send-chat-tools' ) . '/build/index.asset.php';
 
 		wp_enqueue_style(
 			$this->add_prefix( 'style' ),
