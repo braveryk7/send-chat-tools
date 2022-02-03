@@ -23,7 +23,7 @@ class Sct_Connect_Database extends Sct_Base {
 	 * Gave prefix.
 	 */
 	public function __construct() {
-		$this->table_name = $this->create_table_name();
+		$this->table_name = $this->return_table_name();
 	}
 
 	/**
@@ -31,7 +31,7 @@ class Sct_Connect_Database extends Sct_Base {
 	 */
 	public function search_table() {
 		global $wpdb;
-		$get_table = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->create_table_name() ) ); // db call ok; no-cache ok.
+		$get_table = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->return_table_name() ) ); // db call ok; no-cache ok.
 		if ( null === $get_table ) {
 			$this->create_table();
 		}
@@ -77,7 +77,7 @@ class Sct_Connect_Database extends Sct_Base {
 		global $wpdb;
 
 		$wpdb->insert(
-			$this->create_table_name(),
+			$this->return_table_name(),
 			[
 				'states'    => $status_code,
 				'tool'      => $tool,
@@ -117,7 +117,7 @@ class Sct_Connect_Database extends Sct_Base {
 		/* Remove wp_sct table */
 		$table_name = $wpdb->prefix . Sct_Const_Data::TABLE_NAME;
 
-		$sql = 'DROP TABLE IF EXISTS ' . $this->create_table_name();
+		$sql = 'DROP TABLE IF EXISTS ' . $this->return_table_name();
 		$wpdb->query( "${sql}" ); // db call ok; no-cache ok.
 
 		/* Remove cron hooks */
