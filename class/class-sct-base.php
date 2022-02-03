@@ -22,7 +22,7 @@ class Sct_Base {
 	protected const PLUGIN_SLUG = 'send-chat-tools';
 	protected const PLUGIN_NAME = 'Send Chat Tools';
 
-	protected const TABLE_NAME = PREFIX;
+	protected const TABLE_NAME = self::PREFIX;
 
 	/**
 	 * Return add prefix.
