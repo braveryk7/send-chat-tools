@@ -17,14 +17,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Connect Database.
  */
-class Sct_Connect_Database {
+class Sct_Connect_Database extends Sct_Base {
 	/**
 	 * Constructor.
 	 * Gave prefix.
 	 */
 	public function __construct() {
-		global $wpdb;
-		$this->table_name = $wpdb->prefix . Sct_Const_Data::TABLE_NAME;
+		$this->table_name = $this->return_table_name();
 	}
 
 	/**
@@ -32,7 +31,7 @@ class Sct_Connect_Database {
 	 */
 	public function search_table() {
 		global $wpdb;
-		$get_table = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->table_name ) ); // db call ok; no-cache ok.
+		$get_table = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->return_table_name() ) ); // db call ok; no-cache ok.
 		if ( null === $get_table ) {
 			$this->create_table();
 		}
@@ -57,12 +56,12 @@ class Sct_Connect_Database {
 		dbDelta( $sql );
 
 		/* Create columns from wp_options table */
-		$options = Sct_Const_Data::OPTION_LIST;
-		foreach ( $options as $key => $value ) {
-			if ( 'sct_iv' === $key ) {
+		$options = self::OPTIONS_COLUMN;
+		foreach ( $options as $key ) {
+			if ( $this->add_prefx( 'iv' ) === $key ) {
 				add_option( $key, Sct_Encryption::make_vector() );
 			} else {
-				add_option( $key, $value );
+				add_option( $key, false );
 			}
 		}
 	}
@@ -70,17 +69,17 @@ class Sct_Connect_Database {
 	/**
 	 * Insert log.
 	 *
-	 * @param int    $states_code States code.
+	 * @param int    $status_code Status code.
 	 * @param string $tool Use tool number.
 	 * @param string $type Type.
 	 */
-	public function insert_log( int $states_code, string $tool, string $type ) {
+	public function insert_log( int $status_code, string $tool, string $type ) {
 		global $wpdb;
 
 		$wpdb->insert(
-			$this->table_name,
+			$this->return_table_name(),
 			[
-				'states'    => $states_code,
+				'states'    => $status_code,
 				'tool'      => $tool,
 				'type'      => $type,
 				'send_date' => current_time( 'mysql' ),
@@ -110,15 +109,12 @@ class Sct_Connect_Database {
 		global $wpdb;
 
 		/* Remove columns from wp_options table */
-		$options = Sct_Const_Data::OPTION_LIST;
-		foreach ( $options as $key => $value ) {
+		$options = self::OPTIONS_COLUMN;
+		foreach ( $options as $key ) {
 			delete_option( $key );
 		}
 
-		/* Remove wp_sct table */
-		$table_name = $wpdb->prefix . Sct_Const_Data::TABLE_NAME;
-
-		$sql = 'DROP TABLE IF EXISTS ' . $table_name;
+		$sql = 'DROP TABLE IF EXISTS ' . $this->return_table_name();
 		$wpdb->query( "${sql}" ); // db call ok; no-cache ok.
 
 		/* Remove cron hooks */
