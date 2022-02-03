@@ -114,9 +114,6 @@ class Sct_Connect_Database extends Sct_Base {
 			delete_option( $key );
 		}
 
-		/* Remove wp_sct table */
-		$table_name = $wpdb->prefix . Sct_Const_Data::TABLE_NAME;
-
 		$sql = 'DROP TABLE IF EXISTS ' . $this->return_table_name();
 		$wpdb->query( "${sql}" ); // db call ok; no-cache ok.
 
