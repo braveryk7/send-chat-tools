@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Encrypt value
  */
-class Sct_Encryption {
+class Sct_Encryption extends Sct_Base {
 	const METHOD = 'AES-256-CBC';
 
 	/**
@@ -42,13 +42,13 @@ class Sct_Encryption {
 	 */
 	public static function encrypt( string $value ): string {
 		$wpdb;
-		if ( false === get_option( 'sct_iv' ) ) {
+		if ( false === get_option( $this->add_method( 'iv' ) ) ) {
 			$new_iv = self::make_vector();
-			update_option( 'sct_iv', $new_iv );
+			update_option( $this->add_method( 'iv' ), $new_iv );
 		} else {
-			$new_iv = get_option( 'sct_iv' );
+			$new_iv = get_option( $this->add_method( 'iv' ) );
 		}
-		update_option( 'sct_use_user_id', wp_get_current_user()->ID );
+		update_option( $this->add_method( 'use_user_id' ), wp_get_current_user()->ID );
 		return openssl_encrypt( $value, self::METHOD, self::get_user_registered(), 0, hex2bin( $new_iv ) );
 	}
 
@@ -59,9 +59,9 @@ class Sct_Encryption {
 	 */
 	public static function decrypt( string $value ): string {
 		$wpdb;
-		$get_user_id = get_option( 'sct_use_user_id' );
+		$get_user_id = get_option( $this->add_method( 'use_user_id' ) );
 		$key         = get_userdata( $get_user_id )->user_registered;
-		$iv          = get_option( 'sct_iv' );
+		$iv          = get_option( $this->add_method( 'iv' ) );
 		return openssl_decrypt( $value, self::METHOD, $key, 0, hex2bin( $iv ) );
 	}
 }
