@@ -56,12 +56,12 @@ class Sct_Connect_Database extends Sct_Base {
 		dbDelta( $sql );
 
 		/* Create columns from wp_options table */
-		$options = Sct_Const_Data::OPTION_LIST;
-		foreach ( $options as $key => $value ) {
+		$options = self::OPTIONS_COLUMN;
+		foreach ( $options as $key ) {
 			if ( $this->add_prefx( 'iv' ) === $key ) {
 				add_option( $key, Sct_Encryption::make_vector() );
 			} else {
-				add_option( $key, $value );
+				add_option( $key, false );
 			}
 		}
 	}
@@ -109,8 +109,8 @@ class Sct_Connect_Database extends Sct_Base {
 		global $wpdb;
 
 		/* Remove columns from wp_options table */
-		$options = Sct_Const_Data::OPTION_LIST;
-		foreach ( $options as $key => $value ) {
+		$options = self::OPTIONS_COLUMN;
+		foreach ( $options as $key ) {
 			delete_option( $key );
 		}
 
