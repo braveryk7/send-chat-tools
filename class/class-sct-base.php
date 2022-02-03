@@ -135,16 +135,21 @@ class Sct_Base {
 	protected function send_tools( array $options, string $id, string $tools ) {
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
-		if ( 'slack' === $tools ) {
-			$url = Sct_Encryption::decrypt( get_option( 'sct_slack_webhook_url' ) );
-			$log = 'sct_slack_log';
-		} elseif ( 'discord' === $tools ) {
-			$url = Sct_Encryption::decrypt( get_option( 'sct_discord_webhook_url' ) );
-			$log = 'sct_discord_log';
-		} elseif ( 'chatwork' === $tools ) {
-			$url = 'https://api.chatwork.com/v2/rooms/' . Sct_Encryption::decrypt( get_option( 'sct_chatwork_room_id' ) ) . '/messages';
-			$log = 'sct_chatwork_log';
+		switch ( $tools ) {
+			case 'slack':
+				$url = Sct_Encryption::decrypt( get_option( $this->add_prefix( 'slack_webhook_url' ) ) );
+				$log = $this->add_prefix( 'slack_log' );
+				break;
+			case 'discord':
+				$url = Sct_Encryption::decrypt( get_option( $this->add_prefix( 'discord_webhook_url' ) ) );
+				$log = $this->add_prefix( 'discord_log' );
+				break;
+			case 'chatwork':
+				$url = 'https://api.chatwork.com/v2/rooms/' . Sct_Encryption::decrypt( get_option( $this->add_prefix( 'chatwork_room_id' ) ) ) . '/messages';
+				$log = $this->add_prefix( 'chatwork_log' );
+				break;
 		}
+
 		$result = wp_remote_post( $url, $options );
 		update_option( $log, $result );
 
