@@ -38,7 +38,7 @@ class Sct_Settings_Page extends Sct_Base {
 			__( 'Send Chat Tools', 'send-chat-tools' ),
 			__( 'Send Chat Tools', 'send-chat-tools' ),
 			'administrator',
-			$this->return_option_group(),
+			self::PLUGIN_SLUG,
 			[ $this, 'settings_page' ],
 		);
 	}
