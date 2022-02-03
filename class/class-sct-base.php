@@ -132,7 +132,7 @@ class Sct_Base {
 	 * @param string $id ID(Comment/Update).
 	 * @param string $tools Use chat tools prefix.
 	 */
-	protected function sending( array $options, string $id, string $tools ) {
+	protected function send_tools( array $options, string $id, string $tools ) {
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
 		if ( 'slack' === $tools ) {
