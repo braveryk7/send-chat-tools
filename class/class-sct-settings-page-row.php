@@ -278,29 +278,29 @@ class Sct_Settings_Page_Row {
 				$type = 'Update';
 			}
 
-			if ( '1000' === $value->states ) {
-				$states_class   = '--alert';
-				$states_message = 'Could not communicate.';
-			} elseif ( '1001' === $value->states ) {
-				$states_class   = '--alert';
-				$states_message = 'Webhook URL/API Token not entered.';
-			} elseif ( '1002' === $value->states ) {
-				$states_class   = '--alert';
-				$states_message = 'RoomID not entered.';
-			} elseif ( '200' !== $value->states && '204' !== $value->states ) {
-				$states_class   = '--alert';
-				$states_message = 'Could not communicate.';
+			if ( '1000' === $value->status ) {
+				$status_class   = '--alert';
+				$status_message = 'Could not communicate.';
+			} elseif ( '1001' === $value->status ) {
+				$status_class   = '--alert';
+				$status_message = 'Webhook URL/API Token not entered.';
+			} elseif ( '1002' === $value->status ) {
+				$status_class   = '--alert';
+				$status_message = 'RoomID not entered.';
+			} elseif ( '200' !== $value->status && '204' !== $value->status ) {
+				$status_class   = '--alert';
+				$status_message = 'Could not communicate.';
 			} else {
-				$states_class   = '--ok';
-				$states_message = 'Respons OK!';
+				$status_class   = '--ok';
+				$status_message = 'Respons OK!';
 			}
 			?>
-				<p class="log-row<?php echo esc_attr( $states_class ); ?>" >
+				<p class="log-row<?php echo esc_attr( $status_class ); ?>" >
 					[ <?php echo esc_html( $value->send_date ); ?> ]
 					[ <?php echo esc_html( $tool ); ?> ]
 					[ <?php echo esc_html( $type ); ?> ]
-					[ <?php echo esc_html( $value->states ); ?> ] 
-					<?php echo esc_html( $states_message ); ?>
+					[ <?php echo esc_html( $value->status ); ?> ] 
+					<?php echo esc_html( $status_message ); ?>
 				</p>
 			<?php
 		}

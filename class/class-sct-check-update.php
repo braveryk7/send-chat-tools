@@ -64,10 +64,10 @@ class Sct_Check_Update {
 	 * WordPress Core.
 	 */
 	private function check_core() {
-		$get_core_states = get_option( '_site_transient_update_core' );
+		$get_core_status = get_option( '_site_transient_update_core' );
 		$return          = [];
-		if ( ! empty( $get_core_states ) && 'upgrade' === $get_core_states->updates[0]->response ) {
-			$update_core    = $get_core_states->updates[0];
+		if ( ! empty( $get_core_status ) && 'upgrade' === $get_core_status->updates[0]->response ) {
+			$update_core    = $get_core_status->updates[0];
 			$return['core'] = [
 				'name'            => 'WordPress Core',
 				'attribute'       => 'core',
@@ -82,10 +82,10 @@ class Sct_Check_Update {
 	 * Themes.
 	 */
 	private function check_themes() {
-		$get_theme_states = get_option( '_site_transient_update_themes' );
+		$get_theme_status = get_option( '_site_transient_update_themes' );
 		$return           = [];
-		if ( ! empty( $get_theme_states->response ) ) {
-			$update_themes = $get_theme_states->response;
+		if ( ! empty( $get_theme_status->response ) ) {
+			$update_themes = $get_theme_status->response;
 			foreach ( $update_themes as $key => $value ) {
 				$theme_date                  = wp_get_theme( $key );
 				$return[ $theme_date->name ] = [
@@ -131,10 +131,10 @@ class Sct_Check_Update {
 	 * Plugins.
 	 */
 	private function check_plugins() {
-		$get_plugin_states = get_option( '_site_transient_update_plugins' );
+		$get_plugin_status = get_option( '_site_transient_update_plugins' );
 		$return            = [];
-		if ( ! empty( $get_plugin_states->response ) ) {
-			$update_plugins = $get_plugin_states->response;
+		if ( ! empty( $get_plugin_status->response ) ) {
+			$update_plugins = $get_plugin_status->response;
 			foreach ( $update_plugins as $key ) {
 				$path                 = WP_PLUGIN_DIR . '/' . $key->plugin;
 				$plugin_date          = get_file_data(
