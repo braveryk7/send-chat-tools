@@ -48,6 +48,7 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-create-content.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-activate.php';
 
 	global $wpdb;
 
@@ -82,6 +83,11 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	 * Settings page.
 	 */
 	new Sct_Settings_Page();
+
+	/**
+	 * Plugin activate.
+	 */
+	new Sct_Activate();
 
 	/**
 	 * Delete wp_options column.
