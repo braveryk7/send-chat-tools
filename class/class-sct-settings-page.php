@@ -66,7 +66,7 @@ class Sct_Settings_Page extends Sct_Base {
 	 * @param string $hook_shuffix WordPress hook_shuffix.
 	 */
 	public function add_scripts( string $hook_shuffix ) {
-		if ( 'settings_page_' . $this->return_option_group() !== $hook_shuffix ) {
+		if ( 'settings_page_' . self::PLUGIN_SLUG !== $hook_shuffix ) {
 			return;
 		}
 
