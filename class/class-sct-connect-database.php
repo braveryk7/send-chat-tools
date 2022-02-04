@@ -54,16 +54,6 @@ class Sct_Connect_Database extends Sct_Base {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		dbDelta( $sql );
-
-		/* Create columns from wp_options table */
-		$options = self::OPTIONS_COLUMN;
-		foreach ( $options as $key ) {
-			if ( $this->add_prefx( 'iv' ) === $key ) {
-				add_option( $key, Sct_Encryption::make_vector() );
-			} else {
-				add_option( $key, false );
-			}
-		}
 	}
 
 	/**
