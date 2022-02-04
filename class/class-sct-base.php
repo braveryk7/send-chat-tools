@@ -18,11 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Send Chat Tools base class.
  */
 class Sct_Base {
-	protected const PREFIX      = 'sct';
-	protected const PLUGIN_SLUG = 'send-chat-tools';
-	protected const PLUGIN_NAME = 'Send Chat Tools';
-	protected const PLUGIN_FILE = self::PLUGIN_SLUG . '.php';
-	protected const DB_VERSION  = '1.0';
+	protected const PREFIX              = 'sct';
+	protected const PLUGIN_SLUG         = 'send-chat-tools';
+	protected const PLUGIN_NAME         = 'Send Chat Tools';
+	protected const PLUGIN_FILE         = self::PLUGIN_SLUG . '.php';
+	protected const DB_VERSION          = '1.0';
+	protected const OPTIONS_COLUMN_NAME = 'options';
 
 	protected const TABLE_NAME = self::PREFIX;
 
@@ -126,6 +127,22 @@ class Sct_Base {
 	}
 
 	/**
+	 * Get sct_options.
+	 */
+	protected static function get_sct_options(): string {
+		return get_option( $this->add_prefix( self::OPTIONS_COLUMN_NAME ) );
+	}
+
+	/**
+	 * Set sct_options.
+	 *
+	 * @param array $sct_options sct_options column data.
+	 */
+	protected static function set_sct_options( array $sct_options ): void {
+		update_option( $this->add_prefix( self::OPTIONS_COLUMN_NAME ), $sct_options );
+	}
+
+	/**
 	 * Send Slack.
 	 *
 	 * @param array  $options API options.
@@ -135,23 +152,21 @@ class Sct_Base {
 	protected function send_tools( array $options, string $id, string $tools ) {
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
+		$sct_options = $this->get_sct_options();
+
 		switch ( $tools ) {
 			case 'slack':
-				$url = Sct_Encryption::decrypt( get_option( $this->add_prefix( 'slack_webhook_url' ) ) );
-				$log = $this->add_prefix( 'slack_log' );
-				break;
 			case 'discord':
-				$url = Sct_Encryption::decrypt( get_option( $this->add_prefix( 'discord_webhook_url' ) ) );
-				$log = $this->add_prefix( 'discord_log' );
+				$url = Sct_Encryption::decrypt( $sct_option[ $tools ]['webhook_url'] );
 				break;
 			case 'chatwork':
-				$url = 'https://api.chatwork.com/v2/rooms/' . Sct_Encryption::decrypt( get_option( $this->add_prefix( 'chatwork_room_id' ) ) ) . '/messages';
-				$log = $this->add_prefix( 'chatwork_log' );
+				$url = 'https://api.chatwork.com/v2/rooms/' . Sct_Encryption::decrypt( $sct_option[ $tools ]['chatwork_room_id'] ) . '/messages';
 				break;
 		}
 
-		$result = wp_remote_post( $url, $options );
-		update_option( $log, $result );
+		$result                       = wp_remote_post( $url, $options );
+		$sct_options[ $tools ]['log'] = $result;
+		$this->set_sct_options( $sct_options );
 
 		if ( ! isset( $result->errors ) ) {
 			$status_code = $result['response']['code'];

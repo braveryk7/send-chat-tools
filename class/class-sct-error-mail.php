@@ -50,8 +50,6 @@ class Sct_Error_Mail extends Sct_Base {
 	public function make_contents() {
 		global $wpdb;
 		$comment          = get_comment( $this->comment_id );
-		$send_author      = get_option( $this->add_prefix( 'send_slack_author' ) );
-		$url              = get_option( $this->add_prefix( 'slack_webhook_url' ) );
 		$site_name        = get_bloginfo( 'name' );
 		$site_url         = get_bloginfo( 'url' );
 		$comment_approved = $comment->comment_approved;
