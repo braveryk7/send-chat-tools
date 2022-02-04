@@ -1,13 +1,30 @@
 export type apiType = {
-	sct_use_slack?: boolean, // eslint-disable-line
-	sct_send_slack_author?: boolean, // eslint-disable-line
-	sct_send_slack_update?: boolean, // eslint-disable-line
-	sct_use_discord?: boolean, // eslint-disable-line
-	sct_send_discord_author?: boolean, // eslint-disable-line
-	sct_send_discord_update?: boolean, // eslint-disable-line
-	sct_use_chatwork?: boolean, // eslint-disable-line
-	sct_send_chatwork_author?: boolean, // eslint-disable-line
-	sct_send_chatwork_update?: boolean, // eslint-disable-line
+	sct_options: {
+		slack: ChatToolsBaseType & ChatToolsType1Type;
+		discord: ChatToolsBaseType & ChatToolsType1Type;
+		chatwork: ChatToolsBaseType & ChatworkType;
+		db_version: string;
+		iv: string;
+		user_id: string;
+		cron_time: string;
+	};
+};
+
+type ChatToolsBaseType = {
+	use: boolean;
+	send_author: boolean;
+	send_update: boolean;
+	log: {};
+};
+
+// Slack, Discord
+type ChatToolsType1Type = {
+	webhook_url: string;
+};
+
+type ChatworkType = {
+	api_token: string;
+	room_id: string;
 };
 
 export type WPApiType< T > = {
