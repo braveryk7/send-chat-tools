@@ -134,6 +134,15 @@ class Sct_Base {
 	}
 
 	/**
+	 * Set sct_options.
+	 *
+	 * @param array $sct_options sct_options column data.
+	 */
+	protected static function set_sct_options( array $sct_options ): void {
+		update_option( $this->add_prefix( self::OPTIONS_SOLUMN_NAME ), $sct_options );
+	}
+
+	/**
 	 * Send Slack.
 	 *
 	 * @param array  $options API options.
