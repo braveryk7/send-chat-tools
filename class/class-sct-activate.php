@@ -46,7 +46,8 @@ class Sct_Activate extends Sct_Base {
 			'log'         => '',
 		];
 
-		$iv = Sct_Encryption::make_vector();
+		$encryption = new Sct_Encryption();
+		$iv         = $encryption->make_vector();
 
 		$options = [
 			'slack'      => [ $chat_tools_value ],
@@ -139,6 +140,24 @@ class Sct_Activate extends Sct_Base {
 				}
 			}
 			update_option( $this->add_prefix( 'options' ), $sct_options );
+		}
+
+		/**
+		 * If sct table exists.
+		 */
+		if ( ! get_option( $this->add_prefix( 'logs' ) ) ) {
+			global $wpdb;
+			$get_table = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->return_table_name() ) ); // db call ok; no-cache ok.
+
+			if ( $get_table ) {
+				$result = $wpdb->get_results( 'SELECT * FROM wp_sct' ); // phpcs:ignore
+
+				foreach ( $result as $key => $value ) {
+					unset( $result[ $key ]->id );
+				}
+
+				update_option( $this->add_prefix( 'logs' ), $result );
+			}
 		}
 	}
 }

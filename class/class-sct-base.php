@@ -129,7 +129,7 @@ class Sct_Base {
 	/**
 	 * Get sct_options.
 	 */
-	protected static function get_sct_options(): string {
+	protected function get_sct_options(): array {
 		return get_option( $this->add_prefix( self::OPTIONS_COLUMN_NAME ) );
 	}
 
@@ -138,7 +138,7 @@ class Sct_Base {
 	 *
 	 * @param array $sct_options sct_options column data.
 	 */
-	protected static function set_sct_options( array $sct_options ): void {
+	protected function set_sct_options( array $sct_options ): void {
 		update_option( $this->add_prefix( self::OPTIONS_COLUMN_NAME ), $sct_options );
 	}
 
@@ -153,14 +153,15 @@ class Sct_Base {
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
 		$sct_options = $this->get_sct_options();
+		$encryption  = new Sct_Encryption();
 
 		switch ( $tools ) {
 			case 'slack':
 			case 'discord':
-				$url = Sct_Encryption::decrypt( $sct_option[ $tools ]['webhook_url'] );
+				$url = $encryption->decrypt( $sct_options[ $tools ]['webhook_url'] );
 				break;
 			case 'chatwork':
-				$url = 'https://api.chatwork.com/v2/rooms/' . Sct_Encryption::decrypt( $sct_option[ $tools ]['chatwork_room_id'] ) . '/messages';
+				$url = 'https://api.chatwork.com/v2/rooms/' . $encryption->decrypt( $sct_options[ $tools ]['room_id'] ) . '/messages';
 				break;
 		}
 
