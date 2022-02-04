@@ -129,7 +129,7 @@ class Sct_Base {
 	/**
 	 * Get sct_options.
 	 */
-	protected function get_sct_options(): string {
+	protected static function get_sct_options(): string {
 		return get_option( $this->add_prefix( self::OPTIONS_COLUMN_NAME ) );
 	}
 
