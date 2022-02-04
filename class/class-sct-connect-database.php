@@ -35,42 +35,6 @@ class Sct_Connect_Database extends Sct_Base {
 	}
 
 	/**
-	 * Insert log.
-	 *
-	 * @param int    $status_code Status code.
-	 * @param string $tool Use tool number.
-	 * @param string $type Type.
-	 */
-	public function insert_log( int $status_code, string $tool, string $type ) {
-		global $wpdb;
-
-		$wpdb->insert(
-			$this->return_table_name(),
-			[
-				'states'    => $status_code,
-				'tool'      => $tool,
-				'type'      => $type,
-				'send_date' => current_time( 'mysql' ),
-			]
-		); // db call ok.
-	}
-
-	/**
-	 * Get log data.
-	 *
-	 * @param int $limit Get column limit.
-	 * @var array
-	 */
-	public function get_log( int $limit = 100 ): array {
-		global $wpdb;
-		$result = $wpdb->get_results( // phpcs:ignore
-			$wpdb->prepare( "SELECT * FROM $this->table_name ORDER BY send_date DESC LIMIT %d", $limit ) // phpcs:ignore
-		); // phpcs:ignore
-
-		return $result;
-	}
-
-	/**
 	 * Delete wp_option.
 	 */
 	public static function delete_db() {
