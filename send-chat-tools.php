@@ -44,7 +44,7 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-encryption.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-connect-database.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-settings-page.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-admin-page.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-create-content.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
@@ -80,9 +80,9 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	new Sct_Check_Update();
 
 	/**
-	 * Settings page.
+	 * Admin page.
 	 */
-	new Sct_Settings_Page();
+	new Sct_Admin_Page();
 
 	/**
 	 * Plugin activate.
