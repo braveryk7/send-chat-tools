@@ -127,6 +127,13 @@ class Sct_Base {
 	}
 
 	/**
+	 * Get sct_options.
+	 */
+	protected function get_sct_options(): string {
+		return get_option( $this->add_prefix( self::OPTIONS_COLUMN_NAME ) );
+	}
+
+	/**
 	 * Send Slack.
 	 *
 	 * @param array  $options API options.
