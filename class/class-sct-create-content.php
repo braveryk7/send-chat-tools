@@ -43,7 +43,7 @@ class Sct_Create_Content extends Sct_Base {
 	public function controller( int $comment_id = 0, string $type = 'comment', array $check_date = [] ) {
 		global $wpdb;
 
-		$sct_options = get_option( $this->add_prefix( 'options' ) );
+		$sct_options = $this->get_sct_options();
 
 		if ( 'comment' === $type ) {
 			$comment = $this->get_comment_data( $comment_id );
@@ -138,7 +138,7 @@ class Sct_Create_Content extends Sct_Base {
 			$body = [ 'content' => $message ];
 
 		} elseif ( 'chatwork' === $tool ) {
-			$sct_options  = get_option( $this->add_prefix( 'options' ) );
+			$sct_options  = $this->get_sct_options();
 			$content_type = 'X-ChatWorkToken: ' . Sct_Encryption::decrypt( $sct_options['chatwork']['api_token'] );
 
 			if ( 'comment' === $type ) {
