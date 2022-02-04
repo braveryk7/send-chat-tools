@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Check Update WordPress core, theme, and plugin.
  */
-class Sct_Logger {
+class Sct_Logger extends Sct_Base {
 	/**
 	 * Create log format.
 	 *
@@ -49,8 +49,19 @@ class Sct_Logger {
 		}
 
 		if ( isset( $tool ) && isset( $type ) ) {
-			$db_class = new Sct_Connect_Database();
-			$db_class->insert_log( $status_code, $tool, $type );
+			$sct_logs = get_option( $this->add_prefix( 'logs' ) );
+
+			$create_log_data = [
+				'status'    => $status_code,
+				'tool'      => $tool,
+				'type'      => $type,
+				'send_date' => current_time( 'mysql' ),
+			];
+
+			if ( array_key_exists( 999, $sct_logs ) ) {
+				unset( $sct_logs[0] );
+			}
+			update_option( $this->add_prefix( 'logs' ), array_merge( $sct_logs, [ $create_log_data ] ) );
 		}
 	}
 }
