@@ -10,7 +10,7 @@ export type apiType = {
 	};
 };
 
-type ChatToolsBaseType = {
+export type ChatToolsBaseType = {
 	use: boolean;
 	send_author: boolean;
 	send_update: boolean;
@@ -18,11 +18,11 @@ type ChatToolsBaseType = {
 };
 
 // Slack, Discord
-type ChatToolsType1Type = {
+export type ChatToolsType1Type = {
 	webhook_url: string;
 };
 
-type ChatworkType = {
+export type ChatworkType = {
 	api_token: string;
 	room_id: string;
 };
