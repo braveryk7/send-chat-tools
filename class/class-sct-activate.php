@@ -46,7 +46,8 @@ class Sct_Activate extends Sct_Base {
 			'log'         => '',
 		];
 
-		$iv = Sct_Encryption::make_vector();
+		$encryption = new Sct_Encryption();
+		$iv         = $encryption->make_vector();
 
 		$options = [
 			'slack'      => [ $chat_tools_value ],
