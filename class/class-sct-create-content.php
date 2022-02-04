@@ -46,14 +46,15 @@ class Sct_Create_Content extends Sct_Base {
 		$sct_options = $this->get_sct_options();
 
 		if ( 'comment' === $type ) {
-			$comment = $this->get_comment_data( $comment_id );
+			$comment    = $this->get_comment_data( $comment_id );
+			$encryption = new Sct_Encryption();
 
 			$api = [
-				'slack'    => Sct_Encryption::decrypt( $sct_options['slack']['webhook_url'] ),
-				'discord'  => Sct_Encryption::decrypt( $sct_options['discord']['webhook_url'] ),
+				'slack'    => $encryption->decrypt( $sct_options['slack']['webhook_url'] ),
+				'discord'  => $encryption->decrypt( $sct_options['discord']['webhook_url'] ),
 				'chatwork' => [
-					'api_token' => Sct_Encryption::decrypt( $sct_options['chatwork']['api_token'] ),
-					'room_id'   => Sct_Encryption::decrypt( $sct_options['chatwork']['room_id'] ),
+					'api_token' => $encryption->decrypt( $sct_options['chatwork']['api_token'] ),
+					'room_id'   => $encryption->decrypt( $sct_options['chatwork']['room_id'] ),
 				],
 			];
 
@@ -139,7 +140,8 @@ class Sct_Create_Content extends Sct_Base {
 
 		} elseif ( 'chatwork' === $tool ) {
 			$sct_options  = $this->get_sct_options();
-			$content_type = 'X-ChatWorkToken: ' . Sct_Encryption::decrypt( $sct_options['chatwork']['api_token'] );
+			$encryption   = new Sct_Encryption();
+			$content_type = 'X-ChatWorkToken: ' . $encryption->decrypt( $sct_options['chatwork']['api_token'] );
 
 			if ( 'comment' === $type ) {
 				$message = $this->create_comment_message( $comment, $tool );
