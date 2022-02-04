@@ -152,23 +152,21 @@ class Sct_Base {
 	protected function send_tools( array $options, string $id, string $tools ) {
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
+		$sct_options = $this->get_sct_options();
+
 		switch ( $tools ) {
 			case 'slack':
-				$url = Sct_Encryption::decrypt( get_option( $this->add_prefix( 'slack_webhook_url' ) ) );
-				$log = $this->add_prefix( 'slack_log' );
-				break;
 			case 'discord':
-				$url = Sct_Encryption::decrypt( get_option( $this->add_prefix( 'discord_webhook_url' ) ) );
-				$log = $this->add_prefix( 'discord_log' );
+				$url = Sct_Encryption::decrypt( $sct_option[ $tools ]['webhook_url'] );
 				break;
 			case 'chatwork':
-				$url = 'https://api.chatwork.com/v2/rooms/' . Sct_Encryption::decrypt( get_option( $this->add_prefix( 'chatwork_room_id' ) ) ) . '/messages';
-				$log = $this->add_prefix( 'chatwork_log' );
+				$url = 'https://api.chatwork.com/v2/rooms/' . Sct_Encryption::decrypt( $sct_option[ $tools ]['chatwork_room_id'] ) . '/messages';
 				break;
 		}
 
-		$result = wp_remote_post( $url, $options );
-		update_option( $log, $result );
+		$result                       = wp_remote_post( $url, $options );
+		$sct_options[ $tools ]['log'] = $result;
+		$this->set_sct_options( $sct_options );
 
 		if ( ! isset( $result->errors ) ) {
 			$status_code = $result['response']['code'];
