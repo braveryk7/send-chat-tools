@@ -31,7 +31,9 @@ class Sct_Check_Update extends Sct_Base {
 		add_action( $this->add_prefix( 'update_check' ), [ $this, 'controller' ] );
 		if ( ! wp_next_scheduled( $this->add_prefix( 'update_check' ) ) ) {
 			wp_schedule_event( $cron_time, 'daily', $this->add_prefix( 'update_check' ) );
-			update_option( $this->add_prefix( 'cron_time' ), '18:00' );
+			$sct_options              = $this->get_sct_options;
+			$sct_options['cron_time'] = '18:00';
+			$this->set_sct_options( $sct_options );
 		}
 	}
 

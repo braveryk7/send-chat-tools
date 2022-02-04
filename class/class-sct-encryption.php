@@ -40,14 +40,16 @@ class Sct_Encryption extends Sct_Base {
 	 */
 	public static function encrypt( string $value ): string {
 		$wpdb;
-		if ( false === get_option( $this->add_prefix( 'iv' ) ) ) {
-			$new_iv = self::make_vector();
-			update_option( $this->add_prefix( 'iv' ), $new_iv );
-		} else {
-			$new_iv = get_option( $this->add_prefix( 'iv' ) );
+		$sct_options = self::get_sct_options();
+
+		if ( ! $sct_options['iv'] ) {
+			$sct_options['iv'] = self::make_vector();
+			$this->set_sct_options( $sct_options );
 		}
-		update_option( $this->add_prefix( 'use_user_id' ), wp_get_current_user()->ID );
-		return openssl_encrypt( $value, self::METHOD, self::get_user_registered(), 0, hex2bin( $new_iv ) );
+
+		$sct_options['user_id'] = wp_get_current_user()->ID;
+		$this->set_sct_options( $sct_options );
+		return openssl_encrypt( $value, self::METHOD, self::get_user_registered(), 0, hex2bin( $sct_options['iv'] ) );
 	}
 
 	/**
@@ -57,9 +59,8 @@ class Sct_Encryption extends Sct_Base {
 	 */
 	public static function decrypt( string $value ): string {
 		$wpdb;
-		$get_user_id = get_option( self::add_prefix( 'use_user_id' ) );
-		$key         = get_userdata( $get_user_id )->user_registered;
-		$iv          = get_option( self::add_prefix( 'iv' ) );
-		return openssl_decrypt( $value, self::ENCRYPT_METHOD, $key, 0, hex2bin( $iv ) );
+		$sct_options = get_option( self::add_prefix( 'options' ) );
+		$key         = get_userdata( $sct_options['user_id'] )->user_registered;
+		return openssl_decrypt( $value, self::ENCRYPT_METHOD, $key, 0, hex2bin( $sct_options['iv'] ) );
 	}
 }
