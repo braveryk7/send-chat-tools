@@ -38,18 +38,18 @@ class Sct_Encryption extends Sct_Base {
 	 *
 	 * @param string $value to encrypt.
 	 */
-	public static function encrypt( string $value ): string {
+	public function encrypt( string $value ): string {
 		$wpdb;
-		$sct_options = self::get_sct_options();
+		$sct_options = $this->get_sct_options();
 
 		if ( ! $sct_options['iv'] ) {
-			$sct_options['iv'] = self::make_vector();
+			$sct_options['iv'] = $this->make_vector();
 			$this->set_sct_options( $sct_options );
 		}
 
 		$sct_options['user_id'] = wp_get_current_user()->ID;
 		$this->set_sct_options( $sct_options );
-		return openssl_encrypt( $value, self::METHOD, self::get_user_registered(), 0, hex2bin( $sct_options['iv'] ) );
+		return openssl_encrypt( $value, self::METHOD, $this->get_user_registered(), 0, hex2bin( $sct_options['iv'] ) );
 	}
 
 	/**
@@ -57,9 +57,9 @@ class Sct_Encryption extends Sct_Base {
 	 *
 	 * @param string $value to decrypt.
 	 */
-	public static function decrypt( string $value ): string {
+	public function decrypt( string $value ): string {
 		$wpdb;
-		$sct_options = get_option( self::add_prefix( 'options' ) );
+		$sct_options = $this->get_sct_options();
 		$key         = get_userdata( $sct_options['user_id'] )->user_registered;
 		return openssl_decrypt( $value, self::ENCRYPT_METHOD, $key, 0, hex2bin( $sct_options['iv'] ) );
 	}
