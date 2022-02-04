@@ -150,7 +150,7 @@ class Sct_Activate extends Sct_Base {
 			$get_table = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->return_table_name() ) ); // db call ok; no-cache ok.
 
 			if ( $get_table ) {
-				$result = $wpdb->get_results( 'SELECT * FROM wp_sct' );
+				$result = $wpdb->get_results( 'SELECT * FROM wp_sct' ); // phpcs:ignore
 
 				foreach ( $result as $key => $value ) {
 					unset( $result[ $key ]->id );
