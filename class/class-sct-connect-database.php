@@ -32,28 +32,6 @@ class Sct_Connect_Database extends Sct_Base {
 	public function search_table() {
 		global $wpdb;
 		$get_table = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->return_table_name() ) ); // db call ok; no-cache ok.
-		if ( null === $get_table ) {
-			$this->create_table();
-		}
-	}
-
-	/**
-	 * Create table.
-	 */
-	private function create_table() {
-		global $wpdb;
-		$charset_collate = $wpdb->get_charset_collate();
-
-		$sql = "CREATE TABLE $this->table_name (
-			id int unique NOT NULL AUTO_INCREMENT,
-			states smallint(4) UNSIGNED NOT NULL,
-			tool smallint(1) UNSIGNED NOT NULL,
-			type varchar(255) NOT NULL,
-			send_date datetime
-		) $charset_collate;";
-
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-		dbDelta( $sql );
 	}
 
 	/**
