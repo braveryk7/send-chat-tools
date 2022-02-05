@@ -94,6 +94,27 @@ class Sct_Admin_Page extends Sct_Base {
 	public function register() {
 		register_setting(
 			$this->return_option_group(),
+			$this->add_prefix( 'options' ),
+			[
+				'show_in_rest' => [
+					'schema' => [
+						'type'       => 'object',
+						'properties' => [
+							'slack'      => [],
+							'discord'    => [],
+							'chatwork'   => [],
+							'db_version' => [],
+							'iv'         => [],
+							'user_id'    => [],
+							'cron_time'  => [],
+						],
+					],
+				],
+			],
+		);
+
+		register_setting(
+			$this->return_option_group(),
 			$this->add_prefix( 'use_slack' ),
 			[
 				'type'         => 'boolean',

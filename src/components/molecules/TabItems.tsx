@@ -1,44 +1,51 @@
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-import { itemKey } from '../../types/ComponentsType';
+import { itemKeyType, optionNameType } from '../../types/ComponentsType';
+import { TextControlForm } from '../atoms/TextControlForm';
 import { Toggle } from '../atoms/Toggle';
 
 export const Items = ( props: any ) => {
 	const { id, title } = props;
 	const [ basicFlag, setBasicFlag ] = useState( false );
-	const [ itemKeys, setItemKeys ] = useState< itemKey >( 'sct_use_slack' );
-	const [ authorItemKey, setAuthorItemKey ] = useState< itemKey >(
-		'sct_send_slack_author'
-	);
-	const [ updateItemKey, setUpdateItemKey ] = useState< itemKey >(
-		'sct_send_slack_update'
-	);
+	const [ itemKey, setItemKey ] = useState< itemKeyType | null >( null );
 	const [ itemLabel, setItemLabel ] = useState( '' );
+	const [
+		apiOptionName,
+		setApiOptionName,
+	] = useState< optionNameType | null >( null );
+	const [ textLabel, setTextLabel ] = useState( '' );
+	const [
+		chatworkRoomId,
+		setChatworkRoomId,
+	] = useState< optionNameType | null >( null );
+	const [ chatworkText, setChatworkText ] = useState( '' );
 
 	useEffect( () => {
 		switch ( id ) {
 			case 'slack':
-				setItemKeys( 'sct_use_slack' );
-				setAuthorItemKey( 'sct_send_slack_author' );
-				setUpdateItemKey( 'sct_send_slack_update' );
+				setItemKey( 'slack' );
 				setItemLabel( __( 'Slack通知を使用する', 'send-chat-tools' ) );
+				setApiOptionName( 'webhook_url' );
+				setTextLabel( __( 'Slack Webhook URL', 'send-chat-tools' ) );
 				break;
 			case 'discord':
-				setItemKeys( 'sct_use_discord' );
-				setAuthorItemKey( 'sct_send_discord_author' );
-				setUpdateItemKey( 'sct_send_discord_update' );
+				setItemKey( 'discord' );
 				setItemLabel(
 					__( 'Discord通知を使用する', 'send-chat-tools' )
 				);
+				setApiOptionName( 'webhook_url' );
+				setTextLabel( __( 'Discord Webhook URL', 'send-chat-tools' ) );
 				break;
 			case 'chatwork':
-				setItemKeys( 'sct_use_chatwork' );
-				setAuthorItemKey( 'sct_send_chatwork_author' );
-				setUpdateItemKey( 'sct_send_chatwork_update' );
+				setItemKey( 'chatwork' );
 				setItemLabel(
 					__( 'Chatwork通知を使用する', 'send-chat-tools' )
 				);
+				setApiOptionName( 'api_token' );
+				setChatworkRoomId( 'room_id' );
+				setTextLabel( __( 'Chatwork APIキー', 'send-chat-tools' ) );
+				setChatworkText( __( 'Chatwork RoomID', 'send-chat-tools' ) );
 				break;
 		}
 		setBasicFlag( id !== 'basic' ? true : false );
@@ -49,23 +56,45 @@ export const Items = ( props: any ) => {
 			<h2>
 				{ title } { __( 'settings', 'send-chat-tools' ) }
 			</h2>
-			<Toggle itemKey={ itemKeys } label={ itemLabel } />
-			{ basicFlag && (
+			{ itemKey && (
 				<Toggle
-					itemKey={ authorItemKey }
+					itemKey={ itemKey }
+					optionName="use"
+					label={ itemLabel }
+				/>
+			) }
+			{ basicFlag && itemKey && (
+				<Toggle
+					itemKey={ itemKey }
+					optionName="send_author"
 					label={ __(
 						'自分自身のコメントを送信しない',
 						'send-chat-tools'
 					) }
 				/>
 			) }
-			{ basicFlag && (
+			{ basicFlag && itemKey && (
 				<Toggle
-					itemKey={ updateItemKey }
+					itemKey={ itemKey }
+					optionName="send_update"
 					label={ __(
 						'アップデート通知を使用する',
 						'send-chat-tools'
 					) }
+				/>
+			) }
+			{ basicFlag && itemKey && apiOptionName && (
+				<TextControlForm
+					itemKey={ itemKey }
+					optionName={ apiOptionName }
+					label={ textLabel }
+				/>
+			) }
+			{ basicFlag && itemKey && chatworkRoomId && (
+				<TextControlForm
+					itemKey={ itemKey }
+					optionName={ chatworkRoomId }
+					label={ chatworkText }
 				/>
 			) }
 		</div>

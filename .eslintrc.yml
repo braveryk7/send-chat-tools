@@ -8,6 +8,12 @@ extends:
 ignorePatterns:
   - jest.config.js
   - webpack.config.js
+overrides: 
+-
+  files: 
+  - "src/types/*.ts"
+  rules: 
+    camelcase: "off"
 parser: "@typescript-eslint/parser"
 parserOptions:
   project: "./tsconfig.json"
