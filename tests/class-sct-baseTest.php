@@ -9,4 +9,18 @@ require_once './class/class-sct-base.php';
  * Test: Sct_Base
  */
 class Sct_BaseTest extends PHPUnit\Framework\TestCase {
+	/**
+	 * This test class instance.
+	 *
+	 * @var object $instance instance.
+	 */
+	private $instance;
+
+	/**
+	 * SetUp.
+	 * Create instance.
+	 */
+	protected function setUp() :void {
+		$this->instance = new Sct_Base();
+	}
 }
