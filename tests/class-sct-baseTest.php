@@ -23,4 +23,11 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 	protected function setUp() :void {
 		$this->instance = new Sct_Base();
 	}
+
+	/**
+	 * TEST: add_prefix()
+	 */
+	public function test_add_prefix() {
+		$this->assertSame( 'sct_options', $this->instance->add_prefix( 'options' ) );
+	}
 }
