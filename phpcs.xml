@@ -4,6 +4,17 @@
         <exclude name="Generic.Arrays.DisallowShortArraySyntax" />
     </rule>
 
+    <!-- Start: Exclude tests directory -->
+    <!-- Class name rule -->
+    <rule ref="WordPress.Files.FileName.NotHyphenatedLowercase">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+    <!-- File doc comment rule -->
+    <rule ref="Squiz.Commenting.FileComment.Missing">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+    <!-- END: Exclude tests directory -->
+
     <!-- Options. -->
     <arg name="extensions" value="php" />
     <arg name="colors" />
