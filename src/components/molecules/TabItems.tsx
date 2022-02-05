@@ -1,7 +1,8 @@
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-import { itemKeyType } from '../../types/ComponentsType';
+import { itemKeyType, optionNameType } from '../../types/ComponentsType';
+import { TextControll } from '../atoms/TextControl';
 import { Toggle } from '../atoms/Toggle';
 
 export const Items = ( props: any ) => {
@@ -9,24 +10,42 @@ export const Items = ( props: any ) => {
 	const [ basicFlag, setBasicFlag ] = useState( false );
 	const [ itemKey, setItemKey ] = useState< itemKeyType | null >( null );
 	const [ itemLabel, setItemLabel ] = useState( '' );
+	const [
+		apiOptionName,
+		setApiOptionName,
+	] = useState< optionNameType | null >( null );
+	const [ textLabel, setTextLabel ] = useState( '' );
+	const [
+		chatworkRoomId,
+		setChatworkRoomId,
+	] = useState< optionNameType | null >( null );
+	const [ chatworkText, setChatworkText ] = useState( '' );
 
 	useEffect( () => {
 		switch ( id ) {
 			case 'slack':
 				setItemKey( 'slack' );
 				setItemLabel( __( 'Slack通知を使用する', 'send-chat-tools' ) );
+				setApiOptionName( 'webhook_url' );
+				setTextLabel( __( 'Slack Webhook URL', 'send-chat-tools' ) );
 				break;
 			case 'discord':
 				setItemKey( 'discord' );
 				setItemLabel(
 					__( 'Discord通知を使用する', 'send-chat-tools' )
 				);
+				setApiOptionName( 'webhook_url' );
+				setTextLabel( __( 'Discord Webhook URL', 'send-chat-tools' ) );
 				break;
 			case 'chatwork':
 				setItemKey( 'chatwork' );
 				setItemLabel(
 					__( 'Chatwork通知を使用する', 'send-chat-tools' )
 				);
+				setApiOptionName( 'api_token' );
+				setChatworkRoomId( 'room_id' );
+				setTextLabel( __( 'Chatwork APIキー', 'send-chat-tools' ) );
+				setChatworkText( __( 'Chatwork RoomID', 'send-chat-tools' ) );
 				break;
 		}
 		setBasicFlag( id !== 'basic' ? true : false );
@@ -62,6 +81,20 @@ export const Items = ( props: any ) => {
 						'アップデート通知を使用する',
 						'send-chat-tools'
 					) }
+				/>
+			) }
+			{ basicFlag && itemKey && apiOptionName && (
+				<TextControll
+					itemKey={ itemKey }
+					optionName={ apiOptionName }
+					label={ textLabel }
+				/>
+			) }
+			{ basicFlag && itemKey && chatworkRoomId && (
+				<TextControll
+					itemKey={ itemKey }
+					optionName={ chatworkRoomId }
+					label={ chatworkText }
 				/>
 			) }
 		</div>
