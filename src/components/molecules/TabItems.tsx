@@ -2,7 +2,7 @@ import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 import { itemKeyType, optionNameType } from '../../types/ComponentsType';
-import { TextControll } from '../atoms/TextControl';
+import { TextControlForm } from '../atoms/TextControlForm';
 import { Toggle } from '../atoms/Toggle';
 
 export const Items = ( props: any ) => {
@@ -84,14 +84,14 @@ export const Items = ( props: any ) => {
 				/>
 			) }
 			{ basicFlag && itemKey && apiOptionName && (
-				<TextControll
+				<TextControlForm
 					itemKey={ itemKey }
 					optionName={ apiOptionName }
 					label={ textLabel }
 				/>
 			) }
 			{ basicFlag && itemKey && chatworkRoomId && (
-				<TextControll
+				<TextControlForm
 					itemKey={ itemKey }
 					optionName={ chatworkRoomId }
 					label={ chatworkText }
