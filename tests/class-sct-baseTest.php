@@ -43,4 +43,17 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 			$method->invoke( $this->instance, 'send-chat-tools' ),
 		);
 	}
+
+	/**
+	 * TEST: return_plugin_dir()
+	 */
+	public function test_return_plugin_dir() {
+		$method = new ReflectionMethod( $this->instance, 'return_plugin_dir' );
+		$method->setAccessible( true );
+
+		$this->assertSame(
+			'/DocumentRoot/wp-content/plugins/send-chat-tools',
+			$method->invoke( $this->instance, 'send-chat-tools' ),
+		);
+	}
 }
