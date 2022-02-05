@@ -69,4 +69,17 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 			$method->invoke( $this->instance )
 		);
 	}
+
+	/**
+	 * TEST: return_option_group()
+	 */
+	public function test_return_option_group() {
+		$method = new ReflectionMethod( $this->instance, 'return_option_group' );
+		$method->setAccessible( true );
+
+		$this->assertSame(
+			'send-chat-tools-settings',
+			$method->invoke( $this->instance )
+		);
+	}
 }
