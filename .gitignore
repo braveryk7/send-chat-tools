@@ -30,3 +30,8 @@ build/
 #-------------------------------
 .eslintcache
 .stylelintcache
+
+#-------------------------------
+#   Created by Tester
+#-------------------------------
+.phpunit.result.cache
