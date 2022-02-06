@@ -1,4 +1,4 @@
-<phpunit colors="true">
+<phpunit colors="true" cacheResultFile="./.cache/phpunit/.phpunit.result.cache">
 	<php>
 		<const name="WP_PLUGIN_URL" value="https://example.com/wp-content/plugins" />
 		<const name="WP_PLUGIN_DIR" value="/DocumentRoot/wp-content/plugins" />
