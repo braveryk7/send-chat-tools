@@ -23,6 +23,7 @@
         "wplint-set": "./vendor/bin/phpcs --config-set default_standard WordPress",
         "wplint-rules": "./vendor/bin/phpcs -i",
         "phpcb": "./vendor/bin/phpcs --standard=ruleset.xml",
+        "test": "./vendor/bin/phpunit tests",
         "ghinit": "curl https://raw.githubusercontent.com/braveryk7/GitHooks/main/conf/init.sh > init.sh && sh init.sh",
         "gh-script-init": "curl -o cmd/create-verup-issue.sh https://raw.githubusercontent.com/braveryk7/github-cli-scripts/main/cmd/create-verup-issue.sh",
         "jslanguages": "./vendor/bin/wp i18n make-json ./languages/admin-bar-tools-js-ja.po --no-purge"
