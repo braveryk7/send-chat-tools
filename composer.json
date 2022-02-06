@@ -5,7 +5,8 @@
         "phpcompatibility/php-compatibility": "*",
         "wp-cli/wp-cli": "^2.5",
         "wp-cli/wp-cli-bundle": "^2.5",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "phpstan/phpstan": "^1.4"
     },
     "scripts": {
         "post-autoload-dump": [
