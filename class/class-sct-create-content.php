@@ -102,13 +102,27 @@ class Sct_Create_Content extends Sct_Base {
 	 */
 	private function get_send_status( string $tool_name, array $tools, string $comment_user_id ): bool {
 		$encryption = new Sct_Encryption();
+		$status     = [
+			'use'    => false,
+			'api'    => false,
+			'author' => false,
+		];
+		$api_exists = false;
+
+		if ( $tools['use'] ) {
+			$status['use'] = true;
+		}
+
+		if ( ! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ) {
+			$status['author'] = true;
+		}
 
 		switch ( $tool_name ) {
 			case 'slack':
 			case 'discord':
 				$api = $encryption->decrypt( $tools['webhook_url'] );
 
-				! empty( $api ) ? $api_exists = true : $api_exists = false;
+				! empty( $api ) ? $status['api'] = true : $status['api'] = false;
 
 				break;
 			case 'chatwork':
@@ -117,20 +131,15 @@ class Sct_Create_Content extends Sct_Base {
 					'room_id'   => $encryption->decrypt( $tools['room_id'] ),
 				];
 
-				! empty( $api['api_token'] ) && ! empty( $api['room_id'] ) ? $api_exists = true : $api_exists = false;
+				! empty( $api['api_token'] ) && ! empty( $api['room_id'] ) ? $status['api'] = true : $status['api'] = false;
 
 				break;
 			default:
-				$status = false;
+				$status['api'] = false;
 		}
+		update_option( 'sct_st', $status );
 
-		if ( $tools['use'] && $api_exists && ( ! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ) ) {
-			$status = true;
-		} else {
-			$status = false;
-		}
-
-		return $status;
+		return in_array( false, $status, true ) ? false : true;
 	}
 
 	/**
@@ -227,9 +236,9 @@ class Sct_Create_Content extends Sct_Base {
 			$comment_url      = '*' . esc_html__( 'Comment URL:', 'send-chat-tools' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
 			$comment_statuses = '*' . esc_html__( 'Comment Status:', 'send-chat-tools' ) . "*\n{$comment_status}";
 			$context          =
-				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
-				'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
-				'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
+			esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
+			'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
+			'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
 
 			$blocks  = new Sct_Slack_Blocks();
 			$message = [
@@ -255,13 +264,13 @@ class Sct_Create_Content extends Sct_Base {
 			}
 
 			$message =
-				$site_name . '( <' . $site_url . '> )' . esc_html__( 'new comment has been posted.', 'send-chat-tools' ) . "\n\n" .
-				esc_html__( 'Commented article:', 'send-chat-tools' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
-				esc_html__( 'Author:', 'send-chat-tools' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-				esc_html__( 'Date and time:', 'send-chat-tools' ) . $comment->comment_date . "\n" .
-				esc_html__( 'Text:', 'send-chat-tools' ) . "\n" . $comment->comment_content . "\n\n" .
-				esc_html__( 'Comment URL:', 'send-chat-tools' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
-				esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status;
+			$site_name . '( <' . $site_url . '> )' . esc_html__( 'new comment has been posted.', 'send-chat-tools' ) . "\n\n" .
+			esc_html__( 'Commented article:', 'send-chat-tools' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
+			esc_html__( 'Author:', 'send-chat-tools' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
+			esc_html__( 'Date and time:', 'send-chat-tools' ) . $comment->comment_date . "\n" .
+			esc_html__( 'Text:', 'send-chat-tools' ) . "\n" . $comment->comment_content . "\n\n" .
+			esc_html__( 'Comment URL:', 'send-chat-tools' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
+			esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status;
 		} elseif ( 'chatwork' === $tool ) {
 			if ( '1' === $comment->comment_approved ) {
 				$comment_status = esc_html__( 'Approved', 'send-chat-tools' );
@@ -326,12 +335,12 @@ class Sct_Create_Content extends Sct_Base {
 			$header_emoji   = ':zap:';
 			$header_message = "{$header_emoji} {$site_name}({$site_url})" . esc_html__( 'Notification of new updates.', 'send-chat-tools' );
 			$update_message =
-				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
-				esc_html__( 'Update Page:', 'send-chat-tools' ) . "<{$admin_url}>";
+			esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
+			esc_html__( 'Update Page:', 'send-chat-tools' ) . "<{$admin_url}>";
 			$context        =
-				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
-				'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
-				'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
+			esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
+			'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
+			'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
 
 			$blocks  = new Sct_Slack_Blocks();
 			$message = [
@@ -382,12 +391,12 @@ class Sct_Create_Content extends Sct_Base {
 			$message = array_merge_recursive( $message, $fixed_phrase );
 		} elseif ( 'discord' === $tool ) {
 			$message =
-				$site_name . '( <' . $site_url . '> )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
-				$core . $themes . $plugins .
-				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
-				esc_html__( 'Update Page:', 'send-chat-tools' ) . '<' . $admin_url . '>' . "\n\n" .
-				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
-				'<https://wordpress.org/plugins/send-chat-tools/>';
+			$site_name . '( <' . $site_url . '> )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
+			$core . $themes . $plugins .
+			esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
+			esc_html__( 'Update Page:', 'send-chat-tools' ) . '<' . $admin_url . '>' . "\n\n" .
+			esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
+			'<https://wordpress.org/plugins/send-chat-tools/>';
 		} elseif ( 'chatwork' === $tool ) {
 			if ( isset( $core ) ) {
 				$core = $core . '[hr]';
