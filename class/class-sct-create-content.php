@@ -58,7 +58,7 @@ class Sct_Create_Content extends Sct_Base {
 				} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
 					$logger = new Sct_Logger();
 					$logger->create_log( 1001, $tool, '1' );
-				} elseif ( $sct_options['chatwork']['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) {
+				} elseif ( 'chatwork' === $tools && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
 					$logger = new Sct_Logger();
 					$logger->create_log( 1002, 'chatwork', '1' );
 				};
