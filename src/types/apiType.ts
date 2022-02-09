@@ -8,6 +8,9 @@ export type apiType = {
 		user_id: string;
 		cron_time: string;
 	};
+	sct_logs: {
+		[ key: string ]: SctLogsType;
+	};
 };
 
 export type ChatToolsBaseType = {
@@ -25,6 +28,13 @@ export type ChatToolsType1Type = {
 export type ChatworkType = {
 	api_token: string;
 	room_id: string;
+};
+
+export type SctLogsType = {
+	status: string;
+	tool: string;
+	type: string;
+	send_date: string;
 };
 
 export type WPApiType< T > = {

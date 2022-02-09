@@ -115,6 +115,24 @@ class Sct_Admin_Page extends Sct_Base {
 
 		register_setting(
 			$this->return_option_group(),
+			$this->add_prefix( 'logs' ),
+			[
+				'show_in_rest' => [
+					'schema' => [
+						'type'       => 'array',
+						'Properties' => [
+							'status'    => 'string',
+							'type'      => 'string',
+							'tool'      => 'string',
+							'send_date' => 'string',
+						],
+					],
+				],
+			],
+		);
+
+		register_setting(
+			$this->return_option_group(),
 			$this->add_prefix( 'use_slack' ),
 			[
 				'type'         => 'boolean',

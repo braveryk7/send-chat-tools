@@ -152,11 +152,23 @@ class Sct_Activate extends Sct_Base {
 			if ( $get_table ) {
 				$result = $wpdb->get_results( 'SELECT * FROM wp_sct' ); // phpcs:ignore
 
+				$sct_logs = [];
 				foreach ( $result as $key => $value ) {
+					$sct_logs[ $value->id ] = [
+						'status'    => $value->states,
+						'type'      => $value->type,
+						'tool'      => $value->tool,
+						'send_date' => $value->send_date,
+					];
 					unset( $result[ $key ]->id );
-				}
 
-				update_option( $this->add_prefix( 'logs' ), $result );
+				}
+				foreach ( $sct_logs as $key => $value ) {
+					$abc[ $key ] = $value['send_date'];
+				}
+				array_multisort( $abc, SORT_DESC, SORT_REGULAR, $sct_logs );
+
+				update_option( $this->add_prefix( 'logs' ), $sct_logs );
 			}
 		}
 	}

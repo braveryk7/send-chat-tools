@@ -20,6 +20,39 @@
 	&_error {
 		background-color: #d63638;
 	}
+
+	&-logs {
+		width: 80%;
+
+		&-table {
+			font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+			> tr {
+
+				> th {
+					padding: 2px 17px 5px;
+				}
+
+				> td {
+					padding: 2px 20px;
+					text-align: center;
+
+					> .res {
+
+						&-success {
+							color: #2fb51d;
+							font-weight: 900;
+						}
+
+						&-error {
+							color: #de1d1d;
+							font-weight: 900;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 @keyframes fade {

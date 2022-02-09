@@ -29,6 +29,11 @@ export const Tab = () => {
 					title: 'Chatwork',
 					className: 'tab-chatwork',
 				},
+				{
+					name: 'logs',
+					title: 'Logs',
+					className: 'tab-logs',
+				},
 			] }
 		>
 			{ ( tab ) => <Items id={ tab.name } title={ tab.title } /> }

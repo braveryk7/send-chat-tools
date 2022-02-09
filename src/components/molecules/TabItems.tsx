@@ -2,12 +2,14 @@ import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 import { itemKeyType, optionNameType } from '../../types/ComponentsType';
+import { LogView } from '../atoms/LogView';
 import { TextControlForm } from '../atoms/TextControlForm';
 import { Toggle } from '../atoms/Toggle';
 
 export const Items = ( props: any ) => {
 	const { id, title } = props;
 	const [ basicFlag, setBasicFlag ] = useState( false );
+	const [ logsFlag, setLogsFlag ] = useState( false );
 	const [ itemKey, setItemKey ] = useState< itemKeyType | null >( null );
 	const [ itemLabel, setItemLabel ] = useState( '' );
 	const [
@@ -46,6 +48,9 @@ export const Items = ( props: any ) => {
 				setChatworkRoomId( 'room_id' );
 				setTextLabel( __( 'Chatwork APIキー', 'send-chat-tools' ) );
 				setChatworkText( __( 'Chatwork RoomID', 'send-chat-tools' ) );
+				break;
+			case 'logs':
+				setLogsFlag( true );
 				break;
 		}
 		setBasicFlag( id !== 'basic' ? true : false );
@@ -97,6 +102,7 @@ export const Items = ( props: any ) => {
 					label={ chatworkText }
 				/>
 			) }
+			{ logsFlag && <LogView /> }
 		</div>
 	);
 };
