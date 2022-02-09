@@ -43,7 +43,10 @@ class Sct_Create_Content extends Sct_Base {
 	public function controller( int $comment_id = 0, string $type = 'comment', array $check_date = [] ) {
 		global $wpdb;
 
-		$sct_options = $this->get_sct_options();
+		$sct_options      = $this->get_sct_options();
+		$slack_options    = $sct_options['slack']['use'];
+		$discord_options  = $sct_options['discord']['use'];
+		$chatwork_options = $sct_options['chatwork']['use'];
 
 		if ( 'comment' === $type ) {
 			$comment    = $this->get_comment_data( $comment_id );
@@ -58,21 +61,21 @@ class Sct_Create_Content extends Sct_Base {
 				],
 			];
 
-			if ( '1' === $sct_options['slack']['use'] && ! empty( $api['slack'] ) && ( ( ! $sct_options['slack']['send_author'] ) || ( $sct_options['slack']['send_author'] && '0' === $comment->user_id ) ) ) {
+			if ( '1' === $sct_options['slack']['use'] && ! empty( $api['slack'] ) && ( $this->get_send_author( $slack_options['send_author'], $comment->user_id ) ) ) {
 				$options = $this->create_content( $type, 'slack', $comment );
 				$this->send_tools( $options, (string) $wpdb->insert_id, 'slack' );
 			} elseif ( '1' === $sct_options['slack']['use'] && empty( $api['slack'] ) ) {
 				$logger = new Sct_Logger();
 				$logger->create_log( 1001, 'slack', '1' );
 			};
-			if ( '1' === $sct_options['discord']['use'] && ! empty( $api['discord'] ) && ( ( ! $sct_options['discord']['send_author'] ) || ( $sct_options['discord']['send_author'] && '0' === $comment->user_id ) ) ) {
+			if ( '1' === $sct_options['discord']['use'] && ! empty( $api['discord'] ) && ( $this->get_send_author( $discord_options['send_author'], $comment->user_id ) ) ) {
 				$options = $this->create_content( $type, 'discord', $comment );
 				$this->send_tools( $options, (string) $wpdb->insert_id, 'discord' );
 			} elseif ( '1' === $sct_options['discord']['use'] && empty( $api['discord'] ) ) {
 				$logger = new Sct_Logger();
 				$logger->create_log( 1001, 'discord', '1' );
 			};
-			if ( '1' === $sct_options['chatwork']['use'] && ! empty( $api['chatwork']['api_token'] ) && ! empty( $api['chatwork']['room_id'] ) && ( ( ! $sct_options['chatwork']['send_author'] ) || ( $sct_options['chatwork']['send_author'] && '0' === $comment->user_id ) ) ) {
+			if ( '1' === $sct_options['chatwork']['use'] && ! empty( $api['chatwork']['api_token'] ) && ! empty( $api['chatwork']['room_id'] ) && ( $this->get_send_author( $chatwork_options['send_author'], $comment->user_id ) ) ) {
 				$options = $this->create_content( $type, 'chatwork', $comment );
 				$this->send_tools( $options, (string) $wpdb->insert_id, 'chatwork' );
 			} elseif ( '1' === $sct_options['chatwork']['use'] && empty( $api['chatwork']['api_token'] ) ) {
