@@ -161,7 +161,12 @@ class Sct_Activate extends Sct_Base {
 						'send_date' => $value->send_date,
 					];
 					unset( $result[ $key ]->id );
+
 				}
+				foreach ( $sct_logs as $key => $value ) {
+					$abc[ $key ] = $value['send_date'];
+				}
+				array_multisort( $abc, SORT_DESC, SORT_REGULAR, $sct_logs );
 
 				update_option( $this->add_prefix( 'logs' ), $sct_logs );
 			}
