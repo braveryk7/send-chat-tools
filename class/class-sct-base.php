@@ -148,8 +148,9 @@ class Sct_Base {
 	 * @param array  $options API options.
 	 * @param string $id ID(Comment/Update).
 	 * @param string $tools Use chat tools prefix.
+	 * @param object $comment Comment object.
 	 */
-	protected function send_tools( array $options, string $id, string $tools ) {
+	protected function send_tools( array $options, string $id, string $tools, object $comment = null ) {
 		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
 		$sct_options = $this->get_sct_options();
@@ -165,8 +166,25 @@ class Sct_Base {
 				break;
 		}
 
-		$result                       = wp_remote_post( $url, $options );
-		$sct_options[ $tools ]['log'] = $result;
+		$result = wp_remote_post( $url, $options );
+
+		if ( ! is_null( $comment ) ) {
+			$logs = [
+				$comment->comment_date_gmt => [
+					'id'      => $comment->comment_ID,
+					'author'  => $comment->comment_author,
+					'email'   => $comment->comment_author_email,
+					'url'     => $comment->comment_author_url,
+					'comment' => $comment->comment_content,
+					'status'  => $result['response']['code'],
+				],
+			];
+		}
+
+		if ( '2' <= count( $sct_options[ $tools ]['log'] ) ) {
+			array_shift( $sct_options[ $tools ]['log'] );
+		}
+		$sct_options[ $tools ]['log'] += $logs;
 		$this->set_sct_options( $sct_options );
 
 		if ( ! isset( $result->errors ) ) {
