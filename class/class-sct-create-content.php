@@ -43,10 +43,7 @@ class Sct_Create_Content extends Sct_Base {
 	public function controller( int $comment_id = 0, string $type = 'comment', array $check_date = [] ) {
 		global $wpdb;
 
-		$sct_options      = $this->get_sct_options();
-		$slack_options    = $sct_options['slack']['use'];
-		$discord_options  = $sct_options['discord']['use'];
-		$chatwork_options = $sct_options['chatwork']['use'];
+		$sct_options = $this->get_sct_options();
 
 		if ( 'comment' === $type ) {
 			$comment = $this->get_comment_data( $comment_id );
