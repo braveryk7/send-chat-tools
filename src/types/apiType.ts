@@ -8,7 +8,9 @@ export type apiType = {
 		user_id: string;
 		cron_time: string;
 	};
-	sct_logs: SctLogsType;
+	sct_logs: {
+		[ key: string ]: SctLogsType;
+	};
 };
 
 export type ChatToolsBaseType = {
@@ -28,12 +30,12 @@ export type ChatworkType = {
 	room_id: string;
 };
 
-export type SctLogsType = [
-	status: string,
-	tool: string,
-	type: string,
-	send_date: string
-];
+export type SctLogsType = {
+	status: string;
+	tool: string;
+	type: string;
+	send_date: string;
+};
 
 export type WPApiType< T > = {
 	[ key: string ]: { // eslint-disable-line
