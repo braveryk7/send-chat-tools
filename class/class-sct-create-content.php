@@ -121,11 +121,10 @@ class Sct_Create_Content extends Sct_Base {
 
 				break;
 			default:
-				$default_flag = true;
-				$status       = false;
+				$status = false;
 		}
 
-		if ( ! $default_flag && $tools['use'] && $api_exists && ( ! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ) ) {
+		if ( $tools['use'] && $api_exists && ( ! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ) ) {
 			$status = true;
 		} else {
 			$status = false;
