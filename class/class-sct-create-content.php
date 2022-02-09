@@ -49,33 +49,23 @@ class Sct_Create_Content extends Sct_Base {
 		$chatwork_options = $sct_options['chatwork']['use'];
 
 		if ( 'comment' === $type ) {
-			$comment    = $this->get_comment_data( $comment_id );
-			$encryption = new Sct_Encryption();
+			$comment = $this->get_comment_data( $comment_id );
 
-			$api = [
-				'slack'    => $encryption->decrypt( $sct_options['slack']['webhook_url'] ),
-				'discord'  => $encryption->decrypt( $sct_options['discord']['webhook_url'] ),
-				'chatwork' => [
-					'api_token' => $encryption->decrypt( $sct_options['chatwork']['api_token'] ),
-					'room_id'   => $encryption->decrypt( $sct_options['chatwork']['room_id'] ),
-				],
-			];
-
-			if ( '1' === $sct_options['slack']['use'] && ! empty( $api['slack'] ) && ( $this->get_send_author( $slack_options['send_author'], $comment->user_id ) ) ) {
+			if ( $this->get_send_status( 'slack', $sct_options['slack'], $comment->user_id ) ) {
 				$options = $this->create_content( $type, 'slack', $comment );
 				$this->send_tools( $options, (string) $wpdb->insert_id, 'slack' );
 			} elseif ( '1' === $sct_options['slack']['use'] && empty( $api['slack'] ) ) {
 				$logger = new Sct_Logger();
 				$logger->create_log( 1001, 'slack', '1' );
 			};
-			if ( '1' === $sct_options['discord']['use'] && ! empty( $api['discord'] ) && ( $this->get_send_author( $discord_options['send_author'], $comment->user_id ) ) ) {
+			if ( $this->get_send_status( 'discord', $sct_options['discord'], $comment->user_id ) ) {
 				$options = $this->create_content( $type, 'discord', $comment );
 				$this->send_tools( $options, (string) $wpdb->insert_id, 'discord' );
 			} elseif ( '1' === $sct_options['discord']['use'] && empty( $api['discord'] ) ) {
 				$logger = new Sct_Logger();
 				$logger->create_log( 1001, 'discord', '1' );
 			};
-			if ( '1' === $sct_options['chatwork']['use'] && ! empty( $api['chatwork']['api_token'] ) && ! empty( $api['chatwork']['room_id'] ) && ( $this->get_send_author( $chatwork_options['send_author'], $comment->user_id ) ) ) {
+			if ( $this->get_send_status( 'chatwork', $sct_options['chatwork'], $comment->user_id ) ) {
 				$options = $this->create_content( $type, 'chatwork', $comment );
 				$this->send_tools( $options, (string) $wpdb->insert_id, 'chatwork' );
 			} elseif ( '1' === $sct_options['chatwork']['use'] && empty( $api['chatwork']['api_token'] ) ) {
@@ -113,6 +103,47 @@ class Sct_Create_Content extends Sct_Base {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * Check send status.
+	 *
+	 * @param string $tool_name Tool name.
+	 * @param array  $tools Tool options -> sct_options[TOOLNAME].
+	 * @param string $comment_user_id Comment user id.
+	 */
+	private function get_send_status( string $tool_name, array $tools, string $comment_user_id ): bool {
+		$encryption = new Sct_Encryption();
+
+		switch ( $tool_name ) {
+			case 'slack':
+			case 'discord':
+				$api = $encryption->decrypt( $tools['webhook_url'] );
+
+				! empty( $api ) ? $api_exists = true : $api_exists = false;
+
+				break;
+			case 'chatwork':
+				$api = [
+					'api_token' => $encryption->decrypt( $tools['api_token'] ),
+					'room_id'   => $encryption->decrypt( $tools['room_id'] ),
+				];
+
+				! empty( $api['api_token'] ) && ! empty( $api['room_id'] ) ? $api_exists = true : $api_exists = false;
+
+				break;
+			default:
+				$default_flag = true;
+				$status       = false;
+		}
+
+		if ( ! $default_flag && $tools['use'] && $api_exists && ( ! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ) ) {
+			$status = true;
+		} else {
+			$status = false;
+		}
+
+		return $status;
 	}
 
 	/**
