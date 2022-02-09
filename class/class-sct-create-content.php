@@ -99,6 +99,20 @@ class Sct_Create_Content extends Sct_Base {
 	}
 
 	/**
+	 * Get send_author status.
+	 *
+	 * @param boolean $author_status sct_options->TOOLNAME->use.
+	 * @param string  $comment_user_id Comment user ID.
+	 */
+	private function get_send_author( $author_status, $comment_user_id ) {
+		if ( ! $author_status || $author_status && '0' === $comment_user_id ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 * Get comment data.
 	 *
 	 * @param int $comment_id Comment ID.
