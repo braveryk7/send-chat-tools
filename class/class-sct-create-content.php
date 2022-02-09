@@ -54,7 +54,7 @@ class Sct_Create_Content extends Sct_Base {
 
 				if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
 					$options = $this->create_content( $type, $tool, $comment );
-					$this->send_tools( $options, (string) $wpdb->insert_id, $tool );
+					$this->send_tools( $options, (string) $wpdb->insert_id, $tool, $comment );
 				} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
 					$logger = new Sct_Logger();
 					$logger->create_log( 1001, $tool, '1' );
