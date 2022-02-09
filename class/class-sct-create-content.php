@@ -51,37 +51,42 @@ class Sct_Create_Content extends Sct_Base {
 			if ( $this->get_send_status( 'slack', $sct_options['slack'], $comment->user_id ) ) {
 				$options = $this->create_content( $type, 'slack', $comment );
 				$this->send_tools( $options, (string) $wpdb->insert_id, 'slack' );
-			} elseif ( '1' === $sct_options['slack']['use'] && empty( $api['slack'] ) ) {
+			} elseif ( $sct_options['slack']['use'] && empty( $api['slack'] ) ) {
 				$logger = new Sct_Logger();
 				$logger->create_log( 1001, 'slack', '1' );
 			};
+
 			if ( $this->get_send_status( 'discord', $sct_options['discord'], $comment->user_id ) ) {
 				$options = $this->create_content( $type, 'discord', $comment );
 				$this->send_tools( $options, (string) $wpdb->insert_id, 'discord' );
-			} elseif ( '1' === $sct_options['discord']['use'] && empty( $api['discord'] ) ) {
+			} elseif ( $sct_options['discord']['use'] && empty( $api['discord'] ) ) {
 				$logger = new Sct_Logger();
 				$logger->create_log( 1001, 'discord', '1' );
 			};
+
 			if ( $this->get_send_status( 'chatwork', $sct_options['chatwork'], $comment->user_id ) ) {
 				$options = $this->create_content( $type, 'chatwork', $comment );
 				$this->send_tools( $options, (string) $wpdb->insert_id, 'chatwork' );
-			} elseif ( '1' === $sct_options['chatwork']['use'] && empty( $api['chatwork']['api_token'] ) ) {
+			} elseif ( $sct_options['chatwork']['use'] && empty( $api['chatwork']['api_token'] ) ) {
 				$logger = new Sct_Logger();
 				$logger->create_log( 1001, 'chatwork', '1' );
-			} elseif ( '1' === $sct_options['chatwork']['use'] && empty( $api['chatwork']['room_id'] ) ) {
+			} elseif ( $sct_options['chatwork']['use'] && empty( $api['chatwork']['room_id'] ) ) {
 				$logger = new Sct_Logger();
 				$logger->create_log( 1002, 'chatwork', '1' );
 			};
+
 		} elseif ( 'update' === $type ) {
-			if ( '1' === $sct_options['slack']['use'] && '1' === $sct_options['slack']['send_update'] ) {
+			if ( $sct_options['slack']['use'] && $sct_options['slack']['send_update'] ) {
 				$options = $this->create_content( $type, 'slack', null, $check_date );
 				$this->send_tools( $options, 'update', 'slack' );
 			}
-			if ( '1' === $sct_options['discord']['use'] && '1' === $sct_options['discord']['send_update'] ) {
+
+			if ( $sct_options['discord']['use'] && $sct_options['discord']['send_update'] ) {
 				$options = $this->create_content( $type, 'discord', null, $check_date );
 				$this->send_tools( $options, 'update', 'discord' );
 			}
-			if ( '1' === $sct_options['chatwork']['use'] && '1' === $sct_options['chatwork']['send_update'] ) {
+
+			if ( $sct_options['chatwork']['use'] && $sct_options['chatwork']['send_update'] ) {
 				$options = $this->create_content( $type, 'chatwork', null, $check_date );
 				$this->send_tools( $options, 'update', 'chatwork' );
 			}
