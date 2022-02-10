@@ -2,6 +2,7 @@ import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 import { itemKeyType, optionNameType } from '../../types/ComponentsType';
+import { LogDetail } from '../atoms/LogDetail';
 import { LogView } from '../atoms/LogView';
 import { TextControlForm } from '../atoms/TextControlForm';
 import { Toggle } from '../atoms/Toggle';
@@ -102,6 +103,7 @@ export const Items = ( props: any ) => {
 					label={ chatworkText }
 				/>
 			) }
+			{ basicFlag && itemKey && <LogDetail itemKey={ itemKey } /> }
 			{ logsFlag && <LogView /> }
 		</div>
 	);
