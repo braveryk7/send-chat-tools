@@ -81,7 +81,6 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $comment_user_id Comment user id.
 	 */
 	private function get_send_status( string $tool_name, array $tools, string $comment_user_id ): bool {
-		$encryption = new Sct_Encryption();
 		$status     = [
 			'use'    => false,
 			'api'    => false,
@@ -100,15 +99,15 @@ class Sct_Create_Content extends Sct_Base {
 		switch ( $tool_name ) {
 			case 'slack':
 			case 'discord':
-				$api = $encryption->decrypt( $tools['webhook_url'] );
+				$api = $tools['webhook_url'];
 
 				! empty( $api ) ? $status['api'] = true : $status['api'] = false;
 
 				break;
 			case 'chatwork':
 				$api = [
-					'api_token' => $encryption->decrypt( $tools['api_token'] ),
-					'room_id'   => $encryption->decrypt( $tools['room_id'] ),
+					'api_token' => $tools['api_token'],
+					'room_id'   => $tools['room_id'],
 				];
 
 				! empty( $api['api_token'] ) && ! empty( $api['room_id'] ) ? $status['api'] = true : $status['api'] = false;
@@ -164,8 +163,7 @@ class Sct_Create_Content extends Sct_Base {
 
 		} elseif ( 'chatwork' === $tool ) {
 			$sct_options  = $this->get_sct_options();
-			$encryption   = new Sct_Encryption();
-			$content_type = 'X-ChatWorkToken: ' . $encryption->decrypt( $sct_options['chatwork']['api_token'] );
+			$content_type = 'X-ChatWorkToken: ' . $sct_options['chatwork']['api_token'];
 
 			if ( 'comment' === $type ) {
 				$message = $this->create_comment_message( $comment, $tool );
