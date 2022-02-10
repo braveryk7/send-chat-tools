@@ -43,7 +43,7 @@ class Sct_Activate extends Sct_Base {
 			'room_id'     => '',
 			'send_author' => false,
 			'send_update' => false,
-			'log'         => '',
+			'log'         => [],
 		];
 
 		$encryption = new Sct_Encryption();
@@ -117,13 +117,13 @@ class Sct_Activate extends Sct_Base {
 						$sct_options['chatwork']['send_update'] = $old_value;
 						break;
 					case 'slack_log':
-						$sct_options['slack']['log'] = $old_value;
+						$sct_options['slack']['log'] = [];
 						break;
 					case 'discord_log':
-						$sct_options['discord']['log'] = $old_value;
+						$sct_options['discord']['log'] = [];
 						break;
 					case 'chatwork_log':
-						$sct_options['chatwork']['log'] = $old_value;
+						$sct_options['chatwork']['log'] = [];
 						break;
 					case 'db_version':
 						$sct_options['db_version'] = $old_value;
