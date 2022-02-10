@@ -32,7 +32,7 @@ export const LogView = () => {
 		}
 	};
 
-	const getStatusMessage = ( status: string ) => {
+	const getStatusMessage = ( status: number ) => {
 		const addSpanTag = ( value: {}, sendStatus: boolean ) => {
 			const classNameAttr = sendStatus ? 'success' : 'error';
 
@@ -44,18 +44,18 @@ export const LogView = () => {
 		};
 
 		switch ( status ) {
-			case '200':
-			case '204':
+			case 200:
+			case 204:
 				return addSpanTag(
 					__( 'Response OK!', 'send-chat-tools' ),
 					true
 				);
-			case '1000':
+			case 1000:
 				return addSpanTag(
 					__( 'Could not communicate.', 'send-chat-tools' ),
 					false
 				);
-			case '1001':
+			case 1001:
 				return addSpanTag(
 					__(
 						'Webhook URL/API Token not entered.',
@@ -63,7 +63,7 @@ export const LogView = () => {
 					),
 					false
 				);
-			case '1002':
+			case 1002:
 				return addSpanTag(
 					__( 'RoomID not entered.', 'send-chat-tools' ),
 					false
