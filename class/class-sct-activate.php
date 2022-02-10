@@ -157,7 +157,7 @@ class Sct_Activate extends Sct_Base {
 				$sct_logs = [];
 				foreach ( $result as $key => $value ) {
 					$sct_logs[ $value->id ] = [
-						'status'    => $value->states,
+						'status'    => (int) $value->states,
 						'type'      => $value->type,
 						'tool'      => $value->tool,
 						'send_date' => $value->send_date,
