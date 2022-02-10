@@ -116,7 +116,6 @@ class Sct_Create_Content extends Sct_Base {
 			default:
 				$status['api'] = false;
 		}
-		update_option( 'sct_st', $status );
 
 		return in_array( false, $status, true ) ? false : true;
 	}
