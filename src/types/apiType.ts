@@ -31,7 +31,7 @@ export type ChatworkType = {
 };
 
 export type SctLogsType = {
-	status: string;
+	status: number;
 	tool: string;
 	type: string;
 	send_date: string;
