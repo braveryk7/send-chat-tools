@@ -15,3 +15,14 @@ export type TogglePropsType = {
 };
 
 export type TextControlPropsType = TogglePropsType;
+
+export type LogsType = {
+	[ key: string ]: {
+		id: string;
+		author: string;
+		email: string;
+		url: string;
+		comment: string;
+		status: number;
+	};
+};
