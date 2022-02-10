@@ -43,7 +43,7 @@ class Sct_Activate extends Sct_Base {
 			'room_id'     => '',
 			'send_author' => false,
 			'send_update' => false,
-			'log'         => '',
+			'log'         => [],
 		];
 
 		$encryption = new Sct_Encryption();
@@ -117,13 +117,13 @@ class Sct_Activate extends Sct_Base {
 						$sct_options['chatwork']['send_update'] = $old_value;
 						break;
 					case 'slack_log':
-						$sct_options['slack']['log'] = $old_value;
+						$sct_options['slack']['log'] = [];
 						break;
 					case 'discord_log':
-						$sct_options['discord']['log'] = $old_value;
+						$sct_options['discord']['log'] = [];
 						break;
 					case 'chatwork_log':
-						$sct_options['chatwork']['log'] = $old_value;
+						$sct_options['chatwork']['log'] = [];
 						break;
 					case 'db_version':
 						$sct_options['db_version'] = $old_value;
@@ -140,6 +140,8 @@ class Sct_Activate extends Sct_Base {
 				}
 			}
 			update_option( $this->add_prefix( 'options' ), $sct_options );
+
+			$this->crypto2plain( $sct_options );
 		}
 
 		/**
@@ -171,5 +173,34 @@ class Sct_Activate extends Sct_Base {
 				update_option( $this->add_prefix( 'logs' ), $sct_logs );
 			}
 		}
+	}
+
+	/**
+	 * Encrypt -> Plain.
+	 *
+	 * @param array $sct_options Send Chat Tools options.
+	 */
+	private function crypto2plain( array $sct_options ) {
+		$tools = [ 'slack', 'discord', 'chatwork' ];
+
+		$encryption = new Sct_Encryption();
+
+		foreach ( $tools as $tool ) {
+			'chatwork' !== $tool ? $api_key = 'webhook_url' : $api_key = 'api_token';
+			$api_value                      = $encryption->decrypt( $sct_options[ $tool ][ $api_key ] );
+
+			if ( $api_value ) {
+				$sct_options[ $tool ][ $api_key ] = $api_value;
+			}
+
+			if ( 'chatwork' === $tool ) {
+				$this->console( $sct_options[ $tool ]['room_id'] );
+				$room_id = $encryption->decrypt( $sct_options[ $tool ]['room_id'] );
+				if ( $room_id ) {
+					$sct_options[ $tool ]['room_id'] = $room_id;
+				}
+			}
+		}
+		$this->set_sct_options( $sct_options );
 	}
 }

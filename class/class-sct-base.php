@@ -151,18 +151,16 @@ class Sct_Base {
 	 * @param object $comment Comment object.
 	 */
 	protected function send_tools( array $options, string $id, string $tools, object $comment = null ) {
-		require_once dirname( __FILE__ ) . '/class-sct-encryption.php';
 
 		$sct_options = $this->get_sct_options();
-		$encryption  = new Sct_Encryption();
 
 		switch ( $tools ) {
 			case 'slack':
 			case 'discord':
-				$url = $encryption->decrypt( $sct_options[ $tools ]['webhook_url'] );
+				$url = $sct_options[ $tools ]['webhook_url'];
 				break;
 			case 'chatwork':
-				$url = 'https://api.chatwork.com/v2/rooms/' . $encryption->decrypt( $sct_options[ $tools ]['room_id'] ) . '/messages';
+				$url = 'https://api.chatwork.com/v2/rooms/' . $sct_options[ $tools ]['room_id'] . '/messages';
 				break;
 		}
 
