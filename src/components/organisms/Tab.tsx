@@ -5,27 +5,13 @@ import { Items } from '../molecules/TabItems';
 
 export const Tab = () => {
 	const tabs = [
-		{
-			name: 'slack',
-			title: 'Slack',
-			className: 'tab-slack',
-		},
-		{
-			name: 'discord',
-			title: 'Discord',
-			className: 'tab-discord',
-		},
-		{
-			name: 'chatwork',
-			title: 'Chatwork',
-			className: 'tab-chatwork',
-		},
-		{
-			name: 'logs',
-			title: 'Logs',
-			className: 'tab-logs',
-		},
+		{ name: 'slack', title: 'Slack', className: 'tab-slack' },
+		{ name: 'discord', title: 'Discord', className: 'tab-discord' },
+		{ name: 'chatwork', title: 'Chatwork', className: 'tab-chatwork' },
+		{ name: 'update', title: 'Update notify', className: 'tab-update' },
+		{ name: 'logs', title: 'Logs', className: 'tab-logs' },
 	];
+
 	return (
 		<TabPanel
 			activeClass="active-tab"
