@@ -27,9 +27,8 @@ class Sct_Check_Update extends Sct_Base {
 		add_action( 'init', [ $this, 'check_cron_time' ] );
 		add_action( $this->add_prefix( 'update_check' ), [ $this, 'controller' ] );
 
-		global $wpdb;
-		$my_time   = gmdate( 'Y-m-d 18:00:00', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-		$cron_time = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $my_time ) );
+		$datetime_string = gmdate( 'Y-m-d 18:00:00', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+		$cron_time       = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $datetime_string ) );
 
 		if ( ! wp_next_scheduled( $this->add_prefix( 'update_check' ) ) ) {
 			wp_schedule_event( $cron_time, 'daily', $this->add_prefix( 'update_check' ) );
