@@ -24,11 +24,12 @@ class Sct_Check_Update extends Sct_Base {
 	 * Add WP-Cron.
 	 */
 	public function __construct() {
-		global $wpdb;
-		$my_time   = gmdate( 'Y-m-d 18:00:00', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-		$cron_time = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $my_time ) );
-
+		add_action( 'init', [ $this, 'check_cron_time' ] );
 		add_action( $this->add_prefix( 'update_check' ), [ $this, 'controller' ] );
+
+		$datetime_string = gmdate( 'Y-m-d 18:00:00', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+		$cron_time       = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $datetime_string ) );
+
 		if ( ! wp_next_scheduled( $this->add_prefix( 'update_check' ) ) ) {
 			wp_schedule_event( $cron_time, 'daily', $this->add_prefix( 'update_check' ) );
 			$sct_options              = $this->get_sct_options;
@@ -167,5 +168,26 @@ class Sct_Check_Update extends Sct_Base {
 		}
 
 		return $return;
+	}
+
+	/**
+	 * WP-cron check.
+	 */
+	public function check_cron_time() {
+		$current_timestamp = wp_get_scheduled_event( 'sct_update_check' )->timestamp;
+		$sct_options       = $this->get_sct_options();
+
+		if ( '' !== $sct_options['cron_time'] ) {
+			$to_datetime_string    = gmdate( 'Y-m-d ' . $sct_options['cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+			$sct_options_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $to_datetime_string ) );
+
+			if ( $current_timestamp !== $sct_options_timestamp ) {
+				wp_clear_scheduled_hook( 'sct_update_check' );
+				wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
+			}
+		} else {
+			$sct_options['cron_time'] = '18:00';
+			$this->set_sct_options( $sct_options );
+		}
 	}
 }
