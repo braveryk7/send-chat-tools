@@ -1,6 +1,9 @@
 includes:
     - vendor/szepeviktor/phpstan-wordpress/extension.neon
 parameters:
+    excludePaths:
+        - ./vendor/
+        - ./node_modules/
     ignoreErrors:
     level: 0
     paths:
