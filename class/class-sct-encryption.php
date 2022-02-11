@@ -34,25 +34,6 @@ class Sct_Encryption extends Sct_Base {
 	}
 
 	/**
-	 * Encrypt value.
-	 *
-	 * @param string $value to encrypt.
-	 */
-	public function encrypt( string $value ): string {
-		$wpdb;
-		$sct_options = $this->get_sct_options();
-
-		if ( ! $sct_options['iv'] ) {
-			$sct_options['iv'] = $this->make_vector();
-			$this->set_sct_options( $sct_options );
-		}
-
-		$sct_options['user_id'] = wp_get_current_user()->ID;
-		$this->set_sct_options( $sct_options );
-		return openssl_encrypt( $value, self::METHOD, $this->get_user_registered(), 0, hex2bin( $sct_options['iv'] ) );
-	}
-
-	/**
 	 * Decrypt value.
 	 *
 	 * @param string $value to decrypt.
