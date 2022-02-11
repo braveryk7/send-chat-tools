@@ -39,13 +39,16 @@
 		background-color: #d63638;
 	}
 
-	&-tools-log {
+	&-wrapper {
 		margin-top: 30px;
-		width: 80%;
+	}
 
-		&-wrapper {
-			margin-top: 30px;
-		}
+	&-items {
+		margin-top: 40px;
+	}
+
+	&-tools-log {
+		width: 80%;
 	}
 
 	&-logs {
