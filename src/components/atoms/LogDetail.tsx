@@ -11,9 +11,7 @@ export const LogDetail = ( props: { itemKey: itemKeyType } ) => {
 	const [ logs, setLogs ] = useState< LogsType | undefined >( undefined );
 
 	useEffect( () => {
-		if ( itemKey !== 'basic' ) {
-			setLogs( apiData.sct_options[ itemKey ].log );
-		}
+		setLogs( apiData.sct_options[ itemKey ].log );
 	}, [ itemKey ] );
 
 	return (
