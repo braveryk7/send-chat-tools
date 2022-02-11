@@ -5,6 +5,7 @@ parameters:
         - ./vendor/
         - ./node_modules/
     ignoreErrors:
+        - "#Undefined variable: \\$wpdb#"
     level: 0
     paths:
         - ./send-chat-tools.php
