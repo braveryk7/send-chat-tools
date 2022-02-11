@@ -10,9 +10,11 @@ import { LogDetail } from '../atoms/LogDetail';
 import { LogView } from '../atoms/LogView';
 import { TextControlForm } from '../atoms/TextControlForm';
 import { Toggle } from '../atoms/Toggle';
+import { UpdateTime } from '../atoms/UpdateTime';
 
 export const Items = ( props: any ) => {
 	const { id, title } = props;
+	const [ updateFlag, setUpdateFlag ] = useState( false );
 	const [ logsFlag, setLogsFlag ] = useState( false );
 	const [ tabItems, setTabItems ] = useState< TogglePropsType[] >( [] );
 	const [ itemKey, setItemKey ] = useState< itemKeyType | null >( null );
@@ -53,6 +55,9 @@ export const Items = ( props: any ) => {
 				setChatworkRoomId( 'room_id' );
 				setTextLabel( __( 'Chatwork APIキー', 'send-chat-tools' ) );
 				setChatworkText( __( 'Chatwork RoomID', 'send-chat-tools' ) );
+				break;
+			case 'update':
+				setUpdateFlag( true );
 				break;
 			case 'logs':
 				setLogsFlag( true );
@@ -123,6 +128,11 @@ export const Items = ( props: any ) => {
 			{ itemKey && (
 				<div className="sct-items">
 					<LogDetail itemKey={ itemKey } />
+				</div>
+			) }
+			{ updateFlag && (
+				<div className="sct-items">
+					<UpdateTime />
 				</div>
 			) }
 			{ logsFlag && (
