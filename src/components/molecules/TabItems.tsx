@@ -9,7 +9,6 @@ import { Toggle } from '../atoms/Toggle';
 
 export const Items = ( props: any ) => {
 	const { id, title } = props;
-	const [ basicFlag, setBasicFlag ] = useState( false );
 	const [ logsFlag, setLogsFlag ] = useState( false );
 	const [ itemKey, setItemKey ] = useState< itemKeyType | null >( null );
 	const [ itemLabel, setItemLabel ] = useState( '' );
@@ -54,7 +53,6 @@ export const Items = ( props: any ) => {
 				setLogsFlag( true );
 				break;
 		}
-		setBasicFlag( id !== 'basic' ? true : false );
 	}, [ id ] );
 
 	return (
@@ -69,7 +67,7 @@ export const Items = ( props: any ) => {
 					label={ itemLabel }
 				/>
 			) }
-			{ basicFlag && itemKey && (
+			{ itemKey && (
 				<Toggle
 					itemKey={ itemKey }
 					optionName="send_author"
@@ -79,7 +77,7 @@ export const Items = ( props: any ) => {
 					) }
 				/>
 			) }
-			{ basicFlag && itemKey && (
+			{ itemKey && (
 				<Toggle
 					itemKey={ itemKey }
 					optionName="send_update"
@@ -89,21 +87,21 @@ export const Items = ( props: any ) => {
 					) }
 				/>
 			) }
-			{ basicFlag && itemKey && apiOptionName && (
+			{ itemKey && apiOptionName && (
 				<TextControlForm
 					itemKey={ itemKey }
 					optionName={ apiOptionName }
 					label={ textLabel }
 				/>
 			) }
-			{ basicFlag && itemKey && chatworkRoomId && (
+			{ itemKey && chatworkRoomId && (
 				<TextControlForm
 					itemKey={ itemKey }
 					optionName={ chatworkRoomId }
 					label={ chatworkText }
 				/>
 			) }
-			{ basicFlag && itemKey && <LogDetail itemKey={ itemKey } /> }
+			{ itemKey && <LogDetail itemKey={ itemKey } /> }
 			{ logsFlag && <LogView /> }
 		</div>
 	);

@@ -13,33 +13,24 @@ export const Toggle = ( props: TogglePropsType ) => {
 	const [ itemData, setItemData ] = useState( false );
 
 	useEffect( () => {
-		if (
-			itemKey === 'slack' ||
-			itemKey === 'discord' ||
-			itemKey === 'chatwork'
-		) {
-			switch ( optionName ) {
-				case 'use':
-					setItemData( apiData.sct_options[ itemKey ].use );
-					break;
-				case 'send_author':
-					setItemData( apiData.sct_options[ itemKey ].send_author );
-					break;
-				case 'send_update':
-					setItemData( apiData.sct_options[ itemKey ].send_update );
-					break;
-			}
+		switch ( optionName ) {
+			case 'use':
+				setItemData( apiData.sct_options[ itemKey ].use );
+				break;
+			case 'send_author':
+				setItemData( apiData.sct_options[ itemKey ].send_author );
+				break;
+			case 'send_update':
+				setItemData( apiData.sct_options[ itemKey ].send_update );
+				break;
 		}
 	}, [ itemKey, optionName, apiData ] );
 
 	const changeStatus = ( status: boolean ) => {
 		if (
-			( itemKey === 'slack' ||
-				itemKey === 'discord' ||
-				itemKey === 'chatwork' ) &&
-			( optionName === 'use' ||
-				optionName === 'send_author' ||
-				optionName === 'send_update' )
+			optionName === 'use' ||
+			optionName === 'send_author' ||
+			optionName === 'send_update'
 		) {
 			const newItem: apiType = JSON.parse(
 				JSON.stringify( { ...apiData } )
