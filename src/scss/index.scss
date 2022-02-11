@@ -2,13 +2,16 @@
 	margin-top: 30px;
 }
 
-.components-snackbar {
-	animation-duration: 4s;
-	animation-iteration-count: 5;
-	animation-name: fade;
-	position: fixed;
-	right: 30px;
-	top: 50px;
+.components {
+
+	&-snackbar {
+		animation-duration: 4s;
+		animation-iteration-count: 5;
+		animation-name: fade;
+		position: fixed;
+		right: 30px;
+		top: 50px;
+	}
 }
 
 .sct {
