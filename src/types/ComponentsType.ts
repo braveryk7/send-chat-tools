@@ -1,4 +1,4 @@
-export type itemKeyType = 'slack' | 'discord' | 'chatwork' | 'basic';
+export type itemKeyType = 'slack' | 'discord' | 'chatwork';
 
 export type optionNameType =
 	| 'use'
