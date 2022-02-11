@@ -17,13 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Encrypt value
  */
 class Sct_Encryption extends Sct_Base {
-	/**
-	 * Get current user registered date and time.
-	 */
-	private static function get_user_registered(): string {
-		$user_reg_date = get_userdata( wp_get_current_user()->ID );
-		return $user_reg_date->user_registered;
-	}
 
 	/**
 	 * Make IV for OpenSSL.
