@@ -32,7 +32,6 @@ class Sct_Encryption extends Sct_Base {
 	 * @param string $value to decrypt.
 	 */
 	public function decrypt( string $value ) {
-		$wpdb;
 		$sct_options = $this->get_sct_options();
 		$key         = get_userdata( get_option( 'sct_use_user_id' ) )->user_registered;
 		return openssl_decrypt( $value, self::ENCRYPT_METHOD, $key, 0, hex2bin( get_option( 'sct_iv' ) ) );
