@@ -1,7 +1,11 @@
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-import { itemKeyType, optionNameType } from '../../types/ComponentsType';
+import {
+	itemKeyType,
+	optionNameType,
+	TogglePropsType,
+} from '../../types/ComponentsType';
 import { LogDetail } from '../atoms/LogDetail';
 import { LogView } from '../atoms/LogView';
 import { TextControlForm } from '../atoms/TextControlForm';
@@ -10,6 +14,7 @@ import { Toggle } from '../atoms/Toggle';
 export const Items = ( props: any ) => {
 	const { id, title } = props;
 	const [ logsFlag, setLogsFlag ] = useState( false );
+	const [ tabItems, setTabItems ] = useState< TogglePropsType[] >( [] );
 	const [ itemKey, setItemKey ] = useState< itemKeyType | null >( null );
 	const [ itemLabel, setItemLabel ] = useState( '' );
 	const [
@@ -55,54 +60,76 @@ export const Items = ( props: any ) => {
 		}
 	}, [ id ] );
 
+	useEffect( () => {
+		if ( itemKey ) {
+			const items: TogglePropsType[] = [
+				{ itemKey, optionName: 'use', label: itemLabel },
+				{
+					itemKey,
+					optionName: 'send_author',
+					label: __(
+						'自分自身のコメントを送信しない',
+						'send-chat-tools'
+					),
+				},
+				{
+					itemKey,
+					optionName: 'send_update',
+					label: __(
+						'アップデート通知を使用する',
+						'send-chat-tools'
+					),
+				},
+			];
+			setTabItems( items );
+		}
+	}, [ itemKey ] );
+
 	return (
-		<div>
+		<div className="sct-wrapper">
 			<h2>
 				{ title } { __( 'settings', 'send-chat-tools' ) }
 			</h2>
 			{ itemKey && (
-				<Toggle
-					itemKey={ itemKey }
-					optionName="use"
-					label={ itemLabel }
-				/>
-			) }
-			{ itemKey && (
-				<Toggle
-					itemKey={ itemKey }
-					optionName="send_author"
-					label={ __(
-						'自分自身のコメントを送信しない',
-						'send-chat-tools'
-					) }
-				/>
-			) }
-			{ itemKey && (
-				<Toggle
-					itemKey={ itemKey }
-					optionName="send_update"
-					label={ __(
-						'アップデート通知を使用する',
-						'send-chat-tools'
-					) }
-				/>
+				<div className="sct-items">
+					{ Object.values( tabItems ).map( ( item, i ) => (
+						<Toggle
+							key={ i }
+							itemKey={ item.itemKey! }
+							optionName={ item.optionName! }
+							label={ item.label }
+						/>
+					) ) }
+				</div>
 			) }
 			{ itemKey && apiOptionName && (
-				<TextControlForm
-					itemKey={ itemKey }
-					optionName={ apiOptionName }
-					label={ textLabel }
-				/>
+				<div className="sct-items">
+					<TextControlForm
+						itemKey={ itemKey }
+						optionName={ apiOptionName }
+						label={ textLabel }
+					/>
+				</div>
 			) }
 			{ itemKey && chatworkRoomId && (
-				<TextControlForm
-					itemKey={ itemKey }
-					optionName={ chatworkRoomId }
-					label={ chatworkText }
-				/>
+				<div className="sct-items">
+					<TextControlForm
+						itemKey={ itemKey }
+						optionName={ chatworkRoomId }
+						label={ chatworkText }
+					/>
+				</div>
 			) }
-			{ itemKey && <LogDetail itemKey={ itemKey } /> }
-			{ logsFlag && <LogView /> }
+			{ itemKey && (
+				<div className="sct-items">
+					<LogDetail itemKey={ itemKey } />
+				</div>
+			) }
+			{ logsFlag && (
+				<div className="sct-items">
+					<LogView />
+				</div>
+			) }
 		</div>
 	);
 };
