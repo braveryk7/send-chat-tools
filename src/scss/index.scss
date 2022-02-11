@@ -4,6 +4,10 @@
 
 .components {
 
+	&-base-control {
+		width: 80%;
+	}
+
 	&-snackbar {
 		animation-duration: 4s;
 		animation-iteration-count: 5;
