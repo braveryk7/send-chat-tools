@@ -12,6 +12,10 @@
 		right: 30px;
 		top: 50px;
 	}
+
+	&-tab-panel__tabs-item:focus:not(:disabled) {
+		box-shadow: initial;
+	}
 }
 
 .sct {
