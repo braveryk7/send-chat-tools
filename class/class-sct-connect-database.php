@@ -19,14 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Connect_Database extends Sct_Base {
 	/**
-	 * Constructor.
-	 * Gave prefix.
-	 */
-	public function __construct() {
-		$this->table_name = $this->return_table_name();
-	}
-
-	/**
 	 * Search tables.
 	 */
 	public function search_table() {
