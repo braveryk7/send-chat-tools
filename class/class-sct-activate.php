@@ -23,7 +23,7 @@ class Sct_Activate extends Sct_Base {
 	 */
 	public function __construct() {
 		register_activation_hook( $this->return_plugin_path(), [ $this, 'register_options' ] );
-		add_action( 'wp_loaded', [ $this, 'migration_options' ] );
+		add_action( 'wp_loaded', [ $this, 'migration_options' ], 5 );
 	}
 
 	/**
@@ -50,9 +50,9 @@ class Sct_Activate extends Sct_Base {
 		$iv         = $encryption->make_vector();
 
 		$options = [
-			'slack'      => [ $chat_tools_value ],
-			'discord'    => [ $chat_tools_value ],
-			'chatwork'   => [ $chatwork_value ],
+			'slack'      => $chat_tools_value,
+			'discord'    => $chat_tools_value,
+			'chatwork'   => $chatwork_value,
 			'db_version' => self::DB_VERSION,
 			'iv'         => $iv,
 			'user_id'    => '',
@@ -73,6 +73,7 @@ class Sct_Activate extends Sct_Base {
 			$old_options = [];
 			foreach ( self::OPTIONS_COLUMN as $key ) {
 				$old_options[ $key ] = get_option( $this->add_prefix( $key ) );
+				delete_option( $this->add_prefix( $key ) );
 			}
 
 			foreach ( $old_options as $old_key => $old_value ) {
@@ -132,7 +133,7 @@ class Sct_Activate extends Sct_Base {
 						$sct_options['iv'] = $old_value;
 						break;
 					case 'use_user_id':
-						$sct_options['user_id'] = $old_value;
+						$sct_options['user_id'] = (int) $old_value;
 						break;
 					case 'cron_time':
 						$sct_options['cron_time'] = $old_value;

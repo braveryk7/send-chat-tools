@@ -307,9 +307,6 @@ class Sct_Create_Content extends Sct_Base {
 		if ( isset( $add_plugins ) ) {
 			$plugins = esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n";
 		}
-		update_option( 'sct_add_plugins', $add_plugins );
-		update_option( 'sct_add_themes', $add_themes );
-		update_option( 'sct_add_core', $add_core );
 
 		if ( 'slack' === $tool ) {
 			$header_emoji   = ':zap:';
