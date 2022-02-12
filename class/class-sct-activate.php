@@ -50,9 +50,9 @@ class Sct_Activate extends Sct_Base {
 		$iv         = $encryption->make_vector();
 
 		$options = [
-			'slack'      => [ $chat_tools_value ],
-			'discord'    => [ $chat_tools_value ],
-			'chatwork'   => [ $chatwork_value ],
+			'slack'      => $chat_tools_value,
+			'discord'    => $chat_tools_value,
+			'chatwork'   => $chatwork_value,
 			'db_version' => self::DB_VERSION,
 			'iv'         => $iv,
 			'user_id'    => '',
