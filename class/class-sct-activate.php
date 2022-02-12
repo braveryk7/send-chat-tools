@@ -133,7 +133,7 @@ class Sct_Activate extends Sct_Base {
 						$sct_options['iv'] = $old_value;
 						break;
 					case 'use_user_id':
-						$sct_options['user_id'] = $old_value;
+						$sct_options['user_id'] = (int) $old_value;
 						break;
 					case 'cron_time':
 						$sct_options['cron_time'] = $old_value;
