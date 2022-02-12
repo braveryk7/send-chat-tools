@@ -281,12 +281,12 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $tool Tool name.
 	 */
 	private function create_update_message( array $check_data, string $tool ) {
-		$site_name = get_bloginfo( 'name' );
-		$site_url  = get_bloginfo( 'url' );
-		$admin_url = admin_url() . 'update-core.php';
-		$add_plugins;
-		$add_themes;
-		$add_core;
+		$site_name   = get_bloginfo( 'name' );
+		$site_url    = get_bloginfo( 'url' );
+		$admin_url   = admin_url() . 'update-core.php';
+		$add_plugins = '';
+		$add_themes  = '';
+		$add_core    = '';
 
 		foreach ( $check_data as $key => $value ) {
 			if ( 'plugin' === $value['attribute'] ) {
@@ -307,6 +307,9 @@ class Sct_Create_Content extends Sct_Base {
 		if ( isset( $add_plugins ) ) {
 			$plugins = esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n";
 		}
+		update_option( 'sct_add_plugins', $add_plugins );
+		update_option( 'sct_add_themes', $add_themes );
+		update_option( 'sct_add_core', $add_core );
 
 		if ( 'slack' === $tool ) {
 			$header_emoji   = ':zap:';
