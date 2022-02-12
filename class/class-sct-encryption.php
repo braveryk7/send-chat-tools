@@ -17,13 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Encrypt value
  */
 class Sct_Encryption extends Sct_Base {
-	/**
-	 * Get current user registered date and time.
-	 */
-	private static function get_user_registered(): string {
-		$user_reg_date = get_userdata( wp_get_current_user()->ID );
-		return $user_reg_date->user_registered;
-	}
 
 	/**
 	 * Make IV for OpenSSL.
@@ -34,31 +27,11 @@ class Sct_Encryption extends Sct_Base {
 	}
 
 	/**
-	 * Encrypt value.
-	 *
-	 * @param string $value to encrypt.
-	 */
-	public function encrypt( string $value ): string {
-		$wpdb;
-		$sct_options = $this->get_sct_options();
-
-		if ( ! $sct_options['iv'] ) {
-			$sct_options['iv'] = $this->make_vector();
-			$this->set_sct_options( $sct_options );
-		}
-
-		$sct_options['user_id'] = wp_get_current_user()->ID;
-		$this->set_sct_options( $sct_options );
-		return openssl_encrypt( $value, self::METHOD, $this->get_user_registered(), 0, hex2bin( $sct_options['iv'] ) );
-	}
-
-	/**
 	 * Decrypt value.
 	 *
 	 * @param string $value to decrypt.
 	 */
 	public function decrypt( string $value ) {
-		$wpdb;
 		$sct_options = $this->get_sct_options();
 		$key         = get_userdata( get_option( 'sct_use_user_id' ) )->user_registered;
 		return openssl_decrypt( $value, self::ENCRYPT_METHOD, $key, 0, hex2bin( get_option( 'sct_iv' ) ) );

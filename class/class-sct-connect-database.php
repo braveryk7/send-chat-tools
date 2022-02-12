@@ -19,14 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Connect_Database extends Sct_Base {
 	/**
-	 * Constructor.
-	 * Gave prefix.
-	 */
-	public function __construct() {
-		$this->table_name = $this->return_table_name();
-	}
-
-	/**
 	 * Search tables.
 	 */
 	public function search_table() {
@@ -46,7 +38,7 @@ class Sct_Connect_Database extends Sct_Base {
 			delete_option( $key );
 		}
 
-		$sql = 'DROP TABLE IF EXISTS ' . $this->return_table_name();
+		$sql = 'DROP TABLE IF EXISTS ' . $wpdb->prefix . self::TABLE_NAME;
 		$wpdb->query( "${sql}" ); // db call ok; no-cache ok.
 
 		/* Remove cron hooks */
