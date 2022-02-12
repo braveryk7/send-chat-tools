@@ -24,7 +24,7 @@ class Sct_Check_Update extends Sct_Base {
 	 * Add WP-Cron.
 	 */
 	public function __construct() {
-		add_action( 'init', [ $this, 'check_cron_time' ] );
+		add_action( 'wp_loaded', [ $this, 'check_cron_time' ] );
 		add_action( $this->add_prefix( 'update_check' ), [ $this, 'controller' ] );
 
 		$datetime_string = gmdate( 'Y-m-d 18:00:00', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
