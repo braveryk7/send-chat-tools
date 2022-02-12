@@ -91,8 +91,9 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 
 	/**
 	 * Delete wp_options column.
-	 * THIS ITEM WILL BE DELETED IN SEPTEMBER 2021!!
+	 * THIS ITEM WILL BE DELETED IN APRIL 2022!!
 	 */
 	delete_option( 'sct_plugins' );
 	delete_option( 'sct_plugin111' );
+	delete_option( 'sct_uhehe' );
 }
