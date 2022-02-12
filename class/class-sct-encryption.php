@@ -33,7 +33,7 @@ class Sct_Encryption extends Sct_Base {
 	 */
 	public function decrypt( string $value ) {
 		$sct_options = $this->get_sct_options();
-		$key         = get_userdata( get_option( 'sct_use_user_id' ) )->user_registered;
-		return openssl_decrypt( $value, self::ENCRYPT_METHOD, $key, 0, hex2bin( get_option( 'sct_iv' ) ) );
+		$key         = get_userdata( $sct_options['user_id'] )->user_registered;
+		return openssl_decrypt( $value, self::ENCRYPT_METHOD, $key, 0, hex2bin( $sct_options['iv'] ) );
 	}
 }
