@@ -33,7 +33,7 @@ class Sct_Admin_Page extends Sct_Base {
 	/**
 	 * Add Setting menu.
 	 */
-	public function add_menu() {
+	public function add_menu(): void {
 		add_options_page(
 			__( 'Send Chat Tools', 'send-chat-tools' ),
 			__( 'Send Chat Tools', 'send-chat-tools' ),
@@ -91,7 +91,7 @@ class Sct_Admin_Page extends Sct_Base {
 	/**
 	 * Set register.
 	 */
-	public function register() {
+	public function register(): void {
 		register_setting(
 			$this->return_option_group(),
 			$this->add_prefix( 'options' ),
@@ -225,7 +225,7 @@ class Sct_Admin_Page extends Sct_Base {
 	/**
 	 * Settings page.
 	 */
-	public function settings_page() {
+	public function settings_page(): void {
 		echo '<div id="' . esc_attr( $this->return_option_group() ) . '"></div>';
 	}
 }
