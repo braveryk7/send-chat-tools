@@ -10,28 +10,20 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit( 'You do not have access rights.' );
+}
+
 /**
  * Return true or false.
  */
 class Sct_Judgment_Php_Version {
 	/**
-	 * Argument.
-	 *
-	 * @var int
-	 */
-	private $version_received;
-
-	/**
 	 * Judgment PHP version.
 	 *
-	 * @param int $version_received php version.
-	 * @return bool
+	 * @param string $version_received php version.
 	 */
-	public function judgment( $version_received ) {
-		if ( version_compare( PHP_VERSION, $version_received, '>=' ) ) {
-			return true;
-		} else {
-			return false;
-		}
+	public function judgment( string $version_received ): bool {
+		return version_compare( PHP_VERSION, $version_received, '>=' ) ? true : false;
 	}
 }

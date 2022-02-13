@@ -25,13 +25,13 @@ class Sct_Check_Update extends Sct_Base {
 	 */
 	public function __construct() {
 		add_action( 'wp_loaded', [ $this, 'check_cron_time' ] );
-		add_action( $this->add_prefix( 'update_check' ), [ $this, 'controller' ] );
+		add_action( 'wp_loaded', [ $this, 'controller' ] );
 	}
 
 	/**
 	 * Call WordPress Core, Themes and Plugin check function.
 	 */
-	public function controller() {
+	public function controller(): void {
 		$check_data = [];
 		$core       = $this->check_core();
 		$themes     = $this->check_themes();
@@ -56,7 +56,7 @@ class Sct_Check_Update extends Sct_Base {
 	/**
 	 * WordPress Core.
 	 */
-	private function check_core() {
+	private function check_core(): array {
 		$get_core_status = get_option( '_site_transient_update_core' );
 		$return          = [];
 		if ( ! empty( $get_core_status ) && 'upgrade' === $get_core_status->updates[0]->response ) {
@@ -74,7 +74,7 @@ class Sct_Check_Update extends Sct_Base {
 	/**
 	 * Themes.
 	 */
-	private function check_themes() {
+	private function check_themes(): array {
 		$get_theme_status = get_option( '_site_transient_update_themes' );
 		$return           = [];
 		if ( ! empty( $get_theme_status->response ) ) {
@@ -117,7 +117,7 @@ class Sct_Check_Update extends Sct_Base {
 	/**
 	 * Plugins.
 	 */
-	private function check_plugins() {
+	private function check_plugins(): array {
 		$get_plugin_status = get_option( '_site_transient_update_plugins' );
 		$return            = [];
 		if ( ! empty( $get_plugin_status->response ) ) {
@@ -163,7 +163,7 @@ class Sct_Check_Update extends Sct_Base {
 	/**
 	 * WP-cron check.
 	 */
-	public function check_cron_time() {
+	public function check_cron_time(): void {
 		$get_next_schedule = wp_get_scheduled_event( 'sct_update_check' );
 		$sct_options       = $this->get_sct_options();
 

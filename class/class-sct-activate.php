@@ -29,7 +29,7 @@ class Sct_Activate extends Sct_Base {
 	/**
 	 * Register wp_options column.
 	 */
-	public function register_options() {
+	public function register_options(): void {
 		$chat_tools_value = [
 			'use'         => false,
 			'webhook_url' => '',
@@ -66,7 +66,7 @@ class Sct_Activate extends Sct_Base {
 	/**
 	 * Uninstall wp_options column.
 	 */
-	public static function uninstall_options() {
+	public static function uninstall_options(): void {
 		foreach ( self::OPTIONS_COLUMN as $option_name ) {
 			delete_option( self::add_prefix( $option_name ) );
 		}
@@ -75,7 +75,7 @@ class Sct_Activate extends Sct_Base {
 	/**
 	 * Clear WP cron when uninstall.
 	 */
-	public static function clear_wp_event() {
+	public static function clear_wp_event(): void {
 		if ( wp_get_scheduled_event( self::get_wpcron_event_name() ) ) {
 			wp_clear_scheduled_hook( self::get_wpcron_event_name() );
 		}
@@ -84,7 +84,7 @@ class Sct_Activate extends Sct_Base {
 	/**
 	 * Fix use old wp_options -> create new options and migration.
 	 */
-	public function migration_options() {
+	public function migration_options(): void {
 		$sct_options = get_option( $this->add_prefix( 'options' ) );
 		if ( ! $sct_options ) {
 			$this->register_options();
@@ -203,7 +203,7 @@ class Sct_Activate extends Sct_Base {
 	 *
 	 * @param array $sct_options Send Chat Tools options.
 	 */
-	private function crypto2plain( array $sct_options ) {
+	private function crypto2plain( array $sct_options ): void {
 		$tools = [ 'slack', 'discord', 'chatwork' ];
 
 		$encryption = new Sct_Encryption();

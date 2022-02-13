@@ -47,7 +47,7 @@ class Sct_Error_Mail extends Sct_Base {
 	/**
 	 * Make mail to, title, and message.
 	 */
-	public function make_contents() {
+	public function make_contents(): void {
 		global $wpdb;
 		$comment          = get_comment( $this->comment_id );
 		$site_name        = get_bloginfo( 'name' );
@@ -57,12 +57,16 @@ class Sct_Error_Mail extends Sct_Base {
 		$article_url      = get_permalink( $comment->comment_post_ID );
 		$approved_url     = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
 
-		if ( '1' === $comment_approved ) {
-			$comment_status = esc_html__( 'Approved', 'send-chat-tools' );
-		} elseif ( '0' === $comment_approved ) {
-			$comment_status = esc_html__( 'Unapproved', 'send-chat-tools' ) . '<<' . $approved_url . '|' . esc_html__( 'Click here to approve', 'send-chat-tools' ) . '>>';
-		} elseif ( 'spam' === $comment_approved ) {
-			$comment_status = esc_html__( 'Spam', 'send-chat-tools' );
+		switch ( $comment_approved ) {
+			case '1':
+				$comment_status = esc_html__( 'Approved', 'send-chat-tools' );
+				break;
+			case '0':
+				$comment_status = esc_html__( 'Unapproved', 'send-chat-tools' ) . '<<' . $approved_url . '|' . esc_html__( 'Click here to approve', 'send-chat-tools' ) . '>>';
+				break;
+			case 'spam':
+				$comment_status = esc_html__( 'Spam', 'send-chat-tools' );
+				break;
 		}
 
 		$mail_to      = get_option( 'admin_email' );
@@ -87,7 +91,7 @@ class Sct_Error_Mail extends Sct_Base {
 	 *
 	 * @param array $options The outgoing message is stored.
 	 */
-	public function update_contents( array $options ) {
+	public function update_contents( array $options ): void {
 		$mail_to      = get_option( 'admin_email' );
 		$mail_title   = esc_html__( 'WordPress update notification.', 'send-chat-tools' );
 		$mail_message = json_decode( $options['body'], false )->text;
@@ -102,7 +106,7 @@ class Sct_Error_Mail extends Sct_Base {
 	 * @param string $mail_title mail title.
 	 * @param string $mail_message mail message.
 	 */
-	private function send_mail( string $mail_to, string $mail_title, string $mail_message ) {
+	private function send_mail( string $mail_to, string $mail_title, string $mail_message ): void {
 		wp_mail( $mail_to, $mail_title, $mail_message );
 	}
 }

@@ -33,7 +33,7 @@ class Sct_Admin_Page extends Sct_Base {
 	/**
 	 * Add Setting menu.
 	 */
-	public function add_menu() {
+	public function add_menu(): void {
 		add_options_page(
 			__( 'Send Chat Tools', 'send-chat-tools' ),
 			__( 'Send Chat Tools', 'send-chat-tools' ),
@@ -91,7 +91,7 @@ class Sct_Admin_Page extends Sct_Base {
 	/**
 	 * Set register.
 	 */
-	public function register() {
+	public function register(): void {
 		register_setting(
 			$this->return_option_group(),
 			$this->add_prefix( 'options' ),
@@ -130,102 +130,12 @@ class Sct_Admin_Page extends Sct_Base {
 				],
 			],
 		);
-
-		register_setting(
-			$this->return_option_group(),
-			$this->add_prefix( 'use_slack' ),
-			[
-				'type'         => 'boolean',
-				'show_in_rest' => true,
-				'default'      => get_option( $this->add_prefix( 'use_slack' ) ),
-			]
-		);
-
-		register_setting(
-			$this->return_option_group(),
-			$this->add_prefix( 'send_slack_author' ),
-			[
-				'type'         => 'boolean',
-				'show_in_rest' => true,
-				'default'      => get_option( $this->add_prefix( 'send_slack_author' ) ),
-			]
-		);
-
-		register_setting(
-			$this->return_option_group(),
-			$this->add_prefix( 'send_slack_update' ),
-			[
-				'type'         => 'boolean',
-				'show_in_rest' => true,
-				'default'      => get_option( $this->add_prefix( 'send_slack_update' ) ),
-			]
-		);
-
-		register_setting(
-			$this->return_option_group(),
-			$this->add_prefix( 'use_discord' ),
-			[
-				'type'         => 'boolean',
-				'show_in_rest' => true,
-				'default'      => get_option( $this->add_prefix( 'use_discord' ) ),
-			]
-		);
-
-		register_setting(
-			$this->return_option_group(),
-			$this->add_prefix( 'send_discord_author' ),
-			[
-				'type'         => 'boolean',
-				'show_in_rest' => true,
-				'default'      => get_option( $this->add_prefix( 'send_discord_author' ) ),
-			]
-		);
-
-		register_setting(
-			$this->return_option_group(),
-			$this->add_prefix( 'send_discord_update' ),
-			[
-				'type'         => 'boolean',
-				'show_in_rest' => true,
-				'default'      => get_option( $this->add_prefix( 'send_discord_update' ) ),
-			]
-		);
-
-		register_setting(
-			$this->return_option_group(),
-			$this->add_prefix( 'use_chatwork' ),
-			[
-				'type'         => 'boolean',
-				'show_in_rest' => true,
-				'default'      => get_option( $this->add_prefix( 'use_chatwork' ) ),
-			]
-		);
-
-		register_setting(
-			$this->return_option_group(),
-			$this->add_prefix( 'send_chatwork_author' ),
-			[
-				'type'         => 'boolean',
-				'show_in_rest' => true,
-				'default'      => get_option( $this->add_prefix( 'send_chatwork_author' ) ),
-			]
-		);
-
-		register_setting(
-			$this->return_option_group(),
-			$this->add_prefix( 'send_chatwork_update' ),
-			[
-				'type'         => 'boolean',
-				'show_in_rest' => true,
-				'default'      => get_option( $this->add_prefix( 'send_chatwork_update' ) ),
-			]
-		);
 	}
 
 	/**
 	 * Settings page.
 	 */
-	public function settings_page() {
+	public function settings_page(): void {
 		echo '<div id="' . esc_attr( $this->return_option_group() ) . '"></div>';
 	}
 }
