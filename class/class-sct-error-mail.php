@@ -68,13 +68,6 @@ class Sct_Error_Mail extends Sct_Base {
 				$comment_status = esc_html__( 'Spam', 'send-chat-tools' );
 				break;
 		}
-		if ( '1' === $comment_approved ) {
-			$comment_status = esc_html__( 'Approved', 'send-chat-tools' );
-		} elseif ( '0' === $comment_approved ) {
-			$comment_status = esc_html__( 'Unapproved', 'send-chat-tools' ) . '<<' . $approved_url . '|' . esc_html__( 'Click here to approve', 'send-chat-tools' ) . '>>';
-		} elseif ( 'spam' === $comment_approved ) {
-			$comment_status = esc_html__( 'Spam', 'send-chat-tools' );
-		}
 
 		$mail_to      = get_option( 'admin_email' );
 		$mail_title   = esc_html__( 'You have received a new comment', 'send-chat-tools' );
