@@ -75,7 +75,7 @@ class Sct_Activate extends Sct_Base {
 	/**
 	 * Clear WP cron when uninstall.
 	 */
-	private static function clear_wp_event() {
+	public static function clear_wp_event() {
 		if ( wp_get_scheduled_event( self::get_wpcron_event_name() ) ) {
 			wp_clear_scheduled_hook( self::get_wpcron_event_name() );
 		}
