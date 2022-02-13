@@ -191,13 +191,13 @@ class Sct_Base {
 					'status'  => $result['response']['code'],
 				],
 			];
-		}
 
-		if ( '2' <= count( $sct_options[ $tools ]['log'] ) ) {
-			array_shift( $sct_options[ $tools ]['log'] );
+			if ( '2' <= count( $sct_options[ $tools ]['log'] ) ) {
+				array_shift( $sct_options[ $tools ]['log'] );
+			}
+			$sct_options[ $tools ]['log'] += $logs;
+			$this->set_sct_options( $sct_options );
 		}
-		$sct_options[ $tools ]['log'] += $logs;
-		$this->set_sct_options( $sct_options );
 
 		if ( ! isset( $result->errors ) ) {
 			$status_code = $result['response']['code'];
