@@ -280,7 +280,7 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param array  $check_data Update data.
 	 * @param string $tool Tool name.
 	 */
-	private function create_update_message( array $check_data, string $tool ): array {
+	private function create_update_message( array $check_data, string $tool ) {
 		$site_name   = get_bloginfo( 'name' );
 		$site_url    = get_bloginfo( 'url' );
 		$admin_url   = admin_url() . 'update-core.php';
