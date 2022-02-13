@@ -35,7 +35,7 @@ class Sct_Activate extends Sct_Base {
 			'webhook_url' => '',
 			'send_author' => false,
 			'send_update' => false,
-			'log'         => '',
+			'log'         => [],
 		];
 		$chatwork_value   = [
 			'use'         => false,
@@ -56,10 +56,11 @@ class Sct_Activate extends Sct_Base {
 			'db_version' => self::DB_VERSION,
 			'iv'         => $iv,
 			'user_id'    => '',
-			'cron_time'  => false,
+			'cron_time'  => '18:00',
 		];
 
 		add_option( $this->add_prefix( 'options' ), $options );
+		add_option( $this->add_prefix( 'logs' ), [] );
 	}
 
 	/**
