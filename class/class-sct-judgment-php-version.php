@@ -15,13 +15,6 @@ declare( strict_types = 1 );
  */
 class Sct_Judgment_Php_Version {
 	/**
-	 * Argument.
-	 *
-	 * @var int
-	 */
-	private $version_received;
-
-	/**
 	 * Judgment PHP version.
 	 *
 	 * @param int $version_received php version.
