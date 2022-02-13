@@ -80,7 +80,7 @@ class Sct_Activate extends Sct_Base {
 			$this->register_options();
 
 			$old_options = [];
-			foreach ( self::OPTIONS_COLUMN as $key ) {
+			foreach ( self::OLD_OPTIONS_COLUMN as $key ) {
 				$old_options[ $key ] = get_option( $this->add_prefix( $key ) );
 				delete_option( $this->add_prefix( $key ) );
 			}

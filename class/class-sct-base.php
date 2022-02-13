@@ -29,7 +29,7 @@ class Sct_Base {
 
 	protected const ENCRYPT_METHOD = 'AES-256-CBC';
 
-	public const OPTIONS_COLUMN = [
+	public const OLD_OPTIONS_COLUMN = [
 		// Use database.
 		'db_version',
 		'iv',

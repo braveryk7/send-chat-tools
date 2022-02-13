@@ -33,7 +33,7 @@ class Sct_Connect_Database extends Sct_Base {
 		global $wpdb;
 
 		/* Remove columns from wp_options table */
-		$options = self::OPTIONS_COLUMN;
+		$options = self::OLD_OPTIONS_COLUMN;
 		foreach ( $options as $key ) {
 			delete_option( $key );
 		}
