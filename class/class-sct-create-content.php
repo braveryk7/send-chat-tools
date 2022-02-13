@@ -88,30 +88,22 @@ class Sct_Create_Content extends Sct_Base {
 		];
 		$api_exists = false;
 
-		if ( $tools['use'] ) {
-			$status['use'] = true;
-		}
+		$tools['use'] ? $status['use'] = true : $status['use'] = false;
 
-		if ( ! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ) {
-			$status['author'] = true;
-		}
+		! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ? $status['author'] = true : $status['author'] = false;
 
 		switch ( $tool_name ) {
 			case 'slack':
 			case 'discord':
-				$api = $tools['webhook_url'];
-
+				$api                             = $tools['webhook_url'];
 				! empty( $api ) ? $status['api'] = true : $status['api'] = false;
-
 				break;
 			case 'chatwork':
 				$api = [
 					'api_token' => $tools['api_token'],
 					'room_id'   => $tools['room_id'],
 				];
-
 				! empty( $api['api_token'] ) && ! empty( $api['room_id'] ) ? $status['api'] = true : $status['api'] = false;
-
 				break;
 			default:
 				$status['api'] = false;
@@ -138,39 +130,30 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param array  $check_data Update check data.
 	 */
 	private function create_content( string $type, string $tool, object $comment = null, array $check_data = [] ): array {
-		if ( 'slack' === $tool ) {
-			$content_type = [ 'Content-Type: application/json;charset=utf-8' ];
-
-			if ( 'comment' === $type ) {
+		$message = [];
+		switch ( $type ) {
+			case 'comment':
 				$message = $this->create_comment_message( $comment, $tool );
-			} elseif ( 'update' === $type ) {
+				break;
+			case 'update':
 				$message = $this->create_update_message( $check_data, $tool );
-			}
+				break;
+		}
 
-			$body = wp_json_encode( $message );
-
-		} elseif ( 'discord' === $tool ) {
-			$content_type = [ 'Content-Type: application/json;charset=utf-8' ];
-
-			if ( 'comment' === $type ) {
-				$message = $this->create_comment_message( $comment, $tool );
-			} elseif ( 'update' === $type ) {
-				$message = $this->create_update_message( $check_data, $tool );
-			}
-
-			$body = [ 'content' => $message ];
-
-		} elseif ( 'chatwork' === $tool ) {
-			$sct_options  = $this->get_sct_options();
-			$content_type = 'X-ChatWorkToken: ' . $sct_options['chatwork']['api_token'];
-
-			if ( 'comment' === $type ) {
-				$message = $this->create_comment_message( $comment, $tool );
-			} elseif ( 'update' === $type ) {
-				$message = $this->create_update_message( $check_data, $tool );
-			}
-
-			$body = $message;
+		switch ( $tool ) {
+			case 'slack':
+				$content_type = [ 'Content-Type: application/json;charset=utf-8' ];
+				$body         = wp_json_encode( $message );
+				break;
+			case 'discord':
+				$content_type = [ 'Content-Type: application/json;charset=utf-8' ];
+				$body         = [ 'content' => $message ];
+				break;
+			case 'chatwork':
+				$sct_options  = $this->get_sct_options();
+				$content_type = 'X-ChatWorkToken: ' . $sct_options['chatwork']['api_token'];
+				$body         = $message;
+				break;
 		}
 
 		$options = [
