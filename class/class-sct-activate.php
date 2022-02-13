@@ -60,6 +60,7 @@ class Sct_Activate extends Sct_Base {
 		];
 
 		add_option( $this->add_prefix( 'options' ), $options );
+		add_option( $this->add_prefix( 'logs' ), [] );
 	}
 
 	/**
