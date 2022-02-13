@@ -43,31 +43,11 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 } elseif ( true === $get_php_version_bool->judgment( $require_php_version ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-encryption.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-connect-database.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-admin-page.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-create-content.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-activate.php';
-
-	global $wpdb;
-
-	/**
-	 * Activate Hook
-	 */
-	function sct_activate() {
-		$db_class = new Sct_Connect_Database();
-		register_activation_hook( __FILE__, [ $db_class, 'search_table' ] );
-	}
-	sct_activate();
-
-	/**
-	 * Uninstall Hook.
-	 */
-	function sct_uninstall() {
-		register_uninstall_hook( __FILE__, 'Sct_Connect_Database::delete_db' );
-	}
-	sct_uninstall();
 
 	/**
 	 * Start comment process.
