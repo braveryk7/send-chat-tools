@@ -375,15 +375,10 @@ class Sct_Create_Content extends Sct_Base {
 			esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
 			'<https://wordpress.org/plugins/send-chat-tools/>';
 		} elseif ( 'chatwork' === $tool ) {
-			if ( isset( $core ) ) {
-				$core = $core . '[hr]';
-			}
-			if ( isset( $themes ) ) {
-				$themes = $themes . '[hr]';
-			}
-			if ( isset( $plugins ) ) {
-				$plugins = $plugins . '[hr]';
-			}
+			isset( $core ) ? $core       = $core . '[hr]' : $core;
+			isset( $themes ) ? $themes   = $themes . '[hr]' : $themes;
+			isset( $plugins ) ? $plugins = $plugins . '[hr]' : $themes;
+
 			$message = [
 				'body' =>
 					'[info][title]' . $site_name . '( ' . $site_url . ' )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . '[/title]' .
