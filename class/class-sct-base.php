@@ -152,7 +152,7 @@ class Sct_Base {
 	/**
 	 * Get WP-cron event name.
 	 */
-	public function get_wpcron_event_name() {
+	public function get_wpcron_event_name(): string {
 		return self::add_prefix( self::WP_CRON_EVENT_NAME );
 	}
 
@@ -164,7 +164,7 @@ class Sct_Base {
 	 * @param string $tools Use chat tools prefix.
 	 * @param object $comment Comment object.
 	 */
-	protected function send_tools( array $options, string $id, string $tools, object $comment = null ) {
+	protected function send_tools( array $options, string $id, string $tools, object $comment = null ): void {
 
 		$sct_options = $this->get_sct_options();
 
