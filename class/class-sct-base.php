@@ -153,7 +153,7 @@ class Sct_Base {
 	 * Get WP-cron event name.
 	 */
 	public function get_wpcron_event_name() {
-		return $this->add_prefix( self::WP_CRON_EVENT_NAME );
+		return self::add_prefix( self::WP_CRON_EVENT_NAME );
 	}
 
 	/**
