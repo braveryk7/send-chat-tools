@@ -63,6 +63,15 @@ class Sct_Activate extends Sct_Base {
 	}
 
 	/**
+	 * Uninstall wp_options column.
+	 */
+	public static function uninstall_options() {
+		foreach ( self::OPTIONS_COLUMN as $option_name ) {
+			delete_option( self::add_prefix( $option_name ) );
+		}
+	}
+
+	/**
 	 * Fix use old wp_options -> create new options and migration.
 	 */
 	public function migration_options() {
