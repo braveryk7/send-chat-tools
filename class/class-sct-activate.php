@@ -35,7 +35,7 @@ class Sct_Activate extends Sct_Base {
 			'webhook_url' => '',
 			'send_author' => false,
 			'send_update' => false,
-			'log'         => '',
+			'log'         => [],
 		];
 		$chatwork_value   = [
 			'use'         => false,
