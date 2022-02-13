@@ -40,7 +40,7 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $type Content Type (comment: default, update).
 	 * @param array  $check_date Update cehck date ([]: default).
 	 */
-	public function controller( int $comment_id = 0, string $type = 'comment', array $check_date = [] ) {
+	public function controller( int $comment_id = 0, string $type = 'comment', array $check_date = [] ): void {
 		global $wpdb;
 
 		$sct_options = $this->get_sct_options();
@@ -188,7 +188,7 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param object $comment Comment data.
 	 * @param string $tool Tool name.
 	 */
-	private function create_comment_message( object $comment, string $tool ) {
+	private function create_comment_message( object $comment, string $tool ): array {
 		$site_name     = get_bloginfo( 'name' );
 		$site_url      = get_bloginfo( 'url' );
 		$article_title = get_the_title( $comment->comment_post_ID );
@@ -280,7 +280,7 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param array  $check_data Update data.
 	 * @param string $tool Tool name.
 	 */
-	private function create_update_message( array $check_data, string $tool ) {
+	private function create_update_message( array $check_data, string $tool ): array {
 		$site_name   = get_bloginfo( 'name' );
 		$site_url    = get_bloginfo( 'url' );
 		$admin_url   = admin_url() . 'update-core.php';

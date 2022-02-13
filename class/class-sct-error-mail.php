@@ -47,7 +47,7 @@ class Sct_Error_Mail extends Sct_Base {
 	/**
 	 * Make mail to, title, and message.
 	 */
-	public function make_contents() {
+	public function make_contents(): void {
 		global $wpdb;
 		$comment          = get_comment( $this->comment_id );
 		$site_name        = get_bloginfo( 'name' );
@@ -91,7 +91,7 @@ class Sct_Error_Mail extends Sct_Base {
 	 *
 	 * @param array $options The outgoing message is stored.
 	 */
-	public function update_contents( array $options ) {
+	public function update_contents( array $options ): void {
 		$mail_to      = get_option( 'admin_email' );
 		$mail_title   = esc_html__( 'WordPress update notification.', 'send-chat-tools' );
 		$mail_message = json_decode( $options['body'], false )->text;
@@ -106,7 +106,7 @@ class Sct_Error_Mail extends Sct_Base {
 	 * @param string $mail_title mail title.
 	 * @param string $mail_message mail message.
 	 */
-	private function send_mail( string $mail_to, string $mail_title, string $mail_message ) {
+	private function send_mail( string $mail_to, string $mail_title, string $mail_message ): void {
 		wp_mail( $mail_to, $mail_title, $mail_message );
 	}
 }

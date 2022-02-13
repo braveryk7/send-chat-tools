@@ -25,7 +25,7 @@ class Sct_Logger extends Sct_Base {
 	 * @param string $tool_name Use tool name.
 	 * @param string $notification_type Comment, Update.
 	 */
-	public function create_log( int $status_code, string $tool_name, string $notification_type ) {
+	public function create_log( int $status_code, string $tool_name, string $notification_type ): void {
 
 		switch ( $tool_name ) {
 			case 'slack':
