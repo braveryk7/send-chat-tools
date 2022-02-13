@@ -90,6 +90,12 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	new Sct_Activate();
 
 	/**
+	 * Plugin uninstall hook.
+	 * Delete wp_options column.
+	 */
+	register_uninstall_hook( __FILE__, 'Sct_Activate::uninstall_options' );
+
+	/**
 	 * Delete wp_options column.
 	 * THIS ITEM WILL BE DELETED IN APRIL 2022!!
 	 */
