@@ -167,7 +167,7 @@ class Sct_Check_Update extends Sct_Base {
 		$get_next_schedule = wp_get_scheduled_event( 'sct_update_check' );
 		$sct_options       = $this->get_sct_options();
 
-		! $get_next_schedule ? $current_timestamp = $get_next_schedule->timestamp : false;
+		! $get_next_schedule ? $current_timestamp = $get_next_schedule->timestamp : $current_timestamp = false;
 
 		if ( '' !== $sct_options['cron_time'] ) {
 			$to_datetime_string    = gmdate( 'Y-m-d ' . $sct_options['cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
@@ -178,7 +178,7 @@ class Sct_Check_Update extends Sct_Base {
 			}
 
 			if ( $current_timestamp !== $sct_options_timestamp ) {
-				if ( ! $current_timestamp ) {
+				if ( $get_next_schedule ) {
 					wp_clear_scheduled_hook( 'sct_update_check' );
 				}
 				wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
