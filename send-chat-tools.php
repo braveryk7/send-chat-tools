@@ -94,6 +94,7 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	 * Delete wp_options column.
 	 */
 	register_uninstall_hook( __FILE__, 'Sct_Activate::uninstall_options' );
+	register_uninstall_hook( __FILE__, 'Sct_Activate::clear_wp_event' );
 
 	/**
 	 * Delete wp_options column.

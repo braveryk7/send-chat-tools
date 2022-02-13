@@ -29,6 +29,8 @@ class Sct_Base {
 
 	protected const ENCRYPT_METHOD = 'AES-256-CBC';
 
+	public const WP_CRON_EVENT_NAME = 'update_check';
+
 	public const OPTIONS_COLUMN = [
 		'options',
 		'logs',
@@ -145,6 +147,13 @@ class Sct_Base {
 	 */
 	protected function set_sct_options( array $sct_options ): void {
 		update_option( $this->add_prefix( self::OPTIONS_COLUMN_NAME ), $sct_options );
+	}
+
+	/**
+	 * Get WP-cron event name.
+	 */
+	public function get_wpcron_event_name() {
+		return self::add_prefix( self::WP_CRON_EVENT_NAME );
 	}
 
 	/**
