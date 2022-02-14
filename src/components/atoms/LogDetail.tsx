@@ -27,17 +27,27 @@ export const LogDetail = ( props: { itemKey: itemKeyType } ) => {
 							{ `${ __(
 								'Comment Author',
 								'send-chat-tools'
-							) }: ${ value.author }<${ value.email }>` }
-							{ `${ __( 'Status', 'send-chat-tools' ) }: ${
-								value.status
-							}` }
+							) }: ${ value.author } <${ value.email }>` }
+							<span className="sct-tools-log-status">
+								{ `${ __( 'Status', 'send-chat-tools' ) }: ${
+									value.status
+								}` }
+							</span>
 						</CardHeader>
 						<CardBody>{ value.comment }</CardBody>
 						<CardFooter>
-							{ `${ __( 'Comment ID', 'send-chat-tools' ) }: ${
-								value.id
-							}` }
-							{ `${ __( 'Date', 'send-chat-tools' ) }: ${ key }` }
+							<span className="sct-tools-log-comment_id">
+								{ `${ __(
+									'Comment ID',
+									'send-chat-tools'
+								) }: ${ value.id }` }
+							</span>
+							<span className="sct-tools-log-date">
+								{ `${ __(
+									'Date',
+									'send-chat-tools'
+								) }: ${ key }` }
+							</span>
 						</CardFooter>
 					</Card>
 				) ) }
