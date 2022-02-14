@@ -32,7 +32,6 @@ class Sct_Check_Update extends Sct_Base {
 	 * Call WordPress Core, Themes and Plugin check function.
 	 */
 	public function controller(): void {
-		update_option( 'sct_cron_test', 1234 );
 		$check_data = [];
 		$core       = $this->check_core();
 		$themes     = $this->check_themes();
