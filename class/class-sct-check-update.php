@@ -24,14 +24,15 @@ class Sct_Check_Update extends Sct_Base {
 	 * Add WP-Cron.
 	 */
 	public function __construct() {
-		add_action( 'wp_loaded', [ $this, 'check_cron_time' ] );
-		add_action( 'wp_loaded', [ $this, 'controller' ] );
+		add_action( 'wp', [ $this, 'check_cron_time' ] );
+		add_action( 'sct_update_check', [ $this, 'controller' ] );
 	}
 
 	/**
 	 * Call WordPress Core, Themes and Plugin check function.
 	 */
 	public function controller(): void {
+		update_option( 'sct_cron_test', 1234 );
 		$check_data = [];
 		$core       = $this->check_core();
 		$themes     = $this->check_themes();
@@ -164,28 +165,26 @@ class Sct_Check_Update extends Sct_Base {
 	 * WP-cron check.
 	 */
 	public function check_cron_time(): void {
-		$get_next_schedule = wp_get_scheduled_event( 'sct_update_check' );
-		$sct_options       = $this->get_sct_options();
+		$get_next_schedule     = wp_get_scheduled_event( 'sct_update_check' );
+		$sct_options           = $this->get_sct_options();
+		$to_datetime_string    = gmdate( 'Y-m-d ' . $sct_options['cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+		$sct_options_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $to_datetime_string ) );
 
-		! $get_next_schedule ? $current_timestamp = $get_next_schedule->timestamp : $current_timestamp = false;
-
-		if ( '' !== $sct_options['cron_time'] ) {
-			$to_datetime_string    = gmdate( 'Y-m-d ' . $sct_options['cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-			$sct_options_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $to_datetime_string ) );
-
-			if ( $sct_options_timestamp <= time() ) {
-				$sct_options_timestamp = strtotime( '+1 day', $sct_options_timestamp );
-			}
-
-			if ( $current_timestamp !== $sct_options_timestamp ) {
-				if ( $get_next_schedule ) {
-					wp_clear_scheduled_hook( 'sct_update_check' );
-				}
-				wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
-			}
+		if ( ! $get_next_schedule ) {
+			wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
 		} else {
-			$sct_options['cron_time'] = '18:00';
-			$this->set_sct_options( $sct_options );
+			if ( isset( $sct_options['cron_time'] ) ) {
+				if ( $get_next_schedule->timestamp !== $sct_options_timestamp ) {
+					if ( $sct_options_timestamp <= time() ) {
+						$sct_options_timestamp = strtotime( '+1 day', $sct_options_timestamp );
+					}
+					wp_clear_scheduled_hook( 'sct_update_check' );
+					wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
+				}
+			} else {
+				$sct_options['cron_time'] = '18:00';
+				$this->set_sct_options( $sct_options );
+			}
 		}
 	}
 }
