@@ -34,27 +34,23 @@ export const Items = ( props: any ) => {
 		switch ( id ) {
 			case 'slack':
 				setItemKey( 'slack' );
-				setItemLabel( __( 'Slack通知を使用する', 'send-chat-tools' ) );
+				setItemLabel( __( 'Use Slack notify', 'send-chat-tools' ) );
 				setApiOptionName( 'webhook_url' );
 				setTextLabel( __( 'Slack Webhook URL', 'send-chat-tools' ) );
 				break;
 			case 'discord':
 				setItemKey( 'discord' );
-				setItemLabel(
-					__( 'Discord通知を使用する', 'send-chat-tools' )
-				);
+				setItemLabel( __( 'Use Discord notify', 'send-chat-tools' ) );
 				setApiOptionName( 'webhook_url' );
 				setTextLabel( __( 'Discord Webhook URL', 'send-chat-tools' ) );
 				break;
 			case 'chatwork':
 				setItemKey( 'chatwork' );
-				setItemLabel(
-					__( 'Chatwork通知を使用する', 'send-chat-tools' )
-				);
+				setItemLabel( __( 'Use Chatwork notify', 'send-chat-tools' ) );
 				setApiOptionName( 'api_token' );
 				setChatworkRoomId( 'room_id' );
-				setTextLabel( __( 'Chatwork APIキー', 'send-chat-tools' ) );
-				setChatworkText( __( 'Chatwork RoomID', 'send-chat-tools' ) );
+				setTextLabel( __( 'Chatwork API token', 'send-chat-tools' ) );
+				setChatworkText( __( 'Chatwork Room ID', 'send-chat-tools' ) );
 				break;
 			case 'update':
 				setUpdateFlag( true );
@@ -73,17 +69,14 @@ export const Items = ( props: any ) => {
 					itemKey,
 					optionName: 'send_author',
 					label: __(
-						'自分自身のコメントを送信しない',
+						"Don't send your own comments",
 						'send-chat-tools'
 					),
 				},
 				{
 					itemKey,
 					optionName: 'send_update',
-					label: __(
-						'アップデート通知を使用する',
-						'send-chat-tools'
-					),
+					label: __( 'Use Update notify', 'send-chat-tools' ),
 				},
 			];
 			setTabItems( items );

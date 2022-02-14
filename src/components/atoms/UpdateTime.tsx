@@ -26,12 +26,7 @@ export const UpdateTime = () => {
 
 	return (
 		<>
-			<p>
-				{ __(
-					'アップデートをチェックする時間を設定する',
-					'send-chat-tools'
-				) }
-			</p>
+			<p>{ __( 'Set time to check for updates', 'send-chat-tools' ) }</p>
 			<input
 				type="time"
 				value={ time }
