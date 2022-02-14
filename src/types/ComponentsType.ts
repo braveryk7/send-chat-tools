@@ -1,3 +1,7 @@
+export type TabItemsType = {
+	id: string;
+};
+
 export type itemKeyType = 'slack' | 'discord' | 'chatwork';
 
 export type optionNameType =
