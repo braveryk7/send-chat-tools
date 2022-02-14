@@ -13,7 +13,7 @@ import { Toggle } from '../atoms/Toggle';
 import { UpdateTime } from '../atoms/UpdateTime';
 
 export const Items = ( props: any ) => {
-	const { id, title } = props;
+	const { id } = props;
 	const [ updateFlag, setUpdateFlag ] = useState( false );
 	const [ logsFlag, setLogsFlag ] = useState( false );
 	const [ tabItems, setTabItems ] = useState< TogglePropsType[] >( [] );
