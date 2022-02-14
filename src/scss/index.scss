@@ -48,7 +48,19 @@
 	}
 
 	&-tools-log {
+		margin-top: 15px;
 		width: 80%;
+
+		&-footer {
+			align-items: unset !important;
+			flex-direction: column !important;
+
+			&-status,
+			&-date {
+				margin-left: 0 !important;
+			}
+		}
+
 	}
 
 	&-logs {
