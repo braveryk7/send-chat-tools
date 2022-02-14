@@ -23,6 +23,7 @@ export const Items = ( props: any ) => {
 		apiOptionName,
 		setApiOptionName,
 	] = useState< optionNameType | null >( null );
+	const [ titleText, setTitleText ] = useState( '' );
 	const [ textLabel, setTextLabel ] = useState( '' );
 	const [
 		chatworkRoomId,
@@ -36,12 +37,14 @@ export const Items = ( props: any ) => {
 				setItemKey( 'slack' );
 				setItemLabel( __( 'Use Slack notify', 'send-chat-tools' ) );
 				setApiOptionName( 'webhook_url' );
+				setTitleText( __( 'Slack settings', 'send-chat-tools' ) );
 				setTextLabel( __( 'Slack Webhook URL', 'send-chat-tools' ) );
 				break;
 			case 'discord':
 				setItemKey( 'discord' );
 				setItemLabel( __( 'Use Discord notify', 'send-chat-tools' ) );
 				setApiOptionName( 'webhook_url' );
+				setTitleText( __( 'Discord settings', 'send-chat-tools' ) );
 				setTextLabel( __( 'Discord Webhook URL', 'send-chat-tools' ) );
 				break;
 			case 'chatwork':
@@ -49,14 +52,19 @@ export const Items = ( props: any ) => {
 				setItemLabel( __( 'Use Chatwork notify', 'send-chat-tools' ) );
 				setApiOptionName( 'api_token' );
 				setChatworkRoomId( 'room_id' );
+				setTitleText( __( 'Chatwork settings', 'send-chat-tools' ) );
 				setTextLabel( __( 'Chatwork API token', 'send-chat-tools' ) );
 				setChatworkText( __( 'Chatwork Room ID', 'send-chat-tools' ) );
 				break;
 			case 'update':
 				setUpdateFlag( true );
+				setTitleText(
+					__( 'Update notify settings', 'send-chat-tools' )
+				);
 				break;
 			case 'logs':
 				setLogsFlag( true );
+				setTitleText( __( 'Logs', 'send-chat-tools' ) );
 				break;
 		}
 	}, [ id ] );
@@ -85,9 +93,7 @@ export const Items = ( props: any ) => {
 
 	return (
 		<div className="sct-wrapper">
-			<h2>
-				{ title } { __( 'settings', 'send-chat-tools' ) }
-			</h2>
+			<h2>{ titleText }</h2>
 			{ itemKey && (
 				<div className="sct-items">
 					{ Object.values( tabItems ).map( ( item, i ) => (
