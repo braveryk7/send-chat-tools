@@ -18,7 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Check Update WordPress core, theme, and plugin.
  */
 class Sct_Check_Update extends Sct_Base {
-
 	/**
 	 * WordPress hook.
 	 * Add WP-Cron.
@@ -37,15 +36,9 @@ class Sct_Check_Update extends Sct_Base {
 		$themes     = $this->check_themes();
 		$plugins    = $this->check_plugins();
 
-		if ( isset( $core ) ) {
-			$check_data = array_merge( $check_data, $core );
-		}
-		if ( isset( $themes ) ) {
-			$check_data = array_merge( $check_data, $themes );
-		}
-		if ( isset( $plugins ) ) {
-			$check_data = array_merge( $check_data, $plugins );
-		}
+		isset( $core ) ? $check_data    = array_merge( $check_data, $core ) : $check_data;
+		isset( $themes ) ? $check_data  = array_merge( $check_data, $themes ) : $check_data;
+		isset( $plugins ) ? $check_data = array_merge( $check_data, $plugins ) : $check_data;
 
 		if ( ! empty( $check_data ) ) {
 			$next = new Sct_Create_Content();
@@ -174,9 +167,7 @@ class Sct_Check_Update extends Sct_Base {
 		} else {
 			if ( isset( $sct_options['cron_time'] ) ) {
 				if ( $get_next_schedule->timestamp !== $sct_options_timestamp ) {
-					if ( $sct_options_timestamp <= time() ) {
-						$sct_options_timestamp = strtotime( '+1 day', $sct_options_timestamp );
-					}
+					$sct_options_timestamp <= time() ? $sct_options_timestamp = strtotime( '+1 day', $sct_options_timestamp ) : $sct_options_timestamp;
 					wp_clear_scheduled_hook( 'sct_update_check' );
 					wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
 				}
