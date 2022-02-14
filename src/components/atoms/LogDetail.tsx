@@ -27,17 +27,34 @@ export const LogDetail = ( props: { itemKey: itemKeyType } ) => {
 							{ `${ __(
 								'Comment Author',
 								'send-chat-tools'
-							) }: ${ value.author }<${ value.email }>` }
-							{ `${ __( 'Status', 'send-chat-tools' ) }: ${
-								value.status
-							}` }
+							) }: ${ value.author } <${ value.email }>` }
 						</CardHeader>
-						<CardBody>{ value.comment }</CardBody>
-						<CardFooter>
-							{ `${ __( 'Comment ID', 'send-chat-tools' ) }: ${
-								value.id
-							}` }
-							{ `${ __( 'Date', 'send-chat-tools' ) }: ${ key }` }
+						<CardBody
+							dangerouslySetInnerHTML={ {
+								__html: value.comment.replaceAll(
+									'\r\n',
+									'<br>'
+								),
+							} }
+						/>
+						<CardFooter className="sct-tools-log-footer">
+							<span className="sct-tools-log-footer-comment_id">
+								{ `${ __(
+									'Comment ID',
+									'send-chat-tools'
+								) }: ${ value.id }` }
+							</span>
+							<span className="sct-tools-log-footer-status">
+								{ `${ __( 'Status', 'send-chat-tools' ) }: ${
+									value.status
+								}` }
+							</span>
+							<span className="sct-tools-log-footer-date">
+								{ `${ __(
+									'Date',
+									'send-chat-tools'
+								) }: ${ key }` }
+							</span>
 						</CardFooter>
 					</Card>
 				) ) }
