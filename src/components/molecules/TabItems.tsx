@@ -4,6 +4,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	itemKeyType,
 	optionNameType,
+	TabItemsType,
 	TogglePropsType,
 } from '../../types/ComponentsType';
 import { LogDetail } from '../atoms/LogDetail';
@@ -12,7 +13,7 @@ import { TextControlForm } from '../atoms/TextControlForm';
 import { Toggle } from '../atoms/Toggle';
 import { UpdateTime } from '../atoms/UpdateTime';
 
-export const Items = ( props: any ) => {
+export const Items = ( props: TabItemsType ) => {
 	const { id } = props;
 	const [ updateFlag, setUpdateFlag ] = useState( false );
 	const [ logsFlag, setLogsFlag ] = useState( false );
