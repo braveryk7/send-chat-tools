@@ -24,8 +24,8 @@ class Sct_Check_Update extends Sct_Base {
 	 * Add WP-Cron.
 	 */
 	public function __construct() {
-		add_action( 'wp', [ $this, 'check_cron_time' ] );
 		add_action( $this->add_prefix( 'update_check' ), [ $this, 'controller' ] );
+		add_action( 'admin_init', [ $this, 'check_cron_time' ] );
 	}
 
 	/**
