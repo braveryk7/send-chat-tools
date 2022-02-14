@@ -193,7 +193,7 @@ class Sct_Base {
 			];
 
 			if ( '3' <= count( $sct_options[ $tools ]['log'] ) ) {
-				array_shift( $sct_options[ $tools ]['log'] );
+				array_pop( $sct_options[ $tools ]['log'] );
 			}
 			$sct_options[ $tools ]['log'] += $logs;
 			$this->set_sct_options( $sct_options );
