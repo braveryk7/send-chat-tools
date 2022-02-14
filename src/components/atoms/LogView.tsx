@@ -84,9 +84,9 @@ export const LogView = () => {
 			<CardBody>
 				<table className="sct-logs-table">
 					<tr>
-						<th>{ __( 'Send time', 'send-chat-tools' ) }</th>
-						<th>{ __( 'Send tool', 'send-chat-tools' ) }</th>
-						<th>{ __( 'Send Type', 'send-chat-tools' ) }</th>
+						<th>{ __( 'Date', 'send-chat-tools' ) }</th>
+						<th>{ __( 'Tool', 'send-chat-tools' ) }</th>
+						<th>{ __( 'Type', 'send-chat-tools' ) }</th>
 						<th>{ __( 'Statue', 'send-chat-tools' ) }</th>
 						<th>{ __( 'Detail', 'send-chat-tools' ) }</th>
 					</tr>
