@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Send Chat Tools 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/send-chat-tools\n"
 "POT-Creation-Date: 2022-02-15T13:59:55+00:00\n"
-"PO-Revision-Date: 2022-02-15 23:05+0900\n"
+"PO-Revision-Date: 2022-02-15 23:14+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -19,148 +19,148 @@ msgstr ""
 
 #. Plugin Name of the plugin
 msgid "Send Chat Tools"
-msgstr ""
+msgstr "Send Chat Tools"
 
 #. Plugin URI of the plugin
 msgid "https://www.braveryk7.com/"
-msgstr ""
+msgstr "https://www.braveryk7.com/"
 
 #. Description of the plugin
 msgid "A plugin that allows you to send WordPress announcements to chat tools."
-msgstr ""
+msgstr "A plugin that allows you to send WordPress announcements to chat tools."
 
 #. Author of the plugin
 msgid "Ken-chan"
-msgstr ""
+msgstr "けんちゃん"
 
 #. Author URI of the plugin
 msgid "https://twitter.com/braveryk7"
-msgstr ""
+msgstr "https://twitter.com/braveryk7"
 
 #: build/index.js:40 build/index.js:627
 msgid "Logs"
-msgstr ""
+msgstr "ログ"
 
 #: build/index.js:41
 msgid "Last three cases"
-msgstr ""
+msgstr "最後の3件"
 
 #: build/index.js:46
 msgid "Comment Author"
-msgstr ""
+msgstr "コメント投稿者"
 
 #: build/index.js:52
 msgid "Comment ID"
-msgstr ""
+msgstr "コメントID"
 
 #: build/index.js:54 build/index.js:153
 msgid "Status"
-msgstr ""
+msgstr "ステータス"
 
 #: build/index.js:56 build/index.js:153
 msgid "Date"
-msgstr ""
+msgstr "日時"
 
 #: build/index.js:130
 msgid "Response OK!"
-msgstr ""
+msgstr "レスポンスOK!"
 
 #: build/index.js:133 build/index.js:145
 msgid "Could not communicate."
-msgstr ""
+msgstr "通信できませんでした。"
 
 #: build/index.js:136
 msgid "Webhook URL/API Token not entered."
-msgstr ""
+msgstr "Webhook URL/APIトークンが入力されていません。"
 
 #: build/index.js:139
 msgid "RoomID not entered."
-msgstr ""
+msgstr "ルームIDが入力されていません。"
 
 #: build/index.js:142
 msgid "API system value is incorrect."
-msgstr ""
+msgstr "APIシステムの値が正しくありません。"
 
 #: build/index.js:151
 msgid "Communication logs."
-msgstr ""
+msgstr "通信ログ"
 
 #: build/index.js:153
 msgid "Tool"
-msgstr ""
+msgstr "ツール"
 
 #: build/index.js:153
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 #: build/index.js:153
 msgid "Detail"
-msgstr ""
+msgstr "詳細"
 
 #: build/index.js:336
 msgid "Set time to check for updates"
-msgstr ""
+msgstr "アップデート確認をする時間を設定"
 
 #: build/index.js:548
 msgid "Success."
-msgstr ""
+msgstr "成功"
 
 #: build/index.js:553
 msgid "Error."
-msgstr ""
+msgstr "エラー"
 
 #: build/index.js:596
 msgid "Use Slack notify"
-msgstr ""
+msgstr "Slack通知を使用する"
 
 #: build/index.js:598
 msgid "Slack settings"
-msgstr ""
+msgstr "Slack設定"
 
 #: build/index.js:599
 msgid "Slack Webhook URL"
-msgstr ""
+msgstr "Slack Webhook URL"
 
 #: build/index.js:604
 msgid "Use Discord notify"
-msgstr ""
+msgstr "Discord通知を使用する"
 
 #: build/index.js:606
 msgid "Discord settings"
-msgstr ""
+msgstr "Discord設定"
 
 #: build/index.js:607
 msgid "Discord Webhook URL"
-msgstr ""
+msgstr "Discord Webhook URL"
 
 #: build/index.js:612
 msgid "Use Chatwork notify"
-msgstr ""
+msgstr "Chatwork通知を使用する"
 
 #: build/index.js:615
 msgid "Chatwork settings"
-msgstr ""
+msgstr "Chatwork設定"
 
 #: build/index.js:616
 msgid "Chatwork API token"
-msgstr ""
+msgstr "Chatwork APIトークン"
 
 #: build/index.js:617
 msgid "Chatwork Room ID"
-msgstr ""
+msgstr "Chatwork ルームID"
 
 #: build/index.js:622
 msgid "Update notify settings"
-msgstr ""
+msgstr "アップデート通知設定"
 
 #: build/index.js:640
 msgid "Don't send your own comments"
-msgstr ""
+msgstr "自分自身のコメントを送信しない"
 
 #: build/index.js:644
 msgid "Use Update notify"
-msgstr ""
+msgstr "アップデート通知を使用する"
 
 #: build/index.js:711
 msgid "Send Chat Tools Settings"
-msgstr ""
+msgstr "Send Chat Tools設定"
