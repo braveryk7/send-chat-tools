@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Plugin notify on WordPress dashboard.
  */
-class Sct_Dashboard_Notify {
+class Sct_Dashboard_Notify extends Sct_Base {
 	/**
 	 * WordPress hook.
 	 * Use Dashboard API.
@@ -35,5 +35,16 @@ class Sct_Dashboard_Notify {
 			__( 'Notice from Send Chat Tools', 'send-chat-tools' ),
 			[ $this, 'dashboard_message' ]
 		);
+	}
+
+	/**
+	 * Dashboard message.
+	 */
+	public function dashboard_message() {
+		foreach ( $this->get_developer_messages() as $value ) {
+			echo esc_html( $value ) . '<br>';
+		}
+
+		do_action( 'plugin_notify_dashboard_widget' );
 	}
 }
