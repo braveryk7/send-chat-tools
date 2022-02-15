@@ -29,14 +29,9 @@ export const LogDetail = ( props: { itemKey: itemKeyType } ) => {
 								'send-chat-tools'
 							) }: ${ value.author } <${ value.email }>` }
 						</CardHeader>
-						<CardBody
-							dangerouslySetInnerHTML={ {
-								__html: value.comment.replaceAll(
-									'\r\n',
-									'<br>'
-								),
-							} }
-						/>
+						<CardBody className="sct-tools-log-body">
+							{ value.comment }
+						</CardBody>
 						<CardFooter className="sct-tools-log-footer">
 							<span className="sct-tools-log-footer-comment_id">
 								{ `${ __(

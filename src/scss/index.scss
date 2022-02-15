@@ -29,6 +29,7 @@
 	border-bottom: 2px solid #007cba;
 }
 
+
 .sct {
 
 	&_success {
@@ -50,6 +51,10 @@
 	&-tools-log {
 		margin-top: 15px;
 		width: 80%;
+
+		&-body {
+			white-space: pre-wrap;
+		}
 
 		&-footer {
 			align-items: unset !important;
