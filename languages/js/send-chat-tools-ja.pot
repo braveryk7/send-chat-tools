@@ -1,0 +1,167 @@
+# Copyright (C) 2022 Ken-chan
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Send Chat Tools 1.2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/send-chat-tools\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-02-15T13:59:55+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: send-chat-tools\n"
+
+#. Plugin Name of the plugin
+msgid "Send Chat Tools"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://www.braveryk7.com/"
+msgstr ""
+
+#. Description of the plugin
+msgid "A plugin that allows you to send WordPress announcements to chat tools."
+msgstr ""
+
+#. Author of the plugin
+msgid "Ken-chan"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://twitter.com/braveryk7"
+msgstr ""
+
+#: build/index.js:40
+#: build/index.js:627
+msgid "Logs"
+msgstr ""
+
+#: build/index.js:41
+msgid "Last three cases"
+msgstr ""
+
+#: build/index.js:46
+msgid "Comment Author"
+msgstr ""
+
+#: build/index.js:52
+msgid "Comment ID"
+msgstr ""
+
+#: build/index.js:54
+#: build/index.js:153
+msgid "Status"
+msgstr ""
+
+#: build/index.js:56
+#: build/index.js:153
+msgid "Date"
+msgstr ""
+
+#: build/index.js:130
+msgid "Response OK!"
+msgstr ""
+
+#: build/index.js:133
+#: build/index.js:145
+msgid "Could not communicate."
+msgstr ""
+
+#: build/index.js:136
+msgid "Webhook URL/API Token not entered."
+msgstr ""
+
+#: build/index.js:139
+msgid "RoomID not entered."
+msgstr ""
+
+#: build/index.js:142
+msgid "API system value is incorrect."
+msgstr ""
+
+#: build/index.js:151
+msgid "Communication logs."
+msgstr ""
+
+#: build/index.js:153
+msgid "Tool"
+msgstr ""
+
+#: build/index.js:153
+msgid "Type"
+msgstr ""
+
+#: build/index.js:153
+msgid "Detail"
+msgstr ""
+
+#: build/index.js:336
+msgid "Set time to check for updates"
+msgstr ""
+
+#: build/index.js:548
+msgid "Success."
+msgstr ""
+
+#: build/index.js:553
+msgid "Error."
+msgstr ""
+
+#: build/index.js:596
+msgid "Use Slack notify"
+msgstr ""
+
+#: build/index.js:598
+msgid "Slack settings"
+msgstr ""
+
+#: build/index.js:599
+msgid "Slack Webhook URL"
+msgstr ""
+
+#: build/index.js:604
+msgid "Use Discord notify"
+msgstr ""
+
+#: build/index.js:606
+msgid "Discord settings"
+msgstr ""
+
+#: build/index.js:607
+msgid "Discord Webhook URL"
+msgstr ""
+
+#: build/index.js:612
+msgid "Use Chatwork notify"
+msgstr ""
+
+#: build/index.js:615
+msgid "Chatwork settings"
+msgstr ""
+
+#: build/index.js:616
+msgid "Chatwork API token"
+msgstr ""
+
+#: build/index.js:617
+msgid "Chatwork Room ID"
+msgstr ""
+
+#: build/index.js:622
+msgid "Update notify settings"
+msgstr ""
+
+#: build/index.js:640
+msgid "Don't send your own comments"
+msgstr ""
+
+#: build/index.js:644
+msgid "Use Update notify"
+msgstr ""
+
+#: build/index.js:711
+msgid "Send Chat Tools Settings"
+msgstr ""

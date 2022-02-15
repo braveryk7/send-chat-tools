@@ -86,6 +86,12 @@ class Sct_Admin_Page extends Sct_Base {
 			$assets['version'],
 			true
 		);
+
+		wp_set_script_translations(
+			$this->add_prefix( 'script' ),
+			self::PLUGIN_SLUG,
+			$this->get_plugin_dir( self::PLUGIN_SLUG ) . '/languages/js',
+		);
 	}
 
 	/**
