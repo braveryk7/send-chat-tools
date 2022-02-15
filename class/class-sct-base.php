@@ -171,39 +171,46 @@ class Sct_Base {
 		switch ( $tools ) {
 			case 'slack':
 			case 'discord':
-				$url = $sct_options[ $tools ]['webhook_url'];
+				$url   = $sct_options[ $tools ]['webhook_url'];
+				$regex = $this->api_regex( $tools, $url );
 				break;
 			case 'chatwork':
-				$url = 'https://api.chatwork.com/v2/rooms/' . $sct_options[ $tools ]['room_id'] . '/messages';
+				$url   = 'https://api.chatwork.com/v2/rooms/' . $sct_options[ $tools ]['room_id'] . '/messages';
+				$regex = $this->api_regex( 'chatworkid', $sct_options[ $tools ]['room_id'] );
 				break;
 		}
 
-		$result = wp_remote_post( $url, $options );
+		if ( $regex ) {
+			$result = wp_remote_post( $url, $options );
 
-		if ( ! is_null( $comment ) ) {
-			$logs = [
-				$comment->comment_date_gmt => [
-					'id'      => $comment->comment_ID,
-					'author'  => $comment->comment_author,
-					'email'   => $comment->comment_author_email,
-					'url'     => $comment->comment_author_url,
-					'comment' => $comment->comment_content,
-					'status'  => $result['response']['code'],
-				],
-			];
+			if ( ! is_null( $comment ) ) {
+				$logs = [
+					$comment->comment_date_gmt => [
+						'id'      => $comment->comment_ID,
+						'author'  => $comment->comment_author,
+						'email'   => $comment->comment_author_email,
+						'url'     => $comment->comment_author_url,
+						'comment' => $comment->comment_content,
+						'status'  => $result['response']['code'],
+					],
+				];
 
-			if ( '3' <= count( $sct_options[ $tools ]['log'] ) ) {
-				array_pop( $sct_options[ $tools ]['log'] );
+				if ( '3' <= count( $sct_options[ $tools ]['log'] ) ) {
+					array_pop( $sct_options[ $tools ]['log'] );
+				}
+				$sct_options[ $tools ]['log'] = $logs + $sct_options[ $tools ]['log'];
+				$this->set_sct_options( $sct_options );
 			}
-			$sct_options[ $tools ]['log'] = $logs + $sct_options[ $tools ]['log'];
-			$this->set_sct_options( $sct_options );
 		}
 
-		if ( ! isset( $result->errors ) ) {
+		if ( ! $regex ) {
+			$status_code = 1003;
+		} elseif ( ! isset( $result->errors ) ) {
 			$status_code = $result['response']['code'];
 		} else {
 			$status_code = 1000;
 		}
+
 		if ( 200 !== $status_code && 204 !== $status_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
 			if ( 'update' === $id ) {
