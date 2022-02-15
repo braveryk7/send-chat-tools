@@ -94,7 +94,7 @@ class Sct_Base {
 	 *
 	 * @param string $plugin_name Plugin name.
 	 */
-	protected function return_plugin_url( string $plugin_name ): string {
+	protected function get_plugin_url( string $plugin_name ): string {
 		return WP_PLUGIN_URL . '/' . $plugin_name;
 	}
 

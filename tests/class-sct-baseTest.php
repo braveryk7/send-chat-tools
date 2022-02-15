@@ -34,8 +34,8 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: return_plugin_url()
 	 */
-	public function test_return_plugin_url() {
-		$method = new ReflectionMethod( $this->instance, 'return_plugin_url' );
+	public function test_get_plugin_url() {
+		$method = new ReflectionMethod( $this->instance, 'get_plugin_url' );
 		$method->setAccessible( true );
 
 		$this->assertSame(

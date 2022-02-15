@@ -74,14 +74,14 @@ class Sct_Admin_Page extends Sct_Base {
 
 		wp_enqueue_style(
 			$this->add_prefix( 'style' ),
-			$this->return_plugin_url( self::PLUGIN_SLUG ) . '/build/index.css',
+			$this->get_plugin_url( self::PLUGIN_SLUG ) . '/build/index.css',
 			[ 'wp-components' ],
 			$assets['version'],
 		);
 
 		wp_enqueue_script(
 			$this->add_prefix( 'script' ),
-			$this->return_plugin_url( self::PLUGIN_SLUG ) . '/build/index.js',
+			$this->get_plugin_url( self::PLUGIN_SLUG ) . '/build/index.js',
 			$assets['dependencies'],
 			$assets['version'],
 			true
