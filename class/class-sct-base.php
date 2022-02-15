@@ -227,6 +227,33 @@ class Sct_Base {
 	}
 
 	/**
+	 * Regex Webhook_url, Api token, room ID.
+	 *
+	 * @param string $tool tool name.
+	 * @param string $value Webhook_url, Api token, room ID.
+	 */
+	protected function api_regex( string $tool, string $value ) {
+		$pattern = '';
+
+		switch ( $tool ) {
+			case 'slack':
+				$pattern = '/\Ahttps:\/\/hooks.slack.com\/services\/[a-zA-Z0-9]*\/[a-zA-Z0-9]*\/[a-zA-Z0-9]*/';
+				break;
+			case 'discord':
+				$pattern = '/\Ahttps:\/\/discord.com\/api\/webhooks\/[0-9]*\/[a-zA-Z0-9_-]*/';
+				break;
+			case 'chatworkapi':
+				$pattern = '/\A[0-9a-zA-Z]+\z/';
+				break;
+			case 'chatworkid':
+				$pattern = '/\A[0-9]+\z/';
+				break;
+		}
+
+		return preg_match( $pattern, $value );
+	}
+
+	/**
 	 * Output browser console.
 	 * WARNING: Use debag only!
 	 *
