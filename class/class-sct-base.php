@@ -80,6 +80,14 @@ class Sct_Base {
 	];
 
 	/**
+	 * Developer message.
+	 * Use dashboard, notify.
+	 *
+	 * @var array
+	 */
+	protected $developer_messages;
+
+	/**
 	 * Return add prefix.
 	 *
 	 * @param string $value After prefix value.
