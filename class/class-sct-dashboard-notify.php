@@ -18,4 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin notify on WordPress dashboard.
  */
 class Sct_Dashboard_Notify {
+	/**
+	 * WordPress hook.
+	 * Use Dashboard API.
+	 */
+	public function __construct() {
+		add_action( 'wp_dashboard_setup', [ $this, 'add_dashboard' ] );
+	}
 }
