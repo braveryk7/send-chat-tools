@@ -116,7 +116,7 @@ class Sct_Check_Update extends Sct_Base {
 		if ( ! empty( $get_plugin_status->response ) ) {
 			$update_plugins = $get_plugin_status->response;
 			foreach ( $update_plugins as $key ) {
-				$path                 = $this->return_plugin_dir( $key->plugin );
+				$path                 = $this->get_plugin_dir( $key->plugin );
 				$plugin_date          = get_file_data(
 					$path,
 					[

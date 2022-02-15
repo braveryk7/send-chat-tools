@@ -45,10 +45,10 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: return_plugin_dir()
+	 * TEST: get_plugin_dir()
 	 */
-	public function test_return_plugin_dir() {
-		$method = new ReflectionMethod( $this->instance, 'return_plugin_dir' );
+	public function test_get_plugin_dir() {
+		$method = new ReflectionMethod( $this->instance, 'get_plugin_dir' );
 		$method->setAccessible( true );
 
 		$this->assertSame(

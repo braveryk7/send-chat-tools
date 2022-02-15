@@ -104,7 +104,7 @@ class Sct_Base {
 	 *
 	 * @param string $plugin_name Plugin name.
 	 */
-	protected function return_plugin_dir( string $plugin_name ): string {
+	protected function get_plugin_dir( string $plugin_name ): string {
 		return WP_PLUGIN_DIR . '/' . $plugin_name;
 	}
 
@@ -113,7 +113,7 @@ class Sct_Base {
 	 * e.g. /DocumentRoot/wp-content/plugins/send-chat-tools/send-chat-tools.php
 	 */
 	protected function return_plugin_path(): string {
-		return $this->return_plugin_dir( self::PLUGIN_SLUG ) . '/' . self::PLUGIN_FILE;
+		return $this->get_plugin_dir( self::PLUGIN_SLUG ) . '/' . self::PLUGIN_FILE;
 	}
 
 	/**
