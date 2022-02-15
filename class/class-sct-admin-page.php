@@ -27,7 +27,7 @@ class Sct_Admin_Page extends Sct_Base {
 		add_action( 'admin_enqueue_scripts', [ $this, 'add_scripts' ] );
 		add_action( 'rest_api_init', [ $this, 'register' ] );
 		add_action( 'admin_head-settings_page_send-chat-tools-settings', [ $this, 'include_css' ] );
-		add_filter( 'plugin_action_links_' . plugin_basename( $this->return_plugin_path() ), [ $this, 'add_settings_links' ] );
+		add_filter( 'plugin_action_links_' . plugin_basename( $this->get_plugin_path() ), [ $this, 'add_settings_links' ] );
 	}
 
 	/**
@@ -70,18 +70,18 @@ class Sct_Admin_Page extends Sct_Base {
 			return;
 		}
 
-		$assets = require_once $this->return_plugin_dir( 'send-chat-tools' ) . '/build/index.asset.php';
+		$assets = require_once $this->get_plugin_dir( 'send-chat-tools' ) . '/build/index.asset.php';
 
 		wp_enqueue_style(
 			$this->add_prefix( 'style' ),
-			$this->return_plugin_url( self::PLUGIN_SLUG ) . '/build/index.css',
+			$this->get_plugin_url( self::PLUGIN_SLUG ) . '/build/index.css',
 			[ 'wp-components' ],
 			$assets['version'],
 		);
 
 		wp_enqueue_script(
 			$this->add_prefix( 'script' ),
-			$this->return_plugin_url( self::PLUGIN_SLUG ) . '/build/index.js',
+			$this->get_plugin_url( self::PLUGIN_SLUG ) . '/build/index.js',
 			$assets['dependencies'],
 			$assets['version'],
 			true
@@ -93,7 +93,7 @@ class Sct_Admin_Page extends Sct_Base {
 	 */
 	public function register(): void {
 		register_setting(
-			$this->return_option_group(),
+			$this->get_option_group(),
 			$this->add_prefix( 'options' ),
 			[
 				'show_in_rest' => [
@@ -114,7 +114,7 @@ class Sct_Admin_Page extends Sct_Base {
 		);
 
 		register_setting(
-			$this->return_option_group(),
+			$this->get_option_group(),
 			$this->add_prefix( 'logs' ),
 			[
 				'show_in_rest' => [
@@ -136,6 +136,6 @@ class Sct_Admin_Page extends Sct_Base {
 	 * Settings page.
 	 */
 	public function settings_page(): void {
-		echo '<div id="' . esc_attr( $this->return_option_group() ) . '"></div>';
+		echo '<div id="' . esc_attr( $this->get_option_group() ) . '"></div>';
 	}
 }

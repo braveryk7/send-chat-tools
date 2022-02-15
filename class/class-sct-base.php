@@ -94,7 +94,7 @@ class Sct_Base {
 	 *
 	 * @param string $plugin_name Plugin name.
 	 */
-	protected function return_plugin_url( string $plugin_name ): string {
+	protected function get_plugin_url( string $plugin_name ): string {
 		return WP_PLUGIN_URL . '/' . $plugin_name;
 	}
 
@@ -104,7 +104,7 @@ class Sct_Base {
 	 *
 	 * @param string $plugin_name Plugin name.
 	 */
-	protected function return_plugin_dir( string $plugin_name ): string {
+	protected function get_plugin_dir( string $plugin_name ): string {
 		return WP_PLUGIN_DIR . '/' . $plugin_name;
 	}
 
@@ -112,8 +112,8 @@ class Sct_Base {
 	 * Return plugin file path.
 	 * e.g. /DocumentRoot/wp-content/plugins/send-chat-tools/send-chat-tools.php
 	 */
-	protected function return_plugin_path(): string {
-		return $this->return_plugin_dir( self::PLUGIN_SLUG ) . '/' . self::PLUGIN_FILE;
+	protected function get_plugin_path(): string {
+		return $this->get_plugin_dir( self::PLUGIN_SLUG ) . '/' . self::PLUGIN_FILE;
 	}
 
 	/**
@@ -121,14 +121,14 @@ class Sct_Base {
 	 * Use register_setting.
 	 * e.g. send-chat-tools-settings
 	 */
-	protected function return_option_group(): string {
+	protected function get_option_group(): string {
 		return self::PLUGIN_SLUG . '-settings';
 	}
 
 	/**
 	 * Return Database table name.
 	 */
-	protected function return_table_name(): string {
+	protected function get_table_name(): string {
 		global $wpdb;
 		return $wpdb->prefix . self::TABLE_NAME;
 	}

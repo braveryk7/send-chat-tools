@@ -34,8 +34,8 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: return_plugin_url()
 	 */
-	public function test_return_plugin_url() {
-		$method = new ReflectionMethod( $this->instance, 'return_plugin_url' );
+	public function test_get_plugin_url() {
+		$method = new ReflectionMethod( $this->instance, 'get_plugin_url' );
 		$method->setAccessible( true );
 
 		$this->assertSame(
@@ -45,10 +45,10 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: return_plugin_dir()
+	 * TEST: get_plugin_dir()
 	 */
-	public function test_return_plugin_dir() {
-		$method = new ReflectionMethod( $this->instance, 'return_plugin_dir' );
+	public function test_get_plugin_dir() {
+		$method = new ReflectionMethod( $this->instance, 'get_plugin_dir' );
 		$method->setAccessible( true );
 
 		$this->assertSame(
@@ -58,10 +58,10 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: return_plugin_path()
+	 * TEST: get_plugin_path()
 	 */
 	public function test_return_plugin_path() {
-		$method = new ReflectionMethod( $this->instance, 'return_plugin_path' );
+		$method = new ReflectionMethod( $this->instance, 'get_plugin_path' );
 		$method->setAccessible( true );
 
 		$this->assertSame(
@@ -71,10 +71,10 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: return_option_group()
+	 * TEST: get_option_group()
 	 */
 	public function test_return_option_group() {
-		$method = new ReflectionMethod( $this->instance, 'return_option_group' );
+		$method = new ReflectionMethod( $this->instance, 'get_option_group' );
 		$method->setAccessible( true );
 
 		$this->assertSame(
