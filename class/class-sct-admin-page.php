@@ -93,7 +93,7 @@ class Sct_Admin_Page extends Sct_Base {
 	 */
 	public function register(): void {
 		register_setting(
-			$this->return_option_group(),
+			$this->get_option_group(),
 			$this->add_prefix( 'options' ),
 			[
 				'show_in_rest' => [
@@ -114,7 +114,7 @@ class Sct_Admin_Page extends Sct_Base {
 		);
 
 		register_setting(
-			$this->return_option_group(),
+			$this->get_option_group(),
 			$this->add_prefix( 'logs' ),
 			[
 				'show_in_rest' => [
@@ -136,6 +136,6 @@ class Sct_Admin_Page extends Sct_Base {
 	 * Settings page.
 	 */
 	public function settings_page(): void {
-		echo '<div id="' . esc_attr( $this->return_option_group() ) . '"></div>';
+		echo '<div id="' . esc_attr( $this->get_option_group() ) . '"></div>';
 	}
 }
