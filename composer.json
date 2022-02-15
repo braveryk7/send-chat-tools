@@ -29,6 +29,9 @@
         "test": "./vendor/bin/phpunit tests",
         "ghinit": "curl https://raw.githubusercontent.com/braveryk7/GitHooks/main/conf/init.sh > init.sh && sh init.sh",
         "gh-script-init": "curl -o cmd/create-verup-issue.sh https://raw.githubusercontent.com/braveryk7/github-cli-scripts/main/cmd/create-verup-issue.sh",
-        "jslanguages": "./vendor/bin/wp i18n make-json ./languages/admin-bar-tools-js-ja.po --no-purge"
+        "zip": "bash cmd/zip.sh",
+        "make-jspot": "./vendor/bin/wp i18n make-pot . languages/js/ad-block-counter-ja.po --skip-php",
+        "make-pot": "./vendor/bin/wp i18n make-pot . languages/ad-block-counter-ja.po --skip-js",
+        "make-json": "./vendor/bin/wp i18n make-json languages/js --no-purge"
     }
 }
