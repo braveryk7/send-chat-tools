@@ -25,4 +25,15 @@ class Sct_Dashboard_Notify {
 	public function __construct() {
 		add_action( 'wp_dashboard_setup', [ $this, 'add_dashboard' ] );
 	}
+
+	/**
+	 * Add dashboard.
+	 */
+	public function add_dashboard() {
+		wp_add_dashboard_widget(
+			'sct-dashboard',
+			__( 'Notice from Send Chat Tools', 'send-chat-tools' ),
+			[ $this, 'dashboard_message' ]
+		);
+	}
 }
