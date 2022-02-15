@@ -165,6 +165,15 @@ class Sct_Base {
 	}
 
 	/**
+	 * Set & Get $this->developer_messages.
+	 */
+	protected function get_developer_messages(): array {
+		$this->developer_messages = [];
+
+		return $this->developer_messages;
+	}
+
+	/**
 	 * Send Slack.
 	 *
 	 * @param array  $options API options.
