@@ -68,6 +68,11 @@ export const LogView = () => {
 					__( 'RoomID not entered.', 'send-chat-tools' ),
 					false
 				);
+			case 1003:
+				return addSpanTag(
+					__( 'API system value is incorrect.', 'send-chat-tools' ),
+					false
+				);
 			default:
 				return addSpanTag(
 					__( 'Could not communicate.', 'send-chat-tools' ),
