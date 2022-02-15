@@ -185,7 +185,7 @@ class Sct_Base {
 
 			if ( ! is_null( $comment ) ) {
 				$logs = [
-					$comment->comment_date_gmt => [
+					$comment->comment_date => [
 						'id'      => $comment->comment_ID,
 						'author'  => $comment->comment_author,
 						'email'   => $comment->comment_author_email,
