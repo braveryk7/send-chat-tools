@@ -92,7 +92,7 @@ export const LogView = () => {
 						<th>{ __( 'Date', 'send-chat-tools' ) }</th>
 						<th>{ __( 'Tool', 'send-chat-tools' ) }</th>
 						<th>{ __( 'Type', 'send-chat-tools' ) }</th>
-						<th>{ __( 'Statue', 'send-chat-tools' ) }</th>
+						<th>{ __( 'Status', 'send-chat-tools' ) }</th>
 						<th>{ __( 'Detail', 'send-chat-tools' ) }</th>
 					</tr>
 					{ Object.values( apiData.sct_logs ).map(
