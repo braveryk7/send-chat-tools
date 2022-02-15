@@ -58,10 +58,10 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: return_plugin_path()
+	 * TEST: get_plugin_path()
 	 */
 	public function test_return_plugin_path() {
-		$method = new ReflectionMethod( $this->instance, 'return_plugin_path' );
+		$method = new ReflectionMethod( $this->instance, 'get_plugin_path' );
 		$method->setAccessible( true );
 
 		$this->assertSame(

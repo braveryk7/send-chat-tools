@@ -22,7 +22,7 @@ class Sct_Activate extends Sct_Base {
 	 * Constructor.
 	 */
 	public function __construct() {
-		register_activation_hook( $this->return_plugin_path(), [ $this, 'register_options' ] );
+		register_activation_hook( $this->get_plugin_path(), [ $this, 'register_options' ] );
 		add_action( 'wp_loaded', [ $this, 'migration_options' ], 5 );
 	}
 

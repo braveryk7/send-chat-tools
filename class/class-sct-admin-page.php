@@ -27,7 +27,7 @@ class Sct_Admin_Page extends Sct_Base {
 		add_action( 'admin_enqueue_scripts', [ $this, 'add_scripts' ] );
 		add_action( 'rest_api_init', [ $this, 'register' ] );
 		add_action( 'admin_head-settings_page_send-chat-tools-settings', [ $this, 'include_css' ] );
-		add_filter( 'plugin_action_links_' . plugin_basename( $this->return_plugin_path() ), [ $this, 'add_settings_links' ] );
+		add_filter( 'plugin_action_links_' . plugin_basename( $this->get_plugin_path() ), [ $this, 'add_settings_links' ] );
 	}
 
 	/**
