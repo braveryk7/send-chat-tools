@@ -80,6 +80,14 @@ class Sct_Base {
 	];
 
 	/**
+	 * Developer message.
+	 * Use dashboard, notify.
+	 *
+	 * @var array
+	 */
+	protected $developer_messages;
+
+	/**
 	 * Return add prefix.
 	 *
 	 * @param string $value After prefix value.
@@ -154,6 +162,17 @@ class Sct_Base {
 	 */
 	public function get_wpcron_event_name(): string {
 		return self::add_prefix( self::WP_CRON_EVENT_NAME );
+	}
+
+	/**
+	 * Set & Get $this->developer_messages.
+	 */
+	protected function get_developer_messages(): array {
+		$this->developer_messages = [
+			__( 'No announcement.', 'send- chat-tools' ),
+		];
+
+		return $this->developer_messages;
 	}
 
 	/**
