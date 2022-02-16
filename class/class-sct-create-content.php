@@ -74,7 +74,6 @@ class Sct_Create_Content extends Sct_Base {
 			foreach ( $tools as $tool ) {
 				if ( $sct_options[ $tool ]['use'] ) {
 					$options = $this->create_content( $type, $tool, null, $check_date );
-					update_option( 'sct_create_message', $options );
 					$this->send_tools( $options, 'plugin_update', $tool );
 				}
 			}
