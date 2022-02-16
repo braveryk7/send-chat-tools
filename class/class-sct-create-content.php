@@ -300,13 +300,17 @@ class Sct_Create_Content extends Sct_Base {
 		$add_core    = '';
 
 		foreach ( $check_data as $key => $value ) {
-			if ( 'plugin' === $value['attribute'] ) {
-				$add_plugins .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
-			} elseif ( 'theme' === $value['attribute'] ) {
-				$add_themes .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
-			} elseif ( 'core' === $value['attribute'] ) {
-				$add_core .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
-			};
+			switch ( $value['attribute'] ) {
+				case 'core':
+					$add_core .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+					break;
+				case 'theme':
+					$add_themes .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+					break;
+				case 'plugin':
+					$add_plugins .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+					break;
+			}
 		};
 
 		if ( isset( $add_core ) ) {
