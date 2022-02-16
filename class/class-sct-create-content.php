@@ -252,12 +252,12 @@ class Sct_Create_Content extends Sct_Base {
 		$site_name    = get_bloginfo( 'name' );
 		$site_url     = get_bloginfo( 'url' );
 		$admin_url    = admin_url() . 'update-core.php';
-		$add_core     = '';
-		$add_themes   = '';
-		$add_plugins  = '';
 		$update_title = $this->get_send_text( 'update', 'title' );
 		$update_text  = $this->get_send_text( 'update', 'update' );
 		$update_page  = $this->get_send_text( 'update', 'page' );
+		$add_core;
+		$add_themes;
+		$add_plugins;
 
 		foreach ( $check_data as $key => $value ) {
 			switch ( $value['attribute'] ) {
@@ -272,8 +272,6 @@ class Sct_Create_Content extends Sct_Base {
 					break;
 			}
 		};
-
-		update_option( 'sct_check_data', $check_data );
 
 		if ( isset( $add_core ) ) {
 			$core = esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n";
