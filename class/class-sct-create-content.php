@@ -249,12 +249,15 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $tool Tool name.
 	 */
 	private function create_update_message( array $check_data, string $tool ) {
-		$site_name   = get_bloginfo( 'name' );
-		$site_url    = get_bloginfo( 'url' );
-		$admin_url   = admin_url() . 'update-core.php';
-		$add_plugins = '';
-		$add_themes  = '';
-		$add_core    = '';
+		$site_name    = get_bloginfo( 'name' );
+		$site_url     = get_bloginfo( 'url' );
+		$admin_url    = admin_url() . 'update-core.php';
+		$add_plugins  = '';
+		$add_themes   = '';
+		$add_core     = '';
+		$update_title = $this->get_comment_text( 'update', 'title' );
+		$update_text  = $this->get_comment_text( 'update', 'update' );
+		$update_page  = $this->get_comment_text( 'update', 'page' );
 
 		foreach ( $check_data as $key => $value ) {
 			switch ( $value['attribute'] ) {
@@ -282,10 +285,8 @@ class Sct_Create_Content extends Sct_Base {
 
 		if ( 'slack' === $tool ) {
 			$header_emoji   = ':zap:';
-			$header_message = "{$header_emoji} {$site_name}({$site_url})" . esc_html__( 'Notification of new updates.', 'send-chat-tools' );
-			$update_message =
-				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
-				esc_html__( 'Update Page:', 'send-chat-tools' ) . "<{$admin_url}>";
+			$header_message = "{$header_emoji} {$site_name}({$site_url})" . $update_title;
+			$update_message = $update_text . "\n" . $update_page . "<{$admin_url}>";
 			$context        = $this->create_context( $tool );
 
 			$blocks  = new Sct_Slack_Blocks();
@@ -337,10 +338,8 @@ class Sct_Create_Content extends Sct_Base {
 			$message = array_merge_recursive( $message, $fixed_phrase );
 		} elseif ( 'discord' === $tool ) {
 			$message =
-				$site_name . '( <' . $site_url . '> )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . "\n\n" .
-				$core . $themes . $plugins .
-				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
-				esc_html__( 'Update Page:', 'send-chat-tools' ) . '<' . $admin_url . '>' . "\n\n" .
+				$site_name . '( <' . $site_url . '> )' . $update_title . "\n\n" .
+				$core . $themes . $plugins . $update_text . "\n" . $update_page . '<' . $admin_url . '>' . "\n\n" .
 				$this->create_context( $tool );
 		} elseif ( 'chatwork' === $tool ) {
 			isset( $core ) ? $core       = $core . '[hr]' : $core;
@@ -349,10 +348,8 @@ class Sct_Create_Content extends Sct_Base {
 
 			$message = [
 				'body' =>
-					'[info][title]' . $site_name . '( ' . $site_url . ' )' . esc_html__( 'Notification of new updates.', 'send-chat-tools' ) . '[/title]' .
-					$core . $themes . $plugins .
-					esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
-					esc_html__( 'Update Page:', 'send-chat-tools' ) . $admin_url . "\n\n" .
+					'[info][title]' . $site_name . '( ' . $site_url . ' )' . $update_title . '[/title]' .
+					$core . $themes . $plugins . $update_text . "\n" . $update_page . $admin_url . "\n\n" .
 					$this->create_context( $tool ) .
 					'[/info]',
 			];
