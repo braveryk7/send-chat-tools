@@ -19,13 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Create_Content extends Sct_Base {
 	/**
-	 * Comment ID.
-	 *
-	 * @var $id
-	 */
-	private $id;
-
-	/**
 	 * WordPress hook.
 	 */
 	public function __construct() {
