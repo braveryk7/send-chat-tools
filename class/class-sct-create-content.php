@@ -249,7 +249,8 @@ class Sct_Create_Content extends Sct_Base {
 				esc_html__( 'Date and time:', 'send-chat-tools' ) . $comment->comment_date . "\n" .
 				esc_html__( 'Text:', 'send-chat-tools' ) . "\n" . $comment->comment_content . "\n\n" .
 				esc_html__( 'Comment URL:', 'send-chat-tools' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
-				esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status;
+				esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status . "\n\n" .
+				$this->create_context( $tool );
 		} elseif ( 'chatwork' === $tool ) {
 			switch ( $comment->comment_approved ) {
 				case '1':
@@ -275,6 +276,7 @@ class Sct_Create_Content extends Sct_Base {
 					esc_html__( 'Comment URL:', 'send-chat-tools' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
 					'[hr]' .
 					esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status .
+					'[hr]' . $this->create_context( $tool ) .
 					'[/info]',
 			];
 		}
@@ -381,8 +383,7 @@ class Sct_Create_Content extends Sct_Base {
 				$core . $themes . $plugins .
 				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
 				esc_html__( 'Update Page:', 'send-chat-tools' ) . '<' . $admin_url . '>' . "\n\n" .
-				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
-				'<https://wordpress.org/plugins/send-chat-tools/>';
+				$this->create_context( $tool );
 		} elseif ( 'chatwork' === $tool ) {
 			isset( $core ) ? $core       = $core . '[hr]' : $core;
 			isset( $themes ) ? $themes   = $themes . '[hr]' : $themes;
@@ -394,8 +395,7 @@ class Sct_Create_Content extends Sct_Base {
 					$core . $themes . $plugins .
 					esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
 					esc_html__( 'Update Page:', 'send-chat-tools' ) . $admin_url . "\n\n" .
-					esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
-					'https://wordpress.org/plugins/send-chat-tools/' . "\n" .
+					$this->create_context( $tool ) .
 					'[/info]',
 			];
 		}
@@ -444,16 +444,12 @@ class Sct_Create_Content extends Sct_Base {
 		} elseif ( 'discord' === $tool ) {
 			$message =
 				$site_name . '( <' . $site_url . '> ) ' . esc_html__( 'Plugin update', 'send-chat-tools' ) . "\n\n" .
-				$developer_message . "\n" .
-				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
-				'<https://wordpress.org/plugins/send-chat-tools/>';
+				$developer_message . "\n" . $this->create_context( $tool );
 		} elseif ( 'chatwork' === $tool ) {
 			$message = [
 				'body' =>
 					'[info][title]' . $site_name . '( ' . $site_url . ' ) ' . esc_html__( 'Plugin update', 'send-chat-tools' ) . '[/title]' .
-					$developer_message . "\n" .
-					esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
-					'https://wordpress.org/plugins/send-chat-tools/' . "\n" .
+					$developer_message . "\n" . $this->create_context( $tool ) .
 					'[/info]',
 			];
 		}
@@ -468,17 +464,30 @@ class Sct_Create_Content extends Sct_Base {
 	 */
 	private function create_context( string $tool_name ) {
 		$context = '';
+		$message = [
+			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
+			1 => esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ),
+			2 => esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ),
+		];
 
 		switch ( $tool_name ) {
 			case 'slack':
 				$context =
-					esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
-					'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
-					'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
+					$message[0] . "\n" .
+					'<https://wordpress.org/plugins/send-chat-tools/|' . $message[1] . '> / ' .
+					'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . $message[2] . '>';
 				break;
 			case 'discord':
+				$context =
+					$message[0] . "\n" .
+					$message[1] . ' <https://wordpress.org/plugins/send-chat-tools/>' . "\n" .
+					$message[2] . ' <https://www.braveryk7.com/portfolio/send-chat-tools/>';
 				break;
 			case 'chatwork':
+				$context =
+					$message[0] . "\n" .
+					$message[1] . ' https://wordpress.org/plugins/send-chat-tools/' . "\n" .
+					$message[2] . ' https://www.braveryk7.com/portfolio/send-chat-tools/';
 				break;
 		}
 
