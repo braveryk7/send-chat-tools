@@ -168,7 +168,9 @@ class Sct_Base {
 	 * Set & Get $this->developer_messages.
 	 */
 	protected function get_developer_messages(): array {
-		$this->developer_messages = [];
+		$this->developer_messages = [
+			__( 'No announcement.', 'send- chat-tools' ),
+		];
 
 		return $this->developer_messages;
 	}
