@@ -191,26 +191,26 @@ class Sct_Create_Content extends Sct_Base {
 		if ( 'slack' === $tool ) {
 			switch ( $comment->comment_approved ) {
 				case '1':
-					$comment_status = esc_html__( 'Approved', 'send-chat-tools' );
+					$comment_status = $this->get_comment_text( 'comment', 'approved' );
 					break;
 				case '0':
 					$comment_status =
-						esc_html__( 'Unapproved', 'send-chat-tools' ) .
-						'<<' . $approved_url . '|' . esc_html__( 'Click here to approve', 'send-chat-tools' ) . '>>';
+						$this->get_comment_text( 'comment', 'unapproved' ) .
+						'<<' . $approved_url . '|' . $this->get_comment_text( 'comment', 'click' ) . '>>';
 					break;
 				case 'spam':
-					$comment_status = esc_html__( 'Spam', 'send-chat-tools' );
+					$comment_status = $this->get_comment_text( 'comment', 'spam' );
 					break;
 			}
 
 			$header_emoji     = ':mailbox_with_mail:';
-			$header_message   = "{$header_emoji} {$site_name}({$site_url})" . esc_html__( 'new comment has been posted.', 'send-chat-tools' );
-			$comment_article  = '*' . esc_html__( 'Commented article:', 'send-chat-tools' ) . "*<{$article_url}|{$article_title}>";
-			$author           = '*' . esc_html__( 'Author:', 'send-chat-tools' ) . "*\n{$comment->comment_author}<{$comment->comment_author_email}>";
-			$date             = '*' . esc_html__( 'Date and time:', 'send-chat-tools' ) . "*\n{$comment->comment_date}";
-			$comment_content  = '*' . esc_html__( 'Text:', 'send-chat-tools' ) . "*\n{$comment->comment_content}";
-			$comment_url      = '*' . esc_html__( 'Comment URL:', 'send-chat-tools' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
-			$comment_statuses = '*' . esc_html__( 'Comment Status:', 'send-chat-tools' ) . "*\n{$comment_status}";
+			$header_message   = "{$header_emoji} {$site_name}({$site_url})" . $this->get_comment_text( 'comment', 'title' );
+			$comment_article  = '*' . $this->get_comment_text( 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
+			$author           = '*' . $this->get_comment_text( 'comment', 'author' ) . "*\n{$comment->comment_author}<{$comment->comment_author_email}>";
+			$date             = '*' . $this->get_comment_text( 'comment', 'date' ) . "*\n{$comment->comment_date}";
+			$comment_content  = '*' . $this->get_comment_text( 'comment', 'content' ) . "*\n{$comment->comment_content}";
+			$comment_url      = '*' . $this->get_comment_text( 'comment', 'url' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
+			$comment_statuses = '*' . $this->get_comment_text( 'comment', 'status' ) . "*\n{$comment_status}";
 			$context          = $this->create_context( $tool );
 
 			$blocks  = new Sct_Slack_Blocks();
@@ -230,52 +230,52 @@ class Sct_Create_Content extends Sct_Base {
 		} elseif ( 'discord' === $tool ) {
 			switch ( $comment->comment_approved ) {
 				case '1':
-					$comment_status = esc_html__( 'Approved', 'send-chat-tools' );
+					$comment_status = $this->get_comment_text( 'comment', 'approved' );
 					break;
 				case '0':
 					$comment_status =
-						esc_html__( 'Unapproved', 'send-chat-tools' ) . ' >> ' .
-						esc_html__( 'Click here to approve', 'send-chat-tools' ) . '( ' . $approved_url . ' )';
+						$this->get_comment_text( 'comment', 'unapproved' ) . ' >> ' .
+						$this->get_comment_text( 'comment', 'click' ) . '( ' . $approved_url . ' )';
 					break;
 				case 'spam':
-					$comment_status = esc_html__( 'Spam', 'send-chat-tools' );
+					$comment_status = $this->get_comment_text( 'comment', 'spam' );
 					break;
 			}
 
 			$message =
-				$site_name . '( <' . $site_url . '> )' . esc_html__( 'new comment has been posted.', 'send-chat-tools' ) . "\n\n" .
-				esc_html__( 'Commented article:', 'send-chat-tools' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
-				esc_html__( 'Author:', 'send-chat-tools' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-				esc_html__( 'Date and time:', 'send-chat-tools' ) . $comment->comment_date . "\n" .
-				esc_html__( 'Text:', 'send-chat-tools' ) . "\n" . $comment->comment_content . "\n\n" .
-				esc_html__( 'Comment URL:', 'send-chat-tools' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
-				esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status . "\n\n" .
+				$site_name . '( <' . $site_url . '> )' . $this->get_comment_text( 'comment', 'title' ) . "\n\n" .
+				$this->get_comment_text( 'comment', 'article' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
+				$this->get_comment_text( 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
+				$this->get_comment_text( 'comment', 'date' ) . $comment->comment_date . "\n" .
+				$this->get_comment_text( 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
+				$this->get_comment_text( 'comment', 'url' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
+				$this->get_comment_text( 'comment', 'status' ) . $comment_status . "\n\n" .
 				$this->create_context( $tool );
 		} elseif ( 'chatwork' === $tool ) {
 			switch ( $comment->comment_approved ) {
 				case '1':
-					$comment_status = esc_html__( 'Approved', 'send-chat-tools' );
+					$comment_status = $this->get_comment_text( 'comment', 'approved' );
 					break;
 				case '0':
 					$comment_status =
-						esc_html__( 'Unapproved', 'send-chat-tools' ) . "\n" .
-						esc_html__( 'Click here to approve', 'send-chat-tools' ) . ' ' . $approved_url;
+						$this->get_comment_text( 'comment', 'unapproved' ) . "\n" .
+						$this->get_comment_text( 'comment', 'click' ) . ' ' . $approved_url;
 					break;
 				case 'spam':
-					$comment_status = esc_html__( 'Spam', 'send-chat-tools' );
+					$comment_status = $this->get_comment_text( 'comment', 'spam' );
 					break;
 			}
 
 			$message = [
 				'body' =>
-					'[info][title]' . $site_name . '(' . $site_url . ')' . esc_html__( 'new comment has been posted.', 'send-chat-tools' ) . '[/title]' .
-					esc_html__( 'Commented article:', 'send-chat-tools' ) . $article_title . ' - ' . $article_url . "\n" .
-					esc_html__( 'Author:', 'send-chat-tools' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-					esc_html__( 'Date and time:', 'send-chat-tools' ) . $comment->comment_date . "\n" .
-					esc_html__( 'Text:', 'send-chat-tools' ) . "\n" . $comment->comment_content . "\n\n" .
-					esc_html__( 'Comment URL:', 'send-chat-tools' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
+					'[info][title]' . $site_name . '(' . $site_url . ')' . $this->get_comment_text( 'comment', 'title' ) . '[/title]' .
+					$this->get_comment_text( 'comment', 'article' ) . $article_title . ' - ' . $article_url . "\n" .
+					$this->get_comment_text( 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
+					$this->get_comment_text( 'comment', 'date' ) . $comment->comment_date . "\n" .
+					$this->get_comment_text( 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
+					$this->get_comment_text( 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
 					'[hr]' .
-					esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status .
+					$this->get_comment_text( 'comment', 'status' ) . $comment_status .
 					'[hr]' . $this->create_context( $tool ) .
 					'[/info]',
 			];
@@ -455,6 +455,32 @@ class Sct_Create_Content extends Sct_Base {
 		}
 
 		return $message;
+	}
+
+	/**
+	 * Create comment notify content.
+	 *
+	 * @param string $type  Message type.
+	 * @param string $param Item parameter.
+	 */
+	private function get_comment_text( string $type, string $param ) {
+		$message = [
+			'comment' => [
+				'title'      => esc_html__( 'new comment has been posted.', 'send-chat-tools' ),
+				'article'    => esc_html__( 'Commented article:', 'send-chat-tools' ),
+				'author'     => esc_html__( 'Author:', 'send-chat-tools' ),
+				'date'       => esc_html__( 'Date and time:', 'send-chat-tools' ),
+				'content'    => esc_html__( 'Text:', 'send-chat-tools' ),
+				'url'        => esc_html__( 'Comment URL:', 'send-chat-tools' ),
+				'status'     => esc_html__( 'Comment Status:', 'send-chat-tools' ),
+				'approved'   => esc_html__( 'Approved', 'send-chat-tools' ),
+				'unapproved' => esc_html__( 'Unapproved', 'send-chat-tools' ),
+				'click'      => esc_html__( 'Click here to approve', 'send-chat-tools' ),
+				'spam'       => esc_html__( 'Spam', 'send-chat-tools' ),
+			],
+		];
+
+		return $message[ $type ][ $param ];
 	}
 
 	/**
