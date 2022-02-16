@@ -376,4 +376,65 @@ class Sct_Create_Content extends Sct_Base {
 
 		return $message;
 	}
+
+	/**
+	 * Create plugin update message.
+	 *
+	 * @param string $tool Tool name.
+	 */
+	private function create_plugin_update_message( string $tool ) {
+		$site_name         = get_bloginfo( 'name' );
+		$site_url          = get_bloginfo( 'url' );
+		$admin_url         = admin_url() . 'update-core.php';
+		$developer_message = '';
+
+		foreach ( $this->get_developer_messages() as $value ) {
+			$developer_message .= $value . "\n";
+		}
+
+		if ( 'slack' === $tool ) {
+			$header_emoji   = ':tada:';
+			$header_message = "{$header_emoji} {$site_name}({$site_url}) " . esc_html__( 'Plugin update', 'send-chat-tools' );
+
+			$context =
+				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
+				'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
+				'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
+
+			$blocks  = new Sct_Slack_Blocks();
+			$message = [
+				'text'   => $header_message,
+				'blocks' => [
+					$blocks->header( 'plain_text', $header_message, true ),
+				],
+			];
+
+			$fixed_phrase = [
+				'blocks' => [
+					$blocks->single_column( 'mrkdwn', $developer_message ),
+					$blocks->divider(),
+					$blocks->context( 'mrkdwn', $context ),
+				],
+			];
+
+			$message = array_merge_recursive( $message, $fixed_phrase );
+		} elseif ( 'discord' === $tool ) {
+			$message =
+				$site_name . '( <' . $site_url . '> ) ' . esc_html__( 'Plugin update', 'send-chat-tools' ) . "\n\n" .
+				$developer_message . "\n" .
+				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
+				'<https://wordpress.org/plugins/send-chat-tools/>';
+		} elseif ( 'chatwork' === $tool ) {
+			$message = [
+				'body' =>
+					'[info][title]' . $site_name . '( ' . $site_url . ' ) ' . esc_html__( 'Plugin update', 'send-chat-tools' ) . '[/title]' .
+					$developer_message . "\n" .
+					esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) .
+					'https://wordpress.org/plugins/send-chat-tools/' . "\n" .
+					'[/info]',
+			];
+		}
+
+		return $message;
+	}
 }
