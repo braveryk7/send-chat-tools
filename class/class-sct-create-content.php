@@ -367,6 +367,7 @@ class Sct_Create_Content extends Sct_Base {
 		$site_name         = get_bloginfo( 'name' );
 		$site_url          = get_bloginfo( 'url' );
 		$admin_url         = admin_url() . 'update-core.php';
+		$message_title     = $this->get_comment_text( 'plugin_update', 'title' );
 		$developer_message = '';
 
 		foreach ( $this->get_developer_messages() as $value ) {
@@ -375,7 +376,7 @@ class Sct_Create_Content extends Sct_Base {
 
 		if ( 'slack' === $tool ) {
 			$header_emoji   = ':tada:';
-			$header_message = "{$header_emoji} {$site_name}({$site_url}) " . esc_html__( 'Plugin update', 'send-chat-tools' );
+			$header_message = "{$header_emoji} {$site_name}({$site_url}) " . $message_title;
 
 			$context = $this->create_context( $tool );
 
@@ -398,12 +399,12 @@ class Sct_Create_Content extends Sct_Base {
 			$message = array_merge_recursive( $message, $fixed_phrase );
 		} elseif ( 'discord' === $tool ) {
 			$message =
-				$site_name . '( <' . $site_url . '> ) ' . esc_html__( 'Plugin update', 'send-chat-tools' ) . "\n\n" .
+				$site_name . '( <' . $site_url . '> ) ' . $message_title . "\n\n" .
 				$developer_message . "\n" . $this->create_context( $tool );
 		} elseif ( 'chatwork' === $tool ) {
 			$message = [
 				'body' =>
-					'[info][title]' . $site_name . '( ' . $site_url . ' ) ' . esc_html__( 'Plugin update', 'send-chat-tools' ) . '[/title]' .
+					'[info][title]' . $site_name . '( ' . $site_url . ' ) ' . $message_title . '[/title]' .
 					$developer_message . "\n" . $this->create_context( $tool ) .
 					'[/info]',
 			];
