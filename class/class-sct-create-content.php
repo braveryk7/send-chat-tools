@@ -436,6 +436,10 @@ class Sct_Create_Content extends Sct_Base {
 				'click'      => esc_html__( 'Click here to approve', 'send-chat-tools' ),
 				'spam'       => esc_html__( 'Spam', 'send-chat-tools' ),
 			],
+			'update'  => [
+				'update' => esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ),
+				'page'   => esc_html__( 'Update Page:', 'send-chat-tools' ),
+			],
 		];
 
 		return $message[ $type ][ $param ];
