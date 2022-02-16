@@ -24,6 +24,7 @@ class Sct_Activate extends Sct_Base {
 	public function __construct() {
 		register_activation_hook( $this->get_plugin_path(), [ $this, 'register_options' ] );
 		add_action( 'wp_loaded', [ $this, 'migration_options' ], 5 );
+		add_action( 'wp_loaded', [ $this, 'plugin_update_message' ] );
 	}
 
 	/**
@@ -225,5 +226,17 @@ class Sct_Activate extends Sct_Base {
 			}
 		}
 		$this->set_sct_options( $sct_options );
+	}
+
+	/**
+	 * Plugin update check.
+	 */
+	public function plugin_update_message() {
+		$sct_options = $this->get_sct_options();
+		$this->set_sct_options( $sct_options );
+		if ( self::DB_VERSION !== $sct_options['db_version'] ) {
+			$create_content = new Sct_Create_Content();
+			$create_content->controller( 0, 'plugin_update', [] );
+		}
 	}
 }
