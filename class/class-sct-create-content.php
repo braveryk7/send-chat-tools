@@ -211,10 +211,7 @@ class Sct_Create_Content extends Sct_Base {
 			$comment_content  = '*' . esc_html__( 'Text:', 'send-chat-tools' ) . "*\n{$comment->comment_content}";
 			$comment_url      = '*' . esc_html__( 'Comment URL:', 'send-chat-tools' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
 			$comment_statuses = '*' . esc_html__( 'Comment Status:', 'send-chat-tools' ) . "*\n{$comment_status}";
-			$context          =
-				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
-				'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
-				'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
+			$context          = $this->create_context( $tool );
 
 			$blocks  = new Sct_Slack_Blocks();
 			$message = [
@@ -329,10 +326,7 @@ class Sct_Create_Content extends Sct_Base {
 			$update_message =
 				esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ) . "\n" .
 				esc_html__( 'Update Page:', 'send-chat-tools' ) . "<{$admin_url}>";
-			$context        =
-				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
-				'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
-				'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
+			$context        = $this->create_context( $tool );
 
 			$blocks  = new Sct_Slack_Blocks();
 			$message = [
@@ -428,10 +422,7 @@ class Sct_Create_Content extends Sct_Base {
 			$header_emoji   = ':tada:';
 			$header_message = "{$header_emoji} {$site_name}({$site_url}) " . esc_html__( 'Plugin update', 'send-chat-tools' );
 
-			$context =
-				esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
-				'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
-				'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
+			$context = $this->create_context( $tool );
 
 			$blocks  = new Sct_Slack_Blocks();
 			$message = [
