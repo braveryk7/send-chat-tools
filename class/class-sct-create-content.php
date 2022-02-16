@@ -182,27 +182,13 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $tool Tool name.
 	 */
 	private function create_comment_message( object $comment, string $tool ) {
-		$site_name     = get_bloginfo( 'name' );
-		$site_url      = get_bloginfo( 'url' );
-		$article_title = get_the_title( $comment->comment_post_ID );
-		$article_url   = get_permalink( $comment->comment_post_ID );
-		$approved_url  = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
+		$site_name      = get_bloginfo( 'name' );
+		$site_url       = get_bloginfo( 'url' );
+		$article_title  = get_the_title( $comment->comment_post_ID );
+		$article_url    = get_permalink( $comment->comment_post_ID );
+		$comment_status = $this->get_comment_approved_message( $tool, $comment );
 
 		if ( 'slack' === $tool ) {
-			switch ( $comment->comment_approved ) {
-				case '1':
-					$comment_status = $this->get_comment_text( 'comment', 'approved' );
-					break;
-				case '0':
-					$comment_status =
-						$this->get_comment_text( 'comment', 'unapproved' ) .
-						'<<' . $approved_url . '|' . $this->get_comment_text( 'comment', 'click' ) . '>>';
-					break;
-				case 'spam':
-					$comment_status = $this->get_comment_text( 'comment', 'spam' );
-					break;
-			}
-
 			$header_emoji     = ':mailbox_with_mail:';
 			$header_message   = "{$header_emoji} {$site_name}({$site_url})" . $this->get_comment_text( 'comment', 'title' );
 			$comment_article  = '*' . $this->get_comment_text( 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
@@ -228,20 +214,6 @@ class Sct_Create_Content extends Sct_Base {
 				],
 			];
 		} elseif ( 'discord' === $tool ) {
-			switch ( $comment->comment_approved ) {
-				case '1':
-					$comment_status = $this->get_comment_text( 'comment', 'approved' );
-					break;
-				case '0':
-					$comment_status =
-						$this->get_comment_text( 'comment', 'unapproved' ) . ' >> ' .
-						$this->get_comment_text( 'comment', 'click' ) . '( ' . $approved_url . ' )';
-					break;
-				case 'spam':
-					$comment_status = $this->get_comment_text( 'comment', 'spam' );
-					break;
-			}
-
 			$message =
 				$site_name . '( <' . $site_url . '> )' . $this->get_comment_text( 'comment', 'title' ) . "\n\n" .
 				$this->get_comment_text( 'comment', 'article' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
@@ -252,20 +224,6 @@ class Sct_Create_Content extends Sct_Base {
 				$this->get_comment_text( 'comment', 'status' ) . $comment_status . "\n\n" .
 				$this->create_context( $tool );
 		} elseif ( 'chatwork' === $tool ) {
-			switch ( $comment->comment_approved ) {
-				case '1':
-					$comment_status = $this->get_comment_text( 'comment', 'approved' );
-					break;
-				case '0':
-					$comment_status =
-						$this->get_comment_text( 'comment', 'unapproved' ) . "\n" .
-						$this->get_comment_text( 'comment', 'click' ) . ' ' . $approved_url;
-					break;
-				case 'spam':
-					$comment_status = $this->get_comment_text( 'comment', 'spam' );
-					break;
-			}
-
 			$message = [
 				'body' =>
 					'[info][title]' . $site_name . '(' . $site_url . ')' . $this->get_comment_text( 'comment', 'title' ) . '[/title]' .
@@ -481,6 +439,43 @@ class Sct_Create_Content extends Sct_Base {
 		];
 
 		return $message[ $type ][ $param ];
+	}
+
+	/**
+	 * Create comment approved message.
+	 *
+	 * @param string $tool_name Tool name.
+	 * @param object $comment   Comment data.
+	 */
+	private function get_comment_approved_message( string $tool_name, object $comment ) {
+		$comment_status = '';
+		$approved_url   = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
+		$unapproved     = $this->get_comment_text( 'comment', 'unapproved' );
+		$click_message  = $this->get_comment_text( 'comment', 'click' );
+
+		switch ( $comment->comment_approved ) {
+			case '1':
+				$comment_status = $this->get_comment_text( 'comment', 'approved' );
+				break;
+			case '0':
+				switch ( $tool_name ) {
+					case 'slack':
+						$comment_status = $unapproved . '<<' . $approved_url . '|' . $click_message . '>>';
+						break;
+					case 'discord':
+						$comment_status = $unapproved . ' >> ' . $click_message . '( ' . $approved_url . ' )';
+						break;
+					case 'chatwork':
+						$comment_status = $unapproved . "\n" . $click_message . ' ' . $approved_url;
+						break;
+				}
+				break;
+			case 'spam':
+				$comment_status = $this->get_comment_text( 'comment', 'spam' );
+				break;
+		}
+
+		return $comment_status;
 	}
 
 	/**
