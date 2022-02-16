@@ -420,7 +420,7 @@ class Sct_Create_Content extends Sct_Base {
 	 */
 	private function get_comment_text( string $type, string $param ) {
 		$message = [
-			'comment' => [
+			'comment'       => [
 				'title'      => esc_html__( 'new comment has been posted.', 'send-chat-tools' ),
 				'article'    => esc_html__( 'Commented article:', 'send-chat-tools' ),
 				'author'     => esc_html__( 'Author:', 'send-chat-tools' ),
@@ -433,10 +433,13 @@ class Sct_Create_Content extends Sct_Base {
 				'click'      => esc_html__( 'Click here to approve', 'send-chat-tools' ),
 				'spam'       => esc_html__( 'Spam', 'send-chat-tools' ),
 			],
-			'update'  => [
+			'update'        => [
 				'title'  => esc_html__( 'Notification of new updates.', 'send-chat-tools' ),
 				'update' => esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ),
 				'page'   => esc_html__( 'Update Page:', 'send-chat-tools' ),
+			],
+			'plugin_update' => [
+				'title' => esc_html__( 'Plugin update', 'send-chat-tools' ),
 			],
 		];
 
