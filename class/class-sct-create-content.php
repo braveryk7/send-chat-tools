@@ -273,15 +273,9 @@ class Sct_Create_Content extends Sct_Base {
 			}
 		};
 
-		if ( isset( $add_core ) ) {
-			$core = esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n";
-		}
-		if ( isset( $add_themes ) ) {
-			$themes = esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n";
-		}
-		if ( isset( $add_plugins ) ) {
-			$plugins = esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n";
-		}
+		$core    = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
+		$themes  = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
+		$plugins = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
 
 		if ( 'slack' === $tool ) {
 			$header_emoji   = ':zap:';
