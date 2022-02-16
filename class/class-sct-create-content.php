@@ -252,9 +252,9 @@ class Sct_Create_Content extends Sct_Base {
 		$site_name    = get_bloginfo( 'name' );
 		$site_url     = get_bloginfo( 'url' );
 		$admin_url    = admin_url() . 'update-core.php';
-		$add_plugins  = '';
-		$add_themes   = '';
 		$add_core     = '';
+		$add_themes   = '';
+		$add_plugins  = '';
 		$update_title = $this->get_send_text( 'update', 'title' );
 		$update_text  = $this->get_send_text( 'update', 'update' );
 		$update_page  = $this->get_send_text( 'update', 'page' );
