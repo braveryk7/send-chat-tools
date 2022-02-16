@@ -138,6 +138,9 @@ class Sct_Create_Content extends Sct_Base {
 			case 'update':
 				$message = $this->create_update_message( $check_data, $tool );
 				break;
+			case 'plugin_update':
+				$message = $this->create_plugin_update_message( $tool );
+				break;
 		}
 
 		switch ( $tool ) {
