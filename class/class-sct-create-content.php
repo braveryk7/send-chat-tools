@@ -38,9 +38,9 @@ class Sct_Create_Content extends Sct_Base {
 	 *
 	 * @param int    $comment_id Comment ID (0: default).
 	 * @param string $type Content Type (comment: default, update).
-	 * @param array  $check_date Update cehck date ([]: default).
+	 * @param array  $check_data Update cehck date ([]: default).
 	 */
-	public function controller( int $comment_id = 0, string $type = 'comment', array $check_date = [] ): void {
+	public function controller( int $comment_id = 0, string $type = 'comment', array $check_data = [] ): void {
 		global $wpdb;
 
 		$sct_options = $this->get_sct_options();
@@ -66,14 +66,14 @@ class Sct_Create_Content extends Sct_Base {
 		} elseif ( 'update' === $type ) {
 			foreach ( $tools as $tool ) {
 				if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['send_update'] ) {
-					$options = $this->create_content( $type, $tool, null, $check_date );
+					$options = $this->create_content( $type, $tool, null, $check_data );
 					$this->send_tools( $options, 'update', $tool );
 				}
 			}
 		} elseif ( 'plugin_update' === $type ) {
 			foreach ( $tools as $tool ) {
 				if ( $sct_options[ $tool ]['use'] ) {
-					$options = $this->create_content( $type, $tool, null, $check_date );
+					$options = $this->create_content( $type, $tool, null, $check_data );
 					$this->send_tools( $options, 'plugin_update', $tool );
 				}
 			}
@@ -272,6 +272,8 @@ class Sct_Create_Content extends Sct_Base {
 					break;
 			}
 		};
+
+		update_option( 'sct_check_data', $check_data );
 
 		if ( isset( $add_core ) ) {
 			$core = esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n";
