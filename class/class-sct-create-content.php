@@ -413,7 +413,7 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $type  Message type.
 	 * @param string $param Item parameter.
 	 */
-	private function get_send_text( string $type, string $param ) {
+	private function get_send_text( string $type, string $param ): string {
 		$message = [
 			'comment'       => [
 				'title'      => esc_html__( 'new comment has been posted.', 'send-chat-tools' ),
@@ -447,7 +447,7 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $tool_name Tool name.
 	 * @param object $comment   Comment data.
 	 */
-	private function get_comment_approved_message( string $tool_name, object $comment ) {
+	private function get_comment_approved_message( string $tool_name, object $comment ): string {
 		$comment_status = '';
 		$approved_url   = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
 		$unapproved     = $this->get_send_text( 'comment', 'unapproved' );
@@ -483,7 +483,7 @@ class Sct_Create_Content extends Sct_Base {
 	 *
 	 * @param string $tool_name Tool name.
 	 */
-	private function create_context( string $tool_name ) {
+	private function create_context( string $tool_name ): string {
 		$context = '';
 		$message = [
 			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
