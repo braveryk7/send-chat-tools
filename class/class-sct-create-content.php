@@ -469,4 +469,28 @@ class Sct_Create_Content extends Sct_Base {
 
 		return $message;
 	}
+
+	/**
+	 * Create context message.
+	 *
+	 * @param string $tool_name Tool name.
+	 */
+	private function create_context( string $tool_name ) {
+		$context = '';
+
+		switch ( $tool_name ) {
+			case 'slack':
+				$context =
+					esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ) . "\n" .
+					'<https://wordpress.org/plugins/send-chat-tools/|' . esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ) . '> / ' .
+					'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ) . '>';
+				break;
+			case 'discord':
+				break;
+			case 'chatwork':
+				break;
+		}
+
+		return $context;
+	}
 }
