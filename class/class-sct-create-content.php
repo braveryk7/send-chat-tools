@@ -70,6 +70,14 @@ class Sct_Create_Content extends Sct_Base {
 					$this->send_tools( $options, 'update', $tool );
 				}
 			}
+		} elseif ( 'plugin_update' === $type ) {
+			foreach ( $tools as $tool ) {
+				if ( $sct_options[ $tool ]['use'] ) {
+					$options = $this->create_content( $type, $tool, null, $check_date );
+					update_option( 'sct_create_message', $options );
+					$this->send_tools( $options, 'plugin_update', $tool );
+				}
+			}
 		}
 	}
 
