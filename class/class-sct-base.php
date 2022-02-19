@@ -237,11 +237,6 @@ class Sct_Base {
 			$status_code = 1000;
 		}
 
-		if ( ( 200 === $status_code || 204 === $status_code ) && 'dev_notify' === $id ) {
-			$sct_options['version'] = self::VERSION;
-			$this->set_sct_options( $sct_options );
-		}
-
 		if ( 200 !== $status_code && 204 !== $status_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
 			if ( 'update' === $id ) {
