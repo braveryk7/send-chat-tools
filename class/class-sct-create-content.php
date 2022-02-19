@@ -62,11 +62,11 @@ class Sct_Create_Content extends Sct_Base {
 					$this->send_tools( $options, 'update', $tool );
 				}
 			}
-		} elseif ( 'plugin_update' === $type ) {
+		} elseif ( 'dev_notify' === $type ) {
 			foreach ( $tools as $tool ) {
 				if ( $sct_options[ $tool ]['use'] ) {
 					$options = $this->create_content( $type, $tool, null, $update_content );
-					$this->send_tools( $options, 'plugin_update', $tool );
+					$this->send_tools( $options, 'dev_notify', $tool );
 				}
 			}
 		}
@@ -137,7 +137,7 @@ class Sct_Create_Content extends Sct_Base {
 			case 'update':
 				$message = $this->create_update_message( $tool, $update_content );
 				break;
-			case 'plugin_update':
+			case 'dev_notify':
 				$message = $this->create_developer_message( $tool, $update_content );
 				break;
 		}
@@ -402,7 +402,7 @@ class Sct_Create_Content extends Sct_Base {
 						'blocks' => [
 							$blocks->single_column(
 								'mrkdwn',
-								$this->get_send_text( 'plugin_update', 'website' ) . ': ' . $website_url,
+								$this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url,
 							),
 						],
 					];
@@ -415,7 +415,7 @@ class Sct_Create_Content extends Sct_Base {
 						'blocks' => [
 							$blocks->single_column(
 								'mrkdwn',
-								$this->get_send_text( 'plugin_update', 'detail' ) . ': ' . $update_page_url,
+								$this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url,
 							),
 						],
 					];
@@ -434,12 +434,12 @@ class Sct_Create_Content extends Sct_Base {
 			} elseif ( 'discord' === $tool ) {
 				$title        = $site_name . '( <' . $site_url . '> ) ' . $message_title . "\n\n";
 				$main_content = $developer_message . "\n";
-				$website      = $website_url ? $this->get_send_text( 'plugin_update', 'website' ) . ': <' . $website_url . ">\n" : null;
-				$update_page  = $update_page_url ? $this->get_send_text( 'plugin_update', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
+				$website      = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
+				$update_page  = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
 				$message      = $title . $main_content . $website . $update_page . "\n" . $this->create_context( $tool );
 			} elseif ( 'chatwork' === $tool ) {
-				$website     = $website_url ? $this->get_send_text( 'plugin_update', 'website' ) . ': ' . $website_url . "\n" : null;
-				$update_page = $update_page_url ? $this->get_send_text( 'plugin_update', 'detail' ) . ': ' . $update_page_url . "\n" : null;
+				$website     = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url . "\n" : null;
+				$update_page = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url . "\n" : null;
 				$message     = [
 					'body' =>
 						'[info][title]' . $site_name . '( ' . $site_url . ' ) ' . $message_title . '[/title]' .
@@ -460,7 +460,7 @@ class Sct_Create_Content extends Sct_Base {
 	 */
 	private function get_send_text( string $type, string $param ): string {
 		$message = [
-			'comment'       => [
+			'comment'    => [
 				'title'      => esc_html__( 'new comment has been posted.', 'send-chat-tools' ),
 				'article'    => esc_html__( 'Commented article:', 'send-chat-tools' ),
 				'author'     => esc_html__( 'Author:', 'send-chat-tools' ),
@@ -473,12 +473,12 @@ class Sct_Create_Content extends Sct_Base {
 				'click'      => esc_html__( 'Click here to approve', 'send-chat-tools' ),
 				'spam'       => esc_html__( 'Spam', 'send-chat-tools' ),
 			],
-			'update'        => [
+			'update'     => [
 				'title'  => esc_html__( 'Notification of new updates.', 'send-chat-tools' ),
 				'update' => esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ),
 				'page'   => esc_html__( 'Update Page:', 'send-chat-tools' ),
 			],
-			'plugin_update' => [
+			'dev_notify' => [
 				'title'   => esc_html__( 'Notification of plugin updates from', 'send-chat-tools' ),
 				'website' => esc_html__( 'Official Web Site', 'send-chat-tools' ),
 				'detail'  => esc_html__( 'Update details', 'send-chat-tools' ),

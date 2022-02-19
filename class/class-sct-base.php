@@ -237,7 +237,7 @@ class Sct_Base {
 			$status_code = 1000;
 		}
 
-		if ( ( 200 === $status_code || 204 === $status_code ) && 'plugin_update' === $id ) {
+		if ( ( 200 === $status_code || 204 === $status_code ) && 'dev_notify' === $id ) {
 			$sct_options['version'] = self::VERSION;
 			$this->set_sct_options( $sct_options );
 		}
