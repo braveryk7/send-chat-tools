@@ -49,6 +49,7 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-activate.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-dashboard-notify.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-developer-notify.php';
 
 	/**
 	 * Start comment process.
@@ -75,6 +76,10 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 	 */
 	new Sct_Dashboard_Notify();
 
+	/**
+	 * Developer notify.
+	 */
+	new Sct_Developer_Notify();
 
 	/**
 	 * Plugin uninstall hook.
