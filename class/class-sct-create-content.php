@@ -402,7 +402,7 @@ class Sct_Create_Content extends Sct_Base {
 						'blocks' => [
 							$blocks->single_column(
 								'mrkdwn',
-								esc_html__( 'Official Web Site', 'send-chat-tools' ) . ': ' . $website_url,
+								$this->get_send_text( 'plugin_update', 'website' ) . ': ' . $website_url,
 							),
 						],
 					];
@@ -415,7 +415,7 @@ class Sct_Create_Content extends Sct_Base {
 						'blocks' => [
 							$blocks->single_column(
 								'mrkdwn',
-								esc_html__( 'Update details', 'send-chat-tools' ) . ': ' . $update_page_url,
+								$this->get_send_text( 'plugin_update', 'detail' ) . ': ' . $update_page_url,
 							),
 						],
 					];
@@ -434,12 +434,12 @@ class Sct_Create_Content extends Sct_Base {
 			} elseif ( 'discord' === $tool ) {
 				$title        = $site_name . '( <' . $site_url . '> ) ' . $message_title . "\n\n";
 				$main_content = $developer_message . "\n";
-				$website      = ! is_null( $website_url ) ? esc_html__( 'Official Web Site', 'send-chat-tools' ) . ': <' . $website_url . ">\n" : null;
-				$update_page  = ! is_null( $update_page_url ) ? esc_html__( 'Update details', 'send-chat-tools' ) . ': <' . $update_page_url . ">\n" : null;
+				$website      = ! is_null( $website_url ) ? $this->get_send_text( 'plugin_update', 'website' ) . ': <' . $website_url . ">\n" : null;
+				$update_page  = ! is_null( $update_page_url ) ? $this->get_send_text( 'plugin_update', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
 				$message      = $title . $main_content . $website . $update_page . "\n" . $this->create_context( $tool );
 			} elseif ( 'chatwork' === $tool ) {
-				$website     = ! is_null( $website_url ) ? esc_html__( 'Official Web Site', 'send-chat-tools' ) . ': ' . $website_url . "\n" : null;
-				$update_page = ! is_null( $update_page_url ) ? esc_html__( 'Update details', 'send-chat-tools' ) . ': ' . $update_page_url . "\n" : null;
+				$website     = ! is_null( $website_url ) ? $this->get_send_text( 'plugin_update', 'website' ) . ': ' . $website_url . "\n" : null;
+				$update_page = ! is_null( $update_page_url ) ? $this->get_send_text( 'plugin_update', 'detail' ) . ': ' . $update_page_url . "\n" : null;
 				$message     = [
 					'body' =>
 						'[info][title]' . $site_name . '( ' . $site_url . ' ) ' . $message_title . '[/title]' .
@@ -479,7 +479,9 @@ class Sct_Create_Content extends Sct_Base {
 				'page'   => esc_html__( 'Update Page:', 'send-chat-tools' ),
 			],
 			'plugin_update' => [
-				'title' => esc_html__( 'Notification of plugin updates from', 'send-chat-tools' ),
+				'title'   => esc_html__( 'Notification of plugin updates from', 'send-chat-tools' ),
+				'website' => esc_html__( 'Official Web Site', 'send-chat-tools' ),
+				'detail'  => esc_html__( 'Update details', 'send-chat-tools' ),
 			],
 		];
 
