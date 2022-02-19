@@ -397,7 +397,7 @@ class Sct_Create_Content extends Sct_Base {
 
 				$message = array_merge_recursive( $message, $main_content );
 
-				if ( ! is_null( $website_url ) ) {
+				if ( $website_url ) {
 					$website = [
 						'blocks' => [
 							$blocks->single_column(
@@ -410,7 +410,7 @@ class Sct_Create_Content extends Sct_Base {
 					$message = array_merge_recursive( $message, $website );
 				}
 
-				if ( ! is_null( $update_page_url ) ) {
+				if ( $update_page_url ) {
 					$update_page = [
 						'blocks' => [
 							$blocks->single_column(
@@ -434,12 +434,12 @@ class Sct_Create_Content extends Sct_Base {
 			} elseif ( 'discord' === $tool ) {
 				$title        = $site_name . '( <' . $site_url . '> ) ' . $message_title . "\n\n";
 				$main_content = $developer_message . "\n";
-				$website      = ! is_null( $website_url ) ? $this->get_send_text( 'plugin_update', 'website' ) . ': <' . $website_url . ">\n" : null;
-				$update_page  = ! is_null( $update_page_url ) ? $this->get_send_text( 'plugin_update', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
+				$website      = $website_url ? $this->get_send_text( 'plugin_update', 'website' ) . ': <' . $website_url . ">\n" : null;
+				$update_page  = $update_page_url ? $this->get_send_text( 'plugin_update', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
 				$message      = $title . $main_content . $website . $update_page . "\n" . $this->create_context( $tool );
 			} elseif ( 'chatwork' === $tool ) {
-				$website     = ! is_null( $website_url ) ? $this->get_send_text( 'plugin_update', 'website' ) . ': ' . $website_url . "\n" : null;
-				$update_page = ! is_null( $update_page_url ) ? $this->get_send_text( 'plugin_update', 'detail' ) . ': ' . $update_page_url . "\n" : null;
+				$website     = $website_url ? $this->get_send_text( 'plugin_update', 'website' ) . ': ' . $website_url . "\n" : null;
+				$update_page = $update_page_url ? $this->get_send_text( 'plugin_update', 'detail' ) . ': ' . $update_page_url . "\n" : null;
 				$message     = [
 					'body' =>
 						'[info][title]' . $site_name . '( ' . $site_url . ' ) ' . $message_title . '[/title]' .
