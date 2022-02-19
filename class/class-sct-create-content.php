@@ -29,13 +29,11 @@ class Sct_Create_Content extends Sct_Base {
 	/**
 	 * Check tools use status and call.
 	 *
-	 * @param int    $comment_id Comment ID (0: default).
-	 * @param string $type Content Type (comment: default, update).
-	 * @param array  $check_data Update cehck date ([]: default).
+	 * @param int    $comment_id     Comment ID             (0: default).
+	 * @param string $type           Content Type           (comment: default, update).
+	 * @param array  $update_content Update date or message ([]: default).
 	 */
-	public function controller( int $comment_id = 0, string $type = 'comment', array $check_data = [] ): void {
-		global $wpdb;
-
+	public function controller( int $comment_id = 0, string $type = 'comment', array $update_content = [] ): void {
 		$sct_options = $this->get_sct_options();
 		$tools       = [ 'slack', 'discord', 'chatwork' ];
 
@@ -46,6 +44,7 @@ class Sct_Create_Content extends Sct_Base {
 				'chatwork' === $tool ? $api_column = 'api_token' : $api_column = 'webhook_url';
 
 				if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
+					global $wpdb;
 					$options = $this->create_content( $type, $tool, $comment );
 					$this->send_tools( $options, (string) $wpdb->insert_id, $tool, $comment );
 				} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
@@ -59,14 +58,14 @@ class Sct_Create_Content extends Sct_Base {
 		} elseif ( 'update' === $type ) {
 			foreach ( $tools as $tool ) {
 				if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['send_update'] ) {
-					$options = $this->create_content( $type, $tool, null, $check_data );
+					$options = $this->create_content( $type, $tool, null, $update_content );
 					$this->send_tools( $options, 'update', $tool );
 				}
 			}
 		} elseif ( 'plugin_update' === $type ) {
 			foreach ( $tools as $tool ) {
 				if ( $sct_options[ $tool ]['use'] ) {
-					$options = $this->create_content( $type, $tool, null, $check_data );
+					$options = $this->create_content( $type, $tool, null, $update_content );
 					$this->send_tools( $options, 'plugin_update', $tool );
 				}
 			}
@@ -76,8 +75,8 @@ class Sct_Create_Content extends Sct_Base {
 	/**
 	 * Check send status.
 	 *
-	 * @param string $tool_name Tool name.
-	 * @param array  $tools Tool options -> sct_options[TOOLNAME].
+	 * @param string $tool_name       Tool name.
+	 * @param array  $tools           Tool options -> sct_options[TOOLNAME].
 	 * @param string $comment_user_id Comment user id.
 	 */
 	private function get_send_status( string $tool_name, array $tools, string $comment_user_id ): bool {
@@ -124,22 +123,22 @@ class Sct_Create_Content extends Sct_Base {
 	/**
 	 * Create send options.
 	 *
-	 * @param string $type Create type.
-	 * @param string $tool Tool name.
-	 * @param object $comment Comment data.
-	 * @param array  $check_data Update check data.
+	 * @param string $type           Create type.
+	 * @param string $tool           Tool name.
+	 * @param object $comment        Comment data.
+	 * @param array  $update_content Update data or message.
 	 */
-	private function create_content( string $type, string $tool, object $comment = null, array $check_data = [] ): array {
+	private function create_content( string $type, string $tool, object $comment = null, array $update_content = [] ): array {
 		$message = [];
 		switch ( $type ) {
 			case 'comment':
-				$message = $this->create_comment_message( $comment, $tool );
+				$message = $this->create_comment_message( $tool, $comment );
 				break;
 			case 'update':
-				$message = $this->create_update_message( $check_data, $tool );
+				$message = $this->create_update_message( $tool, $update_content );
 				break;
 			case 'plugin_update':
-				$message = $this->create_plugin_update_message( $tool );
+				$message = $this->create_developer_message( $tool, $update_content );
 				break;
 		}
 
@@ -171,10 +170,10 @@ class Sct_Create_Content extends Sct_Base {
 	/**
 	 * Create comment message.
 	 *
+	 * @param string $tool    Tool name.
 	 * @param object $comment Comment data.
-	 * @param string $tool Tool name.
 	 */
-	private function create_comment_message( object $comment, string $tool ) {
+	private function create_comment_message( string $tool, object $comment ) {
 		$site_name      = get_bloginfo( 'name' );
 		$site_url       = get_bloginfo( 'url' );
 		$article_title  = get_the_title( $comment->comment_post_ID );
@@ -238,10 +237,10 @@ class Sct_Create_Content extends Sct_Base {
 	/**
 	 * Create update message.
 	 *
-	 * @param array  $check_data Update data.
-	 * @param string $tool Tool name.
+	 * @param string $tool           Tool name.
+	 * @param array  $update_content Update data.
 	 */
-	private function create_update_message( array $check_data, string $tool ) {
+	private function create_update_message( string $tool, array $update_content ) {
 		$site_name    = get_bloginfo( 'name' );
 		$site_url     = get_bloginfo( 'url' );
 		$admin_url    = admin_url() . 'update-core.php';
@@ -252,7 +251,7 @@ class Sct_Create_Content extends Sct_Base {
 		$add_themes;
 		$add_plugins;
 
-		foreach ( $check_data as $key => $value ) {
+		foreach ( $update_content as $key => $value ) {
 			switch ( $value['attribute'] ) {
 				case 'core':
 					$add_core .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
@@ -348,16 +347,17 @@ class Sct_Create_Content extends Sct_Base {
 	/**
 	 * Create plugin update message.
 	 *
-	 * @param string $tool Tool name.
+	 * @param string $tool           Tool name.
+	 * @param array  $update_message Update message.
 	 */
-	private function create_plugin_update_message( string $tool ) {
+	private function create_developer_message( string $tool, array $update_message ) {
 		$site_name         = get_bloginfo( 'name' );
 		$site_url          = get_bloginfo( 'url' );
 		$admin_url         = admin_url() . 'update-core.php';
 		$message_title     = $this->get_send_text( 'plugin_update', 'title' );
 		$developer_message = '';
 
-		foreach ( $this->get_developer_messages() as $value ) {
+		foreach ( $update_message as $value ) {
 			$developer_message .= $value . "\n";
 		}
 
