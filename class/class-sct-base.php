@@ -169,6 +169,8 @@ class Sct_Base {
 	 */
 	protected function get_developer_messages(): array {
 		$this->developer_messages = [
+			'key'     => plugin_basename( $this->get_plugin_path() ),
+			'type'    => 'plugin',
 			'title'   => esc_html__( 'Send Chat Tools', 'send-chat-tools' ),
 			'message' => [
 				'Test message.',
@@ -235,11 +237,6 @@ class Sct_Base {
 			$status_code = $result['response']['code'];
 		} else {
 			$status_code = 1000;
-		}
-
-		if ( ( 200 === $status_code || 204 === $status_code ) && 'dev_notify' === $id ) {
-			$sct_options['version'] = self::VERSION;
-			$this->set_sct_options( $sct_options );
 		}
 
 		if ( 200 !== $status_code && 204 !== $status_code ) {

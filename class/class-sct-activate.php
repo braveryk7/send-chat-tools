@@ -24,7 +24,7 @@ class Sct_Activate extends Sct_Base {
 	public function __construct() {
 		register_activation_hook( $this->get_plugin_path(), [ $this, 'register_options' ] );
 		add_action( 'wp_loaded', [ $this, 'migration_options' ], 5 );
-		add_action( 'wp_loaded', [ $this, 'dev_notify_message' ] );
+		add_filter( 'sct_developer_notify', [ $this, 'developer_message' ] );
 	}
 
 	/**
@@ -230,13 +230,18 @@ class Sct_Activate extends Sct_Base {
 
 	/**
 	 * Developer notify check.
+	 *
+	 * @param array $developer_message Use developer notify.
 	 */
-	public function dev_notify_message() {
+	public function developer_message( $developer_message ) {
 		$sct_options = $this->get_sct_options();
 		if ( self::VERSION !== $sct_options['version'] ) {
-			$update_message = $this->get_developer_messages();
-			$create_content = new Sct_Create_Content();
-			$create_content->controller( 0, 'dev_notify', $update_message );
+			$developer_message = $this->get_developer_messages();
+
+			$sct_options['version'] = self::VERSION;
+			$this->set_sct_options( $sct_options );
+
+			return $developer_message;
 		}
 	}
 }
