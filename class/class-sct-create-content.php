@@ -432,14 +432,19 @@ class Sct_Create_Content extends Sct_Base {
 
 				$message = array_merge_recursive( $message, $fixed_phrase );
 			} elseif ( 'discord' === $tool ) {
-				$message =
-					$site_name . '( <' . $site_url . '> ) ' . $message_title . "\n\n" .
-					$developer_message . "\n" . $this->create_context( $tool );
+				$title        = $site_name . '( <' . $site_url . '> ) ' . $message_title . "\n\n";
+				$main_content = $developer_message . "\n";
+				$website      = ! is_null( $website_url ) ? esc_html__( 'Official Web Site', 'send-chat-tools' ) . ': <' . $website_url . ">\n" : null;
+				$update_page  = ! is_null( $update_page_url ) ? esc_html__( 'Update details', 'send-chat-tools' ) . ': <' . $update_page_url . ">\n" : null;
+				$message      = $title . $main_content . $website . $update_page . "\n" . $this->create_context( $tool );
 			} elseif ( 'chatwork' === $tool ) {
-				$message = [
+				$website     = ! is_null( $website_url ) ? esc_html__( 'Official Web Site', 'send-chat-tools' ) . ': ' . $website_url . "\n" : null;
+				$update_page = ! is_null( $update_page_url ) ? esc_html__( 'Update details', 'send-chat-tools' ) . ': ' . $update_page_url . "\n" : null;
+				$message     = [
 					'body' =>
 						'[info][title]' . $site_name . '( ' . $site_url . ' ) ' . $message_title . '[/title]' .
-						$developer_message . "\n" . $this->create_context( $tool ) .
+						$developer_message . "\n" .
+						$website . $update_page . $this->create_context( $tool ) .
 						'[/info]',
 				];
 			}
@@ -546,6 +551,7 @@ class Sct_Create_Content extends Sct_Base {
 				break;
 			case 'chatwork':
 				$context =
+					'[hr]' .
 					$message[0] . "\n" .
 					$message[1] . ' https://wordpress.org/plugins/send-chat-tools/' . "\n" .
 					$message[2] . ' https://www.braveryk7.com/portfolio/send-chat-tools/';
