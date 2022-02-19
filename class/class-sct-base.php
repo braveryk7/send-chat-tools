@@ -169,7 +169,14 @@ class Sct_Base {
 	 */
 	protected function get_developer_messages(): array {
 		$this->developer_messages = [
-			__( 'No announcement.', 'send- chat-tools' ),
+			'title'   => esc_html__( 'Send Chat Tools', 'send-chat-tools' ),
+			'message' => [
+				'Test message.',
+			],
+			'url'     => [
+				'website'     => 'https://www.braveryk7.com/portfolio/send-chat-tools/',
+				'update_page' => 'https://www.braveryk7.com/portfolio/send-chat-tools/#update',
+			],
 		];
 
 		return $this->developer_messages;
