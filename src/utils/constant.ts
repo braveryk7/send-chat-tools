@@ -34,8 +34,6 @@ export const getApiInitValue = () => {
 			discord: { ...ChatoToolsBase, ...ChatToolsType1 },
 			chatwork: { ...ChatoToolsBase, ...Chatwork },
 			version: 0,
-			iv: '',
-			user_id: '',
 			cron_time: '',
 		},
 		sct_logs: {},

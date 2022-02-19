@@ -110,8 +110,6 @@ class Sct_Admin_Page extends Sct_Base {
 							'discord'   => [],
 							'chatwork'  => [],
 							'version'   => [],
-							'iv'        => [],
-							'user_id'   => [],
 							'cron_time' => [],
 						],
 					],

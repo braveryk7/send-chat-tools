@@ -47,16 +47,11 @@ class Sct_Activate extends Sct_Base {
 			'log'         => [],
 		];
 
-		$encryption = new Sct_Encryption();
-		$iv         = $encryption->make_vector();
-
 		$options = [
 			'slack'     => $chat_tools_value,
 			'discord'   => $chat_tools_value,
 			'chatwork'  => $chatwork_value,
 			'version'   => self::VERSION,
-			'iv'        => $iv,
-			'user_id'   => '',
 			'cron_time' => '18:00',
 		];
 

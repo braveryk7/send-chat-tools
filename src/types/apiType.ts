@@ -4,8 +4,6 @@ export type apiType = {
 		discord: ChatToolsBaseType & ChatToolsType1Type;
 		chatwork: ChatToolsBaseType & ChatworkType;
 		version: number;
-		iv: string;
-		user_id: string;
 		cron_time: string;
 	};
 	sct_logs: {
