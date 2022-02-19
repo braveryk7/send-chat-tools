@@ -169,6 +169,8 @@ class Sct_Base {
 	 */
 	protected function get_developer_messages(): array {
 		$this->developer_messages = [
+			'key'     => plugin_basename( $this->get_plugin_path() ),
+			'type'    => 'plugin',
 			'title'   => esc_html__( 'Send Chat Tools', 'send-chat-tools' ),
 			'message' => [
 				'Test message.',
