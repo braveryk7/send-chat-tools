@@ -71,12 +71,6 @@ class Sct_Activate extends Sct_Base {
 		foreach ( self::OPTIONS_COLUMN as $option_name ) {
 			delete_option( self::add_prefix( $option_name ) );
 		}
-	}
-
-	/**
-	 * Clear WP cron when uninstall.
-	 */
-	public static function clear_wp_event(): void {
 		if ( wp_get_scheduled_event( self::get_wpcron_event_name() ) ) {
 			wp_clear_scheduled_hook( self::get_wpcron_event_name() );
 		}
