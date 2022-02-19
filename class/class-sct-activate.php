@@ -229,7 +229,7 @@ class Sct_Activate extends Sct_Base {
 	}
 
 	/**
-	 * Plugin update check.
+	 * Developer notify check.
 	 */
 	public function dev_notify_message() {
 		$sct_options = $this->get_sct_options();
