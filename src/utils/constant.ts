@@ -38,6 +38,7 @@ export const getApiInitValue = () => {
 			user_id: '',
 			cron_time: '',
 		},
+		sct_logs: {},
 	};
 
 	return sctOptions;
