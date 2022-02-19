@@ -24,7 +24,6 @@ class Sct_Developer_Notify extends Sct_Base {
 	 * @param array $developer_message Developer message.
 	 */
 	private function developer_message_controller( array $developer_message ) {
-		$this->console( 'controller' );
 		$kesy_check  = $this->developer_message_arraykeys_check( $developer_message );
 		$exist_check = $this->developer_message_key_exists( $developer_message );
 
