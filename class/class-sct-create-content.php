@@ -34,8 +34,6 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param array  $update_content Update date or message ([]: default).
 	 */
 	public function controller( int $comment_id = 0, string $type = 'comment', array $update_content = [] ): void {
-		global $wpdb;
-
 		$sct_options = $this->get_sct_options();
 		$tools       = [ 'slack', 'discord', 'chatwork' ];
 
@@ -46,6 +44,7 @@ class Sct_Create_Content extends Sct_Base {
 				'chatwork' === $tool ? $api_column = 'api_token' : $api_column = 'webhook_url';
 
 				if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
+					global $wpdb;
 					$options = $this->create_content( $type, $tool, $comment );
 					$this->send_tools( $options, (string) $wpdb->insert_id, $tool, $comment );
 				} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
