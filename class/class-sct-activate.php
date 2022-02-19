@@ -236,7 +236,7 @@ class Sct_Activate extends Sct_Base {
 		if ( self::DB_VERSION !== $sct_options['db_version'] ) {
 			$update_message = $this->get_developer_messages();
 			$create_content = new Sct_Create_Content();
-			$create_content->controller( 0, 'plugin_update', [], $update_message );
+			$create_content->controller( 0, 'plugin_update', $update_message );
 		}
 	}
 }
