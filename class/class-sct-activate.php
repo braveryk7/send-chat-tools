@@ -147,7 +147,7 @@ class Sct_Activate extends Sct_Base {
 						$sct_options['chatwork']['log'] = [];
 						break;
 					case 'db_version':
-						$sct_options['version'] = (int) $old_value;
+						$sct_options['version'] = (float) $old_value;
 						break;
 					case 'iv':
 						$sct_options['iv'] = $old_value;
