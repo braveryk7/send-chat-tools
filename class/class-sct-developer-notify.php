@@ -19,6 +19,20 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Developer_Notify extends Sct_Base {
 	/**
+	 * Developer notify hook, process.
+	 */
+	public function developer_notify() {
+		$developer_message = null;
+
+		$developer_message = apply_filters( 'sct_developer_notify', $developer_message );
+
+		if ( $developer_message && $this->developer_message_controller( $developer_message ) ) {
+			$create_content = new Sct_Create_Content();
+			$create_content->controller( 0, 'dev_notify', $developer_message );
+		}
+	}
+
+	/**
 	 * Controller to check developer messages.
 	 *
 	 * @param array $developer_message Developer message.
