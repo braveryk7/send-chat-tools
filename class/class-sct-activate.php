@@ -51,13 +51,13 @@ class Sct_Activate extends Sct_Base {
 		$iv         = $encryption->make_vector();
 
 		$options = [
-			'slack'      => $chat_tools_value,
-			'discord'    => $chat_tools_value,
-			'chatwork'   => $chatwork_value,
-			'db_version' => self::DB_VERSION,
-			'iv'         => $iv,
-			'user_id'    => '',
-			'cron_time'  => '18:00',
+			'slack'     => $chat_tools_value,
+			'discord'   => $chat_tools_value,
+			'chatwork'  => $chatwork_value,
+			'version'   => self::VERSION,
+			'iv'        => $iv,
+			'user_id'   => '',
+			'cron_time' => '18:00',
 		];
 
 		add_option( $this->add_prefix( 'options' ), $options );
@@ -147,7 +147,7 @@ class Sct_Activate extends Sct_Base {
 						$sct_options['chatwork']['log'] = [];
 						break;
 					case 'db_version':
-						$sct_options['db_version'] = $old_value;
+						$sct_options['version'] = $old_value;
 						break;
 					case 'iv':
 						$sct_options['iv'] = $old_value;
@@ -233,7 +233,7 @@ class Sct_Activate extends Sct_Base {
 	 */
 	public function plugin_update_message() {
 		$sct_options = $this->get_sct_options();
-		if ( self::DB_VERSION !== $sct_options['db_version'] ) {
+		if ( self::VERSION !== $sct_options['version'] ) {
 			$update_message = $this->get_developer_messages();
 			$create_content = new Sct_Create_Content();
 			$create_content->controller( 0, 'plugin_update', $update_message );
