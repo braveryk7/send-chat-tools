@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction } from 'react';
 import api from '@wordpress/api'; // eslint-disable-line
 import { useEffect } from '@wordpress/element';
 
-import { apiType, WPApiType } from '../types/apiType';
+import { apiType } from '../types/apiType';
 
 export const useGetApi = (
 	stateFunc: Dispatch< SetStateAction< apiType > >,
@@ -14,7 +14,7 @@ export const useGetApi = (
 		api.loadPromise.then( () => {
 			const model = new api.models.Settings();
 
-			model.fetch().then( ( res: WPApiType< apiType > ) => {
+			model.fetch().then( ( res: apiType ) => {
 				stateFunc( res );
 				setApiStatus( true );
 			} );

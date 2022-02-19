@@ -1,5 +1,6 @@
 export type TabItemsType = {
 	id: string;
+	title: string;
 };
 
 export type itemKeyType = 'slack' | 'discord' | 'chatwork';
