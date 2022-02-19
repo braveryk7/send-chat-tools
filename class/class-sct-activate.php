@@ -233,10 +233,10 @@ class Sct_Activate extends Sct_Base {
 	 */
 	public function plugin_update_message() {
 		$sct_options = $this->get_sct_options();
-		$this->set_sct_options( $sct_options );
 		if ( self::DB_VERSION !== $sct_options['db_version'] ) {
+			$update_message = $this->get_developer_messages();
 			$create_content = new Sct_Create_Content();
-			$create_content->controller( 0, 'plugin_update', [] );
+			$create_content->controller( 0, 'plugin_update', [], $update_message );
 		}
 	}
 }
