@@ -46,6 +46,9 @@ class Sct_Logger extends Sct_Base {
 			case 'update':
 				$type = '2';
 				break;
+			case 'dev_notify':
+				$type = '3';
+				break;
 		}
 
 		if ( isset( $tool ) && isset( $type ) ) {
