@@ -41,6 +41,20 @@ class Sct_Admin_Page extends Sct_Base {
 			self::PLUGIN_SLUG,
 			[ $this, 'settings_page' ],
 		);
+
+		$sct_options = get_option( $this->add_prefix( 'options' ) );
+		if ( $sct_options['old_settings'] ) {
+			unset( $sct_options['old_settings'] );
+			$this->set_sct_options( $sct_options );
+
+			add_options_page(
+				__( 'Old Send Chat Tools', 'send-chat-tools' ),
+				__( 'Old Send Chat Tools', 'send-chat-tools' ),
+				'administrator',
+				'send-chat-tools-settings',
+				[ $this, 'old_settings_page' ]
+			);
+		}
 	}
 
 	/**
@@ -141,5 +155,14 @@ class Sct_Admin_Page extends Sct_Base {
 	 */
 	public function settings_page(): void {
 		echo '<div id="' . esc_attr( $this->get_option_group() ) . '"></div>';
+	}
+
+	/**
+	 * Update user ONLY!!
+	 * Old settings page redirect to settings_page().
+	 */
+	public function old_settings_page() {
+		$url = admin_url() . 'options-general.php?page=send-chat-tools';
+		echo "<script>location.href='${url}';</script>"; //phpcs:ignore
 	}
 }
