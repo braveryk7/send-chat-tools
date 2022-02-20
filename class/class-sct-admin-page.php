@@ -43,7 +43,7 @@ class Sct_Admin_Page extends Sct_Base {
 		);
 
 		$sct_options = get_option( $this->add_prefix( 'options' ) );
-		if ( $sct_options['old_settings'] ) {
+		if ( array_key_exists( 'old_settings', $sct_options ) && $sct_options['old_settings'] ) {
 			unset( $sct_options['old_settings'] );
 			$this->set_sct_options( $sct_options );
 
