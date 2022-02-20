@@ -222,7 +222,7 @@ class Sct_Activate extends Sct_Base {
 	 */
 	public function developer_message( $developer_message ) {
 		$sct_options = $this->get_sct_options();
-		if ( self::VERSION !== $sct_options['version'] ) {
+		if ( array_key_exists( 'version', $sct_options ) && self::VERSION !== $sct_options['version'] ) {
 			$developer_message = $this->get_developer_messages();
 
 			$sct_options['version'] = self::VERSION;
