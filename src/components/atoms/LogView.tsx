@@ -27,6 +27,8 @@ export const LogView = () => {
 				return 'Comment';
 			case '2':
 				return 'Update';
+			case '3':
+				return 'Developer';
 			default:
 				return null;
 		}

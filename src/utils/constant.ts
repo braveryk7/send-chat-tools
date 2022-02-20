@@ -33,7 +33,7 @@ export const getApiInitValue = () => {
 			slack: { ...ChatoToolsBase, ...ChatToolsType1 },
 			discord: { ...ChatoToolsBase, ...ChatToolsType1 },
 			chatwork: { ...ChatoToolsBase, ...Chatwork },
-			version: 0,
+			version: '',
 			cron_time: '',
 		},
 		sct_logs: {},

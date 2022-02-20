@@ -3,7 +3,7 @@ export type apiType = {
 		slack: ChatToolsBaseType & ChatToolsType1Type;
 		discord: ChatToolsBaseType & ChatToolsType1Type;
 		chatwork: ChatToolsBaseType & ChatworkType;
-		version: number;
+		version: string;
 		cron_time: string;
 	};
 	sct_logs: {
