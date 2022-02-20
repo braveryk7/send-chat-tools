@@ -88,13 +88,13 @@ class Sct_Activate extends Sct_Base {
 			foreach ( $old_options as $old_key => $old_value ) {
 				switch ( $old_key ) {
 					case 'use_slack':
-						$sct_options['slack']['use'] = $old_value;
+						$sct_options['slack']['use'] = (bool) $old_value;
 						break;
 					case 'use_discord':
-						$sct_options['discord']['use'] = $old_value;
+						$sct_options['discord']['use'] = (bool) $old_value;
 						break;
 					case 'use_chatwork':
-						$sct_options['chatwork']['use'] = $old_value;
+						$sct_options['chatwork']['use'] = (bool) $old_value;
 						break;
 					case 'slack_webhook_url':
 						$sct_options['slack']['webhook_url'] = $old_value;
@@ -109,22 +109,22 @@ class Sct_Activate extends Sct_Base {
 						$sct_options['chatwork']['room_id'] = $old_value;
 						break;
 					case 'send_slack_author':
-						$sct_options['slack']['send_author'] = $old_value;
+						$sct_options['slack']['send_author'] = (bool) $old_value;
 						break;
 					case 'send_discord_author':
-						$sct_options['discord']['send_author'] = $old_value;
+						$sct_options['discord']['send_author'] = (bool) $old_value;
 						break;
 					case 'send_chatwork_author':
-						$sct_options['chatwork']['send_author'] = $old_value;
+						$sct_options['chatwork']['send_author'] = (bool) $old_value;
 						break;
 					case 'send_slack_update':
-						$sct_options['slack']['send_update'] = $old_value;
+						$sct_options['slack']['send_update'] = (bool) $old_value;
 						break;
 					case 'send_discord_update':
-						$sct_options['discord']['send_update'] = $old_value;
+						$sct_options['discord']['send_update'] = (bool) $old_value;
 						break;
 					case 'send_chatwork_update':
-						$sct_options['chatwork']['send_update'] = $old_value;
+						$sct_options['chatwork']['send_update'] = (bool) $old_value;
 						break;
 					case 'slack_log':
 						$sct_options['slack']['log'] = [];
