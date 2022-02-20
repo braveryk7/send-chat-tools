@@ -22,7 +22,7 @@ class Sct_Base {
 	protected const PLUGIN_SLUG         = 'send-chat-tools';
 	protected const PLUGIN_NAME         = 'Send Chat Tools';
 	protected const PLUGIN_FILE         = self::PLUGIN_SLUG . '.php';
-	protected const VERSION             = 1.0;
+	protected const VERSION             = '1.0.0';
 	protected const OPTIONS_COLUMN_NAME = 'options';
 
 	protected const TABLE_NAME = self::PREFIX;
