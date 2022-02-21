@@ -17,6 +17,13 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	private $instance;
 
 	/**
+	 * Use arg.
+	 *
+	 * @var array $developer_message arg.
+	 */
+	private $developer_message;
+
+	/**
 	 * SetUp.
 	 * Create instance.
 	 */
