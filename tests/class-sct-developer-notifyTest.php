@@ -69,7 +69,7 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: developer_message_urls_regex()
 	 *
-	 * @dataProvider url_parameters
+	 * @dataProvider developer_message_urls_regex_parameters
 	 * @param array $developer_message Developer message.
 	 */
 	public function test_developer_message_urls_regex( $developer_message ) {
@@ -105,7 +105,7 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * Use TEST: developer_message_urls_regex()
 	 */
-	public function url_parameters() {
+	public function developer_message_urls_regex_parameters() {
 		return [
 			'All set'             => [
 				[
