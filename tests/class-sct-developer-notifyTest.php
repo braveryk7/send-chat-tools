@@ -39,6 +39,13 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: developer_message_arraykeys_check()
+	 */
+	public function test_developer_message_arraykeys_check() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
 	 * TEST: developer_message_urls_regex()
 	 *
 	 * @dataProvider url_parameters
