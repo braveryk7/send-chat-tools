@@ -52,4 +52,44 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 			$method->invoke( $this->instance, $developer_message ),
 		);
 	}
+
+	/**
+	 * Use TEST: developer_message_urls_regex()
+	 */
+	public function url_parameters() {
+		return [
+			'All set'             => [
+				[
+					'url' => [
+						'website'     => 'https://www.braveryk7.com/',
+						'update_page' => 'https://www.braveryk7.com/',
+					],
+				],
+			],
+			'website is null'     => [
+				[
+					'url' => [
+						'website'     => 'https://www.braveryk7.com/',
+						'update_page' => 'https://www.braveryk7.com/',
+					],
+				],
+			],
+			'update_page is null' => [
+				[
+					'url' => [
+						'website'     => 'https://www.braveryk7.com/',
+						'update_page' => 'https://www.braveryk7.com/',
+					],
+				],
+			],
+			'All null'            => [
+				[
+					'url' => [
+						'website'     => 'https://www.braveryk7.com/',
+						'update_page' => 'https://www.braveryk7.com/',
+					],
+				],
+			],
+		];
+	}
 }
