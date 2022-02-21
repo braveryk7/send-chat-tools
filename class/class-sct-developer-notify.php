@@ -100,7 +100,7 @@ class Sct_Developer_Notify extends Sct_Base {
 	private function developer_message_urls_regex( array $developer_message ): bool {
 		$flag    = false;
 		$url     = $developer_message['url'];
-		$pattern = '/https?:\/\/[\w!?\/+\-_~;.,*&@#$%()\'[\]]+/';
+		$pattern = '/\Ahttps?:\/\/.*/';
 
 		$flag = preg_match( $pattern, $url['website'] ) && preg_match( $pattern, $url['update_page'] ) ? true : false;
 
