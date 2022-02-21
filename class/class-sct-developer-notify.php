@@ -88,4 +88,19 @@ class Sct_Developer_Notify extends Sct_Base {
 
 		return $flag;
 	}
+
+	/**
+	 * Check if the array value of the url key is in URL format.
+	 *
+	 * @param array $developer_message Developer message.
+	 */
+	private function developer_message_urls_regex( array $developer_message ): bool {
+		$flag    = false;
+		$url     = $developer_message['url'];
+		$pattern = '/https?:\/\/[\w!?\/+\-_~;.,*&@#$%()\'[\]]+/';
+
+		$flag = preg_match( $pattern, $url['website'] ) && preg_match( $pattern, $url['update_page'] ) ? true : false;
+
+		return $flag;
+	}
 }
