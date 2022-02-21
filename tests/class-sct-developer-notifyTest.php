@@ -9,5 +9,10 @@ require_once './class/class-sct-developer-notify.php';
  * Test: Sct_Developer_Notify
  */
 class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
-
+	/**
+	 * This test class instance.
+	 *
+	 * @var object $instance instance.
+	 */
+	private $instance;
 }
