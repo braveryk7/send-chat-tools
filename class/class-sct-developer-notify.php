@@ -67,6 +67,8 @@ class Sct_Developer_Notify extends Sct_Base {
 		$flag = array_key_exists( 'title', $developer_message ) ? true : false;
 		$flag = array_key_exists( 'message', $developer_message ) ? true : false;
 		$flag = array_key_exists( 'url', $developer_message ) ? true : false;
+		$glag = array_key_exists( 'website', $developer_message['url'] ) ? true : false;
+		$glag = array_key_exists( 'update_page', $developer_message['url'] ) ? true : false;
 
 		return $flag;
 	}
