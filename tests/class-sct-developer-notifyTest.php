@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 define( 'ABSPATH', '' );
 
 require_once './class/class-sct-developer-notify.php';
+require_once './tests/lib/wordpress-functions.php';
 
 /**
  * Test: Sct_Developer_Notify
