@@ -28,6 +28,12 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	 * Create instance.
 	 */
 	protected function setUp() :void {
-		$this->instance = new Sct_Developer_Notify();
+		$this->instance          = new Sct_Developer_Notify();
+		$this->developer_message = [
+			'url' => [
+				'website'     => null,
+				'update_page' => null,
+			],
+		];
 	}
 }
