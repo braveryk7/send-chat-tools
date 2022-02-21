@@ -39,14 +39,16 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * TEST: add_prefix()
+	 *
+	 * @param array $developer_message Developer message.
 	 */
-	public function test_developer_message_urls_regex() {
+	public function test_developer_message_urls_regex( $developer_message ) {
 		$method = new ReflectionMethod( $this->instance, 'developer_message_urls_regex' );
 		$method->setAccessible( true );
 
 		$this->assertSame(
 			true,
-			$method->invoke( $this->instance, $this->developer_message ),
+			$method->invoke( $this->instance, $developer_message ),
 		);
 	}
 }
