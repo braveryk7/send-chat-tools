@@ -47,8 +47,9 @@ class Sct_Developer_Notify extends Sct_Base {
 	private function developer_message_controller( array $developer_message ) {
 		$kesy_check  = $this->developer_message_arraykeys_check( $developer_message );
 		$exist_check = $this->developer_message_key_exists( $developer_message );
+		$url_check   = $this->developer_message_urls_regex( $developer_message );
 
-		$flag = $kesy_check && $exist_check ? true : false;
+		$flag = $kesy_check && $exist_check && $url_check ? true : false;
 
 		return $flag;
 	}
