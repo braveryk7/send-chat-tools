@@ -27,11 +27,7 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	 * Create instance.
 	 */
 	protected function setUp() :void {
-		$this->instance =
-			$this->getMockBuilder( 'Sct_Developer_Notify' )
-			->setMethods( null )
-			->disableOriginalConstructor()
-			->getMock();
+		$this->instance = new Sct_Developer_Notify();
 	}
 
 	/**
