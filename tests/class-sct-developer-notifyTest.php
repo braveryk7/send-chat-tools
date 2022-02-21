@@ -74,6 +74,26 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: developer_message_key_exists()
+	 */
+	public function developer_message_key_exists_parameters() {
+		return [
+			'theme'  => [
+				[
+					'key'  => 'my-theme',
+					'type' => 'theme',
+				],
+			],
+			'plugin' => [
+				[
+					'key'  => 'my-plugin/my-plugin.php',
+					'type' => 'plugin',
+				],
+			],
+		];
+	}
+
+	/**
 	 * Use TEST: developer_message_urls_regex()
 	 */
 	public function url_parameters() {
