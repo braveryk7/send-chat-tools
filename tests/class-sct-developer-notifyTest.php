@@ -40,6 +40,7 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: add_prefix()
 	 *
+	 * @dataProvider url_parameters
 	 * @param array $developer_message Developer message.
 	 */
 	public function test_developer_message_urls_regex( $developer_message ) {
