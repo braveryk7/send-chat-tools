@@ -53,10 +53,17 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: developer_message_key_exists()
 	 *
+	 * @dataProvider developer_message_key_exists_parameters
 	 * @param array $developer_message Developer message.
 	 */
 	public function test_developer_message_key_exists( $developer_message ) {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+		$method = new ReflectionMethod( $this->instance, 'developer_message_key_exists' );
+		$method->setAccessible( true );
+
+		$this->assertSame(
+			true,
+			$method->invoke( $this->instance, $developer_message ),
+		);
 	}
 
 	/**
