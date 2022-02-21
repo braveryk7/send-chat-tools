@@ -17,24 +17,11 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	private $instance;
 
 	/**
-	 * Use arg.
-	 *
-	 * @var array $developer_message arg.
-	 */
-	private $developer_message;
-
-	/**
 	 * SetUp.
 	 * Create instance.
 	 */
 	protected function setUp() :void {
-		$this->instance          = new Sct_Developer_Notify();
-		$this->developer_message = [
-			'url' => [
-				'website'     => null,
-				'update_page' => null,
-			],
-		];
+		$this->instance = new Sct_Developer_Notify();
 	}
 
 	/**
