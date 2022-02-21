@@ -15,4 +15,12 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	 * @var object $instance instance.
 	 */
 	private $instance;
+
+	/**
+	 * SetUp.
+	 * Create instance.
+	 */
+	protected function setUp() :void {
+		$this->instance = new Sct_Developer_Notify();
+	}
 }
