@@ -15,3 +15,10 @@ function get_option( $str ) {
 
 	return $value;
 }
+
+/**
+ * Use test: WordPress function.
+ */
+function add_action() {
+	return true;
+}
