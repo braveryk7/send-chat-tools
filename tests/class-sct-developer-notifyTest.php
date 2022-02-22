@@ -93,12 +93,14 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 					'key'  => 'my-theme',
 					'type' => 'theme',
 				],
+				true,
 			],
 			'plugin' => [
 				[
 					'key'  => 'my-plugin/my-plugin.php',
 					'type' => 'plugin',
 				],
+				true,
 			],
 		];
 	}
