@@ -46,9 +46,19 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * TEST: developer_message_arraykeys_check()
+	 *
+	 * @dataProvider developer_message_arraykeys_check_parameters
+	 * @param array $developer_message Developer message.
+	 * @param bool  $expected Expected value.
 	 */
-	public function test_developer_message_arraykeys_check() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+	public function test_developer_message_arraykeys_check( $developer_message, $expected ) {
+		$method = new ReflectionMethod( $this->instance, 'developer_message_arraykeys_check' );
+		$method->setAccessible( true );
+
+		$this->assertSame(
+			$expected,
+			$method->invoke( $this->instance, $developer_message ),
+		);
 	}
 
 	/**
