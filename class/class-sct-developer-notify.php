@@ -60,17 +60,19 @@ class Sct_Developer_Notify extends Sct_Base {
 	 * @param array $developer_message Developer message.
 	 */
 	private function developer_message_arraykeys_check( array $developer_message ): bool {
-		$flag = false;
+		$keys = [ 'key', 'type', 'title', 'message', 'url', 'website', 'update_page' ];
 
-		$flag = array_key_exists( 'key', $developer_message ) ? true : false;
-		$flag = array_key_exists( 'type', $developer_message ) ? true : false;
-		$flag = array_key_exists( 'title', $developer_message ) ? true : false;
-		$flag = array_key_exists( 'message', $developer_message ) ? true : false;
-		$flag = array_key_exists( 'url', $developer_message ) ? true : false;
-		$glag = array_key_exists( 'website', $developer_message['url'] ) ? true : false;
-		$glag = array_key_exists( 'update_page', $developer_message['url'] ) ? true : false;
+		foreach ( $keys as $key ) {
+			if ( 'website' === $key || 'update_page' === $key ) {
+				if ( ! array_key_exists( $key, $developer_message['url'] ) ) {
+					return false;
+				}
+			} elseif ( ! array_key_exists( $key, $developer_message ) ) {
+				return false;
+			}
+		}
 
-		return $flag;
+		return true;
 	}
 
 	/**
