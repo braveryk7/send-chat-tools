@@ -73,13 +73,14 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	 *
 	 * @dataProvider developer_message_urls_regex_parameters
 	 * @param array $developer_message Developer message.
+	 * @param bool  $expected Expected value.
 	 */
-	public function test_developer_message_urls_regex( $developer_message ) {
+	public function test_developer_message_urls_regex( $developer_message, $expected ) {
 		$method = new ReflectionMethod( $this->instance, 'developer_message_urls_regex' );
 		$method->setAccessible( true );
 
 		$this->assertSame(
-			true,
+			$expected,
 			$method->invoke( $this->instance, $developer_message ),
 		);
 	}
