@@ -96,6 +96,27 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: developer_message_arraykeys_check()
+	 */
+	public function developer_message_arraykeys_check_parameters() {
+		return [
+			'All exists' => [
+				[
+					'key'     => '',
+					'type'    => '',
+					'title'   => '',
+					'message' => '',
+					'url'     => [
+						'website'     => '',
+						'update_page' => '',
+					],
+				],
+				true,
+			],
+		];
+	}
+
+	/**
 	 * TEST: developer_message_key_exists()
 	 */
 	public function developer_message_key_exists_parameters() {
