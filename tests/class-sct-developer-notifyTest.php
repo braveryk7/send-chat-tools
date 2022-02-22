@@ -62,6 +62,23 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: developer_message_url_encode()
+	 *
+	 * @dataProvider developer_message_url_encode_parameters
+	 * @param array $developer_message Developer message.
+	 * @param array $expected Expected value.
+	 */
+	public function test_developer_message_url_encode( $developer_message, $expected ) {
+		$method = new ReflectionMethod( $this->instance, 'developer_message_url_encode' );
+		$method->setAccessible( true );
+
+		$this->assertSame(
+			$expected,
+			$method->invoke( $this->instance, $developer_message ),
+		);
+	}
+
+	/**
 	 * TEST: developer_message_key_exists()
 	 *
 	 * @dataProvider developer_message_key_exists_parameters
