@@ -100,7 +100,7 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	 */
 	public function developer_message_arraykeys_check_parameters() {
 		return [
-			'All exists' => [
+			'All exists'     => [
 				[
 					'key'     => '',
 					'type'    => '',
@@ -112,6 +112,16 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 					],
 				],
 				true,
+			],
+			'url child less' => [
+				[
+					'key'     => '',
+					'type'    => '',
+					'title'   => '',
+					'message' => '',
+					'url'     => [],
+				],
+				false,
 			],
 		];
 	}
