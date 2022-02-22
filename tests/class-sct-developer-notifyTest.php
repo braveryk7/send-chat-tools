@@ -56,13 +56,14 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	 *
 	 * @dataProvider developer_message_key_exists_parameters
 	 * @param array $developer_message Developer message.
+	 * @param bool  $expected Expected value.
 	 */
-	public function test_developer_message_key_exists( $developer_message ) {
+	public function test_developer_message_key_exists( $developer_message, $expected ) {
 		$method = new ReflectionMethod( $this->instance, 'developer_message_key_exists' );
 		$method->setAccessible( true );
 
 		$this->assertSame(
-			true,
+			$expected,
 			$method->invoke( $this->instance, $developer_message ),
 		);
 	}
