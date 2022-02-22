@@ -102,7 +102,10 @@ class Sct_Developer_Notify extends Sct_Base {
 		$url     = $developer_message['url'];
 		$pattern = '/\Ahttps?:\/\/.*/';
 
-		$flag = preg_match( $pattern, $url['website'] ) && preg_match( $pattern, $url['update_page'] ) ? true : false;
+		if ( ( is_null( $url['website'] ) || preg_match( $pattern, $url['website'] ) ) &&
+			( is_null( $url['update_page'] ) || preg_match( $pattern, $url['update_page'] ) ) ) {
+			$flag = true;
+		}
 
 		return $flag;
 	}
