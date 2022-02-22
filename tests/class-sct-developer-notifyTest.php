@@ -89,19 +89,40 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	 */
 	public function developer_message_key_exists_parameters() {
 		return [
-			'theme'  => [
+			'theme'     => [
 				[
 					'key'  => 'my-theme',
 					'type' => 'theme',
 				],
 				true,
 			],
-			'plugin' => [
+			'plugin'    => [
 				[
 					'key'  => 'my-plugin/my-plugin.php',
 					'type' => 'plugin',
 				],
 				true,
+			],
+			'type less' => [
+				[
+					'key'  => 'my-theme',
+					'type' => '',
+				],
+				false,
+			],
+			'key less'  => [
+				[
+					'key'  => '',
+					'type' => 'theme',
+				],
+				false,
+			],
+			'null'      => [
+				[
+					'key'  => null,
+					'type' => null,
+				],
+				false,
 			],
 		];
 	}
