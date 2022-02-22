@@ -363,8 +363,13 @@ class Sct_Create_Content extends Sct_Base {
 			);
 			$developer_message = '';
 
+			$i = 0;
 			foreach ( $update_message['message'] as $value ) {
+				if ( $i >= 50 ) {
+					break;
+				}
 				$developer_message .= $value . "\n";
+				$i++;
 			}
 
 			if ( ! is_null( $update_message['url'] ) ) {
