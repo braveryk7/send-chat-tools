@@ -139,6 +139,7 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 						'update_page' => 'https://www.braveryk7.com/',
 					],
 				],
+				true,
 			],
 			'website is null'     => [
 				[
@@ -147,6 +148,7 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 						'update_page' => 'https://www.braveryk7.com/',
 					],
 				],
+				true,
 			],
 			'update_page is null' => [
 				[
@@ -155,6 +157,7 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 						'update_page' => 'https://www.braveryk7.com/',
 					],
 				],
+				true,
 			],
 			'All null'            => [
 				[
@@ -163,6 +166,7 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 						'update_page' => 'https://www.braveryk7.com/',
 					],
 				],
+				true,
 			],
 		];
 	}
