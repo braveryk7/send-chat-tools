@@ -76,6 +76,23 @@ class Sct_Developer_Notify extends Sct_Base {
 	}
 
 	/**
+	 * Encode website and update_page values.
+	 *
+	 * @param array $developer_message Developer message.
+	 */
+	private function developer_message_url_encode( array $developer_message ): array {
+		if ( ! is_null( $developer_message['url']['website'] ) ) {
+			$developer_message['url']['website'] = rawurlencode( $developer_message['url']['website'] );
+		}
+
+		if ( ! is_null( $developer_message['url']['update_page'] ) ) {
+			$developer_message['url']['update_page'] = rawurlencode( $developer_message['url']['update_page'] );
+		}
+
+		return $developer_message;
+	}
+
+	/**
 	 * Check for the presence of themes or plugins in developer messages.
 	 *
 	 * @param array $developer_message Developer message.
