@@ -144,6 +144,70 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: developer_message_url_encode()
+	 */
+	public function developer_message_url_encode_parameters() {
+		return [
+			'All set'             => [
+				[
+					'url' => [
+						'website'     => 'https://www.braveryk7.com/',
+						'update_page' => 'https://www.braveryk7.com/',
+					],
+				],
+				[
+					'url' => [
+						'website'     => 'https%3A%2F%2Fwww.braveryk7.com%2F',
+						'update_page' => 'https%3A%2F%2Fwww.braveryk7.com%2F',
+					],
+				],
+			],
+			'website is null'     => [
+				[
+					'url' => [
+						'website'     => null,
+						'update_page' => 'https://www.braveryk7.com/',
+					],
+				],
+				[
+					'url' => [
+						'website'     => null,
+						'update_page' => 'https%3A%2F%2Fwww.braveryk7.com%2F',
+					],
+				],
+			],
+			'update_page is null' => [
+				[
+					'url' => [
+						'website'     => 'https://www.braveryk7.com/',
+						'update_page' => null,
+					],
+				],
+				[
+					'url' => [
+						'website'     => 'https%3A%2F%2Fwww.braveryk7.com%2F',
+						'update_page' => null,
+					],
+				],
+			],
+			'All null'            => [
+				[
+					'url' => [
+						'website'     => null,
+						'update_page' => null,
+					],
+				],
+				[
+					'url' => [
+						'website'     => null,
+						'update_page' => null,
+					],
+				],
+			],
+		];
+	}
+
+	/**
 	 * TEST: developer_message_key_exists()
 	 */
 	public function developer_message_key_exists_parameters() {
