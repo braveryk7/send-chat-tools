@@ -47,8 +47,9 @@ class Sct_Developer_Notify extends Sct_Base {
 	private function developer_message_controller( array $developer_message ) {
 		$kesy_check  = $this->developer_message_arraykeys_check( $developer_message );
 		$exist_check = $this->developer_message_key_exists( $developer_message );
+		$url_check   = $this->developer_message_urls_regex( $developer_message );
 
-		$flag = $kesy_check && $exist_check ? true : false;
+		$flag = $kesy_check && $exist_check && $url_check ? true : false;
 
 		return $flag;
 	}
@@ -66,6 +67,8 @@ class Sct_Developer_Notify extends Sct_Base {
 		$flag = array_key_exists( 'title', $developer_message ) ? true : false;
 		$flag = array_key_exists( 'message', $developer_message ) ? true : false;
 		$flag = array_key_exists( 'url', $developer_message ) ? true : false;
+		$glag = array_key_exists( 'website', $developer_message['url'] ) ? true : false;
+		$glag = array_key_exists( 'update_page', $developer_message['url'] ) ? true : false;
 
 		return $flag;
 	}
@@ -85,6 +88,21 @@ class Sct_Developer_Notify extends Sct_Base {
 			$plugins = get_option( 'active_plugins' );
 			$flag    = in_array( $developer_message['key'], $plugins, true ) ? true : false;
 		}
+
+		return $flag;
+	}
+
+	/**
+	 * Check if the array value of the url key is in URL format.
+	 *
+	 * @param array $developer_message Developer message.
+	 */
+	private function developer_message_urls_regex( array $developer_message ): bool {
+		$flag    = false;
+		$url     = $developer_message['url'];
+		$pattern = '/\Ahttps?:\/\/.*/';
+
+		$flag = preg_match( $pattern, $url['website'] ) && preg_match( $pattern, $url['update_page'] ) ? true : false;
 
 		return $flag;
 	}
