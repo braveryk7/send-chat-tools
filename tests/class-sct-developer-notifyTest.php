@@ -20,6 +20,10 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 			define( 'ABSPATH', '' );
 		}
 
+		if ( ! class_exists( 'Sct_Base ' ) ) {
+			require_once './class/class-sct-base.php';
+		}
+
 		require_once './class/class-sct-developer-notify.php';
 		require_once './tests/lib/wordpress-functions.php';
 	}
