@@ -20,9 +20,6 @@ You can instantly check comments that you didn't notice with the default email n
 
 Miner update.
 
-Updated to version 1.3.0!
-Here are the main changes...
-
 Important:
 
 * PHP 8.0 and earlier will no longer be supported after next minor update (1.4.0). The update is now scheduled for April.
