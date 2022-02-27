@@ -1,10 +1,6 @@
 <?php
 declare( strict_types = 1 );
 
-define( 'ABSPATH', '' );
-
-require_once './class/class-sct-base.php';
-
 /**
  * Test: Sct_Base
  */
@@ -15,6 +11,18 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 	 * @var object $instance instance.
 	 */
 	private $instance;
+
+	/**
+	 * Settings: ABSPATH, test class file, WordPress functions.
+	 */
+	public static function setUpBeforeClass(): void {
+		if ( ! defined( 'ABSPATH' ) ) {
+			define( 'ABSPATH', '' );
+		}
+
+		require_once './class/class-abt-base.php';
+		require_once './tests/lib/wordpress-functions.php';
+	}
 
 	/**
 	 * SetUp.
