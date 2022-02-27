@@ -33,6 +33,6 @@ class Sct_ActivateTest extends PHPUnit\Framework\TestCase {
 	 * Create instance.
 	 */
 	protected function setUp() :void {
-		$this->instance = new Abt_Activate();
+		$this->instance = new Sct_Activate();
 	}
 }
