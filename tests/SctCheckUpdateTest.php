@@ -23,4 +23,12 @@ class SctCheckUpdateTest extends PHPUnit\Framework\TestCase {
 		require_once './class/class-sct-check-update.php';
 		require_once './tests/lib/wordpress-functions.php';
 	}
+
+	/**
+	 * SetUp.
+	 * Create instance.
+	 */
+	protected function setUp() :void {
+		$this->instance = new Sct_Check_Update();
+	}
 }
