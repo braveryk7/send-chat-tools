@@ -3,7 +3,7 @@
         "squizlabs/php_codesniffer": "*",
         "wp-coding-standards/wpcs": "*",
         "phpcompatibility/php-compatibility": "*",
-        "wp-cli/wp-cli": "^2.5",
+        "wp-cli/wp-cli": "^2.6",
         "wp-cli/wp-cli-bundle": "^2.5",
         "phpunit/phpunit": "^9.5",
         "phpstan/phpstan": "^1.4",
@@ -34,5 +34,10 @@
         "make-jspot": "./vendor/bin/wp i18n make-pot . languages/js/send-chat-tools-ja.pot --skip-php",
         "make-pot": "./vendor/bin/wp i18n make-pot . languages/send-chat-tools-ja.po --skip-js",
         "make-json": "./vendor/bin/wp i18n make-json languages/js --no-purge"
+    },
+    "config": {
+        "platform": {
+            "php": "7.3.0"
+        }
     }
 }
