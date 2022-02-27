@@ -52,4 +52,11 @@ class SctSlackBlocksTest extends PHPUnit\Framework\TestCase {
 	public function test_two_column() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: context()
+	 */
+	public function test_context() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
