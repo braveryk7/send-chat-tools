@@ -38,4 +38,11 @@ class SctDashboardNotifyTest extends PHPUnit\Framework\TestCase {
 	public function test_add_dashboard() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: dashboard_message()
+	 */
+	public function test_dashboard_message() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
