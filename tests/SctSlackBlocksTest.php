@@ -64,6 +64,9 @@ class SctSlackBlocksTest extends PHPUnit\Framework\TestCase {
 	 * TEST: divider()
 	 */
 	public function test_divider() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+		$this->assertSame(
+			[ 'type' => 'divider' ],
+			$this->instance->divider()
+		);
 	}
 }
