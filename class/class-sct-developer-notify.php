@@ -49,9 +49,7 @@ class Sct_Developer_Notify extends Sct_Base {
 		$exist_check = $this->developer_message_key_exists( $developer_message );
 		$url_check   = $this->developer_message_urls_regex( $developer_message );
 
-		$flag = $kesy_check && $exist_check && $url_check ? true : false;
-
-		return $flag;
+		return $kesy_check && $exist_check && $url_check ? true : false;
 	}
 
 	/**
@@ -98,17 +96,15 @@ class Sct_Developer_Notify extends Sct_Base {
 	 * @param array $developer_message Developer message.
 	 */
 	private function developer_message_key_exists( array $developer_message ): bool {
-		$flag = false;
-
 		if ( 'theme' === $developer_message['type'] ) {
 			$themes = get_option( '_site_transient_theme_roots' );
-			$flag   = array_key_exists( $developer_message['key'], $themes ) ? true : false;
+			return array_key_exists( $developer_message['key'], $themes ) ? true : false;
 		} elseif ( 'plugin' === $developer_message['type'] ) {
 			$plugins = get_option( 'active_plugins' );
-			$flag    = in_array( $developer_message['key'], $plugins, true ) ? true : false;
+			return in_array( $developer_message['key'], $plugins, true ) ? true : false;
 		}
 
-		return $flag;
+		return false;
 	}
 
 	/**
@@ -117,15 +113,14 @@ class Sct_Developer_Notify extends Sct_Base {
 	 * @param array $developer_message Developer message.
 	 */
 	private function developer_message_urls_regex( array $developer_message ): bool {
-		$flag    = false;
 		$url     = $developer_message['url'];
 		$pattern = '/\Ahttps?:\/\/.*/';
 
 		if ( ( is_null( $url['website'] ) || preg_match( $pattern, $url['website'] ) ) &&
 			( is_null( $url['update_page'] ) || preg_match( $pattern, $url['update_page'] ) ) ) {
-			$flag = true;
+			return true;
 		}
 
-		return $flag;
+		return false;
 	}
 }
