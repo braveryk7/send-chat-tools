@@ -22,6 +22,9 @@ function add_filter() {
 function plugin_basename() {
 	return true;
 }
+function esc_html__( $value ) {
+	return $value;
+}
 
 function register_activation_hook() {
 	return true;
