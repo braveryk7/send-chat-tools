@@ -14,3 +14,7 @@ function get_option( $str ) {
 function add_action() {
 	return true;
 }
+
+function add_filter() {
+	return true;
+}
