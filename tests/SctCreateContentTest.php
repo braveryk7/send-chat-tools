@@ -73,4 +73,11 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	public function test_create_update_message() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: create_developer_message()
+	 */
+	public function test_create_developer_message() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
