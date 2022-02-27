@@ -24,4 +24,11 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 		require_once './tests/lib/wordpress-functions.php';
 	}
 
+	/**
+	 * SetUp.
+	 * Create instance.
+	 */
+	protected function setUp() :void {
+		$this->instance = new Sct_Create_Content();
+	}
 }
