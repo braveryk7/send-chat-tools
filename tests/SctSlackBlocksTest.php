@@ -31,4 +31,11 @@ class SctSlackBlocksTest extends PHPUnit\Framework\TestCase {
 	protected function setUp() :void {
 		$this->instance = new Sct_Slack_Blocks();
 	}
+
+	/**
+	 * TEST: header()
+	 */
+	public function test_header() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
