@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 /**
  * Test: Sct_Base
  */
-class Sct_BaseTest extends PHPUnit\Framework\TestCase {
+class SctBaseTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * This test class instance.
 	 *
