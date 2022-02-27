@@ -37,7 +37,7 @@ if ( false === $get_php_version_bool->judgment( $require_php_version ) ) {
 		}
 		deactivate_plugins( plugin_basename( __FILE__ ) );
 	} else {
-		echo '<p>' . esc_html_e( 'Send Chat Tools requires at least PHP 7.3.0 or later.', 'send-chat-tools' ) . esc_html_e( 'Please upgrade PHP.', 'admin-bar-tools' ) . '</p>';
+		echo '<p>' . esc_html_e( 'Send Chat Tools requires at least PHP 7.3.0 or later.', 'send-chat-tools' ) . esc_html_e( 'Please upgrade PHP.', 'send-chat-tools' ) . '</p>';
 		exit;
 	}
 } elseif ( true === $get_php_version_bool->judgment( $require_php_version ) ) {
