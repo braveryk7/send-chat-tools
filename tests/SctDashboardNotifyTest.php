@@ -31,4 +31,11 @@ class SctDashboardNotifyTest extends PHPUnit\Framework\TestCase {
 	protected function setUp() :void {
 		$this->instance = new Sct_Dashboard_Notify();
 	}
+
+	/**
+	 * TEST: add_dashboard()
+	 */
+	public function test_add_dashboard() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
