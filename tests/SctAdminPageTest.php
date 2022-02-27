@@ -59,4 +59,11 @@ class SctAdminPageTest extends PHPUnit\Framework\TestCase {
 	public function test_register() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: settings_page()
+	 */
+	public function test_settings_page() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
