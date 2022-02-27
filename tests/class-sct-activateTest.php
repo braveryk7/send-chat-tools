@@ -42,4 +42,11 @@ class Sct_ActivateTest extends PHPUnit\Framework\TestCase {
 	public function test_register_options() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: uninstall_options()
+	 */
+	public function test_uninstall_options() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
