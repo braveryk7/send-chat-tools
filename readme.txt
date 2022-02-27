@@ -70,7 +70,7 @@ Fix.
 
 Support WordPress5.8.
 
-Addition of functions.
+Addition of functions:
 
 * Add Update notifications
 
@@ -80,15 +80,16 @@ Addition of functions.
 		* [THE SONIC COPIA](https://the-sonic.jp/plugin-copia/)
 		* [SANGO Gutenberg](https://saruwakakun.com/sango/gutenberg-introduction)
 
-Improvement.
+Improvements:
 
 * Fix to hide OGP in Discord.
 * Removed unnecessary option columns.
 
 = 1.1.0 =
+
 Miner update.
 
-Addition of functions.
+Addition of functions:
 
 * Add Update notifications
 
@@ -99,23 +100,27 @@ Addition of functions.
 	* Plugins:
 		* [Rinker](https://oyakosodate.com/rinker/)
 
-Improvement.
+Improvements:
 
 * Processing to go through sending process if API is not input.
 
 = 1.0.0 =
+
 Major update.
 
-Addition of functions.
+Addition of functions:
+
 * Add Discord.
 * Add WordPress Core, theme and plugin update notifications.
 * Add API value automatic check.
 * Add Communication log.
 
-Improvement.
+Improvements:
+
 * UI of the admin panel
 
 Fix.
+
 * Problem that error mail may be sent even if the message is sent normally.
 
 = 0.1.6 =
