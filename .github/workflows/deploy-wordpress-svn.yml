@@ -34,7 +34,7 @@ jobs:
 
       - name: Set outputs
         run: |
-          TAG=${GITHUB_REF##*/}
+          TAG=`echo ${GITHUB_REF##*/} | sed -e "s/v//"`
           echo ::set-output name=VERSION::$TAG
           echo ::set-output name=PROJECT_NAME::send-chat-tools
         id: svn-env
@@ -51,7 +51,7 @@ jobs:
       - name: SVN add & update
         run: |
           svn add ${{ steps.svn-env.outputs.PROJECT_NAME }}/trunk/* --force
-          svn cp ${{ steps.svn-env.outputs.PROJECT_NAME }}/trunk/ ${{ steps.svn-env.outputs.PROJECT_NAME }}/tags/${{ steps.svn-env.outputs.VERSION }}
+          svn cp ${{ steps.svn-env.outputs.PROJECT_NAME }}/trunk/ ${{ steps.svn-env.outputs.PROJECT_NAME }}/tags/${{ steps.svn-env.outputs.TAG }}
           svn update ${{ steps.svn-env.outputs.PROJECT_NAME }}/trunk/*
           svn update ${{ steps.svn-env.outputs.PROJECT_NAME }}/tags/*
 
@@ -62,4 +62,4 @@ jobs:
         run: |
           VERSION=`echo ${{ steps.svn-env.outputs.VERSION }} | sed -e "s/v//"`
           cd ${{ steps.svn-env.outputs.PROJECT_NAME }}
-          svn ci -m "version ${VERSION} release" --username "${{ secrets.SVN_USERNAME }}" --password "${{ secrets.SVN_PASSWORD }}" --non-interactive --no-auth-cache
+          svn ci -m "version ${{ steps.svn-env.outputs.TAG }} release" --username "${{ secrets.SVN_USERNAME }}" --password "${{ secrets.SVN_PASSWORD }}" --non-interactive --no-auth-cache
