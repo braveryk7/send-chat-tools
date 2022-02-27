@@ -31,4 +31,11 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	protected function setUp() :void {
 		$this->instance = new Sct_Create_Content();
 	}
+
+	/**
+	 * TEST: controller()
+	 */
+	public function test_controller() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
