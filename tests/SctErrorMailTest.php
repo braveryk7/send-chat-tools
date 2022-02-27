@@ -29,6 +29,8 @@ class SctErrorMailTest extends PHPUnit\Framework\TestCase {
 	 * Create instance.
 	 */
 	protected function setUp() :void {
-		$this->instance = new Sct_Error_Mail();
+		$error_code     = 1;
+		$comment_id     = '1';
+		$this->instance = new Sct_Error_Mail( $error_code, $comment_id );
 	}
 }
