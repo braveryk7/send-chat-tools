@@ -23,4 +23,12 @@ class SctErrorMailTest extends PHPUnit\Framework\TestCase {
 		require_once './class/class-sct-error-mail.php';
 		require_once './tests/lib/wordpress-functions.php';
 	}
+
+	/**
+	 * SetUp.
+	 * Create instance.
+	 */
+	protected function setUp() :void {
+		$this->instance = new Sct_Error_Mail();
+	}
 }
