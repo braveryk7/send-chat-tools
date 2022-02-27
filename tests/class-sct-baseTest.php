@@ -20,7 +20,7 @@ class Sct_BaseTest extends PHPUnit\Framework\TestCase {
 			define( 'ABSPATH', '' );
 		}
 
-		require_once './class/class-abt-base.php';
+		require_once './class/class-sct-base.php';
 		require_once './tests/lib/wordpress-functions.php';
 	}
 
