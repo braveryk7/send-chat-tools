@@ -23,4 +23,12 @@ class SctSlackBlocksTest extends PHPUnit\Framework\TestCase {
 		require_once './class/class-sct-slack-blocks.php';
 		require_once './tests/lib/wordpress-functions.php';
 	}
+
+	/**
+	 * SetUp.
+	 * Create instance.
+	 */
+	protected function setUp() :void {
+		$this->instance = new Sct_Slack_Blocks();
+	}
 }
