@@ -31,4 +31,11 @@ class SctEncryptionTest extends PHPUnit\Framework\TestCase {
 	protected function setUp() :void {
 		$this->instance = new Sct_Encryption();
 	}
+
+	/**
+	 * TEST: make_vector()
+	 */
+	public function test_make_vector() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
