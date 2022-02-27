@@ -23,4 +23,12 @@ class SctEncryptionTest extends PHPUnit\Framework\TestCase {
 		require_once './class/class-sct-encryption.php';
 		require_once './tests/lib/wordpress-functions.php';
 	}
+
+	/**
+	 * SetUp.
+	 * Create instance.
+	 */
+	protected function setUp() :void {
+		$this->instance = new Sct_Encryption();
+	}
 }
