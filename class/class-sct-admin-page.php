@@ -26,7 +26,6 @@ class Sct_Admin_Page extends Sct_Base {
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'add_scripts' ] );
 		add_action( 'rest_api_init', [ $this, 'register' ] );
-		add_action( 'admin_head-settings_page_send-chat-tools-settings', [ $this, 'include_css' ] );
 		add_filter( 'plugin_action_links_' . plugin_basename( $this->get_plugin_path() ), [ $this, 'add_settings_links' ] );
 	}
 
@@ -66,12 +65,6 @@ class Sct_Admin_Page extends Sct_Base {
 		$add_link = '<a href="options-general.php?page=' . self::PLUGIN_SLUG . '">' . __( 'Settings', 'send-chat-tools' ) . '</a>';
 		array_unshift( $links, $add_link );
 		return $links;
-	}
-
-	/**
-	 * Include CSS in Send Chat Tools settings page.
-	 */
-	public function include_css() {
 	}
 
 	/**
