@@ -23,4 +23,12 @@ class SctLoggerTest extends PHPUnit\Framework\TestCase {
 		require_once './class/class-sct-logger.php';
 		require_once './tests/lib/wordpress-functions.php';
 	}
+
+	/**
+	 * SetUp.
+	 * Create instance.
+	 */
+	protected function setUp() :void {
+		$this->instance = new Sct_Logger();
+	}
 }
