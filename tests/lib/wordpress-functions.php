@@ -1,9 +1,4 @@
 <?php
-/**
- * Use test: WordPress function.
- *
- * @param string $str get_option arg.
- */
 function get_option( $str ) {
 	$value = [];
 
@@ -16,9 +11,6 @@ function get_option( $str ) {
 	return $value;
 }
 
-/**
- * Use test: WordPress function.
- */
 function add_action() {
 	return true;
 }
