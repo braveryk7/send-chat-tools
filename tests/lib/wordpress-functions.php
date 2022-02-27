@@ -18,3 +18,7 @@ function add_action() {
 function add_filter() {
 	return true;
 }
+
+function register_activation_hook() {
+	return true;
+}
