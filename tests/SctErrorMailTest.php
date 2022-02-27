@@ -33,4 +33,11 @@ class SctErrorMailTest extends PHPUnit\Framework\TestCase {
 		$comment_id     = '1';
 		$this->instance = new Sct_Error_Mail( $error_code, $comment_id );
 	}
+
+	/**
+	 * TEST: make_contents()
+	 */
+	public function test_make_contents() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
