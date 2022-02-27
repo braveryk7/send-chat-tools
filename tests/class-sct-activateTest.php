@@ -63,4 +63,11 @@ class Sct_ActivateTest extends PHPUnit\Framework\TestCase {
 	public function test_crypto2plain() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: developer_message()
+	 */
+	public function test_developer_message() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
