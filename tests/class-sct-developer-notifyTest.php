@@ -16,7 +16,9 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	 * Settings: ABSPATH, test class file, WordPress functions.
 	 */
 	public static function setUpBeforeClass(): void {
-		define( 'ABSPATH', '' );
+		if ( ! defined( 'ABSPATH' ) ) {
+			define( 'ABSPATH', '' );
+		}
 
 		require_once './class/class-sct-developer-notify.php';
 		require_once './tests/lib/wordpress-functions.php';
