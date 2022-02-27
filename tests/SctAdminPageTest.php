@@ -31,4 +31,11 @@ class SctAdminPageTest extends PHPUnit\Framework\TestCase {
 	protected function setUp() :void {
 		$this->instance = new Sct_Admin_Page();
 	}
+
+	/**
+	 * TEST: add_menu()
+	 */
+	public function test_add_menu() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
