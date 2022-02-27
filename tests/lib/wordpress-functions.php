@@ -27,6 +27,10 @@ function __( $value ) {
 	return $value;
 }
 
+function esc_html( $value ) {
+	return $value;
+}
+
 function esc_html__( $value ) {
 	return $value;
 }
