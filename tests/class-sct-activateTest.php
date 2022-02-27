@@ -49,4 +49,11 @@ class Sct_ActivateTest extends PHPUnit\Framework\TestCase {
 	public function test_uninstall_options() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: migration_options()
+	 */
+	public function test_migration_options() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
