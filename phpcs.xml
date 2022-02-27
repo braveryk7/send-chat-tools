@@ -13,6 +13,9 @@
     <rule ref="Squiz.Commenting.FileComment.Missing">
         <exclude-pattern>*/tests/*</exclude-pattern>
     </rule>
+    <rule ref="Squiz.Commenting.FunctionComment">
+        <exclude-pattern>*/tests/lib/*</exclude-pattern>
+    </rule>
     <!-- END: Exclude tests directory -->
 
     <!-- Options. -->
