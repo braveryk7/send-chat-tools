@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # SVN NAME
-SVN_NAME="admin-bar-tools"
+SVN_NAME="send-chat-tools"
 
 # Output path
 output_path="${SVN_NAME}/trunk/"
