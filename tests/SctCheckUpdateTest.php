@@ -52,4 +52,11 @@ class SctCheckUpdateTest extends PHPUnit\Framework\TestCase {
 	public function test_check_themes() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: check_plugins()
+	 */
+	public function test_check_plugins() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
