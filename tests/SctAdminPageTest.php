@@ -38,4 +38,11 @@ class SctAdminPageTest extends PHPUnit\Framework\TestCase {
 	public function test_add_menu() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: add_settings_links()
+	 */
+	public function test_add_settings_links() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
