@@ -35,4 +35,11 @@ class Sct_ActivateTest extends PHPUnit\Framework\TestCase {
 	protected function setUp() :void {
 		$this->instance = new Sct_Activate();
 	}
+
+	/**
+	 * TEST: register_options()
+	 */
+	public function test_register_options() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
