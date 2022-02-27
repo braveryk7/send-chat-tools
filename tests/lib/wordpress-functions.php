@@ -15,6 +15,10 @@ function add_action() {
 	return true;
 }
 
+function do_action() {
+	return true;
+}
+
 function add_filter() {
 	return true;
 }
