@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 /**
  * Test: Sct_Developer_Notify
  */
-class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
+class SctDeveloperNotifyTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * This test class instance.
 	 *
@@ -16,7 +16,13 @@ class Sct_Developer_NotifyTest extends PHPUnit\Framework\TestCase {
 	 * Settings: ABSPATH, test class file, WordPress functions.
 	 */
 	public static function setUpBeforeClass(): void {
-		define( 'ABSPATH', '' );
+		if ( ! defined( 'ABSPATH' ) ) {
+			define( 'ABSPATH', '' );
+		}
+
+		if ( ! class_exists( 'Sct_Base ' ) ) {
+			require_once './class/class-sct-base.php';
+		}
 
 		require_once './class/class-sct-developer-notify.php';
 		require_once './tests/lib/wordpress-functions.php';
