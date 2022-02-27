@@ -113,15 +113,14 @@ class Sct_Developer_Notify extends Sct_Base {
 	 * @param array $developer_message Developer message.
 	 */
 	private function developer_message_urls_regex( array $developer_message ): bool {
-		$flag    = false;
 		$url     = $developer_message['url'];
 		$pattern = '/\Ahttps?:\/\/.*/';
 
 		if ( ( is_null( $url['website'] ) || preg_match( $pattern, $url['website'] ) ) &&
 			( is_null( $url['update_page'] ) || preg_match( $pattern, $url['update_page'] ) ) ) {
-			$flag = true;
+			return true;
 		}
 
-		return $flag;
+		return false;
 	}
 }
