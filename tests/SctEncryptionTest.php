@@ -38,4 +38,10 @@ class SctEncryptionTest extends PHPUnit\Framework\TestCase {
 	public function test_make_vector() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+	/**
+	 * TEST: decrypt()
+	 */
+	public function test_decrypt() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
