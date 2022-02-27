@@ -59,4 +59,11 @@ class SctSlackBlocksTest extends PHPUnit\Framework\TestCase {
 	public function test_context() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: divider()
+	 */
+	public function test_divider() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
