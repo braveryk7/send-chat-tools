@@ -1,0 +1,39 @@
+name: PHPUnit
+
+on: 
+  pull_request:
+    paths:
+      - 'class/**'
+      - 'send-chat-tools.php'
+
+jobs:
+  test:
+    name: PHPUnit
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['7.4', '8.0', '8.1']
+    steps:
+      - name: Setup -> PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, xdebug, dom
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache composer packages
+        id: vendor_cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        if: steps.vendor_cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-scripts --no-progress
+
+      - name: Run test suite
+        run: composer run-script test

@@ -1,0 +1,65 @@
+name: Deploy WordPress SVN
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  upload:
+    name: Deploy WordPress SVN
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: Cache npm packages
+        id: npm_cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: JS build
+        run: npm run build
+
+      - name: Set outputs
+        run: |
+          TAG=${GITHUB_REF##*/}
+          echo ::set-output name=VERSION::$TAG
+          echo ::set-output name=PROJECT_NAME::send-chat-tools
+        id: svn-env
+
+      - name: SVN checkout
+        run: svn co ${{ secrets.SVN_URL }}
+
+      - name: Before SVN status
+        run: svn st ${{ steps.svn-env.outputs.PROJECT_NAME }}/
+
+      - name: Use create-rsync-cmd.sh
+        run: bash .github/workflows/create-rsync-cmd.sh
+
+      - name: SVN add & update
+        run: |
+          svn add ${{ steps.svn-env.outputs.PROJECT_NAME }}/trunk/* --force
+          svn cp ${{ steps.svn-env.outputs.PROJECT_NAME }}/trunk/ ${{ steps.svn-env.outputs.PROJECT_NAME }}/tags/${{ steps.svn-env.outputs.VERSION }}
+          svn update ${{ steps.svn-env.outputs.PROJECT_NAME }}/trunk/*
+          svn update ${{ steps.svn-env.outputs.PROJECT_NAME }}/tags/*
+
+      - name: After SVN status
+        run: svn st ${{ steps.svn-env.outputs.PROJECT_NAME }}/
+
+      - name: SVN commit
+        run: |
+          VERSION=`echo ${{ steps.svn-env.outputs.VERSION }} | sed -e "s/v//"`
+          cd ${{ steps.svn-env.outputs.PROJECT_NAME }}
+          svn ci -m "version ${VERSION} release" --username ${{ secrets.SVN_USERNAME }} --password ${{ secrets.SVN_PASSWORD }} --non-interactive --no-auth-cache
