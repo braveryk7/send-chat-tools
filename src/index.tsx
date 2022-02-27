@@ -55,7 +55,7 @@ const AdminPage = () => {
 					<Tab />
 				</apiContext.Provider>
 			) : (
-				<Placeholder label={ __( 'Data loading', 'admin-bar-tools' ) }>
+				<Placeholder label={ __( 'Data loading', 'send-chat-tools' ) }>
 					<Spinner />
 				</Placeholder>
 			) }
