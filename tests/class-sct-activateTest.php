@@ -56,4 +56,11 @@ class Sct_ActivateTest extends PHPUnit\Framework\TestCase {
 	public function test_migration_options() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: crypto2plain()
+	 */
+	public function test_crypto2plain() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
