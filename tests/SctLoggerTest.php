@@ -31,4 +31,11 @@ class SctLoggerTest extends PHPUnit\Framework\TestCase {
 	protected function setUp() :void {
 		$this->instance = new Sct_Logger();
 	}
+
+	/**
+	 * TEST: create_log()
+	 */
+	public function test_create_log() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
