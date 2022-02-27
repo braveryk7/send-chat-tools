@@ -45,4 +45,11 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	public function test_get_send_status() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: get_comment_data()
+	 */
+	public function test_get_comment_data() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
