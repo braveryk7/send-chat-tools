@@ -2,7 +2,7 @@
 Contributors: braveryk7
 Tags: send chat tools, send, chat, slack, discord, chatwork, update
 Requires at least: 5.7.2
-Tested up to: 5.8.0
+Tested up to: 5.9.1
 Requires PHP: 7.3.0
 Stable tag: 1.3.0
 License: GpLv2 or later
@@ -15,6 +15,44 @@ Currently, it sends an announcement when a comment is received.
 You can instantly check comments that you didn't notice with the default email notification. 
 
 === Changelog ===
+
+= 1.3.0 =
+
+Miner update.
+
+Updated to version 1.3.0!
+Here are the main changes...
+
+Important:
+
+* PHP 8.0 and earlier will no longer be supported after next minor update (1.4.0). The update is now scheduled for April.
+
+Improvements:
+
+* The admin panel has been replaced with React for a more modern design using WordPress components that are familiar to everyone.
+* The chat tool now saves up to 3 individual logs.
+* The Send Chat Tools widget is now available on the WordPress dashboard.
+* A warning will be displayed when the next update changes the supported PHP version.
+* We will send you the updated content vwhen the plugin is updated.
+* The internal design of PHP has been substantially revised.
+* Most options starting with "sct" have been removed and replaced by the sct_options column.
+* The sct table is no longer available and has been unified with the sct_logs column.
+* The sct_update_notify hook is now publicly available for developers.
+
+Fixes:
+
+* The encryption of API values has been removed.
+* You will not receive a response if the API value is invalid.
+* You won't be able to change the WordPress settings from the Send Chat Tools settings screen.
+
+Development:
+
+* The development environment has been largely upgraded for future updates.
+* PHPUnit has been installed to enable a more precise testing environment.
+* We installed PHPStan to build a static analysis environment.
+* The development environment has been built by combining WordPress components and TypeScript.
+* Updated settings for ESLint, Stylelint, and PHP_Codesniffer.
+* Adopted small tools (zip.sh, git hooks).
 
 = 1.2.0 =
 
