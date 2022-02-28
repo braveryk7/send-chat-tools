@@ -5,6 +5,11 @@ import { Items } from '../molecules/TabItems';
 
 export const Tab = () => {
 	const tabs = [
+		{
+			name: 'basic',
+			title: __('Basic Settings', 'send-chat-tools'),
+			className: 'tab-basic',
+		},
 		{ name: 'slack', title: 'Slack', className: 'tab-slack' },
 		{ name: 'discord', title: 'Discord', className: 'tab-discord' },
 		{ name: 'chatwork', title: 'Chatwork', className: 'tab-chatwork' },
@@ -13,12 +18,8 @@ export const Tab = () => {
 	];
 
 	return (
-		<TabPanel
-			activeClass="active-tab"
-			className="settings-tab"
-			tabs={ tabs }
-		>
-			{ ( tab ) => <Items id={ tab.name } title={ tab.title } /> }
+		<TabPanel activeClass="active-tab" className="settings-tab" tabs={tabs}>
+			{(tab) => <Items id={tab.name} title={tab.title} />}
 		</TabPanel>
 	);
 };
