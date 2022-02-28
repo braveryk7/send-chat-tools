@@ -43,6 +43,22 @@ class SctDashboardNotifyTest extends PHPUnit\Framework\TestCase {
 	 * TEST: dashboard_message()
 	 */
 	public function test_dashboard_message() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+		$sct_base = new Sct_Base();
+		$method   = new ReflectionMethod( $sct_base, 'get_developer_messages' );
+		$method->setAccessible( true );
+
+		ob_start();
+		$this->instance->dashboard_message();
+		$actual             = ob_get_clean();
+		$value              = '';
+		$base               = new Sct_Base();
+		$developer_messages = $method->invoke( $sct_base )['message'];
+		foreach ( $developer_messages as $message ) {
+			$value .= $message . '<br>';
+		}
+		$this->assertSame(
+			$value,
+			$actual,
+		);
 	}
 }
