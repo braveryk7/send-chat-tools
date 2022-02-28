@@ -113,11 +113,12 @@ class Sct_Admin_Page extends Sct_Base {
 					'schema' => [
 						'type'       => 'object',
 						'properties' => [
-							'slack'     => [],
-							'discord'   => [],
-							'chatwork'  => [],
-							'version'   => [],
-							'cron_time' => [],
+							'slack'      => [],
+							'discord'    => [],
+							'chatwork'   => [],
+							'version'    => [],
+							'cron_time'  => [],
+							'ignore_key' => [],
 						],
 					],
 				],
