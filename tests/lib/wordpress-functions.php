@@ -15,12 +15,28 @@ function add_action() {
 	return true;
 }
 
+function do_action() {
+	return true;
+}
+
 function add_filter() {
 	return true;
 }
 
 function plugin_basename() {
 	return true;
+}
+
+function __( $value ) {
+	return $value;
+}
+
+function esc_html( $value ) {
+	return $value;
+}
+
+function esc_html__( $value ) {
+	return $value;
 }
 
 function register_activation_hook() {
