@@ -48,11 +48,12 @@ class Sct_Activate extends Sct_Base {
 		];
 
 		$options = [
-			'slack'     => $chat_tools_value,
-			'discord'   => $chat_tools_value,
-			'chatwork'  => $chatwork_value,
-			'version'   => self::VERSION,
-			'cron_time' => '18:00',
+			'slack'      => $chat_tools_value,
+			'discord'    => $chat_tools_value,
+			'chatwork'   => $chatwork_value,
+			'version'    => self::VERSION,
+			'cron_time'  => '18:00',
+			'ignore_key' => [],
 		];
 
 		add_option( $this->add_prefix( 'options' ), $options );
