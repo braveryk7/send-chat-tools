@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'class/**'
+      - 'tests/**'
       - 'send-chat-tools.php'
 
 jobs:
