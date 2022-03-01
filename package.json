@@ -15,15 +15,17 @@
     "zip": "sh cmd/zip.sh"
   },
   "dependencies": {
+    "@wordpress/block-editor": "^7.0.4",
+    "@wordpress/blocks": "^11.1.2",
     "@wordpress/components": "^19.0.0",
     "@wordpress/element": "^4.0.3",
     "@wordpress/i18n": "^4.2.3"
   },
   "devDependencies": {
-    "@types/wordpress__components": "^19.3.0",
-    "@typescript-eslint/eslint-plugin": "^5.12.1",
-    "@typescript-eslint/parser": "^5.12.1",
-    "@wordpress/scripts": "^22.0.1",
+    "@types/wordpress__components": "^14.0.4",
+    "@typescript-eslint/eslint-plugin": "^4.26.1",
+    "@typescript-eslint/parser": "^4.26.1",
+    "@wordpress/scripts": "^19.0.0",
     "stylelint-order": "^5.0.0",
     "typescript": "^4.3.2"
   }
