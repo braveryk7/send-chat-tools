@@ -15,8 +15,18 @@ export type ChatToolsBaseType = {
 	use: boolean;
 	send_author: boolean;
 	send_update: boolean;
-	log: {};
+	log: chatLogType;
 };
+
+export type chatLogType = {
+	[ key: string ]: {
+		author: string,
+		comment: string,
+		email: string,
+		status: number,
+		url: string,
+	}
+}
 
 // Slack, Discord
 export type ChatToolsType1Type = {
@@ -40,6 +50,4 @@ export type WPApiType< T > = {
 		[ key: string ]: T;
 	};
 };
-export type useSetApiType = {
-	( itemKey: string, value: string | boolean | {} ): void;
-};
+export type useSetApiType = ( itemKey: string, value: string | boolean | object ) => void;
