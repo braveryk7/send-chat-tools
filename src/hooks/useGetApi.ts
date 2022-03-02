@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
 // @ts-ignore
-import api from '@wordpress/api'; // eslint-disable-line
+import api from '@wordpress/api';
 import { useEffect } from '@wordpress/element';
 
 import { apiType } from '../types/apiType';
