@@ -27,8 +27,8 @@ export const Items = ( props: TabItemsType ) => {
 					{ Object.values( tabItems ).map( ( item, i ) => (
 						<Toggle
 							key={ i }
-							itemKey={ item.itemKey! }
-							optionName={ item.optionName! }
+							itemKey={ item.itemKey }
+							optionName={ item.optionName }
 							label={ item.label }
 						/>
 					) ) }
