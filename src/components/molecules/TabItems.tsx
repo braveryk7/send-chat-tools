@@ -1,5 +1,3 @@
-import { __ } from '@wordpress/i18n';
-
 import { useTabItems } from '../../hooks/useTabItems';
 import { TabItemsType } from '../../types/ComponentsType';
 import { LogDetail } from '../atoms/LogDetail';
