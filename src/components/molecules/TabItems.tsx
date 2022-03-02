@@ -1,5 +1,3 @@
-import { __ } from '@wordpress/i18n';
-
 import { useTabItems } from '../../hooks/useTabItems';
 import { TabItemsType } from '../../types/ComponentsType';
 import { LogDetail } from '../atoms/LogDetail';
@@ -29,8 +27,8 @@ export const Items = ( props: TabItemsType ) => {
 					{ Object.values( tabItems ).map( ( item, i ) => (
 						<Toggle
 							key={ i }
-							itemKey={ item.itemKey! }
-							optionName={ item.optionName! }
+							itemKey={ item.itemKey }
+							optionName={ item.optionName }
 							label={ item.label }
 						/>
 					) ) }

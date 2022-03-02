@@ -1,14 +1,15 @@
 import { Card, CardHeader, CardBody, CardFooter } from '@wordpress/components';
 import { useContext, useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import { ChatLogType } from 'types/apiType';
 
 import { apiContext } from '../..';
-import { itemKeyType, LogsType } from '../../types/ComponentsType';
+import { itemKeyType } from '../../types/ComponentsType';
 
 export const LogDetail = ( props: { itemKey: itemKeyType } ) => {
 	const { itemKey } = props;
 	const { apiData } = useContext( apiContext );
-	const [ logs, setLogs ] = useState< LogsType | undefined >( undefined );
+	const [ logs, setLogs ] = useState< ChatLogType | undefined >( undefined );
 
 	useEffect( () => {
 		setLogs( apiData.sct_options[ itemKey ].log );
@@ -21,7 +22,7 @@ export const LogDetail = ( props: { itemKey: itemKeyType } ) => {
 				${ __( 'Last three cases', 'send-chat-tools' ) } )` }
 			</h2>
 			{ logs &&
-				Object.entries( logs! ).map( ( [ key, value ], i ) => (
+				Object.entries( logs ).map( ( [ key, value ], i ) => (
 					<Card className="sct-tools-log" key={ i }>
 						<CardHeader>
 							{ `${ __(
@@ -37,7 +38,7 @@ export const LogDetail = ( props: { itemKey: itemKeyType } ) => {
 								{ `${ __(
 									'Comment ID',
 									'send-chat-tools'
-								) }: ${ value.id }` }
+								) }: ${ value.comment }` }
 							</span>
 							<span className="sct-tools-log-footer-status">
 								{ `${ __( 'Status', 'send-chat-tools' ) }: ${

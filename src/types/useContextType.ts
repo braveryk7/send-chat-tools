@@ -10,5 +10,5 @@ export type apiContextType = {
 	setNoticeStatus: Dispatch< SetStateAction< boolean > >;
 	setNoticeValue: Dispatch< SetStateAction< noticeValueType > >;
 	setNoticeMessage: Dispatch< SetStateAction< string > >;
-	snackbarTimer: NodeJS.Timeout;
+	snackbarTimer: number;
 };

@@ -35,7 +35,7 @@ export const LogView = () => {
 	};
 
 	const getStatusMessage = ( status: number ) => {
-		const addSpanTag = ( value: {}, sendStatus: boolean ) => {
+		const addSpanTag = ( value: string, sendStatus: boolean ) => {
 			const classNameAttr = sendStatus ? 'success' : 'error';
 
 			const createClass = (
