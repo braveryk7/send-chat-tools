@@ -30,3 +30,7 @@ rules:
       alphabetize:
         order: asc
       newlines-between: always
+settings: 
+  import/resolver: 
+    typescript: 
+      project: "./"
