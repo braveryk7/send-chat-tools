@@ -1,6 +1,5 @@
 import { ToggleControl } from '@wordpress/components';
 import { useContext, useEffect, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 
 import { apiContext } from '../..';
 import { useSetApi } from '../../hooks/useSetApi';

@@ -3,7 +3,8 @@ env:
   node: true
   es6: true
 extends:
-  - plugin:@wordpress/eslint-plugin/recommended
+  - plugin:@wordpress/eslint-plugin/recommended-with-formatting
+  - plugin:@typescript-eslint/recommended
   - plugin:import/warnings
 ignorePatterns:
   - jest.config.js
@@ -21,6 +22,7 @@ plugins:
   - import
 root: true
 rules:
+  "@typescript-eslint/ban-ts-comment": off
   import/order:
     - warn
     - groups:
@@ -30,3 +32,7 @@ rules:
       alphabetize:
         order: asc
       newlines-between: always
+settings: 
+  import/resolver: 
+    typescript: 
+      project: "./"

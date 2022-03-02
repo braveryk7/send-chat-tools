@@ -7,19 +7,19 @@ export const Tab = () => {
 	const tabs = [
 		{
 			name: 'basic',
-			title: __('Basic Settings', 'send-chat-tools'),
+			title: __( 'Basic Settings', 'send-chat-tools' ),
 			className: 'tab-basic',
 		},
-		{ name: 'slack', title: 'Slack', className: 'tab-slack' },
-		{ name: 'discord', title: 'Discord', className: 'tab-discord' },
-		{ name: 'chatwork', title: 'Chatwork', className: 'tab-chatwork' },
-		{ name: 'update', title: 'Update notify', className: 'tab-update' },
-		{ name: 'logs', title: 'Logs', className: 'tab-logs' },
+		{ name: 'slack', title: __( 'Slack', 'send-chat-tools' ), className: 'tab-slack' },
+		{ name: 'discord', title: __( 'Discord', 'send-chat-tools' ), className: 'tab-discord' },
+		{ name: 'chatwork', title: __( 'Chatwork', 'send-chat-tools' ), className: 'tab-chatwork' },
+		{ name: 'update', title: __( 'Update notify', 'send-chat-tools' ), className: 'tab-update' },
+		{ name: 'logs', title: __( 'Logs', 'send-chat-tools' ), className: 'tab-logs' },
 	];
 
 	return (
-		<TabPanel activeClass="active-tab" className="settings-tab" tabs={tabs}>
-			{(tab) => <Items id={tab.name} title={tab.title} />}
+		<TabPanel activeClass="active-tab" className="settings-tab" tabs={ tabs }>
+			{ ( tab ) => <Items id={ tab.name } title={ tab.title } /> }
 		</TabPanel>
 	);
 };
