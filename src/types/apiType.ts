@@ -15,10 +15,10 @@ export type ChatToolsBaseType = {
 	use: boolean;
 	send_author: boolean;
 	send_update: boolean;
-	log: chatLogType;
+	log: ChatLogType;
 };
 
-export type chatLogType = {
+export type ChatLogType = {
 	[ key: string ]: {
 		author: string,
 		comment: string,

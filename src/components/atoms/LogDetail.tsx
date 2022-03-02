@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardBody, CardFooter } from '@wordpress/components';
 import { useContext, useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { chatLogType } from 'types/apiType';
+import { ChatLogType } from 'types/apiType';
 
 import { apiContext } from '../..';
 import { itemKeyType } from '../../types/ComponentsType';
@@ -9,7 +9,7 @@ import { itemKeyType } from '../../types/ComponentsType';
 export const LogDetail = ( props: { itemKey: itemKeyType } ) => {
 	const { itemKey } = props;
 	const { apiData } = useContext( apiContext );
-	const [ logs, setLogs ] = useState< chatLogType | undefined >( undefined );
+	const [ logs, setLogs ] = useState< ChatLogType | undefined >( undefined );
 
 	useEffect( () => {
 		setLogs( apiData.sct_options[ itemKey ].log );
