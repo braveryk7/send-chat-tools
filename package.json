@@ -15,8 +15,6 @@
     "zip": "sh cmd/zip.sh"
   },
   "dependencies": {
-    "@wordpress/block-editor": "^8.2.0",
-    "@wordpress/blocks": "^11.1.2",
     "@wordpress/components": "^19.5.0",
     "@wordpress/element": "^4.0.3",
     "@wordpress/i18n": "^4.2.3"
