@@ -27,6 +27,7 @@ class Sct_Admin_Page extends Sct_Base {
 		add_action( 'admin_enqueue_scripts', [ $this, 'add_scripts' ] );
 		add_action( 'rest_api_init', [ $this, 'register' ] );
 		add_filter( 'plugin_action_links_' . plugin_basename( $this->get_plugin_path() ), [ $this, 'add_settings_links' ] );
+		add_action( 'rest_api_init', [ $this, 'register_rest_api' ] );
 	}
 
 	/**
@@ -98,6 +99,21 @@ class Sct_Admin_Page extends Sct_Base {
 			$this->add_prefix( 'script' ),
 			self::PLUGIN_SLUG,
 			$this->get_plugin_dir( self::PLUGIN_SLUG ) . '/languages/js',
+		);
+	}
+
+	/**
+	 * Create custom endpoint.
+	 */
+	public function register_rest_api() {
+		register_rest_route(
+			$this->get_api_namespace(),
+			'/options',
+			[
+				'method'              => WP_REST_Server::READABLE,
+				'callback'            => [ $this, '' ],
+				'permission_callback' => [ $this, '' ],
+			]
 		);
 	}
 
