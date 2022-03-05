@@ -6,7 +6,7 @@ import {
 	optionNameType,
 	TabItemsType,
 	TogglePropsType,
-} from '../types/ComponentsType';
+} from 'src/types/ComponentsType';
 
 export const useTabItems = ( props: TabItemsType ) => {
 	const { id } = props;

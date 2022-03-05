@@ -1,10 +1,11 @@
 import { ToggleControl } from '@wordpress/components';
 import { useContext, useEffect, useState } from '@wordpress/element';
 
-import { apiContext } from '../..';
-import { useSetApi } from '../../hooks/useSetApi';
-import { TogglePropsType } from '../../types/ComponentsType';
-import { apiType } from '../../types/apiType';
+import { useSetApi } from 'src/hooks/useSetApi';
+import { apiContext } from 'src/index';
+
+import { TogglePropsType } from 'src/types/ComponentsType';
+import { apiType } from 'src/types/apiType';
 
 export const Toggle = ( props: TogglePropsType ) => {
 	const { itemKey, optionName, label } = props;

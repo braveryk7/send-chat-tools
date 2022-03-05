@@ -3,9 +3,10 @@ import api from '@wordpress/api';
 import { useContext, useEffect, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-import { apiContext } from '..';
-import { useSetApiType } from '../types/apiType';
-import { addPrefix } from '../utils/constant';
+import { apiContext } from 'src/index';
+import { addPrefix } from 'src/utils/constant';
+
+import { useSetApiType } from 'src/types/apiType';
 
 export const useSetApi: useSetApiType = ( itemKey, value ) => {
 	const {
