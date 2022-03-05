@@ -118,6 +118,13 @@ class Sct_Admin_Page extends Sct_Base {
 	}
 
 	/**
+	 * Return WordPress  administrator permission.
+	 */
+	public function get_wordpress_permission(): bool {
+		return current_user_can( 'administrator' );
+	}
+
+	/**
 	 * Set register.
 	 */
 	public function register(): void {
