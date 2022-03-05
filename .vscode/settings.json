@@ -20,6 +20,7 @@
         "less",
         "postcss"
     ],
+    "typescript.preferences.importModuleSpecifier": "non-relative",
     "[html]": {
         "editor.tabSize": 4,
         "editor.insertSpaces": true,
