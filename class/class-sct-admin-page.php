@@ -125,6 +125,14 @@ class Sct_Admin_Page extends Sct_Base {
 	}
 
 	/**
+	 * Custom endpoint for read.
+	 */
+	public function readable_api() {
+		$sct_options = $this->get_sct_options();
+		return new WP_REST_Response( $sct_options, 200 );
+	}
+
+	/**
 	 * Set register.
 	 */
 	public function register(): void {
