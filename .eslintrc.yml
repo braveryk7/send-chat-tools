@@ -31,7 +31,19 @@ rules:
     - groups:
         - builtin
         - external
-        - internal
+        - parent
+        - - internal
+          - sibling
+        - object
+        - type
+        - index
+      pathGroups:
+        - pattern: "src/types/**"
+          group: type
+          position: after
+        - pattern: "src/**"
+          group: object
+          position: before
       alphabetize:
         order: asc
       newlines-between: always
