@@ -79,6 +79,19 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: get_api_namespace()
+	 */
+	public function test_get_api_namespace() {
+		$method = new ReflectionMethod( $this->instance, 'get_api_namespace' );
+		$method->setAccessible( true );
+
+		$this->assertSame(
+			'send-chat-tools/v1',
+			$method->invoke( $this->instance ),
+		);
+	}
+
+	/**
 	 * TEST: get_option_group()
 	 */
 	public function test_return_option_group() {
