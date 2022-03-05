@@ -41,6 +41,9 @@ module.exports = {
 	},
 	resolve: {
 		...defaultConfig.resolve,
+		alias: {
+			"src": path.resolve(__dirname, "./src"),
+		},
 		extensions: ['.ts', '.tsx', '.js']
 	},
 	module: {
@@ -57,6 +60,16 @@ module.exports = {
 						},
 					},
 				],
+			},
+			{
+				test: /\.tsx?$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'ts-loader',
+					options: {
+						configFile: path.resolve(__dirname, 'tsconfig.json'),
+					}
+				}
 			},
 			{
 				test: /\.css$/,
