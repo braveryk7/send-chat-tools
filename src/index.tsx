@@ -4,11 +4,12 @@ import { Placeholder, Snackbar, Spinner } from '@wordpress/components';
 import { createContext, render, useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-import { Tab } from './components/organisms/Tab';
-import { useGetApi } from './hooks/useGetApi';
-import { apiType } from './types/apiType';
-import { apiContextType, noticeValueType } from './types/useContextType';
-import { getApiInitValue } from './utils/constant';
+import { Tab } from 'src/components/organisms/Tab';
+import { useGetApi } from 'src/hooks/useGetApi';
+import { getApiInitValue } from 'src/utils/constant';
+
+import { apiType } from 'src/types/apiType';
+import { apiContextType, noticeValueType } from 'src/types/useContextType';
 
 export const apiContext = createContext( {} as apiContextType );
 

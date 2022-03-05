@@ -3,9 +3,10 @@ import { ChangeEvent } from 'react';
 import { useContext, useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-import { apiContext } from '../..';
-import { useSetApi } from '../../hooks/useSetApi';
-import { apiType } from '../../types/apiType';
+import { useSetApi } from 'src/hooks/useSetApi';
+import { apiContext } from 'src/index';
+
+import { apiType } from 'src/types/apiType';
 
 export const UpdateTime = () => {
 	const { apiData, setApiData } = useContext( apiContext );

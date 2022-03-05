@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction } from 'react';
 import api from '@wordpress/api';
 import { useEffect } from '@wordpress/element';
 
-import { apiType } from '../types/apiType';
+import { apiType } from 'src/types/apiType';
 
 export const useGetApi = (
 	stateFunc: Dispatch< SetStateAction< apiType > >,

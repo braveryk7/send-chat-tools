@@ -1,9 +1,10 @@
 import { TextControl } from '@wordpress/components';
 import { useContext, useEffect, useState } from '@wordpress/element';
 
-import { apiContext } from '../..';
-import { TextControlPropsType } from '../../types/ComponentsType';
-import { apiType } from '../../types/apiType';
+import { apiContext } from 'src/index';
+
+import { TextControlPropsType } from 'src/types/ComponentsType';
+import { apiType } from 'src/types/apiType';
 
 export const TextControlForm = ( props: TextControlPropsType ) => {
 	const { itemKey, optionName, label } = props;
