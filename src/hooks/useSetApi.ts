@@ -11,7 +11,6 @@ import { useSetApiType } from 'src/types/apiType';
 export const useSetApi: useSetApiType = ( itemKey, value ) => {
 	const {
 		apiData,
-		setNoticeStatus,
 		setNoticeValue,
 		setNoticeMessage,
 		snackbarTimer,
@@ -29,16 +28,14 @@ export const useSetApi: useSetApiType = ( itemKey, value ) => {
 				} );
 				const save = model.save();
 
-				setNoticeStatus( false );
+				setNoticeValue( null );
 				clearTimeout( snackbarTimer );
 
 				save.success( () => {
-					setNoticeStatus( true );
 					setNoticeValue( addPrefix( 'success' ) as 'sct_success' );
 					setNoticeMessage( __( 'Success.', 'send-chat-tools' ) );
 				} );
 				save.error( () => {
-					setNoticeStatus( true );
 					setNoticeValue( addPrefix( 'error' ) as 'sct_error' );
 					setNoticeMessage( __( 'Error.', 'send-chat-tools' ) );
 				} );
