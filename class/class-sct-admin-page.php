@@ -111,8 +111,8 @@ class Sct_Admin_Page extends Sct_Base {
 			'/options',
 			[
 				'method'              => WP_REST_Server::READABLE,
-				'callback'            => [ $this, '' ],
-				'permission_callback' => [ $this, '' ],
+				'callback'            => [ $this, 'readable_api' ],
+				'permission_callback' => [ $this, 'get_wordpress_permission' ],
 			]
 		);
 	}
