@@ -6,7 +6,6 @@ import { __ } from '@wordpress/i18n';
 
 import { Tab } from 'src/components/organisms/Tab';
 import { useGetApi } from 'src/hooks/useGetApi';
-import { getApiInitValue } from 'src/utils/constant';
 
 import { apiType } from 'src/types/apiType';
 import { apiContextType, noticeValueType } from 'src/types/useContextType';
@@ -14,38 +13,34 @@ import { apiContextType, noticeValueType } from 'src/types/useContextType';
 export const apiContext = createContext( {} as apiContextType );
 
 const AdminPage = () => {
-	const [ apiData, setApiData ] = useState< apiType >( getApiInitValue() );
-	const [ apiStatus, setApiStatus ] = useState( false );
-	const [ noticeStatus, setNoticeStatus ] = useState( false );
-	const [ noticeValue, setNoticeValue ] = useState(
-		undefined as noticeValueType
-	);
+	const [ apiData, setApiData ] = useState< apiType | null >( null );
+	const [ noticeValue, setNoticeValue ] = useState< noticeValueType >( null );
 	const [ noticeMessage, setNoticeMessage ] = useState( '' );
 	const [ snackbarTimer, setSnackbarTimer ] = useState( 0 );
-	useGetApi( setApiData, setApiStatus );
+
+	useGetApi( setApiData );
 
 	useEffect( () => {
-		if ( noticeStatus ) {
+		if ( noticeValue ) {
 			setSnackbarTimer(
 				window.setTimeout( () => {
-					setNoticeStatus( false );
+					setNoticeValue( null );
 				}, 4000 )
 			);
 		}
-	}, [ noticeStatus ] );
+	}, [ noticeValue ] );
 
 	return (
 		<div id="sct-wrap">
 			<h1>{ __( 'Send Chat Tools Settings', 'send-chat-tools' ) }</h1>
-			{ noticeStatus && (
+			{ noticeValue && (
 				<Snackbar className={ noticeValue }>{ noticeMessage }</Snackbar>
 			) }
-			{ apiStatus ? (
+			{ apiData ? (
 				<apiContext.Provider
 					value={ {
 						apiData,
 						setApiData,
-						setNoticeStatus,
 						setNoticeValue,
 						setNoticeMessage,
 						snackbarTimer,
