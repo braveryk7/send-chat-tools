@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 import { apiType } from 'src/types/apiType';
 
-export type noticeValueType = 'sct_success' | 'sct_error' | undefined;
+export type noticeValueType = 'sct_success' | 'sct_error' | null;
 
 export type apiContextType = {
 	apiData: apiType | null;
