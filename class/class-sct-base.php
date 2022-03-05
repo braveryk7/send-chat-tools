@@ -127,6 +127,17 @@ class Sct_Base {
 	}
 
 	/**
+	 * Return WP-API parameter.
+	 * e.g. send-chat-tools/v1
+	 *
+	 * @param string $api_name    Plugin unique name.
+	 * @param string $api_version Plugin API version.
+	 */
+	protected function get_api_namespace( string $api_name = self::API_NAME, string $api_version = self::API_VERSION ) {
+		return "${api_name}/${api_version}";
+	}
+
+	/**
 	 * Return option group.
 	 * Use register_setting.
 	 * e.g. send-chat-tools-settings
