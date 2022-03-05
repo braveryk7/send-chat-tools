@@ -1,23 +1,16 @@
 import { Dispatch, SetStateAction } from 'react';
 
-// @ts-ignore
-import api from '@wordpress/api';
+import apiFetch from '@wordpress/api-fetch';
 import { useEffect } from '@wordpress/element';
 
 import { apiType } from 'src/types/apiType';
 
-export const useGetApi = (
-	stateFunc: Dispatch< SetStateAction< apiType > >,
-	setApiStatus: Dispatch< SetStateAction< boolean > >
-) => {
+export const useGetApi = ( stateFunc: Dispatch< SetStateAction< apiType > > ) => {
 	useEffect( () => {
-		api.loadPromise.then( () => {
-			const model = new api.models.Settings();
-
-			model.fetch().then( ( res: apiType ) => {
-				stateFunc( res );
-				setApiStatus( true );
-			} );
+		apiFetch< apiType >(
+			{ path: '/send-chat-tools/v1/options' }
+		).then( ( response ) => {
+			stateFunc( response );
 		} );
 	}, [ stateFunc ] );
 };
