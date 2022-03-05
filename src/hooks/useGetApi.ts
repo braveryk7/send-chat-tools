@@ -5,7 +5,7 @@ import { useEffect } from '@wordpress/element';
 
 import { apiType } from 'src/types/apiType';
 
-export const useGetApi = ( stateFunc: Dispatch< SetStateAction< apiType > > ) => {
+export const useGetApi = ( stateFunc: Dispatch< SetStateAction< apiType | null > > ) => {
 	useEffect( () => {
 		apiFetch< apiType >(
 			{ path: '/send-chat-tools/v1/options' }
