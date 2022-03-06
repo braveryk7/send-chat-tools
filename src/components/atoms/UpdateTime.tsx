@@ -29,6 +29,7 @@ export const UpdateTime = () => {
 				>
 					<input
 						id="update_time"
+						className="update-time"
 						type="time"
 						value={ apiData.cron_time }
 						onChange={ ( newTime ) => changeTime( newTime ) }
