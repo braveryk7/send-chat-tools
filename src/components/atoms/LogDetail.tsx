@@ -4,16 +4,17 @@ import { __ } from '@wordpress/i18n';
 
 import { apiContext } from 'src/index';
 
-import { itemKeyType } from 'src/types/ComponentsType';
-import { ChatLogType } from 'src/types/apiType';
+import { ChatLogType, ChatToolsItemKeyType } from 'src/types/apiType';
 
-export const LogDetail = ( props: { itemKey: itemKeyType } ) => {
+export const LogDetail = ( props: { itemKey: ChatToolsItemKeyType } ) => {
 	const { itemKey } = props;
 	const { apiData } = useContext( apiContext );
 	const [ logs, setLogs ] = useState< ChatLogType | undefined >( undefined );
 
 	useEffect( () => {
-		setLogs( apiData.sct_options[ itemKey ].log );
+		if ( apiData ) {
+			setLogs( apiData[ itemKey ].log );
+		}
 	}, [ itemKey ] );
 
 	return (
