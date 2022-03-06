@@ -1,9 +1,9 @@
+import { itemKeyType } from 'src/types/apiType';
+
 export type TabItemsType = {
 	id: string;
 	title: string;
 };
-
-export type itemKeyType = 'slack' | 'discord' | 'chatwork';
 
 export type optionNameType =
 	| 'use'
