@@ -4,6 +4,8 @@ const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 const postcssPlugins = require( '@wordpress/postcss-plugins-preset' );
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+
 const { hasPostCSSConfig } = require( '@wordpress/scripts/utils' );
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -86,4 +88,8 @@ module.exports = {
 			},
 		],
 	},
+	plugins: [
+		...defaultConfig.plugins,
+		new ForkTsCheckerWebpackPlugin(),
+	],
 };
