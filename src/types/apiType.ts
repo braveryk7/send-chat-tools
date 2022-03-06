@@ -1,12 +1,10 @@
 export type apiType = {
-	sct_options: {
-		slack: ChatToolsBaseType & ChatToolsType1Type;
-		discord: ChatToolsBaseType & ChatToolsType1Type;
-		chatwork: ChatToolsBaseType & ChatworkType;
-		version: string;
-		cron_time: string;
-	};
-	sct_logs: {
+	slack: ChatToolsBaseType & ChatToolsType1Type;
+	discord: ChatToolsBaseType & ChatToolsType1Type;
+	chatwork: ChatToolsBaseType & ChatworkType;
+	version: string;
+	cron_time: string;
+	logs: {
 		[ key: string ]: SctLogsType;
 	};
 };
@@ -50,4 +48,9 @@ export type WPApiType< T > = {
 		[ key: string ]: T;
 	};
 };
-export type useSetApiType = ( itemKey: string, value: string | boolean | object ) => void;
+
+export type itemKeyType = 'slack' | 'discord' | 'chatwork' | 'cron_time' | 'version';
+
+export type useSetApiType = {
+	( itemKey: itemKeyType, value: apiType | null ): void
+};
