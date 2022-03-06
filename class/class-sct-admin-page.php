@@ -115,6 +115,16 @@ class Sct_Admin_Page extends Sct_Base {
 				'permission_callback' => [ $this, 'get_wordpress_permission' ],
 			]
 		);
+
+		register_rest_route(
+			$this->get_api_namespace(),
+			'/update',
+			[
+				'methods'             => WP_REST_Server::EDITABLE,
+				'callback'            => [ $this, 'editable_api' ],
+				'permission_callback' => [ $this, 'get_wordpress_permission' ],
+			]
+		);
 	}
 
 	/**
@@ -128,7 +138,9 @@ class Sct_Admin_Page extends Sct_Base {
 	 * Custom endpoint for read.
 	 */
 	public function readable_api() {
-		$sct_options = $this->get_sct_options();
+		$sct_options         = $this->get_sct_options();
+		$sct_logs            = get_option( $this->add_prefix( 'logs' ) );
+		$sct_options['logs'] = $sct_logs;
 		return new WP_REST_Response( $sct_options, 200 );
 	}
 
