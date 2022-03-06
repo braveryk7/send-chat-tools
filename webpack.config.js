@@ -49,8 +49,8 @@ module.exports = {
 		extensions: ['.ts', '.tsx', '.js']
 	},
 	module: {
-		...defaultConfig.module,
 		rules: [
+			...defaultConfig.module.rules,
 			{
 				test: /\.tsx?$/,
 				exclude: /node_modules/,
