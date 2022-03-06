@@ -26,6 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
     "@wordpress/scripts": "^22.0.1",
+    "esbuild-loader": "^2.18.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "stylelint-order": "^5.0.0",
     "thread-loader": "^3.0.4",
