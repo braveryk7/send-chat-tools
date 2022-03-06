@@ -12,16 +12,18 @@ export const TextControlForm = ( props: TextControlPropsType ) => {
 	const [ itemData, setItemData ] = useState( '' );
 
 	useEffect( () => {
-		if ( itemKey === 'slack' || itemKey === 'discord' ) {
-			setItemData( apiData.sct_options[ itemKey ].webhook_url );
-		} else if ( itemKey === 'chatwork' ) {
-			switch ( optionName ) {
-				case 'api_token':
-					setItemData( apiData.sct_options.chatwork.api_token );
-					break;
-				case 'room_id':
-					setItemData( apiData.sct_options.chatwork.room_id );
-					break;
+		if ( apiData ) {
+			if ( itemKey === 'slack' || itemKey === 'discord' ) {
+				setItemData( apiData[ itemKey ].webhook_url );
+			} else {
+				switch ( optionName ) {
+					case 'api_token':
+						setItemData( apiData.chatwork.api_token );
+						break;
+					case 'room_id':
+						setItemData( apiData.chatwork.room_id );
+						break;
+				}
 			}
 		}
 	}, [ optionName, apiData ] );
@@ -33,12 +35,12 @@ export const TextControlForm = ( props: TextControlPropsType ) => {
 			( itemKey === 'slack' || itemKey === 'discord' ) &&
 			optionName === 'webhook_url'
 		) {
-			newItem.sct_options[ itemKey ][ optionName ] = value;
+			newItem[ itemKey ][ optionName ] = value;
 		} else if (
 			itemKey === 'chatwork' &&
 			( optionName === 'api_token' || optionName === 'room_id' )
 		) {
-			newItem.sct_options[ itemKey ][ optionName ] = value;
+			newItem[ itemKey ][ optionName ] = value;
 		}
 		setApiData( newItem );
 	};
