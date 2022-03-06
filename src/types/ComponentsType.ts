@@ -16,8 +16,8 @@ export type optionNameType =
 	keyof ChatworkType;
 
 export type TogglePropsType = {
-	itemKey: itemKeyType;
-	optionName: optionNameType;
+	itemKey: Exclude< itemKeyType, 'cron_time' | 'version'>;
+	optionName: Exclude< keyof ChatToolsBaseType, 'log' >;
 	label: string;
 };
 
