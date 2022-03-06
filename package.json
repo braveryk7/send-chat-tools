@@ -28,6 +28,7 @@
     "@wordpress/scripts": "^22.0.1",
     "esbuild-loader": "^2.18.0",
     "eslint-import-resolver-typescript": "^2.5.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.1",
     "stylelint-order": "^5.0.0",
     "thread-loader": "^3.0.4",
     "ts-loader": "^9.2.7",
