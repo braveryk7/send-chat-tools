@@ -50,26 +50,23 @@ module.exports = {
 		...defaultConfig.module,
 		rules: [
 			{
-				test: /\.(js|jsx|ts|tsx)$/,
+				test: /\.tsx?$/,
 				exclude: /node_modules/,
 				use: [
 					{
-						loader: require.resolve( 'babel-loader' ),
+						loader: 'thread-loader',
 						options: {
-							cacheDirectory: process.env.BABEL_CACHE_DIRECTORY || true,
-						},
+							workers: require('os').cpus().length - 1,
+						}
+					},
+					{
+						loader: 'esbuild-loader',
+						options: {
+							loader: 'tsx',
+							target: 'es2015',
+						}
 					},
 				],
-			},
-			{
-				test: /\.tsx?$/,
-				exclude: /node_modules/,
-				use: {
-					loader: 'ts-loader',
-					options: {
-						configFile: path.resolve(__dirname, 'tsconfig.json'),
-					}
-				}
 			},
 			{
 				test: /\.css$/,
