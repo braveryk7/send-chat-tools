@@ -15,6 +15,12 @@ module.exports = {
 		},
 		extensions: ['.ts', '.tsx', '.js']
 	},
+	cache: {
+		type: 'filesystem',
+		buildDependencies: {
+		  config: [ __filename ],
+		}
+	},
 	module: {
 		rules: [
 			...defaultConfig.module.rules,
