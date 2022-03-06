@@ -21,7 +21,11 @@ export type TogglePropsType = {
 	label: string;
 };
 
-export type TextControlPropsType = TogglePropsType;
+export type TextControlPropsType = {
+	itemKey: Exclude< itemKeyType, 'cron_time' | 'version'>;
+	optionName: keyof ChatToolsType1Type | keyof ChatworkType;
+	label: string;
+};
 
 export type LogsType = {
 	[ key: string ]: {
