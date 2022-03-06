@@ -45,6 +45,8 @@ export type SctLogsType = {
 
 export type itemKeyType = 'slack' | 'discord' | 'chatwork' | 'cron_time' | 'version';
 
+export type ChatToolsItemKeyType = Extract< itemKeyType, 'slack' | 'discord' | 'chatwork' >;
+
 export type useSetApiType = {
 	( itemKey: itemKeyType, value: apiType | null ): void
 };
