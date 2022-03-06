@@ -43,12 +43,6 @@ export type SctLogsType = {
 	send_date: string;
 };
 
-export type WPApiType< T > = {
-	[ key: string ]: { // eslint-disable-line
-		[ key: string ]: T;
-	};
-};
-
 export type itemKeyType = 'slack' | 'discord' | 'chatwork' | 'cron_time' | 'version';
 
 export type useSetApiType = {
