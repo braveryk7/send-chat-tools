@@ -1,4 +1,9 @@
-import { itemKeyType } from 'src/types/apiType';
+import {
+	ChatToolsBaseType,
+	ChatToolsType1Type,
+	ChatworkType,
+	itemKeyType,
+} from 'src/types/apiType';
 
 export type TabItemsType = {
 	id: string;
@@ -6,12 +11,9 @@ export type TabItemsType = {
 };
 
 export type optionNameType =
-	| 'use'
-	| 'send_author'
-	| 'send_update'
-	| 'webhook_url'
-	| 'api_token'
-	| 'room_id';
+	keyof Omit< ChatToolsBaseType, 'log' > |
+	keyof ChatToolsType1Type |
+	keyof ChatworkType;
 
 export type TogglePropsType = {
 	itemKey: itemKeyType;
