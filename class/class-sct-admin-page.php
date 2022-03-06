@@ -145,6 +145,32 @@ class Sct_Admin_Page extends Sct_Base {
 	}
 
 	/**
+	 * Custom endpoint for edit.
+	 *
+	 * @param WP_REST_Request $request WP_REST_Request object.
+	 */
+	public function editable_api( WP_REST_Request $request ) {
+		$sct_options = $this->get_sct_options();
+		$params      = $request->get_json_params();
+
+		if ( array_key_exists( 'slack', $params ) ) {
+			$sct_options['slack'] = $params['slack'];
+		} elseif ( array_key_exists( 'discord', $params ) ) {
+			$sct_options['discord'] = $params['discord'];
+		} elseif ( array_key_exists( 'chatwork', $params ) ) {
+			$sct_options['chatwork'] = $params['chatwork'];
+		} elseif ( array_key_exists( 'cron_time', $params ) ) {
+			$sct_options['cron_time'] = $params['cron_time'];
+		} else {
+			return new WP_Error( 'invalid_key', __( 'Required key does not exist', 'admin-bar-tools' ), [ 'status' => 404 ] );
+		}
+
+		$this->set_sct_options( $sct_options );
+
+		return new WP_REST_Response( $params, 200 );
+	}
+
+	/**
 	 * Set register.
 	 */
 	public function register(): void {
