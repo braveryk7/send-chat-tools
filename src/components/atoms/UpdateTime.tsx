@@ -1,24 +1,10 @@
-import { ChangeEvent } from 'react';
-
-import { useContext } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-import { useSetApi } from 'src/hooks/useSetApi';
-import { apiContext } from 'src/index';
+import { useChangeValue } from 'src/hooks/useChangeValue';
 
-import { apiType } from 'src/types/apiType';
-
-export const UpdateTime = () => {
-	const { apiData, setApiData } = useContext( apiContext );
-
-	const changeTime = ( newTime: ChangeEvent< HTMLInputElement > ) => {
-		const newItem: apiType = JSON.parse( JSON.stringify( { ...apiData } ) );
-
-		newItem.cron_time = newTime.target.value;
-		setApiData( newItem );
-	};
-
-	useSetApi( 'cron_time', apiData );
+export const UpdateTime = ( props: {itemKey: 'cron_time'} ) => {
+	const { itemKey } = props;
+	const { apiData, changeValue } = useChangeValue( itemKey );
 
 	return (
 		<>
@@ -32,7 +18,7 @@ export const UpdateTime = () => {
 						className="update-time"
 						type="time"
 						value={ apiData.cron_time }
-						onChange={ ( newTime ) => changeTime( newTime ) }
+						onChange={ ( newTime ) => changeValue( newTime ) }
 					/>
 					{ __( 'Set time to check for updates', 'send-chat-tools' ) }
 				</label>
