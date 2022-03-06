@@ -1,16 +1,12 @@
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-import {
-	itemKeyType,
-	optionNameType,
-	TabItemsType,
-	TogglePropsType,
-} from 'src/types/ComponentsType';
+import { optionNameType, TabItemsType, TogglePropsType } from 'src/types/ComponentsType';
+import { ChatToolsItemKeyType } from 'src/types/apiType';
 
 export const useTabItems = ( props: TabItemsType ) => {
 	const { id } = props;
-	const [ itemKey, setItemKey ] = useState< itemKeyType | null >( null );
+	const [ itemKey, setItemKey ] = useState< ChatToolsItemKeyType | null >( null );
 	const [ itemLabel, setItemLabel ] = useState( '' );
 	const [ updateFlag, setUpdateFlag ] = useState( false );
 	const [ logsFlag, setLogsFlag ] = useState( false );
@@ -18,13 +14,13 @@ export const useTabItems = ( props: TabItemsType ) => {
 	const [
 		apiOptionName,
 		setApiOptionName,
-	] = useState< optionNameType | null >( null );
+	] = useState< Extract< optionNameType, 'webhook_url' | 'api_token' > | null >( null );
 	const [ titleText, setTitleText ] = useState( '' );
 	const [ textLabel, setTextLabel ] = useState( '' );
 	const [
 		chatworkRoomId,
 		setChatworkRoomId,
-	] = useState< optionNameType | null >( null );
+	] = useState< Extract< optionNameType, 'room_id' > | null >( null );
 	const [ chatworkText, setChatworkText ] = useState( '' );
 
 	useEffect( () => {
