@@ -59,7 +59,7 @@ export const Items = ( props: TabItemsType ) => {
 			) }
 			{ updateFlag && (
 				<div className="sct-items">
-					<UpdateTime />
+					<UpdateTime itemKey="cron_time" />
 				</div>
 			) }
 			{ logsFlag && (
