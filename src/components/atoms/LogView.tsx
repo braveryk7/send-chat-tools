@@ -98,7 +98,7 @@ export const LogView = () => {
 						<th>{ __( 'Status', 'send-chat-tools' ) }</th>
 						<th>{ __( 'Detail', 'send-chat-tools' ) }</th>
 					</tr>
-					{ Object.values( apiData.sct_logs ).map(
+					{ apiData && Object.values( apiData.logs ).map(
 						( log: SctLogsType, i ) => (
 							<tr key={ i }>
 								<td>{ log.send_date }</td>
@@ -112,7 +112,7 @@ export const LogView = () => {
 				</table>
 			</CardBody>
 			<CardFooter>
-				<p>Total { Object.keys( apiData.sct_logs ).length } items.</p>
+				<p>Total { apiData && Object.keys( apiData.logs ).length } items.</p>
 			</CardFooter>
 		</Card>
 	);
