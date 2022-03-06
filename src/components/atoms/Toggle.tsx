@@ -13,35 +13,21 @@ export const Toggle = ( props: TogglePropsType ) => {
 	const [ itemData, setItemData ] = useState( false );
 
 	useEffect( () => {
-		switch ( optionName ) {
-			case 'use':
-				setItemData( apiData.sct_options[ itemKey ].use );
-				break;
-			case 'send_author':
-				setItemData( apiData.sct_options[ itemKey ].send_author );
-				break;
-			case 'send_update':
-				setItemData( apiData.sct_options[ itemKey ].send_update );
-				break;
+		if ( apiData ) {
+			setItemData( apiData[ itemKey ][ optionName ] );
 		}
 	}, [ itemKey, optionName, apiData ] );
 
 	const changeStatus = ( status: boolean ) => {
-		if (
-			optionName === 'use' ||
-			optionName === 'send_author' ||
-			optionName === 'send_update'
-		) {
-			const newItem: apiType = JSON.parse(
-				JSON.stringify( { ...apiData } )
-			);
+		const newItem: apiType = JSON.parse(
+			JSON.stringify( { ...apiData } )
+		);
 
-			newItem.sct_options[ itemKey ][ optionName ] = status;
-			setApiData( newItem );
-		}
+		newItem[ itemKey ][ optionName ] = status;
+		setApiData( newItem );
 	};
 
-	useSetApi( 'sct_options', apiData.sct_options );
+	useSetApi( itemKey, apiData );
 
 	return (
 		<ToggleControl
