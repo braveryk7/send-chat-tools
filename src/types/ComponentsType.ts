@@ -1,8 +1,8 @@
 import {
 	ChatToolsBaseType,
+	ChatToolsItemKeyType,
 	ChatToolsType1Type,
 	ChatworkType,
-	itemKeyType,
 } from 'src/types/apiType';
 
 export type TabItemsType = {
@@ -16,13 +16,13 @@ export type optionNameType =
 	keyof ChatworkType;
 
 export type TogglePropsType = {
-	itemKey: Exclude< itemKeyType, 'cron_time' | 'version'>;
+	itemKey: ChatToolsItemKeyType;
 	optionName: Exclude< keyof ChatToolsBaseType, 'log' >;
 	label: string;
 };
 
 export type TextControlPropsType = {
-	itemKey: Exclude< itemKeyType, 'cron_time' | 'version'>;
+	itemKey: ChatToolsItemKeyType;
 	optionName: keyof ChatToolsType1Type | keyof ChatworkType;
 	label: string;
 };
