@@ -1,14 +1,13 @@
 import { TextControl } from '@wordpress/components';
-import { useContext, useEffect, useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 
-import { apiContext } from 'src/index';
+import { useChangeValue } from 'src/hooks/useChangeValue';
 
 import { TextControlPropsType } from 'src/types/ComponentsType';
-import { apiType } from 'src/types/apiType';
 
 export const TextControlForm = ( props: TextControlPropsType ) => {
 	const { itemKey, optionName, label } = props;
-	const { apiData, setApiData } = useContext( apiContext );
+	const { apiData, changeValue } = useChangeValue( itemKey, optionName );
 	const [ itemData, setItemData ] = useState( '' );
 
 	useEffect( () => {
@@ -28,28 +27,15 @@ export const TextControlForm = ( props: TextControlPropsType ) => {
 		}
 	}, [ optionName, apiData ] );
 
-	const changeValue = ( value: string ) => {
-		const newItem: apiType = JSON.parse( JSON.stringify( { ...apiData } ) );
-
-		if (
-			( itemKey === 'slack' || itemKey === 'discord' ) &&
-			optionName === 'webhook_url'
-		) {
-			newItem[ itemKey ][ optionName ] = value;
-		} else if (
-			itemKey === 'chatwork' &&
-			( optionName === 'api_token' || optionName === 'room_id' )
-		) {
-			newItem[ itemKey ][ optionName ] = value;
-		}
-		setApiData( newItem );
-	};
-
 	return (
-		<TextControl
-			label={ label }
-			value={ itemData }
-			onChange={ ( value: string ) => changeValue( value ) }
-		/>
+		<>
+			{ apiData &&
+				<TextControl
+					label={ label }
+					value={ itemData }
+					onChange={ ( value: string ) => changeValue( value ) }
+				/>
+			}
+		</>
 	);
 };

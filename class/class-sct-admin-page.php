@@ -25,7 +25,6 @@ class Sct_Admin_Page extends Sct_Base {
 	public function __construct() {
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'add_scripts' ] );
-		add_action( 'rest_api_init', [ $this, 'register' ] );
 		add_filter( 'plugin_action_links_' . plugin_basename( $this->get_plugin_path() ), [ $this, 'add_settings_links' ] );
 		add_action( 'rest_api_init', [ $this, 'register_rest_api' ] );
 	}
@@ -168,48 +167,6 @@ class Sct_Admin_Page extends Sct_Base {
 		$this->set_sct_options( $sct_options );
 
 		return new WP_REST_Response( $params, 200 );
-	}
-
-	/**
-	 * Set register.
-	 */
-	public function register(): void {
-		register_setting(
-			$this->get_option_group(),
-			$this->add_prefix( 'options' ),
-			[
-				'show_in_rest' => [
-					'schema' => [
-						'type'       => 'object',
-						'properties' => [
-							'slack'     => [],
-							'discord'   => [],
-							'chatwork'  => [],
-							'version'   => [],
-							'cron_time' => [],
-						],
-					],
-				],
-			],
-		);
-
-		register_setting(
-			$this->get_option_group(),
-			$this->add_prefix( 'logs' ),
-			[
-				'show_in_rest' => [
-					'schema' => [
-						'type'       => 'array',
-						'Properties' => [
-							'status'    => 'string',
-							'type'      => 'string',
-							'tool'      => 'string',
-							'send_date' => 'string',
-						],
-					],
-				],
-			],
-		);
 	}
 
 	/**

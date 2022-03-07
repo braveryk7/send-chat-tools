@@ -1,61 +1,74 @@
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-import { optionNameType, TabItemsType, TogglePropsType } from 'src/types/ComponentsType';
+import {
+	apiOptionNameType,
+	chatworkRoomIdType,
+	setUseStateType,
+	TabItemsType,
+	TogglePropsType,
+} from 'src/types/ComponentsType';
 import { ChatToolsItemKeyType } from 'src/types/apiType';
 
 export const useTabItems = ( props: TabItemsType ) => {
 	const { id } = props;
 	const [ itemKey, setItemKey ] = useState< ChatToolsItemKeyType | null >( null );
 	const [ itemLabel, setItemLabel ] = useState( '' );
-	const [ updateFlag, setUpdateFlag ] = useState( false );
-	const [ logsFlag, setLogsFlag ] = useState( false );
-	const [ tabItems, setTabItems ] = useState< TogglePropsType[] >( [] );
-	const [
-		apiOptionName,
-		setApiOptionName,
-	] = useState< Extract< optionNameType, 'webhook_url' | 'api_token' > | null >( null );
+	const [ componentName, setComponentName ] = useState( '' );
 	const [ titleText, setTitleText ] = useState( '' );
 	const [ textLabel, setTextLabel ] = useState( '' );
-	const [
-		chatworkRoomId,
-		setChatworkRoomId,
-	] = useState< Extract< optionNameType, 'room_id' > | null >( null );
+	const [ apiOptionName, setApiOptionName ] = useState< apiOptionNameType | null >( null );
+	const [ chatworkRoomId, setChatworkRoomId ] = useState< chatworkRoomIdType | null >( null );
 	const [ chatworkText, setChatworkText ] = useState( '' );
+	const [ tabItems, setTabItems ] = useState< TogglePropsType[] >( [] );
 
 	useEffect( () => {
+		const setUseState: setUseStateType = ( itemName, label, optionName, title, text ) => {
+			setItemKey( itemName );
+			setItemLabel( label );
+			setApiOptionName( optionName );
+			setTitleText( title );
+			setTextLabel( text );
+		};
+
 		switch ( id ) {
 			case 'slack':
-				setItemKey( 'slack' );
-				setItemLabel( __( 'Use Slack notify', 'send-chat-tools' ) );
-				setApiOptionName( 'webhook_url' );
-				setTitleText( __( 'Slack settings', 'send-chat-tools' ) );
-				setTextLabel( __( 'Slack Webhook URL', 'send-chat-tools' ) );
+				setUseState(
+					'slack',
+					__( 'Use Slack notify', 'send-chat-tools' ),
+					'webhook_url',
+					__( 'Slack settings', 'send-chat-tools' ),
+					__( 'Slack Webhook URL', 'send-chat-tools' ),
+				);
 				break;
 			case 'discord':
-				setItemKey( 'discord' );
-				setItemLabel( __( 'Use Discord notify', 'send-chat-tools' ) );
-				setApiOptionName( 'webhook_url' );
-				setTitleText( __( 'Discord settings', 'send-chat-tools' ) );
-				setTextLabel( __( 'Discord Webhook URL', 'send-chat-tools' ) );
+				setUseState(
+					'discord',
+					__( 'Use Discord notify', 'send-chat-tools' ),
+					'webhook_url',
+					__( 'Discord settings', 'send-chat-tools' ),
+					__( 'Discord Webhook URL', 'send-chat-tools' ),
+				);
 				break;
 			case 'chatwork':
-				setItemKey( 'chatwork' );
-				setItemLabel( __( 'Use Chatwork notify', 'send-chat-tools' ) );
-				setApiOptionName( 'api_token' );
+				setUseState(
+					'chatwork',
+					__( 'Use Chatwork notify', 'send-chat-tools' ),
+					'api_token',
+					__( 'Chatwork settings', 'send-chat-tools' ),
+					__( 'Chatwork API token', 'send-chat-tools' ),
+				);
 				setChatworkRoomId( 'room_id' );
-				setTitleText( __( 'Chatwork settings', 'send-chat-tools' ) );
-				setTextLabel( __( 'Chatwork API token', 'send-chat-tools' ) );
 				setChatworkText( __( 'Chatwork Room ID', 'send-chat-tools' ) );
 				break;
 			case 'update':
-				setUpdateFlag( true );
+				setComponentName( 'update' );
 				setTitleText(
 					__( 'Update notify settings', 'send-chat-tools' )
 				);
 				break;
 			case 'logs':
-				setLogsFlag( true );
+				setComponentName( 'logs' );
 				setTitleText( __( 'Logs', 'send-chat-tools' ) );
 				break;
 		}
@@ -84,9 +97,8 @@ export const useTabItems = ( props: TabItemsType ) => {
 	}, [ itemKey ] );
 
 	return {
-		updateFlag,
 		itemKey,
-		logsFlag,
+		componentName,
 		titleText,
 		textLabel,
 		tabItems,

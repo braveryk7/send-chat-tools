@@ -37,3 +37,15 @@ export type LogsType = {
 		status: number;
 	};
 };
+
+export type apiOptionNameType = Extract< optionNameType, 'webhook_url' | 'api_token' >;
+
+export type chatworkRoomIdType = Extract< optionNameType, 'room_id' >;
+
+export type setUseStateType = (
+	itemName: ChatToolsItemKeyType,
+	label: string,
+	optionName: apiOptionNameType,
+	title: string,
+	text: string,
+) => void;
