@@ -4,6 +4,7 @@ export type apiType = {
 	chatwork: ChatToolsBaseType & ChatworkType;
 	version: string;
 	cron_time: string;
+	ignore_key: string[]
 	logs: {
 		[ key: string ]: SctLogsType;
 	};
