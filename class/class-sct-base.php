@@ -22,6 +22,8 @@ class Sct_Base {
 	protected const PLUGIN_SLUG         = 'send-chat-tools';
 	protected const PLUGIN_NAME         = 'Send Chat Tools';
 	protected const PLUGIN_FILE         = self::PLUGIN_SLUG . '.php';
+	protected const API_NAME            = self::PLUGIN_SLUG;
+	protected const API_VERSION         = 'v1';
 	protected const VERSION             = '1.3.0';
 	protected const OPTIONS_COLUMN_NAME = 'options';
 
@@ -131,6 +133,17 @@ class Sct_Base {
 	 */
 	protected function get_plugin_path(): string {
 		return $this->get_plugin_dir( self::PLUGIN_SLUG ) . '/' . self::PLUGIN_FILE;
+	}
+
+	/**
+	 * Return WP-API parameter.
+	 * e.g. send-chat-tools/v1
+	 *
+	 * @param string $api_name    Plugin unique name.
+	 * @param string $api_version Plugin API version.
+	 */
+	protected function get_api_namespace( string $api_name = self::API_NAME, string $api_version = self::API_VERSION ) {
+		return "${api_name}/${api_version}";
 	}
 
 	/**

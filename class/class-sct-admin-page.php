@@ -25,8 +25,8 @@ class Sct_Admin_Page extends Sct_Base {
 	public function __construct() {
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'add_scripts' ] );
-		add_action( 'rest_api_init', [ $this, 'register' ] );
 		add_filter( 'plugin_action_links_' . plugin_basename( $this->get_plugin_path() ), [ $this, 'add_settings_links' ] );
+		add_action( 'rest_api_init', [ $this, 'register_rest_api' ] );
 	}
 
 	/**
@@ -102,46 +102,71 @@ class Sct_Admin_Page extends Sct_Base {
 	}
 
 	/**
-	 * Set register.
+	 * Create custom endpoint.
 	 */
-	public function register(): void {
-		register_setting(
-			$this->get_option_group(),
-			$this->add_prefix( 'options' ),
+	public function register_rest_api() {
+		register_rest_route(
+			$this->get_api_namespace(),
+			'/options',
 			[
-				'show_in_rest' => [
-					'schema' => [
-						'type'       => 'object',
-						'properties' => [
-							'slack'      => [],
-							'discord'    => [],
-							'chatwork'   => [],
-							'version'    => [],
-							'cron_time'  => [],
-							'ignore_key' => [],
-						],
-					],
-				],
-			],
+				'method'              => WP_REST_Server::READABLE,
+				'callback'            => [ $this, 'readable_api' ],
+				'permission_callback' => [ $this, 'get_wordpress_permission' ],
+			]
 		);
 
-		register_setting(
-			$this->get_option_group(),
-			$this->add_prefix( 'logs' ),
+		register_rest_route(
+			$this->get_api_namespace(),
+			'/update',
 			[
-				'show_in_rest' => [
-					'schema' => [
-						'type'       => 'array',
-						'Properties' => [
-							'status'    => 'string',
-							'type'      => 'string',
-							'tool'      => 'string',
-							'send_date' => 'string',
-						],
-					],
-				],
-			],
+				'methods'             => WP_REST_Server::EDITABLE,
+				'callback'            => [ $this, 'editable_api' ],
+				'permission_callback' => [ $this, 'get_wordpress_permission' ],
+			]
 		);
+	}
+
+	/**
+	 * Return WordPress  administrator permission.
+	 */
+	public function get_wordpress_permission(): bool {
+		return current_user_can( 'administrator' );
+	}
+
+	/**
+	 * Custom endpoint for read.
+	 */
+	public function readable_api() {
+		$sct_options         = $this->get_sct_options();
+		$sct_logs            = get_option( $this->add_prefix( 'logs' ) );
+		$sct_options['logs'] = $sct_logs;
+		return new WP_REST_Response( $sct_options, 200 );
+	}
+
+	/**
+	 * Custom endpoint for edit.
+	 *
+	 * @param WP_REST_Request $request WP_REST_Request object.
+	 */
+	public function editable_api( WP_REST_Request $request ) {
+		$sct_options = $this->get_sct_options();
+		$params      = $request->get_json_params();
+
+		if ( array_key_exists( 'slack', $params ) ) {
+			$sct_options['slack'] = $params['slack'];
+		} elseif ( array_key_exists( 'discord', $params ) ) {
+			$sct_options['discord'] = $params['discord'];
+		} elseif ( array_key_exists( 'chatwork', $params ) ) {
+			$sct_options['chatwork'] = $params['chatwork'];
+		} elseif ( array_key_exists( 'cron_time', $params ) ) {
+			$sct_options['cron_time'] = $params['cron_time'];
+		} else {
+			return new WP_Error( 'invalid_key', __( 'Required key does not exist', 'admin-bar-tools' ), [ 'status' => 404 ] );
+		}
+
+		$this->set_sct_options( $sct_options );
+
+		return new WP_REST_Response( $params, 200 );
 	}
 
 	/**

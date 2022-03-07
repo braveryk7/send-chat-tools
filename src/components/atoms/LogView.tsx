@@ -2,8 +2,9 @@ import { Card, CardHeader, CardBody, CardFooter } from '@wordpress/components';
 import { useContext } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
-import { apiContext } from '../..';
-import { SctLogsType } from '../../types/apiType';
+import { apiContext } from 'src/index';
+
+import { SctLogsType } from 'src/types/apiType';
 
 export const LogView = () => {
 	const { apiData } = useContext( apiContext );
@@ -97,7 +98,7 @@ export const LogView = () => {
 						<th>{ __( 'Status', 'send-chat-tools' ) }</th>
 						<th>{ __( 'Detail', 'send-chat-tools' ) }</th>
 					</tr>
-					{ Object.values( apiData.sct_logs ).map(
+					{ apiData && Object.values( apiData.logs ).map(
 						( log: SctLogsType, i ) => (
 							<tr key={ i }>
 								<td>{ log.send_date }</td>
@@ -111,7 +112,7 @@ export const LogView = () => {
 				</table>
 			</CardBody>
 			<CardFooter>
-				<p>Total { Object.keys( apiData.sct_logs ).length } items.</p>
+				<p>Total { apiData && Object.keys( apiData.logs ).length } items.</p>
 			</CardFooter>
 		</Card>
 	);

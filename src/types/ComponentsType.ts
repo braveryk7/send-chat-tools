@@ -1,25 +1,31 @@
+import {
+	ChatToolsBaseType,
+	ChatToolsItemKeyType,
+	ChatToolsType1Type,
+	ChatworkType,
+} from 'src/types/apiType';
+
 export type TabItemsType = {
 	id: string;
 	title: string;
 };
 
-export type itemKeyType = 'slack' | 'discord' | 'chatwork';
-
 export type optionNameType =
-	| 'use'
-	| 'send_author'
-	| 'send_update'
-	| 'webhook_url'
-	| 'api_token'
-	| 'room_id';
+	keyof Omit< ChatToolsBaseType, 'log' > |
+	keyof ChatToolsType1Type |
+	keyof ChatworkType;
 
 export type TogglePropsType = {
-	itemKey: itemKeyType;
-	optionName: optionNameType;
+	itemKey: ChatToolsItemKeyType;
+	optionName: Exclude< keyof ChatToolsBaseType, 'log' >;
 	label: string;
 };
 
-export type TextControlPropsType = TogglePropsType;
+export type TextControlPropsType = {
+	itemKey: ChatToolsItemKeyType;
+	optionName: keyof ChatToolsType1Type | keyof ChatworkType;
+	label: string;
+};
 
 export type LogsType = {
 	[ key: string ]: {
@@ -31,3 +37,15 @@ export type LogsType = {
 		status: number;
 	};
 };
+
+export type apiOptionNameType = Extract< optionNameType, 'webhook_url' | 'api_token' >;
+
+export type chatworkRoomIdType = Extract< optionNameType, 'room_id' >;
+
+export type setUseStateType = (
+	itemName: ChatToolsItemKeyType,
+	label: string,
+	optionName: apiOptionNameType,
+	title: string,
+	text: string,
+) => void;

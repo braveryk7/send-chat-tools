@@ -22,13 +22,28 @@ plugins:
   - import
 root: true
 rules:
+  max-len:
+    - 2
+    - code: 100
   "@typescript-eslint/ban-ts-comment": off
   import/order:
     - warn
     - groups:
         - builtin
         - external
-        - internal
+        - parent
+        - - internal
+          - sibling
+        - object
+        - type
+        - index
+      pathGroups:
+        - pattern: "src/types/**"
+          group: type
+          position: after
+        - pattern: "src/**"
+          group: object
+          position: before
       alphabetize:
         order: asc
       newlines-between: always

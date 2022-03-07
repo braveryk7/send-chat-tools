@@ -1,38 +1,7 @@
 const path = require( 'path' );
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 
-const postcssPlugins = require( '@wordpress/postcss-plugins-preset' );
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-const { hasPostCSSConfig } = require( '@wordpress/scripts/utils' );
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-const cssLoaders = [
-	{
-		loader: MiniCssExtractPlugin.loader,
-	},
-	{
-		loader: require.resolve( 'css-loader' ),
-		options: {
-			sourceMap: ! isProduction,
-			modules: {
-				auto: true,
-			},
-		},
-	},
-	{
-		loader: require.resolve( 'postcss-loader' ),
-		options: {
-			...( ! hasPostCSSConfig() && {
-				postcssOptions: {
-					ident: 'postcss',
-					plugins: postcssPlugins,
-				},
-			} ),
-		},
-	},
-];
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 module.exports = {
 	...defaultConfig,
@@ -41,39 +10,43 @@ module.exports = {
 	},
 	resolve: {
 		...defaultConfig.resolve,
+		alias: {
+			"src": path.resolve(__dirname, "./src"),
+		},
 		extensions: ['.ts', '.tsx', '.js']
 	},
+	cache: {
+		type: 'filesystem',
+		buildDependencies: {
+		  config: [ __filename ],
+		}
+	},
 	module: {
-		...defaultConfig.module,
 		rules: [
+			...defaultConfig.module.rules,
 			{
-				test: /\.(js|jsx|ts|tsx)$/,
+				test: /\.tsx?$/,
 				exclude: /node_modules/,
 				use: [
 					{
-						loader: require.resolve( 'babel-loader' ),
+						loader: 'thread-loader',
 						options: {
-							cacheDirectory: process.env.BABEL_CACHE_DIRECTORY || true,
-						},
+							workers: require('os').cpus().length - 1,
+						}
 					},
-				],
-			},
-			{
-				test: /\.css$/,
-				use: cssLoaders,
-			},
-			{
-				test: /\.(sc|sa)ss$/,
-				use: [
-					...cssLoaders,
 					{
-						loader: require.resolve( 'sass-loader' ),
+						loader: 'esbuild-loader',
 						options: {
-							sourceMap: ! isProduction,
-						},
+							loader: 'tsx',
+							target: 'es2015',
+						}
 					},
 				],
 			},
 		],
 	},
+	plugins: [
+		...defaultConfig.plugins,
+		new ForkTsCheckerWebpackPlugin(),
+	],
 };

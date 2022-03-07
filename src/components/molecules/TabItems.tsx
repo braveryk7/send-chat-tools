@@ -1,16 +1,16 @@
-import { useTabItems } from '../../hooks/useTabItems';
-import { TabItemsType } from '../../types/ComponentsType';
-import { LogDetail } from '../atoms/LogDetail';
-import { LogView } from '../atoms/LogView';
-import { TextControlForm } from '../atoms/TextControlForm';
-import { Toggle } from '../atoms/Toggle';
-import { UpdateTime } from '../atoms/UpdateTime';
+import { LogDetail } from 'src/components/atoms/LogDetail';
+import { LogView } from 'src/components/atoms/LogView';
+import { TextControlForm } from 'src/components/atoms/TextControlForm';
+import { Toggle } from 'src/components/atoms/Toggle';
+import { UpdateTime } from 'src/components/atoms/UpdateTime';
+import { useTabItems } from 'src/hooks/useTabItems';
+
+import { TabItemsType } from 'src/types/ComponentsType';
 
 export const Items = ( props: TabItemsType ) => {
 	const {
-		updateFlag,
 		itemKey,
-		logsFlag,
+		componentName,
 		titleText,
 		textLabel,
 		tabItems,
@@ -57,12 +57,12 @@ export const Items = ( props: TabItemsType ) => {
 					<LogDetail itemKey={ itemKey } />
 				</div>
 			) }
-			{ updateFlag && (
+			{ componentName === 'update' && (
 				<div className="sct-items">
-					<UpdateTime />
+					<UpdateTime itemKey="cron_time" />
 				</div>
 			) }
-			{ logsFlag && (
+			{ componentName === 'logs' && (
 				<div className="sct-items">
 					<LogView />
 				</div>
