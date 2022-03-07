@@ -23,6 +23,20 @@
 			box-shadow: initial;
 		}
 	}
+
+	&-form-token-field__ {
+
+		&input-container {
+			background-color: #fff;
+			width: 80%;
+		}
+
+		&token-text,
+		&remove-token.components-button {
+			background-color: #288cd4;
+			color: #fff;
+		}
+	}
 }
 
 .active-tab {
