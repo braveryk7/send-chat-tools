@@ -9,9 +9,8 @@ import { TabItemsType } from 'src/types/ComponentsType';
 
 export const Items = ( props: TabItemsType ) => {
 	const {
-		updateFlag,
 		itemKey,
-		logsFlag,
+		componentName,
 		titleText,
 		textLabel,
 		tabItems,
@@ -58,12 +57,12 @@ export const Items = ( props: TabItemsType ) => {
 					<LogDetail itemKey={ itemKey } />
 				</div>
 			) }
-			{ updateFlag && (
+			{ componentName === 'update' && (
 				<div className="sct-items">
 					<UpdateTime itemKey="cron_time" />
 				</div>
 			) }
-			{ logsFlag && (
+			{ componentName === 'logs' && (
 				<div className="sct-items">
 					<LogView />
 				</div>
