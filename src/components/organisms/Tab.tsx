@@ -1,6 +1,7 @@
 import { TabPanel } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
+import { BasicSettingsTabItems } from 'src/components/molecules/BasicSettingsTabItems';
 import { TabItems } from 'src/components/molecules/TabItems';
 
 export const Tab = () => {
@@ -23,7 +24,11 @@ export const Tab = () => {
 
 	return (
 		<TabPanel activeClass="active-tab" className="settings-tab" tabs={ tabs }>
-			{ ( tab ) => <TabItems id={ tab.name } title={ tab.title } /> }
+			{ ( tab ) => (
+				tab.name !== 'basic'
+					? <TabItems id={ tab.name } title={ tab.title } />
+					: <BasicSettingsTabItems id={ tab.name } title={ tab.title } />
+			) }
 		</TabPanel>
 	);
 };
