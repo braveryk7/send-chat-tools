@@ -32,6 +32,9 @@ export const useTabItems = ( props: TabItemsType ) => {
 		};
 
 		switch ( id ) {
+			case 'basic':
+				setComponentName( 'basic' );
+				break;
 			case 'slack':
 				setUseState(
 					'slack',
