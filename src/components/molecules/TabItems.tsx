@@ -7,7 +7,7 @@ import { useTabItems } from 'src/hooks/useTabItems';
 
 import { TabItemsType } from 'src/types/ComponentsType';
 
-export const Items = ( props: TabItemsType ) => {
+export const TabItems = ( props: TabItemsType ) => {
 	const {
 		itemKey,
 		componentName,
