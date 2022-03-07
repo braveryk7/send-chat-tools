@@ -34,6 +34,7 @@ export const useTabItems = ( props: TabItemsType ) => {
 		switch ( id ) {
 			case 'basic':
 				setComponentName( 'basic' );
+				setTitleText( __( 'Basic settings', 'send-chat-tools' ), );
 				break;
 			case 'slack':
 				setUseState(
