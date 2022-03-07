@@ -1,7 +1,7 @@
 import { TabPanel } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import { Items } from 'src/components/molecules/TabItems';
+import { TabItems } from 'src/components/molecules/TabItems';
 
 export const Tab = () => {
 	const tabs = [
@@ -23,7 +23,7 @@ export const Tab = () => {
 
 	return (
 		<TabPanel activeClass="active-tab" className="settings-tab" tabs={ tabs }>
-			{ ( tab ) => <Items id={ tab.name } title={ tab.title } /> }
+			{ ( tab ) => <TabItems id={ tab.name } title={ tab.title } /> }
 		</TabPanel>
 	);
 };
