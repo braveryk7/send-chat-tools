@@ -431,6 +431,10 @@ class Sct_Create_Content extends Sct_Base {
 				$fixed_phrase = [
 					'blocks' => [
 						$blocks->divider(),
+						$blocks->context(
+							'mrkdwn',
+							$this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $update_message['key'],
+						),
 						$blocks->context( 'mrkdwn', $context ),
 					],
 				];
@@ -487,6 +491,9 @@ class Sct_Create_Content extends Sct_Base {
 				'title'   => esc_html__( 'Notification of plugin updates from', 'send-chat-tools' ),
 				'website' => esc_html__( 'Official Web Site', 'send-chat-tools' ),
 				'detail'  => esc_html__( 'Update details', 'send-chat-tools' ),
+				'ignore'  => esc_html__(
+					'If this message is sent by a malicious developer, it can be rejected with the following key'
+				),
 			],
 		];
 
