@@ -20,7 +20,7 @@ export const TabItems = ( props: TabItemsType ) => {
 
 	return (
 		<div className="sct-wrapper">
-			<h2>{ titleText }</h2>
+			<h3>{ titleText }</h3>
 			{ itemKey && (
 				<div className="sct-items">
 					{ Object.values( tabItems ).map( ( item, i ) => (
