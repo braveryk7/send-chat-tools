@@ -158,6 +158,8 @@ class Sct_Admin_Page extends Sct_Base {
 			$sct_options['discord'] = $params['discord'];
 		} elseif ( array_key_exists( 'chatwork', $params ) ) {
 			$sct_options['chatwork'] = $params['chatwork'];
+		} elseif ( array_key_exists( 'ignore_key', $params ) ) {
+			$sct_options['ignore_key'] = $params['ignore_key'];
 		} elseif ( array_key_exists( 'cron_time', $params ) ) {
 			$sct_options['cron_time'] = $params['cron_time'];
 		} else {
