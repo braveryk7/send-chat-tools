@@ -11,7 +11,9 @@ import { apiType, ChatToolsBaseType, ChatToolsItemKeyType, itemKeyType } from 's
 export const useChangeValue = ( itemKey: itemKeyType, optionName?: optionNameType ) => {
 	const { apiData, setApiData } = useContext( apiContext );
 
-	const changeValue = ( value: string | boolean | ChangeEvent< HTMLInputElement > ) => {
+	const changeValue = (
+		value: string | boolean | string[] | ChangeEvent< HTMLInputElement >
+	) => {
 		const newItem: apiType = JSON.parse( JSON.stringify( { ...apiData } ) );
 
 		const chatTools = ( toolName: ChatToolsItemKeyType ) => {
@@ -57,8 +59,13 @@ export const useChangeValue = ( itemKey: itemKeyType, optionName?: optionNameTyp
 				chatTools( 'chatwork' );
 				break;
 			case 'cron_time':
-				if ( typeof value === 'object' ) {
+				if ( typeof value === 'object' && 'target' in value ) {
 					newItem.cron_time = value.target.value;
+				}
+				break;
+			case 'ignore_key':
+				if ( Array.isArray( value ) ) {
+					newItem.ignore_key = value;
 				}
 				break;
 			default:

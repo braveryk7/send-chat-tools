@@ -32,6 +32,10 @@ export const useTabItems = ( props: TabItemsType ) => {
 		};
 
 		switch ( id ) {
+			case 'basic':
+				setComponentName( 'basic' );
+				setTitleText( __( 'Basic settings', 'send-chat-tools' ), );
+				break;
 			case 'slack':
 				setUseState(
 					'slack',
@@ -60,12 +64,6 @@ export const useTabItems = ( props: TabItemsType ) => {
 				);
 				setChatworkRoomId( 'room_id' );
 				setChatworkText( __( 'Chatwork Room ID', 'send-chat-tools' ) );
-				break;
-			case 'update':
-				setComponentName( 'update' );
-				setTitleText(
-					__( 'Update notify settings', 'send-chat-tools' )
-				);
 				break;
 			case 'logs':
 				setComponentName( 'logs' );

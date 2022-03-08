@@ -47,11 +47,12 @@ class Sct_Developer_Notify extends Sct_Base {
 	 * @param array $developer_message Developer message.
 	 */
 	private function developer_message_controller( array $developer_message ) {
-		$kesy_check  = $this->developer_message_arraykeys_check( $developer_message );
-		$exist_check = $this->developer_message_key_exists( $developer_message );
-		$url_check   = $this->developer_message_urls_regex( $developer_message );
+		$kesy_check   = $this->developer_message_arraykeys_check( $developer_message );
+		$exist_check  = $this->developer_message_key_exists( $developer_message );
+		$url_check    = $this->developer_message_urls_regex( $developer_message );
+		$ignore_check = $this->developer_message_ignore_check( $developer_message );
 
-		return $kesy_check && $exist_check && $url_check ? true : false;
+		return $kesy_check && $exist_check && $url_check && $ignore_check ? true : false;
 	}
 
 	/**
@@ -124,5 +125,23 @@ class Sct_Developer_Notify extends Sct_Base {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Check if the key is on the exclusion list.
+	 *
+	 * @param array $developer_message Developer message.
+	 */
+	private function developer_message_ignore_check( array $developer_message ): bool {
+		$sct_options = $this->get_sct_options();
+		$ignore_list = $sct_options['ignore_key'];
+
+		foreach ( $ignore_list as $ignore ) {
+			if ( $developer_message['key'] === $ignore ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

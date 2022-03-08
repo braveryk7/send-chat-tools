@@ -431,6 +431,10 @@ class Sct_Create_Content extends Sct_Base {
 				$fixed_phrase = [
 					'blocks' => [
 						$blocks->divider(),
+						$blocks->context(
+							'mrkdwn',
+							$this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $update_message['key'],
+						),
 						$blocks->context( 'mrkdwn', $context ),
 					],
 				];
@@ -441,7 +445,8 @@ class Sct_Create_Content extends Sct_Base {
 				$main_content = $developer_message . "\n";
 				$website      = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
 				$update_page  = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
-				$message      = $title . $main_content . $website . $update_page . "\n" . $this->create_context( $tool );
+				$ignore       = "\n" . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $update_message['key'] . "\n";
+				$message      = $title . $main_content . $website . $update_page . $ignore . "\n" . $this->create_context( $tool );
 			} elseif ( 'chatwork' === $tool ) {
 				$website     = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url . "\n" : null;
 				$update_page = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url . "\n" : null;
@@ -449,7 +454,9 @@ class Sct_Create_Content extends Sct_Base {
 					'body' =>
 						'[info][title]' . $site_name . '( ' . $site_url . ' ) ' . $message_title . '[/title]' .
 						$developer_message . "\n" .
-						$website . $update_page . $this->create_context( $tool ) .
+						$website . $update_page .
+						'[hr]' . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $update_message['key'] .
+						$this->create_context( $tool ) .
 						'[/info]',
 				];
 			}
@@ -487,6 +494,9 @@ class Sct_Create_Content extends Sct_Base {
 				'title'   => esc_html__( 'Notification of plugin updates from', 'send-chat-tools' ),
 				'website' => esc_html__( 'Official Web Site', 'send-chat-tools' ),
 				'detail'  => esc_html__( 'Update details', 'send-chat-tools' ),
+				'ignore'  => esc_html__(
+					'If this message is sent by a malicious developer, it can be rejected with the following key'
+				),
 			],
 		];
 

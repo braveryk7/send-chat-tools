@@ -151,16 +151,20 @@ class Sct_Admin_Page extends Sct_Base {
 	public function editable_api( WP_REST_Request $request ) {
 		$sct_options = $this->get_sct_options();
 		$params      = $request->get_json_params();
+		$keys        = [ 'slack', 'discord', 'chatwork', 'ignore_key', 'cron_time' ];
+		$flag        = false;
 
-		if ( array_key_exists( 'slack', $params ) ) {
-			$sct_options['slack'] = $params['slack'];
-		} elseif ( array_key_exists( 'discord', $params ) ) {
-			$sct_options['discord'] = $params['discord'];
-		} elseif ( array_key_exists( 'chatwork', $params ) ) {
-			$sct_options['chatwork'] = $params['chatwork'];
-		} elseif ( array_key_exists( 'cron_time', $params ) ) {
-			$sct_options['cron_time'] = $params['cron_time'];
-		} else {
+		foreach ( $keys as $key ) {
+			if ( $params && array_key_exists( $key, $params ) ) {
+				$sct_options[ $key ] = $params[ $key ];
+				$flag                = true;
+			}
+			if ( $flag ) {
+				continue;
+			}
+		}
+
+		if ( ! $flag ) {
 			return new WP_Error( 'invalid_key', __( 'Required key does not exist', 'admin-bar-tools' ), [ 'status' => 404 ] );
 		}
 

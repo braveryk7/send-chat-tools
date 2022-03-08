@@ -19,10 +19,10 @@ export const LogDetail = ( props: { itemKey: ChatToolsItemKeyType } ) => {
 
 	return (
 		<div className="sct-tools-log-wrapper">
-			<h2>
+			<h4>
 				{ `${ __( 'Logs', 'send-chat-tools' ) } (
 				${ __( 'Last three cases', 'send-chat-tools' ) } )` }
-			</h2>
+			</h4>
 			{ logs &&
 				Object.entries( logs ).map( ( [ key, value ], i ) => (
 					<Card className="sct-tools-log" key={ i }>

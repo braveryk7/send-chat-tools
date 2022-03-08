@@ -38,6 +38,15 @@ class Sct_Base {
 		'logs',
 	];
 
+	protected const OPTIONS_KEY = [
+		'slack',
+		'discord',
+		'chatwork',
+		'version',
+		'cron_time',
+		'ignore_key',
+	];
+
 	public const OLD_OPTIONS_COLUMN = [
 		// Use database.
 		'db_version',

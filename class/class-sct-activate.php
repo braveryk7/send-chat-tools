@@ -23,6 +23,7 @@ class Sct_Activate extends Sct_Base {
 	 */
 	public function __construct() {
 		register_activation_hook( $this->get_plugin_path(), [ $this, 'register_options' ] );
+		add_action( 'init', [ $this, 'option_check' ] );
 		add_action( 'init', [ $this, 'migration_options' ], 5 );
 		add_filter( 'sct_developer_notify', [ $this, 'developer_message' ] );
 	}
@@ -48,15 +49,34 @@ class Sct_Activate extends Sct_Base {
 		];
 
 		$options = [
-			'slack'     => $chat_tools_value,
-			'discord'   => $chat_tools_value,
-			'chatwork'  => $chatwork_value,
-			'version'   => self::VERSION,
-			'cron_time' => '18:00',
+			'slack'      => $chat_tools_value,
+			'discord'    => $chat_tools_value,
+			'chatwork'   => $chatwork_value,
+			'version'    => self::VERSION,
+			'cron_time'  => '18:00',
+			'ignore_key' => [],
 		];
 
 		add_option( $this->add_prefix( 'options' ), $options );
 		add_option( $this->add_prefix( 'logs' ), [] );
+	}
+
+	/**
+	 * Send Chat Tools option key check.
+	 */
+	public function option_check() {
+		$sct_options = $this->get_sct_options();
+
+		if ( self::VERSION !== $sct_options['version'] ) {
+			foreach ( self::OPTIONS_KEY as $key_name ) {
+				if ( ! array_key_exists( $key_name, $sct_options ) ) {
+					if ( 'ignore_key' === $key_name ) {
+						$sct_options[ $key_name ] = [];
+					}
+				}
+			}
+			$this->set_sct_options( $sct_options );
+		}
 	}
 
 	/**
