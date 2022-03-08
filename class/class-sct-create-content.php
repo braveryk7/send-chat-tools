@@ -454,7 +454,9 @@ class Sct_Create_Content extends Sct_Base {
 					'body' =>
 						'[info][title]' . $site_name . '( ' . $site_url . ' ) ' . $message_title . '[/title]' .
 						$developer_message . "\n" .
-						$website . $update_page . $this->create_context( $tool ) .
+						$website . $update_page .
+						'[hr]' . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $update_message['key'] .
+						$this->create_context( $tool ) .
 						'[/info]',
 				];
 			}
