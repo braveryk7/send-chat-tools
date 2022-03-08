@@ -6,19 +6,10 @@ import { TabItems } from 'src/components/molecules/TabItems';
 
 export const Tab = () => {
 	const tabs = [
-		{
-			name: 'basic',
-			title: __( 'Basic Settings', 'send-chat-tools' ),
-			className: 'tab-basic',
-		},
+		{ name: 'basic', title: __( 'Basic Settings', 'send-chat-tools' ), className: 'tab-basic' },
 		{ name: 'slack', title: __( 'Slack', 'send-chat-tools' ), className: 'tab-slack' },
 		{ name: 'discord', title: __( 'Discord', 'send-chat-tools' ), className: 'tab-discord' },
 		{ name: 'chatwork', title: __( 'Chatwork', 'send-chat-tools' ), className: 'tab-chatwork' },
-		{
-			name: 'update',
-			title: __( 'Update notify', 'send-chat-tools' ),
-			className: 'tab-update',
-		},
 		{ name: 'logs', title: __( 'Logs', 'send-chat-tools' ), className: 'tab-logs' },
 	];
 
