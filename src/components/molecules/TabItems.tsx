@@ -2,7 +2,6 @@ import { LogDetail } from 'src/components/atoms/LogDetail';
 import { LogView } from 'src/components/atoms/LogView';
 import { TextControlForm } from 'src/components/atoms/TextControlForm';
 import { Toggle } from 'src/components/atoms/Toggle';
-import { UpdateTime } from 'src/components/atoms/UpdateTime';
 import { useTabItems } from 'src/hooks/useTabItems';
 
 import { TabItemsType } from 'src/types/ComponentsType';
@@ -55,11 +54,6 @@ export const TabItems = ( props: TabItemsType ) => {
 			{ itemKey && (
 				<div className="sct-items">
 					<LogDetail itemKey={ itemKey } />
-				</div>
-			) }
-			{ componentName === 'update' && (
-				<div className="sct-items">
-					<UpdateTime itemKey="cron_time" />
 				</div>
 			) }
 			{ componentName === 'logs' && (
