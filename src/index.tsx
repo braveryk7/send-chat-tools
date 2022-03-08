@@ -1,6 +1,6 @@
 import './scss/index.scss';
 
-import { Placeholder, Snackbar, Spinner } from '@wordpress/components';
+import { Snackbar, Spinner } from '@wordpress/components';
 import { createContext, render, useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
@@ -49,9 +49,7 @@ const AdminPage = () => {
 					<Tab />
 				</apiContext.Provider>
 			) : (
-				<Placeholder label={ __( 'Data loading', 'send-chat-tools' ) }>
-					<Spinner />
-				</Placeholder>
+				<Spinner />
 			) }
 		</div>
 	);
