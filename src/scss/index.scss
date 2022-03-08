@@ -26,6 +26,10 @@
 
 	&-form-token-field__ {
 
+		&label {
+			display: none;
+		}
+
 		&input-container {
 			background-color: #fff;
 			width: 80%;
