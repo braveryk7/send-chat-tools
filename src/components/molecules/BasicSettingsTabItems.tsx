@@ -11,7 +11,7 @@ export const BasicSettingsTabItems = ( props: TabItemsType ) => {
 
 	return (
 		<div className="sct-wrapper">
-			<h2>{ titleText }</h2>
+			<h3>{ titleText }</h3>
 			<div className="sct-items">
 				<UpdateTime
 					itemKey="cron_time"
