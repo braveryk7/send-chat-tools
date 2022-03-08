@@ -445,7 +445,8 @@ class Sct_Create_Content extends Sct_Base {
 				$main_content = $developer_message . "\n";
 				$website      = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
 				$update_page  = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
-				$message      = $title . $main_content . $website . $update_page . "\n" . $this->create_context( $tool );
+				$ignore       = "\n" . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $update_message['key'] . "\n";
+				$message      = $title . $main_content . $website . $update_page . $ignore . "\n" . $this->create_context( $tool );
 			} elseif ( 'chatwork' === $tool ) {
 				$website     = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url . "\n" : null;
 				$update_page = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url . "\n" : null;
