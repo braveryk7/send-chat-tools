@@ -8,7 +8,7 @@ export const TokenField = ( props: { itemKey: 'ignore_key', title: string } ) =>
 
 	return (
 		<>
-			<h3>{ title }</h3>
+			<h4>{ title }</h4>
 			{ apiData &&
 				<FormTokenField
 					value={ apiData.ignore_key }
