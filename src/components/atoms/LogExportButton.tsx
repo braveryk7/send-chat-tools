@@ -10,7 +10,7 @@ type itemType = {
 	text: string,
 }
 
-export const LogButton = () => {
+export const LogExportButton = () => {
 	const { apiData } = useContext( apiContext );
 	const items: itemType[] = [
 		{ icon: 'clipboard', key: 'clipboard', text: __( 'Copy to clipboard', 'send-chat-tools' ) },
