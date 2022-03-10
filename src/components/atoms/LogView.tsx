@@ -2,6 +2,7 @@ import { Card, CardHeader, CardBody, CardFooter } from '@wordpress/components';
 import { useContext } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
+import { LogExportButton } from 'src/components/atoms/LogExportButton';
 import { apiContext } from 'src/index';
 
 import { SctLogsType } from 'src/types/apiType';
@@ -88,6 +89,7 @@ export const LogView = () => {
 		<Card className="sct-logs">
 			<CardHeader>
 				{ __( 'Communication logs.', 'send-chat-tools' ) }
+				<LogExportButton />
 			</CardHeader>
 			<CardBody>
 				<table className="sct-logs-table">

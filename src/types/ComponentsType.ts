@@ -1,3 +1,5 @@
+import { Dashicon } from '@wordpress/components';
+
 import {
 	ChatToolsBaseType,
 	ChatToolsItemKeyType,
@@ -49,3 +51,9 @@ export type setUseStateType = (
 	title: string,
 	text: string,
 ) => void;
+
+export type itemType = {
+	icon: Dashicon.Icon,
+	key: string,
+	text: string,
+}
