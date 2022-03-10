@@ -6,7 +6,7 @@ import { apiContext } from 'src/index';
 import { itemType } from 'src/types/ComponentsType';
 
 export const useLogExport = () => {
-	const { apiData } = useContext( apiContext );
+	const { apiData, setNoticeValue, setNoticeMessage, snackbarTimer } = useContext( apiContext );
 
 	const items: itemType[] = [
 		{ icon: 'clipboard', key: 'clipboard', text: __( 'Copy to clipboard', 'send-chat-tools' ) },
@@ -53,7 +53,11 @@ export const useLogExport = () => {
 		};
 
 		if ( apiData ) {
+			setNoticeValue( null );
+			clearTimeout( snackbarTimer );
+
 			const separet = itemKey === 'csv' ? ',' : ' ';
+
 			const header = {
 				status: itemKey === 'csv' ? '' : 'Status:',
 				type: itemKey === 'csv' ? '' : 'Type:',
@@ -78,6 +82,11 @@ export const useLogExport = () => {
 				case 'csv':
 					exportFile( logData, itemKey );
 					break;
+			}
+
+			if ( itemKey === 'clipboard' ) {
+				setNoticeValue( 'sct_success' );
+				setNoticeMessage( __( 'Copyed!', 'send-chat-tools' ) );
 			}
 		}
 	};
