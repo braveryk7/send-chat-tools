@@ -52,7 +52,7 @@ const AdminPage = () => {
 					<Tab />
 				</apiContext.Provider>
 			) }
-			{ ! apiError && <Spinner /> }
+			{ ! apiData && ! apiError && <Spinner /> }
 			{ apiError && <ApiError /> }
 		</div>
 	);
