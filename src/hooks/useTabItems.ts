@@ -12,13 +12,18 @@ import { ChatToolsItemKeyType } from 'src/types/apiType';
 
 export const useTabItems = ( props: TabItemsType ) => {
 	const { id } = props;
-	const [ itemKey, setItemKey ] = useState< ChatToolsItemKeyType | null >( null );
+	const [ itemKey, setItemKey ] = useState< ChatToolsItemKeyType | undefined >( undefined );
 	const [ itemLabel, setItemLabel ] = useState( '' );
 	const [ componentName, setComponentName ] = useState( '' );
 	const [ titleText, setTitleText ] = useState( '' );
 	const [ textLabel, setTextLabel ] = useState( '' );
-	const [ apiOptionName, setApiOptionName ] = useState< apiOptionNameType | null >( null );
-	const [ chatworkRoomId, setChatworkRoomId ] = useState< chatworkRoomIdType | null >( null );
+	const [
+		apiOptionName,
+		setApiOptionName,
+	] = useState< apiOptionNameType | undefined >( undefined );
+	const [
+		chatworkRoomId, setChatworkRoomId,
+	] = useState< chatworkRoomIdType | undefined >( undefined );
 	const [ chatworkText, setChatworkText ] = useState( '' );
 	const [ tabItems, setTabItems ] = useState< TogglePropsType[] >( [] );
 

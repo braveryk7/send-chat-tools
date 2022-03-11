@@ -13,8 +13,8 @@ import { apiContextType, noticeValueType } from 'src/types/useContextType';
 export const apiContext = createContext( {} as apiContextType );
 
 const AdminPage = () => {
-	const [ apiData, setApiData ] = useState< apiType | null >( null );
-	const [ noticeValue, setNoticeValue ] = useState< noticeValueType >( null );
+	const [ apiData, setApiData ] = useState< apiType | undefined >( undefined );
+	const [ noticeValue, setNoticeValue ] = useState< noticeValueType | undefined >( undefined );
 	const [ noticeMessage, setNoticeMessage ] = useState( '' );
 	const [ snackbarTimer, setSnackbarTimer ] = useState( 0 );
 
@@ -24,7 +24,7 @@ const AdminPage = () => {
 		if ( noticeValue ) {
 			setSnackbarTimer(
 				window.setTimeout( () => {
-					setNoticeValue( null );
+					setNoticeValue( undefined );
 				}, 4000 )
 			);
 		}
