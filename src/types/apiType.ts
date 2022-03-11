@@ -49,5 +49,5 @@ export type itemKeyType = 'slack' | 'discord' | 'chatwork' | 'version' | 'cron_t
 export type ChatToolsItemKeyType = Extract< itemKeyType, 'slack' | 'discord' | 'chatwork' >;
 
 export type useSetApiType = {
-	( itemKey: itemKeyType, value: apiType | null ): void
+	( itemKey: itemKeyType, value: apiType | undefined ): void
 };
