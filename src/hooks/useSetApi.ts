@@ -20,7 +20,7 @@ export const useSetApi: useSetApiType = ( itemKey, value ) => {
 		if ( isFirstRender.current ) {
 			isFirstRender.current = false;
 		} else if ( value ) {
-			setNoticeValue( null );
+			setNoticeValue( undefined );
 			clearTimeout( snackbarTimer );
 
 			apiFetch( {

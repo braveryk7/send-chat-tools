@@ -53,7 +53,7 @@ export const useLogExport = () => {
 		};
 
 		if ( apiData ) {
-			setNoticeValue( null );
+			setNoticeValue( undefined );
 			clearTimeout( snackbarTimer );
 
 			const separet = itemKey === 'csv' ? ',' : ' ';
