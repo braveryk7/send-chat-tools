@@ -18,7 +18,12 @@ export const UpdateTime = ( props: { itemKey: 'cron_time', title: string } ) => 
 					onChange={ ( newTime ) => changeValue( newTime ) }
 				/>
 			) }
-			{ __( 'この時間以降最初のアクセス時にアップデート確認されます。', 'send-chat-tools' ) }
+			{
+				__(
+					'Updates will be confirmed on the first access made after this time.',
+					'send-chat-tools'
+				)
+			}
 		</>
 	);
 };
