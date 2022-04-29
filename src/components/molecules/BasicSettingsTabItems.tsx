@@ -21,7 +21,12 @@ export const BasicSettingsTabItems = ( props: TabItemsType ) => {
 			<div className="sct-items">
 				<TokenField
 					itemKey="ignore_key"
-					title={ __( '更新通知を除外するテーマ/プラグインのキー', 'send-chat-tools' ) }
+					title={
+						__(
+							'Theme/plugin key to remove update notifications',
+							'send-chat-tools'
+						)
+					}
 				/>
 			</div>
 		</div>
