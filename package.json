@@ -24,7 +24,7 @@
     "@types/react": "^18.0.15",
     "@types/wordpress__components": "^19.10.0",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
-    "@typescript-eslint/parser": "^5.13.0",
+    "@typescript-eslint/parser": "^5.30.5",
     "@wordpress/scripts": "^22.0.1",
     "esbuild-loader": "^2.18.0",
     "eslint-import-resolver-typescript": "^2.5.0",
