@@ -85,12 +85,4 @@ if ( false === $get_php_version_bool->judgment( Sct_Base::REQUIRED_PHP_VERSION )
 	 * Delete wp_options column.
 	 */
 	register_uninstall_hook( __FILE__, 'Sct_Activate::uninstall_options' );
-
-	/**
-	 * Delete wp_options column.
-	 * THIS ITEM WILL BE DELETED IN APRIL 2022!!
-	 */
-	delete_option( 'sct_plugins' );
-	delete_option( 'sct_plugin111' );
-	delete_option( 'sct_uhehe' );
 }
