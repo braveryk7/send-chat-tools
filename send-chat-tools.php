@@ -25,9 +25,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 load_plugin_textdomain( 'send-chat-tools', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
-require_once dirname( __FILE__ ) . '/class/class-sct-judgment-php-version.php';
+require_once dirname( __FILE__ ) . '/class/class-cxn-phpver-judge.php';
 
-$get_php_version_bool = new Sct_Judgment_Php_Version();
+$get_php_version_bool = new Cxn_Phpver_Judge();
 if ( false === $get_php_version_bool->judgment( Sct_Base::REQUIRED_PHP_VERSION ) ) {
 	require_once ABSPATH . 'wp-admin/includes/plugin.php';
 	if ( is_plugin_active( plugin_basename( __FILE__ ) ) ) {
