@@ -26,6 +26,7 @@ class Sct_Base {
 	protected const API_VERSION         = 'v1';
 	protected const VERSION             = '1.3.0';
 	protected const OPTIONS_COLUMN_NAME = 'options';
+	public const REQUIRED_PHP_VERSION   = '7.3.0';
 
 	protected const TABLE_NAME = self::PREFIX;
 
