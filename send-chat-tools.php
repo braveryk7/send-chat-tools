@@ -32,17 +32,7 @@ if ( ! isset( $get_php_version_bool ) ) {
 }
 
 if ( false === $get_php_version_bool->judgment( Sct_Base::REQUIRED_PHP_VERSION ) ) {
-	require_once ABSPATH . 'wp-admin/includes/plugin.php';
-	if ( is_plugin_active( plugin_basename( __FILE__ ) ) ) {
-		if ( is_admin() ) {
-			require_once dirname( __FILE__ ) . '/modules/cancel-activate.php';
-			cancel_activate();
-		}
-		deactivate_plugins( plugin_basename( __FILE__ ) );
-	} else {
-		echo '<p>' . esc_html_e( 'Send Chat Tools requires at least PHP 7.3.0 or later.', 'send-chat-tools' ) . esc_html_e( 'Please upgrade PHP.', 'send-chat-tools' ) . '</p>';
-		exit;
-	}
+	$get_php_version_bool->deactivate( __FILE__ );
 } elseif ( true === $get_php_version_bool->judgment( Sct_Base::REQUIRED_PHP_VERSION ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-encryption.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-admin-page.php';
