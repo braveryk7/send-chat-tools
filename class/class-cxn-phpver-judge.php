@@ -31,12 +31,14 @@ class Cxn_Phpver_Judge {
 	 * Deactivate plugin & show deactivate massege.
 	 *
 	 * @param string $path Plugin path.
+	 * @param string $project Project name.
+	 * @param string $version PHP version.
 	 */
-	public function deactivate( string $path ) {
+	public function deactivate( string $path, string $project, string $version ) {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		if ( is_plugin_active( plugin_basename( $path ) ) ) {
 			if ( is_admin() ) {
-				$this->deactivate_message();
+				$this->deactivate_message( $project, $version );
 			}
 			deactivate_plugins( plugin_basename( $path ) );
 		} else {
@@ -47,10 +49,11 @@ class Cxn_Phpver_Judge {
 
 	/**
 	 * Show deactivate error message.
+	 *
+	 * @param string $project Project name.
+	 * @param string $version PHP version.
 	 */
-	public function deactivate_message() {
-		$project  = 'Send Chat Tools';
-		$version  = '7.3.0';
+	public function deactivate_message( string $project, string $version ) {
 		$messages = [
 			'header'  => sprintf(
 				/* translators: 1: Plugin name */
