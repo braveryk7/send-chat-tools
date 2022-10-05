@@ -36,7 +36,6 @@ class Cxn_Phpver_Judge {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		if ( is_plugin_active( plugin_basename( $path ) ) ) {
 			if ( is_admin() ) {
-				require_once dirname( $path ) . '/modules/cancel-activate.php';
 				$this->deactivate_message();
 			}
 			deactivate_plugins( plugin_basename( $path ) );
