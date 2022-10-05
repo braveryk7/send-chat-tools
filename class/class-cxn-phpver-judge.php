@@ -37,12 +37,31 @@ class Cxn_Phpver_Judge {
 		if ( is_plugin_active( plugin_basename( $path ) ) ) {
 			if ( is_admin() ) {
 				require_once dirname( $path ) . '/modules/cancel-activate.php';
-				cancel_activate();
+				$this->deactivate_message();
 			}
 			deactivate_plugins( plugin_basename( $path ) );
 		} else {
 			echo '<p>' . esc_html_e( 'Send Chat Tools requires at least PHP 7.3.0 or later.', 'send-chat-tools' ) . esc_html_e( 'Please upgrade PHP.', 'send-chat-tools' ) . '</p>';
 			exit;
 		}
+	}
+
+	/**
+	 * Show deactivate error message.
+	 */
+	public function deactivate_message() {
+		?>
+		<div class="error">
+			<p><?php esc_html_e( '[Plugin error] Send Chat Tools has been stopped because the PHP version is old.', 'send-chat-tools' ); ?></p>
+			<p>
+				<?php esc_html_e( 'Send Chat Tools requires at least PHP 7.3.0 or later.', 'send-chat-tools' ); ?>
+				<?php esc_html_e( 'Please upgrade PHP.', 'send-chat-tools' ); ?>
+			</p>
+			<p>
+				<?php esc_html_e( 'Current PHP version:', 'send-chat-tools' ); ?>
+				<?php echo PHP_VERSION; ?>
+			</p>
+		</div>
+		<?php
 	}
 }
