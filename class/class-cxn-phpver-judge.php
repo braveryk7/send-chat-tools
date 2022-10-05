@@ -49,11 +49,29 @@ class Cxn_Phpver_Judge {
 	 * Show deactivate error message.
 	 */
 	public function deactivate_message() {
+		$project = 'Send Chat Tools';
+		$version = '7.3.0';
+
 		?>
 		<div class="error">
-			<p><?php esc_html_e( '[Plugin error] Send Chat Tools has been stopped because the PHP version is old.', 'send-chat-tools' ); ?></p>
 			<p>
-				<?php esc_html_e( 'Send Chat Tools requires at least PHP 7.3.0 or later.', 'send-chat-tools' ); ?>
+				<?php
+					echo sprintf(
+						/* translators: 1: Plugin name */
+						esc_html__( '[Plugin error] %s has been stopped because the PHP version is old.', 'send-chat-tools' ),
+						esc_html( $project ),
+					);
+				?>
+			</p>
+			<p>
+				<?php
+					echo sprintf(
+						/* translators: 1: Plugin name 2: PHP version */
+						esc_html__( '%1$s requires at least PHP %2$s or later.', 'send-chat-tools' ),
+						esc_html( $project ),
+						esc_html( $version ),
+					);
+				?>
 				<?php esc_html_e( 'Please upgrade PHP.', 'send-chat-tools' ); ?>
 			</p>
 			<p>
