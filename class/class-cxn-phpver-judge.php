@@ -49,33 +49,33 @@ class Cxn_Phpver_Judge {
 	 * Show deactivate error message.
 	 */
 	public function deactivate_message() {
-		$project = 'Send Chat Tools';
-		$version = '7.3.0';
+		$project  = 'Send Chat Tools';
+		$version  = '7.3.0';
+		$messages = [
+			'header'  => sprintf(
+				/* translators: 1: Plugin name */
+				__( '[Plugin error] %s has been stopped because the PHP version is old.', 'send-chat-tools' ),
+				$project,
+			),
+			'require' => sprintf(
+				/* translators: 1: Plugin name 2: PHP version */
+				__( '%1$s requires at least PHP %2$s or later.', 'send-chat-tools' ),
+				$project,
+				$version,
+			),
+			'upgrade' => __( 'Please upgrade PHP.', 'send-chat-tools' ),
+			'current' => __( 'Current PHP version:', 'send-chat-tools' ),
+		]
 
 		?>
 		<div class="error">
+			<p><?php echo esc_html( $messages['header'] ); ?></p>
 			<p>
-				<?php
-					echo sprintf(
-						/* translators: 1: Plugin name */
-						esc_html__( '[Plugin error] %s has been stopped because the PHP version is old.', 'send-chat-tools' ),
-						esc_html( $project ),
-					);
-				?>
+				<?php echo esc_html( $messages['require'] ); ?>
+				<?php echo esc_html( $messages['upgrade'] ); ?>
 			</p>
 			<p>
-				<?php
-					echo sprintf(
-						/* translators: 1: Plugin name 2: PHP version */
-						esc_html__( '%1$s requires at least PHP %2$s or later.', 'send-chat-tools' ),
-						esc_html( $project ),
-						esc_html( $version ),
-					);
-				?>
-				<?php esc_html_e( 'Please upgrade PHP.', 'send-chat-tools' ); ?>
-			</p>
-			<p>
-				<?php esc_html_e( 'Current PHP version:', 'send-chat-tools' ); ?>
+				<?php echo esc_html( $messages['current'] ); ?>
 				<?php echo PHP_VERSION; ?>
 			</p>
 		</div>
