@@ -26,7 +26,7 @@ load_plugin_textdomain( 'send-chat-tools', false, basename( dirname( __FILE__ ) 
 
 require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
 
-if ( ! isset( $get_php_version_bool ) ) {
+if ( empty( $get_php_version_bool ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-cxn-phpver-judge.php';
 	$get_php_version_bool = new Cxn_Phpver_Judge();
 }
