@@ -181,6 +181,13 @@ class Sct_Base {
 	}
 
 	/**
+	 * Get required PHP version.
+	 */
+	public static function get_required_php_version(): string {
+		return self::REQUIRED_PHP_VERSION;
+	}
+
+	/**
 	 * Get WP-cron event name.
 	 */
 	public function get_wpcron_event_name(): string {
