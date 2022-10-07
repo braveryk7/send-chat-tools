@@ -109,6 +109,14 @@ class Sct_Base {
 	}
 
 	/**
+	 * Return plugin name.
+	 * e.g. Send Chat Tools
+	 */
+	public static function get_plugin_name(): string {
+		return self::PLUGIN_NAME;
+	}
+
+	/**
 	 * Return plugin url.
 	 * e.g. https://expamle.com/wp-content/plugins/send-chat-tools
 	 *
