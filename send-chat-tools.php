@@ -32,7 +32,7 @@ if ( ! isset( $get_php_version_bool ) ) {
 }
 
 if ( false === $get_php_version_bool->judgment( Sct_Base::get_required_php_version() ) ) {
-	$get_php_version_bool->deactivate( __FILE__ );
+	$get_php_version_bool->deactivate( __FILE__, Sct_Base::get_plugin_name(), Sct_Base::get_required_php_version() );
 } elseif ( true === $get_php_version_bool->judgment( Sct_Base::get_required_php_version() ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-encryption.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-admin-page.php';
