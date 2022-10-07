@@ -38,7 +38,22 @@ class Cxn_Phpver_Judge {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		if ( is_plugin_active( plugin_basename( $path ) ) ) {
 			if ( is_admin() ) {
-				$this->deactivate_message( $project, $version );
+				$messages = $this->deactivate_message( $project, $version );
+
+				?>
+				<div class="error">
+					<p><?php echo esc_html( $messages['header'] ); ?></p>
+					<p>
+						<?php echo esc_html( $messages['require'] ); ?>
+						<?php echo esc_html( $messages['upgrade'] ); ?>
+					</p>
+					<p>
+						<?php echo esc_html( $messages['current'] ); ?>
+						<?php echo PHP_VERSION; ?>
+					</p>
+				</div>
+				<?php
+
 			}
 			deactivate_plugins( plugin_basename( $path ) );
 		} else {
@@ -68,20 +83,8 @@ class Cxn_Phpver_Judge {
 			),
 			'upgrade' => __( 'Please upgrade PHP.', 'send-chat-tools' ),
 			'current' => __( 'Current PHP version:', 'send-chat-tools' ),
-		]
+		];
 
-		?>
-		<div class="error">
-			<p><?php echo esc_html( $messages['header'] ); ?></p>
-			<p>
-				<?php echo esc_html( $messages['require'] ); ?>
-				<?php echo esc_html( $messages['upgrade'] ); ?>
-			</p>
-			<p>
-				<?php echo esc_html( $messages['current'] ); ?>
-				<?php echo PHP_VERSION; ?>
-			</p>
-		</div>
-		<?php
+		return $messages;
 	}
 }
