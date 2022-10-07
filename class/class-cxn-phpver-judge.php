@@ -57,7 +57,15 @@ class Cxn_Phpver_Judge {
 			}
 			deactivate_plugins( plugin_basename( $path ) );
 		} else {
-			echo '<p>' . esc_html_e( 'Send Chat Tools requires at least PHP 7.3.0 or later.', 'send-chat-tools' ) . esc_html_e( 'Please upgrade PHP.', 'send-chat-tools' ) . '</p>';
+			$messages = $this->deactivate_message( $project, $version );
+
+			?>
+			<p>
+				<?php echo esc_html( $messages['require'] ); ?>
+				<?php echo esc_html( $messages['upgrade'] ); ?>
+			</p>
+			<?php
+
 			exit;
 		}
 	}
