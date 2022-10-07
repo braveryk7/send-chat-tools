@@ -18,15 +18,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Send Chat Tools base class.
  */
 class Sct_Base {
-	protected const PREFIX              = 'sct';
-	protected const PLUGIN_SLUG         = 'send-chat-tools';
-	protected const PLUGIN_NAME         = 'Send Chat Tools';
-	protected const PLUGIN_FILE         = self::PLUGIN_SLUG . '.php';
-	protected const API_NAME            = self::PLUGIN_SLUG;
-	protected const API_VERSION         = 'v1';
-	protected const VERSION             = '1.3.0';
-	protected const OPTIONS_COLUMN_NAME = 'options';
-	public const REQUIRED_PHP_VERSION   = '7.3.0';
+	protected const PREFIX               = 'sct';
+	protected const PLUGIN_SLUG          = 'send-chat-tools';
+	protected const PLUGIN_NAME          = 'Send Chat Tools';
+	protected const PLUGIN_FILE          = self::PLUGIN_SLUG . '.php';
+	protected const API_NAME             = self::PLUGIN_SLUG;
+	protected const API_VERSION          = 'v1';
+	protected const VERSION              = '1.3.0';
+	protected const OPTIONS_COLUMN_NAME  = 'options';
+	protected const REQUIRED_PHP_VERSION = '7.3.0';
 
 	protected const TABLE_NAME = self::PREFIX;
 
