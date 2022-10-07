@@ -40,6 +40,13 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: get_plugin_name()
+	 */
+	public function test_get_plugin_name() {
+		$this->assertSame( 'Send Chat Tools', $this->instance->get_plugin_name() );
+	}
+
+	/**
 	 * TEST: return_plugin_url()
 	 */
 	public function test_get_plugin_url() {
