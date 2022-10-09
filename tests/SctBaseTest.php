@@ -110,4 +110,14 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 			$method->invoke( $this->instance )
 		);
 	}
+
+	/**
+	 * TEST: get_required_php_version()
+	 */
+	public function test_get_required_php_version() {
+		$this->assertMatchesRegularExpression( '/^[0-9]+\.?[0-9]?+\.?[0-9]?+\.?/', '7.4.0' );
+		$this->assertMatchesRegularExpression( '/^[0-9]+\.?[0-9]?+\.?[0-9]?+\.?/', '8' );
+		$this->assertMatchesRegularExpression( '/^[0-9]+\.?[0-9]?+\.?[0-9]?+\.?/', '8.1' );
+		$this->assertMatchesRegularExpression( '/^[0-9]+\.?[0-9]?+\.?[0-9]?+\.?/', '8.1.5' );
+	}
 }
