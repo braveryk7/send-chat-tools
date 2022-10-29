@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-02-27 15:42+0900\n"
-"PO-Revision-Date: 2022-02-27 15:54+0900\n"
+"POT-Creation-Date: 2022-10-26 18:37+0900\n"
+"PO-Revision-Date: 2022-10-26 18:45+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -10,15 +10,33 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e;esc_attr__;esc_attr_e\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: vendor\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 
+#: class/class-cxn-phpver-judge.php:83
+#, php-format
+msgid "[Plugin error] %s has been stopped because the PHP version is old."
+msgstr "[プラグインエラー] PHPのバージョンが古いため、%sは停止されました。"
+
+#: class/class-cxn-phpver-judge.php:88
+#, php-format
+msgid "%1$s requires at least PHP %2$s or later."
+msgstr "%1$sには、少なくともPHP%2$s以降が必要です。"
+
+#: class/class-cxn-phpver-judge.php:92 modules/cancel-activate.php:26
+msgid "Please upgrade PHP."
+msgstr "PHPをアップグレードしてください。"
+
+#: class/class-cxn-phpver-judge.php:93 modules/cancel-activate.php:29
+msgid "Current PHP version:"
+msgstr "現在のPHPバージョン："
+
 #: class/class-sct-admin-page.php:37 class/class-sct-admin-page.php:38
-#: class/class-sct-base.php:174
+#: class/class-sct-base.php:212
 msgid "Send Chat Tools"
 msgstr "Send Chat Tools"
 
@@ -30,19 +48,23 @@ msgstr "古いSend Chat Tools"
 msgid "Settings"
 msgstr "設定"
 
-#: class/class-sct-base.php:176
+#: class/class-sct-admin-page.php:168
+msgid "Required key does not exist"
+msgstr ""
+
+#: class/class-sct-base.php:214
 msgid "Updated to version 1.3.0!"
 msgstr "バージョン1.3.0に更新されました！"
 
-#: class/class-sct-base.php:177
+#: class/class-sct-base.php:215
 msgid "Here are the main changes..."
 msgstr "主な変更点は以下の通りです。"
 
-#: class/class-sct-base.php:179
+#: class/class-sct-base.php:217
 msgid "Important:"
 msgstr "重要："
 
-#: class/class-sct-base.php:180
+#: class/class-sct-base.php:218
 msgid ""
 "- PHP 8.0 and earlier will no longer be supported after next minor update "
 "(1.4.0). The update is now scheduled for April."
@@ -50,11 +72,11 @@ msgstr ""
 "- 次回のマイナーアップデート（1.4.0）でPHP8.0以下はサポートされなくなります。"
 "アップデートは4月を予定しています。"
 
-#: class/class-sct-base.php:182
+#: class/class-sct-base.php:220
 msgid "Improvements:"
 msgstr "改善："
 
-#: class/class-sct-base.php:183
+#: class/class-sct-base.php:221
 msgid ""
 "- The admin panel has been replaced with React for a more modern design "
 "using WordPress components that are familiar to everyone."
@@ -62,17 +84,17 @@ msgstr ""
 "- 管理画面をReactに切り替えモダンになりました。WordPressコンポーネントを使用"
 "した、皆さんに馴染みにあるデザインです。"
 
-#: class/class-sct-base.php:184
+#: class/class-sct-base.php:222
 msgid "- The chat tool now saves up to 3 individual logs."
 msgstr "- チャットツール個別のログを3件まで保存するようになりました。"
 
-#: class/class-sct-base.php:185
+#: class/class-sct-base.php:223
 msgid ""
 "- The Send Chat Tools widget is now available on the WordPress dashboard."
 msgstr ""
 "- WordPressのダッシュボードにSend Chat Toolsのウィジェットが設置されました。"
 
-#: class/class-sct-base.php:186
+#: class/class-sct-base.php:224
 msgid ""
 "- A warning will be displayed when the next update changes the supported PHP "
 "version."
@@ -80,79 +102,79 @@ msgstr ""
 "- 次回のアップデートでサポートするPHPのバージョンが変更される場合、警告を表示"
 "します。"
 
-#: class/class-sct-base.php:187
+#: class/class-sct-base.php:225
 msgid "- We will send you the updated content vwhen the plugin is updated."
 msgstr "- プラグインのアップデート時に更新内容を送信します。"
 
-#: class/class-sct-base.php:188
+#: class/class-sct-base.php:226
 msgid "- The internal design of PHP has been substantially revised."
 msgstr "- PHPの内部設計を大幅に見直しました。"
 
-#: class/class-sct-base.php:189
+#: class/class-sct-base.php:227
 msgid ""
 "- Most options starting with \"sct\" have been removed and replaced by the "
 "sct_options column."
 msgstr ""
 "- sctから始まる多くのオプションを廃止し、sct_optionsカラムに統一されました。"
 
-#: class/class-sct-base.php:190
+#: class/class-sct-base.php:228
 msgid ""
 "- The sct table is no longer available and has been unified with the "
 "sct_logs column."
 msgstr "- sctテーブルを廃止し、sct_logsカラムに統一されました。"
 
-#: class/class-sct-base.php:191
+#: class/class-sct-base.php:229
 msgid "- The sct_update_notify hook is now publicly available for developers."
 msgstr "- 開発者向けにsct_update_notifyフックを公開しました。"
 
-#: class/class-sct-base.php:193
+#: class/class-sct-base.php:231
 msgid "Fixes:"
 msgstr "修正："
 
-#: class/class-sct-base.php:194
+#: class/class-sct-base.php:232
 msgid "- The encryption of API values has been removed."
 msgstr "- APIの値の暗号化を廃止しました。"
 
-#: class/class-sct-base.php:195
+#: class/class-sct-base.php:233
 msgid "- You will not receive a response if the API value is invalid."
 msgstr "- APIの値が正常ではない場合、送信されなくなりました。"
 
-#: class/class-sct-base.php:196
+#: class/class-sct-base.php:234
 msgid ""
 "- You won't be able to change the WordPress settings from the Send Chat "
 "Tools settings screen."
 msgstr ""
 "- WordPress本体の設定変更はSend Chat Toolsの設定画面からできなくなりました。"
 
-#: class/class-sct-base.php:198
+#: class/class-sct-base.php:236
 msgid "Development:"
 msgstr "開発："
 
-#: class/class-sct-base.php:199
+#: class/class-sct-base.php:237
 msgid ""
 "- The development environment has been largely upgraded for future updates."
 msgstr "- 将来のアップデートに向けて開発環境を大幅に整備しました。"
 
-#: class/class-sct-base.php:200
+#: class/class-sct-base.php:238
 msgid ""
 "- PHPUnit has been installed to enable a more precise testing environment."
 msgstr "- PHPUnitを導入して厳密なテスト環境を構築しました。"
 
-#: class/class-sct-base.php:201
+#: class/class-sct-base.php:239
 msgid "- We installed PHPStan to build a static analysis environment."
 msgstr "- PHPStanを導入して静的解析環境を構築しました。"
 
-#: class/class-sct-base.php:202
+#: class/class-sct-base.php:240
 msgid ""
 "- The development environment has been built by combining WordPress "
 "components and TypeScript."
 msgstr "- WordPressコンポーネント×TypeScript開発環境を構築しました。"
 
-#: class/class-sct-base.php:203
+#: class/class-sct-base.php:241
 msgid "- Updated settings for ESLint, Stylelint, and PHP_Codesniffer."
 msgstr "- ESLint、Stylelint、PHP_Codesnifferの設定を見直しました。"
 
-#: class/class-sct-base.php:204
+#: class/class-sct-base.php:242
 msgid "- Adopted small tools (zip.sh, git hooks)."
 msgstr "- 小さなツールを採用しました（zip.sh, git hooks）"
 
@@ -177,83 +199,89 @@ msgstr "お知らせはありません。"
 msgid "Update notifications from %s"
 msgstr "%sからアップデートのお知らせ"
 
-#: class/class-sct-create-content.php:469 class/class-sct-error-mail.php:75
+#: class/class-sct-create-content.php:476 class/class-sct-error-mail.php:75
 msgid "new comment has been posted."
 msgstr "に新規コメントが投稿されました。"
 
-#: class/class-sct-create-content.php:470 class/class-sct-error-mail.php:76
+#: class/class-sct-create-content.php:477 class/class-sct-error-mail.php:76
 msgid "Commented article:"
 msgstr "コメントされた記事："
 
-#: class/class-sct-create-content.php:471 class/class-sct-error-mail.php:77
+#: class/class-sct-create-content.php:478 class/class-sct-error-mail.php:77
 msgid "Author:"
 msgstr "投稿者名："
 
-#: class/class-sct-create-content.php:472 class/class-sct-error-mail.php:78
+#: class/class-sct-create-content.php:479 class/class-sct-error-mail.php:78
 msgid "Date and time:"
 msgstr "日時："
 
-#: class/class-sct-create-content.php:473 class/class-sct-error-mail.php:79
+#: class/class-sct-create-content.php:480 class/class-sct-error-mail.php:79
 msgid "Text:"
 msgstr "本文："
 
-#: class/class-sct-create-content.php:474 class/class-sct-error-mail.php:80
+#: class/class-sct-create-content.php:481 class/class-sct-error-mail.php:80
 msgid "Comment URL:"
 msgstr "コメントのURL："
 
-#: class/class-sct-create-content.php:475 class/class-sct-error-mail.php:81
+#: class/class-sct-create-content.php:482 class/class-sct-error-mail.php:81
 msgid "Comment Status:"
 msgstr "コメントの状態："
 
-#: class/class-sct-create-content.php:476 class/class-sct-error-mail.php:62
+#: class/class-sct-create-content.php:483 class/class-sct-error-mail.php:62
 msgid "Approved"
 msgstr "承認済み"
 
-#: class/class-sct-create-content.php:477 class/class-sct-error-mail.php:65
+#: class/class-sct-create-content.php:484 class/class-sct-error-mail.php:65
 msgid "Unapproved"
 msgstr "未承認"
 
-#: class/class-sct-create-content.php:478 class/class-sct-error-mail.php:65
+#: class/class-sct-create-content.php:485 class/class-sct-error-mail.php:65
 msgid "Click here to approve"
 msgstr "ここをクリックして承認"
 
-#: class/class-sct-create-content.php:479 class/class-sct-error-mail.php:68
+#: class/class-sct-create-content.php:486 class/class-sct-error-mail.php:68
 msgid "Spam"
 msgstr "スパム"
 
-#: class/class-sct-create-content.php:482
+#: class/class-sct-create-content.php:489
 msgid "Notification of new updates."
 msgstr "新しいアップデートがあります。"
 
-#: class/class-sct-create-content.php:483
+#: class/class-sct-create-content.php:490
 msgid "Please login to the admin panel to update."
 msgstr "管理画面にログインしてアップデートしてください。"
 
-#: class/class-sct-create-content.php:484
+#: class/class-sct-create-content.php:491
 msgid "Update Page:"
 msgstr "更新ページ："
 
-#: class/class-sct-create-content.php:487
+#: class/class-sct-create-content.php:494
 msgid "Notification of plugin updates from"
 msgstr "からプラグインアップデートのお知らせ"
 
-#: class/class-sct-create-content.php:488
+#: class/class-sct-create-content.php:495
 msgid "Official Web Site"
 msgstr "公式ウェブサイト"
 
-#: class/class-sct-create-content.php:489
+#: class/class-sct-create-content.php:496
 msgid "Update details"
 msgstr "アップデートの詳細"
 
-#: class/class-sct-create-content.php:541
+#: class/class-sct-create-content.php:498
+msgid ""
+"If this message is sent by a malicious developer, it can be rejected with "
+"the following key"
+msgstr ""
+
+#: class/class-sct-create-content.php:551
 msgid "This message was sent by Send Chat Tools: "
 msgstr "このメッセージはSend Chat Toolsにより送信されました。"
 
-#: class/class-sct-create-content.php:542
+#: class/class-sct-create-content.php:552
 msgid "WordPress Plugin Directory"
 msgstr "WordPressプラグインディレクトリ"
 
-#: class/class-sct-create-content.php:543
+#: class/class-sct-create-content.php:553
 msgid "Send Chat Tools Official Page"
 msgstr "Send Chat Tools公式ページ"
 
@@ -289,17 +317,9 @@ msgstr ""
 "[プラグインエラー] PHPのバージョンが古いため、Send Chat Toolsは停止されまし"
 "た。"
 
-#: modules/cancel-activate.php:25 send-chat-tools.php:40
+#: modules/cancel-activate.php:25
 msgid "Send Chat Tools requires at least PHP 7.3.0 or later."
 msgstr "Send Chat Toolsには、少なくともPHP7.3以降が必要です。"
-
-#: modules/cancel-activate.php:26 send-chat-tools.php:40
-msgid "Please upgrade PHP."
-msgstr "PHPをアップグレードしてください。"
-
-#: modules/cancel-activate.php:29
-msgid "Current PHP version:"
-msgstr "現在のPHPバージョン："
 
 #~ msgid "Slack"
 #~ msgstr "Slack"
