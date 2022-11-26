@@ -2,14 +2,14 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Send Chat Tools 1.2.0\n"
+"Project-Id-Version: Send Chat Tools 1.3.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/send-chat-tools\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-15T13:59:55+00:00\n"
+"POT-Creation-Date: 2022-11-26T18:43:56+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: send-chat-tools\n"
@@ -34,134 +34,195 @@ msgstr ""
 msgid "https://twitter.com/braveryk7"
 msgstr ""
 
-#: build/index.js:40
-#: build/index.js:627
+#: build/index.js:22
+msgid "Send Chat Tools uses the WordPress REST API for setting loading."
+msgstr ""
+
+#: build/index.js:22
+msgid "If you continue to see this error, the WordPress REST API may be disabled."
+msgstr ""
+
+#: build/index.js:22
+msgid "The WordPress REST API can be set up in a plugin or in your theme's functions.php file."
+msgstr ""
+
+#: build/index.js:22
+msgid "Please activate the WordPress REST API and try accessing it again."
+msgstr ""
+
+#: build/index.js:24
+msgid "API connection failed."
+msgstr ""
+
+#: build/index.js:68
+#: build/index.js:537
+#: build/index.js:951
 msgid "Logs"
 msgstr ""
 
-#: build/index.js:41
+#: build/index.js:69
 msgid "Last three cases"
 msgstr ""
 
-#: build/index.js:46
+#: build/index.js:74
 msgid "Comment Author"
 msgstr ""
 
-#: build/index.js:52
+#: build/index.js:80
 msgid "Comment ID"
 msgstr ""
 
-#: build/index.js:54
-#: build/index.js:153
+#: build/index.js:82
+#: build/index.js:230
 msgid "Status"
 msgstr ""
 
-#: build/index.js:56
-#: build/index.js:153
+#: build/index.js:84
+#: build/index.js:230
 msgid "Date"
 msgstr ""
 
-#: build/index.js:130
+#: build/index.js:207
 msgid "Response OK!"
 msgstr ""
 
-#: build/index.js:133
-#: build/index.js:145
+#: build/index.js:210
+#: build/index.js:222
 msgid "Could not communicate."
 msgstr ""
 
-#: build/index.js:136
+#: build/index.js:213
 msgid "Webhook URL/API Token not entered."
 msgstr ""
 
-#: build/index.js:139
+#: build/index.js:216
 msgid "RoomID not entered."
 msgstr ""
 
-#: build/index.js:142
+#: build/index.js:219
 msgid "API system value is incorrect."
 msgstr ""
 
-#: build/index.js:151
+#: build/index.js:228
 msgid "Communication logs."
 msgstr ""
 
-#: build/index.js:153
+#: build/index.js:230
 msgid "Tool"
 msgstr ""
 
-#: build/index.js:153
+#: build/index.js:230
 msgid "Type"
 msgstr ""
 
-#: build/index.js:153
+#: build/index.js:230
 msgid "Detail"
 msgstr ""
 
-#: build/index.js:336
+#: build/index.js:390
+msgid "Updates will be confirmed on the first access made after this time."
+msgstr ""
+
+#: build/index.js:424
 msgid "Set time to check for updates"
 msgstr ""
 
-#: build/index.js:548
+#: build/index.js:429
+msgid "Theme/plugin key to remove update notifications"
+msgstr ""
+
+#: build/index.js:521
+msgid "Basic Settings"
+msgstr ""
+
+#: build/index.js:525
+msgid "Slack"
+msgstr ""
+
+#: build/index.js:529
+msgid "Discord"
+msgstr ""
+
+#: build/index.js:533
+msgid "Chatwork"
+msgstr ""
+
+#: build/index.js:736
+msgid "Copy to clipboard"
+msgstr ""
+
+#: build/index.js:740
+msgid "Export text"
+msgstr ""
+
+#: build/index.js:744
+msgid "Export CSV"
+msgstr ""
+
+#: build/index.js:823
+msgid "Copyed!"
+msgstr ""
+
+#: build/index.js:880
 msgid "Success."
 msgstr ""
 
-#: build/index.js:553
+#: build/index.js:883
 msgid "Error."
 msgstr ""
 
-#: build/index.js:596
+#: build/index.js:932
+msgid "Basic settings"
+msgstr ""
+
+#: build/index.js:936
 msgid "Use Slack notify"
 msgstr ""
 
-#: build/index.js:598
+#: build/index.js:936
 msgid "Slack settings"
 msgstr ""
 
-#: build/index.js:599
+#: build/index.js:936
 msgid "Slack Webhook URL"
 msgstr ""
 
-#: build/index.js:604
+#: build/index.js:940
 msgid "Use Discord notify"
 msgstr ""
 
-#: build/index.js:606
+#: build/index.js:940
 msgid "Discord settings"
 msgstr ""
 
-#: build/index.js:607
+#: build/index.js:940
 msgid "Discord Webhook URL"
 msgstr ""
 
-#: build/index.js:612
+#: build/index.js:944
 msgid "Use Chatwork notify"
 msgstr ""
 
-#: build/index.js:615
+#: build/index.js:944
 msgid "Chatwork settings"
 msgstr ""
 
-#: build/index.js:616
+#: build/index.js:944
 msgid "Chatwork API token"
 msgstr ""
 
-#: build/index.js:617
+#: build/index.js:946
 msgid "Chatwork Room ID"
 msgstr ""
 
-#: build/index.js:622
-msgid "Update notify settings"
-msgstr ""
-
-#: build/index.js:640
+#: build/index.js:964
 msgid "Don't send your own comments"
 msgstr ""
 
-#: build/index.js:644
+#: build/index.js:968
 msgid "Use Update notify"
 msgstr ""
 
-#: build/index.js:711
+#: build/index.js:1032
 msgid "Send Chat Tools Settings"
 msgstr ""
