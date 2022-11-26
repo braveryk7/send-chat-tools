@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Send Chat Tools 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/send-chat-tools\n"
-"POT-Creation-Date: 2022-02-15T13:59:55+00:00\n"
-"PO-Revision-Date: 2022-02-15 23:14+0900\n"
+"POT-Creation-Date: 2022-11-26T18:43:56+00:00\n"
+"PO-Revision-Date: 2022-11-27 03:51+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2\n"
 "X-Domain: send-chat-tools\n"
 "X-Poedit-KeywordsList: __;_x;_n;_nx\n"
 
@@ -27,7 +27,8 @@ msgstr "https://www.braveryk7.com/"
 
 #. Description of the plugin
 msgid "A plugin that allows you to send WordPress announcements to chat tools."
-msgstr "A plugin that allows you to send WordPress announcements to chat tools."
+msgstr ""
+"A plugin that allows you to send WordPress announcements to chat tools."
 
 #. Author of the plugin
 msgid "Ken-chan"
@@ -37,130 +38,200 @@ msgstr "けんちゃん"
 msgid "https://twitter.com/braveryk7"
 msgstr "https://twitter.com/braveryk7"
 
-#: build/index.js:40 build/index.js:627
+#: build/index.js:22
+msgid "Send Chat Tools uses the WordPress REST API for setting loading."
+msgstr "Send Chat Toolsは、設定読み込みにWordPress REST APIを使用しています。"
+
+#: build/index.js:22
+msgid ""
+"If you continue to see this error, the WordPress REST API may be disabled."
+msgstr ""
+"もしこのエラーが続けて表示される場合は、WordPress REST APIが無効化されている"
+"可能性があります。"
+
+#: build/index.js:22
+msgid ""
+"The WordPress REST API can be set up in a plugin or in your theme's "
+"functions.php file."
+msgstr ""
+"WordPress REST APIはプラグインやテーマのfunctions.phpファイルで設定することが"
+"できます。"
+
+#: build/index.js:22
+msgid "Please activate the WordPress REST API and try accessing it again."
+msgstr "WordPress REST APIを有効化して再度アクセスしてください。"
+
+#: build/index.js:24
+msgid "API connection failed."
+msgstr "API接続に失敗しました。"
+
+#: build/index.js:68 build/index.js:537 build/index.js:951
 msgid "Logs"
 msgstr "ログ"
 
-#: build/index.js:41
+#: build/index.js:69
 msgid "Last three cases"
 msgstr "最後の3件"
 
-#: build/index.js:46
+#: build/index.js:74
 msgid "Comment Author"
 msgstr "コメント投稿者"
 
-#: build/index.js:52
+#: build/index.js:80
 msgid "Comment ID"
 msgstr "コメントID"
 
-#: build/index.js:54 build/index.js:153
+#: build/index.js:82 build/index.js:230
 msgid "Status"
 msgstr "ステータス"
 
-#: build/index.js:56 build/index.js:153
+#: build/index.js:84 build/index.js:230
 msgid "Date"
 msgstr "日時"
 
-#: build/index.js:130
+#: build/index.js:207
 msgid "Response OK!"
 msgstr "レスポンスOK!"
 
-#: build/index.js:133 build/index.js:145
+#: build/index.js:210 build/index.js:222
 msgid "Could not communicate."
 msgstr "通信できませんでした。"
 
-#: build/index.js:136
+#: build/index.js:213
 msgid "Webhook URL/API Token not entered."
 msgstr "Webhook URL/APIトークンが入力されていません。"
 
-#: build/index.js:139
+#: build/index.js:216
 msgid "RoomID not entered."
 msgstr "ルームIDが入力されていません。"
 
-#: build/index.js:142
+#: build/index.js:219
 msgid "API system value is incorrect."
 msgstr "APIシステムの値が正しくありません。"
 
-#: build/index.js:151
+#: build/index.js:228
 msgid "Communication logs."
 msgstr "通信ログ"
 
-#: build/index.js:153
+#: build/index.js:230
 msgid "Tool"
 msgstr "ツール"
 
-#: build/index.js:153
+#: build/index.js:230
 msgid "Type"
 msgstr "タイプ"
 
-#: build/index.js:153
+#: build/index.js:230
 msgid "Detail"
 msgstr "詳細"
 
-#: build/index.js:336
+#: build/index.js:390
+msgid "Updates will be confirmed on the first access made after this time."
+msgstr "この時間以降最初のアクセス時にアップデート確認されます。"
+
+#: build/index.js:424
 msgid "Set time to check for updates"
 msgstr "アップデート確認をする時間を設定"
 
-#: build/index.js:548
+#: build/index.js:429
+msgid "Theme/plugin key to remove update notifications"
+msgstr "更新通知を除外するテーマ/プラグインのキー"
+
+#: build/index.js:521
+msgid "Basic Settings"
+msgstr "基本設定"
+
+#: build/index.js:525
+msgid "Slack"
+msgstr "Slack"
+
+#: build/index.js:529
+msgid "Discord"
+msgstr "Discord"
+
+#: build/index.js:533
+msgid "Chatwork"
+msgstr "Chatwork"
+
+#: build/index.js:736
+msgid "Copy to clipboard"
+msgstr "クリップボードにコピー"
+
+#: build/index.js:740
+msgid "Export text"
+msgstr "テキストでエクスポート"
+
+#: build/index.js:744
+msgid "Export CSV"
+msgstr "CSVでエクスポート"
+
+#: build/index.js:823
+msgid "Copyed!"
+msgstr "コピー完了！"
+
+#: build/index.js:880
 msgid "Success."
 msgstr "成功"
 
-#: build/index.js:553
+#: build/index.js:883
 msgid "Error."
 msgstr "エラー"
 
-#: build/index.js:596
+#: build/index.js:932
+msgid "Basic settings"
+msgstr "基本設定"
+
+#: build/index.js:936
 msgid "Use Slack notify"
 msgstr "Slack通知を使用する"
 
-#: build/index.js:598
+#: build/index.js:936
 msgid "Slack settings"
 msgstr "Slack設定"
 
-#: build/index.js:599
+#: build/index.js:936
 msgid "Slack Webhook URL"
 msgstr "Slack Webhook URL"
 
-#: build/index.js:604
+#: build/index.js:940
 msgid "Use Discord notify"
 msgstr "Discord通知を使用する"
 
-#: build/index.js:606
+#: build/index.js:940
 msgid "Discord settings"
 msgstr "Discord設定"
 
-#: build/index.js:607
+#: build/index.js:940
 msgid "Discord Webhook URL"
 msgstr "Discord Webhook URL"
 
-#: build/index.js:612
+#: build/index.js:944
 msgid "Use Chatwork notify"
 msgstr "Chatwork通知を使用する"
 
-#: build/index.js:615
+#: build/index.js:944
 msgid "Chatwork settings"
 msgstr "Chatwork設定"
 
-#: build/index.js:616
+#: build/index.js:944
 msgid "Chatwork API token"
 msgstr "Chatwork APIトークン"
 
-#: build/index.js:617
+#: build/index.js:946
 msgid "Chatwork Room ID"
 msgstr "Chatwork ルームID"
 
-#: build/index.js:622
-msgid "Update notify settings"
-msgstr "アップデート通知設定"
-
-#: build/index.js:640
+#: build/index.js:964
 msgid "Don't send your own comments"
 msgstr "自分自身のコメントを送信しない"
 
-#: build/index.js:644
+#: build/index.js:968
 msgid "Use Update notify"
 msgstr "アップデート通知を使用する"
 
-#: build/index.js:711
+#: build/index.js:1032
 msgid "Send Chat Tools Settings"
 msgstr "Send Chat Tools設定"
+
+#~ msgid "Update notify settings"
+#~ msgstr "アップデート通知設定"
