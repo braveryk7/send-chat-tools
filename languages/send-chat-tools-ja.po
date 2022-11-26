@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-10-26 18:37+0900\n"
-"PO-Revision-Date: 2022-10-26 18:45+0900\n"
+"POT-Creation-Date: 2022-11-26 15:33+0900\n"
+"PO-Revision-Date: 2022-11-26 15:35+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -27,11 +27,11 @@ msgstr "[プラグインエラー] PHPのバージョンが古いため、%sは�
 msgid "%1$s requires at least PHP %2$s or later."
 msgstr "%1$sには、少なくともPHP%2$s以降が必要です。"
 
-#: class/class-cxn-phpver-judge.php:92 modules/cancel-activate.php:26
+#: class/class-cxn-phpver-judge.php:92
 msgid "Please upgrade PHP."
 msgstr "PHPをアップグレードしてください。"
 
-#: class/class-cxn-phpver-judge.php:93 modules/cancel-activate.php:29
+#: class/class-cxn-phpver-judge.php:93
 msgid "Current PHP version:"
 msgstr "現在のPHPバージョン："
 
@@ -309,17 +309,15 @@ msgstr "エラーコード："
 msgid "WordPress update notification."
 msgstr "WordPressアップデート通知"
 
-#: modules/cancel-activate.php:23
-msgid ""
-"[Plugin error] Send Chat Tools has been stopped because the PHP version is "
-"old."
-msgstr ""
-"[プラグインエラー] PHPのバージョンが古いため、Send Chat Toolsは停止されまし"
-"た。"
+#~ msgid ""
+#~ "[Plugin error] Send Chat Tools has been stopped because the PHP version "
+#~ "is old."
+#~ msgstr ""
+#~ "[プラグインエラー] PHPのバージョンが古いため、Send Chat Toolsは停止されま"
+#~ "した。"
 
-#: modules/cancel-activate.php:25
-msgid "Send Chat Tools requires at least PHP 7.3.0 or later."
-msgstr "Send Chat Toolsには、少なくともPHP7.3以降が必要です。"
+#~ msgid "Send Chat Tools requires at least PHP 7.3.0 or later."
+#~ msgstr "Send Chat Toolsには、少なくともPHP7.3以降が必要です。"
 
 #~ msgid "Slack"
 #~ msgstr "Slack"
