@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Return true or false.
  */
-class Cxn_Phpver_Judge {
+class Sct_Phpver_Judge {
 	/**
 	 * Judgment PHP version.
 	 *
