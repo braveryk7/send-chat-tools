@@ -26,7 +26,7 @@
         "wplint-rules": "./vendor/bin/phpcs -i",
         "phpcb": "./vendor/bin/phpcs --standard=ruleset.xml",
         "phpstan": "./vendor/bin/phpstan analyse . -c ./phpstan.neon --memory-limit 2G",
-        "test": "./vendor/bin/phpunit tests",
+        "test": "./vendor/bin/phpunit tests --testdox",
         "ghinit": "curl https://raw.githubusercontent.com/braveryk7/GitHooks/main/conf/init.sh > init.sh && sh init.sh",
         "gh-script-init": "curl -o cmd/create-verup-issue.sh https://raw.githubusercontent.com/braveryk7/github-cli-scripts/main/cmd/create-verup-issue.sh",
         "zip": "npm run build && bash cmd/zip.sh",
