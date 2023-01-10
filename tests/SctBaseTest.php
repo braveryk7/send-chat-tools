@@ -162,4 +162,11 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	public function test_send_tools() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: api_regex()
+	 */
+	public function test_api_regex() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
