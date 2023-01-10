@@ -119,6 +119,13 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: get_sct_options()
+	 */
+	public function test_get_sct_options() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
 	 * TEST: get_required_php_version()
 	 */
 	public function test_get_required_php_version() {
