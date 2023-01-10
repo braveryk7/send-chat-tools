@@ -75,7 +75,7 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: get_plugin_path()
 	 */
-	public function test_return_plugin_path() {
+	public function test_get_plugin_path() {
 		$method = new ReflectionMethod( $this->instance, 'get_plugin_path' );
 		$method->setAccessible( true );
 
@@ -101,7 +101,7 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: get_option_group()
 	 */
-	public function test_return_option_group() {
+	public function test_get_option_group() {
 		$method = new ReflectionMethod( $this->instance, 'get_option_group' );
 		$method->setAccessible( true );
 
@@ -112,6 +112,27 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: get_table_name()
+	 */
+	public function test_get_table_name() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
+	 * TEST: get_sct_options()
+	 */
+	public function test_get_sct_options() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
+	 * TEST: set_sct_options()
+	 */
+	public function test_set_sct_options() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
 	 * TEST: get_required_php_version()
 	 */
 	public function test_get_required_php_version() {
@@ -119,5 +140,40 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 		$this->assertMatchesRegularExpression( '/^[0-9]+\.?[0-9]?+\.?[0-9]?+\.?/', '8' );
 		$this->assertMatchesRegularExpression( '/^[0-9]+\.?[0-9]?+\.?[0-9]?+\.?/', '8.1' );
 		$this->assertMatchesRegularExpression( '/^[0-9]+\.?[0-9]?+\.?[0-9]?+\.?/', '8.1.5' );
+	}
+
+	/**
+	 * TEST: get_wpcron_event_name()
+	 */
+	public function test_get_wpcron_event_name() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
+	 * TEST: get_developer_messages()
+	 */
+	public function test_get_developer_messages() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
+	 * TEST: send_tools()
+	 */
+	public function test_send_tools() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
+	 * TEST: api_regex()
+	 */
+	public function test_api_regex() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
+	 * TEST: console()
+	 */
+	public function test_console() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
 }
