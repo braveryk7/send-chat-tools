@@ -148,4 +148,11 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	public function test_get_wpcron_event_name() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: get_developer_messages()
+	 */
+	public function test_get_developer_messages() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
