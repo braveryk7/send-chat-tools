@@ -155,4 +155,11 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	public function test_get_developer_messages() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: send_tools()
+	 */
+	public function test_send_tools() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
