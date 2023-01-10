@@ -141,4 +141,11 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 		$this->assertMatchesRegularExpression( '/^[0-9]+\.?[0-9]?+\.?[0-9]?+\.?/', '8.1' );
 		$this->assertMatchesRegularExpression( '/^[0-9]+\.?[0-9]?+\.?[0-9]?+\.?/', '8.1.5' );
 	}
+
+	/**
+	 * TEST: get_wpcron_event_name()
+	 */
+	public function test_get_wpcron_event_name() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
