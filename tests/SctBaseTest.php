@@ -101,7 +101,7 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: get_option_group()
 	 */
-	public function test_return_option_group() {
+	public function test_get_option_group() {
 		$method = new ReflectionMethod( $this->instance, 'get_option_group' );
 		$method->setAccessible( true );
 
