@@ -68,6 +68,13 @@ class SctAdminPageTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: get_wordpress_permission()
+	 */
+	public function test_get_wordpress_permission() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
 	 * TEST: settings_page()
 	 */
 	public function test_settings_page() {
