@@ -82,6 +82,13 @@ class SctAdminPageTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: editable_api()
+	 */
+	public function test_editable_api() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
 	 * TEST: settings_page()
 	 */
 	public function test_settings_page() {
