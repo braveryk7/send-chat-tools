@@ -54,9 +54,30 @@ class SctAdminPageTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: register()
+	 * TEST: register_rest_api()
 	 */
-	public function test_register() {
+	public function test_register_rest_api() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
+	 * TEST: get_wordpress_permission()
+	 */
+	public function test_get_wordpress_permission() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
+	 * TEST: readable_api()
+	 */
+	public function test_readable_api() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
+	 * TEST: editable_api()
+	 */
+	public function test_editable_api() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
 
