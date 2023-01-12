@@ -45,4 +45,11 @@ class SctPhpverJudgeTest extends PHPUnit\Framework\TestCase {
 	public function test_deactivate() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: deactivate_message()
+	 */
+	public function test_deactivate_message() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
