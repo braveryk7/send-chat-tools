@@ -31,4 +31,11 @@ class SctPhpverJudgeTest extends PHPUnit\Framework\TestCase {
 	protected function setUp() :void {
 		$this->instance = new Sct_Phpver_Judge();
 	}
+
+	/**
+	 * TEST: judgment()
+	 */
+	public function test_judgment() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }
