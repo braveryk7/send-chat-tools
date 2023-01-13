@@ -36,7 +36,7 @@ class SctPhpverJudgeTest extends PHPUnit\Framework\TestCase {
 	 * TEST: judgment()
 	 */
 	public function test_judgment() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+		$this->assertGreaterThanOrEqual( Sct_Base::get_required_php_version(), PHP_VERSION );
 	}
 
 	/**
