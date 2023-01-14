@@ -48,8 +48,31 @@ class SctPhpverJudgeTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * TEST: deactivate_message()
+	 *
+	 * @testWith [ "Send Chat Tools", "7.3.0" ]
+	 *           [ "Admin Bar Tools", "8.0" ]
+	 *
+	 * @param string $project Project name.
+	 * @param string $version PHP version.
 	 */
-	public function test_deactivate_message() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+	public function test_deactivate_message( $project, $version ) {
+		$messages = [
+			'header'  => sprintf(
+				'[Plugin error] %s has been stopped because the PHP version is old.',
+				$project,
+			),
+			'require' => sprintf(
+				'%1$s requires at least PHP %2$s or later.',
+				$project,
+				$version,
+			),
+			'upgrade' => 'Please upgrade PHP.',
+			'current' => 'Current PHP version:',
+		];
+
+		$this->assertSame(
+			$messages,
+			$this->instance->deactivate_message( $project, $version ),
+		);
 	}
 }
