@@ -101,7 +101,20 @@ class SctSlackBlocksTest extends PHPUnit\Framework\TestCase {
 	 * TEST: context()
 	 */
 	public function test_context() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+		$type = 'mrkdwn';
+		$text = 'test message';
+
+		$context = [
+			'type'     => 'context',
+			'elements' => [
+				[
+					'type' => $type,
+					'text' => $text,
+				],
+			],
+		];
+
+		$this->assertSame( $context, $this->instance->context( $type, $text ) );
 	}
 
 	/**
