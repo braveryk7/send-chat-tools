@@ -74,14 +74,47 @@ class SctSlackBlocksTest extends PHPUnit\Framework\TestCase {
 	 * TEST: two_column()
 	 */
 	public function test_two_column() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+		$content1st = [
+			'mrkdwn',
+			'test_message',
+		];
+		$content2nd = $content1st;
+
+		$column = [
+			'type'   => 'section',
+			'fields' => [
+				[
+					'type' => $content1st[0],
+					'text' => $content1st[1],
+				],
+				[
+					'type' => $content2nd[0],
+					'text' => $content2nd[1],
+				],
+			],
+		];
+
+		$this->assertSame( $column, $this->instance->two_column( $content1st, $content2nd ) );
 	}
 
 	/**
 	 * TEST: context()
 	 */
 	public function test_context() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+		$type = 'mrkdwn';
+		$text = 'test message';
+
+		$context = [
+			'type'     => 'context',
+			'elements' => [
+				[
+					'type' => $type,
+					'text' => $text,
+				],
+			],
+		];
+
+		$this->assertSame( $context, $this->instance->context( $type, $text ) );
 	}
 
 	/**
