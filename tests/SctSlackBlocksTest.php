@@ -36,7 +36,20 @@ class SctSlackBlocksTest extends PHPUnit\Framework\TestCase {
 	 * TEST: header()
 	 */
 	public function test_header() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+		$type  = 'plain_text';
+		$text  = 'test message';
+		$emoji = true;
+
+		$header = [
+			'type' => 'header',
+			'text' => [
+				'type'  => $type,
+				'text'  => $text,
+				'emoji' => $emoji,
+			],
+		];
+
+		$this->assertSame( $header, $this->instance->header( $type, $text, $emoji ) );
 	}
 
 	/**
