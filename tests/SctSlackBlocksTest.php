@@ -56,7 +56,18 @@ class SctSlackBlocksTest extends PHPUnit\Framework\TestCase {
 	 * TEST: single_column()
 	 */
 	public function test_single_column() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+		$type = 'section';
+		$text = 'test message';
+
+		$column = [
+			'type' => 'section',
+			'text' => [
+				'type' => $type,
+				'text' => $text,
+			],
+		];
+
+		$this->assertSame( $column, $this->instance->single_column( $type, $text ) );
 	}
 
 	/**
