@@ -107,7 +107,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: create_context()
+	 * TEST: make_context()
 	 *
 	 * @testWith [ "slack" ]
 	 *           [ "discord" ]
@@ -115,8 +115,8 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	 *
 	 * @param string $tool_name Chat tool name.
 	 */
-	public function test_create_context( string $tool_name ) {
-		$method = new ReflectionMethod( $this->instance, 'create_context' );
+	public function test_make_context( string $tool_name ) {
+		$method = new ReflectionMethod( $this->instance, 'make_context' );
 		$method->setAccessible( true );
 
 		$message = [
