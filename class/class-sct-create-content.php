@@ -189,7 +189,7 @@ class Sct_Create_Content extends Sct_Base {
 			$comment_content  = '*' . $this->get_send_text( 'comment', 'content' ) . "*\n{$comment->comment_content}";
 			$comment_url      = '*' . $this->get_send_text( 'comment', 'url' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
 			$comment_statuses = '*' . $this->get_send_text( 'comment', 'status' ) . "*\n{$comment_status}";
-			$context          = $this->create_context( $tool );
+			$context          = $this->make_context( $tool );
 
 			$blocks  = new Sct_Slack_Blocks();
 			$message = [
@@ -214,7 +214,7 @@ class Sct_Create_Content extends Sct_Base {
 				$this->get_send_text( 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
 				$this->get_send_text( 'comment', 'url' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
 				$this->get_send_text( 'comment', 'status' ) . $comment_status . "\n\n" .
-				$this->create_context( $tool );
+				$this->make_context( $tool );
 		} elseif ( 'chatwork' === $tool ) {
 			$message = [
 				'body' =>
@@ -226,7 +226,7 @@ class Sct_Create_Content extends Sct_Base {
 					$this->get_send_text( 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
 					'[hr]' .
 					$this->get_send_text( 'comment', 'status' ) . $comment_status .
-					'[hr]' . $this->create_context( $tool ) .
+					'[hr]' . $this->make_context( $tool ) .
 					'[/info]',
 			];
 		}
@@ -273,7 +273,7 @@ class Sct_Create_Content extends Sct_Base {
 			$header_emoji   = ':zap:';
 			$header_message = "{$header_emoji} {$site_name}({$site_url})" . $update_title;
 			$update_message = $update_text . "\n" . $update_page . "<{$admin_url}>";
-			$context        = $this->create_context( $tool );
+			$context        = $this->make_context( $tool );
 
 			$blocks  = new Sct_Slack_Blocks();
 			$message = [
@@ -326,7 +326,7 @@ class Sct_Create_Content extends Sct_Base {
 			$message =
 				$site_name . '( <' . $site_url . '> )' . $update_title . "\n\n" .
 				$core . $themes . $plugins . $update_text . "\n" . $update_page . '<' . $admin_url . '>' . "\n\n" .
-				$this->create_context( $tool );
+				$this->make_context( $tool );
 		} elseif ( 'chatwork' === $tool ) {
 			isset( $core ) ? $core       = $core . '[hr]' : $core;
 			isset( $themes ) ? $themes   = $themes . '[hr]' : $themes;
@@ -336,7 +336,7 @@ class Sct_Create_Content extends Sct_Base {
 				'body' =>
 					'[info][title]' . $site_name . '( ' . $site_url . ' )' . $update_title . '[/title]' .
 					$core . $themes . $plugins . $update_text . "\n" . $update_page . $admin_url . "\n\n" .
-					$this->create_context( $tool ) .
+					$this->make_context( $tool ) .
 					'[/info]',
 			];
 		}
@@ -384,7 +384,7 @@ class Sct_Create_Content extends Sct_Base {
 				$header_emoji   = ':tada:';
 				$header_message = "{$header_emoji} {$site_name}({$site_url}) " . $message_title;
 
-				$context = $this->create_context( $tool );
+				$context = $this->make_context( $tool );
 
 				$blocks  = new Sct_Slack_Blocks();
 				$message = [
@@ -446,7 +446,7 @@ class Sct_Create_Content extends Sct_Base {
 				$website      = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
 				$update_page  = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
 				$ignore       = "\n" . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $update_message['key'] . "\n";
-				$message      = $title . $main_content . $website . $update_page . $ignore . "\n" . $this->create_context( $tool );
+				$message      = $title . $main_content . $website . $update_page . $ignore . "\n" . $this->make_context( $tool );
 			} elseif ( 'chatwork' === $tool ) {
 				$website     = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url . "\n" : null;
 				$update_page = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url . "\n" : null;
@@ -456,7 +456,7 @@ class Sct_Create_Content extends Sct_Base {
 						$developer_message . "\n" .
 						$website . $update_page .
 						'[hr]' . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $update_message['key'] .
-						$this->create_context( $tool ) .
+						$this->make_context( $tool ) .
 						'[/info]',
 				];
 			}
