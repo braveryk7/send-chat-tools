@@ -545,7 +545,7 @@ class Sct_Create_Content extends Sct_Base {
 	 *
 	 * @param string $tool_name Tool name.
 	 */
-	private function create_context( string $tool_name ): string {
+	private function make_context( string $tool_name ): string {
 		$message = [
 			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
 			1 => esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ),
