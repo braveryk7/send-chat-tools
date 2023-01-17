@@ -83,9 +83,20 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * TEST: get_send_text()
+	 *
+	 * @testWith [ "comment", "title", "new comment has been posted." ]
+	 *           [ "update", "page", "Update Page:" ]
+	 *           [ "dev_notify", "detail", "Update details" ]
+	 *
+	 * @param string $type Message type.
+	 * @param string $param Message content.
+	 * @param string $expected Expected value.
 	 */
-	public function test_get_send_text() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+	public function test_get_send_text( $type, $param, $expected ) {
+		$method = new ReflectionMethod( $this->instance, 'get_send_text' );
+		$method->setAccessible( true );
+
+		$this->assertSame( $expected, $method->invoke( $this->instance, $type, $param ), );
 	}
 
 	/**
