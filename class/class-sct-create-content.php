@@ -546,32 +546,24 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $tool_name Tool name.
 	 */
 	private function create_context( string $tool_name ): string {
-		$context = '';
 		$message = [
 			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
 			1 => esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ),
 			2 => esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ),
 		];
 
+		$wordpress_directory = 'https://wordpress.org/plugins/send-chat-tools/';
+		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
+
 		switch ( $tool_name ) {
 			case 'slack':
-				$context =
-					$message[0] . "\n" .
-					'<https://wordpress.org/plugins/send-chat-tools/|' . $message[1] . '> / ' .
-					'<https://www.braveryk7.com/portfolio/send-chat-tools/|' . $message[2] . '>';
+				$context = $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>';
 				break;
 			case 'discord':
-				$context =
-					$message[0] . "\n" .
-					$message[1] . ' <https://wordpress.org/plugins/send-chat-tools/>' . "\n" .
-					$message[2] . ' <https://www.braveryk7.com/portfolio/send-chat-tools/>';
+				$context = $message[0] . "\n" . $message[1] . ' <' . $wordpress_directory . '>' . "\n" . $message[2] . ' <' . $official_web_site . '>';
 				break;
 			case 'chatwork':
-				$context =
-					'[hr]' .
-					$message[0] . "\n" .
-					$message[1] . ' https://wordpress.org/plugins/send-chat-tools/' . "\n" .
-					$message[2] . ' https://www.braveryk7.com/portfolio/send-chat-tools/';
+				$context = '[hr]' . $message[0] . "\n" . $message[1] . ' ' . $wordpress_directory . "\n" . $message[2] . ' ' . $official_web_site;
 				break;
 		}
 
