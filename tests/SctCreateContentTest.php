@@ -165,7 +165,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 		$admin_url = 'https://expamle.com/';
 
 		return [
-			[
+			'Comment status is Approved' => [
 				'slack',
 				$comment,
 				'Approved',
