@@ -15,6 +15,10 @@ function add_action() {
 	return true;
 }
 
+function admin_url(): string {
+	return 'https://expamle.com/';
+}
+
 function do_action() {
 	return true;
 }
