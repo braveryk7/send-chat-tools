@@ -154,15 +154,36 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 		$comment->comment_ID       = '123';
 		$comment->comment_approved = '1';
 
+		$comment_pending                   = new stdClass();
+		$comment_pending->comment_ID       = '123';
+		$comment_pending->comment_approved = '0';
+
 		$comment_spam                   = new stdClass();
 		$comment_spam->comment_ID       = '123';
 		$comment_spam->comment_approved = 'spam';
+
+		$admin_url = 'https://expamle.com/';
 
 		return [
 			[
 				'slack',
 				$comment,
 				'Approved',
+			],
+			[
+				'slack',
+				$comment_pending,
+				'Unapproved<<' . $admin_url . 'comment.php?action=approve&c=' . $comment_pending->comment_ID . '|Click here to approve>>',
+			],
+			[
+				'discord',
+				$comment_pending,
+				'Unapproved >> Click here to approve( ' . $admin_url . 'comment.php?action=approve&c=' . $comment_pending->comment_ID . ' )',
+			],
+			[
+				'chatwork',
+				$comment_pending,
+				'Unapproved' . "\n" . 'Click here to approve ' . $admin_url . 'comment.php?action=approve&c=' . $comment_pending->comment_ID,
 			],
 			[
 				'spam',
