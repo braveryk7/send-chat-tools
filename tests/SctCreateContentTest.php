@@ -107,9 +107,33 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: create_context()
+	 * TEST: make_context()
+	 *
+	 * @testWith [ "slack" ]
+	 *           [ "discord" ]
+	 *           [ "chatwork" ]
+	 *
+	 * @param string $tool_name Chat tool name.
 	 */
-	public function test_create_context() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+	public function test_make_context( string $tool_name ) {
+		$method = new ReflectionMethod( $this->instance, 'make_context' );
+		$method->setAccessible( true );
+
+		$message = [
+			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
+			1 => esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ),
+			2 => esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ),
+		];
+
+		$wordpress_directory = 'https://wordpress.org/plugins/send-chat-tools/';
+		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
+
+		$context = match ( $tool_name ) {
+			'slack'    => $message[0] . "\n<" . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>',
+			'discord'  => $message[0] . "\n" . $message[1] . ' <' . $wordpress_directory . '>' . "\n" . $message[2] . ' <' . $official_web_site . '>',
+			'chatwork' => '[hr]' . $message[0] . "\n" . $message[1] . ' ' . $wordpress_directory . "\n" . $message[2] . ' ' . $official_web_site,
+		};
+
+		$this->assertSame( $context, $method->invoke( $this->instance, $tool_name, ), );
 	}
 }
