@@ -185,7 +185,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 				$comment_pending,
 				'Unapproved' . "\n" . 'Click here to approve ' . $admin_url . 'comment.php?action=approve&c=' . $comment_pending->comment_ID,
 			],
-			[
+			'Comment status is spam'     => [
 				'spam',
 				$comment_spam,
 				'Spam',
