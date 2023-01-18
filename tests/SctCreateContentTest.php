@@ -100,9 +100,9 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: get_comment_approved_message()
+	 * TEST: make_comment_approved_message()
 	 */
-	public function test_get_comment_approved_message() {
+	public function test_make_comment_approved_message() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
 
