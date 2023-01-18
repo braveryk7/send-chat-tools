@@ -145,4 +145,21 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 
 		$this->assertSame( $context, $method->invoke( $this->instance, $tool_name, ), );
 	}
+
+	/**
+	 * TEST: make_comment_approved_message
+	 */
+	public function make_comment_approved_message_parameters() {
+		$comment                   = new stdClass();
+		$comment->comment_ID       = '123';
+		$comment->comment_approved = '1';
+
+		return [
+			[
+				'slack',
+				$comment,
+				'Approved',
+			],
+		];
+	}
 }
