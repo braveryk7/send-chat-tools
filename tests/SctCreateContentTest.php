@@ -165,12 +165,12 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 		$admin_url = 'https://expamle.com/';
 
 		return [
-			'Comment status is Approved' => [
+			'Comment status is Approved'              => [
 				'slack',
 				$comment,
 				'Approved',
 			],
-			[
+			'Comment status is unapproved with slack' => [
 				'slack',
 				$comment_pending,
 				'Unapproved<<' . $admin_url . 'comment.php?action=approve&c=' . $comment_pending->comment_ID . '|Click here to approve>>',
@@ -185,7 +185,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 				$comment_pending,
 				'Unapproved' . "\n" . 'Click here to approve ' . $admin_url . 'comment.php?action=approve&c=' . $comment_pending->comment_ID,
 			],
-			'Comment status is spam'     => [
+			'Comment status is spam'                  => [
 				'spam',
 				$comment_spam,
 				'Spam',
