@@ -178,7 +178,7 @@ class Sct_Create_Content extends Sct_Base {
 		$site_url       = get_bloginfo( 'url' );
 		$article_title  = get_the_title( $comment->comment_post_ID );
 		$article_url    = get_permalink( $comment->comment_post_ID );
-		$comment_status = $this->get_comment_approved_message( $tool, $comment );
+		$comment_status = $this->make_comment_approved_message( $tool, $comment );
 
 		if ( 'slack' === $tool ) {
 			$header_emoji     = ':mailbox_with_mail:';
