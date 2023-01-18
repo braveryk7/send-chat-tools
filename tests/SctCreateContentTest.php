@@ -154,11 +154,20 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 		$comment->comment_ID       = '123';
 		$comment->comment_approved = '1';
 
+		$comment_spam                   = new stdClass();
+		$comment_spam->comment_ID       = '123';
+		$comment_spam->comment_approved = 'spam';
+
 		return [
 			[
 				'slack',
 				$comment,
 				'Approved',
+			],
+			[
+				'spam',
+				$comment_spam,
+				'Spam',
 			],
 		];
 	}
