@@ -101,9 +101,18 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * TEST: make_comment_approved_message()
+	 *
+	 * @dataProvider make_comment_approved_message_parameters
+	 *
+	 * @param string $tool_name Chat tool name.
+	 * @param object $comment WordPress comment date.
+	 * @param string $expected Expected value.
 	 */
-	public function test_make_comment_approved_message() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+	public function test_make_comment_approved_message( string $tool_name, object $comment, string $expected ) {
+		$method = new ReflectionMethod( $this->instance, 'make_comment_approved_message' );
+		$method->setAccessible( true );
+
+		$this->assertSame( $expected, $method->invoke( $this->instance, $tool_name, $comment ) );
 	}
 
 	/**
