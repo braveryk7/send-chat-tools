@@ -150,6 +150,8 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	 * TEST: make_comment_approved_message
 	 */
 	public function make_comment_approved_message_parameters() {
+		require_once './tests/lib/wordpress-functions.php';
+
 		$comment                   = new stdClass();
 		$comment->comment_ID       = '123';
 		$comment->comment_approved = '1';
@@ -162,7 +164,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 		$comment_spam->comment_ID       = '123';
 		$comment_spam->comment_approved = 'spam';
 
-		$admin_url    = 'https://expamle.com/';
+		$admin_url    = admin_url();
 		$approved_url = $admin_url . 'comment.php?action=approve&c=';
 		$unapproved   = 'Unapproved';
 		$click        = 'Click here to approve';
