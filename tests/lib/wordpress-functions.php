@@ -26,6 +26,10 @@ function get_bloginfo( $show ) {
 	};
 }
 
+function get_permalink( $id ) {
+	return 'https://www.example.com/my-post';
+}
+
 function get_the_title( $id ) {
 	return 'Test article';
 }
