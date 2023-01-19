@@ -100,10 +100,19 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: get_comment_approved_message()
+	 * TEST: make_comment_approved_message()
+	 *
+	 * @dataProvider make_comment_approved_message_parameters
+	 *
+	 * @param string $tool_name Chat tool name.
+	 * @param object $comment WordPress comment date.
+	 * @param string $expected Expected value.
 	 */
-	public function test_get_comment_approved_message() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+	public function test_make_comment_approved_message( string $tool_name, object $comment, string $expected ) {
+		$method = new ReflectionMethod( $this->instance, 'make_comment_approved_message' );
+		$method->setAccessible( true );
+
+		$this->assertSame( $expected, $method->invoke( $this->instance, $tool_name, $comment ) );
 	}
 
 	/**
@@ -135,5 +144,57 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 		};
 
 		$this->assertSame( $context, $method->invoke( $this->instance, $tool_name, ), );
+	}
+
+	/**
+	 * TEST: make_comment_approved_message
+	 */
+	public function make_comment_approved_message_parameters() {
+		require_once './tests/lib/wordpress-functions.php';
+
+		$comment                   = new stdClass();
+		$comment->comment_ID       = '123';
+		$comment->comment_approved = '1';
+
+		$comment_pending                   = new stdClass();
+		$comment_pending->comment_ID       = '123';
+		$comment_pending->comment_approved = '0';
+
+		$comment_spam                   = new stdClass();
+		$comment_spam->comment_ID       = '123';
+		$comment_spam->comment_approved = 'spam';
+
+		$admin_url    = admin_url();
+		$approved_url = $admin_url . 'comment.php?action=approve&c=';
+		$unapproved   = 'Unapproved';
+		$click        = 'Click here to approve';
+
+		return [
+			'Comment status is Approved'                 => [
+				'slack',
+				$comment,
+				'Approved',
+			],
+			'Comment status is unapproved with slack'    => [
+				'slack',
+				$comment_pending,
+				$unapproved . '<<' . $approved_url . $comment_pending->comment_ID . '|' . $click . '>>',
+			],
+			'Comment status is unapproved with discord'  => [
+				'discord',
+				$comment_pending,
+				$unapproved . ' >> ' . $click . '( ' . $approved_url . $comment_pending->comment_ID . ' )',
+			],
+			'Comment status is unapproved with chatwork' => [
+				'chatwork',
+				$comment_pending,
+				$unapproved . "\n" . $click . ' ' . $approved_url . $comment_pending->comment_ID,
+			],
+			'Comment status is spam'                     => [
+				'spam',
+				$comment_spam,
+				'Spam',
+			],
+		];
 	}
 }

@@ -178,7 +178,7 @@ class Sct_Create_Content extends Sct_Base {
 		$site_url       = get_bloginfo( 'url' );
 		$article_title  = get_the_title( $comment->comment_post_ID );
 		$article_url    = get_permalink( $comment->comment_post_ID );
-		$comment_status = $this->get_comment_approved_message( $tool, $comment );
+		$comment_status = $this->make_comment_approved_message( $tool, $comment );
 
 		if ( 'slack' === $tool ) {
 			$header_emoji     = ':mailbox_with_mail:';
@@ -509,7 +509,7 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $tool_name Tool name.
 	 * @param object $comment   Comment data.
 	 */
-	private function get_comment_approved_message( string $tool_name, object $comment ): string {
+	private function make_comment_approved_message( string $tool_name, object $comment ): string {
 		$comment_status = '';
 		$approved_url   = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
 		$unapproved     = $this->get_send_text( 'comment', 'unapproved' );
