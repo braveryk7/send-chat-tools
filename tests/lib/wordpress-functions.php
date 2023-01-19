@@ -26,6 +26,10 @@ function get_bloginfo( $show ) {
 	};
 }
 
+function get_the_title( $id ) {
+	return 'Test article';
+}
+
 function do_action() {
 	return true;
 }
