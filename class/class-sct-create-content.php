@@ -173,7 +173,7 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $tool    Tool name.
 	 * @param object $comment Comment data.
 	 */
-	private function create_comment_message( string $tool, object $comment ) {
+	private function make_comment_message( string $tool, object $comment ) {
 		$site_name      = get_bloginfo( 'name' );
 		$site_url       = get_bloginfo( 'url' );
 		$article_title  = get_the_title( $comment->comment_post_ID );
