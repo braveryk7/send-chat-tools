@@ -225,6 +225,35 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: create_comment_message()
+	 */
+	public function create_comment_message_parameters() {
+		$comment                       = new stdClass();
+		$comment->comment_post_ID      = '123';
+		$comment->comment_ID           = '111';
+		$comment->comment_approved     = '1';
+		$comment->comment_author       = 'test author';
+		$comment->comment_author_email = 'test@example.com';
+		$comment->comment_date         = '';
+		$comment->comment_content      = '';
+
+		return [
+			'With Slack'    => [
+				'slack',
+				$comment,
+			],
+			'With Discord'  => [
+				'discord',
+				$comment,
+			],
+			'With Chatwork' => [
+				'chatwork',
+				$comment,
+			],
+		];
+	}
+
+	/**
 	 * TEST: make_comment_approved_message
 	 */
 	public function make_comment_approved_message_parameters() {
