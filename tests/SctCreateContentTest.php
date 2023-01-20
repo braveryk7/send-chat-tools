@@ -61,14 +61,14 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: create_comment_message()
+	 * TEST: make_comment_message()
 	 *
 	 * @dataProvider create_comment_message_parameters
 	 *
 	 * @param string $tool    Chat tool name.
 	 * @param object $comment Comment data.
 	 */
-	public function test_create_comment_message( string $tool, object $comment ) {
+	public function test_make_comment_message( string $tool, object $comment ) {
 		$method = new ReflectionMethod( $this->instance, 'create_comment_message' );
 		$method->setAccessible( true );
 
