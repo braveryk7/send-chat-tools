@@ -69,7 +69,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	 * @param object $comment Comment data.
 	 */
 	public function test_make_comment_message( string $tool, object $comment ) {
-		$method = new ReflectionMethod( $this->instance, 'create_comment_message' );
+		$method = new ReflectionMethod( $this->instance, 'make_comment_message' );
 		$method->setAccessible( true );
 
 		$get_send_text = new ReflectionMethod( $this->instance, 'get_send_text' );
