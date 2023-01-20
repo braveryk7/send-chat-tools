@@ -256,7 +256,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: make_comment_approved_message
 	 */
-	public function make_comment_approved_message_parameters() {
+	public function make_comment_approved_message_parameters(): array {
 		require_once './tests/lib/wordpress-functions.php';
 
 		$comment                   = new stdClass();
