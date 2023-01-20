@@ -132,7 +132,7 @@ class Sct_Create_Content extends Sct_Base {
 		$message = [];
 		switch ( $type ) {
 			case 'comment':
-				$message = $this->create_comment_message( $tool, $comment );
+				$message = $this->make_comment_message( $tool, $comment );
 				break;
 			case 'update':
 				$message = $this->create_update_message( $tool, $update_content );
