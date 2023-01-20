@@ -170,7 +170,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	 * @param string $param Message content.
 	 * @param string $expected Expected value.
 	 */
-	public function test_get_send_text( $type, $param, $expected ) {
+	public function test_get_send_text( $type, $param, $expected ): void {
 		$method = new ReflectionMethod( $this->instance, 'get_send_text' );
 		$method->setAccessible( true );
 
