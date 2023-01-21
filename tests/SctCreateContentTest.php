@@ -48,9 +48,19 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 
 	/**
 	 * TEST: get_comment_data()
+	 *
+	 * @testWith [ 1, 1 ]
+	 *           [ 100, 100 ]
+	 *           [ 2800, 2800 ]
+	 *
+	 * @param int $comment_id Comment->comment_ID.
+	 * @param int $expected Expected value.
 	 */
-	public function test_get_comment_data() {
-		$this->markTestIncomplete( 'This test is incomplete.' );
+	public function test_get_comment_data( int $comment_id, int $expected ): void {
+		$method = new ReflectionMethod( $this->instance, 'get_comment_data' );
+		$method->setAccessible( true );
+
+		$this->assertSame( $expected, $method->invoke( $this->instance, $comment_id )->comment_ID, );
 	}
 
 	/**
