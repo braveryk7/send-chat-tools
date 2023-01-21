@@ -247,9 +247,6 @@ class Sct_Create_Content extends Sct_Base {
 		$update_title = $this->get_send_text( 'update', 'title' );
 		$update_text  = $this->get_send_text( 'update', 'update' );
 		$update_page  = $this->get_send_text( 'update', 'page' );
-		$add_core;
-		$add_themes;
-		$add_plugins;
 
 		foreach ( $update_content as $key => $value ) {
 			switch ( $value['attribute'] ) {
