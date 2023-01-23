@@ -151,7 +151,7 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 
 		$this->assertSame(
 			'https://wordpress.org/plugins/send-chat-tools/',
-			$method->invoke( $this->instance() ),
+			$method->invoke( $this->instance ),
 		);
 	}
 
