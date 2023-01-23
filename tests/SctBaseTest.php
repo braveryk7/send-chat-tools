@@ -143,10 +143,10 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: get_plugin_direcotyr()
+	 * TEST: get_official_directory()
 	 */
-	public function test_get_plugin_directory() {
-		$method = new ReflectionMethod( $this->instance, 'get_plugin_direcotyr' );
+	public function test_get_official_directory() {
+		$method = new ReflectionMethod( $this->instance, 'get_official_directory' );
 		$method->setAccessible( true );
 
 		$this->assertSame(
