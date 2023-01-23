@@ -197,6 +197,13 @@ class Sct_Base {
 	}
 
 	/**
+	 * Get WordPress official directory url
+	 */
+	protected function get_official_directory() {
+		return self::OFFICIAL_DIRECTORY;
+	}
+
+	/**
 	 * Get WP-cron event name.
 	 */
 	public function get_wpcron_event_name(): string {
