@@ -27,6 +27,7 @@ class Sct_Base {
 	protected const VERSION              = '1.3.0';
 	protected const OPTIONS_COLUMN_NAME  = 'options';
 	protected const REQUIRED_PHP_VERSION = '7.3.0';
+	protected const OFFICIAL_DIRECTORY   = 'https://wordpress.org/plugins/' . self::PLUGIN_SLUG . '/';
 
 	protected const TABLE_NAME = self::PREFIX;
 
