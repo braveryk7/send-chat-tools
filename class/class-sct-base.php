@@ -153,7 +153,7 @@ class Sct_Base {
 	 * @param string $api_version Plugin API version.
 	 */
 	protected function get_api_namespace( string $api_name = self::API_NAME, string $api_version = self::API_VERSION ) {
-		return "${api_name}/${api_version}";
+		return "{$api_name}/{$api_version}";
 	}
 
 	/**
