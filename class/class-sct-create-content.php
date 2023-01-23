@@ -549,7 +549,7 @@ class Sct_Create_Content extends Sct_Base {
 			2 => esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ),
 		];
 
-		$wordpress_directory = 'https://wordpress.org/plugins/send-chat-tools/';
+		$wordpress_directory = $this->get_official_directory();
 		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
 
 		switch ( $tool_name ) {
