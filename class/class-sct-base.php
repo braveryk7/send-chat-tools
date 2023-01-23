@@ -27,6 +27,7 @@ class Sct_Base {
 	protected const VERSION              = '1.3.0';
 	protected const OPTIONS_COLUMN_NAME  = 'options';
 	protected const REQUIRED_PHP_VERSION = '7.3.0';
+	protected const OFFICIAL_DIRECTORY   = 'https://wordpress.org/plugins/' . self::PLUGIN_SLUG . '/';
 
 	protected const TABLE_NAME = self::PREFIX;
 
@@ -193,6 +194,13 @@ class Sct_Base {
 	 */
 	public static function get_required_php_version(): string {
 		return self::REQUIRED_PHP_VERSION;
+	}
+
+	/**
+	 * Get WordPress official directory url
+	 */
+	protected function get_official_directory() {
+		return self::OFFICIAL_DIRECTORY;
 	}
 
 	/**

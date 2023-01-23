@@ -143,6 +143,19 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: get_official_directory()
+	 */
+	public function test_get_official_directory() {
+		$method = new ReflectionMethod( $this->instance, 'get_official_directory' );
+		$method->setAccessible( true );
+
+		$this->assertSame(
+			'https://wordpress.org/plugins/send-chat-tools/',
+			$method->invoke( $this->instance ),
+		);
+	}
+
+	/**
 	 * TEST: get_wpcron_event_name()
 	 */
 	public function test_get_wpcron_event_name() {
