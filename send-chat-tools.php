@@ -28,11 +28,11 @@ require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
 
 if ( empty( $get_php_version_bool ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-Sct-phpver-judge.php';
-	$get_php_version_bool = new Sct_Phpver_Judge();
+	$sct_phpver_judge = new Sct_Phpver_Judge();
 }
 
-if ( ! $get_php_version_bool->judgment( Sct_Base::get_required_php_version() ) ) {
-	$get_php_version_bool->deactivate(
+if ( ! $sct_phpver_judge->judgment( Sct_Base::get_required_php_version() ) ) {
+	$sct_phpver_judge->deactivate(
 		__FILE__,
 		Sct_Base::get_plugin_name(),
 		Sct_Base::get_required_php_version()
