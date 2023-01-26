@@ -26,10 +26,8 @@ load_plugin_textdomain( 'send-chat-tools', false, basename( dirname( __FILE__ ) 
 
 require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
 
-if ( empty( $get_php_version_bool ) ) {
-	require_once dirname( __FILE__ ) . '/class/class-Sct-phpver-judge.php';
-	$sct_phpver_judge = new Sct_Phpver_Judge();
-}
+require_once dirname( __FILE__ ) . '/class/class-Sct-phpver-judge.php';
+$sct_phpver_judge = new Sct_Phpver_Judge();
 
 if ( ! $sct_phpver_judge->judgment( Sct_Base::get_required_php_version() ) ) {
 	$sct_phpver_judge->deactivate(
