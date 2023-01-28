@@ -251,13 +251,13 @@ class Sct_Create_Content extends Sct_Base {
 		foreach ( $update_content as $key => $value ) {
 			switch ( $value['attribute'] ) {
 				case 'core':
-					$add_core .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+					$add_core = '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
 					break;
 				case 'theme':
-					$add_themes .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+					$add_themes = '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
 					break;
 				case 'plugin':
-					$add_plugins .= '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
+					$add_plugins = '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
 					break;
 			}
 		};
