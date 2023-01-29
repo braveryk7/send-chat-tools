@@ -64,7 +64,7 @@ class Sct_Activate extends Sct_Base {
 	/**
 	 * Send Chat Tools option key check.
 	 */
-	public function option_check() {
+	public function option_check(): void {
 		$sct_options = $this->get_sct_options();
 
 		if ( self::VERSION !== $sct_options['version'] ) {
