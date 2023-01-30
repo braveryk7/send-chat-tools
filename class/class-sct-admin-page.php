@@ -72,7 +72,7 @@ class Sct_Admin_Page extends Sct_Base {
 	 *
 	 * @param string $hook_shuffix WordPress hook_shuffix.
 	 */
-	public function add_scripts( string $hook_shuffix ) {
+	public function add_scripts( string $hook_shuffix ): void {
 		if ( 'settings_page_' . self::PLUGIN_SLUG !== $hook_shuffix ) {
 			return;
 		}
@@ -104,7 +104,7 @@ class Sct_Admin_Page extends Sct_Base {
 	/**
 	 * Create custom endpoint.
 	 */
-	public function register_rest_api() {
+	public function register_rest_api(): void {
 		register_rest_route(
 			$this->get_api_namespace(),
 			'/options',
@@ -184,7 +184,7 @@ class Sct_Admin_Page extends Sct_Base {
 	 * Update user ONLY!!
 	 * Old settings page redirect to settings_page().
 	 */
-	public function old_settings_page() {
+	public function old_settings_page(): void {
 		$url = admin_url() . 'options-general.php?page=send-chat-tools';
 		echo "<script>location.href='${url}';</script>"; //phpcs:ignore
 	}
