@@ -184,7 +184,7 @@ class Sct_Admin_Page extends Sct_Base {
 	 * Update user ONLY!!
 	 * Old settings page redirect to settings_page().
 	 */
-	public function old_settings_page() {
+	public function old_settings_page(): void {
 		$url = admin_url() . 'options-general.php?page=send-chat-tools';
 		echo "<script>location.href='${url}';</script>"; //phpcs:ignore
 	}
