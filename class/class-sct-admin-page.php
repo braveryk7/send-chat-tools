@@ -72,7 +72,7 @@ class Sct_Admin_Page extends Sct_Base {
 	 *
 	 * @param string $hook_shuffix WordPress hook_shuffix.
 	 */
-	public function add_scripts( string $hook_shuffix ) {
+	public function add_scripts( string $hook_shuffix ): void {
 		if ( 'settings_page_' . self::PLUGIN_SLUG !== $hook_shuffix ) {
 			return;
 		}
