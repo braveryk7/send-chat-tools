@@ -104,7 +104,7 @@ class Sct_Admin_Page extends Sct_Base {
 	/**
 	 * Create custom endpoint.
 	 */
-	public function register_rest_api() {
+	public function register_rest_api(): void {
 		register_rest_route(
 			$this->get_api_namespace(),
 			'/options',
