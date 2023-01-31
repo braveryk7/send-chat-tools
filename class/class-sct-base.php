@@ -199,7 +199,7 @@ class Sct_Base {
 	/**
 	 * Get WordPress official directory url
 	 */
-	protected function get_official_directory() {
+	protected function get_official_directory(): string {
 		return self::OFFICIAL_DIRECTORY;
 	}
 
