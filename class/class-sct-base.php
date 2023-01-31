@@ -152,7 +152,7 @@ class Sct_Base {
 	 * @param string $api_name    Plugin unique name.
 	 * @param string $api_version Plugin API version.
 	 */
-	protected function get_api_namespace( string $api_name = self::API_NAME, string $api_version = self::API_VERSION ) {
+	protected function get_api_namespace( string $api_name = self::API_NAME, string $api_version = self::API_VERSION ): string {
 		return "{$api_name}/{$api_version}";
 	}
 
@@ -199,7 +199,7 @@ class Sct_Base {
 	/**
 	 * Get WordPress official directory url
 	 */
-	protected function get_official_directory() {
+	protected function get_official_directory(): string {
 		return self::OFFICIAL_DIRECTORY;
 	}
 
@@ -334,7 +334,7 @@ class Sct_Base {
 	 * @param string $tool tool name.
 	 * @param string $value Webhook_url, Api token, room ID.
 	 */
-	protected function api_regex( string $tool, string $value ) {
+	protected function api_regex( string $tool, string $value ): bool {
 		$pattern = '';
 
 		switch ( $tool ) {
