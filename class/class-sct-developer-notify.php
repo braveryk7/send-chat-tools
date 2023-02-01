@@ -28,7 +28,7 @@ class Sct_Developer_Notify extends Sct_Base {
 	/**
 	 * Developer notify hook, process.
 	 */
-	public function developer_notify() {
+	public function developer_notify(): void {
 		$developer_messages = apply_filters( 'sct_developer_notify', [] );
 
 		if ( $developer_messages && is_array( $developer_messages ) ) {
@@ -46,7 +46,7 @@ class Sct_Developer_Notify extends Sct_Base {
 	 *
 	 * @param array $developer_message Developer message.
 	 */
-	private function developer_message_controller( array $developer_message ) {
+	private function developer_message_controller( array $developer_message ): bool {
 		$kesy_check   = $this->developer_message_arraykeys_check( $developer_message );
 		$exist_check  = $this->developer_message_key_exists( $developer_message );
 		$url_check    = $this->developer_message_urls_regex( $developer_message );
