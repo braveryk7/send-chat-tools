@@ -40,7 +40,7 @@ class Sct_Dashboard_Notify extends Sct_Base {
 	/**
 	 * Dashboard message.
 	 */
-	public function dashboard_message() {
+	public function dashboard_message(): void {
 		foreach ( $this->get_developer_messages()['message'] as $value ) {
 			echo esc_html( $value ) . '<br>';
 		}
