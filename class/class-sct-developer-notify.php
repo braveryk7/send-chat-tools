@@ -28,7 +28,7 @@ class Sct_Developer_Notify extends Sct_Base {
 	/**
 	 * Developer notify hook, process.
 	 */
-	public function developer_notify() {
+	public function developer_notify(): void {
 		$developer_messages = apply_filters( 'sct_developer_notify', [] );
 
 		if ( $developer_messages && is_array( $developer_messages ) ) {
