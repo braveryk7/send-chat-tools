@@ -29,7 +29,7 @@ class Sct_Dashboard_Notify extends Sct_Base {
 	/**
 	 * Add dashboard.
 	 */
-	public function add_dashboard() {
+	public function add_dashboard(): void {
 		wp_add_dashboard_widget(
 			'sct-dashboard',
 			__( 'Notice from Send Chat Tools', 'send-chat-tools' ),
@@ -40,7 +40,7 @@ class Sct_Dashboard_Notify extends Sct_Base {
 	/**
 	 * Dashboard message.
 	 */
-	public function dashboard_message() {
+	public function dashboard_message(): void {
 		foreach ( $this->get_developer_messages()['message'] as $value ) {
 			echo esc_html( $value ) . '<br>';
 		}
