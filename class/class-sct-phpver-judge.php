@@ -34,7 +34,7 @@ class Sct_Phpver_Judge {
 	 * @param string $project Project name.
 	 * @param string $version PHP version.
 	 */
-	public function deactivate( string $path, string $project, string $version ) {
+	public function deactivate( string $path, string $project, string $version ): void {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		if ( is_plugin_active( plugin_basename( $path ) ) ) {
 			if ( is_admin() ) {
