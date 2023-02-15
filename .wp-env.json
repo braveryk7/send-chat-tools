@@ -3,5 +3,6 @@
 	"core": null,
 	"env": {},
 	"mappings": {},
-	"phpVersion": null
+	"phpVersion": null,
+	"plugins": [] 
 }
