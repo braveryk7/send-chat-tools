@@ -2,5 +2,6 @@
 	"config": {},
 	"core": null,
 	"env": {},
-	"mappings": {}
+	"mappings": {},
+	"phpVersion": null
 }
