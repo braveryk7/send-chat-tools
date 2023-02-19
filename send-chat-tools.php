@@ -16,6 +16,8 @@
  * @since 0.0.1
  */
 
+// test message.
+
 declare( strict_types = 1 );
 
 if ( ! defined( 'ABSPATH' ) ) {
