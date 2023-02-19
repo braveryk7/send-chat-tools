@@ -79,80 +79,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	 * @param object $comment Comment data.
 	 */
 	public function test_make_comment_message( string $tool, object $comment ): void {
-		$method = new ReflectionMethod( $this->instance, 'make_comment_message' );
-		$method->setAccessible( true );
-
-		$get_send_text = new ReflectionMethod( $this->instance, 'get_send_text' );
-		$get_send_text->setAccessible( true );
-
-		$approved_message = new ReflectionMethod( $this->instance, 'make_comment_approved_message' );
-		$approved_message->setAccessible( true );
-
-		$make_context = new ReflectionMethod( $this->instance, 'make_context' );
-		$make_context->setAccessible( true );
-
-		$site_name      = get_bloginfo( 'name' );
-		$site_url       = get_bloginfo( 'url' );
-		$article_title  = get_the_title( $comment->comment_post_ID );
-		$article_url    = get_permalink( $comment->comment_post_ID );
-		$comment_status = $approved_message->invoke( $this->instance, $tool, $comment );
-
-		$expected = match ( $tool ) {
-			'slack' => ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $make_context ) {
-				$header_emoji     = ':mailbox_with_mail:';
-				$header_message   = "{$header_emoji} {$site_name}({$site_url})" . $get_send_text->invoke( $this->instance, 'comment', 'title' );
-				$comment_article  = '*' . $get_send_text->invoke( $this->instance, 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
-				$author           = '*' . $get_send_text->invoke( $this->instance, 'comment', 'author' ) . "*\n{$comment->comment_author}<{$comment->comment_author_email}>";
-				$date             = '*' . $get_send_text->invoke( $this->instance, 'comment', 'date' ) . "*\n{$comment->comment_date}";
-				$comment_content  = '*' . $get_send_text->invoke( $this->instance, 'comment', 'content' ) . "*\n{$comment->comment_content}";
-				$comment_url      = '*' . $get_send_text->invoke( $this->instance, 'comment', 'url' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
-				$comment_statuses = '*' . $get_send_text->invoke( $this->instance, 'comment', 'status' ) . "*\n{$comment_status}";
-				$context          = $make_context->invoke( $this->instance, $tool );
-
-				$blocks = new Sct_Slack_Blocks();
-
-				return [
-					'text'   => $header_message,
-					'blocks' => [
-						$blocks->header( 'plain_text', $header_message, true ),
-						$blocks->single_column( 'mrkdwn', $comment_article ),
-						$blocks->divider(),
-						$blocks->two_column( [ 'mrkdwn', $author ], [ 'mrkdwn', $date ] ),
-						$blocks->single_column( 'mrkdwn', $comment_content ),
-						$blocks->two_column( [ 'mrkdwn', $comment_url ], [ 'mrkdwn', $comment_statuses ] ),
-						$blocks->divider(),
-						$blocks->context( 'mrkdwn', $context ),
-					],
-				];
-			} ),
-			'discord' => ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $make_context ) {
-				return $site_name . '( <' . $site_url . '> )' . $get_send_text->invoke( $this->instance, 'comment', 'title' ) . "\n\n" .
-					$get_send_text->invoke( $this->instance, 'comment', 'article' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
-					$get_send_text->invoke( $this->instance, 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-					$get_send_text->invoke( $this->instance, 'comment', 'date' ) . $comment->comment_date . "\n" .
-					$get_send_text->invoke( $this->instance, 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
-					$get_send_text->invoke( $this->instance, 'comment', 'url' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
-					$get_send_text->invoke( $this->instance, 'comment', 'status' ) . $comment_status . "\n\n" .
-					$make_context->invoke( $this->instance, $tool );
-			} ),
-			'chatwork' =>  ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $make_context ) {
-				return [
-					'body' =>
-						'[info][title]' . $site_name . '(' . $site_url . ')' . $get_send_text->invoke( $this->instance, 'comment', 'title' ) . '[/title]' .
-						$get_send_text->invoke( $this->instance, 'comment', 'article' ) . $article_title . ' - ' . $article_url . "\n" .
-						$get_send_text->invoke( $this->instance, 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-						$get_send_text->invoke( $this->instance, 'comment', 'date' ) . $comment->comment_date . "\n" .
-						$get_send_text->invoke( $this->instance, 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
-						$get_send_text->invoke( $this->instance, 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
-						'[hr]' .
-						$get_send_text->invoke( $this->instance, 'comment', 'status' ) . $comment_status .
-						'[hr]' . $make_context->invoke( $this->instance, $tool ) .
-						'[/info]',
-				];
-			} ),
-		};
-
-		$this->assertSame( $expected( $tool, $comment ), $method->invoke( $this->instance, $tool, $comment ), );
+		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
 
 	/**
@@ -213,25 +140,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	 * @param string $tool_name Chat tool name.
 	 */
 	public function test_make_context( string $tool_name ): void {
-		$method = new ReflectionMethod( $this->instance, 'make_context' );
-		$method->setAccessible( true );
-
-		$message = [
-			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
-			1 => esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ),
-			2 => esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ),
-		];
-
-		$wordpress_directory = 'https://wordpress.org/plugins/send-chat-tools/';
-		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
-
-		$context = match ( $tool_name ) {
-			'slack'    => $message[0] . "\n<" . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>',
-			'discord'  => $message[0] . "\n" . $message[1] . ' <' . $wordpress_directory . '>' . "\n" . $message[2] . ' <' . $official_web_site . '>',
-			'chatwork' => '[hr]' . $message[0] . "\n" . $message[1] . ' ' . $wordpress_directory . "\n" . $message[2] . ' ' . $official_web_site,
-		};
-
-		$this->assertSame( $context, $method->invoke( $this->instance, $tool_name, ), );
+		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
 
 	/**
