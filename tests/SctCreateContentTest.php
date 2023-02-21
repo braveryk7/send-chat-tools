@@ -146,7 +146,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 						$get_send_text->invoke( $this->instance, 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
 						'[hr]' .
 						$get_send_text->invoke( $this->instance, 'comment', 'status' ) . $comment_status .
-						'[hr]' . $make_context->invoke( $this->instance, $tool ) .
+						$make_context->invoke( $this->instance, $tool ) .
 						'[/info]',
 				];
 			} ),
