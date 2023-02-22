@@ -38,4 +38,11 @@ class SctLoggerTest extends PHPUnit\Framework\TestCase {
 	public function test_create_log() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
+	/**
+	 * TEST: save_log()
+	 */
+	public function test_save_log() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
 }

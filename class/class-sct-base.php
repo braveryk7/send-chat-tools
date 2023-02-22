@@ -266,7 +266,7 @@ class Sct_Base {
 	 * @param string $tools Use chat tools prefix.
 	 * @param object $comment Comment object.
 	 */
-	protected function send_tools( array $options, string $id, string $tools, object $comment = null ): void {
+	protected function send_tools( array $options, string $id, string $tools, object $comment = null ): bool {
 
 		$sct_options = $this->get_sct_options();
 
@@ -324,8 +324,22 @@ class Sct_Base {
 			}
 		}
 
-		$logger = new Sct_Logger();
-		$logger->create_log( $status_code, $tools, $id );
+		return $this->logger( $status_code, $tools, $id );
+	}
+
+	/**
+	 * Create and save log data.
+	 *
+	 * @param int    $status_code HTTP status code.
+	 * @param string $tool_name Use tool name.
+	 * @param string $notification_type Comment, Update.
+	 */
+	protected function logger( int $status_code, string $tool_name, string $notification_type ): bool {
+		$logger   = new Sct_Logger();
+		$log_data = $logger->create_log( $status_code, $tool_name, $notification_type );
+		$result   = $logger->save_log( $log_data );
+
+		return $result;
 	}
 
 	/**

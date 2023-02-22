@@ -25,7 +25,8 @@ class Sct_Logger extends Sct_Base {
 	 * @param string $tool_name Use tool name.
 	 * @param string $notification_type Comment, Update.
 	 */
-	public function create_log( int $status_code, string $tool_name, string $notification_type ): void {
+	public function create_log( int $status_code, string $tool_name, string $notification_type ): array {
+		$create_log_data = [];
 
 		switch ( $tool_name ) {
 			case 'slack':
@@ -52,19 +53,33 @@ class Sct_Logger extends Sct_Base {
 		}
 
 		if ( isset( $tool ) && isset( $type ) ) {
-			$sct_logs = get_option( $this->add_prefix( 'logs' ) );
-
 			$create_log_data = [
 				'status'    => $status_code,
 				'tool'      => $tool,
 				'type'      => $type,
 				'send_date' => current_time( 'mysql' ),
 			];
+		}
+
+		return $create_log_data;
+	}
+
+	/**
+	 * Save Send Chat Tools log data.
+	 *
+	 * @param array $log_data Current log data.
+	 */
+	public function save_log( array $log_data ): bool {
+		if ( empty( $log_data ) ) {
+			return false;
+		} else {
+			$sct_logs = get_option( $this->add_prefix( 'logs' ) );
 
 			if ( array_key_exists( 999, $sct_logs ) ) {
 				unset( $sct_logs[999] );
 			}
-			update_option( $this->add_prefix( 'logs' ), array_merge( [ $create_log_data ], $sct_logs, ) );
+
+			return update_option( $this->add_prefix( 'logs' ), array_merge( [ $log_data ], $sct_logs ) );
 		}
 	}
 }

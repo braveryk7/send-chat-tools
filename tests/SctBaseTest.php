@@ -177,6 +177,13 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: logger()
+	 */
+	public function test_logger() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
 	 * TEST: api_regex()
 	 */
 	public function test_api_regex() {
