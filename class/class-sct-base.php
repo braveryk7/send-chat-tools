@@ -332,6 +332,21 @@ class Sct_Base {
 	}
 
 	/**
+	 * Create and save log data.
+	 *
+	 * @param int    $status_code HTTP status code.
+	 * @param string $tool_name Use tool name.
+	 * @param string $notification_type Comment, Update.
+	 */
+	protected function logger( int $status_code, string $tool_name, string $notification_type ): bool {
+		$logger   = new Sct_Logger();
+		$log_data = $logger->create_log( $status_code, $tool_name, $notification_type );
+		$result   = $logger->save_log( $log_data );
+
+		return $result;
+	}
+
+	/**
 	 * Regex Webhook_url, Api token, room ID.
 	 *
 	 * @param string $tool tool name.
