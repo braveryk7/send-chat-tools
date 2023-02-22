@@ -48,13 +48,9 @@ class Sct_Create_Content extends Sct_Base {
 					$options = $this->create_content( $type, $tool, $comment );
 					$this->send_tools( $options, (string) $wpdb->insert_id, $tool, $comment );
 				} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
-					$logger   = new Sct_Logger();
-					$log_data = $logger->create_log( 1001, $tool, '1' );
-					$logger->save_log( $log_data );
+					$this->logger( 1001, $tool, '1' );
 				} elseif ( 'chatwork' === $tools && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
-					$logger   = new Sct_Logger();
-					$log_data = $logger->create_log( 1002, 'chatwork', '1' );
-					$logger->save_log( $log_data );
+					$this->logger( 1002, 'chatwork', '1' );
 				};
 			}
 		} elseif ( 'update' === $type ) {
