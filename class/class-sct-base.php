@@ -324,11 +324,7 @@ class Sct_Base {
 			}
 		}
 
-		$logger   = new Sct_Logger();
-		$log_data = $logger->create_log( $status_code, $tools, $id );
-		$result   = $logger->save_log( $log_data );
-
-		return $result;
+		return $this->logger( $status_code, $tools, $id );
 	}
 
 	/**
