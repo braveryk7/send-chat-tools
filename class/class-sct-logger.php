@@ -70,12 +70,16 @@ class Sct_Logger extends Sct_Base {
 	 * @param array $log_data Current log data.
 	 */
 	public function save_log( array $log_data ): bool {
-		$sct_logs = get_option( $this->add_prefix( 'logs' ) );
+		if ( empty( $log_data ) ) {
+			return false;
+		} else {
+			$sct_logs = get_option( $this->add_prefix( 'logs' ) );
 
-		if ( array_key_exists( 999, $sct_logs ) ) {
-			unset( $sct_logs[999] );
+			if ( array_key_exists( 999, $sct_logs ) ) {
+				unset( $sct_logs[999] );
+			}
+
+			return update_option( $this->add_prefix( 'logs' ), array_merge( [ $log_data ], $sct_logs ) );
 		}
-
-		return update_option( $this->add_prefix( 'logs' ), array_merge( [ $log_data ], $sct_logs ) );
 	}
 }
