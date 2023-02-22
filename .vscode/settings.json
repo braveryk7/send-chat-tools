@@ -7,6 +7,8 @@
         "source.fixAll.stylelint": true,
     },
     "editor.insertSpaces": false,
+    "intelephense.format.enable": false,
+    "intelephense.environment.phpVersion": "8.0",
     "phpsab.executablePathCBF": "./vendor/bin/phpcbf",
     "phpsab.executablePathCS": "./vendor/bin/phpcs",
     "phpsab.fixerEnable": true,
