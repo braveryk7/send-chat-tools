@@ -239,13 +239,6 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param array  $update_content Update data.
 	 */
 	private function create_update_message( string $tool, array $update_content ) {
-		$site_name    = get_bloginfo( 'name' );
-		$site_url     = get_bloginfo( 'url' );
-		$admin_url    = admin_url() . 'update-core.php';
-		$update_title = $this->get_send_text( 'update', 'title' );
-		$update_text  = $this->get_send_text( 'update', 'update' );
-		$update_page  = $this->get_send_text( 'update', 'page' );
-
 		foreach ( $update_content as $value ) {
 			switch ( $value['attribute'] ) {
 				case 'core':
@@ -265,12 +258,12 @@ class Sct_Create_Content extends Sct_Base {
 		$plain->core         = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
 		$plain->themes       = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
 		$plain->plugins      = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
-		$plain->site_name    = $site_name;
-		$plain->site_url     = $site_url;
-		$plain->update_page  = $update_page;
-		$plain->admin_url    = $admin_url;
-		$plain->update_title = $update_title;
-		$plain->update_text  = $update_text;
+		$plain->site_name    = get_bloginfo( 'name' );
+		$plain->site_url     = get_bloginfo( 'url' );
+		$plain->update_page  = $this->get_send_text( 'update', 'page' );
+		$plain->admin_url    = admin_url() . 'update-core.php';
+		$plain->update_title = $this->get_send_text( 'update', 'title' );
+		$plain->update_text  = $this->get_send_text( 'update', 'update' );
 
 		return $plain;
 	}
