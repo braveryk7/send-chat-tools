@@ -91,12 +91,12 @@ class Sct_Error_Mail extends Sct_Base {
 	 *
 	 * @param array $options The outgoing message is stored.
 	 */
-	public function update_contents( array $options ): void {
+	public function update_contents( array $options ): array {
 		$mail_to      = get_option( 'admin_email' );
 		$mail_title   = esc_html__( 'WordPress update notification.', 'send-chat-tools' );
 		$mail_message = json_decode( $options['body'], false )->text;
 
-		$this->send_mail( $mail_to, $mail_title, $mail_message );
+		return [ $mail_to, $mail_title, $mail_message ];
 	}
 
 	/**
