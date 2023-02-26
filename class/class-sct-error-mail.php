@@ -106,7 +106,7 @@ class Sct_Error_Mail extends Sct_Base {
 	 * @param string $mail_title mail title.
 	 * @param string $mail_message mail message.
 	 */
-	private function send_mail( string $mail_to, string $mail_title, string $mail_message ): void {
+	public function send_mail( string $mail_to, string $mail_title, string $mail_message ): void {
 		wp_mail( $mail_to, $mail_title, $mail_message );
 	}
 }
