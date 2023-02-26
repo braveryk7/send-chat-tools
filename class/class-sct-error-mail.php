@@ -47,7 +47,7 @@ class Sct_Error_Mail extends Sct_Base {
 	/**
 	 * Make mail to, title, and message.
 	 */
-	public function make_contents(): void {
+	public function make_contents(): array {
 		global $wpdb;
 		$comment          = get_comment( $this->comment_id );
 		$site_name        = get_bloginfo( 'name' );
@@ -83,7 +83,7 @@ class Sct_Error_Mail extends Sct_Base {
 			esc_html__( 'Possible that the message was not sent to the chat tool correctly.', 'send-chat-tools' ) . "\n" .
 			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
 
-		$this->send_mail( $mail_to, $mail_title, $mail_message );
+		return [ $mail_to, $mail_title, $mail_message ];
 	}
 
 	/**
