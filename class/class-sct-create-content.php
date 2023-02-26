@@ -264,6 +264,25 @@ class Sct_Create_Content extends Sct_Base {
 		$themes  = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
 		$plugins = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
 
+		$plain = [
+			'update' => [
+				'tools'   => $tool,
+				'core'    => $core,
+				'theme'   => $themes,
+				'plugins' => $plugins,
+				'header'  => [
+					'site_name'   => $site_name,
+					'site_url'    => $site_url,
+					'update_page' => $update_page,
+					'admin_url'   => $admin_url,
+				],
+				'content' => [
+					'update_title' => $update_title,
+					'update_text'  => $update_text,
+				],
+			],
+		];
+
 		if ( 'slack' === $tool ) {
 			$header_emoji   = ':zap:';
 			$header_message = "{$header_emoji} {$site_name}({$site_url})" . $update_title;
