@@ -246,7 +246,7 @@ class Sct_Create_Content extends Sct_Base {
 		$update_text  = $this->get_send_text( 'update', 'update' );
 		$update_page  = $this->get_send_text( 'update', 'page' );
 
-		foreach ( $update_content as $key => $value ) {
+		foreach ( $update_content as $value ) {
 			switch ( $value['attribute'] ) {
 				case 'core':
 					$add_core = '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
