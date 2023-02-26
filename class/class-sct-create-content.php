@@ -396,6 +396,88 @@ class Sct_Create_Content extends Sct_Base {
 	}
 
 	/**
+	 * Processed for chat tools.
+	 *
+	 * @param object $plain_data Plain data.
+	 */
+	public function make_processed_chat_tools( object $plain_data ) {
+		if ( 'slack' === $plain_data->tools ) {
+			$header_emoji   = ':zap:';
+			$header_message = "{$header_emoji} {$plain_data->site_name}({$plain_data->site_url})" . $plain_data->update_title;
+			$update_message = $plain_data->update_text . "\n" . $plain_data->update_page . "<{$plain_data->admin_url}>";
+			$context        = $this->make_context( $plain_data->tools );
+
+			$blocks  = new Sct_Slack_Blocks();
+			$message = [
+				'text'   => $header_message,
+				'blocks' => [
+					$blocks->header( 'plain_text', $header_message, true ),
+				],
+			];
+
+			if ( isset( $plain_data->core ) ) {
+				$core_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':star: ' . $plain_data->core ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $core_message );
+			}
+
+			if ( isset( $plain_data->themes ) ) {
+				$themes_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':art: ' . $plain_data->themes ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $themes_message );
+			}
+
+			if ( isset( $plain_data->plugins ) ) {
+				$plugins_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':wrench: ' . $plain_data->plugins ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $plugins_message );
+			}
+
+			$fixed_phrase = [
+				'blocks' => [
+					$blocks->single_column( 'mrkdwn', $update_message ),
+					$blocks->divider(),
+					$blocks->context( 'mrkdwn', $context ),
+				],
+			];
+
+			$message = array_merge_recursive( $message, $fixed_phrase );
+		} elseif ( 'discord' === $plain_data->tools ) {
+			$message =
+				$plain_data->site_name . '( <' . $plain_data->site_url . '> )' . $plain_data->update_title . "\n\n" .
+				$plain_data->core . $plain_data->themes . $plain_data->plugins .
+				$plain_data->update_text . "\n" . $plain_data->update_page . '<' . $plain_data->admin_url . '>' . "\n\n" .
+				$this->make_context( $plain_data->tools );
+		} elseif ( 'chatwork' === $plain_data->tools ) {
+			isset( $plain_data->core ) ? $core       = $plain_data->core . '[hr]' : $plain_data->core;
+			isset( $plain_data->themes ) ? $themes   = $plain_data->themes . '[hr]' : $plain_data->themes;
+			isset( $plain_data->plugins ) ? $plugins = $plain_data->plugins . '[hr]' : $plain_data->plugins;
+
+			$message = [
+				'body' =>
+					'[info][title]' . $plain_data->site_name . '( ' . $plain_data->site_url . ' )' . $plain_data->update_title . '[/title]' .
+					$core . $themes . $plugins . $plain_data->update_text . "\n" . $plain_data->update_page . $plain_data->admin_url . "\n\n" .
+					$this->make_context( $plain_data->tools ) .
+					'[/info]',
+			];
+		}
+
+		return $message;
+	}
+
+	/**
 	 * Create comment notify content.
 	 *
 	 * @param string $type  Message type.
