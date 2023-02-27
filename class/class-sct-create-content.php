@@ -133,7 +133,8 @@ class Sct_Create_Content extends Sct_Base {
 				$message = $this->make_comment_message( $tool, $comment );
 				break;
 			case 'update':
-				$message = $this->make_processed_chat_tools( $this->create_update_message( $tool, $update_content ) );
+				$plain_data = $this->create_update_message( $tool, $update_content );
+				$message    = $this->make_processed_chat_tools( $plain_data );
 				break;
 			case 'dev_notify':
 				$message = $this->create_developer_message( $tool, $update_content );
@@ -161,6 +162,10 @@ class Sct_Create_Content extends Sct_Base {
 			'headers' => $content_type,
 			'body'    => $body,
 		];
+
+		if ( 'update' === $type && isset( $plain_data ) ) {
+			$options['plain_data'] = $plain_data;
+		}
 
 		return $options;
 	}
