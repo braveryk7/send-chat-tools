@@ -133,7 +133,8 @@ class Sct_Create_Content extends Sct_Base {
 				$message = $this->make_comment_message( $tool, $comment );
 				break;
 			case 'update':
-				$message = $this->create_update_message( $tool, $update_content );
+				$plain_data = $this->create_update_message( $tool, $update_content );
+				$message    = $this->make_processed_chat_tools( $plain_data );
 				break;
 			case 'dev_notify':
 				$message = $this->create_developer_message( $tool, $update_content );
@@ -161,6 +162,10 @@ class Sct_Create_Content extends Sct_Base {
 			'headers' => $content_type,
 			'body'    => $body,
 		];
+
+		if ( 'update' === $type && isset( $plain_data ) ) {
+			$options['plain_data'] = $plain_data;
+		}
 
 		return $options;
 	}
@@ -239,14 +244,7 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param array  $update_content Update data.
 	 */
 	private function create_update_message( string $tool, array $update_content ) {
-		$site_name    = get_bloginfo( 'name' );
-		$site_url     = get_bloginfo( 'url' );
-		$admin_url    = admin_url() . 'update-core.php';
-		$update_title = $this->get_send_text( 'update', 'title' );
-		$update_text  = $this->get_send_text( 'update', 'update' );
-		$update_page  = $this->get_send_text( 'update', 'page' );
-
-		foreach ( $update_content as $key => $value ) {
+		foreach ( $update_content as $value ) {
 			switch ( $value['attribute'] ) {
 				case 'core':
 					$add_core = '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
@@ -260,83 +258,19 @@ class Sct_Create_Content extends Sct_Base {
 			}
 		};
 
-		$core    = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
-		$themes  = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
-		$plugins = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
+		$plain               = new stdClass();
+		$plain->tools        = $tool;
+		$plain->core         = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
+		$plain->themes       = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
+		$plain->plugins      = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
+		$plain->site_name    = get_bloginfo( 'name' );
+		$plain->site_url     = get_bloginfo( 'url' );
+		$plain->update_page  = $this->get_send_text( 'update', 'page' );
+		$plain->admin_url    = admin_url() . 'update-core.php';
+		$plain->update_title = $this->get_send_text( 'update', 'title' );
+		$plain->update_text  = $this->get_send_text( 'update', 'update' );
 
-		if ( 'slack' === $tool ) {
-			$header_emoji   = ':zap:';
-			$header_message = "{$header_emoji} {$site_name}({$site_url})" . $update_title;
-			$update_message = $update_text . "\n" . $update_page . "<{$admin_url}>";
-			$context        = $this->make_context( $tool );
-
-			$blocks  = new Sct_Slack_Blocks();
-			$message = [
-				'text'   => $header_message,
-				'blocks' => [
-					$blocks->header( 'plain_text', $header_message, true ),
-				],
-			];
-
-			if ( isset( $core ) ) {
-				$core_message = [
-					'blocks' => [
-						$blocks->single_column( 'mrkdwn', ':star: ' . $core ),
-					],
-				];
-
-				$message = array_merge_recursive( $message, $core_message );
-			}
-
-			if ( isset( $themes ) ) {
-				$themes_message = [
-					'blocks' => [
-						$blocks->single_column( 'mrkdwn', ':art: ' . $themes ),
-					],
-				];
-
-				$message = array_merge_recursive( $message, $themes_message );
-			}
-
-			if ( isset( $plugins ) ) {
-				$plugins_message = [
-					'blocks' => [
-						$blocks->single_column( 'mrkdwn', ':wrench: ' . $plugins ),
-					],
-				];
-
-				$message = array_merge_recursive( $message, $plugins_message );
-			}
-
-			$fixed_phrase = [
-				'blocks' => [
-					$blocks->single_column( 'mrkdwn', $update_message ),
-					$blocks->divider(),
-					$blocks->context( 'mrkdwn', $context ),
-				],
-			];
-
-			$message = array_merge_recursive( $message, $fixed_phrase );
-		} elseif ( 'discord' === $tool ) {
-			$message =
-				$site_name . '( <' . $site_url . '> )' . $update_title . "\n\n" .
-				$core . $themes . $plugins . $update_text . "\n" . $update_page . '<' . $admin_url . '>' . "\n\n" .
-				$this->make_context( $tool );
-		} elseif ( 'chatwork' === $tool ) {
-			isset( $core ) ? $core       = $core . '[hr]' : $core;
-			isset( $themes ) ? $themes   = $themes . '[hr]' : $themes;
-			isset( $plugins ) ? $plugins = $plugins . '[hr]' : $themes;
-
-			$message = [
-				'body' =>
-					'[info][title]' . $site_name . '( ' . $site_url . ' )' . $update_title . '[/title]' .
-					$core . $themes . $plugins . $update_text . "\n" . $update_page . $admin_url . "\n\n" .
-					$this->make_context( $tool ) .
-					'[/info]',
-			];
-		}
-
-		return $message;
+		return $plain;
 	}
 
 	/**
@@ -456,6 +390,88 @@ class Sct_Create_Content extends Sct_Base {
 				];
 			}
 		}
+		return $message;
+	}
+
+	/**
+	 * Processed for chat tools.
+	 *
+	 * @param object $plain_data Plain data.
+	 */
+	public function make_processed_chat_tools( object $plain_data ) {
+		if ( 'slack' === $plain_data->tools ) {
+			$header_emoji   = ':zap:';
+			$header_message = "{$header_emoji} {$plain_data->site_name}({$plain_data->site_url})" . $plain_data->update_title;
+			$update_message = $plain_data->update_text . "\n" . $plain_data->update_page . "<{$plain_data->admin_url}>";
+			$context        = $this->make_context( $plain_data->tools );
+
+			$blocks  = new Sct_Slack_Blocks();
+			$message = [
+				'text'   => $header_message,
+				'blocks' => [
+					$blocks->header( 'plain_text', $header_message, true ),
+				],
+			];
+
+			if ( isset( $plain_data->core ) ) {
+				$core_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':star: ' . $plain_data->core ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $core_message );
+			}
+
+			if ( isset( $plain_data->themes ) ) {
+				$themes_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':art: ' . $plain_data->themes ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $themes_message );
+			}
+
+			if ( isset( $plain_data->plugins ) ) {
+				$plugins_message = [
+					'blocks' => [
+						$blocks->single_column( 'mrkdwn', ':wrench: ' . $plain_data->plugins ),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $plugins_message );
+			}
+
+			$fixed_phrase = [
+				'blocks' => [
+					$blocks->single_column( 'mrkdwn', $update_message ),
+					$blocks->divider(),
+					$blocks->context( 'mrkdwn', $context ),
+				],
+			];
+
+			$message = array_merge_recursive( $message, $fixed_phrase );
+		} elseif ( 'discord' === $plain_data->tools ) {
+			$message =
+				$plain_data->site_name . '( <' . $plain_data->site_url . '> )' . $plain_data->update_title . "\n\n" .
+				$plain_data->core . $plain_data->themes . $plain_data->plugins .
+				$plain_data->update_text . "\n" . $plain_data->update_page . '<' . $plain_data->admin_url . '>' . "\n\n" .
+				$this->make_context( $plain_data->tools );
+		} elseif ( 'chatwork' === $plain_data->tools ) {
+			isset( $plain_data->core ) ? $core       = $plain_data->core . '[hr]' : $plain_data->core;
+			isset( $plain_data->themes ) ? $themes   = $plain_data->themes . '[hr]' : $plain_data->themes;
+			isset( $plain_data->plugins ) ? $plugins = $plain_data->plugins . '[hr]' : $plain_data->plugins;
+
+			$message = [
+				'body' =>
+					'[info][title]' . $plain_data->site_name . '( ' . $plain_data->site_url . ' )' . $plain_data->update_title . '[/title]' .
+					$core . $themes . $plugins . $plain_data->update_text . "\n" . $plain_data->update_page . $plain_data->admin_url . "\n\n" .
+					$this->make_context( $plain_data->tools ) .
+					'[/info]',
+			];
+		}
+
 		return $message;
 	}
 
