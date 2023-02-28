@@ -466,7 +466,7 @@ class Sct_Create_Content extends Sct_Base {
 			$message = [
 				'body' =>
 					'[info][title]' . $plain_data->site_name . '( ' . $plain_data->site_url . ' )' . $plain_data->update_title . '[/title]' .
-					$core . $themes . $plugins . $plain_data->update_text . "\n" . $plain_data->update_page . $plain_data->admin_url . "\n\n" .
+					$core . $themes . $plugins . $plain_data->update_text . "\n" . $plain_data->update_page . $plain_data->admin_url . "\n" .
 					$this->make_context( $plain_data->tools ) .
 					'[/info]',
 			];
