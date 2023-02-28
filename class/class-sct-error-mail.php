@@ -89,12 +89,19 @@ class Sct_Error_Mail extends Sct_Base {
 	/**
 	 * Create WordPress Core, Theme, Plugin update content.
 	 *
-	 * @param array $options The outgoing message is stored.
+	 * @param object $plain_data The outgoing message is stored.
 	 */
-	public function update_contents( array $options ): array {
+	public function update_contents( object $plain_data ): array {
+		update_option( 'sct_error_mail_content', $plain_data->update_text );
 		$mail_to      = get_option( 'admin_email' );
 		$mail_title   = esc_html__( 'WordPress update notification.', 'send-chat-tools' );
-		$mail_message = json_decode( $options['body'], false )->text;
+		$mail_message =
+			$plain_data->site_name . '(' . $plain_data->site_url . ')' . $plain_data->update_title . "\n\n" .
+			$plain_data->core . $plain_data->themes . $plain_data->plugins . $plain_data->update_text . "\n" .
+			$plain_data->update_page . $plain_data->admin_url . "\n\n" .
+			esc_html__( 'This message was sent by Send Chat Tools.', 'send-chat-tools' ) . "\n" .
+			esc_html__( 'Possible that the message was not sent to the chat tool correctly.', 'send-chat-tools' ) . "\n" .
+			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
 
 		return [ $mail_to, $mail_title, $mail_message ];
 	}
