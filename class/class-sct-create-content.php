@@ -459,14 +459,14 @@ class Sct_Create_Content extends Sct_Base {
 				$plain_data->update_text . "\n" . $plain_data->update_page . '<' . $plain_data->admin_url . '>' . "\n\n" .
 				$this->make_context( $plain_data->tools );
 		} elseif ( 'chatwork' === $plain_data->tools ) {
-			isset( $plain_data->core ) ? $core       = $plain_data->core . '[hr]' : $plain_data->core;
-			isset( $plain_data->themes ) ? $themes   = $plain_data->themes . '[hr]' : $plain_data->themes;
-			isset( $plain_data->plugins ) ? $plugins = $plain_data->plugins . '[hr]' : $plain_data->plugins;
+			isset( $plain_data->core ) ? $core       = rtrim( $plain_data->core ) . '[hr]' : $plain_data->core;
+			isset( $plain_data->themes ) ? $themes   = rtrim( $plain_data->themes ) . '[hr]' : $plain_data->themes;
+			isset( $plain_data->plugins ) ? $plugins = rtrim( $plain_data->plugins ) . '[hr]' : $plain_data->plugins;
 
 			$message = [
 				'body' =>
 					'[info][title]' . $plain_data->site_name . '( ' . $plain_data->site_url . ' )' . $plain_data->update_title . '[/title]' .
-					$core . $themes . $plugins . $plain_data->update_text . "\n" . $plain_data->update_page . $plain_data->admin_url . "\n\n" .
+					$core . $themes . $plugins . $plain_data->update_text . "\n" . $plain_data->update_page . $plain_data->admin_url . "\n" .
 					$this->make_context( $plain_data->tools ) .
 					'[/info]',
 			];
