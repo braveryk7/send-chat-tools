@@ -226,7 +226,7 @@ class Sct_Create_Content extends Sct_Base {
 					$this->get_send_text( 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
 					$this->get_send_text( 'comment', 'date' ) . $comment->comment_date . "\n" .
 					$this->get_send_text( 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
-					$this->get_send_text( 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
+					$this->get_send_text( 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n" .
 					'[hr]' .
 					$this->get_send_text( 'comment', 'status' ) . $comment_status .
 					$this->make_context( $tool ) .
