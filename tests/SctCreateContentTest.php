@@ -143,7 +143,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 						$get_send_text->invoke( $this->instance, 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
 						$get_send_text->invoke( $this->instance, 'comment', 'date' ) . $comment->comment_date . "\n" .
 						$get_send_text->invoke( $this->instance, 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
-						$get_send_text->invoke( $this->instance, 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
+						$get_send_text->invoke( $this->instance, 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n" .
 						'[hr]' .
 						$get_send_text->invoke( $this->instance, 'comment', 'status' ) . $comment_status .
 						$make_context->invoke( $this->instance, $tool ) .
