@@ -316,10 +316,10 @@ class Sct_Base {
 		if ( 200 !== $status_code && 204 !== $status_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
 			if ( 'update' === $id ) {
-				$send_mail = new Sct_Error_Mail( $status_code, $id );
+				$send_mail = new Sct_Error_Mail( $status_code, $id, $tools );
 				$send_mail->send_mail( ...$send_mail->update_contents( $options['plain_data'] ) );
 			} else {
-				$send_mail = new Sct_Error_Mail( $status_code, $id );
+				$send_mail = new Sct_Error_Mail( $status_code, $id, $tools );
 				$send_mail->send_mail( ...$send_mail->make_contents() );
 			}
 		}
