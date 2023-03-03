@@ -31,7 +31,8 @@ class SctErrorMailTest extends PHPUnit\Framework\TestCase {
 	protected function setUp() :void {
 		$error_code     = 1;
 		$comment_id     = '1';
-		$this->instance = new Sct_Error_Mail( $error_code, $comment_id );
+		$tool_name      = 'slack';
+		$this->instance = new Sct_Error_Mail( $error_code, $comment_id, $tool_name );
 	}
 
 	/**
