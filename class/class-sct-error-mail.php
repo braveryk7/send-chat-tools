@@ -34,14 +34,23 @@ class Sct_Error_Mail extends Sct_Base {
 	private $comment_id;
 
 	/**
+	 * Tool name.
+	 *
+	 * @var string
+	 */
+	private $tool_name;
+
+	/**
 	 * Construc.
 	 *
 	 * @param int    $error_code error code.
 	 * @param string $comment_id comment ID.
+	 * @param string $tool_name  Tool name.
 	 */
-	public function __construct( int $error_code, string $comment_id ) {
+	public function __construct( int $error_code, string $comment_id, string $tool_name ) {
 		$this->error_code = $error_code;
 		$this->comment_id = $comment_id;
+		$this->tool_name  = $tool_name;
 	}
 
 	/**
@@ -100,7 +109,8 @@ class Sct_Error_Mail extends Sct_Base {
 			$plain_data->core . $plain_data->themes . $plain_data->plugins . $plain_data->update_text . "\n" .
 			$plain_data->update_page . $plain_data->admin_url . "\n\n" .
 			esc_html__( 'This message was sent by Send Chat Tools.', 'send-chat-tools' ) . "\n" .
-			esc_html__( 'Possible that the message was not sent to the chat tool correctly.', 'send-chat-tools' ) . "\n" .
+			esc_html__( 'Possible that the message was not sent to the chat tool correctly.', 'send-chat-tools' ) . "\n\n" .
+			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
 			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
 
 		return [ $mail_to, $mail_title, $mail_message ];
