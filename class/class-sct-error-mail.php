@@ -89,7 +89,8 @@ class Sct_Error_Mail extends Sct_Base {
 			esc_html__( 'Comment URL:', 'send-chat-tools' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
 			esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status . "\n\n" .
 			esc_html__( 'This message was sent by Send Chat Tools.', 'send-chat-tools' ) . "\n" .
-			esc_html__( 'Possible that the message was not sent to the chat tool correctly.', 'send-chat-tools' ) . "\n" .
+			esc_html__( 'Possible that the message was not sent to the chat tool correctly.', 'send-chat-tools' ) . "\n\n" .
+			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
 			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
 
 		return [ $mail_to, $mail_title, $mail_message ];
