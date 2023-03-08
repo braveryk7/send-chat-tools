@@ -65,8 +65,8 @@ excludes=(
 	"tsconfig.json"
 	"webpack.config.js"
 	# WordPress
-	.wp-env.json
-	.wp-env.override.json
+	".wp-env.json"
+	".wp-env.override.json"
 )
 
 # Delete trunk directory.
