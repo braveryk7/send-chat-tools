@@ -206,7 +206,7 @@ class Sct_Base {
 	/**
 	 * Get WP-cron event name.
 	 */
-	public function get_wpcron_event_name(): string {
+	public static function get_wpcron_event_name(): string {
 		return self::add_prefix( self::WP_CRON_EVENT_NAME );
 	}
 
