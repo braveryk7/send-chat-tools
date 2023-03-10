@@ -49,7 +49,7 @@ class Sct_Check_Update extends Sct_Base {
 	/**
 	 * WordPress Core.
 	 */
-	private function check_core(): array {
+	private function check_core(): ?array {
 		$get_core_status = get_option( '_site_transient_update_core' );
 		$return          = [];
 		if ( ! empty( $get_core_status ) && 'upgrade' === $get_core_status->updates[0]->response ) {
