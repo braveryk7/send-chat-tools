@@ -36,9 +36,9 @@ class Sct_Check_Update extends Sct_Base {
 		$themes     = $this->check_themes();
 		$plugins    = $this->check_plugins();
 
-		isset( $core ) ? $check_data    = array_merge( $check_data, $core ) : $check_data;
-		isset( $themes ) ? $check_data  = array_merge( $check_data, $themes ) : $check_data;
-		isset( $plugins ) ? $check_data = array_merge( $check_data, $plugins ) : $check_data;
+		foreach ( [ $core, $themes, $plugins ] as $value ) {
+			$check_data = array_merge( $check_data, $value ?? [] );
+		}
 
 		if ( ! empty( $check_data ) ) {
 			$next = new Sct_Create_Content();
