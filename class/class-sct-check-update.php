@@ -31,50 +31,53 @@ class Sct_Check_Update extends Sct_Base {
 	 * Call WordPress Core, Themes and Plugin check function.
 	 */
 	public function controller(): void {
-		$check_data = [];
-		$core       = $this->check_core();
-		$themes     = $this->check_themes();
-		$plugins    = $this->check_plugins();
+		$updates = [];
+		$core    = $this->check_core();
+		$themes  = $this->check_themes();
+		$plugins = $this->check_plugins();
 
-		isset( $core ) ? $check_data    = array_merge( $check_data, $core ) : $check_data;
-		isset( $themes ) ? $check_data  = array_merge( $check_data, $themes ) : $check_data;
-		isset( $plugins ) ? $check_data = array_merge( $check_data, $plugins ) : $check_data;
+		foreach ( [ $core, $themes, $plugins ] as $value ) {
+			$updates = array_merge( $updates, $value ?? [] );
+		}
 
-		if ( ! empty( $check_data ) ) {
+		if ( ! empty( $updates ) ) {
 			$next = new Sct_Create_Content();
-			$next->controller( 0, 'update', $check_data );
+			$next->controller( 0, 'update', $updates );
 		}
 	}
 
 	/**
 	 * WordPress Core.
 	 */
-	private function check_core(): array {
+	private function check_core(): ?array {
 		$get_core_status = get_option( '_site_transient_update_core' );
-		$return          = [];
+		$core_data       = null;
+
 		if ( ! empty( $get_core_status ) && 'upgrade' === $get_core_status->updates[0]->response ) {
-			$update_core    = $get_core_status->updates[0];
-			$return['core'] = [
+			$update_infomation = $get_core_status->updates[0];
+			$core_data['core'] = [
 				'name'            => 'WordPress Core',
 				'attribute'       => 'core',
 				'current_version' => get_bloginfo( 'version' ),
-				'new_version'     => $update_core->version,
+				'new_version'     => $update_infomation->version,
 			];
 		}
-		return $return;
+
+		return $core_data;
 	}
 
 	/**
 	 * Themes.
 	 */
-	private function check_themes(): array {
+	private function check_themes(): ?array {
 		$get_theme_status = get_option( '_site_transient_update_themes' );
-		$return           = [];
+		$theme_data       = null;
+
 		if ( ! empty( $get_theme_status->response ) ) {
 			$update_themes = $get_theme_status->response;
 			foreach ( $update_themes as $key => $value ) {
-				$theme_date                  = wp_get_theme( $key );
-				$return[ $theme_date->name ] = [
+				$theme_date                      = wp_get_theme( $key );
+				$theme_data[ $theme_date->name ] = [
 					'name'            => $theme_date->name,
 					'attribute'       => 'theme',
 					'path'            => $theme_date->theme_root . '/' . $key,
@@ -84,18 +87,13 @@ class Sct_Check_Update extends Sct_Base {
 			}
 		}
 
-		if ( is_child_theme() ) {
-			$theme_name      = wp_get_theme()->parent()->Name;
-			$current_version = wp_get_theme()->parent()->Version;
-		} else {
-			$theme_name      = wp_get_theme()->Name;
-			$current_version = wp_get_theme()->Version;
-		}
+		$theme_name      = is_child_theme() ? wp_get_theme()->parent()->name : wp_get_theme()->Name;
+		$current_version = is_child_theme() ? wp_get_theme()->parent()->Version : wp_get_theme()->Version;
 
 		if ( array_key_exists( $theme_name, self::THEME_OPTION_NAME ) ) {
 			$get_update = get_option( self::THEME_OPTION_NAME[ $theme_name ] );
 			if ( version_compare( $current_version, $get_update->update->version, '<' ) ) {
-				$return[ $theme_name ] = [
+				$theme_data[ $theme_name ] = [
 					'name'            => $theme_name,
 					'attribute'       => 'theme',
 					'current_version' => $current_version,
@@ -104,27 +102,28 @@ class Sct_Check_Update extends Sct_Base {
 			}
 		}
 
-		return $return;
+		return $theme_data;
 	}
 
 	/**
 	 * Plugins.
 	 */
-	private function check_plugins(): array {
+	private function check_plugins(): ?array {
 		$get_plugin_status = get_option( '_site_transient_update_plugins' );
-		$return            = [];
+		$plugin_data       = null;
+
 		if ( ! empty( $get_plugin_status->response ) ) {
 			$update_plugins = $get_plugin_status->response;
 			foreach ( $update_plugins as $key ) {
-				$path                 = $this->get_plugin_dir( $key->plugin );
-				$plugin_date          = get_file_data(
+				$path                      = $this->get_plugin_dir( $key->plugin );
+				$plugin_date               = get_file_data(
 					$path,
 					[
 						'name'    => 'Plugin Name',
 						'version' => 'Version',
 					]
 				);
-				$return[ $key->slug ] = [
+				$plugin_data[ $key->slug ] = [
 					'name'            => $plugin_date['name'],
 					'attribute'       => 'plugin',
 					'path'            => $path,
@@ -136,11 +135,12 @@ class Sct_Check_Update extends Sct_Base {
 
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		$current_plugins = get_plugins();
-		foreach ( $current_plugins as $key => $value ) {
+
+		foreach ( $current_plugins as $value ) {
 			if ( array_key_exists( $value['Name'], self::PLUGIN_OPTION_NAME ) ) {
 				$get_update = get_option( self::PLUGIN_OPTION_NAME[ $value['Name'] ] );
 				if ( ! empty( $get_update ) && version_compare( $value['Version'], $get_update->update->version, '<' ) ) {
-					$return[ $value['Name'] ] = [
+					$plugin_data[ $value['Name'] ] = [
 						'name'            => $value['Name'],
 						'attribute'       => 'plugin',
 						'current_version' => $value['Version'],
@@ -150,7 +150,7 @@ class Sct_Check_Update extends Sct_Base {
 			}
 		}
 
-		return $return;
+		return $plugin_data;
 	}
 
 	/**
