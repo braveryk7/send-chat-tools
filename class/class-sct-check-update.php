@@ -42,7 +42,7 @@ class Sct_Check_Update extends Sct_Base {
 
 		if ( ! empty( $updates ) ) {
 			$next = new Sct_Create_Content();
-			$next->controller( 0, 'update', $updates );
+			$next->controller( type: 'update', update_content: $updates );
 		}
 	}
 
