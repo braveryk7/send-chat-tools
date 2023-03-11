@@ -106,7 +106,7 @@ class Sct_Check_Update extends Sct_Base {
 	/**
 	 * Plugins.
 	 */
-	private function check_plugins(): array {
+	private function check_plugins(): ?array {
 		$get_plugin_status = get_option( '_site_transient_update_plugins' );
 		$plugin_data       = [];
 		if ( ! empty( $get_plugin_status->response ) ) {
