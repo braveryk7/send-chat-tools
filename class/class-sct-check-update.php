@@ -108,19 +108,19 @@ class Sct_Check_Update extends Sct_Base {
 	 */
 	private function check_plugins(): array {
 		$get_plugin_status = get_option( '_site_transient_update_plugins' );
-		$return            = [];
+		$plugin_data       = [];
 		if ( ! empty( $get_plugin_status->response ) ) {
 			$update_plugins = $get_plugin_status->response;
 			foreach ( $update_plugins as $key ) {
-				$path                 = $this->get_plugin_dir( $key->plugin );
-				$plugin_date          = get_file_data(
+				$path                      = $this->get_plugin_dir( $key->plugin );
+				$plugin_date               = get_file_data(
 					$path,
 					[
 						'name'    => 'Plugin Name',
 						'version' => 'Version',
 					]
 				);
-				$return[ $key->slug ] = [
+				$plugin_data[ $key->slug ] = [
 					'name'            => $plugin_date['name'],
 					'attribute'       => 'plugin',
 					'path'            => $path,
@@ -136,7 +136,7 @@ class Sct_Check_Update extends Sct_Base {
 			if ( array_key_exists( $value['Name'], self::PLUGIN_OPTION_NAME ) ) {
 				$get_update = get_option( self::PLUGIN_OPTION_NAME[ $value['Name'] ] );
 				if ( ! empty( $get_update ) && version_compare( $value['Version'], $get_update->update->version, '<' ) ) {
-					$return[ $value['Name'] ] = [
+					$plugin_data[ $value['Name'] ] = [
 						'name'            => $value['Name'],
 						'attribute'       => 'plugin',
 						'current_version' => $value['Version'],
@@ -146,7 +146,7 @@ class Sct_Check_Update extends Sct_Base {
 			}
 		}
 
-		return $return;
+		return $plugin_data;
 	}
 
 	/**
