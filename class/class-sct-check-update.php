@@ -70,12 +70,12 @@ class Sct_Check_Update extends Sct_Base {
 	 */
 	private function check_themes(): ?array {
 		$get_theme_status = get_option( '_site_transient_update_themes' );
-		$plugin_data      = null;
+		$theme_data       = null;
 		if ( ! empty( $get_theme_status->response ) ) {
 			$update_themes = $get_theme_status->response;
 			foreach ( $update_themes as $key => $value ) {
-				$theme_date                       = wp_get_theme( $key );
-				$plugin_data[ $theme_date->name ] = [
+				$theme_date                      = wp_get_theme( $key );
+				$theme_data[ $theme_date->name ] = [
 					'name'            => $theme_date->name,
 					'attribute'       => 'theme',
 					'path'            => $theme_date->theme_root . '/' . $key,
@@ -96,7 +96,7 @@ class Sct_Check_Update extends Sct_Base {
 		if ( array_key_exists( $theme_name, self::THEME_OPTION_NAME ) ) {
 			$get_update = get_option( self::THEME_OPTION_NAME[ $theme_name ] );
 			if ( version_compare( $current_version, $get_update->update->version, '<' ) ) {
-				$plugin_data[ $theme_name ] = [
+				$theme_data[ $theme_name ] = [
 					'name'            => $theme_name,
 					'attribute'       => 'theme',
 					'current_version' => $current_version,
@@ -105,7 +105,7 @@ class Sct_Check_Update extends Sct_Base {
 			}
 		}
 
-		return $plugin_data;
+		return $theme_data;
 	}
 
 	/**
