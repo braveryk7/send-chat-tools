@@ -68,7 +68,7 @@ class Sct_Check_Update extends Sct_Base {
 	/**
 	 * Themes.
 	 */
-	private function check_themes(): array {
+	private function check_themes(): ?array {
 		$get_theme_status = get_option( '_site_transient_update_themes' );
 		$return           = null;
 		if ( ! empty( $get_theme_status->response ) ) {
