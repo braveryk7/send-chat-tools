@@ -31,18 +31,18 @@ class Sct_Check_Update extends Sct_Base {
 	 * Call WordPress Core, Themes and Plugin check function.
 	 */
 	public function controller(): void {
-		$check_data = [];
-		$core       = $this->check_core();
-		$themes     = $this->check_themes();
-		$plugins    = $this->check_plugins();
+		$updates = [];
+		$core    = $this->check_core();
+		$themes  = $this->check_themes();
+		$plugins = $this->check_plugins();
 
 		foreach ( [ $core, $themes, $plugins ] as $value ) {
-			$check_data = array_merge( $check_data, $value ?? [] );
+			$updates = array_merge( $updates, $value ?? [] );
 		}
 
-		if ( ! empty( $check_data ) ) {
+		if ( ! empty( $updates ) ) {
 			$next = new Sct_Create_Content();
-			$next->controller( 0, 'update', $check_data );
+			$next->controller( 0, 'update', $updates );
 		}
 	}
 
