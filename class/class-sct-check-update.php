@@ -52,6 +52,7 @@ class Sct_Check_Update extends Sct_Base {
 	private function check_core(): ?array {
 		$get_core_status = get_option( '_site_transient_update_core' );
 		$update_data     = null;
+
 		if ( ! empty( $get_core_status ) && 'upgrade' === $get_core_status->updates[0]->response ) {
 			$update_infomation   = $get_core_status->updates[0];
 			$update_data['core'] = [
