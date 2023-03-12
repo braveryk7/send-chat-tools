@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 load_plugin_textdomain( 'send-chat-tools', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
-require_once dirname( __FILE__ ) . '/class/class-Sct-phpver-judge.php';
+require_once dirname( __FILE__ ) . '/class/class-sct-phpver-judge.php';
 
 $sct_phpver_judge = new Sct_Phpver_Judge();
 
