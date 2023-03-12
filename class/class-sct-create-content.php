@@ -38,10 +38,10 @@ class Sct_Create_Content extends Sct_Base {
 		$tools       = [ 'slack', 'discord', 'chatwork' ];
 
 		if ( 'comment' === $type ) {
-			$comment = $this->get_comment_data( $comment_id );
+			$comment = get_comment( $comment_id );
 
 			foreach ( $tools as $tool ) {
-				'chatwork' === $tool ? $api_column = 'api_token' : $api_column = 'webhook_url';
+				$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
 
 				if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
 					global $wpdb;
@@ -78,44 +78,34 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $comment_user_id Comment user id.
 	 */
 	private function get_send_status( string $tool_name, array $tools, string $comment_user_id ): bool {
-		$status     = [
+		$status = [
 			'use'    => false,
 			'api'    => false,
 			'author' => false,
 		];
-		$api_exists = false;
 
-		$tools['use'] ? $status['use'] = true : $status['use'] = false;
+		$status['use'] = $tools['use'] ? true : false;
 
-		! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ? $status['author'] = true : $status['author'] = false;
+		$status['author'] = ! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ? true : false;
 
 		switch ( $tool_name ) {
 			case 'slack':
 			case 'discord':
-				$api                             = $tools['webhook_url'];
-				! empty( $api ) ? $status['api'] = true : $status['api'] = false;
+				$api           = $tools['webhook_url'];
+				$status['api'] = ! empty( $api ) ? true : false;
 				break;
 			case 'chatwork':
-				$api = [
+				$api           = [
 					'api_token' => $tools['api_token'],
 					'room_id'   => $tools['room_id'],
 				];
-				! empty( $api['api_token'] ) && ! empty( $api['room_id'] ) ? $status['api'] = true : $status['api'] = false;
+				$status['api'] = ! empty( $api['api_token'] ) && ! empty( $api['room_id'] ) ? true : false;
 				break;
 			default:
 				$status['api'] = false;
 		}
 
 		return in_array( false, $status, true ) ? false : true;
-	}
-
-	/**
-	 * Get comment data.
-	 *
-	 * @param int $comment_id Comment ID.
-	 */
-	private function get_comment_data( int $comment_id ): object {
-		return get_comment( $comment_id );
 	}
 
 	/**
@@ -244,18 +234,13 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param array  $update_content Update data.
 	 */
 	private function create_update_message( string $tool, array $update_content ) {
+		$add_core    = null;
+		$add_themes  = null;
+		$add_plugins = null;
+
 		foreach ( $update_content as $value ) {
-			switch ( $value['attribute'] ) {
-				case 'core':
-					$add_core = '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
-					break;
-				case 'theme':
-					$add_themes = '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
-					break;
-				case 'plugin':
-					$add_plugins = '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
-					break;
-			}
+			$is_core                              = 'core' === $value['attribute'] ? null : 's';
+			${ "add_$value[attribute]$is_core" } .= "   $value[name] ( $value[current_version] -> $value[new_version] )\n";
 		};
 
 		$plain               = new stdClass();
@@ -269,7 +254,6 @@ class Sct_Create_Content extends Sct_Base {
 		$plain->admin_url    = admin_url() . 'update-core.php';
 		$plain->update_title = $this->get_send_text( 'update', 'title' );
 		$plain->update_text  = $this->get_send_text( 'update', 'update' );
-
 		return $plain;
 	}
 
