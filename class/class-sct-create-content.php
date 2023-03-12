@@ -92,8 +92,8 @@ class Sct_Create_Content extends Sct_Base {
 		switch ( $tool_name ) {
 			case 'slack':
 			case 'discord':
-				$api                             = $tools['webhook_url'];
-				! empty( $api ) ? $status['api'] = true : $status['api'] = false;
+				$api           = $tools['webhook_url'];
+				$status['api'] = ! empty( $api ) ? true : false;
 				break;
 			case 'chatwork':
 				$api = [
