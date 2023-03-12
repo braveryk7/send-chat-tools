@@ -87,7 +87,7 @@ class Sct_Create_Content extends Sct_Base {
 
 		$status['use'] = $tools['use'] ? true : false;
 
-		! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ? $status['author'] = true : $status['author'] = false;
+		$status['author'] = ! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ? true : false;
 
 		switch ( $tool_name ) {
 			case 'slack':
