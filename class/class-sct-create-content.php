@@ -38,7 +38,7 @@ class Sct_Create_Content extends Sct_Base {
 		$tools       = [ 'slack', 'discord', 'chatwork' ];
 
 		if ( 'comment' === $type ) {
-			$comment = $this->get_comment_data( $comment_id );
+			$comment = get_comment( $comment_id );
 
 			foreach ( $tools as $tool ) {
 				$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
