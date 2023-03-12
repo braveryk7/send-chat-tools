@@ -85,7 +85,7 @@ class Sct_Create_Content extends Sct_Base {
 		];
 		$api_exists = false;
 
-		$tools['use'] ? $status['use'] = true : $status['use'] = false;
+		$status['use'] = $tools['use'] ? true : false;
 
 		! $tools['send_author'] || $tools['send_author'] && '0' === $comment_user_id ? $status['author'] = true : $status['author'] = false;
 
