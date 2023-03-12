@@ -24,7 +24,7 @@ class Sct_Base {
 	protected const PLUGIN_FILE          = self::PLUGIN_SLUG . '.php';
 	protected const API_NAME             = self::PLUGIN_SLUG;
 	protected const API_VERSION          = 'v1';
-	protected const VERSION              = '1.3.0';
+	protected const VERSION              = '1.3.1';
 	protected const OPTIONS_COLUMN_NAME  = 'options';
 	protected const REQUIRED_PHP_VERSION = '7.3.0';
 	protected const OFFICIAL_DIRECTORY   = 'https://wordpress.org/plugins/' . self::PLUGIN_SLUG . '/';
