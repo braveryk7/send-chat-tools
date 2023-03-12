@@ -41,7 +41,7 @@ class Sct_Create_Content extends Sct_Base {
 			$comment = $this->get_comment_data( $comment_id );
 
 			foreach ( $tools as $tool ) {
-				'chatwork' === $tool ? $api_column = 'api_token' : $api_column = 'webhook_url';
+				$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
 
 				if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
 					global $wpdb;
