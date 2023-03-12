@@ -78,12 +78,11 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param string $comment_user_id Comment user id.
 	 */
 	private function get_send_status( string $tool_name, array $tools, string $comment_user_id ): bool {
-		$status     = [
+		$status = [
 			'use'    => false,
 			'api'    => false,
 			'author' => false,
 		];
-		$api_exists = false;
 
 		$status['use'] = $tools['use'] ? true : false;
 
