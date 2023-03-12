@@ -109,15 +109,6 @@ class Sct_Create_Content extends Sct_Base {
 	}
 
 	/**
-	 * Get comment data.
-	 *
-	 * @param int $comment_id Comment ID.
-	 */
-	private function get_comment_data( int $comment_id ): object {
-		return get_comment( $comment_id );
-	}
-
-	/**
 	 * Create send options.
 	 *
 	 * @param string $type           Create type.
