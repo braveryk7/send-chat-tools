@@ -234,18 +234,13 @@ class Sct_Create_Content extends Sct_Base {
 	 * @param array  $update_content Update data.
 	 */
 	private function create_update_message( string $tool, array $update_content ) {
+		$add_core    = null;
+		$add_themes  = null;
+		$add_plugins = null;
+
 		foreach ( $update_content as $value ) {
-			switch ( $value['attribute'] ) {
-				case 'core':
-					$add_core = '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
-					break;
-				case 'theme':
-					$add_themes = '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
-					break;
-				case 'plugin':
-					$add_plugins = '   ' . $value['name'] . ' ( ' . $value['current_version'] . ' -> ' . $value['new_version'] . ' )' . "\n";
-					break;
-			}
+			$is_core                              = 'core' === $value['attribute'] ? null : 's';
+			${ "add_$value[attribute]$is_core" } .= "   $value[name] ( $value[current_version] -> $value[new_version] )\n";
 		};
 
 		$plain               = new stdClass();
@@ -259,7 +254,6 @@ class Sct_Create_Content extends Sct_Base {
 		$plain->admin_url    = admin_url() . 'update-core.php';
 		$plain->update_title = $this->get_send_text( 'update', 'title' );
 		$plain->update_text  = $this->get_send_text( 'update', 'update' );
-
 		return $plain;
 	}
 
