@@ -96,11 +96,11 @@ class Sct_Create_Content extends Sct_Base {
 				$status['api'] = ! empty( $api ) ? true : false;
 				break;
 			case 'chatwork':
-				$api = [
+				$api           = [
 					'api_token' => $tools['api_token'],
 					'room_id'   => $tools['room_id'],
 				];
-				! empty( $api['api_token'] ) && ! empty( $api['room_id'] ) ? $status['api'] = true : $status['api'] = false;
+				$status['api'] = ! empty( $api['api_token'] ) && ! empty( $api['room_id'] ) ? true : false;
 				break;
 			default:
 				$status['api'] = false;
