@@ -71,7 +71,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 		$approved_message = new ReflectionMethod( $this->instance, 'generate_comment_approved_message' );
 		$approved_message->setAccessible( true );
 
-		$generate_context = new ReflectionMethod( $this->instance, 'make_context' );
+		$generate_context = new ReflectionMethod( $this->instance, 'generate_context' );
 		$generate_context->setAccessible( true );
 
 		$site_name      = get_bloginfo( 'name' );
