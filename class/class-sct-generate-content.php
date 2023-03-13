@@ -258,7 +258,7 @@ class Sct_Generate_Content extends Sct_Base {
 	}
 
 	/**
-	 * Create plugin update message.
+	 * Generate plugin update message.
 	 *
 	 * @param string $tool           Tool name.
 	 * @param array  $update_message Update message.
