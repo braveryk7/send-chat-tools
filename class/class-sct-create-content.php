@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Assemble the content before sending.
  */
-class Sct_Create_Content extends Sct_Base {
+class Sct_Generate_Content extends Sct_Base {
 	/**
 	 * WordPress hook.
 	 */
