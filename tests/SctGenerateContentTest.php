@@ -187,7 +187,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: make_context()
+	 * TEST: generate_context()
 	 *
 	 * @testWith [ "slack" ]
 	 *           [ "discord" ]
