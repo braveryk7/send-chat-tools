@@ -54,7 +54,7 @@ class Sct_Error_Mail extends Sct_Base {
 	}
 
 	/**
-	 * Make mail to, title, and message.
+	 * Generate mail to, title, and message.
 	 */
 	public function generate_contents(): array {
 		$comment          = get_comment( $this->comment_id );
