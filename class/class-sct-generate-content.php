@@ -161,7 +161,7 @@ class Sct_Generate_Content extends Sct_Base {
 	}
 
 	/**
-	 * Create comment message.
+	 * Generate comment message.
 	 *
 	 * @param string $tool    Tool name.
 	 * @param object $comment Comment data.
