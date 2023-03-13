@@ -71,8 +71,8 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 		$approved_message = new ReflectionMethod( $this->instance, 'generate_comment_approved_message' );
 		$approved_message->setAccessible( true );
 
-		$make_context = new ReflectionMethod( $this->instance, 'make_context' );
-		$make_context->setAccessible( true );
+		$generate_context = new ReflectionMethod( $this->instance, 'make_context' );
+		$generate_context->setAccessible( true );
 
 		$site_name      = get_bloginfo( 'name' );
 		$site_url       = get_bloginfo( 'url' );
@@ -81,7 +81,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 		$comment_status = $approved_message->invoke( $this->instance, $tool, $comment );
 
 		$expected = match ( $tool ) {
-			'slack' => ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $make_context ) {
+			'slack' => ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $generate_context ) {
 				$header_emoji     = ':mailbox_with_mail:';
 				$header_message   = "{$header_emoji} {$site_name}({$site_url})" . $get_send_text->invoke( $this->instance, 'comment', 'title' );
 				$comment_article  = '*' . $get_send_text->invoke( $this->instance, 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
@@ -90,7 +90,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 				$comment_content  = '*' . $get_send_text->invoke( $this->instance, 'comment', 'content' ) . "*\n{$comment->comment_content}";
 				$comment_url      = '*' . $get_send_text->invoke( $this->instance, 'comment', 'url' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
 				$comment_statuses = '*' . $get_send_text->invoke( $this->instance, 'comment', 'status' ) . "*\n{$comment_status}";
-				$context          = $make_context->invoke( $this->instance, $tool );
+				$context          = $generate_context->invoke( $this->instance, $tool );
 
 				$blocks = new Sct_Slack_Blocks();
 
