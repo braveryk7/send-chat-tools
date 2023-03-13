@@ -171,7 +171,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: make_comment_approved_message()
+	 * TEST: generate_comment_approved_message()
 	 *
 	 * @dataProvider make_comment_approved_message_parameters
 	 *
