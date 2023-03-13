@@ -124,7 +124,7 @@ class Sct_Generate_Content extends Sct_Base {
 				break;
 			case 'update':
 				$plain_data = $this->generate_update_message( $tool, $update_content );
-				$message    = $this->make_processed_chat_tools( $plain_data );
+				$message    = $this->generate_processed_chat_tools( $plain_data );
 				break;
 			case 'dev_notify':
 				$message = $this->generate_developer_message( $tool, $update_content );
