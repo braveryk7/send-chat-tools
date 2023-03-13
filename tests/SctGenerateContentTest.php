@@ -108,7 +108,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 					],
 				];
 			} ),
-			'discord' => ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $make_context ) {
+			'discord' => ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $generate_context ) {
 				return $site_name . '( <' . $site_url . '> )' . $get_send_text->invoke( $this->instance, 'comment', 'title' ) . "\n\n" .
 					$get_send_text->invoke( $this->instance, 'comment', 'article' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
 					$get_send_text->invoke( $this->instance, 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
@@ -116,7 +116,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 					$get_send_text->invoke( $this->instance, 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
 					$get_send_text->invoke( $this->instance, 'comment', 'url' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
 					$get_send_text->invoke( $this->instance, 'comment', 'status' ) . $comment_status . "\n\n" .
-					$make_context->invoke( $this->instance, $tool );
+					$generate_context->invoke( $this->instance, $tool );
 			} ),
 			'chatwork' =>  ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $make_context ) {
 				return [
