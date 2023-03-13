@@ -54,7 +54,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: make_comment_message()
+	 * TEST: generate_comment_message()
 	 *
 	 * @dataProvider make_comment_message_parameters
 	 *
