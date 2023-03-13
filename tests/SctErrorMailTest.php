@@ -36,9 +36,9 @@ class SctErrorMailTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: make_contents()
+	 * TEST: generate_contents()
 	 */
-	public function test_make_contents() {
+	public function test_generate_contents() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
 

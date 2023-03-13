@@ -2,7 +2,7 @@
 declare( strict_types = 1 );
 
 /**
- * Test: Sct_Create_Content
+ * Test: Sct_Generate_Content
  */
 class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	/**
@@ -20,7 +20,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 			define( 'ABSPATH', '' );
 		}
 
-		require_once './class/class-sct-create-content.php';
+		require_once './class/class-sct-generate-content.php';
 		require_once './tests/lib/wordpress-functions.php';
 	}
 
@@ -29,7 +29,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	 * Create instance.
 	 */
 	protected function setUp() :void {
-		$this->instance = new Sct_Create_Content();
+		$this->instance = new Sct_Generate_Content();
 	}
 
 	/**
@@ -54,25 +54,25 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: make_comment_message()
+	 * TEST: generate_comment_message()
 	 *
-	 * @dataProvider make_comment_message_parameters
+	 * @dataProvider generate_comment_message_parameters
 	 *
 	 * @param string $tool    Chat tool name.
 	 * @param object $comment Comment data.
 	 */
-	public function test_make_comment_message( string $tool, object $comment ): void {
-		$method = new ReflectionMethod( $this->instance, 'make_comment_message' );
+	public function test_generate_comment_message( string $tool, object $comment ): void {
+		$method = new ReflectionMethod( $this->instance, 'generate_comment_message' );
 		$method->setAccessible( true );
 
 		$get_send_text = new ReflectionMethod( $this->instance, 'get_send_text' );
 		$get_send_text->setAccessible( true );
 
-		$approved_message = new ReflectionMethod( $this->instance, 'make_comment_approved_message' );
+		$approved_message = new ReflectionMethod( $this->instance, 'generate_comment_approved_message' );
 		$approved_message->setAccessible( true );
 
-		$make_context = new ReflectionMethod( $this->instance, 'make_context' );
-		$make_context->setAccessible( true );
+		$generate_context = new ReflectionMethod( $this->instance, 'generate_context' );
+		$generate_context->setAccessible( true );
 
 		$site_name      = get_bloginfo( 'name' );
 		$site_url       = get_bloginfo( 'url' );
@@ -81,7 +81,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 		$comment_status = $approved_message->invoke( $this->instance, $tool, $comment );
 
 		$expected = match ( $tool ) {
-			'slack' => ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $make_context ) {
+			'slack' => ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $generate_context ) {
 				$header_emoji     = ':mailbox_with_mail:';
 				$header_message   = "{$header_emoji} {$site_name}({$site_url})" . $get_send_text->invoke( $this->instance, 'comment', 'title' );
 				$comment_article  = '*' . $get_send_text->invoke( $this->instance, 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
@@ -90,7 +90,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 				$comment_content  = '*' . $get_send_text->invoke( $this->instance, 'comment', 'content' ) . "*\n{$comment->comment_content}";
 				$comment_url      = '*' . $get_send_text->invoke( $this->instance, 'comment', 'url' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
 				$comment_statuses = '*' . $get_send_text->invoke( $this->instance, 'comment', 'status' ) . "*\n{$comment_status}";
-				$context          = $make_context->invoke( $this->instance, $tool );
+				$context          = $generate_context->invoke( $this->instance, $tool );
 
 				$blocks = new Sct_Slack_Blocks();
 
@@ -108,7 +108,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 					],
 				];
 			} ),
-			'discord' => ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $make_context ) {
+			'discord' => ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $generate_context ) {
 				return $site_name . '( <' . $site_url . '> )' . $get_send_text->invoke( $this->instance, 'comment', 'title' ) . "\n\n" .
 					$get_send_text->invoke( $this->instance, 'comment', 'article' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
 					$get_send_text->invoke( $this->instance, 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
@@ -116,9 +116,9 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 					$get_send_text->invoke( $this->instance, 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
 					$get_send_text->invoke( $this->instance, 'comment', 'url' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
 					$get_send_text->invoke( $this->instance, 'comment', 'status' ) . $comment_status . "\n\n" .
-					$make_context->invoke( $this->instance, $tool );
+					$generate_context->invoke( $this->instance, $tool );
 			} ),
-			'chatwork' =>  ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $make_context ) {
+			'chatwork' =>  ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $generate_context ) {
 				return [
 					'body' =>
 						'[info][title]' . $site_name . '(' . $site_url . ')' . $get_send_text->invoke( $this->instance, 'comment', 'title' ) . '[/title]' .
@@ -129,7 +129,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 						$get_send_text->invoke( $this->instance, 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n" .
 						'[hr]' .
 						$get_send_text->invoke( $this->instance, 'comment', 'status' ) . $comment_status .
-						$make_context->invoke( $this->instance, $tool ) .
+						$generate_context->invoke( $this->instance, $tool ) .
 						'[/info]',
 				];
 			} ),
@@ -171,23 +171,23 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: make_comment_approved_message()
+	 * TEST: generate_comment_approved_message()
 	 *
-	 * @dataProvider make_comment_approved_message_parameters
+	 * @dataProvider generate_comment_approved_message_parameters
 	 *
 	 * @param string $tool_name Chat tool name.
 	 * @param object $comment WordPress comment date.
 	 * @param string $expected Expected value.
 	 */
-	public function test_make_comment_approved_message( string $tool_name, object $comment, string $expected ): void {
-		$method = new ReflectionMethod( $this->instance, 'make_comment_approved_message' );
+	public function test_generate_comment_approved_message( string $tool_name, object $comment, string $expected ): void {
+		$method = new ReflectionMethod( $this->instance, 'generate_comment_approved_message' );
 		$method->setAccessible( true );
 
 		$this->assertSame( $expected, $method->invoke( $this->instance, $tool_name, $comment ) );
 	}
 
 	/**
-	 * TEST: make_context()
+	 * TEST: generate_context()
 	 *
 	 * @testWith [ "slack" ]
 	 *           [ "discord" ]
@@ -195,8 +195,8 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	 *
 	 * @param string $tool_name Chat tool name.
 	 */
-	public function test_make_context( string $tool_name ): void {
-		$method = new ReflectionMethod( $this->instance, 'make_context' );
+	public function test_generate_context( string $tool_name ): void {
+		$method = new ReflectionMethod( $this->instance, 'generate_context' );
 		$method->setAccessible( true );
 
 		$message = [
@@ -218,9 +218,9 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: make_comment_message()
+	 * TEST: generate_comment_message()
 	 */
-	public function make_comment_message_parameters(): array {
+	public function generate_comment_message_parameters(): array {
 		$comment                       = new stdClass();
 		$comment->comment_post_ID      = '123';
 		$comment->comment_ID           = '111';
@@ -247,9 +247,9 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: make_comment_approved_message
+	 * TEST: generate_comment_approved_message
 	 */
-	public function make_comment_approved_message_parameters(): array {
+	public function generate_comment_approved_message_parameters(): array {
 		require_once './tests/lib/wordpress-functions.php';
 
 		$comment                   = new stdClass();

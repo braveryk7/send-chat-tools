@@ -320,7 +320,7 @@ class Sct_Base {
 				$send_mail->send_mail( ...$send_mail->update_contents( $options['plain_data'] ) );
 			} else {
 				$send_mail = new Sct_Error_Mail( $status_code, $id, $tools );
-				$send_mail->send_mail( ...$send_mail->make_contents() );
+				$send_mail->send_mail( ...$send_mail->generate_contents() );
 			}
 		}
 
