@@ -504,7 +504,7 @@ class Sct_Generate_Content extends Sct_Base {
 	 * @param string $tool_name Tool name.
 	 * @param object $comment   Comment data.
 	 */
-	private function make_comment_approved_message( string $tool_name, object $comment ): string {
+	private function generate_comment_approved_message( string $tool_name, object $comment ): string {
 		$comment_status = '';
 		$approved_url   = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
 		$unapproved     = $this->get_send_text( 'comment', 'unapproved' );
