@@ -173,7 +173,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: generate_comment_approved_message()
 	 *
-	 * @dataProvider make_comment_approved_message_parameters
+	 * @dataProvider generate_comment_approved_message_parameters
 	 *
 	 * @param string $tool_name Chat tool name.
 	 * @param object $comment WordPress comment date.
