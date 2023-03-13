@@ -109,7 +109,7 @@ class Sct_Generate_Content extends Sct_Base {
 	}
 
 	/**
-	 * Create send options.
+	 * Generate send options.
 	 *
 	 * @param string $type           Create type.
 	 * @param string $tool           Tool name.
