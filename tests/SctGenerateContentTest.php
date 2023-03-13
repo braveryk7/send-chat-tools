@@ -20,7 +20,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 			define( 'ABSPATH', '' );
 		}
 
-		require_once './class/class-sct-create-content.php';
+		require_once './class/class-sct-generate-content.php';
 		require_once './tests/lib/wordpress-functions.php';
 	}
 
