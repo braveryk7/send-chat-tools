@@ -263,7 +263,7 @@ class Sct_Generate_Content extends Sct_Base {
 	 * @param string $tool           Tool name.
 	 * @param array  $update_message Update message.
 	 */
-	private function create_developer_message( string $tool, array $update_message ) {
+	private function generate_developer_message( string $tool, array $update_message ) {
 		$message = __( 'No announcement.', 'send- chat-tools' );
 
 		if ( isset( $update_message['title'] ) && isset( $update_message['message'] ) && array_key_exists( 'url', $update_message ) ) {
