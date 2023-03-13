@@ -182,7 +182,7 @@ class Sct_Generate_Content extends Sct_Base {
 			$comment_content  = '*' . $this->get_send_text( 'comment', 'content' ) . "*\n{$comment->comment_content}";
 			$comment_url      = '*' . $this->get_send_text( 'comment', 'url' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
 			$comment_statuses = '*' . $this->get_send_text( 'comment', 'status' ) . "*\n{$comment_status}";
-			$context          = $this->make_context( $tool );
+			$context          = $this->generate_context( $tool );
 
 			$blocks  = new Sct_Slack_Blocks();
 			$message = [
