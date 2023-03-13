@@ -111,7 +111,7 @@ class Sct_Generate_Content extends Sct_Base {
 	/**
 	 * Generate send options.
 	 *
-	 * @param string $type           Create type.
+	 * @param string $type           Generate type.
 	 * @param string $tool           Tool name.
 	 * @param object $comment        Comment data.
 	 * @param array  $update_content Update data or message.
