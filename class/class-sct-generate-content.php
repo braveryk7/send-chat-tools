@@ -359,7 +359,7 @@ class Sct_Generate_Content extends Sct_Base {
 				$website      = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
 				$update_page  = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
 				$ignore       = "\n" . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $update_message['key'] . "\n";
-				$message      = $title . $main_content . $website . $update_page . $ignore . "\n" . $this->make_context( $tool );
+				$message      = $title . $main_content . $website . $update_page . $ignore . "\n" . $this->generate_context( $tool );
 			} elseif ( 'chatwork' === $tool ) {
 				$website     = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url . "\n" : null;
 				$update_page = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url . "\n" : null;
