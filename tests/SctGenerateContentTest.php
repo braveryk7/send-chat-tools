@@ -29,7 +29,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	 * Create instance.
 	 */
 	protected function setUp() :void {
-		$this->instance = new Sct_Create_Content();
+		$this->instance = new Sct_Generate_Content();
 	}
 
 	/**
