@@ -220,7 +220,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: generate_comment_message()
 	 */
-	public function make_comment_message_parameters(): array {
+	public function generate_comment_message_parameters(): array {
 		$comment                       = new stdClass();
 		$comment->comment_post_ID      = '123';
 		$comment->comment_ID           = '111';
