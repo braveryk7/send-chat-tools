@@ -196,7 +196,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	 * @param string $tool_name Chat tool name.
 	 */
 	public function test_generate_context( string $tool_name ): void {
-		$method = new ReflectionMethod( $this->instance, 'make_context' );
+		$method = new ReflectionMethod( $this->instance, 'generate_context' );
 		$method->setAccessible( true );
 
 		$message = [
