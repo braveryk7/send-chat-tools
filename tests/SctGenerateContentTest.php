@@ -56,7 +56,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * TEST: generate_comment_message()
 	 *
-	 * @dataProvider make_comment_message_parameters
+	 * @dataProvider generate_comment_message_parameters
 	 *
 	 * @param string $tool    Chat tool name.
 	 * @param object $comment Comment data.
