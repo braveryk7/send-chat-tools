@@ -116,7 +116,7 @@ class Sct_Generate_Content extends Sct_Base {
 	 * @param object $comment        Comment data.
 	 * @param array  $update_content Update data or message.
 	 */
-	private function create_content( string $type, string $tool, object $comment = null, array $update_content = [] ): array {
+	private function generate_content( string $type, string $tool, object $comment = null, array $update_content = [] ): array {
 		$message = [];
 		switch ( $type ) {
 			case 'comment':
