@@ -38,7 +38,7 @@ if ( ! $sct_phpver_judge->judgment( Sct_Base::get_required_php_version() ) ) {
 } else {
 	require_once dirname( __FILE__ ) . '/class/class-sct-encryption.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-admin-page.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-create-content.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-generate-content.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-activate.php';
