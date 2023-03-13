@@ -48,7 +48,7 @@ if ( ! $sct_phpver_judge->judgment( Sct_Base::get_required_php_version() ) ) {
 	/**
 	 * Start comment process.
 	 */
-	new Sct_Create_Content();
+	new Sct_Generate_Content();
 
 	/**
 	 * Start update process.
