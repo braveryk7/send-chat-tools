@@ -499,7 +499,7 @@ class Sct_Generate_Content extends Sct_Base {
 	}
 
 	/**
-	 * Create comment approved message.
+	 * Generate comment approved message.
 	 *
 	 * @param string $tool_name Tool name.
 	 * @param object $comment   Comment data.
