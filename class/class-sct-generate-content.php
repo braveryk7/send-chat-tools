@@ -460,7 +460,7 @@ class Sct_Generate_Content extends Sct_Base {
 	}
 
 	/**
-	 * Create comment notify content.
+	 * Get comment notify content.
 	 *
 	 * @param string $type  Message type.
 	 * @param string $param Item parameter.
