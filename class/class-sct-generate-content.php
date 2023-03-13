@@ -228,7 +228,7 @@ class Sct_Generate_Content extends Sct_Base {
 	}
 
 	/**
-	 * Create update message.
+	 * Generate update message.
 	 *
 	 * @param string $tool           Tool name.
 	 * @param array  $update_content Update data.
