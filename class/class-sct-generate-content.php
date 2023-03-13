@@ -441,7 +441,7 @@ class Sct_Generate_Content extends Sct_Base {
 				$plain_data->site_name . '( <' . $plain_data->site_url . '> )' . $plain_data->update_title . "\n\n" .
 				$plain_data->core . $plain_data->themes . $plain_data->plugins .
 				$plain_data->update_text . "\n" . $plain_data->update_page . '<' . $plain_data->admin_url . '>' . "\n\n" .
-				$this->make_context( $plain_data->tools );
+				$this->generate_context( $plain_data->tools );
 		} elseif ( 'chatwork' === $plain_data->tools ) {
 			$core    = isset( $plain_data->core ) ? rtrim( $plain_data->core ) . '[hr]' : $plain_data->core;
 			$themes  = isset( $plain_data->themes ) ? rtrim( $plain_data->themes ) . '[hr]' : $plain_data->themes;
