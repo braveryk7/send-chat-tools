@@ -45,7 +45,7 @@ class Sct_Generate_Content extends Sct_Base {
 
 				if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
 					global $wpdb;
-					$options = $this->create_content( $type, $tool, $comment );
+					$options = $this->generate_content( $type, $tool, $comment );
 					$this->send_tools( $options, (string) $wpdb->insert_id, $tool, $comment );
 				} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
 					$this->logger( 1001, $tool, '1' );
@@ -56,14 +56,14 @@ class Sct_Generate_Content extends Sct_Base {
 		} elseif ( 'update' === $type ) {
 			foreach ( $tools as $tool ) {
 				if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['send_update'] ) {
-					$options = $this->create_content( $type, $tool, null, $update_content );
+					$options = $this->generate_content( $type, $tool, null, $update_content );
 					$this->send_tools( $options, 'update', $tool );
 				}
 			}
 		} elseif ( 'dev_notify' === $type ) {
 			foreach ( $tools as $tool ) {
 				if ( $sct_options[ $tool ]['use'] ) {
-					$options = $this->create_content( $type, $tool, null, $update_content );
+					$options = $this->generate_content( $type, $tool, null, $update_content );
 					$this->send_tools( $options, 'dev_notify', $tool );
 				}
 			}
