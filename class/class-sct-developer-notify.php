@@ -34,7 +34,7 @@ class Sct_Developer_Notify extends Sct_Base {
 		if ( $developer_messages && is_array( $developer_messages ) ) {
 			foreach ( $developer_messages as $developer_message ) {
 				if ( $developer_message && $this->developer_message_controller( $developer_message ) ) {
-					$create_content = new Sct_Create_Content();
+					$create_content = new Sct_Generate_Content();
 					$create_content->controller( 0, 'dev_notify', $developer_message );
 				}
 			}
