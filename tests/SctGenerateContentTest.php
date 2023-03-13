@@ -118,7 +118,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 					$get_send_text->invoke( $this->instance, 'comment', 'status' ) . $comment_status . "\n\n" .
 					$generate_context->invoke( $this->instance, $tool );
 			} ),
-			'chatwork' =>  ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $make_context ) {
+			'chatwork' =>  ( function ( $tool, $comment ) use ( $site_name, $site_url, $article_title, $article_url, $comment_status, $get_send_text, $generate_context ) {
 				return [
 					'body' =>
 						'[info][title]' . $site_name . '(' . $site_url . ')' . $get_send_text->invoke( $this->instance, 'comment', 'title' ) . '[/title]' .
@@ -129,7 +129,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 						$get_send_text->invoke( $this->instance, 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n" .
 						'[hr]' .
 						$get_send_text->invoke( $this->instance, 'comment', 'status' ) . $comment_status .
-						$make_context->invoke( $this->instance, $tool ) .
+						$generate_context->invoke( $this->instance, $tool ) .
 						'[/info]',
 				];
 			} ),
