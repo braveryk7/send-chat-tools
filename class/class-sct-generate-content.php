@@ -207,7 +207,7 @@ class Sct_Generate_Content extends Sct_Base {
 				$this->get_send_text( 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
 				$this->get_send_text( 'comment', 'url' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
 				$this->get_send_text( 'comment', 'status' ) . $comment_status . "\n\n" .
-				$this->make_context( $tool );
+				$this->generate_context( $tool );
 		} elseif ( 'chatwork' === $tool ) {
 			$message = [
 				'body' =>
