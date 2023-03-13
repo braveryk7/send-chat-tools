@@ -180,7 +180,7 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	 * @param string $expected Expected value.
 	 */
 	public function test_make_comment_approved_message( string $tool_name, object $comment, string $expected ): void {
-		$method = new ReflectionMethod( $this->instance, 'make_comment_approved_message' );
+		$method = new ReflectionMethod( $this->instance, 'generate_comment_approved_message' );
 		$method->setAccessible( true );
 
 		$this->assertSame( $expected, $method->invoke( $this->instance, $tool_name, $comment ) );
