@@ -369,7 +369,7 @@ class Sct_Generate_Content extends Sct_Base {
 						$developer_message . "\n" .
 						$website . $update_page .
 						'[hr]' . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $update_message['key'] .
-						$this->make_context( $tool ) .
+						$this->generate_context( $tool ) .
 						'[/info]',
 				];
 			}
