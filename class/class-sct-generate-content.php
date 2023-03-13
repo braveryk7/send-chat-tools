@@ -536,7 +536,7 @@ class Sct_Generate_Content extends Sct_Base {
 	}
 
 	/**
-	 * Create context message.
+	 * Generate context message.
 	 *
 	 * @param string $tool_name Tool name.
 	 */
