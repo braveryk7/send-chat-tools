@@ -297,7 +297,7 @@ class Sct_Generate_Content extends Sct_Base {
 				$header_emoji   = ':tada:';
 				$header_message = "{$header_emoji} {$site_name}({$site_url}) " . $message_title;
 
-				$context = $this->make_context( $tool );
+				$context = $this->generate_context( $tool );
 
 				$blocks  = new Sct_Slack_Blocks();
 				$message = [
