@@ -96,7 +96,7 @@ class Sct_Error_Mail extends Sct_Base {
 	}
 
 	/**
-	 * Create WordPress Core, Theme, Plugin update content.
+	 * Generate WordPress Core, Theme, Plugin update content.
 	 *
 	 * @param object $plain_data The outgoing message is stored.
 	 */
