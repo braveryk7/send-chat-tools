@@ -361,7 +361,7 @@ class Sct_Base {
 				break;
 		}
 
-		return preg_match( $pattern, $value );
+		return preg_match( $pattern, $value ) ? true : false;
 	}
 
 	/**
