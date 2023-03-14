@@ -47,9 +47,9 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: create_content()
+	 * TEST: generate_content()
 	 */
-	public function test_create_content() {
+	public function test_generate_content() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
 
@@ -139,16 +139,23 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * TEST: create_update_message()
+	 * TEST: generate_update_message()
 	 */
-	public function test_create_update_message() {
+	public function test_generate_update_message() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
 
 	/**
-	 * TEST: create_developer_message()
+	 * TEST: generate_developer_message()
 	 */
-	public function test_create_developer_message() {
+	public function test_generate_developer_message() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
+	 * TEST: generate_processed_chat_tools
+	 */
+	public function test_generate_processed_chat_tools() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
 
