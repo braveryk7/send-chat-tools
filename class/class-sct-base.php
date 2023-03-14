@@ -343,7 +343,7 @@ class Sct_Base {
 	 * @param string $tool tool name.
 	 * @param string $value Webhook_url, Api token, room ID.
 	 */
-	protected function api_regex( string $tool, string $value ): int {
+	protected function api_regex( string $tool, string $value ): bool {
 		$pattern = '';
 
 		switch ( $tool ) {
