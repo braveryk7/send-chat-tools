@@ -490,7 +490,8 @@ class Sct_Generate_Content extends Sct_Base {
 				'website' => esc_html__( 'Official Web Site', 'send-chat-tools' ),
 				'detail'  => esc_html__( 'Update details', 'send-chat-tools' ),
 				'ignore'  => esc_html__(
-					'If this message is sent by a malicious developer, it can be rejected with the following key'
+					'If this message is sent by a malicious developer, it can be rejected with the following key',
+					'send-chat-tools',
 				),
 			],
 		];
