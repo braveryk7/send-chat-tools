@@ -42,7 +42,11 @@ class Sct_Dashboard_Notify extends Sct_Base {
 	 */
 	public function dashboard_message(): void {
 		foreach ( $this->get_developer_messages()['message'] as $value ) {
-			echo esc_html( $value ) . '<br>';
+			if ( strpos( $value, '：' ) || strpos( $value, ':' ) ) {
+				echo '<h3>' . esc_html( $value ) . '</h3>';
+			} else {
+				echo esc_html( $value ) . '<br>';
+			}
 		}
 
 		do_action( 'plugin_notify_dashboard_widget' );
