@@ -153,6 +153,13 @@ class SctCreateContentTest extends PHPUnit\Framework\TestCase {
 	}
 
 	/**
+	 * TEST: generate_processed_chat_tools
+	 */
+	public function test_generate_processed_chat_tools() {
+		$this->markTestIncomplete( 'This test is incomplete.' );
+	}
+
+	/**
 	 * TEST: get_send_text()
 	 *
 	 * @testWith [ "comment", "title", "new comment has been posted." ]
