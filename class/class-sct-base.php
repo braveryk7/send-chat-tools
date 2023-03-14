@@ -227,7 +227,6 @@ class Sct_Base {
 				__( '- The limit for logs will be reduced from 1,000 to 300 in the next update. Please make a backup if needed.', 'send-chat-tools' ),
 				'',
 				__( 'Improvements:', 'send-chat-tools' ),
-				__( '- ', 'send-chat-tools' ),
 				__( '- It is now ready for WordPress 6.2.', 'send-chat-tools' ),
 				__( '- The new functionality to reject certain developer messages has been implemented.', 'send-chat-tools' ),
 				__( '- The @wordpress/api-fetch package has been adopted for quicker and safer use of the setting page.', 'send-chat-tools' ),
