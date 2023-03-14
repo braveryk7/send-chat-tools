@@ -247,8 +247,8 @@ class Sct_Activate extends Sct_Base {
 
 			$sct_options['version'] = self::VERSION;
 			$this->set_sct_options( $sct_options );
-
-			return $developer_message;
 		}
+
+		return $developer_message;
 	}
 }
