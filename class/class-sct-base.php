@@ -343,8 +343,8 @@ class Sct_Base {
 	 * @param string $tool tool name.
 	 * @param string $value Webhook_url, Api token, room ID.
 	 */
-	protected function api_regex( string $tool, string $value ): int {
-		$pattern = '';
+	protected function api_regex( string $tool, string $value ): ?bool {
+		$pattern = null;
 
 		switch ( $tool ) {
 			case 'slack':
@@ -361,7 +361,7 @@ class Sct_Base {
 				break;
 		}
 
-		return preg_match( $pattern, $value );
+		return is_null( $pattern ) ? null : ( preg_match( $pattern, $value ) ? true : false );
 	}
 
 	/**
