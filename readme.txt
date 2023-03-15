@@ -16,6 +16,33 @@ You can instantly check comments that you didn't notice with the default email n
 
 === Changelog ===
 
+= 1.3.1 =
+
+Important:
+
+* Please update your PHP version to 8.0 or higher. The next update will not allow use with PHP 8.0 or lower and will automatically disable the plugin. This change is scheduled around April 15th.
+* The limit for logs will be reduced from 1,000 to 300 in the next update. Please make a backup if needed.
+
+Improvements:
+
+* It is now ready for WordPress 6.2.
+* The new functionality to reject certain developer messages has been implemented
+* The @wordpress/api-fetch package has been adopted for quicker and safer use of the setting page.
+* The design of the screen during data loading has been simplified.
+* We have moved the time settings for update notification to the Basic Settings tab. With this change, the Update Notification tab has been eliminated.
+* An output function for logs has been installed. You can choose to copy to the clipboard and output to text/CSV.
+* We now show an error message when data retrieval failures occur in the WordPress REST API.
+
+Fixes:
+* We have fixed a problem that was causing API errors being output to PHP.
+* Refactoring of code has been implemented.
+* Some legacy code has been removed.
+* We have resolved an issue that caused a critical error in some environments during updates.
+
+Development:
+
+* The development environment has been reorganized.
+
 = 1.3.0 =
 
 Miner update.
