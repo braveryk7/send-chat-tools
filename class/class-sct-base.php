@@ -223,7 +223,7 @@ class Sct_Base {
 				__( 'Here are the main changes...', 'send-chat-tools' ),
 				'',
 				__( 'Important:', 'send-chat-tools' ),
-				__( '- Please update your PHP version to 8.0 or higher. The next update will not allow use with PHP 8.0 or lower and will automatically disable the plugin. This change is scheduled around March 28th.', 'send-chat-tools' ),
+				__( '- Please update your PHP version to 8.0 or higher. The next update will not allow use with PHP 8.0 or lower and will automatically disable the plugin. This change is scheduled around April 15th.', 'send-chat-tools' ),
 				__( '- The limit for logs will be reduced from 1,000 to 300 in the next update. Please make a backup if needed.', 'send-chat-tools' ),
 				'',
 				__( 'Improvements:', 'send-chat-tools' ),

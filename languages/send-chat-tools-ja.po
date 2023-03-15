@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-03-14 12:47+0900\n"
-"PO-Revision-Date: 2023-03-14 12:53+0900\n"
+"POT-Creation-Date: 2023-03-15 17:39+0900\n"
+"PO-Revision-Date: 2023-03-15 17:39+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -50,10 +50,10 @@ msgstr "重要："
 msgid ""
 "- Please update your PHP version to 8.0 or higher. The next update will not "
 "allow use with PHP 8.0 or lower and will automatically disable the plugin. "
-"This change is scheduled around March 28th."
+"This change is scheduled around April 15th."
 msgstr ""
 "・次回のアップデートでPHP8.0以下の場合、プラグインが自動停止され使用できなく"
-"なります。アップデートは3月28日頃に行われる予定です。"
+"なります。アップデートは4月15日頃に行われる予定です。"
 
 #: class/class-sct-base.php:227
 msgid ""
@@ -270,17 +270,17 @@ msgstr ""
 "このメッセージが悪意のある開発者によって送信された場合、次のキーで拒否できま"
 "す"
 
-#: class/class-sct-generate-content.php:545
+#: class/class-sct-generate-content.php:546
 #: tests/SctGenerateContentTest.php:210
 msgid "This message was sent by Send Chat Tools: "
 msgstr "このメッセージはSend Chat Toolsにより送信されました。"
 
-#: class/class-sct-generate-content.php:546
+#: class/class-sct-generate-content.php:547
 #: tests/SctGenerateContentTest.php:211
 msgid "WordPress Plugin Directory"
 msgstr "WordPressプラグインディレクトリ"
 
-#: class/class-sct-generate-content.php:547
+#: class/class-sct-generate-content.php:548
 #: tests/SctGenerateContentTest.php:212
 msgid "Send Chat Tools Official Page"
 msgstr "Send Chat Tools公式ページ"
