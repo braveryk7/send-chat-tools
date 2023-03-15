@@ -34,6 +34,7 @@ Improvements:
 * We now show an error message when data retrieval failures occur in the WordPress REST API.
 
 Fixes:
+
 * We have fixed a problem that was causing API errors being output to PHP.
 * Refactoring of code has been implemented.
 * Some legacy code has been removed.
