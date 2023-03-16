@@ -54,7 +54,7 @@ class SctDashboardNotifyTest extends PHPUnit\Framework\TestCase {
 		$base               = new Sct_Base();
 		$developer_messages = $method->invoke( $sct_base )['message'];
 		foreach ( $developer_messages as $message ) {
-			$value .= $message . '<br>';
+			$value .= strpos( $message, '：' ) || strpos( $message, ':' ) ? '<h3>' . $message . '</h3>' : $message . '<br>';
 		}
 		$this->assertSame(
 			$value,
