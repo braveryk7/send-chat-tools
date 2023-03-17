@@ -34,17 +34,10 @@ class Sct_Logger extends Sct_Base {
 			'chatwork' => '3',
 		};
 
-		switch ( $notification_type ) {
-			case ctype_digit( $notification_type ):
-				$type = '1';
-				break;
-			case 'update':
-				$type = '2';
-				break;
-			case 'dev_notify':
-				$type = '3';
-				break;
-		}
+		$type = ctype_digit( $notification_type ) ? '1' : match ( $notification_type ) {
+			'update'     => '2',
+			'dev_notify' => '3',
+		};
 
 		if ( isset( $tool ) && isset( $type ) ) {
 			$create_log_data = [
