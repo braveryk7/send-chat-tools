@@ -551,18 +551,10 @@ class Sct_Generate_Content extends Sct_Base {
 		$wordpress_directory = $this->get_official_directory();
 		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
 
-		switch ( $tool_name ) {
-			case 'slack':
-				$context = $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>';
-				break;
-			case 'discord':
-				$context = $message[0] . "\n" . $message[1] . ' <' . $wordpress_directory . '>' . "\n" . $message[2] . ' <' . $official_web_site . '>';
-				break;
-			case 'chatwork':
-				$context = '[hr]' . $message[0] . "\n" . $message[1] . ' ' . $wordpress_directory . "\n" . $message[2] . ' ' . $official_web_site;
-				break;
-		}
-
-		return $context;
+		return match ( $tool_name ) {
+			'slack'    => $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>',
+			'discord'  => $message[0] . "\n" . $message[1] . ' <' . $wordpress_directory . '>' . "\n" . $message[2] . ' <' . $official_web_site . '>',
+			'chatwork' => '[hr]' . $message[0] . "\n" . $message[1] . ' ' . $wordpress_directory . "\n" . $message[2] . ' ' . $official_web_site,
+		};
 	}
 }
