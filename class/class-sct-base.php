@@ -344,22 +344,13 @@ class Sct_Base {
 	 * @param string $value Webhook_url, Api token, room ID.
 	 */
 	protected function api_regex( string $tool, string $value ): ?bool {
-		$pattern = null;
-
-		switch ( $tool ) {
-			case 'slack':
-				$pattern = '/\Ahttps:\/\/hooks.slack.com\/services\/[a-zA-Z0-9]*\/[a-zA-Z0-9]*\/[a-zA-Z0-9]*/';
-				break;
-			case 'discord':
-				$pattern = '/\Ahttps:\/\/discord.com\/api\/webhooks\/[0-9]*\/[a-zA-Z0-9_-]*/';
-				break;
-			case 'chatworkapi':
-				$pattern = '/\A[0-9a-zA-Z]+\z/';
-				break;
-			case 'chatworkid':
-				$pattern = '/\A[0-9]+\z/';
-				break;
-		}
+		$pattern = match ( $tool ) {
+			'slack'       => '/\Ahttps:\/\/hooks.slack.com\/services\/[a-zA-Z0-9]*\/[a-zA-Z0-9]*\/[a-zA-Z0-9]*/',
+			'discord'     => '/\Ahttps:\/\/discord.com\/api\/webhooks\/[0-9]*\/[a-zA-Z0-9_-]*/',
+			'chatworkapi' => '/\A[0-9a-zA-Z]+\z/',
+			'chatworkid'  => '/\A[0-9]+\z/',
+			default       => null,
+		};
 
 		return is_null( $pattern ) ? null : ( preg_match( $pattern, $value ) ? true : false );
 	}
