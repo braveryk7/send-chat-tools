@@ -511,27 +511,15 @@ class Sct_Generate_Content extends Sct_Base {
 		$unapproved     = $this->get_send_text( 'comment', 'unapproved' );
 		$click_message  = $this->get_send_text( 'comment', 'click' );
 
-		switch ( $comment->comment_approved ) {
-			case '1':
-				$comment_status = $this->get_send_text( 'comment', 'approved' );
-				break;
-			case '0':
-				switch ( $tool_name ) {
-					case 'slack':
-						$comment_status = $unapproved . '<<' . $approved_url . '|' . $click_message . '>>';
-						break;
-					case 'discord':
-						$comment_status = $unapproved . ' >> ' . $click_message . '( ' . $approved_url . ' )';
-						break;
-					case 'chatwork':
-						$comment_status = $unapproved . "\n" . $click_message . ' ' . $approved_url;
-						break;
-				}
-				break;
-			case 'spam':
-				$comment_status = $this->get_send_text( 'comment', 'spam' );
-				break;
-		}
+		$comment_status = match ( $comment->comment_approved ) {
+			'1'    => $this->get_send_text( 'comment', 'approved' ),
+			'2'    => match ( $tool_name ) {
+				'slack'    => $unapproved . '<<' . $approved_url . '|' . $click_message . '>>',
+				'discord'  => $unapproved . ' >> ' . $click_message . '( ' . $approved_url . ' )',
+				'chatwork' => $unapproved . "\n" . $click_message . ' ' . $approved_url,
+			},
+			'spam' => $this->get_send_text( 'comment', 'spam' ),
+		};
 
 		return $comment_status;
 	}
