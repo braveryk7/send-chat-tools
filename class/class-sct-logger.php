@@ -28,17 +28,11 @@ class Sct_Logger extends Sct_Base {
 	public function create_log( int $status_code, string $tool_name, string $notification_type ): array {
 		$create_log_data = [];
 
-		switch ( $tool_name ) {
-			case 'slack':
-				$tool = '1';
-				break;
-			case 'discord':
-				$tool = '2';
-				break;
-			case 'chatwork':
-				$tool = '3';
-				break;
-		}
+		$tool = match ( $tool_name ) {
+			'slack'    => '1',
+			'discord'  => '2',
+			'chatwork' => '3',
+		};
 
 		switch ( $notification_type ) {
 			case ctype_digit( $notification_type ):
