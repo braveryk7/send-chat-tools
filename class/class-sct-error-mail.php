@@ -65,17 +65,11 @@ class Sct_Error_Mail extends Sct_Base {
 		$article_url      = get_permalink( $comment->comment_post_ID );
 		$approved_url     = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
 
-		switch ( $comment_approved ) {
-			case '1':
-				$comment_status = esc_html__( 'Approved', 'send-chat-tools' );
-				break;
-			case '0':
-				$comment_status = esc_html__( 'Unapproved', 'send-chat-tools' ) . '<<' . $approved_url . '|' . esc_html__( 'Click here to approve', 'send-chat-tools' ) . '>>';
-				break;
-			case 'spam':
-				$comment_status = esc_html__( 'Spam', 'send-chat-tools' );
-				break;
-		}
+		$comment_status = match ( $comment_approved ) {
+			'1' => $comment_status = esc_html__( 'Approved', 'send-chat-tools' ),
+			'0' => esc_html__( 'Unapproved', 'send-chat-tools' ) . '<<' . $approved_url . '|' . esc_html__( 'Click here to approve', 'send-chat-tools' ) . '>>',
+			'spam' => esc_html__( 'Spam', 'send-chat-tools' ),
+		};
 
 		$mail_to      = get_option( 'admin_email' );
 		$mail_title   = esc_html__( 'You have received a new comment', 'send-chat-tools' );
