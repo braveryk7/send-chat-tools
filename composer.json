@@ -34,10 +34,5 @@
         "make-jspot": "./vendor/bin/wp i18n make-pot . languages/js/send-chat-tools-ja.pot --skip-php",
         "make-pot": "./vendor/bin/wp i18n make-pot . languages/send-chat-tools-ja.po --skip-js",
         "make-json": "./vendor/bin/wp i18n make-json languages/js --no-purge"
-    },
-    "config": {
-        "platform": {
-            "php": "7.3.0"
-        }
     }
 }
