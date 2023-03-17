@@ -66,8 +66,8 @@ class Sct_Error_Mail extends Sct_Base {
 		$approved_url     = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
 
 		$comment_status = match ( $comment_approved ) {
-			'1' => $comment_status = esc_html__( 'Approved', 'send-chat-tools' ),
-			'0' => esc_html__( 'Unapproved', 'send-chat-tools' ) . '<<' . $approved_url . '|' . esc_html__( 'Click here to approve', 'send-chat-tools' ) . '>>',
+			'1'    => $comment_status = esc_html__( 'Approved', 'send-chat-tools' ),
+			'0'    => esc_html__( 'Unapproved', 'send-chat-tools' ) . '<<' . $approved_url . '|' . esc_html__( 'Click here to approve', 'send-chat-tools' ) . '>>',
 			'spam' => esc_html__( 'Spam', 'send-chat-tools' ),
 		};
 
