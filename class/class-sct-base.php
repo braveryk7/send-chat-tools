@@ -93,14 +93,6 @@ class Sct_Base {
 	];
 
 	/**
-	 * Developer message.
-	 * Use dashboard, notify.
-	 *
-	 * @var array
-	 */
-	protected $developer_messages;
-
-	/**
 	 * Return add prefix.
 	 *
 	 * @param string $value After prefix value.
@@ -214,7 +206,7 @@ class Sct_Base {
 	 * Set & Get $this->developer_messages.
 	 */
 	protected function get_developer_messages(): array {
-		$this->developer_messages = [
+		return [
 			'key'     => plugin_basename( $this->get_plugin_path() ),
 			'type'    => 'plugin',
 			'title'   => esc_html__( 'Send Chat Tools', 'send-chat-tools' ),
@@ -249,8 +241,6 @@ class Sct_Base {
 				'update_page' => 'https://www.braveryk7.com/portfolio/send-chat-tools/#update',
 			],
 		];
-
-		return $this->developer_messages;
 	}
 
 	/**
