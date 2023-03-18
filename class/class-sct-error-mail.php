@@ -18,28 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Send error mail.
  */
 class Sct_Error_Mail extends Sct_Base {
-
-	/**
-	 * Return error code.
-	 *
-	 * @var int
-	 */
-	private $error_code;
-
-	/**
-	 * Comment ID.
-	 *
-	 * @var string
-	 */
-	private $comment_id;
-
-	/**
-	 * Tool name.
-	 *
-	 * @var string
-	 */
-	private $tool_name;
-
 	/**
 	 * Construc.
 	 *
@@ -47,7 +25,7 @@ class Sct_Error_Mail extends Sct_Base {
 	 * @param string $comment_id comment ID.
 	 * @param string $tool_name  Tool name.
 	 */
-	public function __construct( int $error_code, string $comment_id, string $tool_name ) {
+	public function __construct( private int $error_code, private string $comment_id, private string $tool_name ) {
 		$this->error_code = $error_code;
 		$this->comment_id = $comment_id;
 		$this->tool_name  = $tool_name;
