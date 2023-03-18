@@ -349,7 +349,7 @@ class Sct_Base {
 	 * Output browser console.
 	 * WARNING: Use debag only!
 	 *
-	 * @param string|int|float|boolean|array|object $value Output data.
+	 * @param mixid $value Output data.
 	 */
 	protected function console( $value ): void {
 		echo '<script>console.log(' . wp_json_encode( $value ) . ');</script>';
