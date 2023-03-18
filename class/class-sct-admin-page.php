@@ -148,7 +148,7 @@ class Sct_Admin_Page extends Sct_Base {
 	 *
 	 * @param WP_REST_Request $request WP_REST_Request object.
 	 */
-	public function editable_api( WP_REST_Request $request ) {
+	public function editable_api( WP_REST_Request $request ): WP_REST_Response {
 		$sct_options = $this->get_sct_options();
 		$params      = $request->get_json_params();
 		$keys        = [ 'slack', 'discord', 'chatwork', 'ignore_key', 'cron_time' ];
