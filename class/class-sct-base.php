@@ -351,7 +351,7 @@ class Sct_Base {
 	 *
 	 * @param mixed $value Output data.
 	 */
-	protected function console( $value ): void {
+	protected function console( mixed $value ): void {
 		echo '<script>console.log(' . wp_json_encode( $value ) . ');</script>';
 	}
 }
