@@ -93,14 +93,6 @@ class Sct_Base {
 	];
 
 	/**
-	 * Developer message.
-	 * Use dashboard, notify.
-	 *
-	 * @var array
-	 */
-	protected $developer_messages;
-
-	/**
 	 * Return add prefix.
 	 *
 	 * @param string $value After prefix value.
@@ -214,7 +206,7 @@ class Sct_Base {
 	 * Set & Get $this->developer_messages.
 	 */
 	protected function get_developer_messages(): array {
-		$this->developer_messages = [
+		return [
 			'key'     => plugin_basename( $this->get_plugin_path() ),
 			'type'    => 'plugin',
 			'title'   => esc_html__( 'Send Chat Tools', 'send-chat-tools' ),
@@ -249,8 +241,6 @@ class Sct_Base {
 				'update_page' => 'https://www.braveryk7.com/portfolio/send-chat-tools/#update',
 			],
 		];
-
-		return $this->developer_messages;
 	}
 
 	/**
@@ -344,22 +334,13 @@ class Sct_Base {
 	 * @param string $value Webhook_url, Api token, room ID.
 	 */
 	protected function api_regex( string $tool, string $value ): ?bool {
-		$pattern = null;
-
-		switch ( $tool ) {
-			case 'slack':
-				$pattern = '/\Ahttps:\/\/hooks.slack.com\/services\/[a-zA-Z0-9]*\/[a-zA-Z0-9]*\/[a-zA-Z0-9]*/';
-				break;
-			case 'discord':
-				$pattern = '/\Ahttps:\/\/discord.com\/api\/webhooks\/[0-9]*\/[a-zA-Z0-9_-]*/';
-				break;
-			case 'chatworkapi':
-				$pattern = '/\A[0-9a-zA-Z]+\z/';
-				break;
-			case 'chatworkid':
-				$pattern = '/\A[0-9]+\z/';
-				break;
-		}
+		$pattern = match ( $tool ) {
+			'slack'       => '/\Ahttps:\/\/hooks.slack.com\/services\/[a-zA-Z0-9]*\/[a-zA-Z0-9]*\/[a-zA-Z0-9]*/',
+			'discord'     => '/\Ahttps:\/\/discord.com\/api\/webhooks\/[0-9]*\/[a-zA-Z0-9_-]*/',
+			'chatworkapi' => '/\A[0-9a-zA-Z]+\z/',
+			'chatworkid'  => '/\A[0-9]+\z/',
+			default       => null,
+		};
 
 		return is_null( $pattern ) ? null : ( preg_match( $pattern, $value ) ? true : false );
 	}
@@ -368,9 +349,9 @@ class Sct_Base {
 	 * Output browser console.
 	 * WARNING: Use debag only!
 	 *
-	 * @param string|int|float|boolean|array|object $value Output data.
+	 * @param mixed $value Output data.
 	 */
-	protected function console( $value ): void {
+	protected function console( mixed $value ): void {
 		echo '<script>console.log(' . wp_json_encode( $value ) . ');</script>';
 	}
 }

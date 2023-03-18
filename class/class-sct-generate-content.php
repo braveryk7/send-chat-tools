@@ -45,7 +45,7 @@ class Sct_Generate_Content extends Sct_Base {
 
 				if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
 					global $wpdb;
-					$options = $this->generate_content( $type, $tool, $comment );
+					$options = $this->generate_content( type: $type, tool: $tool, comment: $comment );
 					$this->send_tools( $options, (string) $wpdb->insert_id, $tool, $comment );
 				} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
 					$this->logger( 1001, $tool, '1' );
@@ -56,14 +56,14 @@ class Sct_Generate_Content extends Sct_Base {
 		} elseif ( 'update' === $type ) {
 			foreach ( $tools as $tool ) {
 				if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['send_update'] ) {
-					$options = $this->generate_content( $type, $tool, null, $update_content );
+					$options = $this->generate_content( type: $type, tool: $tool, update_content: $update_content );
 					$this->send_tools( $options, 'update', $tool );
 				}
 			}
 		} elseif ( 'dev_notify' === $type ) {
 			foreach ( $tools as $tool ) {
 				if ( $sct_options[ $tool ]['use'] ) {
-					$options = $this->generate_content( $type, $tool, null, $update_content );
+					$options = $this->generate_content( type: $type, tool: $tool, update_content: $update_content );
 					$this->send_tools( $options, 'dev_notify', $tool );
 				}
 			}
@@ -166,7 +166,7 @@ class Sct_Generate_Content extends Sct_Base {
 	 * @param string $tool    Tool name.
 	 * @param object $comment Comment data.
 	 */
-	private function generate_comment_message( string $tool, object $comment ) {
+	private function generate_comment_message( string $tool, object $comment ): string | array {
 		$site_name      = get_bloginfo( 'name' );
 		$site_url       = get_bloginfo( 'url' );
 		$article_title  = get_the_title( $comment->comment_post_ID );
@@ -233,7 +233,7 @@ class Sct_Generate_Content extends Sct_Base {
 	 * @param string $tool           Tool name.
 	 * @param array  $update_content Update data.
 	 */
-	private function generate_update_message( string $tool, array $update_content ) {
+	private function generate_update_message( string $tool, array $update_content ): stdClass {
 		$add_core    = null;
 		$add_themes  = null;
 		$add_plugins = null;
@@ -263,7 +263,7 @@ class Sct_Generate_Content extends Sct_Base {
 	 * @param string $tool           Tool name.
 	 * @param array  $update_message Update message.
 	 */
-	private function generate_developer_message( string $tool, array $update_message ) {
+	private function generate_developer_message( string $tool, array $update_message ): string | array {
 		$message = __( 'No announcement.', 'send- chat-tools' );
 
 		if ( isset( $update_message['title'] ) && isset( $update_message['message'] ) && array_key_exists( 'url', $update_message ) ) {
@@ -380,9 +380,9 @@ class Sct_Generate_Content extends Sct_Base {
 	/**
 	 * Processed for chat tools.
 	 *
-	 * @param object $plain_data Plain data.
+	 * @param stdClass $plain_data Plain data.
 	 */
-	public function generate_processed_chat_tools( object $plain_data ) {
+	public function generate_processed_chat_tools( stdClass $plain_data ): string | array {
 		if ( 'slack' === $plain_data->tools ) {
 			$header_emoji   = ':zap:';
 			$header_message = "{$header_emoji} {$plain_data->site_name}({$plain_data->site_url})" . $plain_data->update_title;
@@ -511,27 +511,15 @@ class Sct_Generate_Content extends Sct_Base {
 		$unapproved     = $this->get_send_text( 'comment', 'unapproved' );
 		$click_message  = $this->get_send_text( 'comment', 'click' );
 
-		switch ( $comment->comment_approved ) {
-			case '1':
-				$comment_status = $this->get_send_text( 'comment', 'approved' );
-				break;
-			case '0':
-				switch ( $tool_name ) {
-					case 'slack':
-						$comment_status = $unapproved . '<<' . $approved_url . '|' . $click_message . '>>';
-						break;
-					case 'discord':
-						$comment_status = $unapproved . ' >> ' . $click_message . '( ' . $approved_url . ' )';
-						break;
-					case 'chatwork':
-						$comment_status = $unapproved . "\n" . $click_message . ' ' . $approved_url;
-						break;
-				}
-				break;
-			case 'spam':
-				$comment_status = $this->get_send_text( 'comment', 'spam' );
-				break;
-		}
+		$comment_status = match ( $comment->comment_approved ) {
+			'1'    => $this->get_send_text( 'comment', 'approved' ),
+			'0'    => match ( $tool_name ) {
+				'slack'    => $unapproved . '<<' . $approved_url . '|' . $click_message . '>>',
+				'discord'  => $unapproved . ' >> ' . $click_message . '( ' . $approved_url . ' )',
+				'chatwork' => $unapproved . "\n" . $click_message . ' ' . $approved_url,
+			},
+			'spam' => $this->get_send_text( 'comment', 'spam' ),
+		};
 
 		return $comment_status;
 	}
@@ -551,18 +539,10 @@ class Sct_Generate_Content extends Sct_Base {
 		$wordpress_directory = $this->get_official_directory();
 		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
 
-		switch ( $tool_name ) {
-			case 'slack':
-				$context = $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>';
-				break;
-			case 'discord':
-				$context = $message[0] . "\n" . $message[1] . ' <' . $wordpress_directory . '>' . "\n" . $message[2] . ' <' . $official_web_site . '>';
-				break;
-			case 'chatwork':
-				$context = '[hr]' . $message[0] . "\n" . $message[1] . ' ' . $wordpress_directory . "\n" . $message[2] . ' ' . $official_web_site;
-				break;
-		}
-
-		return $context;
+		return match ( $tool_name ) {
+			'slack'    => $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>',
+			'discord'  => $message[0] . "\n" . $message[1] . ' <' . $wordpress_directory . '>' . "\n" . $message[2] . ' <' . $official_web_site . '>',
+			'chatwork' => '[hr]' . $message[0] . "\n" . $message[1] . ' ' . $wordpress_directory . "\n" . $message[2] . ' ' . $official_web_site,
+		};
 	}
 }

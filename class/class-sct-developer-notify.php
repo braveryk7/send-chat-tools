@@ -99,15 +99,11 @@ class Sct_Developer_Notify extends Sct_Base {
 	 * @param array $developer_message Developer message.
 	 */
 	private function developer_message_key_exists( array $developer_message ): bool {
-		if ( 'theme' === $developer_message['type'] ) {
-			$themes = get_option( '_site_transient_theme_roots' );
-			return array_key_exists( $developer_message['key'], $themes ) ? true : false;
-		} elseif ( 'plugin' === $developer_message['type'] ) {
-			$plugins = get_option( 'active_plugins' );
-			return in_array( $developer_message['key'], $plugins, true ) ? true : false;
-		}
-
-		return false;
+		return match ( $developer_message['type'] ) {
+			'theme'  => array_key_exists( $developer_message['key'], get_option( '_site_transient_theme_roots' ) ) ? true : false,
+			'plugin' => in_array( $developer_message['key'], get_option( 'active_plugins' ), true ) ? true : false,
+			default  => false,
+		};
 	}
 
 	/**
