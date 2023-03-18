@@ -136,7 +136,7 @@ class Sct_Admin_Page extends Sct_Base {
 	/**
 	 * Custom endpoint for read.
 	 */
-	public function readable_api() {
+	public function readable_api(): WP_REST_Response {
 		$sct_options         = $this->get_sct_options();
 		$sct_logs            = get_option( $this->add_prefix( 'logs' ) );
 		$sct_options['logs'] = $sct_logs;
