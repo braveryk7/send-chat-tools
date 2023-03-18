@@ -102,6 +102,7 @@ class Sct_Developer_Notify extends Sct_Base {
 		return match ( $developer_message['type'] ) {
 			'theme'  => array_key_exists( $developer_message['key'], get_option( '_site_transient_theme_roots' ) ) ? true : false,
 			'plugin' => in_array( $developer_message['key'], get_option( 'active_plugins' ), true ) ? true : false,
+			default  => false,
 		};
 	}
 
