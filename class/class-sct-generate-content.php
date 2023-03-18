@@ -233,7 +233,7 @@ class Sct_Generate_Content extends Sct_Base {
 	 * @param string $tool           Tool name.
 	 * @param array  $update_content Update data.
 	 */
-	private function generate_update_message( string $tool, array $update_content ) {
+	private function generate_update_message( string $tool, array $update_content ): stdClass {
 		$add_core    = null;
 		$add_themes  = null;
 		$add_plugins = null;
