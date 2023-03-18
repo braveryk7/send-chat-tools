@@ -380,9 +380,9 @@ class Sct_Generate_Content extends Sct_Base {
 	/**
 	 * Processed for chat tools.
 	 *
-	 * @param object $plain_data Plain data.
+	 * @param stdClass $plain_data Plain data.
 	 */
-	public function generate_processed_chat_tools( object $plain_data ) {
+	public function generate_processed_chat_tools( stdClass $plain_data ) {
 		if ( 'slack' === $plain_data->tools ) {
 			$header_emoji   = ':zap:';
 			$header_message = "{$header_emoji} {$plain_data->site_name}({$plain_data->site_url})" . $plain_data->update_title;
