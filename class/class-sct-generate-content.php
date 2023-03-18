@@ -63,7 +63,7 @@ class Sct_Generate_Content extends Sct_Base {
 		} elseif ( 'dev_notify' === $type ) {
 			foreach ( $tools as $tool ) {
 				if ( $sct_options[ $tool ]['use'] ) {
-					$options = $this->generate_content( $type, $tool, null, $update_content );
+					$options = $this->generate_content( type: $type, tool: $tool, update_content: $update_content );
 					$this->send_tools( $options, 'dev_notify', $tool );
 				}
 			}
