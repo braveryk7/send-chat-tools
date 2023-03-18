@@ -513,7 +513,7 @@ class Sct_Generate_Content extends Sct_Base {
 
 		$comment_status = match ( $comment->comment_approved ) {
 			'1'    => $this->get_send_text( 'comment', 'approved' ),
-			'2'    => match ( $tool_name ) {
+			'0'    => match ( $tool_name ) {
 				'slack'    => $unapproved . '<<' . $approved_url . '|' . $click_message . '>>',
 				'discord'  => $unapproved . ' >> ' . $click_message . '( ' . $approved_url . ' )',
 				'chatwork' => $unapproved . "\n" . $click_message . ' ' . $approved_url,
