@@ -216,10 +216,9 @@ class Sct_Activate extends Sct_Base {
 	 */
 	private function crypto2plain( array $sct_options ): void {
 		if ( $sct_options['user_id'] ) {
-			$tools      = [ 'slack', 'discord', 'chatwork' ];
 			$encryption = new Sct_Encryption();
 
-			foreach ( $tools as $tool ) {
+			foreach ( [ 'slack', 'discord', 'chatwork' ] as $tool ) {
 				if ( 'slack' === $tool || 'discord' === $tool ) {
 					$sct_options[ $tool ]['webhook_url'] = $encryption->decrypt( $sct_options[ $tool ]['webhook_url'] );
 				} elseif ( 'chatwork' === $tool ) {
