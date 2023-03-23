@@ -138,8 +138,7 @@ class Sct_Admin_Page extends Sct_Base {
 	 */
 	public function readable_api(): WP_REST_Response {
 		$sct_options         = $this->get_sct_options();
-		$sct_logs            = get_option( $this->add_prefix( 'logs' ) );
-		$sct_options['logs'] = $sct_logs;
+		$sct_options['logs'] = get_option( $this->add_prefix( 'logs' ) );
 		return new WP_REST_Response( $sct_options, 200 );
 	}
 
