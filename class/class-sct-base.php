@@ -290,13 +290,11 @@ class Sct_Base {
 			}
 		}
 
-		if ( ! $regex ) {
-			$status_code = 1003;
-		} elseif ( ! isset( $result->errors ) ) {
-			$status_code = $result['response']['code'];
-		} else {
-			$status_code = 1000;
-		}
+		$status_code = match ( true ) {
+			! isset( $result->errors ) => $result['response']['code'],
+			! $regex                   => 1003,
+			default                    => 1000,
+		};
 
 		if ( 200 !== $status_code && 204 !== $status_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
