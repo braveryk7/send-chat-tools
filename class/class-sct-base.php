@@ -247,23 +247,23 @@ class Sct_Base {
 	 * Send Slack.
 	 *
 	 * @param array  $options API options.
-	 * @param string $id ID(Comment/Update).
-	 * @param string $tools Use chat tools prefix.
+	 * @param string $id      ID(Comment/Update).
+	 * @param string $tool    Use chat tools prefix.
 	 * @param object $comment Comment object.
 	 */
-	protected function send_tools( array $options, string $id, string $tools, object $comment = null ): bool {
+	protected function send_tools( array $options, string $id, string $tool, object $comment = null ): bool {
 
 		$sct_options = $this->get_sct_options();
 
-		switch ( $tools ) {
+		switch ( $tool ) {
 			case 'slack':
 			case 'discord':
-				$url   = $sct_options[ $tools ]['webhook_url'];
-				$regex = $this->api_regex( $tools, $url );
+				$url   = $sct_options[ $tool ]['webhook_url'];
+				$regex = $this->api_regex( $tool, $url );
 				break;
 			case 'chatwork':
-				$url   = 'https://api.chatwork.com/v2/rooms/' . $sct_options[ $tools ]['room_id'] . '/messages';
-				$regex = $this->api_regex( 'chatworkid', $sct_options[ $tools ]['room_id'] );
+				$url   = 'https://api.chatwork.com/v2/rooms/' . $sct_options[ $tool ]['room_id'] . '/messages';
+				$regex = $this->api_regex( 'chatworkid', $sct_options[ $tool ]['room_id'] );
 				break;
 		}
 
@@ -282,10 +282,10 @@ class Sct_Base {
 					],
 				];
 
-				if ( '3' <= count( $sct_options[ $tools ]['log'] ) ) {
-					array_pop( $sct_options[ $tools ]['log'] );
+				if ( '3' <= count( $sct_options[ $tool ]['log'] ) ) {
+					array_pop( $sct_options[ $tool ]['log'] );
 				}
-				$sct_options[ $tools ]['log'] = $logs + $sct_options[ $tools ]['log'];
+				$sct_options[ $tool ]['log'] = $logs + $sct_options[ $tool ]['log'];
 				$this->set_sct_options( $sct_options );
 			}
 		}
