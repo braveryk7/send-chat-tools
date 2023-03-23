@@ -158,8 +158,6 @@ class Sct_Admin_Page extends Sct_Base {
 			if ( $params && array_key_exists( $key, $params ) ) {
 				$sct_options[ $key ] = $params[ $key ];
 				$flag                = true;
-			}
-			if ( $flag ) {
 				continue;
 			}
 		}
