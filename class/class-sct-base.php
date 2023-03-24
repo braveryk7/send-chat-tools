@@ -290,26 +290,24 @@ class Sct_Base {
 			}
 		}
 
-		if ( ! $regex ) {
-			$status_code = 1003;
-		} elseif ( ! isset( $result->errors ) ) {
-			$status_code = $result['response']['code'];
-		} else {
-			$status_code = 1000;
-		}
+		$status_code = match ( true ) {
+			! isset( $result->errors ) => $result['response']['code'],
+			! $regex                   => 1003,
+			default                    => 1000,
+		};
 
 		if ( 200 !== $status_code && 204 !== $status_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
 			if ( 'update' === $id ) {
-				$send_mail = new Sct_Error_Mail( $status_code, $id, $tools );
+				$send_mail = new Sct_Error_Mail( $status_code, $id, $tool );
 				$send_mail->send_mail( ...$send_mail->update_contents( $options['plain_data'] ) );
 			} else {
-				$send_mail = new Sct_Error_Mail( $status_code, $id, $tools );
+				$send_mail = new Sct_Error_Mail( $status_code, $id, $tool );
 				$send_mail->send_mail( ...$send_mail->generate_contents() );
 			}
 		}
 
-		return $this->logger( $status_code, $tools, $id );
+		return $this->logger( $status_code, $tool, $id );
 	}
 
 	/**
