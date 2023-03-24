@@ -74,8 +74,7 @@ class Sct_Check_Update extends Sct_Base {
 		$theme_data       = null;
 
 		if ( ! empty( $get_theme_status->response ) ) {
-			$update_themes = $get_theme_status->response;
-			foreach ( $update_themes as $key => $value ) {
+			foreach ( $get_theme_status->response as $key => $value ) {
 				$theme_date                      = wp_get_theme( $key );
 				$theme_data[ $theme_date->name ] = [
 					'name'            => $theme_date->name,
