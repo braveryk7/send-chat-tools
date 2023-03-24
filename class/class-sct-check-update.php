@@ -70,22 +70,7 @@ class Sct_Check_Update extends Sct_Base {
 	 * Themes.
 	 */
 	private function check_themes(): ?array {
-		$get_theme_status = get_option( '_site_transient_update_themes' );
-		$theme_data       = null;
-
-		if ( ! empty( $get_theme_status->response ) ) {
-			foreach ( $get_theme_status->response as $key => $value ) {
-				$theme_date                      = wp_get_theme( $key );
-				$theme_data[ $theme_date->name ] = [
-					'name'            => $theme_date->name,
-					'attribute'       => 'theme',
-					'path'            => $theme_date->theme_root . '/' . $key,
-					'current_version' => $theme_date->version,
-					'new_version'     => $value['new_version'],
-				];
-			}
-		}
-
+		$theme_data      = null;
 		$current_theme   = is_child_theme() ? wp_get_theme()->parent()->name : wp_get_theme()->Name;
 		$current_version = is_child_theme() ? wp_get_theme()->parent()->Version : wp_get_theme()->Version;
 
@@ -97,6 +82,21 @@ class Sct_Check_Update extends Sct_Base {
 					'attribute'       => 'theme',
 					'current_version' => $current_version,
 					'new_version'     => $get_update->update->version,
+				];
+			}
+		}
+
+		$get_theme_status = get_option( '_site_transient_update_themes' );
+
+		if ( ! empty( $get_theme_status->response ) ) {
+			foreach ( $get_theme_status->response as $key => $value ) {
+				$theme_date                      = wp_get_theme( $key );
+				$theme_data[ $theme_date->name ] = [
+					'name'            => $theme_date->name,
+					'attribute'       => 'theme',
+					'path'            => $theme_date->theme_root . '/' . $key,
+					'current_version' => $theme_date->version,
+					'new_version'     => $value['new_version'],
 				];
 			}
 		}
