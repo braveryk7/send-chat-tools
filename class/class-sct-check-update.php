@@ -41,8 +41,8 @@ class Sct_Check_Update extends Sct_Base {
 		}
 
 		if ( ! empty( $updates ) ) {
-			$next = new Sct_Generate_Content();
-			$next->controller( type: 'update', update_content: $updates );
+			$generate_content = new Sct_Generate_Content();
+			$generate_content->controller( type: 'update', update_content: $updates );
 		}
 	}
 
@@ -70,12 +70,26 @@ class Sct_Check_Update extends Sct_Base {
 	 * Themes.
 	 */
 	private function check_themes(): ?array {
+		$theme_data      = null;
+		$current_theme   = is_child_theme() ? wp_get_theme()->parent()->name : wp_get_theme()->Name;
+		$current_version = is_child_theme() ? wp_get_theme()->parent()->Version : wp_get_theme()->Version;
+
+		if ( array_key_exists( $current_theme, self::THEME_OPTION_NAME ) ) {
+			$get_update = get_option( self::THEME_OPTION_NAME[ $current_theme ] );
+			if ( version_compare( $current_version, $get_update->update->version, '<' ) ) {
+				$theme_data[ $current_theme ] = [
+					'name'            => $current_theme,
+					'attribute'       => 'theme',
+					'current_version' => $current_version,
+					'new_version'     => $get_update->update->version,
+				];
+			}
+		}
+
 		$get_theme_status = get_option( '_site_transient_update_themes' );
-		$theme_data       = null;
 
 		if ( ! empty( $get_theme_status->response ) ) {
-			$update_themes = $get_theme_status->response;
-			foreach ( $update_themes as $key => $value ) {
+			foreach ( $get_theme_status->response as $key => $value ) {
 				$theme_date                      = wp_get_theme( $key );
 				$theme_data[ $theme_date->name ] = [
 					'name'            => $theme_date->name,
@@ -83,21 +97,6 @@ class Sct_Check_Update extends Sct_Base {
 					'path'            => $theme_date->theme_root . '/' . $key,
 					'current_version' => $theme_date->version,
 					'new_version'     => $value['new_version'],
-				];
-			}
-		}
-
-		$theme_name      = is_child_theme() ? wp_get_theme()->parent()->name : wp_get_theme()->Name;
-		$current_version = is_child_theme() ? wp_get_theme()->parent()->Version : wp_get_theme()->Version;
-
-		if ( array_key_exists( $theme_name, self::THEME_OPTION_NAME ) ) {
-			$get_update = get_option( self::THEME_OPTION_NAME[ $theme_name ] );
-			if ( version_compare( $current_version, $get_update->update->version, '<' ) ) {
-				$theme_data[ $theme_name ] = [
-					'name'            => $theme_name,
-					'attribute'       => 'theme',
-					'current_version' => $current_version,
-					'new_version'     => $get_update->update->version,
 				];
 			}
 		}
@@ -113,8 +112,7 @@ class Sct_Check_Update extends Sct_Base {
 		$plugin_data       = null;
 
 		if ( ! empty( $get_plugin_status->response ) ) {
-			$update_plugins = $get_plugin_status->response;
-			foreach ( $update_plugins as $key ) {
+			foreach ( $get_plugin_status->response as $key ) {
 				$path                      = $this->get_plugin_dir( $key->plugin );
 				$plugin_date               = get_file_data(
 					$path,
@@ -134,9 +132,8 @@ class Sct_Check_Update extends Sct_Base {
 		}
 
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		$current_plugins = get_plugins();
 
-		foreach ( $current_plugins as $value ) {
+		foreach ( get_plugins() as $value ) {
 			if ( array_key_exists( $value['Name'], self::PLUGIN_OPTION_NAME ) ) {
 				$get_update = get_option( self::PLUGIN_OPTION_NAME[ $value['Name'] ] );
 				if ( ! empty( $get_update ) && version_compare( $value['Version'], $get_update->update->version, '<' ) ) {
@@ -149,6 +146,8 @@ class Sct_Check_Update extends Sct_Base {
 				}
 			}
 		}
+
+		ksort( $plugin_data );
 
 		return $plugin_data;
 	}
