@@ -132,9 +132,8 @@ class Sct_Check_Update extends Sct_Base {
 		}
 
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		$current_plugins = get_plugins();
 
-		foreach ( $current_plugins as $value ) {
+		foreach ( get_plugins() as $value ) {
 			if ( array_key_exists( $value['Name'], self::PLUGIN_OPTION_NAME ) ) {
 				$get_update = get_option( self::PLUGIN_OPTION_NAME[ $value['Name'] ] );
 				if ( ! empty( $get_update ) && version_compare( $value['Version'], $get_update->update->version, '<' ) ) {
