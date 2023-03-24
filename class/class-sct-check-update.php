@@ -147,6 +147,8 @@ class Sct_Check_Update extends Sct_Base {
 			}
 		}
 
+		ksort( $plugin_data );
+
 		return $plugin_data;
 	}
 
