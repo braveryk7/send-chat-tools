@@ -86,14 +86,14 @@ class Sct_Check_Update extends Sct_Base {
 			}
 		}
 
-		$theme_name      = is_child_theme() ? wp_get_theme()->parent()->name : wp_get_theme()->Name;
+		$current_theme   = is_child_theme() ? wp_get_theme()->parent()->name : wp_get_theme()->Name;
 		$current_version = is_child_theme() ? wp_get_theme()->parent()->Version : wp_get_theme()->Version;
 
-		if ( array_key_exists( $theme_name, self::THEME_OPTION_NAME ) ) {
-			$get_update = get_option( self::THEME_OPTION_NAME[ $theme_name ] );
+		if ( array_key_exists( $current_theme, self::THEME_OPTION_NAME ) ) {
+			$get_update = get_option( self::THEME_OPTION_NAME[ $current_theme ] );
 			if ( version_compare( $current_version, $get_update->update->version, '<' ) ) {
-				$theme_data[ $theme_name ] = [
-					'name'            => $theme_name,
+				$theme_data[ $current_theme ] = [
+					'name'            => $current_theme,
 					'attribute'       => 'theme',
 					'current_version' => $current_version,
 					'new_version'     => $get_update->update->version,
