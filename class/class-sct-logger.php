@@ -52,7 +52,7 @@ class Sct_Logger extends Sct_Base {
 		};
 
 		if ( isset( $tool ) && isset( $type ) ) {
-			$log = [
+			$this->log = [
 				'status'    => $status_code,
 				'tool'      => $tool,
 				'type'      => $type,
