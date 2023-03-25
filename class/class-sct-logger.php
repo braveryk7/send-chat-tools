@@ -73,9 +73,9 @@ class Sct_Logger extends Sct_Base {
 	/**
 	 * Save Send Chat Tools log data.
 	 */
-	public function save_log(): bool {
+	public function save_log(): Sct_Logger {
 		if ( empty( $this->log ) ) {
-			return false;
+			$this->result = false;
 		} else {
 			$sct_logs = get_option( $this->add_prefix( 'logs' ) );
 
@@ -83,7 +83,9 @@ class Sct_Logger extends Sct_Base {
 				unset( $sct_logs[999] );
 			}
 
-			return update_option( $this->add_prefix( 'logs' ), array_merge( [ $this->log ], $sct_logs ) );
+			$this->result = update_option( $this->add_prefix( 'logs' ), array_merge( [ $this->log ], $sct_logs ) );
 		}
+
+		return $this;
 	}
 }
