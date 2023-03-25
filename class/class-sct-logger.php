@@ -19,6 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Logger extends Sct_Base {
 	/**
+	 * Store the log data generate.
+	 *
+	 * @var array $log Log data.
+	 */
+	private $log;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
