@@ -40,6 +40,13 @@ class Sct_Logger extends Sct_Base {
 	}
 
 	/**
+	 * Instantiate and return itself.
+	 */
+	public static function get_instance(): Sct_Logger {
+		return new self();
+	}
+
+	/**
 	 * Create log format.
 	 *
 	 * @param int    $status_code HTTP status code.
