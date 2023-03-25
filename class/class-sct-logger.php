@@ -26,6 +26,13 @@ class Sct_Logger extends Sct_Base {
 	private $log;
 
 	/**
+	 * Store the bool value of update_option.
+	 *
+	 * @var bool $result
+	 */
+	public $result;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
