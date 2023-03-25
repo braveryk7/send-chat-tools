@@ -19,6 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Logger extends Sct_Base {
 	/**
+	 * Constructor.
+	 */
+	public function __construct() {
+		return $this;
+	}
+
+	/**
 	 * Create log format.
 	 *
 	 * @param int    $status_code HTTP status code.
