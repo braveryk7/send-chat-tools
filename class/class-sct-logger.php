@@ -20,10 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Sct_Logger extends Sct_Base {
 	/**
 	 * Constructor.
-	 *
-	 * @param array $log Log data.
 	 */
-	public function __construct( private array $log ) {
+	public function __construct() {
 		return $this;
 	}
 
@@ -47,7 +45,7 @@ class Sct_Logger extends Sct_Base {
 		};
 
 		if ( isset( $tool ) && isset( $type ) ) {
-			$this->log = [
+			$log = [
 				'status'    => $status_code,
 				'tool'      => $tool,
 				'type'      => $type,
