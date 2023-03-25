@@ -35,7 +35,7 @@ class Sct_Logger extends Sct_Base {
 	/**
 	 * Constructor.
 	 */
-	public function __construct() {
+	private function __construct() {
 		return $this;
 	}
 
