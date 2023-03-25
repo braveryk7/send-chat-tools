@@ -65,11 +65,9 @@ class Sct_Logger extends Sct_Base {
 
 	/**
 	 * Save Send Chat Tools log data.
-	 *
-	 * @param array $log_data Current log data.
 	 */
-	public function save_log( array $log_data ): bool {
-		if ( empty( $log_data ) ) {
+	public function save_log(): bool {
+		if ( empty( $this->log ) ) {
 			return false;
 		} else {
 			$sct_logs = get_option( $this->add_prefix( 'logs' ) );
@@ -78,7 +76,7 @@ class Sct_Logger extends Sct_Base {
 				unset( $sct_logs[999] );
 			}
 
-			return update_option( $this->add_prefix( 'logs' ), array_merge( [ $log_data ], $sct_logs ) );
+			return update_option( $this->add_prefix( 'logs' ), array_merge( [ $this->log ], $sct_logs ) );
 		}
 	}
 }
