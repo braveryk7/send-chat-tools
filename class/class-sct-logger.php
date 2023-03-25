@@ -20,8 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Sct_Logger extends Sct_Base {
 	/**
 	 * Constructor.
+	 *
+	 * @param array $log Log data.
 	 */
-	public function __construct() {
+	public function __construct( private array $log ) {
 		return $this;
 	}
 
