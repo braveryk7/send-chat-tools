@@ -34,9 +34,7 @@ class Sct_Logger extends Sct_Base {
 	 * @param string $tool_name Use tool name.
 	 * @param string $notification_type Comment, Update.
 	 */
-	public function create_log( int $status_code, string $tool_name, string $notification_type ): array {
-		$create_log_data = [];
-
+	public function create_log( int $status_code, string $tool_name, string $notification_type ): Sct_Logger {
 		$tool = match ( $tool_name ) {
 			'slack'    => '1',
 			'discord'  => '2',
@@ -49,7 +47,7 @@ class Sct_Logger extends Sct_Base {
 		};
 
 		if ( isset( $tool ) && isset( $type ) ) {
-			$create_log_data = [
+			$this->log = [
 				'status'    => $status_code,
 				'tool'      => $tool,
 				'type'      => $type,
@@ -57,7 +55,7 @@ class Sct_Logger extends Sct_Base {
 			];
 		}
 
-		return $create_log_data;
+		return $this;
 	}
 
 	/**
