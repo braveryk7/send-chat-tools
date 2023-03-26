@@ -35,8 +35,8 @@ jobs:
       - name: Set outputs
         run: |
           TAG=`echo ${GITHUB_REF##*/} | sed -e "s/v//"`
-          echo ::set-output name=VERSION::$TAG
-          echo ::set-output name=PROJECT_NAME::send-chat-tools
+          echo "VERSION=$TAG" >> $GITHUB_OUTPUT
+          echo "PROJECT_NAME=send-chat-tools" >> $GITHUB_OUTPUT
         id: svn-env
 
       - name: SVN checkout
