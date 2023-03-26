@@ -56,7 +56,7 @@ export const useLogExport = () => {
 			setNoticeValue( undefined );
 			clearTimeout( snackbarTimer );
 
-			const separet = itemKey === 'csv' ? ',' : ' ';
+			const separate = itemKey === 'csv' ? ',' : ' ';
 
 			const header = {
 				status: itemKey === 'csv' ? '' : 'Status:',
@@ -67,9 +67,9 @@ export const useLogExport = () => {
 
 			const logData = Object.values( apiData.logs ).map( ( log ) => {
 				const row =
-					`${ header.status }${ log.status }${ separet }` +
-					`${ header.tool }${ toolNumberToToolName( log.tool ) }${ separet }` +
-					`${ header.type }${ typeNumberToTypeName( log.type ) }${ separet }` +
+					`${ header.status }${ log.status }${ separate }` +
+					`${ header.tool }${ toolNumberToToolName( log.tool ) }${ separate }` +
+					`${ header.type }${ typeNumberToTypeName( log.type ) }${ separate }` +
 					`${ header.date }${ log.send_date }\n`;
 				return row;
 			} );
