@@ -54,12 +54,12 @@ class Sct_Check_Update extends Sct_Base {
 		$core_data       = null;
 
 		if ( ! empty( $get_core_status ) && 'upgrade' === $get_core_status->updates[0]->response ) {
-			$update_infomation = $get_core_status->updates[0];
-			$core_data['core'] = [
+			$update_information = $get_core_status->updates[0];
+			$core_data['core']  = [
 				'name'            => 'WordPress Core',
 				'attribute'       => 'core',
 				'current_version' => get_bloginfo( 'version' ),
-				'new_version'     => $update_infomation->version,
+				'new_version'     => $update_information->version,
 			];
 		}
 
