@@ -97,7 +97,7 @@ class Sct_Logger extends Sct_Base {
 	}
 
 	/**
-	 * Returns whether update_option was successful or faiure.
+	 * Returns whether update_option was successful or failure.
 	 */
 	public function is_saved() {
 		return $this->result;

@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Developer_Notify extends Sct_Base {
 	/**
-	 * Constructer.
+	 * Constructor.
 	 */
 	public function __construct() {
 		add_action( 'init', [ $this, 'developer_notify' ] );
@@ -47,12 +47,12 @@ class Sct_Developer_Notify extends Sct_Base {
 	 * @param array $developer_message Developer message.
 	 */
 	private function developer_message_controller( array $developer_message ): bool {
-		$kesy_check   = $this->developer_message_arraykeys_check( $developer_message );
+		$keys_check   = $this->developer_message_arraykeys_check( $developer_message );
 		$exist_check  = $this->developer_message_key_exists( $developer_message );
 		$url_check    = $this->developer_message_urls_regex( $developer_message );
 		$ignore_check = $this->developer_message_ignore_check( $developer_message );
 
-		return $kesy_check && $exist_check && $url_check && $ignore_check ? true : false;
+		return $keys_check && $exist_check && $url_check && $ignore_check ? true : false;
 	}
 
 	/**
