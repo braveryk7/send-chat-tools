@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Error_Mail extends Sct_Base {
 	/**
-	 * Construc.
+	 * Constructor.
 	 *
 	 * @param int    $error_code error code.
 	 * @param string $comment_id comment ID.
