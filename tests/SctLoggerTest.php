@@ -29,7 +29,7 @@ class SctLoggerTest extends PHPUnit\Framework\TestCase {
 	 * Create instance.
 	 */
 	protected function setUp() :void {
-		$this->instance = new Sct_Logger();
+		$this->instance = Sct_Logger::get_instance();
 	}
 
 	/**
