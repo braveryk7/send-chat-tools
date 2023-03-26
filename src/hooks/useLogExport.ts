@@ -86,7 +86,7 @@ export const useLogExport = () => {
 
 			if ( itemKey === 'clipboard' ) {
 				setNoticeValue( 'sct_success' );
-				setNoticeMessage( __( 'Copyed!', 'send-chat-tools' ) );
+				setNoticeMessage( __( 'Copied!', 'send-chat-tools' ) );
 			}
 		}
 	};
