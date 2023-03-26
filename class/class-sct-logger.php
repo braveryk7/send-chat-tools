@@ -19,15 +19,41 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Logger extends Sct_Base {
 	/**
+	 * Store the log data generate.
+	 *
+	 * @var array $log Log data.
+	 */
+	private $log;
+
+	/**
+	 * Store the bool value of update_option.
+	 *
+	 * @var bool $result
+	 */
+	public $result;
+
+	/**
+	 * Constructor.
+	 */
+	private function __construct() {
+		return $this;
+	}
+
+	/**
+	 * Instantiate and return itself.
+	 */
+	public static function get_instance(): Sct_Logger {
+		return new self();
+	}
+
+	/**
 	 * Create log format.
 	 *
 	 * @param int    $status_code HTTP status code.
 	 * @param string $tool_name Use tool name.
 	 * @param string $notification_type Comment, Update.
 	 */
-	public function create_log( int $status_code, string $tool_name, string $notification_type ): array {
-		$create_log_data = [];
-
+	public function create_log( int $status_code, string $tool_name, string $notification_type ): Sct_Logger {
 		$tool = match ( $tool_name ) {
 			'slack'    => '1',
 			'discord'  => '2',
@@ -40,7 +66,7 @@ class Sct_Logger extends Sct_Base {
 		};
 
 		if ( isset( $tool ) && isset( $type ) ) {
-			$create_log_data = [
+			$this->log = [
 				'status'    => $status_code,
 				'tool'      => $tool,
 				'type'      => $type,
@@ -48,17 +74,15 @@ class Sct_Logger extends Sct_Base {
 			];
 		}
 
-		return $create_log_data;
+		return $this;
 	}
 
 	/**
 	 * Save Send Chat Tools log data.
-	 *
-	 * @param array $log_data Current log data.
 	 */
-	public function save_log( array $log_data ): bool {
-		if ( empty( $log_data ) ) {
-			return false;
+	public function save_log(): Sct_Logger {
+		if ( empty( $this->log ) ) {
+			$this->result = false;
 		} else {
 			$sct_logs = get_option( $this->add_prefix( 'logs' ) );
 
@@ -66,7 +90,16 @@ class Sct_Logger extends Sct_Base {
 				unset( $sct_logs[999] );
 			}
 
-			return update_option( $this->add_prefix( 'logs' ), array_merge( [ $log_data ], $sct_logs ) );
+			$this->result = update_option( $this->add_prefix( 'logs' ), array_merge( [ $this->log ], $sct_logs ) );
 		}
+
+		return $this;
+	}
+
+	/**
+	 * Returns whether update_option was successful or faiure.
+	 */
+	public function is_saved() {
+		return $this->result;
 	}
 }

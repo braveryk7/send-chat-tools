@@ -318,11 +318,10 @@ class Sct_Base {
 	 * @param string $notification_type Comment, Update.
 	 */
 	protected function logger( int $status_code, string $tool_name, string $notification_type ): bool {
-		$logger   = new Sct_Logger();
-		$log_data = $logger->create_log( $status_code, $tool_name, $notification_type );
-		$result   = $logger->save_log( $log_data );
-
-		return $result;
+		return Sct_Logger::get_instance()
+				?->create_log( $status_code, $tool_name, $notification_type )
+				?->save_log()
+				?->is_saved();
 	}
 
 	/**
