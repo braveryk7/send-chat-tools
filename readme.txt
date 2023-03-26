@@ -58,7 +58,7 @@ Improvements:
 * The chat tool now saves up to 3 individual logs.
 * The Send Chat Tools widget is now available on the WordPress dashboard.
 * A warning will be displayed when the next update changes the supported PHP version.
-* We will send you the updated content vwhen the plugin is updated.
+* We will send you the updated content when the plugin is updated.
 * The internal design of PHP has been substantially revised.
 * Most options starting with "sct" have been removed and replaced by the sct_options column.
 * The sct table is no longer available and has been unified with the sct_logs column.
