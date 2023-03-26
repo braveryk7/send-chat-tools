@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Developer_Notify extends Sct_Base {
 	/**
-	 * Constructer.
+	 * Constructor.
 	 */
 	public function __construct() {
 		add_action( 'init', [ $this, 'developer_notify' ] );
