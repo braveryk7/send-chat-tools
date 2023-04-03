@@ -38,6 +38,11 @@ build/
 .phpunit.result.cache
 
 #-------------------------------
+#   WordPress environment
+#-------------------------------
+.wp-env.override.json
+
+#-------------------------------
 #   etc
 #-------------------------------
 send-chat-tools.zip
