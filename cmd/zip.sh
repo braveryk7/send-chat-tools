@@ -83,6 +83,9 @@ excludes=(
 	"jest.config.json"
 	"tsconfig.json"
 	"webpack.config.js"
+	# WordPress environment
+	".wp-env.json"
+	".wp-env.override.json"
 )
 
 ########################################################
