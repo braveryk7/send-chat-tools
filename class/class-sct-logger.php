@@ -86,8 +86,12 @@ class Sct_Logger extends Sct_Base {
 		} else {
 			$sct_logs = get_option( $this->add_prefix( 'logs' ) );
 
-			if ( array_key_exists( 999, $sct_logs ) ) {
-				unset( $sct_logs[999] );
+			if ( array_key_exists( 299, $sct_logs ) ) {
+				foreach ( $sct_logs as $key => $value ) {
+					if ( $key >= 299 ) {
+						unset( $sct_logs[ $key ] );
+					}
+				}
 			}
 
 			$this->result = update_option( $this->add_prefix( 'logs' ), array_merge( [ $this->log ], $sct_logs ) );
