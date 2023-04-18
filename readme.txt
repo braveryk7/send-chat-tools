@@ -16,6 +16,22 @@ You can instantly check comments that you didn't notice with the default email n
 
 === Changelog ===
 
+= 1.4.0 =
+
+Important:
+
+* We no longer support PHP7 series. This plugin can only be activated with PHP8 or higher.
+* The chat log limit has been changed to 300 entries.
+
+Improvements:
+
+* The PHP versioning logic has been revised.
+* We have expanded the testing of various methods.
+
+Development:
+
+* The genuine WordPress wp-env environment has been installed.
+
 = 1.3.1 =
 
 Important:
