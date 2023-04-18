@@ -3,7 +3,7 @@ Contributors: braveryk7
 Tags: send chat tools, send, chat, slack, discord, chatwork, update
 Requires at least: 5.7.2
 Tested up to: 6.2
-Requires PHP: 7.3.0
+Requires PHP: 8.0.0
 Stable tag: 1.3.1
 License: GpLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
