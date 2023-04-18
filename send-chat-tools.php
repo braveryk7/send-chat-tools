@@ -32,7 +32,7 @@ $sct_require_php_version = '8.0.0';
 if ( ! $sct_phpver_judge->judgment( $sct_require_php_version ) ) {
 	$sct_phpver_judge->deactivate(
 		__FILE__,
-		Sct_Base::get_plugin_name(),
+		'Send Chat Tools',
 		$sct_require_php_version,
 	);
 } else {
