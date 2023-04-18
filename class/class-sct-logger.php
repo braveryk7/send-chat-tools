@@ -87,7 +87,7 @@ class Sct_Logger extends Sct_Base {
 			$sct_logs = get_option( $this->add_prefix( 'logs' ) );
 
 			if ( array_key_exists( 299, $sct_logs ) ) {
-				foreach ( $sct_logs as $key => $value ) {
+				foreach ( array_keys( $sct_logs ) as $key ) {
 					if ( $key >= 299 ) {
 						unset( $sct_logs[ $key ] );
 					}
