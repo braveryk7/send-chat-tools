@@ -24,18 +24,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 load_plugin_textdomain( 'send-chat-tools', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
-require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
 require_once dirname( __FILE__ ) . '/class/class-sct-phpver-judge.php';
 
-$sct_phpver_judge = new Sct_Phpver_Judge();
+$sct_phpver_judge        = new Sct_Phpver_Judge();
+$sct_require_php_version = '8.0.0';
 
-if ( ! $sct_phpver_judge->judgment( Sct_Base::get_required_php_version() ) ) {
+if ( ! $sct_phpver_judge->judgment( $sct_require_php_version ) ) {
 	$sct_phpver_judge->deactivate(
 		__FILE__,
-		Sct_Base::get_plugin_name(),
-		Sct_Base::get_required_php_version()
+		'Send Chat Tools',
+		$sct_require_php_version,
 	);
 } else {
+	require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-encryption.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-admin-page.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-generate-content.php';
