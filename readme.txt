@@ -3,8 +3,8 @@ Contributors: braveryk7
 Tags: send chat tools, send, chat, slack, discord, chatwork, update
 Requires at least: 5.7.2
 Tested up to: 6.2
-Requires PHP: 7.3.0
-Stable tag: 1.3.1
+Requires PHP: 8.0.0
+Stable tag: 1.4.0
 License: GpLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -15,6 +15,22 @@ Currently, it sends an announcement when a comment is received.
 You can instantly check comments that you didn't notice with the default email notification. 
 
 === Changelog ===
+
+= 1.4.0 =
+
+Important:
+
+* We no longer support PHP7 series. This plugin can only be activated with PHP8 or higher.
+* The chat log limit has been changed to 300 entries.
+
+Improvements:
+
+* The PHP versioning logic has been revised.
+* We have expanded the testing of various methods.
+
+Development:
+
+* The genuine WordPress wp-env environment has been installed.
 
 = 1.3.1 =
 
