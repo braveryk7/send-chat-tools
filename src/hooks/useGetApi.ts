@@ -18,5 +18,5 @@ export const useGetApi = (
 		} ).catch( () => {
 			setApiError( true );
 		} );
-	}, [ stateFunc ] );
+	}, [ stateFunc, setApiError ] );
 };
