@@ -97,7 +97,7 @@ export const useTabItems = ( props: TabItemsType ) => {
 			];
 			setTabItems( items );
 		}
-	}, [ itemKey ] );
+	}, [ itemKey, itemLabel ] );
 
 	return {
 		itemKey,
