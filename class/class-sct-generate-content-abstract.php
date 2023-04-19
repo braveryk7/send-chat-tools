@@ -13,3 +13,9 @@ declare( strict_types = 1 );
 if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'You do not have access rights.' );
 }
+
+/**
+ * Abstract class
+ */
+abstract class Sct_Generate_Content_Abstract {
+}
