@@ -12,7 +12,7 @@ export const TokenField = ( props: { itemKey: 'ignore_key', title: string } ) =>
 			{ apiData &&
 				<FormTokenField
 					value={ apiData.ignore_key }
-					onChange={ ( tokens: [] ) => changeValue( tokens ) }
+					onChange={ ( tokens: any ) => changeValue( tokens ) }
 				/>
 			}
 		</>

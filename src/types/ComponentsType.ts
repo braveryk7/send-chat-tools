@@ -1,4 +1,4 @@
-import { Dashicon } from '@wordpress/components';
+import Dashicon from '@wordpress/components/dashicon';
 
 import {
 	ChatToolsBaseType,
