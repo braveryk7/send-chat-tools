@@ -15,7 +15,7 @@ export const LogDetail = ( props: { itemKey: ChatToolsItemKeyType } ) => {
 		if ( apiData ) {
 			setLogs( apiData[ itemKey ].log );
 		}
-	}, [ itemKey ] );
+	}, [ itemKey, apiData ] );
 
 	return (
 		<div className="sct-tools-log-wrapper">
