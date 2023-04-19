@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
-    "@types/wordpress__components": "^19.10.0",
+    "@types/wordpress__components": "^23.0.1",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
     "@wordpress/env": "^5.11.0",
