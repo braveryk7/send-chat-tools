@@ -25,7 +25,7 @@ export const TextControlForm = ( props: TextControlPropsType ) => {
 				}
 			}
 		}
-	}, [ optionName, apiData ] );
+	}, [ itemKey, optionName, apiData ] );
 
 	return (
 		<>
