@@ -1,10 +1,12 @@
+import { TokenItem } from '@wordpress/components/build-types/form-token-field/types';
+
 export type apiType = {
 	slack: ChatToolsBaseType & ChatToolsType1Type;
 	discord: ChatToolsBaseType & ChatToolsType1Type;
 	chatwork: ChatToolsBaseType & ChatworkType;
 	version: string;
 	cron_time: string;
-	ignore_key: string[]
+	ignore_key: ( string|TokenItem )[]
 	logs: {
 		[ key: string ]: SctLogsType;
 	};
