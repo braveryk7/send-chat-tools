@@ -35,5 +35,5 @@ export const useSetApi: useSetApiType = ( itemKey, value ) => {
 				setNoticeMessage( __( 'Error.', 'send-chat-tools' ) );
 			} );
 		}
-	}, [ apiData ] );
+	}, [ apiData, itemKey, value, setNoticeMessage, setNoticeValue, snackbarTimer ] );
 };
