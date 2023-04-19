@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 
+import { TokenItem } from '@wordpress/components/build-types/form-token-field/types';
 import { useContext } from '@wordpress/element';
 
 import { useSetApi } from 'src/hooks/useSetApi';
@@ -12,7 +13,7 @@ export const useChangeValue = ( itemKey: itemKeyType, optionName?: optionNameTyp
 	const { apiData, setApiData } = useContext( apiContext );
 
 	const changeValue = (
-		value: string | boolean | string[] | ChangeEvent< HTMLInputElement >
+		value: string | boolean | ( string|TokenItem )[] | ChangeEvent< HTMLInputElement >
 	) => {
 		const newItem: apiType = JSON.parse( JSON.stringify( { ...apiData } ) );
 
