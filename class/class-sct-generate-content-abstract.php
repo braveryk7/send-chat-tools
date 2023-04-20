@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
-	 * チャットツールに送信するコメントデータを作成するabstractメソッド。
+	 * Abstract method to create comment data to be sent to chat tools.
 	 *
 	 * @param object $comment Comment data.
 	 */
