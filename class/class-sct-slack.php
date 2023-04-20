@@ -53,15 +53,11 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	public function generate_comment_content( object $comment, ): Sct_Slack {
 		$this->comment = $comment;
 
-		$site_name     = get_bloginfo( 'name' );
-		$site_url      = get_bloginfo( 'url' );
-		$article_title = get_the_title( $comment->comment_post_ID );
-		$article_url   = get_permalink( $comment->comment_post_ID );
-
-		$approved_url   = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
-		$unapproved     = $this->get_send_text( 'comment', 'unapproved' );
-		$click_message  = $this->get_send_text( 'comment', 'click' );
-		$comment_status = $unapproved . '<<' . $approved_url . '|' . $click_message . '>>';
+		$site_name      = get_bloginfo( 'name' );
+		$site_url       = get_bloginfo( 'url' );
+		$article_title  = get_the_title( $comment->comment_post_ID );
+		$article_url    = get_permalink( $comment->comment_post_ID );
+		$comment_status = $this->generate_comment_approved_message( 'slack', $comment );
 
 		$message = [
 			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
