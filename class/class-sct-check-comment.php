@@ -18,6 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * If comment data exists, a class that calls the class that performs various processes.
  */
 class Sct_Check_Comment extends Sct_Base {
+	/**
+	 * WordPress hook.
+	 */
+	public function __construct() {
+		add_action( 'comment_post', [ $this, 'controller' ] );
+	}
 
 	/**
 	 * Controller called by add_action.
