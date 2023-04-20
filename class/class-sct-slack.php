@@ -39,7 +39,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$this->header = [
 			'method'  => 'POST',
 			'headers' => [ 'Content-Type: application/json;charset=utf-8' ],
-			'body'    => wp_json_encode( $this->comment_content ),
+			'body'    => wp_json_encode( $this->content ),
 		];
 
 		return $this;
@@ -82,8 +82,8 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$comment_statuses = '*' . $this->get_send_text( 'comment', 'status' ) . "*\n{$comment_status}";
 		$context          = $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>';
 
-		$blocks                = new Sct_Slack_Blocks();
-		$this->comment_content = [
+		$blocks        = new Sct_Slack_Blocks();
+		$this->content = [
 			'text'   => $header_message,
 			'blocks' => [
 				$blocks->header( 'plain_text', $header_message, true ),
@@ -102,8 +102,76 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate update notifications for Slack.
+	 *
+	 * @param array $update_content Update data.
 	 */
-	public function generate_update_content(): Sct_Slack {
+	public function generate_update_content( array $update_content ): Sct_Slack {
+		$plain_data     = $this->generate_plain_update_message( $update_content );
+		$header_emoji   = ':zap:';
+		$header_message = "{$header_emoji} {$plain_data->site_name}({$plain_data->site_url})" . $plain_data->update_title;
+		$update_message = $plain_data->update_text . "\n" . $plain_data->update_page . "<{$plain_data->admin_url}>";
+
+		$message = [
+			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
+			1 => esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ),
+			2 => esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ),
+		];
+
+		$wordpress_directory = $this->get_official_directory();
+		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
+
+		$context = $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>';
+
+		$blocks  = new Sct_Slack_Blocks();
+		$message = [
+			'text'   => $header_message,
+			'blocks' => [
+				$blocks->header( 'plain_text', $header_message, true ),
+			],
+		];
+
+		if ( isset( $plain_data->core ) ) {
+			$core_message = [
+				'blocks' => [
+					$blocks->single_column( 'mrkdwn', ':star: ' . $plain_data->core ),
+				],
+			];
+
+			$message = array_merge_recursive( $message, $core_message );
+		}
+
+		if ( isset( $plain_data->themes ) ) {
+			$themes_message = [
+				'blocks' => [
+					$blocks->single_column( 'mrkdwn', ':art: ' . $plain_data->themes ),
+				],
+			];
+
+			$message = array_merge_recursive( $message, $themes_message );
+		}
+
+		if ( isset( $plain_data->plugins ) ) {
+			$plugins_message = [
+				'blocks' => [
+					$blocks->single_column( 'mrkdwn', ':wrench: ' . $plain_data->plugins ),
+				],
+			];
+
+			$message = array_merge_recursive( $message, $plugins_message );
+		}
+
+		$fixed_phrase = [
+			'blocks' => [
+				$blocks->single_column( 'mrkdwn', $update_message ),
+				$blocks->divider(),
+				$blocks->context( 'mrkdwn', $context ),
+			],
+		];
+
+		$message = array_merge_recursive( $message, $fixed_phrase );
+
+		$this->content = $message;
+
 		return $this;
 	}
 }
