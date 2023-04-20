@@ -30,6 +30,12 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	 * A method to generate a Discord header.
 	 */
 	public function generate_header(): Sct_Discord {
+		$this->header = [
+			'method'  => 'POST',
+			'headers' => [ 'Content-Type: application/json;charset=utf-8' ],
+			'body'    => [ 'content' => $this->comment_content ],
+		];
+
 		return $this;
 	}
 
