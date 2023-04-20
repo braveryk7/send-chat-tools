@@ -57,6 +57,11 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	abstract public function generate_comment_content( object $comment, ): Sct_Slack | Sct_Discord | Sct_Chatwork;
 
 	/**
+	 * Abstract method to create update data to be sent to chat tools.
+	 */
+	abstract public function generate_update_content(): Sct_Slack | Sct_Discord | Sct_Chatwork;
+
+	/**
 	 * Generate plain update messages.
 	 *
 	 * @param array $update_content Update data.
