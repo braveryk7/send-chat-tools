@@ -151,4 +151,13 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 		return $this;
 	}
+
+	/**
+	 * Generate developer message for Slack.
+	 *
+	 * @param array $developer_message Developer message.
+	 */
+	public function generate_developer_message( array $developer_message ): Sct_Slack {
+		return $this;
+	}
 }

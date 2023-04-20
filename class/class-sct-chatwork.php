@@ -89,4 +89,13 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		];
 		return $this;
 	}
+
+	/**
+	 * Generate developer message for Chatwork.
+	 *
+	 * @param array $developer_message Developer message.
+	 */
+	public function generate_developer_message( array $developer_message ): Sct_Chatwork {
+		return $this;
+	}
 }

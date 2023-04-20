@@ -82,4 +82,13 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 		return $this;
 	}
+
+	/**
+	 * Generate developer message for Discord.
+	 *
+	 * @param array $developer_message Developer message.
+	 */
+	public function generate_developer_message( array $developer_message ): Sct_Discord {
+		return $this;
+	}
 }
