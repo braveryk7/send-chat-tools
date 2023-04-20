@@ -45,6 +45,41 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	 * @param object $comment Comment data.
 	 */
 	public function generate_comment_content( object $comment, ): Sct_Chatwork {
+		$this->comment = $comment;
+
+		$site_name     = get_bloginfo( 'name' );
+		$site_url      = get_bloginfo( 'url' );
+		$article_title = get_the_title( $comment->comment_post_ID );
+		$article_url   = get_permalink( $comment->comment_post_ID );
+
+		$approved_url   = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
+		$unapproved     = $this->get_send_text( 'comment', 'unapproved' );
+		$click_message  = $this->get_send_text( 'comment', 'click' );
+		$comment_status = $unapproved . "\n" . $click_message . ' ' . $approved_url;
+
+		$message = [
+			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
+			1 => esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ),
+			2 => esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ),
+		];
+
+		$wordpress_directory = $this->get_official_directory();
+		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
+
+		$this->comment_content = [
+			'body' =>
+				'[info][title]' . $site_name . '(' . $site_url . ')' . $this->get_send_text( 'comment', 'title' ) . '[/title]' .
+				$this->get_send_text( 'comment', 'article' ) . $article_title . ' - ' . $article_url . "\n" .
+				$this->get_send_text( 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
+				$this->get_send_text( 'comment', 'date' ) . $comment->comment_date . "\n" .
+				$this->get_send_text( 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
+				$this->get_send_text( 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n" .
+				'[hr]' .
+				$this->get_send_text( 'comment', 'status' ) . $comment_status .
+				'[hr]' . $message[0] . "\n" . $message[1] . ' ' . $wordpress_directory . "\n" . $message[2] . ' ' . $official_web_site .
+				'[/info]',
+		];
+
 		return $this;
 	}
 }
