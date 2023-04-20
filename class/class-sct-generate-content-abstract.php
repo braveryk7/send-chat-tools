@@ -97,7 +97,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	}
 
 	/**
-	 * Send Slack.
+	 * Methods to send to chat tools.
 	 *
 	 * @param string $id      ID(Comment/Update).
 	 * @param string $tool    Use chat tools prefix.
