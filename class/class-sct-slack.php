@@ -31,12 +31,14 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	/**
 	 * A method to generate a Slack header.
 	 */
-	public function generate_header(): array {
-		return [
+	public function generate_header(): Sct_Slack {
+		$this->header = [
 			'method'  => 'POST',
 			'headers' => [ 'Content-Type: application/json;charset=utf-8' ],
 			'body'    => wp_json_encode( $this->comment_content ),
 		];
+
+		return $this;
 	}
 
 	/**
