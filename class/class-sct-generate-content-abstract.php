@@ -26,6 +26,15 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	protected $comment;
 
 	/**
+	 * Constructor.
+	 *
+	 * @param object $comment Comment data.
+	 */
+	protected function __construct( object $comment, ) {
+		$this->comment = $comment;
+	}
+
+	/**
 	 * Abstract method to generate a chat tool header.
 	 */
 	abstract public function generate_header(): array;
