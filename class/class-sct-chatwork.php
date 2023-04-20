@@ -96,6 +96,45 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	 * @param array $developer_message Developer message.
 	 */
 	public function generate_developer_message( array $developer_message ): Sct_Chatwork {
+		if ( isset( $developer_message['title'] ) && isset( $developer_message['message'] ) && array_key_exists( 'url', $developer_message ) ) {
+			$site_name     = get_bloginfo( 'name' );
+			$site_url      = get_bloginfo( 'url' );
+			$message_title = sprintf(
+				/* translators: 1: Theme or Plugin name */
+				esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
+				esc_html( $developer_message['title'] ),
+			);
+			$content = '';
+
+			$i = 0;
+			foreach ( $developer_message['message'] as $value ) {
+				if ( $i >= 50 ) {
+					break;
+				}
+				$content .= $value . "\n";
+				$i++;
+			}
+
+			if ( ! is_null( $developer_message['url'] ) ) {
+				$website_url     = array_key_exists( 'website', $developer_message['url'] ) ? $developer_message['url']['website'] : null;
+				$update_page_url = array_key_exists( 'update_page', $developer_message['url'] ) ? $developer_message['url']['update_page'] : null;
+			} else {
+				$website_url     = null;
+				$update_page_url = null;
+			}
+
+			$website       = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url . "\n" : null;
+			$update_page   = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url . "\n" : null;
+			$this->content = [
+				'body' =>
+					'[info][title]' . $site_name . '( ' . $site_url . ' ) ' . $message_title . '[/title]' .
+					$content . "\n" .
+					$website . $update_page .
+					'[hr]' . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $developer_message['key'] .
+					$this->generate_context( 'chatwork' ) .
+					'[/info]',
+			];
+		}
 		return $this;
 	}
 }
