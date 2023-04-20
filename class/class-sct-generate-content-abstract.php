@@ -19,6 +19,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
+	 * Abstract method to generate a chat tool header.
+	 */
+	abstract public function generate_header(): array;
+
+	/**
 	 * Abstract method to create comment data to be sent to chat tools.
 	 *
 	 * @param object $comment Comment data.
