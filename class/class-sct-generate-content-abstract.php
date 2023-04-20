@@ -33,11 +33,11 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	protected $header;
 
 	/**
-	 * Property to store generated comment content.
+	 * Property to store generated content.
 	 *
 	 * @var array Generated comment content.
 	 */
-	protected $comment_content;
+	protected $content;
 
 	/**
 	 * Abstract method to get an instance.

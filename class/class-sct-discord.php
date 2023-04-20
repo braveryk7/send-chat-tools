@@ -33,7 +33,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$this->header = [
 			'method'  => 'POST',
 			'headers' => [ 'Content-Type: application/json;charset=utf-8' ],
-			'body'    => [ 'content' => $this->comment_content ],
+			'body'    => [ 'content' => $this->content ],
 		];
 
 		return $this;
@@ -66,7 +66,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$wordpress_directory = $this->get_official_directory();
 		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
 
-		$this->comment_content =
+		$this->content =
 			$site_name . '( <' . $site_url . '> )' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
 			$this->get_send_text( 'comment', 'article' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
 			$this->get_send_text( 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .

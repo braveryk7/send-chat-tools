@@ -33,7 +33,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		$this->header = [
 			'method'  => 'POST',
 			'headers' => 'X-ChatWorkToken: ' . $this->get_sct_options()['chatwork']['api_token'],
-			'body'    => $this->comment_content,
+			'body'    => $this->content,
 		];
 
 		return $this;
@@ -66,7 +66,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		$wordpress_directory = $this->get_official_directory();
 		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
 
-		$this->comment_content = [
+		$this->content = [
 			'body' =>
 				'[info][title]' . $site_name . '(' . $site_url . ')' . $this->get_send_text( 'comment', 'title' ) . '[/title]' .
 				$this->get_send_text( 'comment', 'article' ) . $article_title . ' - ' . $article_url . "\n" .
