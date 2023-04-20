@@ -41,7 +41,8 @@ class Sct_Check_Comment extends Sct_Base {
 			if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
 				global $wpdb;
 				$chat = match ( $tool ) {
-					'slack' => Sct_Slack::get_instance(),
+					'slack'   => Sct_Slack::get_instance(),
+					'discord' => Sct_Discord::get_instance(),
 				};
 				$chat?->generate_comment_content( $comment )?->generate_header()?->send_tools( (string) $wpdb->insert_id, $tool );
 			} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
