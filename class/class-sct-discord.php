@@ -85,6 +85,23 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	 * @param array $update_content Update data.
 	 */
 	public function generate_update_content( array $update_content ): Sct_Discord {
+		$plain_data = $this->generate_plain_update_message( $update_content );
+
+		$message = [
+			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
+			1 => esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ),
+			2 => esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ),
+		];
+
+		$wordpress_directory = $this->get_official_directory();
+		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
+
+		$this->content =
+			$plain_data->site_name . '( <' . $plain_data->site_url . '> )' . $plain_data->update_title . "\n\n" .
+			$plain_data->core . $plain_data->themes . $plain_data->plugins .
+			$plain_data->update_text . "\n" . $plain_data->update_page . '<' . $plain_data->admin_url . '>' . "\n\n" .
+			$message[0] . "\n" . $message[1] . ' <' . $wordpress_directory . '>' . "\n" . $message[2] . ' <' . $official_web_site . '>';
+
 		return $this;
 	}
 }
