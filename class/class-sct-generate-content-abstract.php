@@ -108,7 +108,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 * @param string $tool    Use chat tools prefix.
 	 * @param object $comment Comment object.
 	 */
-	protected function send_tools( array $options, string $id, string $tool, object $comment = null ): bool {
+	public function send_tools( array $options, string $id, string $tool, object $comment = null ): bool {
 
 		$sct_options = $this->get_sct_options();
 
