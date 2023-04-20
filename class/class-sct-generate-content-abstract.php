@@ -99,4 +99,71 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 
 		return $message[ $type ][ $param ];
 	}
+
+	/**
+	 * Send Slack.
+	 *
+	 * @param array  $options API options.
+	 * @param string $id      ID(Comment/Update).
+	 * @param string $tool    Use chat tools prefix.
+	 * @param object $comment Comment object.
+	 */
+	protected function send_tools( array $options, string $id, string $tool, object $comment = null ): bool {
+
+		$sct_options = $this->get_sct_options();
+
+		switch ( $tool ) {
+			case 'slack':
+			case 'discord':
+				$url   = $sct_options[ $tool ]['webhook_url'];
+				$regex = $this->api_regex( $tool, $url );
+				break;
+			case 'chatwork':
+				$url   = 'https://api.chatwork.com/v2/rooms/' . $sct_options[ $tool ]['room_id'] . '/messages';
+				$regex = $this->api_regex( 'chatworkid', $sct_options[ $tool ]['room_id'] );
+				break;
+		}
+
+		if ( $regex ) {
+			$result = wp_remote_post( $url, $options );
+
+			if ( ! is_null( $comment ) ) {
+				$logs = [
+					$comment->comment_date => [
+						'id'      => $comment->comment_ID,
+						'author'  => $comment->comment_author,
+						'email'   => $comment->comment_author_email,
+						'url'     => $comment->comment_author_url,
+						'comment' => $comment->comment_content,
+						'status'  => $result['response']['code'],
+					],
+				];
+
+				if ( '3' <= count( $sct_options[ $tool ]['log'] ) ) {
+					array_pop( $sct_options[ $tool ]['log'] );
+				}
+				$sct_options[ $tool ]['log'] = $logs + $sct_options[ $tool ]['log'];
+				$this->set_sct_options( $sct_options );
+			}
+		}
+
+		$status_code = match ( true ) {
+			! isset( $result->errors ) => $result['response']['code'],
+			! $regex                   => 1003,
+			default                    => 1000,
+		};
+
+		if ( 200 !== $status_code && 204 !== $status_code ) {
+			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
+			if ( 'update' === $id ) {
+				$send_mail = new Sct_Error_Mail( $status_code, $id, $tool );
+				$send_mail->send_mail( ...$send_mail->update_contents( $options['plain_data'] ) );
+			} else {
+				$send_mail = new Sct_Error_Mail( $status_code, $id, $tool );
+				$send_mail->send_mail( ...$send_mail->generate_contents() );
+			}
+		}
+
+		return $this->logger( $status_code, $tool, $id );
+	}
 }
