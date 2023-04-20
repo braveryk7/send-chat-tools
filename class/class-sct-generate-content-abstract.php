@@ -155,6 +155,28 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	}
 
 	/**
+	 * Generate context message.
+	 *
+	 * @param string $tool_name Tool name.
+	 */
+	protected function generate_context( string $tool_name ): string {
+		$message = [
+			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
+			1 => esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ),
+			2 => esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ),
+		];
+
+		$wordpress_directory = $this->get_official_directory();
+		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
+
+		return match ( $tool_name ) {
+			'slack'    => $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>',
+			'discord'  => $message[0] . "\n" . $message[1] . ' <' . $wordpress_directory . '>' . "\n" . $message[2] . ' <' . $official_web_site . '>',
+			'chatwork' => '[hr]' . $message[0] . "\n" . $message[1] . ' ' . $wordpress_directory . "\n" . $message[2] . ' ' . $official_web_site,
+		};
+	}
+
+	/**
 	 * Methods to send to chat tools.
 	 *
 	 * @param string $id      ID(Comment/Update).
