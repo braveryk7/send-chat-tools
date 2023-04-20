@@ -19,6 +19,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Slack extends Sct_Generate_Content_Abstract {
 	/**
+	 * Constructor.
+	 *
+	 * @param object $comment Comment data.
+	 */
+	public function __construct( object $comment ) {
+		parent::__construct( $comment );
+		require_once 'class-sct-slack-blocks.php';
+	}
+
+	/**
 	 * A method to generate a Slack header.
 	 */
 	public function generate_header(): array {
