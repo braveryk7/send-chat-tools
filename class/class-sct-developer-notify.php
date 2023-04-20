@@ -34,8 +34,25 @@ class Sct_Developer_Notify extends Sct_Base {
 		if ( $developer_messages && is_array( $developer_messages ) ) {
 			foreach ( $developer_messages as $developer_message ) {
 				if ( $developer_message && $this->developer_message_controller( $developer_message ) ) {
-					$generate_content = new Sct_Generate_Content();
-					$generate_content->controller( 0, 'dev_notify', $developer_message );
+					$sct_options = $this->get_sct_options();
+					$tools       = [ 'slack', 'discord', 'chatwork' ];
+
+					foreach ( $tools as $tool ) {
+						$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
+
+						if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['send_update'] ) {
+							$instance = match ( $tool ) {
+								'slack'    => Sct_Slack::get_instance(),
+								'discord'  => Sct_Discord::get_instance(),
+								'chatwork' => Sct_Chatwork::get_instance(),
+							};
+							$instance?->generate_developer_message( $developer_message )?->generate_header()?->send_tools( 'update', $tool );
+						} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
+							$this->logger( 1001, $tool, '1' );
+						} elseif ( 'chatwork' === $tools && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
+							$this->logger( 1002, 'chatwork', '1' );
+						};
+					}
 				}
 			}
 		}
