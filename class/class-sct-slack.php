@@ -19,10 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Slack extends Sct_Generate_Content_Abstract {
 	/**
-	 * Constructor.
+	 * A method to generate a Slack header.
 	 */
-	public function __construct() {
-		require_once 'class-sct-slack-blocks.php';
+	public function generate_header(): array {
+		return [
+			'method'  => 'POST',
+			'headers' => [ 'Content-Type: application/json;charset=utf-8' ],
+			'body'    => wp_json_encode( $this->generate_comment_content( $this->comment ) ),
+		];
 	}
 
 	/**
@@ -75,6 +79,6 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 			],
 		];
 
-		return [];
+		return $message;
 	}
 }
