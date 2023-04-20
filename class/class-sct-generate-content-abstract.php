@@ -103,12 +103,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
 	 * Send Slack.
 	 *
-	 * @param array  $options API options.
 	 * @param string $id      ID(Comment/Update).
 	 * @param string $tool    Use chat tools prefix.
-	 * @param object $comment Comment object.
 	 */
-	public function send_tools( array $options, string $id, string $tool, object $comment = null ): bool {
+	public function send_tools( string $id, string $tool ): bool {
 
 		$sct_options = $this->get_sct_options();
 
@@ -125,16 +123,16 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		}
 
 		if ( $regex ) {
-			$result = wp_remote_post( $url, $options );
+			$result = wp_remote_post( $url, $this->header );
 
-			if ( ! is_null( $comment ) ) {
+			if ( ! is_null( $this->comment ) ) {
 				$logs = [
-					$comment->comment_date => [
-						'id'      => $comment->comment_ID,
-						'author'  => $comment->comment_author,
-						'email'   => $comment->comment_author_email,
-						'url'     => $comment->comment_author_url,
-						'comment' => $comment->comment_content,
+					$this->comment->comment_date => [
+						'id'      => $this->comment->comment_ID,
+						'author'  => $this->comment->comment_author,
+						'email'   => $this->comment->comment_author_email,
+						'url'     => $this->comment->comment_author_url,
+						'comment' => $this->comment->comment_content,
 						'status'  => $result['response']['code'],
 					],
 				];
