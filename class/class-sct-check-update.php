@@ -41,8 +41,25 @@ class Sct_Check_Update extends Sct_Base {
 		}
 
 		if ( ! empty( $updates ) ) {
-			$generate_content = new Sct_Generate_Content();
-			$generate_content->controller( type: 'update', update_content: $updates );
+			$sct_options = $this->get_sct_options();
+			$tools       = [ 'slack', 'discord', 'chatwork' ];
+
+			foreach ( $tools as $tool ) {
+				$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
+
+				if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['send_update'] ) {
+					$instance = match ( $tool ) {
+						'slack'    => Sct_Slack::get_instance(),
+						'discord'  => Sct_Discord::get_instance(),
+						'chatwork' => Sct_Chatwork::get_instance(),
+					};
+					$instance?->generate_update_content( $updates )?->generate_header()?->send_tools( 'update', $tool );
+				} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
+					$this->logger( 1001, $tool, '1' );
+				} elseif ( 'chatwork' === $tools && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
+					$this->logger( 1002, 'chatwork', '1' );
+				};
+			}
 		}
 	}
 
