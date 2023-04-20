@@ -23,5 +23,5 @@ abstract class Sct_Generate_Content_Abstract {
 	 *
 	 * @param object $comment Comment data.
 	 */
-	abstract public function generate_content( object $comment, ): array;
+	abstract public function generate_comment_content( object $comment, ): array;
 }
