@@ -64,6 +64,28 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	abstract public function generate_update_content( array $update_content ): Sct_Slack | Sct_Discord | Sct_Chatwork;
 
 	/**
+	 * Generate comment approved message.
+	 *
+	 * @param string $tool_name Tool name.
+	 * @param object $comment   Comment data.
+	 */
+	protected function generate_comment_approved_message( string $tool_name, object $comment ): string {
+		$approved_url  = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
+		$unapproved    = $this->get_send_text( 'comment', 'unapproved' );
+		$click_message = $this->get_send_text( 'comment', 'click' );
+
+		return match ( $comment->comment_approved ) {
+			'1'    => $this->get_send_text( 'comment', 'approved' ),
+			'0'    => match ( $tool_name ) {
+				'slack'    => $unapproved . '<<' . $approved_url . '|' . $click_message . '>>',
+				'discord'  => $unapproved . ' >> ' . $click_message . '( ' . $approved_url . ' )',
+				'chatwork' => $unapproved . "\n" . $click_message . ' ' . $approved_url,
+			},
+			'spam' => $this->get_send_text( 'comment', 'spam' ),
+		};
+	}
+
+	/**
 	 * Generate plain update messages.
 	 *
 	 * @param array $update_content Update data.
