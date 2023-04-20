@@ -19,6 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Slack extends Sct_Generate_Content_Abstract {
 	/**
+	 * Constructor.
+	 */
+	public function __construct() {
+		require_once 'class-sct-slack-blocks.php';
+	}
+
+	/**
 	 * Abstract method to create comment data to be sent to chat tools.
 	 *
 	 * @param object $comment Comment data.
