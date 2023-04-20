@@ -17,9 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Abstract class
  */
-abstract class Sct_Generate_Content_Abstract {
+abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
-	 * チャットツールに送信するコメントデータを作成するabstractメソッド
+	 * チャットツールに送信するコメントデータを作成するabstractメソッド。
 	 *
 	 * @param object $comment Comment data.
 	 */
