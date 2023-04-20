@@ -43,8 +43,7 @@ class Sct_Check_Comment extends Sct_Base {
 				$chat = match ( $tool ) {
 					'slack' => new Sct_Slack( $comment ),
 				};
-				$options = $chat->generate_header();
-				$this->send_tools( $options, (string) $wpdb->insert_id, $tool, $comment );
+				$chat->generate_comment_content( $comment )->generate_header()->send_tools( (string) $wpdb->insert_id, $tool );
 			}
 		}
 	}
