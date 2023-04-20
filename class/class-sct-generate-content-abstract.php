@@ -40,6 +40,11 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	protected $comment_content;
 
 	/**
+	 * Abstract method to get an instance.
+	 */
+	abstract public static function get_instance(): Sct_Slack;
+
+	/**
 	 * Abstract method to generate a chat tool header.
 	 */
 	abstract public function generate_header(): Sct_Slack;
