@@ -18,4 +18,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Abstract class
  */
 abstract class Sct_Generate_Content_Abstract {
+	/**
+	 * チャットツールに送信するコメントデータを作成するabstractメソッド
+	 *
+	 * @param object $comment Comment data.
+	 */
+	abstract public function generate_content( object $comment, ): array;
 }
