@@ -99,4 +99,11 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 		return $this;
 	}
+
+	/**
+	 * Generate update notifications for Slack.
+	 */
+	public function generate_update_content(): Sct_Slack {
+		return $this;
+	}
 }

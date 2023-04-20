@@ -78,4 +78,11 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 		return $this;
 	}
+
+	/**
+	 * Generate update notifications for Discord.
+	 */
+	public function generate_update_content(): Sct_Discord {
+		return $this;
+	}
 }
