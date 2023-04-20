@@ -41,9 +41,9 @@ class Sct_Check_Comment extends Sct_Base {
 			if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
 				global $wpdb;
 				$chat = match ( $tool ) {
-					'slack' => new Sct_Slack( $comment ),
+					'slack' => Sct_Slack::get_instance(),
 				};
-				$chat->generate_comment_content( $comment )->generate_header()->send_tools( (string) $wpdb->insert_id, $tool );
+				$chat?->generate_comment_content( $comment )?->generate_header()?->send_tools( (string) $wpdb->insert_id, $tool );
 			}
 		}
 	}
