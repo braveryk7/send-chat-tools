@@ -35,7 +35,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		return [
 			'method'  => 'POST',
 			'headers' => [ 'Content-Type: application/json;charset=utf-8' ],
-			'body'    => wp_json_encode( $this->generate_comment_content( $this->comment ) ),
+			'body'    => wp_json_encode( $this->comment_content ),
 		];
 	}
 
@@ -44,7 +44,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 *
 	 * @param object $comment Comment data.
 	 */
-	public function generate_comment_content( object $comment, ): array {
+	public function generate_comment_content( object $comment, ): Sct_Slack {
 		$site_name     = get_bloginfo( 'name' );
 		$site_url      = get_bloginfo( 'url' );
 		$article_title = get_the_title( $comment->comment_post_ID );
@@ -74,8 +74,8 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$comment_statuses = '*' . $this->get_send_text( 'comment', 'status' ) . "*\n{$comment_status}";
 		$context          = $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>';
 
-		$blocks  = new Sct_Slack_Blocks();
-		$message = [
+		$blocks                = new Sct_Slack_Blocks();
+		$this->comment_content = [
 			'text'   => $header_message,
 			'blocks' => [
 				$blocks->header( 'plain_text', $header_message, true ),
@@ -89,6 +89,6 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 			],
 		];
 
-		return $message;
+		return $this;
 	}
 }
