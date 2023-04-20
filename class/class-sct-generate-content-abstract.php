@@ -57,6 +57,35 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	abstract public function generate_comment_content( object $comment, ): Sct_Slack | Sct_Discord | Sct_Chatwork;
 
 	/**
+	 * Generate plain update messages.
+	 *
+	 * @param array $update_content Update data.
+	 */
+	protected function generate_update_message( array $update_content ): stdClass {
+		$add_core    = null;
+		$add_themes  = null;
+		$add_plugins = null;
+
+		foreach ( $update_content as $value ) {
+			$is_core                              = 'core' === $value['attribute'] ? null : 's';
+			${ "add_$value[attribute]$is_core" } .= "   $value[name] ( $value[current_version] -> $value[new_version] )\n";
+		};
+
+		$plain_update_message               = new stdClass();
+		$plain_update_message->core         = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
+		$plain_update_message->themes       = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
+		$plain_update_message->plugins      = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
+		$plain_update_message->site_name    = get_bloginfo( 'name' );
+		$plain_update_message->site_url     = get_bloginfo( 'url' );
+		$plain_update_message->update_page  = $this->get_send_text( 'update', 'page' );
+		$plain_update_message->admin_url    = admin_url() . 'update-core.php';
+		$plain_update_message->update_title = $this->get_send_text( 'update', 'title' );
+		$plain_update_message->update_text  = $this->get_send_text( 'update', 'update' );
+
+		return $plain_update_message;
+	}
+
+	/**
 	 * Get comment notify content.
 	 *
 	 * @param string $type  Message type.
