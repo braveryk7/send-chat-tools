@@ -26,6 +26,13 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
+	 * Instantiate and return itself.
+	 */
+	public static function get_instance(): Sct_Slack {
+		return new self();
+	}
+
+	/**
 	 * A method to generate a Slack header.
 	 */
 	public function generate_header(): Sct_Slack {
