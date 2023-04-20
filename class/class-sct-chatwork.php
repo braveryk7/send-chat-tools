@@ -89,6 +89,28 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	 * @param array $update_content Update data.
 	 */
 	public function generate_update_content( array $update_content ): Sct_Chatwork {
+		$plain_data = $this->generate_plain_update_message( $update_content );
+
+		$message = [
+			0 => esc_html__( 'This message was sent by Send Chat Tools: ', 'send-chat-tools' ),
+			1 => esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ),
+			2 => esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ),
+		];
+
+		$wordpress_directory = $this->get_official_directory();
+		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
+
+		$core    = isset( $plain_data->core ) ? rtrim( $plain_data->core ) . '[hr]' : $plain_data->core;
+		$themes  = isset( $plain_data->themes ) ? rtrim( $plain_data->themes ) . '[hr]' : $plain_data->themes;
+		$plugins = isset( $plain_data->plugins ) ? rtrim( $plain_data->plugins ) . '[hr]' : $plain_data->plugins;
+
+		$this->content = [
+			'body' =>
+				'[info][title]' . $plain_data->site_name . '( ' . $plain_data->site_url . ' )' . $plain_data->update_title . '[/title]' .
+				$core . $themes . $plugins . $plain_data->update_text . "\n" . $plain_data->update_page . $plain_data->admin_url . "\n" .
+				'[hr]' . $message[0] . "\n" . $message[1] . ' ' . $wordpress_directory . "\n" . $message[2] . ' ' . $official_web_site .
+				'[/info]',
+		];
 		return $this;
 	}
 }
