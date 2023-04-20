@@ -158,6 +158,94 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 * @param array $developer_message Developer message.
 	 */
 	public function generate_developer_message( array $developer_message ): Sct_Slack {
+		if ( isset( $developer_message['title'] ) && isset( $developer_message['message'] ) && array_key_exists( 'url', $developer_message ) ) {
+			$site_name     = get_bloginfo( 'name' );
+			$site_url      = get_bloginfo( 'url' );
+			$message_title = sprintf(
+				/* translators: 1: Theme or Plugin name */
+				esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
+				esc_html( $developer_message['title'] ),
+			);
+			$content = '';
+
+			$i = 0;
+			foreach ( $developer_message['message'] as $value ) {
+				if ( $i >= 50 ) {
+					break;
+				}
+				$content .= $value . "\n";
+				$i++;
+			}
+
+			if ( ! is_null( $developer_message['url'] ) ) {
+				$website_url     = array_key_exists( 'website', $developer_message['url'] ) ? $developer_message['url']['website'] : null;
+				$update_page_url = array_key_exists( 'update_page', $developer_message['url'] ) ? $developer_message['url']['update_page'] : null;
+			} else {
+				$website_url     = null;
+				$update_page_url = null;
+			}
+
+			$header_emoji   = ':tada:';
+			$header_message = "{$header_emoji} {$site_name}({$site_url}) " . $message_title;
+
+			$context = $this->generate_context( 'slack' );
+
+			$blocks  = new Sct_Slack_Blocks();
+			$message = [
+				'text'   => $header_message,
+				'blocks' => [
+					$blocks->header( 'plain_text', $header_message, true ),
+				],
+			];
+
+			$main_content = [
+				'blocks' => [
+					$blocks->single_column( 'mrkdwn', $content ),
+				],
+			];
+
+			$message = array_merge_recursive( $message, $main_content );
+
+			if ( $website_url ) {
+				$website = [
+					'blocks' => [
+						$blocks->single_column(
+							'mrkdwn',
+							$this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url,
+						),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $website );
+			}
+
+			if ( $update_page_url ) {
+				$update_page = [
+					'blocks' => [
+						$blocks->single_column(
+							'mrkdwn',
+							$this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url,
+						),
+					],
+				];
+
+				$message = array_merge_recursive( $message, $update_page );
+			}
+
+			$fixed_phrase = [
+				'blocks' => [
+					$blocks->divider(),
+					$blocks->context(
+						'mrkdwn',
+						$this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $developer_message['key'],
+					),
+					$blocks->context( 'mrkdwn', $context ),
+				],
+			];
+
+			$this->content = array_merge_recursive( $message, $fixed_phrase );
+		}
+
 		return $this;
 	}
 }
