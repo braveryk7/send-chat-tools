@@ -39,18 +39,16 @@ if ( ! $sct_phpver_judge->judgment( $sct_require_php_version ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-encryption.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-admin-page.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-generate-content.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-comment.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-activate.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-dashboard-notify.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-developer-notify.php';
-
-	/**
-	 * Start comment process.
-	 */
-	new Sct_Generate_Content();
+	require_once dirname( __FILE__ ) . '/class/class-sct-generate-content-abstract.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-slack.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-discord.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-chatwork.php';
 
 	/**
 	 * Start comment process.
