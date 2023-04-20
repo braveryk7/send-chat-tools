@@ -30,6 +30,12 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	 * A method to generate a Chatwork header.
 	 */
 	public function generate_header(): Sct_Chatwork {
+		$this->header = [
+			'method'  => 'POST',
+			'headers' => 'X-ChatWorkToken: ' . $this->get_sct_options()['chatwork']['api_token'],
+			'body'    => $this->comment_content,
+		];
+
 		return $this;
 	}
 
