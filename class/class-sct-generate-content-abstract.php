@@ -19,6 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
+	 * Property with WordPress comment data.
+	 *
+	 * @var object Comment data.
+	 */
+	protected $comment;
+
+	/**
 	 * Abstract method to generate a chat tool header.
 	 */
 	abstract public function generate_header(): array;
