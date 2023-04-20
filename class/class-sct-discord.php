@@ -70,7 +70,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 			$this->get_send_text( 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
 			$this->get_send_text( 'comment', 'url' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
 			$this->get_send_text( 'comment', 'status' ) . $comment_status . "\n\n" .
-			$this->$message[0] . "\n" . $message[1] . ' <' . $wordpress_directory . '>' . "\n" . $message[2] . ' <' . $official_web_site . '>';
+			$message[0] . "\n" . $message[1] . ' <' . $wordpress_directory . '>' . "\n" . $message[2] . ' <' . $official_web_site . '>';
 
 		return $this;
 	}
