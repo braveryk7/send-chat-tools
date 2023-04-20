@@ -20,11 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Sct_Slack extends Sct_Generate_Content_Abstract {
 	/**
 	 * Constructor.
-	 *
-	 * @param object $comment Comment data.
 	 */
-	public function __construct( object $comment ) {
-		parent::__construct( $comment );
+	public function __construct() {
 		require_once 'class-sct-slack-blocks.php';
 	}
 
@@ -47,6 +44,8 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 * @param object $comment Comment data.
 	 */
 	public function generate_comment_content( object $comment, ): Sct_Slack {
+		$this->comment = $comment;
+
 		$site_name     = get_bloginfo( 'name' );
 		$site_url      = get_bloginfo( 'url' );
 		$article_title = get_the_title( $comment->comment_post_ID );
