@@ -34,6 +34,19 @@ class Sct_Check_Comment extends Sct_Base {
 		$sct_options = $this->get_sct_options();
 		$tools       = [ 'slack', 'discord', 'chatwork' ];
 		$comment     = get_comment( $comment_id );
+
+		foreach ( $tools as $tool ) {
+			$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
+
+			if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
+				global $wpdb;
+				$chat = match ( $tool ) {
+					'slack' => new Sct_Slack( $comment ),
+				};
+				$options = $chat->generate_header();
+				$this->send_tools( $options, (string) $wpdb->insert_id, $tool, $comment );
+			}
+		}
 	}
 
 	/**
