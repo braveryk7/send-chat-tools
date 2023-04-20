@@ -85,8 +85,10 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate update notifications for Chatwork.
+	 *
+	 * @param array $update_content Update data.
 	 */
-	public function generate_update_content(): Sct_Chatwork {
+	public function generate_update_content( array $update_content ): Sct_Chatwork {
 		return $this;
 	}
 }

@@ -81,8 +81,10 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate update notifications for Discord.
+	 *
+	 * @param array $update_content Update data.
 	 */
-	public function generate_update_content(): Sct_Discord {
+	public function generate_update_content( array $update_content ): Sct_Discord {
 		return $this;
 	}
 }
