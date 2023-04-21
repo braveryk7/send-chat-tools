@@ -39,7 +39,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	public function generate_header(): Sct_Chatwork {
 		$this->header = [
 			'method'  => 'POST',
-			'headers' => 'X-ChatWorkToken: ' . $this->get_sct_options()['chatwork']['api_token'],
+			'headers' => 'X-ChatWorkToken: ' . $this->get_sct_options()[ $this->tool_name ]['api_token'],
 			'body'    => $this->content,
 		];
 
@@ -58,7 +58,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		$site_url       = get_bloginfo( 'url' );
 		$article_title  = get_the_title( $comment->comment_post_ID );
 		$article_url    = get_permalink( $comment->comment_post_ID );
-		$comment_status = $this->generate_comment_approved_message( 'chatwork', $comment );
+		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$this->content = [
 			'body' =>
@@ -70,7 +70,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 				$this->get_send_text( 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n" .
 				'[hr]' .
 				$this->get_send_text( 'comment', 'status' ) . $comment_status .
-				$this->generate_context( 'chatwork' ) . '[/info]',
+				$this->generate_context( $this->tool_name ) . '[/info]',
 		];
 
 		return $this;
@@ -92,7 +92,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 			'body' =>
 				'[info][title]' . $plain_data->site_name . '( ' . $plain_data->site_url . ' )' . $plain_data->update_title . '[/title]' .
 				$core . $themes . $plugins . $plain_data->update_text . "\n" . $plain_data->update_page . $plain_data->admin_url . "\n" .
-				$this->generate_context( 'chatwork' ) . '[/info]',
+				$this->generate_context( $this->tool_name ) . '[/info]',
 		];
 		return $this;
 	}
@@ -138,7 +138,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 					$content . "\n" .
 					$website . $update_page .
 					'[hr]' . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $developer_message['key'] .
-					$this->generate_context( 'chatwork' ) .
+					$this->generate_context( $this->tool_name ) .
 					'[/info]',
 			];
 		}

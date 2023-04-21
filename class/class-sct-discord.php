@@ -58,7 +58,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$site_url       = get_bloginfo( 'url' );
 		$article_title  = get_the_title( $comment->comment_post_ID );
 		$article_url    = get_permalink( $comment->comment_post_ID );
-		$comment_status = $this->generate_comment_approved_message( 'discord', $comment );
+		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$this->content =
 			$site_name . '( <' . $site_url . '> )' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
@@ -68,7 +68,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 			$this->get_send_text( 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
 			$this->get_send_text( 'comment', 'url' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
 			$this->get_send_text( 'comment', 'status' ) . $comment_status . "\n\n" .
-			$this->generate_context( 'discord' );
+			$this->generate_context( $this->tool_name );
 
 		return $this;
 	}
@@ -85,7 +85,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 			$plain_data->site_name . '( <' . $plain_data->site_url . '> )' . $plain_data->update_title . "\n\n" .
 			$plain_data->core . $plain_data->themes . $plain_data->plugins .
 			$plain_data->update_text . "\n" . $plain_data->update_page . '<' . $plain_data->admin_url . '>' . "\n\n" .
-			$this->generate_context( 'discord' );
+			$this->generate_context( $this->tool_name );
 
 		return $this;
 	}
@@ -128,7 +128,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 			$website       = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
 			$update_page   = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
 			$ignore        = "\n" . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $developer_message['key'] . "\n";
-			$this->content = $title . $main_content . $website . $update_page . $ignore . "\n" . $this->generate_context( 'discord' );
+			$this->content = $title . $main_content . $website . $update_page . $ignore . "\n" . $this->generate_context( $this->tool_name );
 		}
 
 		return $this;
