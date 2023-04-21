@@ -54,10 +54,18 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	protected $site_name;
 
 	/**
+	 * Property that stores the site URL.
+	 *
+	 * @var string Site URL.
+	 */
+	protected $site_url;
+
+	/**
 	 * Constructor to obtain information necessary for content generation.
 	 */
 	protected function __construct() {
 		$this->site_name = get_bloginfo( 'name' );
+		$this->site_url  = get_bloginfo( 'url' );
 	}
 
 	/**
