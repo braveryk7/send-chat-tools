@@ -268,4 +268,21 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 		return $header;
 	}
+	/**
+	 * Create single column.
+	 *
+	 * @param string $type content type.
+	 * @param string $text content text.
+	 */
+	private function single_column( string $type, string $text ): array {
+		$column = [
+			'type' => 'section',
+			'text' => [
+				'type' => $type,
+				'text' => $text,
+			],
+		];
+
+		return $column;
+	}
 }
