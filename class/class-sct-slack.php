@@ -309,4 +309,24 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 		return $columns;
 	}
+
+	/**
+	 * Create context.
+	 *
+	 * @param string $type content type.
+	 * @param string $text content text.
+	 */
+	public function context( string $type, string $text ): array {
+		$context = [
+			'type'     => 'context',
+			'elements' => [
+				[
+					'type' => $type,
+					'text' => $text,
+				],
+			],
+		];
+
+		return $context;
+	}
 }
