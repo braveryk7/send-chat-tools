@@ -47,9 +47,17 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	protected $tool_name;
 
 	/**
+	 * Property that stores the site name.
+	 *
+	 * @var string Site name.
+	 */
+	protected $site_name;
+
+	/**
 	 * Constructor to obtain information necessary for content generation.
 	 */
 	protected function __construct() {
+		$this->site_name = get_bloginfo( 'name' );
 	}
 
 	/**
