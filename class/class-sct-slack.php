@@ -69,18 +69,17 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$comment_statuses = '*' . $this->get_send_text( 'comment', 'status' ) . "*\n{$comment_status}";
 		$context          = $this->generate_context( 'slack' );
 
-		$blocks        = new Sct_Slack_Blocks();
 		$this->content = [
 			'text'   => $header_message,
 			'blocks' => [
-				$blocks->header( 'plain_text', $header_message, true ),
-				$blocks->single_column( 'mrkdwn', $comment_article ),
-				$blocks->divider(),
-				$blocks->two_column( [ 'mrkdwn', $author ], [ 'mrkdwn', $date ] ),
-				$blocks->single_column( 'mrkdwn', $comment_content ),
-				$blocks->two_column( [ 'mrkdwn', $comment_url ], [ 'mrkdwn', $comment_statuses ] ),
-				$blocks->divider(),
-				$blocks->context( 'mrkdwn', $context ),
+				$this->header( 'plain_text', $header_message, true ),
+				$this->single_column( 'mrkdwn', $comment_article ),
+				$this->divider(),
+				$this->two_column( [ 'mrkdwn', $author ], [ 'mrkdwn', $date ] ),
+				$this->single_column( 'mrkdwn', $comment_content ),
+				$this->two_column( [ 'mrkdwn', $comment_url ], [ 'mrkdwn', $comment_statuses ] ),
+				$this->divider(),
+				$this->context( 'mrkdwn', $context ),
 			],
 		];
 
@@ -99,18 +98,17 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$update_message = $plain_data->update_text . "\n" . $plain_data->update_page . "<{$plain_data->admin_url}>";
 		$context        = $this->generate_context( 'slack' );
 
-		$blocks  = new Sct_Slack_Blocks();
 		$message = [
 			'text'   => $header_message,
 			'blocks' => [
-				$blocks->header( 'plain_text', $header_message, true ),
+				$this->header( 'plain_text', $header_message, true ),
 			],
 		];
 
 		if ( isset( $plain_data->core ) ) {
 			$core_message = [
 				'blocks' => [
-					$blocks->single_column( 'mrkdwn', ':star: ' . $plain_data->core ),
+					$this->single_column( 'mrkdwn', ':star: ' . $plain_data->core ),
 				],
 			];
 
@@ -120,7 +118,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		if ( isset( $plain_data->themes ) ) {
 			$themes_message = [
 				'blocks' => [
-					$blocks->single_column( 'mrkdwn', ':art: ' . $plain_data->themes ),
+					$this->single_column( 'mrkdwn', ':art: ' . $plain_data->themes ),
 				],
 			];
 
@@ -130,7 +128,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		if ( isset( $plain_data->plugins ) ) {
 			$plugins_message = [
 				'blocks' => [
-					$blocks->single_column( 'mrkdwn', ':wrench: ' . $plain_data->plugins ),
+					$this->single_column( 'mrkdwn', ':wrench: ' . $plain_data->plugins ),
 				],
 			];
 
@@ -139,9 +137,9 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 		$fixed_phrase = [
 			'blocks' => [
-				$blocks->single_column( 'mrkdwn', $update_message ),
-				$blocks->divider(),
-				$blocks->context( 'mrkdwn', $context ),
+				$this->single_column( 'mrkdwn', $update_message ),
+				$this->divider(),
+				$this->context( 'mrkdwn', $context ),
 			],
 		];
 
@@ -190,17 +188,16 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 			$context = $this->generate_context( 'slack' );
 
-			$blocks  = new Sct_Slack_Blocks();
 			$message = [
 				'text'   => $header_message,
 				'blocks' => [
-					$blocks->header( 'plain_text', $header_message, true ),
+					$this->header( 'plain_text', $header_message, true ),
 				],
 			];
 
 			$main_content = [
 				'blocks' => [
-					$blocks->single_column( 'mrkdwn', $content ),
+					$this->single_column( 'mrkdwn', $content ),
 				],
 			];
 
@@ -209,7 +206,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 			if ( $website_url ) {
 				$website = [
 					'blocks' => [
-						$blocks->single_column(
+						$this->single_column(
 							'mrkdwn',
 							$this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url,
 						),
@@ -222,7 +219,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 			if ( $update_page_url ) {
 				$update_page = [
 					'blocks' => [
-						$blocks->single_column(
+						$this->single_column(
 							'mrkdwn',
 							$this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url,
 						),
@@ -234,12 +231,12 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 			$fixed_phrase = [
 				'blocks' => [
-					$blocks->divider(),
-					$blocks->context(
+					$this->divider(),
+					$this->context(
 						'mrkdwn',
 						$this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $developer_message['key'],
 					),
-					$blocks->context( 'mrkdwn', $context ),
+					$this->context( 'mrkdwn', $context ),
 				],
 			];
 
