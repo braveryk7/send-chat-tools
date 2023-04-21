@@ -40,6 +40,12 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	protected $content;
 
 	/**
+	 * Constructor to obtain information necessary for content generation.
+	 */
+	protected function __construct() {
+	}
+
+	/**
 	 * Abstract method to get an instance.
 	 */
 	abstract public static function get_instance(): Sct_Slack | Sct_Discord | Sct_Chatwork;
