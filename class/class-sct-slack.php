@@ -285,4 +285,28 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 		return $column;
 	}
+
+	/**
+	 * Create two column.
+	 *
+	 * @param array $content1st [ $type, $text ].
+	 * @param array $content2nd [ $type, $text ].
+	 */
+	private function two_column( array $content1st, array $content2nd ): array {
+		$columns = [
+			'type'   => 'section',
+			'fields' => [
+				[
+					'type' => $content1st[0],
+					'text' => $content1st[1],
+				],
+				[
+					'type' => $content2nd[0],
+					'text' => $content2nd[1],
+				],
+			],
+		];
+
+		return $columns;
+	}
 }
