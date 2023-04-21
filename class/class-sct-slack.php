@@ -329,4 +329,15 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 		return $context;
 	}
+
+	/**
+	 * Create divider.
+	 */
+	private function divider(): array {
+		$divider = [
+			'type' => 'divider',
+		];
+
+		return $divider;
+	}
 }
