@@ -18,6 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class for Chatwork processing.
  */
 class Sct_Chatwork extends Sct_Generate_Content_Abstract {
+	/**
+	 * Constructors that inherit from the abstract class constructor.
+	 */
+	private function __construct() {
+		parent::__construct();
+		$this->tool_name = 'chatwork';
+	}
 
 	/**
 	 * Instantiate and return itself.

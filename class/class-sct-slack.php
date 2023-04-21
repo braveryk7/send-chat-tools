@@ -19,6 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Slack extends Sct_Generate_Content_Abstract {
 	/**
+	 * Constructors that inherit from the abstract class constructor.
+	 */
+	private function __construct() {
+		parent::__construct();
+		$this->tool_name = 'slack';
+	}
+
+	/**
 	 * Instantiate and return itself.
 	 */
 	public static function get_instance(): Sct_Slack {
