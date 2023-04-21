@@ -248,4 +248,24 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 		return $this;
 	}
+
+	/**
+	 * Create header.
+	 *
+	 * @param string $type content type.
+	 * @param string $text content text.
+	 * @param bool   $emoji Use emoji.
+	 */
+	private function header( string $type, string $text, bool $emoji = true ): array {
+		$header = [
+			'type' => 'header',
+			'text' => [
+				'type'  => $type,
+				'text'  => $text,
+				'emoji' => $emoji,
+			],
+		];
+
+		return $header;
+	}
 }
