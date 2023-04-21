@@ -40,6 +40,13 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	protected $content;
 
 	/**
+	 * Property that stores the tool name.
+	 *
+	 * @var string Tool name.
+	 */
+	protected $tool_name;
+
+	/**
 	 * Constructor to obtain information necessary for content generation.
 	 */
 	protected function __construct() {
