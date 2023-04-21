@@ -19,13 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Slack extends Sct_Generate_Content_Abstract {
 	/**
-	 * Constructor.
-	 */
-	public function __construct() {
-		require_once 'class-sct-slack-blocks.php';
-	}
-
-	/**
 	 * Instantiate and return itself.
 	 */
 	public static function get_instance(): Sct_Slack {
