@@ -54,14 +54,12 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	public function generate_comment_content( object $comment, ): Sct_Discord {
 		$this->comment = $comment;
 
-		$site_name      = get_bloginfo( 'name' );
-		$site_url       = get_bloginfo( 'url' );
 		$article_title  = get_the_title( $comment->comment_post_ID );
 		$article_url    = get_permalink( $comment->comment_post_ID );
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$this->content =
-			$site_name . '( <' . $site_url . '> )' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
+			$this->site_name . '( <' . $this->site_url . '> )' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
 			$this->get_send_text( 'comment', 'article' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
 			$this->get_send_text( 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
 			$this->get_send_text( 'comment', 'date' ) . $comment->comment_date . "\n" .
@@ -97,8 +95,6 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_developer_message( array $developer_message ): Sct_Discord {
 		if ( isset( $developer_message['title'] ) && isset( $developer_message['message'] ) && array_key_exists( 'url', $developer_message ) ) {
-			$site_name     = get_bloginfo( 'name' );
-			$site_url      = get_bloginfo( 'url' );
 			$message_title = sprintf(
 				/* translators: 1: Theme or Plugin name */
 				esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
@@ -123,7 +119,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 				$update_page_url = null;
 			}
 
-			$title         = $site_name . '( <' . $site_url . '> ) ' . $message_title . "\n\n";
+			$title         = $this->site_name . '( <' . $this->site_url . '> ) ' . $message_title . "\n\n";
 			$main_content  = $content . "\n";
 			$website       = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
 			$update_page   = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;

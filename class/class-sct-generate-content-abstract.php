@@ -140,8 +140,8 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		$plain_update_message->core         = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
 		$plain_update_message->themes       = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
 		$plain_update_message->plugins      = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
-		$plain_update_message->site_name    = get_bloginfo( 'name' );
-		$plain_update_message->site_url     = get_bloginfo( 'url' );
+		$plain_update_message->site_name    = $this->site_name;
+		$plain_update_message->site_url     = $this->site_url;
 		$plain_update_message->update_page  = $this->get_send_text( 'update', 'page' );
 		$plain_update_message->admin_url    = admin_url() . 'update-core.php';
 		$plain_update_message->update_title = $this->get_send_text( 'update', 'title' );

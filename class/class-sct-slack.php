@@ -54,14 +54,12 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	public function generate_comment_content( object $comment, ): Sct_Slack {
 		$this->comment = $comment;
 
-		$site_name      = get_bloginfo( 'name' );
-		$site_url       = get_bloginfo( 'url' );
 		$article_title  = get_the_title( $comment->comment_post_ID );
 		$article_url    = get_permalink( $comment->comment_post_ID );
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$header_emoji     = ':mailbox_with_mail:';
-		$header_message   = "{$header_emoji} {$site_name}({$site_url})" . $this->get_send_text( 'comment', 'title' );
+		$header_message   = "{$header_emoji} {$this->site_name}({$this->site_url})" . $this->get_send_text( 'comment', 'title' );
 		$comment_article  = '*' . $this->get_send_text( 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
 		$author           = '*' . $this->get_send_text( 'comment', 'author' ) . "*\n{$comment->comment_author}<{$comment->comment_author_email}>";
 		$date             = '*' . $this->get_send_text( 'comment', 'date' ) . "*\n{$comment->comment_date}";
@@ -158,8 +156,6 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_developer_message( array $developer_message ): Sct_Slack {
 		if ( isset( $developer_message['title'] ) && isset( $developer_message['message'] ) && array_key_exists( 'url', $developer_message ) ) {
-			$site_name     = get_bloginfo( 'name' );
-			$site_url      = get_bloginfo( 'url' );
 			$message_title = sprintf(
 				/* translators: 1: Theme or Plugin name */
 				esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
@@ -185,7 +181,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 			}
 
 			$header_emoji   = ':tada:';
-			$header_message = "{$header_emoji} {$site_name}({$site_url}) " . $message_title;
+			$header_message = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $message_title;
 
 			$context = $this->generate_context( $this->tool_name );
 
