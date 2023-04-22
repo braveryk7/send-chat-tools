@@ -177,7 +177,8 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'page'   => esc_html__( 'Update Page:', 'send-chat-tools' ),
 			],
 			'dev_notify' => [
-				'title'   => esc_html__( 'Notification of plugin updates from', 'send-chat-tools' ),
+				/* translators: 1: Theme or Plugin name */
+				'title'   => esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
 				'website' => esc_html__( 'Official Web Site', 'send-chat-tools' ),
 				'detail'  => esc_html__( 'Update details', 'send-chat-tools' ),
 				'ignore'  => esc_html__(
