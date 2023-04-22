@@ -156,12 +156,8 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_developer_message( array $developer_message ): Sct_Slack {
 		if ( isset( $developer_message['title'] ) && isset( $developer_message['message'] ) && array_key_exists( 'url', $developer_message ) ) {
-			$message_title = sprintf(
-				/* translators: 1: Theme or Plugin name */
-				esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
-				esc_html( $developer_message['title'] ),
-			);
-			$content = '';
+			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $developer_message['title'] ), );
+			$content       = '';
 
 			$i = 0;
 			foreach ( $developer_message['message'] as $value ) {
