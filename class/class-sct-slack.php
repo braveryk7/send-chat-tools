@@ -19,6 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Slack extends Sct_Generate_Content_Abstract {
 	/**
+	 * Constructors that inherit from the abstract class constructor.
+	 */
+	private function __construct() {
+		parent::__construct();
+		$this->tool_name = 'slack';
+	}
+
+	/**
 	 * Instantiate and return itself.
 	 */
 	public static function get_instance(): Sct_Slack {
@@ -46,21 +54,19 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	public function generate_comment_content( object $comment, ): Sct_Slack {
 		$this->comment = $comment;
 
-		$site_name      = get_bloginfo( 'name' );
-		$site_url       = get_bloginfo( 'url' );
 		$article_title  = get_the_title( $comment->comment_post_ID );
 		$article_url    = get_permalink( $comment->comment_post_ID );
-		$comment_status = $this->generate_comment_approved_message( 'slack', $comment );
+		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$header_emoji     = ':mailbox_with_mail:';
-		$header_message   = "{$header_emoji} {$site_name}({$site_url})" . $this->get_send_text( 'comment', 'title' );
+		$header_message   = "{$header_emoji} {$this->site_name}({$this->site_url})" . $this->get_send_text( 'comment', 'title' );
 		$comment_article  = '*' . $this->get_send_text( 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
 		$author           = '*' . $this->get_send_text( 'comment', 'author' ) . "*\n{$comment->comment_author}<{$comment->comment_author_email}>";
 		$date             = '*' . $this->get_send_text( 'comment', 'date' ) . "*\n{$comment->comment_date}";
 		$comment_content  = '*' . $this->get_send_text( 'comment', 'content' ) . "*\n{$comment->comment_content}";
 		$comment_url      = '*' . $this->get_send_text( 'comment', 'url' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
 		$comment_statuses = '*' . $this->get_send_text( 'comment', 'status' ) . "*\n{$comment_status}";
-		$context          = $this->generate_context( 'slack' );
+		$context          = $this->generate_context( $this->tool_name );
 
 		$this->content = [
 			'text'   => $header_message,
@@ -89,7 +95,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$header_emoji   = ':zap:';
 		$header_message = "{$header_emoji} {$plain_data->site_name}({$plain_data->site_url})" . $plain_data->update_title;
 		$update_message = $plain_data->update_text . "\n" . $plain_data->update_page . "<{$plain_data->admin_url}>";
-		$context        = $this->generate_context( 'slack' );
+		$context        = $this->generate_context( $this->tool_name );
 
 		$message = [
 			'text'   => $header_message,
@@ -150,14 +156,8 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_developer_message( array $developer_message ): Sct_Slack {
 		if ( isset( $developer_message['title'] ) && isset( $developer_message['message'] ) && array_key_exists( 'url', $developer_message ) ) {
-			$site_name     = get_bloginfo( 'name' );
-			$site_url      = get_bloginfo( 'url' );
-			$message_title = sprintf(
-				/* translators: 1: Theme or Plugin name */
-				esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
-				esc_html( $developer_message['title'] ),
-			);
-			$content = '';
+			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $developer_message['title'] ), );
+			$content       = '';
 
 			$i = 0;
 			foreach ( $developer_message['message'] as $value ) {
@@ -168,18 +168,12 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 				$i++;
 			}
 
-			if ( ! is_null( $developer_message['url'] ) ) {
-				$website_url     = array_key_exists( 'website', $developer_message['url'] ) ? $developer_message['url']['website'] : null;
-				$update_page_url = array_key_exists( 'update_page', $developer_message['url'] ) ? $developer_message['url']['update_page'] : null;
-			} else {
-				$website_url     = null;
-				$update_page_url = null;
-			}
+			$header_emoji    = ':tada:';
+			$header_message  = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $message_title;
+			$website_url     = $developer_message['url']['website'];
+			$update_page_url = $developer_message['url']['update_page'];
 
-			$header_emoji   = ':tada:';
-			$header_message = "{$header_emoji} {$site_name}({$site_url}) " . $message_title;
-
-			$context = $this->generate_context( 'slack' );
+			$context = $this->generate_context( $this->tool_name );
 
 			$message = [
 				'text'   => $header_message,
@@ -240,7 +234,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Create header.
+	 * Method to generate a header for Slack Blocks.
 	 *
 	 * @param string $type content type.
 	 * @param string $text content text.
@@ -259,7 +253,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		return $header;
 	}
 	/**
-	 * Create single column.
+	 * Method to generate a single column for Slack Blocks.
 	 *
 	 * @param string $type content type.
 	 * @param string $text content text.
@@ -277,7 +271,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Create two column.
+	 * Method to generate TWO columns of Slack Blocks.
 	 *
 	 * @param array $content1st [ $type, $text ].
 	 * @param array $content2nd [ $type, $text ].
@@ -301,7 +295,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Create context.
+	 * Method to generate Slack Blocks context.
 	 *
 	 * @param string $type content type.
 	 * @param string $text content text.
@@ -321,7 +315,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Create divider.
+	 * Method to generate a divider for Slack Blocks.
 	 */
 	private function divider(): array {
 		$divider = [

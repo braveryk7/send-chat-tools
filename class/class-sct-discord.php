@@ -18,6 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class for Discord processing.
  */
 class Sct_Discord extends Sct_Generate_Content_Abstract {
+	/**
+	 * Constructors that inherit from the abstract class constructor.
+	 */
+	private function __construct() {
+		parent::__construct();
+		$this->tool_name = 'discord';
+	}
 
 	/**
 	 * Instantiate and return itself.
@@ -47,21 +54,19 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	public function generate_comment_content( object $comment, ): Sct_Discord {
 		$this->comment = $comment;
 
-		$site_name      = get_bloginfo( 'name' );
-		$site_url       = get_bloginfo( 'url' );
 		$article_title  = get_the_title( $comment->comment_post_ID );
 		$article_url    = get_permalink( $comment->comment_post_ID );
-		$comment_status = $this->generate_comment_approved_message( 'discord', $comment );
+		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$this->content =
-			$site_name . '( <' . $site_url . '> )' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
+			$this->site_name . '( <' . $this->site_url . '> )' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
 			$this->get_send_text( 'comment', 'article' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
 			$this->get_send_text( 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
 			$this->get_send_text( 'comment', 'date' ) . $comment->comment_date . "\n" .
 			$this->get_send_text( 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
 			$this->get_send_text( 'comment', 'url' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
 			$this->get_send_text( 'comment', 'status' ) . $comment_status . "\n\n" .
-			$this->generate_context( 'discord' );
+			$this->generate_context( $this->tool_name );
 
 		return $this;
 	}
@@ -78,7 +83,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 			$plain_data->site_name . '( <' . $plain_data->site_url . '> )' . $plain_data->update_title . "\n\n" .
 			$plain_data->core . $plain_data->themes . $plain_data->plugins .
 			$plain_data->update_text . "\n" . $plain_data->update_page . '<' . $plain_data->admin_url . '>' . "\n\n" .
-			$this->generate_context( 'discord' );
+			$this->generate_context( $this->tool_name );
 
 		return $this;
 	}
@@ -90,14 +95,8 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_developer_message( array $developer_message ): Sct_Discord {
 		if ( isset( $developer_message['title'] ) && isset( $developer_message['message'] ) && array_key_exists( 'url', $developer_message ) ) {
-			$site_name     = get_bloginfo( 'name' );
-			$site_url      = get_bloginfo( 'url' );
-			$message_title = sprintf(
-				/* translators: 1: Theme or Plugin name */
-				esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
-				esc_html( $developer_message['title'] ),
-			);
-			$content = '';
+			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $developer_message['title'] ), );
+			$content       = '';
 
 			$i = 0;
 			foreach ( $developer_message['message'] as $value ) {
@@ -108,20 +107,15 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 				$i++;
 			}
 
-			if ( ! is_null( $developer_message['url'] ) ) {
-				$website_url     = array_key_exists( 'website', $developer_message['url'] ) ? $developer_message['url']['website'] : null;
-				$update_page_url = array_key_exists( 'update_page', $developer_message['url'] ) ? $developer_message['url']['update_page'] : null;
-			} else {
-				$website_url     = null;
-				$update_page_url = null;
-			}
+			$website_url     = $developer_message['url']['website'];
+			$update_page_url = $developer_message['url']['update_page'];
 
-			$title         = $site_name . '( <' . $site_url . '> ) ' . $message_title . "\n\n";
+			$title         = $this->site_name . '( <' . $this->site_url . '> ) ' . $message_title . "\n\n";
 			$main_content  = $content . "\n";
 			$website       = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
 			$update_page   = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
 			$ignore        = "\n" . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $developer_message['key'] . "\n";
-			$this->content = $title . $main_content . $website . $update_page . $ignore . "\n" . $this->generate_context( 'discord' );
+			$this->content = $title . $main_content . $website . $update_page . $ignore . "\n" . $this->generate_context( $this->tool_name );
 		}
 
 		return $this;

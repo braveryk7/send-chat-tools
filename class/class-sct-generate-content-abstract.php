@@ -40,6 +40,35 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	protected $content;
 
 	/**
+	 * Property that stores the tool name.
+	 *
+	 * @var string Tool name.
+	 */
+	protected $tool_name;
+
+	/**
+	 * Property that stores the site name.
+	 *
+	 * @var string Site name.
+	 */
+	protected $site_name;
+
+	/**
+	 * Property that stores the site URL.
+	 *
+	 * @var string Site URL.
+	 */
+	protected $site_url;
+
+	/**
+	 * Constructor to obtain information necessary for content generation.
+	 */
+	protected function __construct() {
+		$this->site_name = get_bloginfo( 'name' );
+		$this->site_url  = get_bloginfo( 'url' );
+	}
+
+	/**
 	 * Abstract method to get an instance.
 	 */
 	abstract public static function get_instance(): Sct_Slack | Sct_Discord | Sct_Chatwork;
@@ -111,8 +140,8 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		$plain_update_message->core         = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
 		$plain_update_message->themes       = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
 		$plain_update_message->plugins      = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
-		$plain_update_message->site_name    = get_bloginfo( 'name' );
-		$plain_update_message->site_url     = get_bloginfo( 'url' );
+		$plain_update_message->site_name    = $this->site_name;
+		$plain_update_message->site_url     = $this->site_url;
 		$plain_update_message->update_page  = $this->get_send_text( 'update', 'page' );
 		$plain_update_message->admin_url    = admin_url() . 'update-core.php';
 		$plain_update_message->update_title = $this->get_send_text( 'update', 'title' );
@@ -148,7 +177,8 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'page'   => esc_html__( 'Update Page:', 'send-chat-tools' ),
 			],
 			'dev_notify' => [
-				'title'   => esc_html__( 'Notification of plugin updates from', 'send-chat-tools' ),
+				/* translators: 1: Theme or Plugin name */
+				'title'   => esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
 				'website' => esc_html__( 'Official Web Site', 'send-chat-tools' ),
 				'detail'  => esc_html__( 'Update details', 'send-chat-tools' ),
 				'ignore'  => esc_html__(
