@@ -234,7 +234,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Create header.
+	 * Method to generate a header for Slack Blocks.
 	 *
 	 * @param string $type content type.
 	 * @param string $text content text.
@@ -253,7 +253,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		return $header;
 	}
 	/**
-	 * Create single column.
+	 * Method to generate a single column for Slack Blocks.
 	 *
 	 * @param string $type content type.
 	 * @param string $text content text.
@@ -271,7 +271,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Create two column.
+	 * Method to generate TWO columns of Slack Blocks.
 	 *
 	 * @param array $content1st [ $type, $text ].
 	 * @param array $content2nd [ $type, $text ].
@@ -295,7 +295,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Create context.
+	 * Method to generate Slack Blocks context.
 	 *
 	 * @param string $type content type.
 	 * @param string $text content text.
@@ -315,7 +315,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Create divider.
+	 * Method to generate a divider for Slack Blocks.
 	 */
 	private function divider(): array {
 		$divider = [
