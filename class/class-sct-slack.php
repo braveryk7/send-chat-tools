@@ -168,16 +168,10 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 				$i++;
 			}
 
-			if ( ! is_null( $developer_message['url'] ) ) {
-				$website_url     = array_key_exists( 'website', $developer_message['url'] ) ? $developer_message['url']['website'] : null;
-				$update_page_url = array_key_exists( 'update_page', $developer_message['url'] ) ? $developer_message['url']['update_page'] : null;
-			} else {
-				$website_url     = null;
-				$update_page_url = null;
-			}
-
-			$header_emoji   = ':tada:';
-			$header_message = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $message_title;
+			$header_emoji    = ':tada:';
+			$header_message  = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $message_title;
+			$website_url     = $developer_message['url']['website'];
+			$update_page_url = $developer_message['url']['update_page'];
 
 			$context = $this->generate_context( $this->tool_name );
 

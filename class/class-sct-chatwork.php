@@ -114,13 +114,8 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 				$i++;
 			}
 
-			if ( ! is_null( $developer_message['url'] ) ) {
-				$website_url     = array_key_exists( 'website', $developer_message['url'] ) ? $developer_message['url']['website'] : null;
-				$update_page_url = array_key_exists( 'update_page', $developer_message['url'] ) ? $developer_message['url']['update_page'] : null;
-			} else {
-				$website_url     = null;
-				$update_page_url = null;
-			}
+			$website_url     = $developer_message['url']['website'];
+			$update_page_url = $developer_message['url']['update_page'];
 
 			$website       = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url . "\n" : null;
 			$update_page   = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url . "\n" : null;
