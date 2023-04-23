@@ -36,44 +36,38 @@ export const useTabItems = ( props: TabItemsType ) => {
 			setTextLabel( text );
 		};
 
-		switch ( id ) {
-			case 'basic':
-				setComponentName( 'basic' );
-				setTitleText( __( 'Basic settings', 'send-chat-tools' ), );
-				break;
-			case 'slack':
-				setUseState(
-					'slack',
-					__( 'Use Slack notify', 'send-chat-tools' ),
-					'webhook_url',
-					__( 'Slack settings', 'send-chat-tools' ),
-					__( 'Slack Webhook URL', 'send-chat-tools' ),
-				);
-				break;
-			case 'discord':
-				setUseState(
-					'discord',
-					__( 'Use Discord notify', 'send-chat-tools' ),
-					'webhook_url',
-					__( 'Discord settings', 'send-chat-tools' ),
-					__( 'Discord Webhook URL', 'send-chat-tools' ),
-				);
-				break;
-			case 'chatwork':
-				setUseState(
-					'chatwork',
-					__( 'Use Chatwork notify', 'send-chat-tools' ),
-					'api_token',
-					__( 'Chatwork settings', 'send-chat-tools' ),
-					__( 'Chatwork API token', 'send-chat-tools' ),
-				);
-				setChatworkRoomId( 'room_id' );
-				setChatworkText( __( 'Chatwork Room ID', 'send-chat-tools' ) );
-				break;
-			case 'logs':
-				setComponentName( 'logs' );
-				setTitleText( __( 'Logs', 'send-chat-tools' ) );
-				break;
+		if ( 'basic' === id ) {
+			setComponentName( 'basic' );
+			setTitleText( __( 'Basic settings', 'send-chat-tools' ), );
+		} else if ( 'slack' === id ) {
+			setUseState(
+				'slack',
+				__( 'Use Slack notify', 'send-chat-tools' ),
+				'webhook_url',
+				__( 'Slack settings', 'send-chat-tools' ),
+				__( 'Slack Webhook URL', 'send-chat-tools' ),
+			);
+		} else if ( 'discord' === id ) {
+			setUseState(
+				'discord',
+				__( 'Use Discord notify', 'send-chat-tools' ),
+				'webhook_url',
+				__( 'Discord settings', 'send-chat-tools' ),
+				__( 'Discord Webhook URL', 'send-chat-tools' ),
+			);
+		} else if ( 'chatwork' === id ) {
+			setUseState(
+				'chatwork',
+				__( 'Use Chatwork notify', 'send-chat-tools' ),
+				'api_token',
+				__( 'Chatwork settings', 'send-chat-tools' ),
+				__( 'Chatwork API token', 'send-chat-tools' ),
+			);
+			setChatworkRoomId( 'room_id' );
+			setChatworkText( __( 'Chatwork Room ID', 'send-chat-tools' ) );
+		} else if ( 'logs' === id ) {
+			setComponentName( 'logs' );
+			setTitleText( __( 'Logs', 'send-chat-tools' ) );
 		}
 	}, [ id ] );
 
