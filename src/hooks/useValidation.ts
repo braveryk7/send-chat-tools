@@ -11,33 +11,15 @@ export const useValidation = (
 	useEffect( () => {
 		if ( '' !== value ) {
 			const pattern = () => {
-				switch ( itemKey ) {
-					case 'slack':
-						setErrorMessage(
-							__(
-								'Please enter the correct value',
-								'send-chat-tools'
-							)
-						);
-						return /^https:\/\/hooks.slack.com\/services\/.*\/.*/;
-					case 'discord':
-						setErrorMessage(
-							__(
-								'Please enter the correct value',
-								'send-chat-tools'
-							)
-						);
-						return /^https:\/\/discord.com\/api\/webhooks\/\d{4,}\/.*/;
-					default:
-						setErrorMessage(
-							__(
-								'Please enter the correct value',
-								'send-chat-tools'
-							)
-						);
-						return /.*/;
+				setErrorMessage( __( 'Please enter the correct value', 'send-chat-tools' ) );
+				if ( 'slack' === itemKey ) {
+					return /^https:\/\/hooks.slack.com\/services\/.*\/.*/;
+				} else if ( 'discord' === itemKey ) {
+					return /^https:\/\/discord.com\/api\/webhooks\/\d{4,}\/.*/;
 				}
+				return /.*/;
 			};
+
 			const validate = pattern().test( value );
 			if ( validate ) {
 				setValidateFlag( true );
