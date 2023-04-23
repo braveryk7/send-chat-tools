@@ -11,7 +11,7 @@ export const useSetApi: useSetApiType = ( itemKey, value ) => {
 		apiData,
 		setNoticeValue,
 		setNoticeMessage,
-		snackbarTimer,
+		setSnackbarTimer,
 	} = useContext( apiContext );
 
 	const isFirstRender = useRef( true );
@@ -21,7 +21,7 @@ export const useSetApi: useSetApiType = ( itemKey, value ) => {
 			isFirstRender.current = false;
 		} else if ( value ) {
 			setNoticeValue( undefined );
-			clearTimeout( snackbarTimer );
+			setSnackbarTimer( 0 );
 
 			apiFetch( {
 				path: '/send-chat-tools/v1/update',
@@ -35,5 +35,5 @@ export const useSetApi: useSetApiType = ( itemKey, value ) => {
 				setNoticeMessage( __( 'Error.', 'send-chat-tools' ) );
 			} );
 		}
-	}, [ apiData, itemKey, value, setNoticeMessage, setNoticeValue, snackbarTimer ] );
+	}, [ apiData, itemKey, value, setNoticeMessage, setNoticeValue, setSnackbarTimer ] );
 };
