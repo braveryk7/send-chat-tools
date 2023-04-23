@@ -22,16 +22,14 @@ export const LogView = () => {
 	};
 
 	const getTypes = ( typeId: string ) => {
-		switch ( typeId ) {
-			case '1':
-				return 'Comment';
-			case '2':
-				return 'Update';
-			case '3':
-				return 'Developer';
-			default:
-				return null;
+		if ( typeId === '1' ) {
+			return 'Comment';
+		} else if ( typeId === '2' ) {
+			return 'Update';
+		} else if ( typeId === '3' ) {
+			return 'Developer';
 		}
+		return null;
 	};
 
 	const getStatusMessage = ( status: number ) => {
