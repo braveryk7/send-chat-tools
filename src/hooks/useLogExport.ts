@@ -6,7 +6,12 @@ import { apiContext } from 'src/index';
 import { itemType } from 'src/types/ComponentsType';
 
 export const useLogExport = () => {
-	const { apiData, setNoticeValue, setNoticeMessage, snackbarTimer } = useContext( apiContext );
+	const {
+		apiData,
+		setNoticeValue,
+		setNoticeMessage,
+		setSnackbarTimer,
+	} = useContext( apiContext );
 
 	const items: itemType[] = [
 		{ icon: 'clipboard', key: 'clipboard', text: __( 'Copy to clipboard', 'send-chat-tools' ) },
@@ -54,7 +59,7 @@ export const useLogExport = () => {
 
 		if ( apiData ) {
 			setNoticeValue( undefined );
-			clearTimeout( snackbarTimer );
+			setSnackbarTimer( 0 );
 
 			const separate = itemKey === 'csv' ? ',' : ' ';
 
