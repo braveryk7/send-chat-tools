@@ -1,7 +1,7 @@
 import './scss/index.scss';
 
 import { Snackbar, Spinner } from '@wordpress/components';
-import { createContext, render, useCallback, useState } from '@wordpress/element';
+import { createContext, render, useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 import { ApiError } from 'src/components/atoms/ApiError';
@@ -22,7 +22,7 @@ const AdminPage = () => {
 
 	useGetApi( setApiData, setApiError );
 
-	useCallback( () => {
+	useEffect( () => {
 		if ( noticeValue ) {
 			setSnackbarTimer(
 				window.setTimeout( () => {
@@ -47,6 +47,7 @@ const AdminPage = () => {
 						setNoticeValue,
 						setNoticeMessage,
 						snackbarTimer,
+						setSnackbarTimer,
 					} }
 				>
 					<Tab />
