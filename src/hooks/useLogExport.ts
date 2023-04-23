@@ -15,7 +15,7 @@ export const useLogExport = () => {
 
 	const items: itemType[] = [
 		{ icon: 'clipboard', key: 'clipboard', text: __( 'Copy to clipboard', 'send-chat-tools' ) },
-		{ icon: 'media-text', key: 'text', text: __( 'Export text1', 'send-chat-tools' ) },
+		{ icon: 'media-text', key: 'text', text: __( 'Export text', 'send-chat-tools' ) },
 		{ icon: 'media-spreadsheet', key: 'csv', text: __( 'Export CSV', 'send-chat-tools' ) },
 	];
 
