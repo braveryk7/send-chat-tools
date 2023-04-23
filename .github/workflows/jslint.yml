@@ -27,6 +27,7 @@ jobs:
           restore-keys: ${{ runner.os }}-node-
 
       - name: Install dependencies
+        if: steps.npm_cache.outputs.cache-hit != 'true'
         run: npm ci --ignore-scripts
 
       - name: ESLint
