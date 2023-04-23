@@ -21,6 +21,15 @@ export const useLogExport = () => {
 
 	const copyLogs = ( itemKey: string ) => {
 		const toolNumberToToolName = ( toolNumber: string ) => {
+			if ( toolNumber === '1' ) {
+				return 'Slack';
+			} else if ( toolNumber === '2' ) {
+				return 'Discord';
+			} else if ( toolNumber === '3' ) {
+				return 'Chatwork';
+			}
+			return null;
+
 			switch ( toolNumber ) {
 				case '1':
 					return 'Slack';
