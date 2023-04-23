@@ -11,4 +11,5 @@ export type apiContextType = {
 	setNoticeValue: Dispatch< SetStateAction< noticeValueType | undefined > >;
 	setNoticeMessage: Dispatch< SetStateAction< string > >;
 	snackbarTimer: number;
+	setSnackbarTimer: Dispatch< SetStateAction< number > >;
 };
