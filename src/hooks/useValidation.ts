@@ -21,11 +21,7 @@ export const useValidation = (
 			};
 
 			const validate = pattern().test( value );
-			if ( validate ) {
-				setValidateFlag( true );
-			} else {
-				setValidateFlag( false );
-			}
+			setValidateFlag( validate ? true : false );
 		}
 	}, [ value, itemKey ] );
 
