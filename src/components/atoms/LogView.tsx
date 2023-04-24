@@ -11,29 +11,25 @@ export const LogView = () => {
 	const { apiData } = useContext( apiContext );
 
 	const getTools = ( toolId: string ) => {
-		switch ( toolId ) {
-			case '1':
-				return 'Slack';
-			case '2':
-				return 'Discord';
-			case '3':
-				return 'Chatwork';
-			default:
-				return null;
+		if ( toolId === '1' ) {
+			return 'Slack';
+		} else if ( toolId === '2' ) {
+			return 'Discord';
+		} else if ( toolId === '3' ) {
+			return 'Chatwork';
 		}
+		return null;
 	};
 
 	const getTypes = ( typeId: string ) => {
-		switch ( typeId ) {
-			case '1':
-				return 'Comment';
-			case '2':
-				return 'Update';
-			case '3':
-				return 'Developer';
-			default:
-				return null;
+		if ( typeId === '1' ) {
+			return 'Comment';
+		} else if ( typeId === '2' ) {
+			return 'Update';
+		} else if ( typeId === '3' ) {
+			return 'Developer';
 		}
+		return null;
 	};
 
 	const getStatusMessage = ( status: number ) => {

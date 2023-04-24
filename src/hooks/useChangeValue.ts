@@ -49,28 +49,20 @@ export const useChangeValue = ( itemKey: itemKeyType, optionName?: optionNameTyp
 			}
 		};
 
-		switch ( itemKey ) {
-			case 'slack':
-				chatTools( 'slack' );
-				break;
-			case 'discord':
-				chatTools( 'discord' );
-				break;
-			case 'chatwork':
-				chatTools( 'chatwork' );
-				break;
-			case 'cron_time':
-				if ( typeof value === 'object' && 'target' in value ) {
-					newItem.cron_time = value.target.value;
-				}
-				break;
-			case 'ignore_key':
-				if ( Array.isArray( value ) ) {
-					newItem.ignore_key = value;
-				}
-				break;
-			default:
-				break;
+		if ( itemKey === 'slack' ) {
+			chatTools( 'slack' );
+		} else if ( itemKey === 'discord' ) {
+			chatTools( 'discord' );
+		} else if ( itemKey === 'chatwork' ) {
+			chatTools( 'chatwork' );
+		} else if ( itemKey === 'cron_time' ) {
+			if ( typeof value === 'object' && 'target' in value ) {
+				newItem.cron_time = value.target.value;
+			}
+		} else if ( itemKey === 'ignore_key' ) {
+			if ( Array.isArray( value ) ) {
+				newItem.ignore_key = value;
+			}
 		}
 
 		setApiData( newItem );

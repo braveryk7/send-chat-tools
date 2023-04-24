@@ -14,15 +14,10 @@ export const TextControlForm = ( props: TextControlPropsType ) => {
 		if ( apiData ) {
 			if ( itemKey === 'slack' || itemKey === 'discord' ) {
 				setItemData( apiData[ itemKey ].webhook_url );
-			} else {
-				switch ( optionName ) {
-					case 'api_token':
-						setItemData( apiData.chatwork.api_token );
-						break;
-					case 'room_id':
-						setItemData( apiData.chatwork.room_id );
-						break;
-				}
+			} else if ( optionName === 'api_token' ) {
+				setItemData( apiData.chatwork.api_token );
+			} else if ( optionName === 'room_id' ) {
+				setItemData( apiData.chatwork.room_id );
 			}
 		}
 	}, [ itemKey, optionName, apiData ] );
