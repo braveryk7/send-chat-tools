@@ -235,8 +235,10 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate login message for Slack.
+	 *
+	 * @param object $user User object.
 	 */
-	public function generate_login_message(): Sct_Slack {
+	public function generate_login_message( object $user ): Sct_Slack {
 		return $this;
 	}
 

@@ -134,8 +134,10 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate login message for Slack.
+	 *
+	 * @param object $user User data.
 	 */
-	public function generate_login_message(): Sct_Chatwork {
+	public function generate_login_message( object $user ): Sct_Chatwork {
 		return $this;
 	}
 }
