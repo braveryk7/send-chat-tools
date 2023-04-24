@@ -17,6 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * A class that detects user login and calls a class for sending when the condition is met.
  */
-class Sct_Check_Login {
-
+class Sct_Check_Login extends Sct_Base {
+	/**
+	 * WordPress hook.
+	 */
+	public function __construct() {
+		add_action( 'wp_login', [ $this, 'controller' ], 10, 2 );
+	}
 }
