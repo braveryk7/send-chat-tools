@@ -234,6 +234,13 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
+	 * Generate login message for Slack.
+	 */
+	public function generate_login_message(): Sct_Slack {
+		return $this;
+	}
+
+	/**
 	 * Method to generate a header for Slack Blocks.
 	 *
 	 * @param string $type content type.

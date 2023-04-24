@@ -131,4 +131,11 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		}
 		return $this;
 	}
+
+	/**
+	 * Generate login message for Slack.
+	 */
+	public function generate_login_message(): Sct_Chatwork {
+		return $this;
+	}
 }
