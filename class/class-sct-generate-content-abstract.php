@@ -171,7 +171,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 			'comment'      => [
 				'title'      => esc_html__( 'New comment has been posted', 'send-chat-tools' ),
 				'article'    => esc_html__( 'Commented article', 'send-chat-tools' ),
-				'author'     => esc_html__( 'Author', 'send-chat-tools' ),
+				'commenter'  => esc_html__( 'Commenter', 'send-chat-tools' ),
 				'comment'    => esc_html__( 'Comment', 'send-chat-tools' ),
 				'url'        => esc_html__( 'Comment URL', 'send-chat-tools' ),
 				'status'     => esc_html__( 'Comment Status', 'send-chat-tools' ),
