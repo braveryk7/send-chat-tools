@@ -94,7 +94,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$plain_data     = $this->generate_plain_update_message( $update_content );
 		$header_emoji   = ':zap:';
 		$header_message = "{$header_emoji} {$plain_data->site_name}({$plain_data->site_url}) " . $plain_data->update_title;
-		$update_message = $plain_data->update_text . "\n" . $plain_data->update_page . "<{$plain_data->admin_url}>";
+		$update_message = $plain_data->update_text . "\n" . $plain_data->update_page . ": <{$plain_data->admin_url}>";
 		$context        = $this->generate_context( $this->tool_name );
 
 		$message = [

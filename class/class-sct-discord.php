@@ -82,7 +82,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$this->content =
 			$plain_data->site_name . '( <' . $plain_data->site_url . '> ) ' . $plain_data->update_title . "\n\n" .
 			$plain_data->core . $plain_data->themes . $plain_data->plugins .
-			$plain_data->update_text . "\n" . $plain_data->update_page . '<' . $plain_data->admin_url . '>' . "\n\n" .
+			$plain_data->update_text . "\n" . $plain_data->update_page . ': <' . $plain_data->admin_url . '>' . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
 		return $this;
