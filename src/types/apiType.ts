@@ -7,6 +7,7 @@ export type apiType = {
 	version: string;
 	cron_time: string;
 	ignore_key: ( string|TokenItem )[]
+	login_notify: boolean;
 	logs: {
 		[ key: string ]: SctLogsType;
 	};
