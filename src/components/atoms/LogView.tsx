@@ -28,6 +28,8 @@ export const LogView = () => {
 			return 'Update';
 		} else if ( typeId === '3' ) {
 			return 'Developer';
+		} else if ( typeId === '4' ) {
+			return 'Login';
 		}
 		return null;
 	};
