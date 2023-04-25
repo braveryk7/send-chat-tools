@@ -200,8 +200,8 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'user_name'          => __( 'User name', 'send-chat-tools' ),
 				'login_env'          => __( 'Login environment', 'send-chat-tools' ),
 				'ip_address'         => __( 'IP Address', 'send-chat-tools' ),
-				'unauthorized_login' => __( 'If you do not recognize this message, you may have an unauthorized login.' ),
-				'disconnect'         => __( 'Disconnect all location sessions and change passwords.' ),
+				'unauthorized_login' => __( 'If you do not recognize this message, you may have an unauthorized login.', 'send-chat-tools' ),
+				'disconnect'         => __( 'Disconnect all location sessions and change passwords.', 'send-chat-tools' ),
 			],
 		];
 
