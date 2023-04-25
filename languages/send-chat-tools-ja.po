@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-04-26 00:11+0900\n"
-"PO-Revision-Date: 2023-04-26 00:11+0900\n"
+"POT-Creation-Date: 2023-04-26 00:28+0900\n"
+"PO-Revision-Date: 2023-04-26 00:28+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -111,12 +111,10 @@ msgid "new comment has been posted."
 msgstr "に新規コメントが投稿されました。"
 
 #: class/class-sct-error-mail.php:56
-#: class/class-sct-generate-content-abstract.php:173
 msgid "Commented article:"
 msgstr "コメントされた記事："
 
 #: class/class-sct-error-mail.php:57
-#: class/class-sct-generate-content-abstract.php:174
 msgid "Author:"
 msgstr "投稿者名："
 
@@ -125,17 +123,14 @@ msgid "Date and time:"
 msgstr "日時："
 
 #: class/class-sct-error-mail.php:59
-#: class/class-sct-generate-content-abstract.php:175
 msgid "Text:"
 msgstr "本文："
 
 #: class/class-sct-error-mail.php:60
-#: class/class-sct-generate-content-abstract.php:176
 msgid "Comment URL:"
 msgstr "コメントのURL："
 
 #: class/class-sct-error-mail.php:61
-#: class/class-sct-generate-content-abstract.php:177
 msgid "Comment Status:"
 msgstr "コメントの状態："
 
@@ -178,6 +173,26 @@ msgstr "日時"
 #: class/class-sct-generate-content-abstract.php:172
 msgid "New comment has been posted"
 msgstr "新規コメントが投稿されました"
+
+#: class/class-sct-generate-content-abstract.php:173
+msgid "Commented article"
+msgstr "コメントされた記事"
+
+#: class/class-sct-generate-content-abstract.php:174
+msgid "Commenter"
+msgstr "投稿者"
+
+#: class/class-sct-generate-content-abstract.php:175
+msgid "Comment"
+msgstr "コメント"
+
+#: class/class-sct-generate-content-abstract.php:176
+msgid "Comment URL"
+msgstr "コメントのURL"
+
+#: class/class-sct-generate-content-abstract.php:177
+msgid "Comment Status"
+msgstr "コメントの状態"
 
 #: class/class-sct-generate-content-abstract.php:184
 msgid "Notification of new updates"
