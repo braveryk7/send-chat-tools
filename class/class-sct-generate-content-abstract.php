@@ -165,6 +165,9 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 */
 	protected function get_send_text( string $type, string $param ): string {
 		$message = [
+			'constant'     => [
+				'date' => __( 'Date and time', 'send-chat-tools' ),
+			],
 			'comment'      => [
 				'title'      => esc_html__( 'new comment has been posted.', 'send-chat-tools' ),
 				'article'    => esc_html__( 'Commented article:', 'send-chat-tools' ),
