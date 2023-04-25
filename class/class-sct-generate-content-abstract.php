@@ -183,7 +183,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 			'update'       => [
 				'title'  => esc_html__( 'Notification of new updates', 'send-chat-tools' ),
 				'update' => esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ),
-				'page'   => esc_html__( 'Update Page:', 'send-chat-tools' ),
+				'page'   => esc_html__( 'Update Page', 'send-chat-tools' ),
 			],
 			'dev_notify'   => [
 				/* translators: 1: Theme or Plugin name */
