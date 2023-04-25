@@ -75,6 +75,10 @@ class Sct_Activate extends Sct_Base {
 					if ( 'ignore_key' === $key_name ) {
 						$sct_options[ $key_name ] = [];
 					}
+				} elseif ( 'slack' === $key_name || 'discord' === $key_name || 'chatwork' === $key_name ) {
+					if ( ! $sct_options[ $key_name ]['login_notify'] ) {
+						$sct_options[ $key_name ]['login_notify'] = true;
+					}
 				}
 			}
 			$this->set_sct_options( $sct_options );
