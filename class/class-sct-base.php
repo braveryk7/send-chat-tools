@@ -47,7 +47,6 @@ class Sct_Base {
 		'version',
 		'cron_time',
 		'ignore_key',
-		'login_notify',
 	];
 
 	public const OLD_OPTIONS_COLUMN = [
