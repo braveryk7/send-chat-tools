@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-04-25 23:40+0900\n"
-"PO-Revision-Date: 2023-04-25 23:45+0900\n"
+"POT-Creation-Date: 2023-04-26 00:02+0900\n"
+"PO-Revision-Date: 2023-04-26 00:02+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -176,12 +176,12 @@ msgid "Date and time"
 msgstr "日時"
 
 #: class/class-sct-generate-content-abstract.php:172
-msgid "New comment has been posted."
-msgstr "に新規コメントが投稿されました。"
+msgid "New comment has been posted"
+msgstr "新規コメントが投稿されました"
 
 #: class/class-sct-generate-content-abstract.php:184
-msgid "Notification of new updates."
-msgstr "新しいアップデートがあります。"
+msgid "Notification of new updates"
+msgstr "アップデート通知"
 
 #: class/class-sct-generate-content-abstract.php:185
 msgid "Please login to the admin panel to update."
