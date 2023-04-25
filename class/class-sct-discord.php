@@ -135,7 +135,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$login_user_name = '***' . $this->get_send_text( 'login_notify', 'user_name' ) . "***: {$user_name}<$user_email>";
 
 		$now_date   = gmdate( 'Y-m-d H:i:s', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-		$login_date = '***' . $this->get_send_text( 'login_notify', 'date' ) . "***: {$now_date}";
+		$login_date = '***' . $this->get_send_text( 'constant', 'date' ) . "***: {$now_date}";
 
 		$os_browser = getenv( 'HTTP_USER_AGENT' );
 		$login_env  = '***' . $this->get_send_text( 'login_notify', 'login_env' ) . "***: {$os_browser}";
