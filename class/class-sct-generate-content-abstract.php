@@ -172,7 +172,6 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'title'      => esc_html__( 'new comment has been posted.', 'send-chat-tools' ),
 				'article'    => esc_html__( 'Commented article:', 'send-chat-tools' ),
 				'author'     => esc_html__( 'Author:', 'send-chat-tools' ),
-				'date'       => esc_html__( 'Date and time:', 'send-chat-tools' ),
 				'content'    => esc_html__( 'Text:', 'send-chat-tools' ),
 				'url'        => esc_html__( 'Comment URL:', 'send-chat-tools' ),
 				'status'     => esc_html__( 'Comment Status:', 'send-chat-tools' ),
@@ -199,7 +198,6 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 			'login_notify' => [
 				'title'              => __( 'Login Notification', 'send-chat-tools' ),
 				'user_name'          => __( 'User name', 'send-chat-tools' ),
-				'date'               => __( 'Date and time', 'send-chat-tools' ),
 				'login_env'          => __( 'Login environment', 'send-chat-tools' ),
 				'ip_address'         => __( 'IP Address', 'send-chat-tools' ),
 				'unauthorized_login' => __( 'If you do not recognize this message, you may have an unauthorized login.' ),
