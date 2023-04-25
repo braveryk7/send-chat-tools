@@ -59,7 +59,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$this->content =
-			$this->site_name . '( <' . $this->site_url . '> )' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
+			$this->site_name . '( <' . $this->site_url . '> ) ' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
 			$this->get_send_text( 'comment', 'article' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
 			$this->get_send_text( 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
 			$this->get_send_text( 'constant', 'date' ) . ': ' . $comment->comment_date . "\n" .

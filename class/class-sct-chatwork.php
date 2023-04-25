@@ -60,7 +60,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 
 		$this->content = [
 			'body' =>
-				'[info][title]' . $this->site_name . '(' . $this->site_url . ')' . $this->get_send_text( 'comment', 'title' ) . '[/title]' .
+				'[info][title]' . $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'comment', 'title' ) . '[/title]' .
 				$this->get_send_text( 'comment', 'article' ) . $article_title . ' - ' . $article_url . "\n" .
 				$this->get_send_text( 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
 				$this->get_send_text( 'constant', 'date' ) . ': ' . $comment->comment_date . "\n" .
