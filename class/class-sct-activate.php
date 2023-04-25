@@ -73,6 +73,9 @@ class Sct_Activate extends Sct_Base {
 					if ( 'ignore_key' === $key_name ) {
 						$sct_options[ $key_name ] = [];
 					}
+					if ( 'login_notify' === $key_name ) {
+						$sct_options[ $key_name ] = true;
+					}
 				}
 			}
 			$this->set_sct_options( $sct_options );
