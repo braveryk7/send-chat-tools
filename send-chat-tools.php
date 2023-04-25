@@ -40,6 +40,7 @@ if ( ! $sct_phpver_judge->judgment( $sct_require_php_version ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-encryption.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-admin-page.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-comment.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-check-login.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-activate.php';
@@ -54,6 +55,11 @@ if ( ! $sct_phpver_judge->judgment( $sct_require_php_version ) ) {
 	 * Start comment process.
 	 */
 	new Sct_Check_Comment();
+
+	/**
+	 * Start login process.
+	 */
+	new Sct_Check_Login();
 
 	/**
 	 * Start update process.
