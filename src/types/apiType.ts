@@ -17,6 +17,7 @@ export type ChatToolsBaseType = {
 	use: boolean;
 	send_author: boolean;
 	send_update: boolean;
+	login_notify: boolean;
 	log: ChatLogType;
 };
 
