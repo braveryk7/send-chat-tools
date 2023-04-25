@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-04-26 00:02+0900\n"
-"PO-Revision-Date: 2023-04-26 00:02+0900\n"
+"POT-Creation-Date: 2023-04-26 00:11+0900\n"
+"PO-Revision-Date: 2023-04-26 00:11+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -188,8 +188,8 @@ msgid "Please login to the admin panel to update."
 msgstr "管理画面にログインしてアップデートしてください。"
 
 #: class/class-sct-generate-content-abstract.php:186
-msgid "Update Page:"
-msgstr "更新ページ："
+msgid "Update Page"
+msgstr "更新ページ"
 
 #: class/class-sct-generate-content-abstract.php:190
 #, php-format
