@@ -7,6 +7,7 @@ export type apiType = {
 	version: string;
 	cron_time: string;
 	ignore_key: ( string|TokenItem )[]
+	login_notify: boolean;
 	logs: {
 		[ key: string ]: SctLogsType;
 	};
@@ -16,6 +17,7 @@ export type ChatToolsBaseType = {
 	use: boolean;
 	send_author: boolean;
 	send_update: boolean;
+	login_notify: boolean;
 	log: ChatLogType;
 };
 

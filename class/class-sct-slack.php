@@ -234,6 +234,46 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
+	 * Generate login message for Slack.
+	 *
+	 * @param object $user User object.
+	 */
+	public function generate_login_message( object $user ): Sct_Slack {
+		$header_emoji   = ':door:';
+		$header_message = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $this->get_send_text( 'login_notify', 'title' );
+
+		$user_name       = $user->data->user_login;
+		$user_email      = $user->data->user_email;
+		$login_user_name = '*' . $this->get_send_text( 'login_notify', 'user_name' ) . ":*\n{$user_name}<$user_email>";
+
+		$now_date   = gmdate( 'Y-m-d H:i:s', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+		$login_date = '*' . $this->get_send_text( 'login_notify', 'date' ) . ":*\n{$now_date}";
+
+		$os_browser = getenv( 'HTTP_USER_AGENT' );
+		$login_env  = '*' . $this->get_send_text( 'login_notify', 'login_env' ) . ":*\n{$os_browser}";
+
+		$ip_address       = getenv( 'REMOTE_ADDR' );
+		$login_ip_address = '*' . $this->get_send_text( 'login_notify', 'ip_address' ) . ":*\n{$ip_address}";
+
+		$this->content = [
+			'text'   => $header_message,
+			'blocks' => [
+				$this->header( 'plain_text', $header_message, true ),
+				$this->two_column( [ 'mrkdwn', $login_user_name ], [ 'mrkdwn', $login_date ] ),
+				$this->two_column( [ 'mrkdwn', $login_env ], [ 'mrkdwn', $login_ip_address ] ),
+				$this->divider(),
+				$this->single_column( 'mrkdwn', $this->get_send_text( 'login_notify', 'unauthorized_login' ), ),
+				$this->single_column( 'mrkdwn', $this->get_send_text( 'login_notify', 'disconnect' ), ),
+				$this->single_column( 'mrkdwn', $this->site_url . '/wp-admin/profile.php' ),
+				$this->divider(),
+				$this->context( 'mrkdwn', $this->generate_context( $this->tool_name ) ),
+			],
+		];
+
+		return $this;
+	}
+
+	/**
 	 * Method to generate a header for Slack Blocks.
 	 *
 	 * @param string $type content type.

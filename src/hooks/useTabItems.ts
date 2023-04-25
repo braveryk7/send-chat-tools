@@ -88,6 +88,11 @@ export const useTabItems = ( props: TabItemsType ) => {
 					optionName: 'send_update',
 					label: __( 'Use Update notify', 'send-chat-tools' ),
 				},
+				{
+					itemKey,
+					optionName: 'login_notify',
+					label: __( 'Use login notify', 'send-chat-tools' ),
+				},
 			];
 			setTabItems( items );
 		}

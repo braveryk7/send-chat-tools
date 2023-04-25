@@ -120,4 +120,36 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 		return $this;
 	}
+
+	/**
+	 * Generate login message for Slack.
+	 *
+	 * @param object $user User data.
+	 */
+	public function generate_login_message( object $user ): Sct_Discord {
+		$header_emoji   = ':unlock:';
+		$header_message = "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $this->get_send_text( 'login_notify', 'title' ) . '***__';
+
+		$user_name       = $user->data->user_login;
+		$user_email      = $user->data->user_email;
+		$login_user_name = '***' . $this->get_send_text( 'login_notify', 'user_name' ) . "***: {$user_name}<$user_email>";
+
+		$now_date   = gmdate( 'Y-m-d H:i:s', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+		$login_date = '***' . $this->get_send_text( 'login_notify', 'date' ) . "***: {$now_date}";
+
+		$os_browser = getenv( 'HTTP_USER_AGENT' );
+		$login_env  = '***' . $this->get_send_text( 'login_notify', 'login_env' ) . "***: {$os_browser}";
+
+		$ip_address       = getenv( 'REMOTE_ADDR' );
+		$login_ip_address = '***' . $this->get_send_text( 'login_notify', 'ip_address' ) . "***: {$ip_address}";
+
+		$this->content =
+			$header_message . "\n\n" . $login_user_name . "\n" . $login_date . "\n" . $login_env . "\n" . $login_ip_address . "\n\n" .
+			$this->get_send_text( 'login_notify', 'unauthorized_login' ) . "\n" .
+			$this->get_send_text( 'login_notify', 'disconnect' ) . "\n" .
+			$this->site_url . "\n\n" .
+			'>>> ' . $this->generate_context( $this->tool_name );
+
+		return $this;
+	}
 }
