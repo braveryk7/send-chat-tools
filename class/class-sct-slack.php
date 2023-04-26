@@ -244,16 +244,16 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 		$user_name       = $user->data->user_login;
 		$user_email      = $user->data->user_email;
-		$login_user_name = '*' . $this->get_send_text( 'login_notify', 'user_name' ) . ":*\n{$user_name}<$user_email>";
+		$login_user_name = '*' . $this->get_send_text( 'login_notify', 'user_name' ) . "*\n{$user_name}<$user_email>";
 
 		$now_date   = gmdate( 'Y-m-d H:i:s', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-		$login_date = '*' . $this->get_send_text( 'constant', 'date' ) . ":*\n{$now_date}";
+		$login_date = '*' . $this->get_send_text( 'constant', 'date' ) . "*\n{$now_date}";
 
 		$os_browser = getenv( 'HTTP_USER_AGENT' );
-		$login_env  = '*' . $this->get_send_text( 'login_notify', 'login_env' ) . ":*\n{$os_browser}";
+		$login_env  = '*' . $this->get_send_text( 'login_notify', 'login_env' ) . "*\n{$os_browser}";
 
 		$ip_address       = getenv( 'REMOTE_ADDR' );
-		$login_ip_address = '*' . $this->get_send_text( 'login_notify', 'ip_address' ) . ":*\n{$ip_address}";
+		$login_ip_address = '*' . $this->get_send_text( 'login_notify', 'ip_address' ) . "*\n{$ip_address}";
 
 		$this->content = [
 			'text'   => $header_message,
