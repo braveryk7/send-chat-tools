@@ -82,9 +82,27 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	public function generate_update_content( array $update_content ): Sct_Discord {
 		$plain_data = $this->generate_plain_update_message( $update_content );
 
+		$header_emoji    = ':zap:';
+		$header_message  = "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $plain_data->update_title . '***__';
+		$core_content    = null;
+		$themes_content  = null;
+		$plugins_content = null;
+
+		if ( $plain_data->core ) {
+			$core_content = ':star: ' . $plain_data->core;
+		}
+
+		if ( $plain_data->themes ) {
+			$themes_content = ':art: ' . $plain_data->themes;
+		}
+
+		if ( $plain_data->plugins ) {
+			$plugins_content = ':wrench: ' . $plain_data->plugins;
+		}
+
 		$this->content =
-			$plain_data->site_name . '( <' . $plain_data->site_url . '> ) ' . $plain_data->update_title . "\n\n" .
-			$plain_data->core . $plain_data->themes . $plain_data->plugins .
+			$header_message . "\n\n" .
+			$core_content . $themes_content . $plugins_content .
 			$plain_data->update_text . "\n" . $plain_data->update_page . ': <' . $plain_data->admin_url . '>' . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
