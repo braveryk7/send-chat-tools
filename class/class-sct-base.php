@@ -217,6 +217,22 @@ class Sct_Base {
 	}
 
 	/**
+	 * A common method that calls the class for each chat tool.
+	 *
+	 * @param string       $tool_name   Tool name.
+	 * @param string       $method_name Method name.
+	 * @param object|array $data        An object or array for generating data to be sent.
+	 */
+	protected function call_chat_tool_class( string $tool_name, string $method_name, object | array $data ): void {
+		$class = match ( $tool_name ) {
+			'slack'    => 'Sct_Slack',
+			'discord'  => 'Sct_Discord',
+			'chatwork' => 'Sct_Chatwork',
+		};
+		$class::get_instance()?->$method_name( $data )?->generate_header()?->send_tools( 'login_notify', $tool_name );
+	}
+
+	/**
 	 * Set & Get $this->developer_messages.
 	 */
 	protected function get_developer_messages(): array {
