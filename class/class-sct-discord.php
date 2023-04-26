@@ -58,15 +58,18 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$article_url    = get_permalink( $comment->comment_post_ID );
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
+		$header_emoji   = ':mailbox_with_mail:';
+		$header_message = "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $this->get_send_text( 'comment', 'title' ) . '***__';
+
 		$this->content =
-			$this->site_name . '( <' . $this->site_url . '> ) ' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
-			$this->get_send_text( 'comment', 'article' ) . ': ' . $article_title . ' - <' . $article_url . '>' . "\n" .
-			$this->get_send_text( 'comment', 'commenter' ) . ': ' . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-			$this->get_send_text( 'constant', 'date' ) . ': ' . $comment->comment_date . "\n" .
-			$this->get_send_text( 'comment', 'comment' ) . ': ' . "\n" . $comment->comment_content . "\n\n" .
-			$this->get_send_text( 'comment', 'url' ) . ': <' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
-			$this->get_send_text( 'comment', 'status' ) . ': ' . $comment_status . "\n\n" .
-			$this->generate_context( $this->tool_name );
+			$header_message . "\n\n" .
+			'**' . $this->get_send_text( 'comment', 'article' ) . '**: ' . $article_title . ' - <' . $article_url . '>' . "\n" .
+			'**' . $this->get_send_text( 'comment', 'commenter' ) . '**: ' . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
+			'**' . $this->get_send_text( 'constant', 'date' ) . '**: ' . $comment->comment_date . "\n" .
+			'**' . $this->get_send_text( 'comment', 'comment' ) . '**: ' . "\n" . $comment->comment_content . "\n\n" .
+			'**' . $this->get_send_text( 'comment', 'url' ) . '**: <' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
+			'**' . $this->get_send_text( 'comment', 'status' ) . '**: ' . $comment_status . "\n\n" .
+			'>>> ' . $this->generate_context( $this->tool_name );
 
 		return $this;
 	}
