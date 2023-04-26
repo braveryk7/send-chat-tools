@@ -38,13 +38,7 @@ class Sct_Check_Comment extends Sct_Base {
 			$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
 
 			if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
-				global $wpdb;
-				$instance = match ( $tool ) {
-					'slack'    => Sct_Slack::get_instance(),
-					'discord'  => Sct_Discord::get_instance(),
-					'chatwork' => Sct_Chatwork::get_instance(),
-				};
-				$instance?->generate_comment_content( $comment )?->generate_header()?->send_tools( (string) $wpdb->insert_id, $tool );
+				$this->call_chat_tool_class( $tool, 'generate_comment_content', $comment->comment_ID, $comment );
 			} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
 				$this->logger( 1001, $tool, '1' );
 			} elseif ( 'chatwork' === $tool && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
