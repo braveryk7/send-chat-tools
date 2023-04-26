@@ -48,7 +48,7 @@ class Sct_Check_Comment extends Sct_Base {
 				$instance?->generate_comment_content( $comment )?->generate_header()?->send_tools( (string) $wpdb->insert_id, $tool );
 			} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
 				$this->logger( 1001, $tool, '1' );
-			} elseif ( 'chatwork' === $tools && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
+			} elseif ( 'chatwork' === $tool && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
 				$this->logger( 1002, 'chatwork', '1' );
 			};
 		}
