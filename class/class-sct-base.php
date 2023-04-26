@@ -202,6 +202,14 @@ class Sct_Base {
 	}
 
 	/**
+	 * Method to return the value of CHAT_TOOLS.
+	 * e.g [ 'slack', 'discord', 'chatwork' ]
+	 */
+	protected function get_chat_tools(): array {
+		return self::CHAT_TOOLS;
+	}
+
+	/**
 	 * Get WP-cron event name.
 	 */
 	public static function get_wpcron_event_name(): string {
