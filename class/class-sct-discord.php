@@ -128,10 +128,12 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 				$i++;
 			}
 
+			$header_emoji    = ':tada:';
+			$header_message  = "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $message_title . '***__';
 			$website_url     = $developer_message['url']['website'];
 			$update_page_url = $developer_message['url']['update_page'];
 
-			$title         = $this->site_name . '( <' . $this->site_url . '> ) ' . $message_title . "\n\n";
+			$title         = $header_message . "\n\n";
 			$main_content  = $content . "\n";
 			$website       = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
 			$update_page   = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
