@@ -61,13 +61,13 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		$this->content = [
 			'body' =>
 				'[info][title]' . $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'comment', 'title' ) . '[/title]' .
-				$this->get_send_text( 'comment', 'article' ) . $article_title . ' - ' . $article_url . "\n" .
-				$this->get_send_text( 'comment', 'commenter' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
+				$this->get_send_text( 'comment', 'article' ) . ': ' . $article_title . ' - ' . $article_url . "\n" .
+				$this->get_send_text( 'comment', 'commenter' ) . ': ' . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
 				$this->get_send_text( 'constant', 'date' ) . ': ' . $comment->comment_date . "\n" .
-				$this->get_send_text( 'comment', 'comment' ) . "\n" . $comment->comment_content . "\n\n" .
-				$this->get_send_text( 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n" .
+				$this->get_send_text( 'comment', 'comment' ) . ': ' . "\n" . $comment->comment_content . "\n\n" .
+				$this->get_send_text( 'comment', 'url' ) . ': ' . $article_url . '#comment-' . $comment->comment_ID . "\n" .
 				'[hr]' .
-				$this->get_send_text( 'comment', 'status' ) . $comment_status .
+				$this->get_send_text( 'comment', 'status' ) . ': ' . $comment_status .
 				$this->generate_context( $this->tool_name ) . '[/info]',
 		];
 
