@@ -170,7 +170,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 			$header_message . "\n\n" . $login_user_name . "\n" . $login_date . "\n" . $login_env . "\n" . $login_ip_address . "\n\n" .
 			$this->get_send_text( 'login_notify', 'unauthorized_login' ) . "\n" .
 			$this->get_send_text( 'login_notify', 'disconnect' ) . "\n" .
-			$this->site_url . "\n\n" .
+			$this->site_url . '/wp-admin/profile.php' . "\n\n" .
 			'>>> ' . $this->generate_context( $this->tool_name );
 
 		return $this;
