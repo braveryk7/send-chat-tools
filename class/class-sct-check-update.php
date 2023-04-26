@@ -42,9 +42,8 @@ class Sct_Check_Update extends Sct_Base {
 
 		if ( ! empty( $updates ) ) {
 			$sct_options = $this->get_sct_options();
-			$tools       = [ 'slack', 'discord', 'chatwork' ];
 
-			foreach ( $tools as $tool ) {
+			foreach ( $this->get_chat_tools() as $tool ) {
 				$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
 
 				if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['send_update'] ) {

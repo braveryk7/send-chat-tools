@@ -32,10 +32,9 @@ class Sct_Check_Comment extends Sct_Base {
 	 */
 	public function controller( int $comment_id ) {
 		$sct_options = $this->get_sct_options();
-		$tools       = [ 'slack', 'discord', 'chatwork' ];
 		$comment     = get_comment( $comment_id );
 
-		foreach ( $tools as $tool ) {
+		foreach ( $this->get_chat_tools() as $tool ) {
 			$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
 
 			if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {

@@ -33,9 +33,8 @@ class Sct_Check_Login extends Sct_Base {
 	 */
 	public function controller( $user_login, $user ) {
 		$sct_options = $this->get_sct_options();
-		$tools       = [ 'slack', 'discord', 'chatwork' ];
 
-		foreach ( $tools as $tool ) {
+		foreach ( $this->get_chat_tools() as $tool ) {
 			$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
 
 			if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['login_notify'] ) {
