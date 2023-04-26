@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-03-15 17:39+0900\n"
-"PO-Revision-Date: 2023-03-15 17:39+0900\n"
+"POT-Creation-Date: 2023-04-26 00:28+0900\n"
+"PO-Revision-Date: 2023-04-26 00:28+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 
 #: class/class-sct-admin-page.php:37 class/class-sct-admin-page.php:38
-#: class/class-sct-base.php:220
+#: class/class-sct-base.php:212
 msgid "Send Chat Tools"
 msgstr "Send Chat Tools"
 
@@ -30,239 +30,196 @@ msgstr "古いSend Chat Tools"
 msgid "Settings"
 msgstr "設定"
 
-#: class/class-sct-admin-page.php:168
+#: class/class-sct-admin-page.php:165
 msgid "Required key does not exist"
 msgstr "必要なキーが存在しません"
 
-#: class/class-sct-base.php:222
-msgid "Updated to version 1.3.1!"
-msgstr "バージョン1.3.1に更新されました！"
+#: class/class-sct-base.php:214
+msgid "Updated to version 1.4.0!"
+msgstr "バージョン1.4.0に更新されました！"
 
-#: class/class-sct-base.php:223
+#: class/class-sct-base.php:215
 msgid "Here are the main changes..."
 msgstr "主な変更点は以下の通りです。"
 
-#: class/class-sct-base.php:225
+#: class/class-sct-base.php:217
 msgid "Important:"
 msgstr "重要："
 
-#: class/class-sct-base.php:226
+#: class/class-sct-base.php:218
 msgid ""
-"- Please update your PHP version to 8.0 or higher. The next update will not "
-"allow use with PHP 8.0 or lower and will automatically disable the plugin. "
-"This change is scheduled around April 15th."
+"- We no longer support PHP7 series. This plugin can only be activated with "
+"PHP8 or higher."
 msgstr ""
-"・次回のアップデートでPHP8.0以下の場合、プラグインが自動停止され使用できなく"
-"なります。アップデートは4月15日頃に行われる予定です。"
+"・PHP7系のサポートを終了しました。このプラグインはPHP8以上でないとアクティ"
+"ベートできません。"
 
-#: class/class-sct-base.php:227
-msgid ""
-"- The limit for logs will be reduced from 1,000 to 300 in the next update. "
-"Please make a backup if needed."
-msgstr ""
-"・次回のアップデートでログの上限が1,000件から300件に削減されます。必要であれ"
-"ばバックアップを取得してください。"
+#: class/class-sct-base.php:219
+msgid "- The chat log limit has been changed to 300 entries."
+msgstr "・チャットログの上限が300件に変更されました。"
 
-#: class/class-sct-base.php:229
+#: class/class-sct-base.php:221
 msgid "Improvements:"
 msgstr "改善："
 
-#: class/class-sct-base.php:230
-msgid "- It is now ready for WordPress 6.2."
-msgstr "・WordPress6.2に対応しました。"
+#: class/class-sct-base.php:222
+msgid "- The PHP versioning logic has been revised.."
+msgstr "・PHPのバージョン判定ロジックを見直しました。"
 
-#: class/class-sct-base.php:231
-msgid ""
-"- The new functionality to reject certain developer messages has been "
-"implemented."
-msgstr "・特定のデベロッパーメッセージを拒否する機能を実装しました。"
+#: class/class-sct-base.php:223
+msgid "- We have expanded the testing of various methods."
+msgstr "・各種メソッドのテストを拡充しました。"
 
-#: class/class-sct-base.php:232
-msgid ""
-"- The @wordpress/api-fetch package has been adopted for quicker and safer "
-"use of the setting page."
-msgstr ""
-"・@wordpress/api-fetchパッケージを採用し、より高速で安全に設定ページを使用で"
-"きるようになりました。"
-
-#: class/class-sct-base.php:233
-msgid "- The design of the screen during data loading has been simplified."
-msgstr "・データロード中の画面をシンプルなデザインに変更しました。"
-
-#: class/class-sct-base.php:234
-msgid ""
-"- We have moved the time settings for update notification to the Basic "
-"Settings tab. With this change, the Update Notification tab has been "
-"eliminated."
-msgstr ""
-"・アップデート通知時刻の変更を基本設定タブに移行しました。これに伴いアップ"
-"デート通知タブは廃止されました。"
-
-#: class/class-sct-base.php:235
-msgid ""
-"- An output function for logs has been installed. You can choose to copy to "
-"the clipboard and output to text/CSV."
-msgstr ""
-"・ログの出力機能を実装しました。クリップボードコピー、テキスト/CSV出力を選択"
-"できます。"
-
-#: class/class-sct-base.php:236
-msgid ""
-"- We now show an error message when data retrieval failures occur in the "
-"WordPress REST API."
-msgstr ""
-"・WordPress REST APIでデータ取得が失敗した時、エラーメッセージを表示するよう"
-"になりました。"
-
-#: class/class-sct-base.php:238
-msgid "Fixes:"
-msgstr "修正："
-
-#: class/class-sct-base.php:239
-msgid ""
-"- We have fixed a problem that was causing API errors being output to PHP."
-msgstr "・PHPにAPIのエラーが出力されていた問題を修正しました。"
-
-#: class/class-sct-base.php:240
-msgid "- Refactoring of code has been implemented."
-msgstr "・コードのリファクタリングを実施しました。"
-
-#: class/class-sct-base.php:241
-msgid "- Some legacy code has been removed."
-msgstr "・一部のレガシーなコードを削除しました。"
-
-#: class/class-sct-base.php:242
-msgid ""
-"- We have resolved an issue that caused a critical error in some "
-"environments during updates."
-msgstr "・アップデート時に一部の環境で重大なエラーが起こる問題を解決しました。"
-
-#: class/class-sct-base.php:244
+#: class/class-sct-base.php:225
 msgid "Development:"
 msgstr "開発："
 
-#: class/class-sct-base.php:245
-msgid "- The development environment has been reorganized."
-msgstr "・開発環境を再整備しました。"
+#: class/class-sct-base.php:226
+msgid "- The genuine WordPress wp-env environment has been installed."
+msgstr "・WordPress純正のwp-env環境を導入しました。"
 
 #: class/class-sct-dashboard-notify.php:35
 msgid "Notice from Send Chat Tools"
 msgstr "Send Chat Toolsからのお知らせ"
 
-#: class/class-sct-error-mail.php:70 class/class-sct-generate-content.php:478
+#: class/class-sct-error-mail.php:47
+#: class/class-sct-generate-content-abstract.php:178
 msgid "Approved"
 msgstr "承認済み"
 
-#: class/class-sct-error-mail.php:73 class/class-sct-generate-content.php:479
+#: class/class-sct-error-mail.php:48
+#: class/class-sct-generate-content-abstract.php:179
 msgid "Unapproved"
 msgstr "未承認"
 
-#: class/class-sct-error-mail.php:73 class/class-sct-generate-content.php:480
+#: class/class-sct-error-mail.php:48
+#: class/class-sct-generate-content-abstract.php:180
 msgid "Click here to approve"
 msgstr "ここをクリックして承認"
 
-#: class/class-sct-error-mail.php:76 class/class-sct-generate-content.php:481
+#: class/class-sct-error-mail.php:49
+#: class/class-sct-generate-content-abstract.php:181
 msgid "Spam"
 msgstr "スパム"
 
-#: class/class-sct-error-mail.php:81
+#: class/class-sct-error-mail.php:53
 msgid "You have received a new comment"
 msgstr "新しいコメントが投稿されました"
 
-#: class/class-sct-error-mail.php:83 class/class-sct-generate-content.php:471
+#: class/class-sct-error-mail.php:55
 msgid "new comment has been posted."
 msgstr "に新規コメントが投稿されました。"
 
-#: class/class-sct-error-mail.php:84 class/class-sct-generate-content.php:472
+#: class/class-sct-error-mail.php:56
 msgid "Commented article:"
 msgstr "コメントされた記事："
 
-#: class/class-sct-error-mail.php:85 class/class-sct-generate-content.php:473
+#: class/class-sct-error-mail.php:57
 msgid "Author:"
 msgstr "投稿者名："
 
-#: class/class-sct-error-mail.php:86 class/class-sct-generate-content.php:474
+#: class/class-sct-error-mail.php:58
 msgid "Date and time:"
 msgstr "日時："
 
-#: class/class-sct-error-mail.php:87 class/class-sct-generate-content.php:475
+#: class/class-sct-error-mail.php:59
 msgid "Text:"
 msgstr "本文："
 
-#: class/class-sct-error-mail.php:88 class/class-sct-generate-content.php:476
+#: class/class-sct-error-mail.php:60
 msgid "Comment URL:"
 msgstr "コメントのURL："
 
-#: class/class-sct-error-mail.php:89 class/class-sct-generate-content.php:477
+#: class/class-sct-error-mail.php:61
 msgid "Comment Status:"
 msgstr "コメントの状態："
 
-#: class/class-sct-error-mail.php:90 class/class-sct-error-mail.php:110
+#: class/class-sct-error-mail.php:62 class/class-sct-error-mail.php:82
 msgid "This message was sent by Send Chat Tools."
 msgstr "このメッセージはSend Chat Toolsにより送信されました。"
 
-#: class/class-sct-error-mail.php:91 class/class-sct-error-mail.php:111
+#: class/class-sct-error-mail.php:63 class/class-sct-error-mail.php:83
 msgid "Possible that the message was not sent to the chat tool correctly."
 msgstr "メッセージがチャットツールに正しく送信されなかった可能性があります。"
 
-#: class/class-sct-error-mail.php:92 class/class-sct-error-mail.php:112
+#: class/class-sct-error-mail.php:64 class/class-sct-error-mail.php:84
 msgid "Tool name:"
 msgstr "ツール名："
 
-#: class/class-sct-error-mail.php:93 class/class-sct-error-mail.php:113
+#: class/class-sct-error-mail.php:65 class/class-sct-error-mail.php:85
 msgid "Error code:"
 msgstr "エラーコード："
 
-#: class/class-sct-error-mail.php:105
+#: class/class-sct-error-mail.php:77
 msgid "WordPress update notification."
 msgstr "WordPressアップデート通知"
 
-#: class/class-sct-generate-content.php:248
+#: class/class-sct-generate-content-abstract.php:147
 msgid "WordPress Core:"
 msgstr "WordPressコア："
 
-#: class/class-sct-generate-content.php:249
+#: class/class-sct-generate-content-abstract.php:148
 msgid "Themes:"
 msgstr "テーマ："
 
-#: class/class-sct-generate-content.php:250
+#: class/class-sct-generate-content-abstract.php:149
 msgid "Plugins:"
 msgstr "プラグイン："
 
-#: class/class-sct-generate-content.php:267
-msgid "No announcement."
-msgstr "お知らせはありません。"
+#: class/class-sct-generate-content-abstract.php:169
+msgid "Date and time"
+msgstr "日時"
 
-#: class/class-sct-generate-content.php:274
+#: class/class-sct-generate-content-abstract.php:172
+msgid "New comment has been posted"
+msgstr "新規コメントが投稿されました"
+
+#: class/class-sct-generate-content-abstract.php:173
+msgid "Commented article"
+msgstr "コメントされた記事"
+
+#: class/class-sct-generate-content-abstract.php:174
+msgid "Commenter"
+msgstr "投稿者"
+
+#: class/class-sct-generate-content-abstract.php:175
+msgid "Comment"
+msgstr "コメント"
+
+#: class/class-sct-generate-content-abstract.php:176
+msgid "Comment URL"
+msgstr "コメントのURL"
+
+#: class/class-sct-generate-content-abstract.php:177
+msgid "Comment Status"
+msgstr "コメントの状態"
+
+#: class/class-sct-generate-content-abstract.php:184
+msgid "Notification of new updates"
+msgstr "アップデート通知"
+
+#: class/class-sct-generate-content-abstract.php:185
+msgid "Please login to the admin panel to update."
+msgstr "管理画面にログインしてアップデートしてください。"
+
+#: class/class-sct-generate-content-abstract.php:186
+msgid "Update Page"
+msgstr "更新ページ"
+
+#: class/class-sct-generate-content-abstract.php:190
 #, php-format
 msgid "Update notifications from %s"
 msgstr "%sからアップデートのお知らせ"
 
-#: class/class-sct-generate-content.php:484
-msgid "Notification of new updates."
-msgstr "新しいアップデートがあります。"
-
-#: class/class-sct-generate-content.php:485
-msgid "Please login to the admin panel to update."
-msgstr "管理画面にログインしてアップデートしてください。"
-
-#: class/class-sct-generate-content.php:486
-msgid "Update Page:"
-msgstr "更新ページ："
-
-#: class/class-sct-generate-content.php:489
-msgid "Notification of plugin updates from"
-msgstr "からプラグインアップデートのお知らせ"
-
-#: class/class-sct-generate-content.php:490
+#: class/class-sct-generate-content-abstract.php:191
 msgid "Official Web Site"
 msgstr "公式ウェブサイト"
 
-#: class/class-sct-generate-content.php:491
+#: class/class-sct-generate-content-abstract.php:192
 msgid "Update details"
 msgstr "アップデートの詳細"
 
-#: class/class-sct-generate-content.php:493
+#: class/class-sct-generate-content-abstract.php:194
 msgid ""
 "If this message is sent by a malicious developer, it can be rejected with "
 "the following key"
@@ -270,18 +227,42 @@ msgstr ""
 "このメッセージが悪意のある開発者によって送信された場合、次のキーで拒否できま"
 "す"
 
-#: class/class-sct-generate-content.php:546
-#: tests/SctGenerateContentTest.php:210
+#: class/class-sct-generate-content-abstract.php:199
+msgid "Login Notification"
+msgstr "ログイン通知"
+
+#: class/class-sct-generate-content-abstract.php:200
+msgid "User name"
+msgstr "ユーザー名"
+
+#: class/class-sct-generate-content-abstract.php:201
+msgid "Login environment"
+msgstr "ログイン環境"
+
+#: class/class-sct-generate-content-abstract.php:202
+msgid "IP Address"
+msgstr "IPアドレス"
+
+#: class/class-sct-generate-content-abstract.php:203
+msgid ""
+"If you do not recognize this message, you may have an unauthorized login."
+msgstr ""
+"このメッセージに心当たりがない場合、不正なログインが行われている可能性があり"
+"ます。"
+
+#: class/class-sct-generate-content-abstract.php:204
+msgid "Disconnect all location sessions and change passwords."
+msgstr "すべての場所からセッションを切断し、パスワードを変更してください。"
+
+#: class/class-sct-generate-content-abstract.php:218
 msgid "This message was sent by Send Chat Tools: "
 msgstr "このメッセージはSend Chat Toolsにより送信されました。"
 
-#: class/class-sct-generate-content.php:547
-#: tests/SctGenerateContentTest.php:211
+#: class/class-sct-generate-content-abstract.php:219
 msgid "WordPress Plugin Directory"
 msgstr "WordPressプラグインディレクトリ"
 
-#: class/class-sct-generate-content.php:548
-#: tests/SctGenerateContentTest.php:212
+#: class/class-sct-generate-content-abstract.php:220
 msgid "Send Chat Tools Official Page"
 msgstr "Send Chat Tools公式ページ"
 
@@ -302,6 +283,86 @@ msgstr "PHPをアップグレードしてください。"
 #: class/class-sct-phpver-judge.php:93
 msgid "Current PHP version:"
 msgstr "現在のPHPバージョン："
+
+#~ msgid ""
+#~ "- Please update your PHP version to 8.0 or higher. The next update will "
+#~ "not allow use with PHP 8.0 or lower and will automatically disable the "
+#~ "plugin. This change is scheduled around April 15th."
+#~ msgstr ""
+#~ "・次回のアップデートでPHP8.0以下の場合、プラグインが自動停止され使用できな"
+#~ "くなります。アップデートは4月15日頃に行われる予定です。"
+
+#~ msgid ""
+#~ "- The limit for logs will be reduced from 1,000 to 300 in the next "
+#~ "update. Please make a backup if needed."
+#~ msgstr ""
+#~ "・次回のアップデートでログの上限が1,000件から300件に削減されます。必要であ"
+#~ "ればバックアップを取得してください。"
+
+#~ msgid "- It is now ready for WordPress 6.2."
+#~ msgstr "・WordPress6.2に対応しました。"
+
+#~ msgid ""
+#~ "- The new functionality to reject certain developer messages has been "
+#~ "implemented."
+#~ msgstr "・特定のデベロッパーメッセージを拒否する機能を実装しました。"
+
+#~ msgid ""
+#~ "- The @wordpress/api-fetch package has been adopted for quicker and safer "
+#~ "use of the setting page."
+#~ msgstr ""
+#~ "・@wordpress/api-fetchパッケージを採用し、より高速で安全に設定ページを使用"
+#~ "できるようになりました。"
+
+#~ msgid "- The design of the screen during data loading has been simplified."
+#~ msgstr "・データロード中の画面をシンプルなデザインに変更しました。"
+
+#~ msgid ""
+#~ "- We have moved the time settings for update notification to the Basic "
+#~ "Settings tab. With this change, the Update Notification tab has been "
+#~ "eliminated."
+#~ msgstr ""
+#~ "・アップデート通知時刻の変更を基本設定タブに移行しました。これに伴いアップ"
+#~ "デート通知タブは廃止されました。"
+
+#~ msgid ""
+#~ "- An output function for logs has been installed. You can choose to copy "
+#~ "to the clipboard and output to text/CSV."
+#~ msgstr ""
+#~ "・ログの出力機能を実装しました。クリップボードコピー、テキスト/CSV出力を選"
+#~ "択できます。"
+
+#~ msgid ""
+#~ "- We now show an error message when data retrieval failures occur in the "
+#~ "WordPress REST API."
+#~ msgstr ""
+#~ "・WordPress REST APIでデータ取得が失敗した時、エラーメッセージを表示するよ"
+#~ "うになりました。"
+
+#~ msgid "Fixes:"
+#~ msgstr "修正："
+
+#~ msgid ""
+#~ "- We have fixed a problem that was causing API errors being output to PHP."
+#~ msgstr "・PHPにAPIのエラーが出力されていた問題を修正しました。"
+
+#~ msgid "- Refactoring of code has been implemented."
+#~ msgstr "・コードのリファクタリングを実施しました。"
+
+#~ msgid "- Some legacy code has been removed."
+#~ msgstr "・一部のレガシーなコードを削除しました。"
+
+#~ msgid ""
+#~ "- We have resolved an issue that caused a critical error in some "
+#~ "environments during updates."
+#~ msgstr ""
+#~ "・アップデート時に一部の環境で重大なエラーが起こる問題を解決しました。"
+
+#~ msgid "No announcement."
+#~ msgstr "お知らせはありません。"
+
+#~ msgid "Notification of plugin updates from"
+#~ msgstr "からプラグインアップデートのお知らせ"
 
 #~ msgid ""
 #~ "- PHP 8.0 and earlier will no longer be supported after next minor update "

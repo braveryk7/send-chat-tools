@@ -59,11 +59,11 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$header_emoji     = ':mailbox_with_mail:';
-		$header_message   = "{$header_emoji} {$this->site_name}({$this->site_url})" . $this->get_send_text( 'comment', 'title' );
+		$header_message   = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $this->get_send_text( 'comment', 'title' );
 		$comment_article  = '*' . $this->get_send_text( 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
-		$author           = '*' . $this->get_send_text( 'comment', 'author' ) . "*\n{$comment->comment_author}<{$comment->comment_author_email}>";
-		$date             = '*' . $this->get_send_text( 'comment', 'date' ) . "*\n{$comment->comment_date}";
-		$comment_content  = '*' . $this->get_send_text( 'comment', 'content' ) . "*\n{$comment->comment_content}";
+		$author           = '*' . $this->get_send_text( 'comment', 'commenter' ) . "*\n{$comment->comment_author}<{$comment->comment_author_email}>";
+		$date             = '*' . $this->get_send_text( 'constant', 'date' ) . "*\n{$comment->comment_date}";
+		$comment_content  = '*' . $this->get_send_text( 'comment', 'comment' ) . "*\n{$comment->comment_content}";
 		$comment_url      = '*' . $this->get_send_text( 'comment', 'url' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
 		$comment_statuses = '*' . $this->get_send_text( 'comment', 'status' ) . "*\n{$comment_status}";
 		$context          = $this->generate_context( $this->tool_name );
@@ -93,8 +93,8 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	public function generate_update_content( array $update_content ): Sct_Slack {
 		$plain_data     = $this->generate_plain_update_message( $update_content );
 		$header_emoji   = ':zap:';
-		$header_message = "{$header_emoji} {$plain_data->site_name}({$plain_data->site_url})" . $plain_data->update_title;
-		$update_message = $plain_data->update_text . "\n" . $plain_data->update_page . "<{$plain_data->admin_url}>";
+		$header_message = "{$header_emoji} {$plain_data->site_name}({$plain_data->site_url}) " . $plain_data->update_title;
+		$update_message = $plain_data->update_text . "\n" . $plain_data->update_page . ": <{$plain_data->admin_url}>";
 		$context        = $this->generate_context( $this->tool_name );
 
 		$message = [
@@ -244,16 +244,16 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 		$user_name       = $user->data->user_login;
 		$user_email      = $user->data->user_email;
-		$login_user_name = '*' . $this->get_send_text( 'login_notify', 'user_name' ) . ":*\n{$user_name}<$user_email>";
+		$login_user_name = '*' . $this->get_send_text( 'login_notify', 'user_name' ) . "*\n{$user_name}<$user_email>";
 
 		$now_date   = gmdate( 'Y-m-d H:i:s', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-		$login_date = '*' . $this->get_send_text( 'login_notify', 'date' ) . ":*\n{$now_date}";
+		$login_date = '*' . $this->get_send_text( 'constant', 'date' ) . "*\n{$now_date}";
 
 		$os_browser = getenv( 'HTTP_USER_AGENT' );
-		$login_env  = '*' . $this->get_send_text( 'login_notify', 'login_env' ) . ":*\n{$os_browser}";
+		$login_env  = '*' . $this->get_send_text( 'login_notify', 'login_env' ) . "*\n{$os_browser}";
 
 		$ip_address       = getenv( 'REMOTE_ADDR' );
-		$login_ip_address = '*' . $this->get_send_text( 'login_notify', 'ip_address' ) . ":*\n{$ip_address}";
+		$login_ip_address = '*' . $this->get_send_text( 'login_notify', 'ip_address' ) . "*\n{$ip_address}";
 
 		$this->content = [
 			'text'   => $header_message,

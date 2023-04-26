@@ -165,23 +165,25 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 */
 	protected function get_send_text( string $type, string $param ): string {
 		$message = [
+			'constant'     => [
+				'date' => __( 'Date and time', 'send-chat-tools' ),
+			],
 			'comment'      => [
-				'title'      => esc_html__( 'new comment has been posted.', 'send-chat-tools' ),
-				'article'    => esc_html__( 'Commented article:', 'send-chat-tools' ),
-				'author'     => esc_html__( 'Author:', 'send-chat-tools' ),
-				'date'       => esc_html__( 'Date and time:', 'send-chat-tools' ),
-				'content'    => esc_html__( 'Text:', 'send-chat-tools' ),
-				'url'        => esc_html__( 'Comment URL:', 'send-chat-tools' ),
-				'status'     => esc_html__( 'Comment Status:', 'send-chat-tools' ),
+				'title'      => esc_html__( 'New comment has been posted', 'send-chat-tools' ),
+				'article'    => esc_html__( 'Commented article', 'send-chat-tools' ),
+				'commenter'  => esc_html__( 'Commenter', 'send-chat-tools' ),
+				'comment'    => esc_html__( 'Comment', 'send-chat-tools' ),
+				'url'        => esc_html__( 'Comment URL', 'send-chat-tools' ),
+				'status'     => esc_html__( 'Comment Status', 'send-chat-tools' ),
 				'approved'   => esc_html__( 'Approved', 'send-chat-tools' ),
 				'unapproved' => esc_html__( 'Unapproved', 'send-chat-tools' ),
 				'click'      => esc_html__( 'Click here to approve', 'send-chat-tools' ),
 				'spam'       => esc_html__( 'Spam', 'send-chat-tools' ),
 			],
 			'update'       => [
-				'title'  => esc_html__( 'Notification of new updates.', 'send-chat-tools' ),
+				'title'  => esc_html__( 'Notification of new updates', 'send-chat-tools' ),
 				'update' => esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ),
-				'page'   => esc_html__( 'Update Page:', 'send-chat-tools' ),
+				'page'   => esc_html__( 'Update Page', 'send-chat-tools' ),
 			],
 			'dev_notify'   => [
 				/* translators: 1: Theme or Plugin name */
@@ -196,11 +198,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 			'login_notify' => [
 				'title'              => __( 'Login Notification', 'send-chat-tools' ),
 				'user_name'          => __( 'User name', 'send-chat-tools' ),
-				'date'               => __( 'Date and time', 'send-chat-tools' ),
 				'login_env'          => __( 'Login environment', 'send-chat-tools' ),
 				'ip_address'         => __( 'IP Address', 'send-chat-tools' ),
-				'unauthorized_login' => __( 'If you do not recognize this message, you may have an unauthorized login.' ),
-				'disconnect'         => __( 'Disconnect all location sessions and change passwords.' ),
+				'unauthorized_login' => __( 'If you do not recognize this message, you may have an unauthorized login.', 'send-chat-tools' ),
+				'disconnect'         => __( 'Disconnect all location sessions and change passwords.', 'send-chat-tools' ),
 			],
 		];
 

@@ -60,14 +60,14 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 
 		$this->content = [
 			'body' =>
-				'[info][title]' . $this->site_name . '(' . $this->site_url . ')' . $this->get_send_text( 'comment', 'title' ) . '[/title]' .
-				$this->get_send_text( 'comment', 'article' ) . $article_title . ' - ' . $article_url . "\n" .
-				$this->get_send_text( 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-				$this->get_send_text( 'comment', 'date' ) . $comment->comment_date . "\n" .
-				$this->get_send_text( 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
-				$this->get_send_text( 'comment', 'url' ) . $article_url . '#comment-' . $comment->comment_ID . "\n" .
+				'[info][title]' . $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'comment', 'title' ) . '[/title]' .
+				$this->get_send_text( 'comment', 'article' ) . ': ' . $article_title . ' - ' . $article_url . "\n" .
+				$this->get_send_text( 'comment', 'commenter' ) . ': ' . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
+				$this->get_send_text( 'constant', 'date' ) . ': ' . $comment->comment_date . "\n" .
+				$this->get_send_text( 'comment', 'comment' ) . ': ' . "\n" . $comment->comment_content . "\n\n" .
+				$this->get_send_text( 'comment', 'url' ) . ': ' . $article_url . '#comment-' . $comment->comment_ID . "\n" .
 				'[hr]' .
-				$this->get_send_text( 'comment', 'status' ) . $comment_status .
+				$this->get_send_text( 'comment', 'status' ) . ': ' . $comment_status .
 				$this->generate_context( $this->tool_name ) . '[/info]',
 		];
 
@@ -88,8 +88,8 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 
 		$this->content = [
 			'body' =>
-				'[info][title]' . $plain_data->site_name . '( ' . $plain_data->site_url . ' )' . $plain_data->update_title . '[/title]' .
-				$core . $themes . $plugins . $plain_data->update_text . "\n" . $plain_data->update_page . $plain_data->admin_url . "\n" .
+				'[info][title]' . $plain_data->site_name . '( ' . $plain_data->site_url . ' ) ' . $plain_data->update_title . '[/title]' .
+				$core . $themes . $plugins . $plain_data->update_text . "\n" . $plain_data->update_page . ': ' . $plain_data->admin_url . "\n" .
 				$this->generate_context( $this->tool_name ) . '[/info]',
 		];
 		return $this;
@@ -145,7 +145,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		$login_user_name = $this->get_send_text( 'login_notify', 'user_name' ) . ": {$user_name}<$user_email>";
 
 		$now_date   = gmdate( 'Y-m-d H:i:s', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-		$login_date = $this->get_send_text( 'login_notify', 'date' ) . ": {$now_date}";
+		$login_date = $this->get_send_text( 'constant', 'date' ) . ": {$now_date}";
 
 		$os_browser = getenv( 'HTTP_USER_AGENT' );
 		$login_env  = $this->get_send_text( 'login_notify', 'login_env' ) . ": {$os_browser}";

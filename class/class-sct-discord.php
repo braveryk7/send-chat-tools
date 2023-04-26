@@ -59,13 +59,13 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$this->content =
-			$this->site_name . '( <' . $this->site_url . '> )' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
-			$this->get_send_text( 'comment', 'article' ) . $article_title . ' - <' . $article_url . '>' . "\n" .
-			$this->get_send_text( 'comment', 'author' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-			$this->get_send_text( 'comment', 'date' ) . $comment->comment_date . "\n" .
-			$this->get_send_text( 'comment', 'content' ) . "\n" . $comment->comment_content . "\n\n" .
-			$this->get_send_text( 'comment', 'url' ) . '<' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
-			$this->get_send_text( 'comment', 'status' ) . $comment_status . "\n\n" .
+			$this->site_name . '( <' . $this->site_url . '> ) ' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
+			$this->get_send_text( 'comment', 'article' ) . ': ' . $article_title . ' - <' . $article_url . '>' . "\n" .
+			$this->get_send_text( 'comment', 'commenter' ) . ': ' . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
+			$this->get_send_text( 'constant', 'date' ) . ': ' . $comment->comment_date . "\n" .
+			$this->get_send_text( 'comment', 'comment' ) . ': ' . "\n" . $comment->comment_content . "\n\n" .
+			$this->get_send_text( 'comment', 'url' ) . ': <' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
+			$this->get_send_text( 'comment', 'status' ) . ': ' . $comment_status . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
 		return $this;
@@ -80,9 +80,9 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$plain_data = $this->generate_plain_update_message( $update_content );
 
 		$this->content =
-			$plain_data->site_name . '( <' . $plain_data->site_url . '> )' . $plain_data->update_title . "\n\n" .
+			$plain_data->site_name . '( <' . $plain_data->site_url . '> ) ' . $plain_data->update_title . "\n\n" .
 			$plain_data->core . $plain_data->themes . $plain_data->plugins .
-			$plain_data->update_text . "\n" . $plain_data->update_page . '<' . $plain_data->admin_url . '>' . "\n\n" .
+			$plain_data->update_text . "\n" . $plain_data->update_page . ': <' . $plain_data->admin_url . '>' . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
 		return $this;
@@ -135,7 +135,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$login_user_name = '***' . $this->get_send_text( 'login_notify', 'user_name' ) . "***: {$user_name}<$user_email>";
 
 		$now_date   = gmdate( 'Y-m-d H:i:s', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-		$login_date = '***' . $this->get_send_text( 'login_notify', 'date' ) . "***: {$now_date}";
+		$login_date = '***' . $this->get_send_text( 'constant', 'date' ) . "***: {$now_date}";
 
 		$os_browser = getenv( 'HTTP_USER_AGENT' );
 		$login_env  = '***' . $this->get_send_text( 'login_notify', 'login_env' ) . "***: {$os_browser}";
