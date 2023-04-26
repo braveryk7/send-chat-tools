@@ -58,15 +58,18 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$article_url    = get_permalink( $comment->comment_post_ID );
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
+		$header_emoji   = ':mailbox_with_mail:';
+		$header_message = "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $this->get_send_text( 'comment', 'title' ) . '***__';
+
 		$this->content =
-			$this->site_name . '( <' . $this->site_url . '> ) ' . $this->get_send_text( 'comment', 'title' ) . "\n\n" .
-			$this->get_send_text( 'comment', 'article' ) . ': ' . $article_title . ' - <' . $article_url . '>' . "\n" .
-			$this->get_send_text( 'comment', 'commenter' ) . ': ' . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-			$this->get_send_text( 'constant', 'date' ) . ': ' . $comment->comment_date . "\n" .
-			$this->get_send_text( 'comment', 'comment' ) . ': ' . "\n" . $comment->comment_content . "\n\n" .
-			$this->get_send_text( 'comment', 'url' ) . ': <' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
-			$this->get_send_text( 'comment', 'status' ) . ': ' . $comment_status . "\n\n" .
-			$this->generate_context( $this->tool_name );
+			$header_message . "\n\n" .
+			'**' . $this->get_send_text( 'comment', 'article' ) . '**: ' . $article_title . ' - <' . $article_url . '>' . "\n" .
+			'**' . $this->get_send_text( 'comment', 'commenter' ) . '**: ' . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
+			'**' . $this->get_send_text( 'constant', 'date' ) . '**: ' . $comment->comment_date . "\n" .
+			'**' . $this->get_send_text( 'comment', 'comment' ) . '**: ' . "\n" . $comment->comment_content . "\n\n" .
+			'**' . $this->get_send_text( 'comment', 'url' ) . '**: <' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
+			'**' . $this->get_send_text( 'comment', 'status' ) . '**: ' . $comment_status . "\n\n" .
+			'>>> ' . $this->generate_context( $this->tool_name );
 
 		return $this;
 	}
@@ -79,9 +82,27 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	public function generate_update_content( array $update_content ): Sct_Discord {
 		$plain_data = $this->generate_plain_update_message( $update_content );
 
+		$header_emoji    = ':zap:';
+		$header_message  = "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $plain_data->update_title . '***__';
+		$core_content    = null;
+		$themes_content  = null;
+		$plugins_content = null;
+
+		if ( $plain_data->core ) {
+			$core_content = ':star: ' . $plain_data->core;
+		}
+
+		if ( $plain_data->themes ) {
+			$themes_content = ':art: ' . $plain_data->themes;
+		}
+
+		if ( $plain_data->plugins ) {
+			$plugins_content = ':wrench: ' . $plain_data->plugins;
+		}
+
 		$this->content =
-			$plain_data->site_name . '( <' . $plain_data->site_url . '> ) ' . $plain_data->update_title . "\n\n" .
-			$plain_data->core . $plain_data->themes . $plain_data->plugins .
+			$header_message . "\n\n" .
+			$core_content . $themes_content . $plugins_content .
 			$plain_data->update_text . "\n" . $plain_data->update_page . ': <' . $plain_data->admin_url . '>' . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
@@ -107,10 +128,12 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 				$i++;
 			}
 
+			$header_emoji    = ':tada:';
+			$header_message  = "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $message_title . '***__';
 			$website_url     = $developer_message['url']['website'];
 			$update_page_url = $developer_message['url']['update_page'];
 
-			$title         = $this->site_name . '( <' . $this->site_url . '> ) ' . $message_title . "\n\n";
+			$title         = $header_message . "\n\n";
 			$main_content  = $content . "\n";
 			$website       = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
 			$update_page   = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
