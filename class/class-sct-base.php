@@ -40,6 +40,12 @@ class Sct_Base {
 		'logs',
 	];
 
+	private const CHAT_TOOLS = [
+		'slack',
+		'discord',
+		'chatwork',
+	];
+
 	protected const OPTIONS_KEY = [
 		'slack',
 		'discord',
@@ -196,10 +202,35 @@ class Sct_Base {
 	}
 
 	/**
+	 * Method to return the value of CHAT_TOOLS.
+	 * e.g [ 'slack', 'discord', 'chatwork' ]
+	 */
+	protected function get_chat_tools(): array {
+		return self::CHAT_TOOLS;
+	}
+
+	/**
 	 * Get WP-cron event name.
 	 */
 	public static function get_wpcron_event_name(): string {
 		return self::add_prefix( self::WP_CRON_EVENT_NAME );
+	}
+
+	/**
+	 * A common method that calls the class for each chat tool.
+	 *
+	 * @param string       $tool_name   Tool name.
+	 * @param string       $method_name Method name.
+	 * @param string       $type        Comment ID/update/dev_notify/login_notify.
+	 * @param object|array $data        An object or array for generating data to be sent.
+	 */
+	protected function call_chat_tool_class( string $tool_name, string $method_name, string $type, object | array $data ): void {
+		$class = match ( $tool_name ) {
+			'slack'    => 'Sct_Slack',
+			'discord'  => 'Sct_Discord',
+			'chatwork' => 'Sct_Chatwork',
+		};
+		$class::get_instance()?->$method_name( $data )?->generate_header()?->send_tools( $type, $tool_name );
 	}
 
 	/**
