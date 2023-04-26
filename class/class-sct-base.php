@@ -40,7 +40,7 @@ class Sct_Base {
 		'logs',
 	];
 
-	protected const CHAT_TOOLS = [
+	private const CHAT_TOOLS = [
 		'slack',
 		'discord',
 		'chatwork',
