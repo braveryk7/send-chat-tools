@@ -244,7 +244,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'amazon'    => __( 'Amazon', 'send-chat-tools' ),
 				'rakuten'   => __( 'Rakuten', 'send-chat-tools' ),
 				'temporary' => __( 'Amazon and Rakuten may have temporarily withdrawn sales.', 'send-chat-tools' ),
-				'resume'    => __( 'After receiving this notification, there is a possibility that sales may resume.', 'send-chat-tools' ),
+				'resume'    => __( 'Note that sales may resume after this notice is received, and there is no promise of an end of sales.', 'send-chat-tools' ),
 			],
 		];
 
