@@ -30,6 +30,8 @@ export const LogView = () => {
 			return 'Developer';
 		} else if ( typeId === '4' ) {
 			return 'Login';
+		} else if ( typeId === '5' ) {
+			return 'Rinker';
 		}
 		return null;
 	};
