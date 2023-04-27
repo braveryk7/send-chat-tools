@@ -27,6 +27,20 @@ export const BasicSettingsTabItems = ( props: TabItemsType ) => {
 				/>
 			</div>
 			<div className="sct-items">
+				<UpdateTime
+					itemKey="check_rinker_exists_items_cron"
+					title={ __( 'Set time to check for Rinker exists items', 'send-chat-tools' ) }
+					id="check_rinker_exists_items_cron"
+					message={
+						__(
+							'Rinker items will be checked on first access after this time.',
+							'send-chat-tools'
+						)
+					}
+
+				/>
+			</div>
+			<div className="sct-items">
 				<TokenField
 					itemKey="ignore_key"
 					title={
