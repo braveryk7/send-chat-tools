@@ -19,6 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Check_Rinker extends Sct_Base {
 	/**
+	 * WordPress hook.
+	 */
+	public function __construct() {
+		add_action( $this->add_prefix( 'rinker_exists_items_check' ), [ $this, 'controller' ] );
+		add_action( 'admin_init', [ $this, 'check_cron_time' ] );
+	}
+
+	/**
 	 * Controller method called by WP-Cron that executes the check_rinker_exists_items method and calls each chat class.
 	 */
 	public function controller() {
