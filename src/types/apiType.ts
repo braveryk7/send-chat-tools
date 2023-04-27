@@ -19,6 +19,7 @@ export type ChatToolsBaseType = {
 	send_author: boolean;
 	send_update: boolean;
 	login_notify: boolean;
+	check_rinker_exists_items_cron: boolean;
 	log: ChatLogType;
 };
 
