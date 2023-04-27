@@ -279,6 +279,25 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 * @param array $rinker_exists_items Rinker exists items.
 	 */
 	public function generate_rinker_message( array $rinker_exists_items ): Sct_Slack {
+		$header_emoji   = ':package:';
+		$header_message = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $this->get_send_text( 'rinker_notify', 'title' );
+
+		$items = $this->generate_rinker_content( $rinker_exists_items );
+
+		$after_message = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
+
+		$this->content = [
+			'text'   => $header_message,
+			'blocks' => [
+				$this->header( 'plain_text', $header_message, true ),
+				$this->single_column( 'mrkdwn', $items ),
+				$this->divider(),
+				$this->single_column( 'mrkdwn', $after_message ),
+				$this->divider(),
+				$this->context( 'mrkdwn', $this->generate_context( $this->tool_name ) ),
+			],
+		];
+
 		return $this;
 	}
 
