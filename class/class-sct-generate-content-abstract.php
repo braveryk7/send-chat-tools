@@ -234,9 +234,11 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'disconnect'         => __( 'Disconnect all location sessions and change passwords.', 'send-chat-tools' ),
 			],
 			'rinker_notify' => [
-				'title'   => __( 'Rinker End Of Sales Notification', 'send-chat-tools' ),
-				'amazon'  => __( 'Amazon', 'send-chat-tools' ),
-				'rakuten' => __( 'Rakuten', 'send-chat-tools' ),
+				'title'     => __( 'Rinker End Of Sales Notification', 'send-chat-tools' ),
+				'amazon'    => __( 'Amazon', 'send-chat-tools' ),
+				'rakuten'   => __( 'Rakuten', 'send-chat-tools' ),
+				'temporary' => __( 'Amazon and Rakuten may have temporarily withdrawn sales.', 'send-chat-tools' ),
+				'resume'    => __( 'After receiving this notification, there is a possibility that sales may resume.', 'send-chat-tools' ),
 			],
 		];
 
