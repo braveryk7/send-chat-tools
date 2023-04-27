@@ -165,6 +165,29 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	}
 
 	/**
+	 * A method to format the list of items that are no longer handled by Rinker into a string type.
+	 *
+	 * @param array $rinker_exists_items Rinker exists items.
+	 */
+	protected function generate_rinker_content( array $rinker_exists_items ): string {
+		$amazon  = '';
+		$rakuten = '';
+		foreach ( $rinker_exists_items as $item ) {
+			if ( 'amazon' === $item['item_shop'] ) {
+				$amazon = $amazon . "    ・ <{$item['item_url']}|{$item['item_name']}>\n";
+			} elseif ( 'rakuten' === $item['item_shop'] ) {
+				$rakuten = $rakuten . "    ・ <{$item['item_url']}|{$item['item_name']}>\n";
+			}
+		}
+
+		$amazon            = $amazon ? $this->get_send_text( 'rinker_notify', 'amazon' ) . ": \n" . $amazon : $amazon;
+		$rakuten           = $rakuten ? $this->get_send_text( 'rinker_notify', 'rakuten' ) . ": \n" . $rakuten : $rakuten;
+		$is_amazon_rakuten = $amazon && $rakuten ? "\n" : '';
+
+		return $amazon . $is_amazon_rakuten . $rakuten;
+	}
+
+	/**
 	 * Get comment notify content.
 	 *
 	 * @param string $type  Message type.
