@@ -170,13 +170,19 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 * @param array $rinker_exists_items Rinker exists items.
 	 */
 	protected function generate_rinker_content( array $rinker_exists_items ): string {
+		$format = match ( $this->tool_name ) {
+			'slack'                => "    ・ <%s|%s>\n",
+			'discord', 'chatwork'  => "    ・ %2\$s - %1\$s\n",
+		};
+
 		$amazon  = '';
 		$rakuten = '';
+
 		foreach ( $rinker_exists_items as $item ) {
 			if ( 'amazon' === $item['item_shop'] ) {
-				$amazon = $amazon . "    ・ <{$item['item_url']}|{$item['item_name']}>\n";
+				$amazon = $amazon . sprintf( $format, $item['item_url'], $item['item_name'] );
 			} elseif ( 'rakuten' === $item['item_shop'] ) {
-				$rakuten = $rakuten . "    ・ <{$item['item_url']}|{$item['item_name']}>\n";
+				$rakuten = $rakuten . sprintf( $format, $item['item_url'], $item['item_name'] );
 			}
 		}
 
