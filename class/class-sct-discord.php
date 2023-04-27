@@ -175,4 +175,13 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 		return $this;
 	}
+
+	/**
+	 * Generate Rinker exists items message for Discord.
+	 *
+	 * @param array $rinker_exists_items Rinker exists items.
+	 */
+	public function generate_rinker_message( array $rinker_exists_items ): Sct_Discord {
+		return $this;
+	}
 }

@@ -274,6 +274,15 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
+	 * Generate Rinker exists items message for Slack.
+	 *
+	 * @param array $rinker_exists_items Rinker exists items.
+	 */
+	public function generate_rinker_message( array $rinker_exists_items ): Sct_Slack {
+		return $this;
+	}
+
+	/**
 	 * Method to generate a header for Slack Blocks.
 	 *
 	 * @param string $type content type.
