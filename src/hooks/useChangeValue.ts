@@ -24,7 +24,9 @@ export const useChangeValue = ( itemKey: itemKeyType, optionName?: optionNameTyp
 			const isBaseOption = (
 				option: optionNameType
 			): option is keyof Omit< ChatToolsBaseType, 'log' > => {
-				return [ 'use', 'send_author', 'send_update', 'login_notify' ].includes( option );
+				return [
+					'use', 'send_author', 'send_update', 'login_notify', 'rinker_notify',
+				].includes( option );
 			};
 
 			const isWebhook = ( option: optionNameType ): option is 'webhook_url' => {
