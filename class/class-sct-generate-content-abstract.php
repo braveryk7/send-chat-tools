@@ -172,10 +172,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 */
 	protected function get_send_text( string $type, string $param ): string {
 		$message = [
-			'constant'     => [
+			'constant'      => [
 				'date' => __( 'Date and time', 'send-chat-tools' ),
 			],
-			'comment'      => [
+			'comment'       => [
 				'title'      => esc_html__( 'New comment has been posted', 'send-chat-tools' ),
 				'article'    => esc_html__( 'Commented article', 'send-chat-tools' ),
 				'commenter'  => esc_html__( 'Commenter', 'send-chat-tools' ),
@@ -187,12 +187,12 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'click'      => esc_html__( 'Click here to approve', 'send-chat-tools' ),
 				'spam'       => esc_html__( 'Spam', 'send-chat-tools' ),
 			],
-			'update'       => [
+			'update'        => [
 				'title'  => esc_html__( 'Notification of new updates', 'send-chat-tools' ),
 				'update' => esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ),
 				'page'   => esc_html__( 'Update Page', 'send-chat-tools' ),
 			],
-			'dev_notify'   => [
+			'dev_notify'    => [
 				/* translators: 1: Theme or Plugin name */
 				'title'   => esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
 				'website' => esc_html__( 'Official Web Site', 'send-chat-tools' ),
@@ -202,13 +202,18 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 					'send-chat-tools',
 				),
 			],
-			'login_notify' => [
+			'login_notify'  => [
 				'title'              => __( 'Login Notification', 'send-chat-tools' ),
 				'user_name'          => __( 'User name', 'send-chat-tools' ),
 				'login_env'          => __( 'Login environment', 'send-chat-tools' ),
 				'ip_address'         => __( 'IP Address', 'send-chat-tools' ),
 				'unauthorized_login' => __( 'If you do not recognize this message, you may have an unauthorized login.', 'send-chat-tools' ),
 				'disconnect'         => __( 'Disconnect all location sessions and change passwords.', 'send-chat-tools' ),
+			],
+			'rinker_notify' => [
+				'title'   => __( 'Rinker End Of Sales Notification', 'send-chat-tools' ),
+				'amazon'  => __( 'Amazon', 'send-chat-tools' ),
+				'rakuten' => __( 'Rakuten', 'send-chat-tools' ),
 			],
 		];
 
