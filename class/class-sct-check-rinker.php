@@ -39,7 +39,7 @@ class Sct_Check_Rinker extends Sct_Base {
 				$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
 
 				if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['rinker_notify'] ) {
-					$this->call_chat_tool_class( $tool, 'generate_rinker_message', 'rinker', $exists_items );
+					$this->call_chat_tool_class( $tool, 'generate_rinker_message', 'rinker_notify', $exists_items );
 				} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
 					$this->logger( 1001, $tool, '1' );
 				} elseif ( 'chatwork' === $tool && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
