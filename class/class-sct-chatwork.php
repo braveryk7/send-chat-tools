@@ -171,6 +171,15 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	 * @param array $rinker_exists_items Rinker exists items.
 	 */
 	public function generate_rinker_message( array $rinker_exists_items ): Sct_Chatwork {
+		$header_message = '[title]' . $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'rinker_notify', 'title' ) . '[/title]';
+		$items          = $this->generate_rinker_content( $rinker_exists_items );
+		$after_message  = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
+
+		$this->content = [
+			'body' =>
+				'[info]' . $header_message . $items . "\n" . $after_message . "\n" . $this->generate_context( $this->tool_name ) . '[/info]',
+		];
+
 		return $this;
 	}
 }
