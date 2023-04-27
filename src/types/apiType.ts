@@ -8,6 +8,7 @@ export type apiType = {
 	cron_time: string;
 	ignore_key: ( string|TokenItem )[]
 	login_notify: boolean;
+	check_rinker_exists_items_cron: string;
 	logs: {
 		[ key: string ]: SctLogsType;
 	};
