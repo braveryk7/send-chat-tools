@@ -16,6 +16,14 @@ export const BasicSettingsTabItems = ( props: TabItemsType ) => {
 				<UpdateTime
 					itemKey="cron_time"
 					title={ __( 'Set time to check for updates', 'send-chat-tools' ) }
+					id="cron_time"
+					message={
+						__(
+							'Updates will be confirmed on the first access made after this time.',
+							'send-chat-tools'
+						)
+					}
+
 				/>
 			</div>
 			<div className="sct-items">
