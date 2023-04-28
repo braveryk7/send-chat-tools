@@ -269,7 +269,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		return match ( $tool_name ) {
 			'slack'    => $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>',
 			'discord'  => $message[0] . "\n\n" . $message[1] . ': <' . $wordpress_directory . '>' . "\n" . $message[2] . ': <' . $official_web_site . '>',
-			'chatwork' => '[hr]' . $message[0] . "\n" . $message[1] . ' ' . $wordpress_directory . "\n" . $message[2] . ' ' . $official_web_site,
+			'chatwork' => '[hr]' . $message[0] . "\n" . $message[1] . ': ' . $wordpress_directory . "\n" . $message[2] . ': ' . $official_web_site,
 		};
 	}
 
