@@ -61,9 +61,10 @@ class Sct_Logger extends Sct_Base {
 		};
 
 		$type = ctype_digit( $notification_type ) ? '1' : match ( $notification_type ) {
-			'update'       => '2',
-			'dev_notify'   => '3',
-			'login_notify' => '4',
+			'update'        => '2',
+			'dev_notify'    => '3',
+			'login_notify'  => '4',
+			'rinker_notify' => '5',
 		};
 
 		if ( isset( $tool ) && isset( $type ) ) {

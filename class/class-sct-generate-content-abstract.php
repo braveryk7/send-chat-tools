@@ -107,6 +107,13 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	abstract public function generate_login_message( object $user ): Sct_Slack | Sct_Discord | Sct_Chatwork;
 
 	/**
+	 * Abstract method to generate Rinker exists items message content to be sent to chat tools.
+	 *
+	 * @param array $rinker_exists_items Rinker exists items.
+	 */
+	abstract public function generate_rinker_message( array $rinker_exists_items ): Sct_Slack | Sct_Discord | Sct_Chatwork;
+
+	/**
 	 * Generate comment approved message.
 	 *
 	 * @param string $tool_name Tool name.
@@ -158,6 +165,35 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	}
 
 	/**
+	 * A method to format the list of items that are no longer handled by Rinker into a string type.
+	 *
+	 * @param array $rinker_exists_items Rinker exists items.
+	 */
+	protected function generate_rinker_content( array $rinker_exists_items ): string {
+		$format = match ( $this->tool_name ) {
+			'slack'                => "    ・ <%s|%s>\n",
+			'discord', 'chatwork'  => "    ・ %2\$s - %1\$s\n",
+		};
+
+		$amazon  = '';
+		$rakuten = '';
+
+		foreach ( $rinker_exists_items as $item ) {
+			if ( 'amazon' === $item['item_shop'] ) {
+				$amazon = $amazon . sprintf( $format, $item['item_url'], $item['item_name'] );
+			} elseif ( 'rakuten' === $item['item_shop'] ) {
+				$rakuten = $rakuten . sprintf( $format, $item['item_url'], $item['item_name'] );
+			}
+		}
+
+		$amazon            = $amazon ? $this->get_send_text( 'rinker_notify', 'amazon' ) . ": \n" . $amazon : $amazon;
+		$rakuten           = $rakuten ? $this->get_send_text( 'rinker_notify', 'rakuten' ) . ": \n" . $rakuten : $rakuten;
+		$is_amazon_rakuten = $amazon && $rakuten ? "\n" : '';
+
+		return $amazon . $is_amazon_rakuten . $rakuten;
+	}
+
+	/**
 	 * Get comment notify content.
 	 *
 	 * @param string $type  Message type.
@@ -165,10 +201,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 */
 	protected function get_send_text( string $type, string $param ): string {
 		$message = [
-			'constant'     => [
+			'constant'      => [
 				'date' => __( 'Date and time', 'send-chat-tools' ),
 			],
-			'comment'      => [
+			'comment'       => [
 				'title'      => esc_html__( 'New comment has been posted', 'send-chat-tools' ),
 				'article'    => esc_html__( 'Commented article', 'send-chat-tools' ),
 				'commenter'  => esc_html__( 'Commenter', 'send-chat-tools' ),
@@ -180,12 +216,12 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'click'      => esc_html__( 'Click here to approve', 'send-chat-tools' ),
 				'spam'       => esc_html__( 'Spam', 'send-chat-tools' ),
 			],
-			'update'       => [
+			'update'        => [
 				'title'  => esc_html__( 'Notification of new updates', 'send-chat-tools' ),
 				'update' => esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ),
 				'page'   => esc_html__( 'Update Page', 'send-chat-tools' ),
 			],
-			'dev_notify'   => [
+			'dev_notify'    => [
 				/* translators: 1: Theme or Plugin name */
 				'title'   => esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
 				'website' => esc_html__( 'Official Web Site', 'send-chat-tools' ),
@@ -195,13 +231,20 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 					'send-chat-tools',
 				),
 			],
-			'login_notify' => [
+			'login_notify'  => [
 				'title'              => __( 'Login Notification', 'send-chat-tools' ),
 				'user_name'          => __( 'User name', 'send-chat-tools' ),
 				'login_env'          => __( 'Login environment', 'send-chat-tools' ),
 				'ip_address'         => __( 'IP Address', 'send-chat-tools' ),
 				'unauthorized_login' => __( 'If you do not recognize this message, you may have an unauthorized login.', 'send-chat-tools' ),
 				'disconnect'         => __( 'Disconnect all location sessions and change passwords.', 'send-chat-tools' ),
+			],
+			'rinker_notify' => [
+				'title'     => __( 'Rinker End Of Sales Notification', 'send-chat-tools' ),
+				'amazon'    => __( 'Amazon', 'send-chat-tools' ),
+				'rakuten'   => __( 'Rakuten', 'send-chat-tools' ),
+				'temporary' => __( 'Amazon and Rakuten may have temporarily withdrawn sales.', 'send-chat-tools' ),
+				'resume'    => __( 'Note that sales may resume after this notice is received, and there is no promise of an end of sales.', 'send-chat-tools' ),
 			],
 		];
 

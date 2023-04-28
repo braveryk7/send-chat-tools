@@ -8,6 +8,7 @@ export type apiType = {
 	cron_time: string;
 	ignore_key: ( string|TokenItem )[]
 	login_notify: boolean;
+	check_rinker_exists_items_cron: string;
 	logs: {
 		[ key: string ]: SctLogsType;
 	};
@@ -18,6 +19,7 @@ export type ChatToolsBaseType = {
 	send_author: boolean;
 	send_update: boolean;
 	login_notify: boolean;
+	rinker_notify: boolean;
 	log: ChatLogType;
 };
 
@@ -48,7 +50,14 @@ export type SctLogsType = {
 	send_date: string;
 };
 
-export type itemKeyType = 'slack' | 'discord' | 'chatwork' | 'version' | 'cron_time' | 'ignore_key';
+export type itemKeyType =
+	'slack' |
+	'discord' |
+	'chatwork' |
+	'version' |
+	'cron_time' |
+	'ignore_key' |
+	'check_rinker_exists_items_cron';
 
 export type ChatToolsItemKeyType = Extract< itemKeyType, 'slack' | 'discord' | 'chatwork' >;
 

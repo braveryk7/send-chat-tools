@@ -93,6 +93,11 @@ export const useTabItems = ( props: TabItemsType ) => {
 					optionName: 'login_notify',
 					label: __( 'Use login notify', 'send-chat-tools' ),
 				},
+				{
+					itemKey,
+					optionName: 'rinker_notify',
+					label: __( 'Use Rinker notify', 'send-chat-tools' ),
+				},
 			];
 			setTabItems( items );
 		}

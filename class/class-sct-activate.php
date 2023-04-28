@@ -33,30 +33,33 @@ class Sct_Activate extends Sct_Base {
 	 */
 	public function register_options(): void {
 		$chat_tools_value = [
-			'use'          => false,
-			'webhook_url'  => '',
-			'send_author'  => false,
-			'send_update'  => false,
-			'login_notify' => false,
-			'log'          => [],
+			'use'           => false,
+			'webhook_url'   => '',
+			'send_author'   => false,
+			'send_update'   => false,
+			'login_notify'  => false,
+			'rinker_notify' => false,
+			'log'           => [],
 		];
 		$chatwork_value   = [
-			'use'          => false,
-			'api_token'    => '',
-			'room_id'      => '',
-			'send_author'  => false,
-			'send_update'  => false,
-			'login_notify' => false,
-			'log'          => [],
+			'use'           => false,
+			'api_token'     => '',
+			'room_id'       => '',
+			'send_author'   => false,
+			'send_update'   => false,
+			'login_notify'  => false,
+			'rinker_notify' => false,
+			'log'           => [],
 		];
 
 		$options = [
-			'slack'      => $chat_tools_value,
-			'discord'    => $chat_tools_value,
-			'chatwork'   => $chatwork_value,
-			'version'    => self::VERSION,
-			'cron_time'  => '18:00',
-			'ignore_key' => [],
+			'slack'                          => $chat_tools_value,
+			'discord'                        => $chat_tools_value,
+			'chatwork'                       => $chatwork_value,
+			'version'                        => self::VERSION,
+			'cron_time'                      => '18:00',
+			'check_rinker_exists_items_cron' => '19:00',
+			'ignore_key'                     => [],
 		];
 
 		add_option( $this->add_prefix( 'options' ), $options );
@@ -75,9 +78,15 @@ class Sct_Activate extends Sct_Base {
 					if ( 'ignore_key' === $key_name ) {
 						$sct_options[ $key_name ] = [];
 					}
+					if ( 'check_rinker_exists_items_cron' === $key_name ) {
+						$sct_options[ $key_name ] = '19:00';
+					}
 				} elseif ( 'slack' === $key_name || 'discord' === $key_name || 'chatwork' === $key_name ) {
 					if ( ! $sct_options[ $key_name ]['login_notify'] ) {
 						$sct_options[ $key_name ]['login_notify'] = true;
+					}
+					if ( ! $sct_options[ $key_name ]['rinker_notify'] ) {
+						$sct_options[ $key_name ]['rinker_notify'] = true;
 					}
 				}
 			}

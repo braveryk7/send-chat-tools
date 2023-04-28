@@ -41,6 +41,7 @@ if ( ! $sct_phpver_judge->judgment( $sct_require_php_version ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-admin-page.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-comment.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-login.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-check-rinker.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-activate.php';
@@ -60,6 +61,11 @@ if ( ! $sct_phpver_judge->judgment( $sct_require_php_version ) ) {
 	 * Start login process.
 	 */
 	new Sct_Check_Login();
+
+	/**
+	 * Start Rinker process.
+	 */
+	new Sct_Check_Rinker();
 
 	/**
 	 * Start update process.
