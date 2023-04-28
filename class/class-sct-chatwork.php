@@ -92,7 +92,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		$this->content = [
 			'body' =>
 				'[info]' . $header_message . $core . $themes . $plugins .
-				$plain_data->update_text . "\n" . $this->get_send_text( 'update', 'page' ) . ': ' . $plain_data->admin_url . "\n" .
+				$this->get_send_text( 'update', 'update' ) . "\n" . $this->get_send_text( 'update', 'page' ) . ': ' . $plain_data->admin_url . "\n" .
 				$this->generate_context( $this->tool_name ) . '[/info]',
 		];
 		return $this;
