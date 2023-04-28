@@ -7,6 +7,9 @@ on:
       - 'tests/**'
       - 'send-chat-tools.php'
 
+env:
+  SECRETS_CACHE: ${{ secrets.CACHE }}
+
 jobs:
   test:
     name: PHPUnit
@@ -29,7 +32,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ github.workspace }}/vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ env.SECRETS_CACHE }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
