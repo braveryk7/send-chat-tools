@@ -59,7 +59,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$header_emoji   = ':mailbox_with_mail:';
-		$header_message = "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $this->get_send_text( 'comment', 'title' ) . '***__';
+		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment', 'title' ) );
 
 		$this->content =
 			$header_message . "\n\n" .
@@ -83,7 +83,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$plain_data = $this->generate_plain_update_message( $update_content );
 
 		$header_emoji    = ':zap:';
-		$header_message  = "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $plain_data->update_title . '***__';
+		$header_message  = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update', 'title' ) );
 		$core_content    = null;
 		$themes_content  = null;
 		$plugins_content = null;
@@ -129,7 +129,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 			}
 
 			$header_emoji    = ':tada:';
-			$header_message  = "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $message_title . '***__';
+			$header_message  = $this->generate_header_message( $header_emoji, $message_title );
 			$website_url     = $developer_message['url']['website'];
 			$update_page_url = $developer_message['url']['update_page'];
 
@@ -151,7 +151,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_login_message( object $user ): Sct_Discord {
 		$header_emoji   = ':unlock:';
-		$header_message = "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $this->get_send_text( 'login_notify', 'title' ) . '***__';
+		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'login_notify', 'title' ) );
 
 		$user_name       = $user->data->user_login;
 		$user_email      = $user->data->user_email;
@@ -183,7 +183,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_rinker_message( array $rinker_exists_items ): Sct_Discord {
 		$header_emoji   = ':package:';
-		$header_message = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $this->get_send_text( 'rinker_notify', 'title' );
+		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'rinker_notify', 'title' ) );
 
 		$items = $this->generate_rinker_content( $rinker_exists_items );
 
