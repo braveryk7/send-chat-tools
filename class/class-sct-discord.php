@@ -189,7 +189,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 		$after_message = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
 
-		$this->content = $header_message . "\n\n" . $items . "\n\n" . $after_message . "\n>>> " . $this->generate_context( $this->tool_name );
+		$this->content = $header_message . "\n\n" . $items . "\n\n" . $after_message . "\n" . $this->generate_context( $this->tool_name );
 
 		return $this;
 	}
