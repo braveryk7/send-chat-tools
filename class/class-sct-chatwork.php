@@ -57,10 +57,11 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		$article_title  = get_the_title( $comment->comment_post_ID );
 		$article_url    = get_permalink( $comment->comment_post_ID );
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
+		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'comment', 'title' ) );
 
 		$this->content = [
 			'body' =>
-				'[info][title]' . $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'comment', 'title' ) . '[/title]' .
+				'[info]' . $header_message .
 				$this->get_send_text( 'comment', 'article' ) . ': ' . $article_title . ' - ' . $article_url . "\n" .
 				$this->get_send_text( 'comment', 'commenter' ) . ': ' . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
 				$this->get_send_text( 'constant', 'date' ) . ': ' . $comment->comment_date . "\n" .
@@ -86,10 +87,12 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		$themes  = isset( $plain_data->themes ) ? rtrim( $plain_data->themes ) . '[hr]' : $plain_data->themes;
 		$plugins = isset( $plain_data->plugins ) ? rtrim( $plain_data->plugins ) . '[hr]' : $plain_data->plugins;
 
+		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'update', 'title' ) );
+
 		$this->content = [
 			'body' =>
-				'[info][title]' . $plain_data->site_name . '( ' . $plain_data->site_url . ' ) ' . $plain_data->update_title . '[/title]' .
-				$core . $themes . $plugins . $plain_data->update_text . "\n" . $plain_data->update_page . ': ' . $plain_data->admin_url . "\n" .
+				'[info]' . $header_message . $core . $themes . $plugins .
+				$plain_data->update_text . "\n" . $plain_data->update_page . ': ' . $plain_data->admin_url . "\n" .
 				$this->generate_context( $this->tool_name ) . '[/info]',
 		];
 		return $this;
@@ -114,19 +117,18 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 				$i++;
 			}
 
+			$header_message  = $this->generate_header_message( header_message: $message_title );
 			$website_url     = $developer_message['url']['website'];
 			$update_page_url = $developer_message['url']['update_page'];
 
-			$website       = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url . "\n" : null;
-			$update_page   = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url . "\n" : null;
+			$website     = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url . "\n" : null;
+			$update_page = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url . "\n" : null;
+
 			$this->content = [
 				'body' =>
-					'[info][title]' . $this->site_name . '( ' . $this->site_url . ' ) ' . $message_title . '[/title]' .
-					$content . "\n" .
-					$website . $update_page .
+					'[info]' . $header_message . $content . "\n" . $website . $update_page .
 					'[hr]' . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $developer_message['key'] .
-					$this->generate_context( $this->tool_name ) .
-					'[/info]',
+					$this->generate_context( $this->tool_name ) . '[/info]',
 			];
 		}
 		return $this;
@@ -138,7 +140,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	 * @param object $user User data.
 	 */
 	public function generate_login_message( object $user ): Sct_Chatwork {
-		$header_message = '[title]' . $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'login_notify', 'title' ) . '[/title]';
+		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'login_notify', 'title' ) );
 
 		$user_name       = $user->data->user_login;
 		$user_email      = $user->data->user_email;
@@ -171,7 +173,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	 * @param array $rinker_exists_items Rinker exists items.
 	 */
 	public function generate_rinker_message( array $rinker_exists_items ): Sct_Chatwork {
-		$header_message = '[title]' . $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'rinker_notify', 'title' ) . '[/title]';
+		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'rinker_notify', 'title' ) );
 		$items          = $this->generate_rinker_content( $rinker_exists_items );
 		$after_message  = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
 
