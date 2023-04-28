@@ -69,7 +69,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 			'**' . $this->get_send_text( 'comment', 'comment' ) . '**: ' . "\n" . $comment->comment_content . "\n\n" .
 			'**' . $this->get_send_text( 'comment', 'url' ) . '**: <' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
 			'**' . $this->get_send_text( 'comment', 'status' ) . '**: ' . $comment_status . "\n\n" .
-			'>>> ' . $this->generate_context( $this->tool_name );
+			$this->generate_context( $this->tool_name );
 
 		return $this;
 	}
@@ -171,7 +171,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 			$this->get_send_text( 'login_notify', 'unauthorized_login' ) . "\n" .
 			$this->get_send_text( 'login_notify', 'disconnect' ) . "\n" .
 			$this->site_url . '/wp-admin/profile.php' . "\n\n" .
-			'>>> ' . $this->generate_context( $this->tool_name );
+			$this->generate_context( $this->tool_name );
 
 		return $this;
 	}
@@ -189,7 +189,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 		$after_message = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
 
-		$this->content = $header_message . "\n\n" . $items . "\n\n" . $after_message . "\n>>> " . $this->generate_context( $this->tool_name );
+		$this->content = $header_message . "\n\n" . $items . "\n\n" . $after_message . "\n" . $this->generate_context( $this->tool_name );
 
 		return $this;
 	}
