@@ -19,8 +19,9 @@ const AdminPage = () => {
 	const [ noticeValue, setNoticeValue ] = useState< noticeValueType | undefined >( undefined );
 	const [ noticeMessage, setNoticeMessage ] = useState( '' );
 	const [ snackbarTimer, setSnackbarTimer ] = useState( 0 );
+	const [ isRinkerExists, setIsRinkerExists ] = useState( false );
 
-	useGetApi( setApiData, setApiError );
+	useGetApi( setApiData, setApiError, setIsRinkerExists );
 
 	useEffect( () => {
 		if ( noticeValue ) {
@@ -48,6 +49,7 @@ const AdminPage = () => {
 						setNoticeMessage,
 						snackbarTimer,
 						setSnackbarTimer,
+						isRinkerExists,
 					} }
 				>
 					<Tab />
