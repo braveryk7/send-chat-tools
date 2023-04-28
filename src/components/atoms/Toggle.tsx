@@ -17,8 +17,8 @@ export const Toggle = ( props: TogglePropsType ) => {
 		return 'rinker_notify' === optionName ? true : false;
 	};
 
-	const rinkerExistMessage = __(
-		'Rinker is not activated.' +
+	const rinkerExistMessage = __( 'Rinker is not activated.', 'send-chat-tools' );
+	const rinkerRecommendMessage = __(
 		'Rinker is a very popular product management plug-in for Amazon and Rakuten.',
 		'send-chat-tools'
 	);
@@ -41,7 +41,7 @@ export const Toggle = ( props: TogglePropsType ) => {
 				isOptionNameRinker() && ! isRinkerExists &&
 					<div className="sct-rinker-notice">
 						<p>
-							{ rinkerExistMessage } <br />
+							{ rinkerExistMessage + ' ' + rinkerRecommendMessage } <br />
 							{ __( 'Download', 'send-chat-tools' ) + ' >>> ' }
 							<a
 								href={ rinkerUrl }
