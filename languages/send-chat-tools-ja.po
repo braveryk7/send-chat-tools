@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-04-28 01:09+0900\n"
-"PO-Revision-Date: 2023-04-28 01:09+0900\n"
+"POT-Creation-Date: 2023-04-28 17:19+0900\n"
+"PO-Revision-Date: 2023-04-28 17:19+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -279,8 +279,8 @@ msgstr ""
 "のではありません。"
 
 #: class/class-sct-generate-content-abstract.php:261
-msgid "This message was sent by Send Chat Tools: "
-msgstr "このメッセージはSend Chat Toolsにより送信されました。"
+msgid "This message was sent by Send Chat Tools "
+msgstr "このメッセージはSend Chat Toolsにより送信されました"
 
 #: class/class-sct-generate-content-abstract.php:262
 msgid "WordPress Plugin Directory"
