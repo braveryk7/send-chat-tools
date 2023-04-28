@@ -6,8 +6,7 @@ export type apiType = {
 	chatwork: ChatToolsBaseType & ChatworkType;
 	version: string;
 	cron_time: string;
-	ignore_key: ( string|TokenItem )[]
-	login_notify: boolean;
+	ignore_key: ( string|TokenItem )[];
 	check_rinker_exists_items_cron: string;
 	logs: {
 		[ key: string ]: SctLogsType;
