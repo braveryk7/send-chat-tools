@@ -59,7 +59,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$header_emoji     = ':mailbox_with_mail:';
-		$header_message   = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $this->get_send_text( 'comment', 'title' );
+		$header_message   = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment', 'title' ) );
 		$comment_article  = '*' . $this->get_send_text( 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
 		$author           = '*' . $this->get_send_text( 'comment', 'commenter' ) . "*\n{$comment->comment_author}<{$comment->comment_author_email}>";
 		$date             = '*' . $this->get_send_text( 'constant', 'date' ) . "*\n{$comment->comment_date}";
@@ -93,7 +93,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	public function generate_update_content( array $update_content ): Sct_Slack {
 		$plain_data     = $this->generate_plain_update_message( $update_content );
 		$header_emoji   = ':zap:';
-		$header_message = "{$header_emoji} {$plain_data->site_name}({$plain_data->site_url}) " . $plain_data->update_title;
+		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update', 'title' ) );
 		$update_message = $plain_data->update_text . "\n" . $plain_data->update_page . ": <{$plain_data->admin_url}>";
 		$context        = $this->generate_context( $this->tool_name );
 
@@ -169,7 +169,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 			}
 
 			$header_emoji    = ':tada:';
-			$header_message  = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $message_title;
+			$header_message  = $this->generate_header_message( $header_emoji, $message_title );
 			$website_url     = $developer_message['url']['website'];
 			$update_page_url = $developer_message['url']['update_page'];
 
@@ -240,7 +240,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_login_message( object $user ): Sct_Slack {
 		$header_emoji   = ':door:';
-		$header_message = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $this->get_send_text( 'login_notify', 'title' );
+		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'login_notify', 'title' ) );
 
 		$user_name       = $user->data->user_login;
 		$user_email      = $user->data->user_email;
@@ -280,7 +280,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_rinker_message( array $rinker_exists_items ): Sct_Slack {
 		$header_emoji   = ':package:';
-		$header_message = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $this->get_send_text( 'rinker_notify', 'title' );
+		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'rinker_notify', 'title' ) );
 
 		$items = $this->generate_rinker_content( $rinker_exists_items );
 
