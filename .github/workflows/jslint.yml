@@ -27,7 +27,10 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ env.SECRETS_CACHE }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
+          restore-keys: |
+            ${{ runner.os }}-composer-${{ env.CACHE_TAG }}-
+            ${{ runner.os }}-composer-
+            ${{ runner.os }}
 
       - name: Install dependencies
         if: steps.npm_cache.outputs.cache-hit != 'true'
