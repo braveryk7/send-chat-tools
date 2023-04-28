@@ -50,14 +50,7 @@ export type SctLogsType = {
 	send_date: string;
 };
 
-export type itemKeyType =
-	'slack' |
-	'discord' |
-	'chatwork' |
-	'version' |
-	'cron_time' |
-	'ignore_key' |
-	'check_rinker_exists_items_cron';
+export type itemKeyType = keyof Omit<apiType, 'logs'>;
 
 export type ChatToolsItemKeyType = Extract< itemKeyType, 'slack' | 'discord' | 'chatwork' >;
 
