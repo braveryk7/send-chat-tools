@@ -33,7 +33,10 @@ jobs:
         with:
           path: ${{ github.workspace }}/vendor
           key: ${{ runner.os }}-composer-${{ env.CACHE_TAG }}-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+          restore-keys: |
+            ${{ runner.os }}-composer-${{ env.CACHE_TAG }}-
+            ${{ runner.os }}-composer-
+            ${{ runner.os }}
 
       - name: Install dependencies
         if: steps.vendor_cache.outputs.cache-hit != 'true'
