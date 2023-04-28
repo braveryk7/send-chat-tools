@@ -69,7 +69,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 			'**' . $this->get_send_text( 'comment', 'comment' ) . '**: ' . "\n" . $comment->comment_content . "\n\n" .
 			'**' . $this->get_send_text( 'comment', 'url' ) . '**: <' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
 			'**' . $this->get_send_text( 'comment', 'status' ) . '**: ' . $comment_status . "\n\n" .
-			'>>> ' . $this->generate_context( $this->tool_name );
+			$this->generate_context( $this->tool_name );
 
 		return $this;
 	}
