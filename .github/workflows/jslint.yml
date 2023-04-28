@@ -6,7 +6,7 @@ on:
       - 'src/**'
 
 env:
-  SECRETS_CACHE: ${{ secrets.CACHE }}
+  CACHE_TAG: v1
 
 jobs:
   test:
@@ -26,8 +26,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ env.SECRETS_CACHE }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
+          key: ${{ runner.os }}-node-${{ env.CACHE_TAG }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-${{ env.CACHE_TAG }}-
+            ${{ runner.os }}-composer-
+            ${{ runner.os }}
 
       - name: Install dependencies
         if: steps.npm_cache.outputs.cache-hit != 'true'
