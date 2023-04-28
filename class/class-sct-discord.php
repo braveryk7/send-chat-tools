@@ -103,7 +103,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$this->content =
 			$header_message . "\n\n" .
 			$core_content . $themes_content . $plugins_content .
-			$plain_data->update_text . "\n" . $plain_data->update_page . ': <' . $plain_data->admin_url . '>' . "\n\n" .
+			$this->get_send_text( 'update', 'update' ) . "\n" . $this->get_send_text( 'update', 'page' ) . ': <' . $plain_data->admin_url . '>' . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
 		return $this;
