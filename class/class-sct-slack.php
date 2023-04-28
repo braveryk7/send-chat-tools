@@ -255,6 +255,11 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$ip_address       = getenv( 'REMOTE_ADDR' );
 		$login_ip_address = '*' . $this->get_send_text( 'login_notify', 'ip_address' ) . "*\n{$ip_address}";
 
+		$message =
+			$this->get_send_text( 'login_notify', 'unauthorized_login' ) . "\n" .
+			$this->get_send_text( 'login_notify', 'disconnect' ) . "\n" .
+			$this->site_url . '/wp-admin/profile.php';
+
 		$this->content = [
 			'text'   => $header_message,
 			'blocks' => [
@@ -262,9 +267,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 				$this->two_column( [ 'mrkdwn', $login_user_name ], [ 'mrkdwn', $login_date ] ),
 				$this->two_column( [ 'mrkdwn', $login_env ], [ 'mrkdwn', $login_ip_address ] ),
 				$this->divider(),
-				$this->single_column( 'mrkdwn', $this->get_send_text( 'login_notify', 'unauthorized_login' ), ),
-				$this->single_column( 'mrkdwn', $this->get_send_text( 'login_notify', 'disconnect' ), ),
-				$this->single_column( 'mrkdwn', $this->site_url . '/wp-admin/profile.php' ),
+				$this->single_column( 'mrkdwn', $message, ),
 				$this->divider(),
 				$this->context( 'mrkdwn', $this->generate_context( $this->tool_name ) ),
 			],
