@@ -114,6 +114,20 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	abstract public function generate_rinker_message( array $rinker_exists_items ): Sct_Slack | Sct_Discord | Sct_Chatwork;
 
 	/**
+	 * Method to generate headers for each chat tool.
+	 *
+	 * @param string|null $header_emoji Header emoji.
+	 * @param string      $header_message Header message.
+	 */
+	protected function generate_header_message( string $header_emoji = null, string $header_message ): string {
+		return match ( $this->tool_name ) {
+			'slack'    => "{$header_emoji} {$this->site_name}({$this->site_url}) " . $header_message,
+			'discord'  => "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $header_message . '***__',
+			'chatwork' => '[title]' . $this->site_name . '(' . $this->site_url . ') ' . $header_message . '[/title]',
+		};
+	}
+
+	/**
 	 * Generate comment approved message.
 	 *
 	 * @param string $tool_name Tool name.
