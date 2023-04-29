@@ -32,10 +32,10 @@ export const useSetApi: useSetApiType = ( itemKey, value ) => {
 				data: { [ itemKey ]: value[ itemKey ] },
 			} ).then( ( ) => {
 				setNoticeValue( 'sct_success' );
-				setNoticeMessage( __( 'Success.', 'send-chat-tools' ) );
+				setNoticeMessage( __( 'Success', 'send-chat-tools' ) );
 			} ).catch( ( ) => {
 				setNoticeValue( 'sct_error' );
-				setNoticeMessage( __( 'Error.', 'send-chat-tools' ) );
+				setNoticeMessage( __( 'Error', 'send-chat-tools' ) );
 			} );
 		}
 	}, [ apiData, itemKey, value, setNoticeMessage, setNoticeValue, snackbarTimer, currentValue ] );
