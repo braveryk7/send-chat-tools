@@ -88,6 +88,8 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 * @param object $comment Comment data.
 	 */
 	public function generate_comment_content( object $comment, ): Sct_Error_Mail {
+		$this->mail_title = esc_html__( 'You have received a new comment', 'send-chat-tools' );
+
 		$article_title  = get_the_title( $comment->comment_post_ID );
 		$article_url    = get_permalink( $comment->comment_post_ID );
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
