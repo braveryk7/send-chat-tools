@@ -46,6 +46,19 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
+	 * A method to set the error code and tool name.
+	 *
+	 * @param int    $error_code Error code.
+	 * @param string $tool_name Tool name.
+	 */
+	public function set_error_code_tool_name( int $error_code, string $tool_name ): Sct_Error_Mail {
+		$this->error_code = $error_code;
+		$this->tool_name  = $tool_name;
+
+		return $this;
+	}
+
+	/**
 	 * A method to generate a Error Mail header.
 	 */
 	public function generate_header(): Sct_Error_Mail {
@@ -59,7 +72,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 * @param object $comment Comment data.
 	 */
 	public function generate_comment_content( object $comment, ): Sct_Error_Mail {
-		$comment          = get_comment( $this->comment_id );
+		update_option( 'sct_call', 'called' );
 		$comment_approved = $comment->comment_approved;
 		$article_title    = get_the_title( $comment->comment_post_ID );
 		$article_url      = get_permalink( $comment->comment_post_ID );
@@ -155,6 +168,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 * @param string $mail_message mail message.
 	 */
 	public function send_mail( string $mail_to, string $mail_title, string $mail_message ): void {
+		update_option( 'sct_error_mail', $mail_to );
 		wp_mail( $mail_to, $mail_title, $mail_message );
 	}
 }
