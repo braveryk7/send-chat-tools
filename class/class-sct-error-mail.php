@@ -26,13 +26,6 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	private int $error_code;
 
 	/**
-	 * Property to store comment ID.
-	 *
-	 * @var string $comment_id.
-	 */
-	private string $comment_id;
-
-	/**
 	 * Property to store mail to.
 	 *
 	 * @var string $mail_to.
