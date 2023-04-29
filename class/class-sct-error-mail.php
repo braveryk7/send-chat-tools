@@ -50,6 +50,8 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 * Constructor.
 	 */
 	public function __construct() {
+		parent::__construct();
+		$this->mail_to = get_option( 'admin_email' );
 	}
 
 	/**
