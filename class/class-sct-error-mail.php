@@ -72,7 +72,6 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 * @param object $comment Comment data.
 	 */
 	public function generate_comment_content( object $comment, ): Sct_Error_Mail {
-		update_option( 'sct_call', 'called' );
 		$comment_approved = $comment->comment_approved;
 		$article_title    = get_the_title( $comment->comment_post_ID );
 		$article_url      = get_permalink( $comment->comment_post_ID );
@@ -168,7 +167,6 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 * @param string $mail_message mail message.
 	 */
 	public function send_mail( string $mail_to, string $mail_title, string $mail_message ): void {
-		update_option( 'sct_error_mail', $mail_to );
 		wp_mail( $mail_to, $mail_title, $mail_message );
 	}
 }
