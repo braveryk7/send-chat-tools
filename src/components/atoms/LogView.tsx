@@ -88,7 +88,7 @@ export const LogView = () => {
 	return (
 		<Card className="sct-logs">
 			<CardHeader>
-				{ __( 'Communication logs.', 'send-chat-tools' ) }
+				{ __( 'Communication logs', 'send-chat-tools' ) }
 				<LogExportButton />
 			</CardHeader>
 			<CardBody>
