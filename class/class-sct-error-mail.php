@@ -79,7 +79,6 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_header(): Sct_Error_Mail {
 		return $this;
-
 	}
 
 	/**
