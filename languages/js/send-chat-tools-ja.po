@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Send Chat Tools 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/send-chat-tools\n"
-"POT-Creation-Date: 2023-04-29T04:04:34+00:00\n"
-"PO-Revision-Date: 2023-04-29 13:06+0900\n"
+"POT-Creation-Date: 2023-04-29T04:10:25+00:00\n"
+"PO-Revision-Date: 2023-04-29 13:10+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -151,8 +151,8 @@ msgid "Set time to check for updates"
 msgstr "アップデート確認をする時間を設定"
 
 #: build/index.js:551
-msgid "Updates will be confirmed on the first access made after this time."
-msgstr "この時間以降最初のアクセス時にアップデート確認されます。"
+msgid "Time to send Updates notifications"
+msgstr "アップデート通知を送信する時間"
 
 #: build/index.js:557
 msgid "Set time to check for Rinker exists items"
@@ -269,6 +269,9 @@ msgstr "Rinker通知を使用する"
 #: build/index.js:1161
 msgid "Send Chat Tools Settings"
 msgstr "Send Chat Tools設定"
+
+#~ msgid "Updates will be confirmed on the first access made after this time."
+#~ msgstr "この時間以降最初のアクセス時にアップデート確認されます。"
 
 #~ msgid "Rinker items will be checked on first access after this time."
 #~ msgstr "この時間以降最初のアクセス時にRinkerの確認がされます。"
