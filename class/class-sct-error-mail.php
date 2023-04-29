@@ -33,6 +33,20 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	private string $comment_id;
 
 	/**
+	 * Property to store mail to.
+	 *
+	 * @var string $mail_to.
+	 */
+	private string $mail_to;
+
+	/**
+	 * Property to store mail title.
+	 *
+	 * @var string $mail_title.
+	 */
+	private string $mail_title;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
