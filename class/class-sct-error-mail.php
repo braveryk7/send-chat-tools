@@ -169,12 +169,8 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Send mail.
-	 *
-	 * @param string $mail_to mail to.
-	 * @param string $mail_title mail title.
-	 * @param string $mail_message mail message.
 	 */
-	public function send_mail( string $mail_to, string $mail_title, string $mail_message ): void {
-		wp_mail( $mail_to, $mail_title, $mail_message );
+	public function send_mail(): void {
+		wp_mail( $this->mail_to, $this->mail_title, $this->content );
 	}
 }
