@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ToggleControl } from '@wordpress/components';
+import { ExternalLink, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import { useChangeValue } from 'src/hooks/useChangeValue';
@@ -43,21 +43,17 @@ export const Toggle = ( props: TogglePropsType ) => {
 						<p>
 							{ rinkerExistMessage + ' ' + rinkerRecommendMessage } <br />
 							{ __( 'Download', 'send-chat-tools' ) + ' >>> ' }
-							<a
+							<ExternalLink
 								href={ rinkerUrl }
-								target="_blank"
-								rel="noopener noreferrer"
 							>
 								{ __( 'Rinker Official Web Site', 'send-chat-tools' ) }
-							</a>
+							</ExternalLink>
 							{ ' / ' }
-							<a
+							<ExternalLink
 								href={ rinkerFanboxUrl }
-								target="_blank"
-								rel="noopener noreferrer"
 							>
 								{ __( 'Rinker Official FANBOX', 'send-chat-tools' ) }
-							</a>
+							</ExternalLink>
 						</p>
 					</div>
 			}
