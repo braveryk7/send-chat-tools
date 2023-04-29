@@ -71,47 +71,47 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
 	 * Abstract method to get an instance.
 	 */
-	abstract public static function get_instance(): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public static function get_instance(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate a chat tool header.
 	 */
-	abstract public function generate_header(): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_header(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate comment content to be sent to chat tools.
 	 *
 	 * @param object $comment Comment data.
 	 */
-	abstract public function generate_comment_content( object $comment, ): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_comment_content( object $comment, ): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate update content to be sent to chat tools.
 	 *
 	 * @param array $update_content Update data.
 	 */
-	abstract public function generate_update_content( array $update_content ): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_update_content( array $update_content ): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate developer message content to be sent to chat tools.
 	 *
 	 * @param array $developer_message Update data.
 	 */
-	abstract public function generate_developer_message( array $developer_message ): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_developer_message( array $developer_message ): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate login message content to be sent to chat tools.
 	 *
 	 * @param object $user User data.
 	 */
-	abstract public function generate_login_message( object $user ): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_login_message( object $user ): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate Rinker exists items message content to be sent to chat tools.
 	 *
 	 * @param array $rinker_exists_items Rinker exists items.
 	 */
-	abstract public function generate_rinker_message( array $rinker_exists_items ): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_rinker_message( array $rinker_exists_items ): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Method to generate headers for each chat tool.
