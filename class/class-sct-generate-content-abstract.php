@@ -61,6 +61,20 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	protected $site_url;
 
 	/**
+	 * Property that stores the type of notification.
+	 *
+	 * @var string Notification type.
+	 */
+	protected $notification_type;
+
+	/**
+	 * Property that stores the original data before processing.
+	 *
+	 * @var array Original data.
+	 */
+	protected $original_data;
+
+	/**
 	 * Constructor to obtain information necessary for content generation.
 	 */
 	protected function __construct() {
