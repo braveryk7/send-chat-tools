@@ -59,6 +59,35 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 * @param object $comment Comment data.
 	 */
 	public function generate_comment_content( object $comment, ): Sct_Error_Mail {
+		$comment          = get_comment( $this->comment_id );
+		$comment_approved = $comment->comment_approved;
+		$article_title    = get_the_title( $comment->comment_post_ID );
+		$article_url      = get_permalink( $comment->comment_post_ID );
+		$approved_url     = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
+
+		$comment_status = match ( $comment_approved ) {
+			'1'    => $comment_status = esc_html__( 'Approved', 'send-chat-tools' ),
+			'0'    => esc_html__( 'Unapproved', 'send-chat-tools' ) . '<<' . $approved_url . '|' . esc_html__( 'Click here to approve', 'send-chat-tools' ) . '>>',
+			'spam' => esc_html__( 'Spam', 'send-chat-tools' ),
+		};
+
+		$mail_to      = get_option( 'admin_email' );
+		$mail_title   = esc_html__( 'You have received a new comment', 'send-chat-tools' );
+		$mail_message =
+			$this->site_name . '( ' . $this->site_url . ' )' . esc_html__( 'new comment has been posted.', 'send-chat-tools' ) . "\n\n" .
+			esc_html__( 'Commented article:', 'send-chat-tools' ) . $article_title . ' - ' . $article_url . "\n" .
+			esc_html__( 'Author:', 'send-chat-tools' ) . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
+			esc_html__( 'Date and time:', 'send-chat-tools' ) . $comment->comment_date . "\n" .
+			esc_html__( 'Text:', 'send-chat-tools' ) . "\n" . $comment->comment_content . "\n\n" .
+			esc_html__( 'Comment URL:', 'send-chat-tools' ) . $article_url . '#comment-' . $comment->comment_ID . "\n\n" .
+			esc_html__( 'Comment Status:', 'send-chat-tools' ) . $comment_status . "\n\n" .
+			esc_html__( 'This message was sent by Send Chat Tools.', 'send-chat-tools' ) . "\n" .
+			esc_html__( 'Possible that the message was not sent to the chat tool correctly.', 'send-chat-tools' ) . "\n\n" .
+			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
+			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
+
+		$this->content = [ $mail_to, $mail_title, $mail_message ];
+
 		return $this;
 	}
 
