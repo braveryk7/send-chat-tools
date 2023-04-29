@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Send Chat Tools 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/send-chat-tools\n"
-"POT-Creation-Date: 2023-04-29T03:46:18+00:00\n"
-"PO-Revision-Date: 2023-04-29 12:51+0900\n"
+"POT-Creation-Date: 2023-04-29T04:04:34+00:00\n"
+"PO-Revision-Date: 2023-04-29 13:06+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -110,7 +110,7 @@ msgid "API system value is incorrect."
 msgstr "APIシステムの値が正しくありません。"
 
 #: build/index.js:248
-msgid "Communication logs."
+msgid "Communication logs"
 msgstr "通信ログ"
 
 #: build/index.js:256
@@ -159,8 +159,8 @@ msgid "Set time to check for Rinker exists items"
 msgstr "Rinkerの確認をする時間を設定"
 
 #: build/index.js:559
-msgid "Rinker items will be checked on first access after this time."
-msgstr "この時間以降最初のアクセス時にRinkerの確認がされます。"
+msgid "Time to send Rinker end-of-sale notifications"
+msgstr "Rinkerの終売通知を送信する時間"
 
 #: build/index.js:565
 msgid "Theme/plugin key to remove update notifications"
@@ -195,15 +195,15 @@ msgid "Export CSV"
 msgstr "CSVでエクスポート"
 
 #: build/index.js:945
-msgid "Copied!"
-msgstr "コピーしました！"
+msgid "Copied"
+msgstr "コピーしました"
 
 #: build/index.js:1005
-msgid "Success."
+msgid "Success"
 msgstr "成功"
 
 #: build/index.js:1008
-msgid "Error."
+msgid "Error"
 msgstr "エラー"
 
 #: build/index.js:1057
@@ -269,6 +269,9 @@ msgstr "Rinker通知を使用する"
 #: build/index.js:1161
 msgid "Send Chat Tools Settings"
 msgstr "Send Chat Tools設定"
+
+#~ msgid "Rinker items will be checked on first access after this time."
+#~ msgstr "この時間以降最初のアクセス時にRinkerの確認がされます。"
 
 #~ msgid "Copyed!"
 #~ msgstr "コピー完了！"
