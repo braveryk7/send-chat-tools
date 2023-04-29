@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Send Chat Tools 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/send-chat-tools\n"
-"POT-Creation-Date: 2023-04-29T04:44:35+00:00\n"
-"PO-Revision-Date: 2023-04-29 13:45+0900\n"
+"POT-Creation-Date: 2023-04-29T05:21:30+00:00\n"
+"PO-Revision-Date: 2023-04-29 14:22+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -74,7 +74,7 @@ msgid "Last three cases"
 msgstr "最後の3件"
 
 #: build/index.js:89
-msgid "Comment Author"
+msgid "Commenter"
 msgstr "コメント投稿者"
 
 #: build/index.js:97
@@ -89,9 +89,9 @@ msgstr "ステータス"
 msgid "Date"
 msgstr "日時"
 
-#: build/index.js:232
-msgid "Response OK!"
-msgstr "レスポンスOK!"
+#: build/index.js:232 build/index.js:1015
+msgid "Success"
+msgstr "成功"
 
 #: build/index.js:234 build/index.js:242
 msgid "Could not communicate."
@@ -206,10 +206,6 @@ msgstr "CSVでエクスポート"
 msgid "Copied"
 msgstr "コピーしました"
 
-#: build/index.js:1015
-msgid "Success"
-msgstr "成功"
-
 #: build/index.js:1018
 msgid "Error"
 msgstr "エラー"
@@ -277,6 +273,12 @@ msgstr "Rinker通知を使用する"
 #: build/index.js:1171
 msgid "Send Chat Tools Settings"
 msgstr "Send Chat Tools設定"
+
+#~ msgid "Comment Author"
+#~ msgstr "コメント投稿者"
+
+#~ msgid "Response OK!"
+#~ msgstr "レスポンスOK!"
 
 #~ msgid "Rinker items will be checked on first access after this time."
 #~ msgstr "この時間以降最初のアクセス時にRinkerの確認がされます。"
