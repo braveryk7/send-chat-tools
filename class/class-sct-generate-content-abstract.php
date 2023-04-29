@@ -133,9 +133,11 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 * @param string       $notification_type Notification type.
 	 * @param array|object $original_data     Original data.
 	 */
-	public function set_notification_type_original_data( string $notification_type, object | array $original_data ): void {
+	public function set_notification_type_original_data( string $notification_type, object | array $original_data ): Sct_Slack | Sct_Discord | Sct_Chatwork {
 		$this->notification_type = $notification_type;
 		$this->original_data     = $original_data;
+
+		return $this;
 	}
 
 	/**
