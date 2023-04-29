@@ -360,4 +360,25 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 
 		return $this->logger( $status_code, $tool, $id );
 	}
+
+	/**
+	 * Method to call the error mail class.
+	 *
+	 * @param int    $error_code Error code.
+	 * @param string $tool_name  Chat tool name.
+	 */
+	private function call_error_mail_class( int $error_code, string $tool_name ): void {
+		$method = match ( $this->notification_type ) {
+			'update'        => 'generate_update_content',
+			'dev_notify'    => 'generate_developer_message',
+			'login_notify'  => 'generate_login_message',
+			'rinker_notify' => 'generate_rinker_message',
+			default         => 'generate_comment_content',
+		};
+
+		Sct_Error_Mail::get_instance()
+			?->set_error_code_tool_name( $error_code, $tool_name )
+			?->$method( $this->original_data )
+			?->send_mail();
+	}
 }
