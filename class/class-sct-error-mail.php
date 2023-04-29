@@ -19,16 +19,23 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Error_Mail extends Sct_Base {
 	/**
-	 * Constructor.
+	 * Property to store error code.
 	 *
-	 * @param int    $error_code error code.
-	 * @param string $comment_id comment ID.
-	 * @param string $tool_name  Tool name.
+	 * @var int $error_code.
 	 */
-	public function __construct( private int $error_code, private string $comment_id, private string $tool_name ) {
-		$this->error_code = $error_code;
-		$this->comment_id = $comment_id;
-		$this->tool_name  = $tool_name;
+	private int $error_code;
+
+	/**
+	 * Property to store comment ID.
+	 *
+	 * @var string $comment_id.
+	 */
+	private string $comment_id;
+
+	/**
+	 * Constructor.
+	 */
+	public function __construct() {
 	}
 
 	/**
