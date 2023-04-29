@@ -19,7 +19,7 @@ export const BasicSettingsTabItems = ( props: TabItemsType ) => {
 					id="cron_time"
 					message={
 						__(
-							'Updates will be confirmed on the first access made after this time.',
+							'Time to send Updates notifications',
 							'send-chat-tools'
 						)
 					}
