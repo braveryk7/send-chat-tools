@@ -128,6 +128,17 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	abstract public function generate_rinker_message( array $rinker_exists_items ): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
+	 * Method to set notification type and original data.
+	 *
+	 * @param string       $notification_type Notification type.
+	 * @param array|object $original_data     Original data.
+	 */
+	public function set_notification_type_original_data( string $notification_type, object | array $original_data ): void {
+		$this->notification_type = $notification_type;
+		$this->original_data     = $original_data;
+	}
+
+	/**
 	 * Method to generate headers for each chat tool.
 	 *
 	 * @param string|null $header_emoji Header emoji.
