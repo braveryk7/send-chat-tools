@@ -1,3 +1,4 @@
+import { Tip } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import { TokenField } from 'src/components/atoms/TokenField';
@@ -8,6 +9,13 @@ import { TabItemsType } from 'src/types/ComponentsType';
 
 export const BasicSettingsTabItems = ( props: TabItemsType ) => {
 	const { titleText } = useTabItems( props );
+
+	const useWpCron = __(
+		'Update and Rinker notifications are made using wp-cron.', 'send-chat-tools'
+	);
+	const wpCronNotifyTime = __(
+		'wp-cron will be executed on the first access after this time.', 'send-chat-tools'
+	);
 
 	return (
 		<div className="sct-wrapper">
@@ -39,6 +47,9 @@ export const BasicSettingsTabItems = ( props: TabItemsType ) => {
 					}
 
 				/>
+			</div>
+			<div className="sct-items">
+				<Tip>{ useWpCron + ' ' + wpCronNotifyTime }</Tip>
 			</div>
 			<div className="sct-items">
 				<TokenField
