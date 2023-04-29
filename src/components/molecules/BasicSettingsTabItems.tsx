@@ -33,7 +33,7 @@ export const BasicSettingsTabItems = ( props: TabItemsType ) => {
 					id="check_rinker_exists_items_cron"
 					message={
 						__(
-							'Rinker items will be checked on first access after this time.',
+							'Time to send Rinker end-of-sale notifications',
 							'send-chat-tools'
 						)
 					}
