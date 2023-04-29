@@ -51,7 +51,7 @@ export const LogView = () => {
 			case 200:
 			case 204:
 				return addSpanTag(
-					__( 'Response OK!', 'send-chat-tools' ),
+					__( 'Success', 'send-chat-tools' ),
 					true
 				);
 			case 1000:
@@ -88,7 +88,7 @@ export const LogView = () => {
 	return (
 		<Card className="sct-logs">
 			<CardHeader>
-				{ __( 'Communication logs.', 'send-chat-tools' ) }
+				{ __( 'Communication logs', 'send-chat-tools' ) }
 				<LogExportButton />
 			</CardHeader>
 			<CardBody>

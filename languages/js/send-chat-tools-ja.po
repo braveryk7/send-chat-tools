@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Send Chat Tools 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/send-chat-tools\n"
-"POT-Creation-Date: 2023-04-29T03:46:18+00:00\n"
-"PO-Revision-Date: 2023-04-29 12:51+0900\n"
+"POT-Creation-Date: 2023-04-29T05:21:30+00:00\n"
+"PO-Revision-Date: 2023-04-29 14:22+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -65,7 +65,7 @@ msgstr "WordPress REST APIを有効化して再度アクセスしてください
 msgid "API connection failed."
 msgstr "API接続に失敗しました。"
 
-#: build/index.js:82 build/index.js:690 build/index.js:1068
+#: build/index.js:82 build/index.js:700 build/index.js:1078
 msgid "Logs"
 msgstr "ログ"
 
@@ -74,7 +74,7 @@ msgid "Last three cases"
 msgstr "最後の3件"
 
 #: build/index.js:89
-msgid "Comment Author"
+msgid "Commenter"
 msgstr "コメント投稿者"
 
 #: build/index.js:97
@@ -89,9 +89,9 @@ msgstr "ステータス"
 msgid "Date"
 msgstr "日時"
 
-#: build/index.js:232
-msgid "Response OK!"
-msgstr "レスポンスOK!"
+#: build/index.js:232 build/index.js:1015
+msgid "Success"
+msgstr "成功"
 
 #: build/index.js:234 build/index.js:242
 msgid "Could not communicate."
@@ -110,7 +110,7 @@ msgid "API system value is incorrect."
 msgstr "APIシステムの値が正しくありません。"
 
 #: build/index.js:248
-msgid "Communication logs."
+msgid "Communication logs"
 msgstr "通信ログ"
 
 #: build/index.js:256
@@ -146,129 +146,142 @@ msgstr "Rinker公式Webサイト"
 msgid "Rinker Official FANBOX"
 msgstr "Rinker公式FANBOX"
 
-#: build/index.js:549
+#: build/index.js:544
+msgid "Update and Rinker notifications are made using wp-cron."
+msgstr "アップデート、Rinker通知はwp-cronを使用しています。"
+
+#: build/index.js:545
+msgid "wp-cron will be executed on the first access after this time."
+msgstr "wp-cronはこの時間以降最初のアクセス時に実行されます。"
+
+#: build/index.js:554
 msgid "Set time to check for updates"
 msgstr "アップデート確認をする時間を設定"
 
-#: build/index.js:551
-msgid "Updates will be confirmed on the first access made after this time."
-msgstr "この時間以降最初のアクセス時にアップデート確認されます。"
+#: build/index.js:556
+msgid "Time to send Updates notifications"
+msgstr "アップデート通知を送信する時間"
 
-#: build/index.js:557
+#: build/index.js:562
 msgid "Set time to check for Rinker exists items"
 msgstr "Rinkerの確認をする時間を設定"
 
-#: build/index.js:559
-msgid "Rinker items will be checked on first access after this time."
-msgstr "この時間以降最初のアクセス時にRinkerの確認がされます。"
+#: build/index.js:564
+msgid "Time to send Rinker end-of-sale notifications"
+msgstr "Rinkerの終売通知を送信する時間"
 
-#: build/index.js:565
+#: build/index.js:575
 msgid "Theme/plugin key to remove update notifications"
 msgstr "更新通知を除外するテーマ/プラグインのキー"
 
-#: build/index.js:674
+#: build/index.js:684
 msgid "Basic Settings"
 msgstr "基本設定"
 
-#: build/index.js:678
+#: build/index.js:688
 msgid "Slack"
 msgstr "Slack"
 
-#: build/index.js:682
+#: build/index.js:692
 msgid "Discord"
 msgstr "Discord"
 
-#: build/index.js:686
+#: build/index.js:696
 msgid "Chatwork"
 msgstr "Chatwork"
 
-#: build/index.js:876
+#: build/index.js:886
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
-#: build/index.js:880
+#: build/index.js:890
 msgid "Export text"
 msgstr "テキストでエクスポート"
 
-#: build/index.js:884
+#: build/index.js:894
 msgid "Export CSV"
 msgstr "CSVでエクスポート"
 
-#: build/index.js:945
-msgid "Copied!"
-msgstr "コピーしました！"
+#: build/index.js:955
+msgid "Copied"
+msgstr "コピーしました"
 
-#: build/index.js:1005
-msgid "Success."
-msgstr "成功"
-
-#: build/index.js:1008
-msgid "Error."
+#: build/index.js:1018
+msgid "Error"
 msgstr "エラー"
 
-#: build/index.js:1057
+#: build/index.js:1067
 msgid "Basic settings"
 msgstr "基本設定"
 
-#: build/index.js:1059
+#: build/index.js:1069
 msgid "Use Slack notify"
 msgstr "Slack通知を使用する"
 
-#: build/index.js:1059
+#: build/index.js:1069
 msgid "Slack settings"
 msgstr "Slack設定"
 
-#: build/index.js:1059
+#: build/index.js:1069
 msgid "Slack Webhook URL"
 msgstr "Slack Webhook URL"
 
-#: build/index.js:1061
+#: build/index.js:1071
 msgid "Use Discord notify"
 msgstr "Discord通知を使用する"
 
-#: build/index.js:1061
+#: build/index.js:1071
 msgid "Discord settings"
 msgstr "Discord設定"
 
-#: build/index.js:1061
+#: build/index.js:1071
 msgid "Discord Webhook URL"
 msgstr "Discord Webhook URL"
 
-#: build/index.js:1063
+#: build/index.js:1073
 msgid "Use Chatwork notify"
 msgstr "Chatwork通知を使用する"
 
-#: build/index.js:1063
+#: build/index.js:1073
 msgid "Chatwork settings"
 msgstr "Chatwork設定"
 
-#: build/index.js:1063
+#: build/index.js:1073
 msgid "Chatwork API token"
 msgstr "Chatwork APIトークン"
 
-#: build/index.js:1065
+#: build/index.js:1075
 msgid "Chatwork Room ID"
 msgstr "Chatwork ルームID"
 
-#: build/index.js:1080
+#: build/index.js:1090
 msgid "Don't send your own comments"
 msgstr "自分自身のコメントを送信しない"
 
-#: build/index.js:1084
+#: build/index.js:1094
 msgid "Use Update notify"
 msgstr "アップデート通知を使用する"
 
-#: build/index.js:1088
+#: build/index.js:1098
 msgid "Use login notify"
 msgstr "ログイン通知を使用する"
 
-#: build/index.js:1092
+#: build/index.js:1102
 msgid "Use Rinker notify"
 msgstr "Rinker通知を使用する"
 
-#: build/index.js:1161
+#: build/index.js:1171
 msgid "Send Chat Tools Settings"
 msgstr "Send Chat Tools設定"
+
+#~ msgid "Comment Author"
+#~ msgstr "コメント投稿者"
+
+#~ msgid "Response OK!"
+#~ msgstr "レスポンスOK!"
+
+#~ msgid "Rinker items will be checked on first access after this time."
+#~ msgstr "この時間以降最初のアクセス時にRinkerの確認がされます。"
 
 #~ msgid "Copyed!"
 #~ msgstr "コピー完了！"
