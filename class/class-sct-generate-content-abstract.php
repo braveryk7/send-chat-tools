@@ -349,13 +349,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 
 		if ( 200 !== $status_code && 204 !== $status_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
-			if ( 'update' === $id ) {
-				$send_mail = new Sct_Error_Mail( $status_code, $id, $tool );
-				$send_mail->send_mail( ...$send_mail->update_contents( $options['plain_data'] ) );
-			} else {
-				$send_mail = new Sct_Error_Mail( $status_code, $id, $tool );
-				$send_mail->send_mail( ...$send_mail->generate_contents() );
-			}
+			$this->call_error_mail_class( $status_code, $tool );
 		}
 
 		return $this->logger( $status_code, $tool, $id );
