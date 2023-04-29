@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Send error mail.
  */
-class Sct_Error_Mail extends Sct_Base {
+class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	/**
 	 * Property to store error code.
 	 *
@@ -36,6 +36,66 @@ class Sct_Error_Mail extends Sct_Base {
 	 * Constructor.
 	 */
 	public function __construct() {
+	}
+
+	/**
+	 * Instantiate and return itself.
+	 */
+	public static function get_instance(): Sct_Error_Mail {
+		return new self();
+	}
+
+	/**
+	 * A method to generate a Error Mail header.
+	 */
+	public function generate_header(): Sct_Error_Mail {
+		return $this;
+
+	}
+
+	/**
+	 * Generate comment notify for Error Mail.
+	 *
+	 * @param object $comment Comment data.
+	 */
+	public function generate_comment_content( object $comment, ): Sct_Error_Mail {
+		return $this;
+	}
+
+	/**
+	 * Generate update notify for Error Mail.
+	 *
+	 * @param array $update_content Update data.
+	 */
+	public function generate_update_content( array $update_content ): Sct_Error_Mail {
+		return $this;
+	}
+
+	/**
+	 * Generate developer notify for Error Mail.
+	 *
+	 * @param array $developer_message Developer message.
+	 */
+	public function generate_developer_message( array $developer_message ): Sct_Error_Mail {
+		return $this;
+	}
+
+	/**
+	 * Generate login notify for Error Mail.
+	 *
+	 * @param object $user User object.
+	 */
+	public function generate_login_message( object $user ): Sct_Error_Mail {
+		return $this;
+	}
+
+	/**
+	 * Generate Rinker notify for Error Mail.
+	 *
+	 * @param array $rinker_exists_items Rinker exists items.
+	 */
+	public function generate_rinker_message( array $rinker_exists_items ): Sct_Error_Mail {
+		return $this;
 	}
 
 	/**
