@@ -70,7 +70,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
 	 * Property that stores the original data before processing.
 	 *
-	 * @var array Original data.
+	 * @var object|array Original data.
 	 */
 	protected $original_data;
 
