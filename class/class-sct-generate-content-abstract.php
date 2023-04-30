@@ -75,6 +75,13 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	protected $original_data;
 
 	/**
+	 * Property that stores the flag of whether or not it is an error mail.
+	 *
+	 * @var bool Error mail flag.
+	 */
+	protected $is_error_mail = false;
+
+	/**
 	 * Constructor to obtain information necessary for content generation.
 	 */
 	protected function __construct() {
