@@ -128,14 +128,12 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate login message for Slack.
-	 *
-	 * @param object $user User data.
 	 */
-	public function generate_login_message( object $user ): Sct_Chatwork {
+	public function generate_login_message(): Sct_Chatwork {
 		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'login_notify', 'title' ) );
 
-		$user_name       = $user->data->user_login;
-		$user_email      = $user->data->user_email;
+		$user_name       = $this->original_data->data->user_login;
+		$user_email      = $this->original_data->data->user_email;
 		$login_user_name = $this->get_send_text( 'login_notify', 'user_name' ) . ": {$user_name}<$user_email>";
 
 		$now_date   = gmdate( 'Y-m-d H:i:s', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
