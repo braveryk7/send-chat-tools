@@ -94,16 +94,14 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate developer message for Chatwork.
-	 *
-	 * @param array $developer_message Developer message.
 	 */
-	public function generate_developer_message( array $developer_message ): Sct_Chatwork {
-		if ( isset( $developer_message['title'] ) && isset( $developer_message['message'] ) && array_key_exists( 'url', $developer_message ) ) {
-			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $developer_message['title'] ), );
+	public function generate_developer_message(): Sct_Chatwork {
+		if ( isset( $this->original_data['title'] ) && isset( $this->original_data['message'] ) && array_key_exists( 'url', $this->original_data ) ) {
+			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
 			$content       = '';
 
 			$i = 0;
-			foreach ( $developer_message['message'] as $value ) {
+			foreach ( $this->original_data['message'] as $value ) {
 				if ( $i >= 50 ) {
 					break;
 				}
@@ -112,8 +110,8 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 			}
 
 			$header_message  = $this->generate_header_message( header_message: $message_title );
-			$website_url     = $developer_message['url']['website'];
-			$update_page_url = $developer_message['url']['update_page'];
+			$website_url     = $this->original_data['url']['website'];
+			$update_page_url = $this->original_data['url']['update_page'];
 
 			$website     = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': ' . $website_url . "\n" : null;
 			$update_page = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': ' . $update_page_url . "\n" : null;
@@ -121,7 +119,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 			$this->content = [
 				'body' =>
 					'[info]' . $header_message . $content . "\n" . $website . $update_page .
-					'[hr]' . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $developer_message['key'] .
+					'[hr]' . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $this->original_data['key'] .
 					$this->generate_context( $this->tool_name ) . '[/info]',
 			];
 		}

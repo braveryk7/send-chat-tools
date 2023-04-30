@@ -146,16 +146,14 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate developer message for Slack.
-	 *
-	 * @param array $developer_message Developer message.
 	 */
-	public function generate_developer_message( array $developer_message ): Sct_Slack {
-		if ( isset( $developer_message['title'] ) && isset( $developer_message['message'] ) && array_key_exists( 'url', $developer_message ) ) {
-			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $developer_message['title'] ), );
+	public function generate_developer_message(): Sct_Slack {
+		if ( isset( $this->original_data['title'] ) && isset( $this->original_data['message'] ) && array_key_exists( 'url', $this->original_data ) ) {
+			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
 			$content       = '';
 
 			$i = 0;
-			foreach ( $developer_message['message'] as $value ) {
+			foreach ( $this->original_data['message'] as $value ) {
 				if ( $i >= 50 ) {
 					break;
 				}
@@ -165,8 +163,8 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 			$header_emoji    = ':tada:';
 			$header_message  = $this->generate_header_message( $header_emoji, $message_title );
-			$website_url     = $developer_message['url']['website'];
-			$update_page_url = $developer_message['url']['update_page'];
+			$website_url     = $this->original_data['url']['website'];
+			$update_page_url = $this->original_data['url']['update_page'];
 
 			$context = $this->generate_context( $this->tool_name );
 
@@ -216,7 +214,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 					$this->divider(),
 					$this->context(
 						'mrkdwn',
-						$this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $developer_message['key'],
+						$this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $this->original_data['key'],
 					),
 					$this->context( 'mrkdwn', $context ),
 				],
