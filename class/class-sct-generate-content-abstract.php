@@ -94,10 +94,8 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 
 	/**
 	 * Abstract method to generate comment content to be sent to chat tools.
-	 *
-	 * @param object $comment Comment data.
 	 */
-	abstract public function generate_comment_content( object $comment, ): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
+	abstract public function generate_comment_content(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate update content to be sent to chat tools.
@@ -384,7 +382,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		};
 
 		Sct_Error_Mail::get_instance()
-			?->set_error_code_tool_name( $error_code, $tool_name )
+			?->set_error_mail_properties( $error_code, $tool_name, $this->original_data )
 			?->$method( $this->original_data )
 			?->send_mail();
 	}
