@@ -55,14 +55,16 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * A method to set the error code and tool name.
+	 * Method to set properties necessary for error mail generation.
 	 *
-	 * @param int    $error_code Error code.
-	 * @param string $tool_name Tool name.
+	 * @param int          $error_code    Error code.
+	 * @param string       $tool_name     Tool name.
+	 * @param object|array $original_data Original data.
 	 */
-	public function set_error_code_tool_name( int $error_code, string $tool_name ): Sct_Error_Mail {
-		$this->error_code = $error_code;
-		$this->tool_name  = $tool_name;
+	public function set_error_mail_properties( int $error_code, string $tool_name, object | array $original_data ): Sct_Error_Mail {
+		$this->error_code    = $error_code;
+		$this->tool_name     = $tool_name;
+		$this->original_data = $original_data;
 
 		return $this;
 	}
@@ -76,24 +78,22 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate comment notify for Error Mail.
-	 *
-	 * @param object $comment Comment data.
 	 */
-	public function generate_comment_content( object $comment, ): Sct_Error_Mail {
+	public function generate_comment_content(): Sct_Error_Mail {
 		$this->mail_title = esc_html__( 'You have received a new comment', 'send-chat-tools' );
 
-		$article_title  = get_the_title( $comment->comment_post_ID );
-		$article_url    = get_permalink( $comment->comment_post_ID );
-		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
+		$article_title  = get_the_title( $this->original_data->comment_post_ID );
+		$article_url    = get_permalink( $this->original_data->comment_post_ID );
+		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $this->original_data );
 		$header_message = $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'comment', 'title' );
 
 		$this->content =
 			$header_message . "\n\n" .
 			$this->get_send_text( 'comment', 'article' ) . ': ' . $article_title . ' - ' . $article_url . "\n" .
-			$this->get_send_text( 'comment', 'commenter' ) . ': ' . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-			$this->get_send_text( 'constant', 'date' ) . ': ' . $comment->comment_date . "\n" .
-			$this->get_send_text( 'comment', 'comment' ) . ': ' . "\n" . $comment->comment_content . "\n\n" .
-			$this->get_send_text( 'comment', 'url' ) . ': ' . $article_url . '#comment-' . $comment->comment_ID . "\n" .
+			$this->get_send_text( 'comment', 'commenter' ) . ': ' . $this->original_data->comment_author . '<' . $this->original_data->comment_author_email . ">\n" .
+			$this->get_send_text( 'constant', 'date' ) . ': ' . $this->original_data->comment_date . "\n" .
+			$this->get_send_text( 'comment', 'comment' ) . ': ' . "\n" . $this->original_data->comment_content . "\n\n" .
+			$this->get_send_text( 'comment', 'url' ) . ': ' . $article_url . '#comment-' . $this->original_data->comment_ID . "\n" .
 			$this->get_send_text( 'comment', 'status' ) . ': ' . $comment_status . "\n\n" .
 			esc_html__( 'This message was sent by Send Chat Tools.', 'send-chat-tools' ) . "\n" .
 			esc_html__( 'Possible that the message was not sent to the chat tool correctly.', 'send-chat-tools' ) . "\n\n" .
