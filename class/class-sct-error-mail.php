@@ -126,10 +126,8 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate Rinker notify for Error Mail.
-	 *
-	 * @param array $rinker_exists_items Rinker exists items.
 	 */
-	public function generate_rinker_message( array $rinker_exists_items ): Sct_Error_Mail {
+	public function generate_rinker_message(): Sct_Error_Mail {
 		return $this;
 	}
 
