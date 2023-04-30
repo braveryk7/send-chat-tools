@@ -105,10 +105,8 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate update notify for Error Mail.
-	 *
-	 * @param array $update_content Update data.
 	 */
-	public function generate_update_content( array $update_content ): Sct_Error_Mail {
+	public function generate_update_content(): Sct_Error_Mail {
 		return $this;
 	}
 
