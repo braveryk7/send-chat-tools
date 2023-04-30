@@ -65,6 +65,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 		$this->error_code    = $error_code;
 		$this->tool_name     = $tool_name;
 		$this->original_data = $original_data;
+		$this->is_error_mail = true;
 
 		return $this;
 	}
