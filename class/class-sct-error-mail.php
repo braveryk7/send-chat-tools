@@ -127,6 +127,36 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 * Generate developer notify for Error Mail.
 	 */
 	public function generate_developer_message(): Sct_Error_Mail {
+		$this->mail_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
+
+		$content = '';
+		update_option( 'sct_dev_error', 'called' );
+
+		$i = 0;
+		foreach ( $this->original_data['message'] as $value ) {
+			if ( $i >= 50 ) {
+				break;
+			}
+			$content .= $value . "\n";
+			$i++;
+		}
+
+		$header_message  = $this->site_name . '(' . $this->site_url . ') ' . sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
+		$website_url     = $this->original_data['url']['website'];
+		$update_page_url = $this->original_data['url']['update_page'];
+
+		$title        = $header_message . "\n\n";
+		$main_content = $content . "\n";
+		$website      = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
+		$update_page  = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
+		$ignore       = "\n" . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $this->original_data['key'] . "\n";
+
+		$this->content =
+			$title . $main_content . $website . $update_page . $ignore . "\n" .
+			$this->generate_context( 'error_mail' ) . "\n" .
+			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
+			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
+
 		return $this;
 	}
 
