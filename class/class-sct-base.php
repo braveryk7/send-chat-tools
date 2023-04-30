@@ -231,7 +231,12 @@ class Sct_Base {
 			'discord'  => 'Sct_Discord',
 			'chatwork' => 'Sct_Chatwork',
 		};
-		$class::get_instance()?->$method_name( $data )?->generate_header()?->send_tools( $type, $tool_name );
+
+		$class::get_instance()
+			?->set_notification_type_original_data( $method_name, $data )
+			?->$method_name( $data )
+			?->generate_header()
+			?->send_tools( $type, $tool_name );
 	}
 
 	/**
