@@ -56,7 +56,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 		$header_emoji     = ':mailbox_with_mail:';
 		$header_message   = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment', 'title' ) );
-		$comment_article  = '*' . $this->get_send_text( 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
+		$comment_article  = '*' . $this->get_send_text( 'comment', 'article' ) . ": *<{$article_url}|{$article_title}>";
 		$author           = '*' . $this->get_send_text( 'comment', 'commenter' ) . "*\n{$this->original_data->comment_author}<{$this->original_data->comment_author_email}>";
 		$date             = '*' . $this->get_send_text( 'constant', 'date' ) . "*\n{$this->original_data->comment_date}";
 		$comment_content  = '*' . $this->get_send_text( 'comment', 'comment' ) . "*\n{$this->original_data->comment_content}";
