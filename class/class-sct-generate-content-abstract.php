@@ -375,7 +375,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 
 		Sct_Error_Mail::get_instance()
 			?->set_error_mail_properties( $error_code, $tool_name, $this->original_data )
-			?->$method( $this->original_data )
+			?->$method()
 			?->send_mail();
 	}
 }
