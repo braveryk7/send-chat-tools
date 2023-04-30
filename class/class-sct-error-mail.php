@@ -197,6 +197,19 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 * Generate Rinker notify for Error Mail.
 	 */
 	public function generate_rinker_message(): Sct_Error_Mail {
+		$this->mail_title = $this->get_send_text( 'rinker_notify', 'title' );
+
+		$items = $this->generate_rinker_content( $this->original_data );
+
+		$after_message = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
+
+		$this->content =
+			$this->site_name . '(' . $this->site_url . ') ' . $this->mail_title . "\n\n" .
+			$items . "\n\n" . $after_message . "\n\n" .
+			$this->generate_context( 'error_mail' ) . "\n" .
+			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
+			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
+
 		return $this;
 	}
 
