@@ -48,13 +48,11 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Abstract method to create comment data to be sent to chat tools.
-	 *
-	 * @param object $comment Comment data.
 	 */
-	public function generate_comment_content( object $comment, ): Sct_Slack {
+	public function generate_comment_content(): Sct_Slack {
 		$article_title  = get_the_title( $this->original_data->comment_post_ID );
 		$article_url    = get_permalink( $this->original_data->comment_post_ID );
-		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
+		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $this->original_data );
 
 		$header_emoji     = ':mailbox_with_mail:';
 		$header_message   = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment', 'title' ) );
