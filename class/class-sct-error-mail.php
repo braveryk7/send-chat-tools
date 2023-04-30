@@ -112,10 +112,8 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate developer notify for Error Mail.
-	 *
-	 * @param array $developer_message Developer message.
 	 */
-	public function generate_developer_message( array $developer_message ): Sct_Error_Mail {
+	public function generate_developer_message(): Sct_Error_Mail {
 		return $this;
 	}
 
