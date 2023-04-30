@@ -109,10 +109,8 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 
 	/**
 	 * Abstract method to generate login message content to be sent to chat tools.
-	 *
-	 * @param object $user User data.
 	 */
-	abstract public function generate_login_message( object $user ): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
+	abstract public function generate_login_message(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate Rinker exists items message content to be sent to chat tools.
