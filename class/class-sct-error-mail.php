@@ -107,6 +107,19 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 * Generate update notify for Error Mail.
 	 */
 	public function generate_update_content(): Sct_Error_Mail {
+		$this->mail_title = $this->get_send_text( 'update', 'title' );
+
+		$plain_data = $this->generate_plain_update_message( $this->original_data );
+
+		$header_message = $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'update', 'title' );
+
+		$this->content =
+			$header_message . "\n\n" . $plain_data->core . $plain_data->themes . $plain_data->plugins .
+			$this->get_send_text( 'update', 'update' ) . "\n" . $this->get_send_text( 'update', 'page' ) . ': ' . $plain_data->admin_url . "\n\n" .
+			$this->generate_context( 'error_mail' ) . "\n" .
+			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
+			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
+
 		return $this;
 	}
 
