@@ -170,14 +170,12 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate Rinker exists items message for Discord.
-	 *
-	 * @param array $rinker_exists_items Rinker exists items.
 	 */
-	public function generate_rinker_message( array $rinker_exists_items ): Sct_Discord {
+	public function generate_rinker_message(): Sct_Discord {
 		$header_emoji   = ':package:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'rinker_notify', 'title' ) );
 
-		$items = $this->generate_rinker_content( $rinker_exists_items );
+		$items = $this->generate_rinker_content( $this->original_data );
 
 		$after_message = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
 
