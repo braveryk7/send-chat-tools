@@ -74,11 +74,9 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate update notifications for Discord.
-	 *
-	 * @param array $update_content Update data.
 	 */
-	public function generate_update_content( array $update_content ): Sct_Discord {
-		$plain_data = $this->generate_plain_update_message( $update_content );
+	public function generate_update_content(): Sct_Discord {
+		$plain_data = $this->generate_plain_update_message( $this->original_data );
 
 		$header_emoji    = ':zap:';
 		$header_message  = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update', 'title' ) );
