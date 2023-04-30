@@ -48,15 +48,13 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Abstract method to create comment data to be sent to chat tools.
-	 *
-	 * @param object $comment Comment data.
 	 */
-	public function generate_comment_content( object $comment, ): Sct_Discord {
-		$this->comment = $comment;
+	public function generate_comment_content(): Sct_Discord {
+		$this->comment = $this->original_data;
 
-		$article_title  = get_the_title( $comment->comment_post_ID );
-		$article_url    = get_permalink( $comment->comment_post_ID );
-		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
+		$article_title  = get_the_title( $this->original_data->comment_post_ID );
+		$article_url    = get_permalink( $this->original_data->comment_post_ID );
+		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $this->original_data );
 
 		$header_emoji   = ':mailbox_with_mail:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment', 'title' ) );
@@ -64,10 +62,10 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$this->content =
 			$header_message . "\n\n" .
 			'**' . $this->get_send_text( 'comment', 'article' ) . '**: ' . $article_title . ' - <' . $article_url . '>' . "\n" .
-			'**' . $this->get_send_text( 'comment', 'commenter' ) . '**: ' . $comment->comment_author . '<' . $comment->comment_author_email . ">\n" .
-			'**' . $this->get_send_text( 'constant', 'date' ) . '**: ' . $comment->comment_date . "\n" .
-			'**' . $this->get_send_text( 'comment', 'comment' ) . '**: ' . "\n" . $comment->comment_content . "\n\n" .
-			'**' . $this->get_send_text( 'comment', 'url' ) . '**: <' . $article_url . '#comment-' . $comment->comment_ID . '>' . "\n\n" .
+			'**' . $this->get_send_text( 'comment', 'commenter' ) . '**: ' . $this->original_data->comment_author . '<' . $this->original_data->comment_author_email . ">\n" .
+			'**' . $this->get_send_text( 'constant', 'date' ) . '**: ' . $this->original_data->comment_date . "\n" .
+			'**' . $this->get_send_text( 'comment', 'comment' ) . '**: ' . "\n" . $this->original_data->comment_content . "\n\n" .
+			'**' . $this->get_send_text( 'comment', 'url' ) . '**: <' . $article_url . '#comment-' . $this->original_data->comment_ID . '>' . "\n\n" .
 			'**' . $this->get_send_text( 'comment', 'status' ) . '**: ' . $comment_status . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
@@ -76,11 +74,9 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate update notifications for Discord.
-	 *
-	 * @param array $update_content Update data.
 	 */
-	public function generate_update_content( array $update_content ): Sct_Discord {
-		$plain_data = $this->generate_plain_update_message( $update_content );
+	public function generate_update_content(): Sct_Discord {
+		$plain_data = $this->generate_plain_update_message( $this->original_data );
 
 		$header_emoji    = ':zap:';
 		$header_message  = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update', 'title' ) );
@@ -111,16 +107,14 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate developer message for Discord.
-	 *
-	 * @param array $developer_message Developer message.
 	 */
-	public function generate_developer_message( array $developer_message ): Sct_Discord {
-		if ( isset( $developer_message['title'] ) && isset( $developer_message['message'] ) && array_key_exists( 'url', $developer_message ) ) {
-			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $developer_message['title'] ), );
+	public function generate_developer_message(): Sct_Discord {
+		if ( isset( $this->original_data['title'] ) && isset( $this->original_data['message'] ) && array_key_exists( 'url', $this->original_data ) ) {
+			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
 			$content       = '';
 
 			$i = 0;
-			foreach ( $developer_message['message'] as $value ) {
+			foreach ( $this->original_data['message'] as $value ) {
 				if ( $i >= 50 ) {
 					break;
 				}
@@ -130,14 +124,14 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 			$header_emoji    = ':tada:';
 			$header_message  = $this->generate_header_message( $header_emoji, $message_title );
-			$website_url     = $developer_message['url']['website'];
-			$update_page_url = $developer_message['url']['update_page'];
+			$website_url     = $this->original_data['url']['website'];
+			$update_page_url = $this->original_data['url']['update_page'];
 
 			$title         = $header_message . "\n\n";
 			$main_content  = $content . "\n";
 			$website       = $website_url ? $this->get_send_text( 'dev_notify', 'website' ) . ': <' . $website_url . ">\n" : null;
 			$update_page   = $update_page_url ? $this->get_send_text( 'dev_notify', 'detail' ) . ': <' . $update_page_url . ">\n" : null;
-			$ignore        = "\n" . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $developer_message['key'] . "\n";
+			$ignore        = "\n" . $this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $this->original_data['key'] . "\n";
 			$this->content = $title . $main_content . $website . $update_page . $ignore . "\n" . $this->generate_context( $this->tool_name );
 		}
 
@@ -146,15 +140,13 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate login message for Slack.
-	 *
-	 * @param object $user User data.
 	 */
-	public function generate_login_message( object $user ): Sct_Discord {
+	public function generate_login_message(): Sct_Discord {
 		$header_emoji   = ':unlock:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'login_notify', 'title' ) );
 
-		$user_name       = $user->data->user_login;
-		$user_email      = $user->data->user_email;
+		$user_name       = $this->original_data->data->user_login;
+		$user_email      = $this->original_data->data->user_email;
 		$login_user_name = '***' . $this->get_send_text( 'login_notify', 'user_name' ) . "***: {$user_name}<$user_email>";
 
 		$now_date   = gmdate( 'Y-m-d H:i:s', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
@@ -178,14 +170,12 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate Rinker exists items message for Discord.
-	 *
-	 * @param array $rinker_exists_items Rinker exists items.
 	 */
-	public function generate_rinker_message( array $rinker_exists_items ): Sct_Discord {
+	public function generate_rinker_message(): Sct_Discord {
 		$header_emoji   = ':package:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'rinker_notify', 'title' ) );
 
-		$items = $this->generate_rinker_content( $rinker_exists_items );
+		$items = $this->generate_rinker_content( $this->original_data );
 
 		$after_message = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
 

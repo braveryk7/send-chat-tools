@@ -61,6 +61,27 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	protected $site_url;
 
 	/**
+	 * Property that stores the type of notification.
+	 *
+	 * @var string Notification type.
+	 */
+	protected $notification_type;
+
+	/**
+	 * Property that stores the original data before processing.
+	 *
+	 * @var object|array Original data.
+	 */
+	protected $original_data;
+
+	/**
+	 * Property that stores the flag of whether or not it is an error mail.
+	 *
+	 * @var bool Error mail flag.
+	 */
+	protected $is_error_mail = false;
+
+	/**
 	 * Constructor to obtain information necessary for content generation.
 	 */
 	protected function __construct() {
@@ -71,47 +92,50 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
 	 * Abstract method to get an instance.
 	 */
-	abstract public static function get_instance(): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public static function get_instance(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate a chat tool header.
 	 */
-	abstract public function generate_header(): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_header(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate comment content to be sent to chat tools.
-	 *
-	 * @param object $comment Comment data.
 	 */
-	abstract public function generate_comment_content( object $comment, ): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_comment_content(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate update content to be sent to chat tools.
-	 *
-	 * @param array $update_content Update data.
 	 */
-	abstract public function generate_update_content( array $update_content ): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_update_content(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate developer message content to be sent to chat tools.
-	 *
-	 * @param array $developer_message Update data.
 	 */
-	abstract public function generate_developer_message( array $developer_message ): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_developer_message(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate login message content to be sent to chat tools.
-	 *
-	 * @param object $user User data.
 	 */
-	abstract public function generate_login_message( object $user ): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_login_message(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate Rinker exists items message content to be sent to chat tools.
-	 *
-	 * @param array $rinker_exists_items Rinker exists items.
 	 */
-	abstract public function generate_rinker_message( array $rinker_exists_items ): Sct_Slack | Sct_Discord | Sct_Chatwork;
+	abstract public function generate_rinker_message(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
+
+	/**
+	 * Method to set notification type and original data.
+	 *
+	 * @param string       $notification_type Notification type.
+	 * @param array|object $original_data     Original data.
+	 */
+	public function set_notification_type_original_data( string $notification_type, object | array $original_data ): Sct_Slack | Sct_Discord | Sct_Chatwork {
+		$this->notification_type = $notification_type;
+		$this->original_data     = $original_data;
+
+		return $this;
+	}
 
 	/**
 	 * Method to generate headers for each chat tool.
@@ -179,7 +203,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 * @param array $rinker_exists_items Rinker exists items.
 	 */
 	protected function generate_rinker_content( array $rinker_exists_items ): string {
-		$format = match ( $this->tool_name ) {
+		$format = $this->is_error_mail ? "    ・ %2\$s\n         %1\$s\n" : match ( $this->tool_name ) {
 			'slack'                => "    ・ <%s|%s>\n",
 			'discord', 'chatwork'  => "    ・ %2\$s - %1\$s\n",
 		};
@@ -270,15 +294,17 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 			0 => esc_html__( 'This message was sent by Send Chat Tools', 'send-chat-tools' ),
 			1 => esc_html__( 'WordPress Plugin Directory', 'send-chat-tools' ),
 			2 => esc_html__( 'Send Chat Tools Official Page', 'send-chat-tools' ),
+			3 => esc_html__( 'Possible that the message was not sent to the chat tool correctly.', 'send-chat-tools' ),
 		];
 
 		$wordpress_directory = $this->get_official_directory();
 		$official_web_site   = 'https://www.braveryk7.com/portfolio/send-chat-tools/';
 
 		return match ( $tool_name ) {
-			'slack'    => $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>',
-			'discord'  => '>>> ' . $message[0] . "\n\n" . $message[1] . ': <' . $wordpress_directory . '>' . "\n" . $message[2] . ': <' . $official_web_site . '>',
-			'chatwork' => '[hr]' . $message[0] . "\n" . $message[1] . ': ' . $wordpress_directory . "\n" . $message[2] . ': ' . $official_web_site,
+			'slack'      => $message[0] . "\n" . '<' . $wordpress_directory . '|' . $message[1] . '> / <' . $official_web_site . '|' . $message[2] . '>',
+			'discord'    => '>>> ' . $message[0] . "\n\n" . $message[1] . ': <' . $wordpress_directory . '>' . "\n" . $message[2] . ': <' . $official_web_site . '>',
+			'chatwork'   => '[hr]' . $message[0] . "\n" . $message[1] . ': ' . $wordpress_directory . "\n" . $message[2] . ': ' . $official_web_site,
+			'error_mail' => $message[0] . "\n\n" . $message[1] . ': ' . $wordpress_directory . "\n" . $message[2] . ': ' . $official_web_site . "\n\n" . $message[3],
 		};
 	}
 
@@ -335,15 +361,24 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 
 		if ( 200 !== $status_code && 204 !== $status_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
-			if ( 'update' === $id ) {
-				$send_mail = new Sct_Error_Mail( $status_code, $id, $tool );
-				$send_mail->send_mail( ...$send_mail->update_contents( $options['plain_data'] ) );
-			} else {
-				$send_mail = new Sct_Error_Mail( $status_code, $id, $tool );
-				$send_mail->send_mail( ...$send_mail->generate_contents() );
-			}
+			$this->call_error_mail_class( $status_code, $tool );
 		}
 
 		return $this->logger( $status_code, $tool, $id );
+	}
+
+	/**
+	 * Method to call the error mail class.
+	 *
+	 * @param int    $error_code Error code.
+	 * @param string $tool_name  Chat tool name.
+	 */
+	private function call_error_mail_class( int $error_code, string $tool_name ): void {
+		$method = $this->notification_type;
+
+		Sct_Error_Mail::get_instance()
+			?->set_error_mail_properties( $error_code, $tool_name, $this->original_data )
+			?->$method()
+			?->send_mail();
 	}
 }
