@@ -52,19 +52,17 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 * @param object $comment Comment data.
 	 */
 	public function generate_comment_content( object $comment, ): Sct_Slack {
-		$this->comment = $comment;
-
-		$article_title  = get_the_title( $comment->comment_post_ID );
-		$article_url    = get_permalink( $comment->comment_post_ID );
+		$article_title  = get_the_title( $this->original_data->comment_post_ID );
+		$article_url    = get_permalink( $this->original_data->comment_post_ID );
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
 
 		$header_emoji     = ':mailbox_with_mail:';
 		$header_message   = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment', 'title' ) );
 		$comment_article  = '*' . $this->get_send_text( 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
-		$author           = '*' . $this->get_send_text( 'comment', 'commenter' ) . "*\n{$comment->comment_author}<{$comment->comment_author_email}>";
-		$date             = '*' . $this->get_send_text( 'constant', 'date' ) . "*\n{$comment->comment_date}";
-		$comment_content  = '*' . $this->get_send_text( 'comment', 'comment' ) . "*\n{$comment->comment_content}";
-		$comment_url      = '*' . $this->get_send_text( 'comment', 'url' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
+		$author           = '*' . $this->get_send_text( 'comment', 'commenter' ) . "*\n{$this->original_data->comment_author}<{$this->original_data->comment_author_email}>";
+		$date             = '*' . $this->get_send_text( 'constant', 'date' ) . "*\n{$this->original_data->comment_date}";
+		$comment_content  = '*' . $this->get_send_text( 'comment', 'comment' ) . "*\n{$this->original_data->comment_content}";
+		$comment_url      = '*' . $this->get_send_text( 'comment', 'url' ) . "*\n{$article_url}#comment-{$this->original_data->comment_ID}";
 		$comment_statuses = '*' . $this->get_send_text( 'comment', 'status' ) . "*\n{$comment_status}";
 		$context          = $this->generate_context( $this->tool_name );
 
