@@ -119,10 +119,8 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 
 	/**
 	 * Generate login notify for Error Mail.
-	 *
-	 * @param object $user User object.
 	 */
-	public function generate_login_message( object $user ): Sct_Error_Mail {
+	public function generate_login_message(): Sct_Error_Mail {
 		return $this;
 	}
 
