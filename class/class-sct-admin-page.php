@@ -127,7 +127,7 @@ class Sct_Admin_Page extends Sct_Base {
 
 		register_rest_route(
 			$this->get_api_namespace(),
-			'/rinker-exists',
+			'/is-rinker-activated',
 			[
 				'methods'             => WP_REST_Server::READABLE,
 				'callback'            => [ $this, 'is_rinker_activated' ],
