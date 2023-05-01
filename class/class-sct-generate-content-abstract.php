@@ -112,17 +112,17 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
 	 * Abstract method to generate developer message content to be sent to chat tools.
 	 */
-	abstract public function generate_developer_message(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
+	abstract public function generate_developer_content(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Abstract method to generate login message content to be sent to chat tools.
 	 */
-	abstract public function generate_login_message(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
+	abstract public function generate_login_content(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
-	 * Abstract method to generate Rinker exists items message content to be sent to chat tools.
+	 * Abstract method to generate Rinker content to be sent to chat tools.
 	 */
-	abstract public function generate_rinker_message(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
+	abstract public function generate_rinker_content(): Sct_Slack | Sct_Discord | Sct_Chatwork | Sct_Error_Mail;
 
 	/**
 	 * Method to set notification type and original data.
@@ -159,26 +159,26 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 */
 	protected function generate_comment_approved_message( string $tool_name, object $comment ): string {
 		$approved_url  = admin_url() . 'comment.php?action=approve&c=' . $comment->comment_ID;
-		$unapproved    = $this->get_send_text( 'comment', 'unapproved' );
-		$click_message = $this->get_send_text( 'comment', 'click' );
+		$unapproved    = $this->get_send_text( 'comment_notify', 'unapproved' );
+		$click_message = $this->get_send_text( 'comment_notify', 'click' );
 
 		return match ( $comment->comment_approved ) {
-			'1'    => $this->get_send_text( 'comment', 'approved' ),
+			'1'    => $this->get_send_text( 'comment_notify', 'approved' ),
 			'0'    => match ( $tool_name ) {
 				'slack'    => $unapproved . '<<' . $approved_url . '|' . $click_message . '>>',
 				'discord'  => $unapproved . ' >> ' . $click_message . '( ' . $approved_url . ' )',
 				'chatwork' => $unapproved . "\n" . $click_message . ' ' . $approved_url,
 			},
-			'spam' => $this->get_send_text( 'comment', 'spam' ),
+			'spam' => $this->get_send_text( 'comment_notify', 'spam' ),
 		};
 	}
 
 	/**
-	 * Generate plain update messages.
+	 * Generate update raw data.
 	 *
 	 * @param array $update_content Update data.
 	 */
-	protected function generate_plain_update_message( array $update_content ): stdClass {
+	protected function generate_update_raw_data( array $update_content ): stdClass {
 		$add_core    = null;
 		$add_themes  = null;
 		$add_plugins = null;
@@ -188,21 +188,21 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 			${ "add_$value[attribute]$is_core" } .= "   $value[name] ( $value[current_version] -> $value[new_version] )\n";
 		};
 
-		$plain_update_message            = new stdClass();
-		$plain_update_message->core      = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
-		$plain_update_message->themes    = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
-		$plain_update_message->plugins   = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
-		$plain_update_message->admin_url = admin_url() . 'update-core.php';
+		$update_raw_data            = new stdClass();
+		$update_raw_data->core      = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
+		$update_raw_data->themes    = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
+		$update_raw_data->plugins   = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
+		$update_raw_data->admin_url = admin_url() . 'update-core.php';
 
-		return $plain_update_message;
+		return $update_raw_data;
 	}
 
 	/**
 	 * A method to format the list of items that are no longer handled by Rinker into a string type.
 	 *
-	 * @param array $rinker_exists_items Rinker exists items.
+	 * @param array $rinker_discontinued_items Rinker discontinued items.
 	 */
-	protected function generate_rinker_content( array $rinker_exists_items ): string {
+	protected function format_rinker_items( array $rinker_discontinued_items ): string {
 		$format = $this->is_error_mail ? "    ・ %2\$s\n         %1\$s\n" : match ( $this->tool_name ) {
 			'slack'                => "    ・ <%s|%s>\n",
 			'discord', 'chatwork'  => "    ・ %2\$s - %1\$s\n",
@@ -211,7 +211,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		$amazon  = '';
 		$rakuten = '';
 
-		foreach ( $rinker_exists_items as $item ) {
+		foreach ( $rinker_discontinued_items as $item ) {
 			if ( 'amazon' === $item['item_shop'] ) {
 				$amazon = $amazon . sprintf( $format, $item['item_url'], $item['item_name'] );
 			} elseif ( 'rakuten' === $item['item_shop'] ) {
@@ -227,17 +227,17 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	}
 
 	/**
-	 * Get comment notify content.
+	 * Method to retrieve text to be used during content generation.
 	 *
 	 * @param string $type  Message type.
 	 * @param string $param Item parameter.
 	 */
 	protected function get_send_text( string $type, string $param ): string {
 		$message = [
-			'constant'      => [
+			'constant'       => [
 				'date' => __( 'Date and time', 'send-chat-tools' ),
 			],
-			'comment'       => [
+			'comment_notify' => [
 				'title'      => esc_html__( 'New comment has been posted', 'send-chat-tools' ),
 				'article'    => esc_html__( 'Commented article', 'send-chat-tools' ),
 				'commenter'  => esc_html__( 'Commenter', 'send-chat-tools' ),
@@ -249,12 +249,12 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'click'      => esc_html__( 'Click here to approve', 'send-chat-tools' ),
 				'spam'       => esc_html__( 'Spam', 'send-chat-tools' ),
 			],
-			'update'        => [
+			'update_notify'  => [
 				'title'  => esc_html__( 'Notification of new updates', 'send-chat-tools' ),
 				'update' => esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ),
 				'page'   => esc_html__( 'Update Page', 'send-chat-tools' ),
 			],
-			'dev_notify'    => [
+			'dev_notify'     => [
 				/* translators: 1: Theme or Plugin name */
 				'title'   => esc_html__( 'Update notifications from %s', 'send-chat-tools' ),
 				'website' => esc_html__( 'Official Web Site', 'send-chat-tools' ),
@@ -264,7 +264,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 					'send-chat-tools',
 				),
 			],
-			'login_notify'  => [
+			'login_notify'   => [
 				'title'              => __( 'Login Notification', 'send-chat-tools' ),
 				'user_name'          => __( 'User name', 'send-chat-tools' ),
 				'login_env'          => __( 'Login environment', 'send-chat-tools' ),
@@ -272,7 +272,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'unauthorized_login' => __( 'If you do not recognize this message, you may have an unauthorized login.', 'send-chat-tools' ),
 				'disconnect'         => __( 'Disconnect all location sessions and change passwords.', 'send-chat-tools' ),
 			],
-			'rinker_notify' => [
+			'rinker_notify'  => [
 				'title'     => __( 'Rinker End Of Sales Notification', 'send-chat-tools' ),
 				'amazon'    => __( 'Amazon', 'send-chat-tools' ),
 				'rakuten'   => __( 'Rakuten', 'send-chat-tools' ),
@@ -311,22 +311,22 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
 	 * Methods to send to chat tools.
 	 *
-	 * @param string $id      ID(Comment/Update).
-	 * @param string $tool    Use chat tools prefix.
+	 * @param string $notification_type Notification type.
+	 * @param string $tool_name         Use chat tools prefix.
 	 */
-	public function send_tools( string $id, string $tool ): bool {
+	public function send_tools( string $notification_type, string $tool_name ): bool {
 
 		$sct_options = $this->get_sct_options();
 
-		switch ( $tool ) {
+		switch ( $tool_name ) {
 			case 'slack':
 			case 'discord':
-				$url   = $sct_options[ $tool ]['webhook_url'];
-				$regex = $this->api_regex( $tool, $url );
+				$url   = $sct_options[ $tool_name ]['webhook_url'];
+				$regex = $this->api_regex( $tool_name, $url );
 				break;
 			case 'chatwork':
-				$url   = 'https://api.chatwork.com/v2/rooms/' . $sct_options[ $tool ]['room_id'] . '/messages';
-				$regex = $this->api_regex( 'chatworkid', $sct_options[ $tool ]['room_id'] );
+				$url   = 'https://api.chatwork.com/v2/rooms/' . $sct_options[ $tool_name ]['room_id'] . '/messages';
+				$regex = $this->api_regex( 'chatworkid', $sct_options[ $tool_name ]['room_id'] );
 				break;
 		}
 
@@ -345,10 +345,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 					],
 				];
 
-				if ( '3' <= count( $sct_options[ $tool ]['log'] ) ) {
-					array_pop( $sct_options[ $tool ]['log'] );
+				if ( '3' <= count( $sct_options[ $tool_name ]['log'] ) ) {
+					array_pop( $sct_options[ $tool_name ]['log'] );
 				}
-				$sct_options[ $tool ]['log'] = $logs + $sct_options[ $tool ]['log'];
+				$sct_options[ $tool_name ]['log'] = $logs + $sct_options[ $tool_name ]['log'];
 				$this->set_sct_options( $sct_options );
 			}
 		}
@@ -361,10 +361,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 
 		if ( 200 !== $status_code && 204 !== $status_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
-			$this->call_error_mail_class( $status_code, $tool );
+			$this->call_error_mail_class( $status_code, $tool_name );
 		}
 
-		return $this->logger( $status_code, $tool, $id );
+		return $this->logger( $status_code, $tool_name, $notification_type );
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?php
 /**
- * Check Update WordPress core, theme, and plugin.
+ * A class that generates logs and stores them in a database.
  *
  * @author Ken-chan
  * @package WordPress
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Check Update WordPress core, theme, and plugin.
+ * A class that generates logs and stores them in a database.
  */
 class Sct_Logger extends Sct_Base {
 	/**

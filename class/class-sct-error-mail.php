@@ -78,7 +78,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate comment notify for Error Mail.
+	 * Generate comment content for Error Mail.
 	 */
 	public function generate_comment_content(): Sct_Error_Mail {
 		$this->mail_title = esc_html__( 'You have received a new comment', 'send-chat-tools' );
@@ -86,16 +86,16 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 		$article_title  = get_the_title( $this->original_data->comment_post_ID );
 		$article_url    = get_permalink( $this->original_data->comment_post_ID );
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $this->original_data );
-		$header_message = $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'comment', 'title' );
+		$header_message = $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'comment_notify', 'title' );
 
 		$this->content =
 			$header_message . "\n\n" .
-			$this->get_send_text( 'comment', 'article' ) . ': ' . $article_title . ' - ' . $article_url . "\n" .
-			$this->get_send_text( 'comment', 'commenter' ) . ': ' . $this->original_data->comment_author . '<' . $this->original_data->comment_author_email . ">\n" .
+			$this->get_send_text( 'comment_notify', 'article' ) . ': ' . $article_title . ' - ' . $article_url . "\n" .
+			$this->get_send_text( 'comment_notify', 'commenter' ) . ': ' . $this->original_data->comment_author . '<' . $this->original_data->comment_author_email . ">\n" .
 			$this->get_send_text( 'constant', 'date' ) . ': ' . $this->original_data->comment_date . "\n" .
-			$this->get_send_text( 'comment', 'comment' ) . ': ' . "\n" . $this->original_data->comment_content . "\n\n" .
-			$this->get_send_text( 'comment', 'url' ) . ': ' . $article_url . '#comment-' . $this->original_data->comment_ID . "\n" .
-			$this->get_send_text( 'comment', 'status' ) . ': ' . $comment_status . "\n\n" .
+			$this->get_send_text( 'comment_notify', 'comment' ) . ': ' . "\n" . $this->original_data->comment_content . "\n\n" .
+			$this->get_send_text( 'comment_notify', 'url' ) . ': ' . $article_url . '#comment-' . $this->original_data->comment_ID . "\n" .
+			$this->get_send_text( 'comment_notify', 'status' ) . ': ' . $comment_status . "\n\n" .
 			esc_html__( 'This message was sent by Send Chat Tools.', 'send-chat-tools' ) . "\n" .
 			esc_html__( 'Possible that the message was not sent to the chat tool correctly.', 'send-chat-tools' ) . "\n\n" .
 			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
@@ -105,18 +105,18 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate update notify for Error Mail.
+	 * Generate update content for Error Mail.
 	 */
 	public function generate_update_content(): Sct_Error_Mail {
-		$this->mail_title = $this->get_send_text( 'update', 'title' );
+		$this->mail_title = $this->get_send_text( 'update_notify', 'title' );
 
-		$plain_data = $this->generate_plain_update_message( $this->original_data );
+		$raw_data = $this->generate_update_raw_data( $this->original_data );
 
-		$header_message = $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'update', 'title' );
+		$header_message = $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'update_notify', 'title' );
 
 		$this->content =
-			$header_message . "\n\n" . $plain_data->core . $plain_data->themes . $plain_data->plugins .
-			$this->get_send_text( 'update', 'update' ) . "\n" . $this->get_send_text( 'update', 'page' ) . ': ' . $plain_data->admin_url . "\n\n" .
+			$header_message . "\n\n" . $raw_data->core . $raw_data->themes . $raw_data->plugins .
+			$this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ': ' . $raw_data->admin_url . "\n\n" .
 			$this->generate_context( 'error_mail' ) . "\n" .
 			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
 			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
@@ -125,9 +125,9 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate developer notify for Error Mail.
+	 * Generate developer content for Error Mail.
 	 */
-	public function generate_developer_message(): Sct_Error_Mail {
+	public function generate_developer_content(): Sct_Error_Mail {
 		$this->mail_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
 
 		$content = '';
@@ -162,9 +162,9 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate login notify for Error Mail.
+	 * Generate login content for Error Mail.
 	 */
-	public function generate_login_message(): Sct_Error_Mail {
+	public function generate_login_content(): Sct_Error_Mail {
 		$this->mail_title = $this->get_send_text( 'login_notify', 'title' );
 
 		$user_name       = $this->original_data->data->user_login;
@@ -194,12 +194,12 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate Rinker notify for Error Mail.
+	 * Generate Rinker content for Error Mail.
 	 */
-	public function generate_rinker_message(): Sct_Error_Mail {
+	public function generate_rinker_content(): Sct_Error_Mail {
 		$this->mail_title = $this->get_send_text( 'rinker_notify', 'title' );
 
-		$items = $this->generate_rinker_content( $this->original_data );
+		$items = $this->format_rinker_items( $this->original_data );
 
 		$after_message = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
 

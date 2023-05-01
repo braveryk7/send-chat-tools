@@ -127,10 +127,10 @@ class Sct_Admin_Page extends Sct_Base {
 
 		register_rest_route(
 			$this->get_api_namespace(),
-			'/rinker-exists',
+			'/get-rinker-activated',
 			[
 				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'check_rinker_exists' ],
+				'callback'            => [ $this, 'is_rinker_activated' ],
 				'permission_callback' => [ $this, 'get_wordpress_permission' ],
 			]
 		);
@@ -160,7 +160,7 @@ class Sct_Admin_Page extends Sct_Base {
 	public function editable_api( WP_REST_Request $request ): WP_REST_Response {
 		$sct_options = $this->get_sct_options();
 		$params      = $request->get_json_params();
-		$keys        = [ 'slack', 'discord', 'chatwork', 'ignore_key', 'cron_time', 'check_rinker_exists_items_cron' ];
+		$keys        = [ 'slack', 'discord', 'chatwork', 'ignore_key', 'cron_time', 'rinker_cron_time' ];
 		$flag        = false;
 
 		foreach ( $keys as $key ) {
@@ -183,18 +183,18 @@ class Sct_Admin_Page extends Sct_Base {
 	/**
 	 * Check if Rinker is activated.
 	 */
-	public function check_rinker_exists(): WP_REST_Response {
-		$get_plugins   = get_option( 'active_plugins' );
-		$rinker_exists = false;
+	public function is_rinker_activated(): WP_REST_Response {
+		$get_plugins         = get_option( 'active_plugins' );
+		$is_rinker_activated = false;
 
 		foreach ( $get_plugins as $value ) {
 			if ( 'yyi-rinker/yyi-rinker.php' === $value ) {
-				$rinker_exists = true;
+				$is_rinker_activated = true;
 				continue;
 			}
 		}
 
-		return new WP_REST_Response( $rinker_exists, 200 );
+		return new WP_REST_Response( $is_rinker_activated, 200 );
 	}
 
 	/**

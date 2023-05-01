@@ -47,7 +47,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Abstract method to create comment data to be sent to chat tools.
+	 * Generate comment content for Discord.
 	 */
 	public function generate_comment_content(): Sct_Discord {
 		$this->comment = $this->original_data;
@@ -57,58 +57,58 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $this->original_data );
 
 		$header_emoji   = ':mailbox_with_mail:';
-		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment', 'title' ) );
+		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment_notify', 'title' ) );
 
 		$this->content =
 			$header_message . "\n\n" .
-			'**' . $this->get_send_text( 'comment', 'article' ) . '**: ' . $article_title . ' - <' . $article_url . '>' . "\n" .
-			'**' . $this->get_send_text( 'comment', 'commenter' ) . '**: ' . $this->original_data->comment_author . '<' . $this->original_data->comment_author_email . ">\n" .
+			'**' . $this->get_send_text( 'comment_notify', 'article' ) . '**: ' . $article_title . ' - <' . $article_url . '>' . "\n" .
+			'**' . $this->get_send_text( 'comment_notify', 'commenter' ) . '**: ' . $this->original_data->comment_author . '<' . $this->original_data->comment_author_email . ">\n" .
 			'**' . $this->get_send_text( 'constant', 'date' ) . '**: ' . $this->original_data->comment_date . "\n" .
-			'**' . $this->get_send_text( 'comment', 'comment' ) . '**: ' . "\n" . $this->original_data->comment_content . "\n\n" .
-			'**' . $this->get_send_text( 'comment', 'url' ) . '**: <' . $article_url . '#comment-' . $this->original_data->comment_ID . '>' . "\n\n" .
-			'**' . $this->get_send_text( 'comment', 'status' ) . '**: ' . $comment_status . "\n\n" .
+			'**' . $this->get_send_text( 'comment_notify', 'comment' ) . '**: ' . "\n" . $this->original_data->comment_content . "\n\n" .
+			'**' . $this->get_send_text( 'comment_notify', 'url' ) . '**: <' . $article_url . '#comment-' . $this->original_data->comment_ID . '>' . "\n\n" .
+			'**' . $this->get_send_text( 'comment_notify', 'status' ) . '**: ' . $comment_status . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
 		return $this;
 	}
 
 	/**
-	 * Generate update notifications for Discord.
+	 * Generate update content for Discord.
 	 */
 	public function generate_update_content(): Sct_Discord {
-		$plain_data = $this->generate_plain_update_message( $this->original_data );
+		$raw_data = $this->generate_update_raw_data( $this->original_data );
 
 		$header_emoji    = ':zap:';
-		$header_message  = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update', 'title' ) );
+		$header_message  = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update_notify', 'title' ) );
 		$core_content    = null;
 		$themes_content  = null;
 		$plugins_content = null;
 
-		if ( $plain_data->core ) {
-			$core_content = ':star: ' . $plain_data->core;
+		if ( $raw_data->core ) {
+			$core_content = ':star: ' . $raw_data->core;
 		}
 
-		if ( $plain_data->themes ) {
-			$themes_content = ':art: ' . $plain_data->themes;
+		if ( $raw_data->themes ) {
+			$themes_content = ':art: ' . $raw_data->themes;
 		}
 
-		if ( $plain_data->plugins ) {
-			$plugins_content = ':wrench: ' . $plain_data->plugins;
+		if ( $raw_data->plugins ) {
+			$plugins_content = ':wrench: ' . $raw_data->plugins;
 		}
 
 		$this->content =
 			$header_message . "\n\n" .
 			$core_content . $themes_content . $plugins_content .
-			$this->get_send_text( 'update', 'update' ) . "\n" . $this->get_send_text( 'update', 'page' ) . ': <' . $plain_data->admin_url . '>' . "\n\n" .
+			$this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ': <' . $raw_data->admin_url . '>' . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
 		return $this;
 	}
 
 	/**
-	 * Generate developer message for Discord.
+	 * Generate developer content for Discord.
 	 */
-	public function generate_developer_message(): Sct_Discord {
+	public function generate_developer_content(): Sct_Discord {
 		if ( isset( $this->original_data['title'] ) && isset( $this->original_data['message'] ) && array_key_exists( 'url', $this->original_data ) ) {
 			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
 			$content       = '';
@@ -139,9 +139,9 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate login message for Slack.
+	 * Generate login content for Discord.
 	 */
-	public function generate_login_message(): Sct_Discord {
+	public function generate_login_content(): Sct_Discord {
 		$header_emoji   = ':unlock:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'login_notify', 'title' ) );
 
@@ -169,17 +169,17 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate Rinker exists items message for Discord.
+	 * Generate Rinker content for Discord.
 	 */
-	public function generate_rinker_message(): Sct_Discord {
+	public function generate_rinker_content(): Sct_Discord {
 		$header_emoji   = ':package:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'rinker_notify', 'title' ) );
 
-		$items = $this->generate_rinker_content( $this->original_data );
+		$discontinued_items = $this->format_rinker_items( $this->original_data );
 
 		$after_message = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
 
-		$this->content = $header_message . "\n\n" . $items . "\n\n" . $after_message . "\n" . $this->generate_context( $this->tool_name );
+		$this->content = $header_message . "\n\n" . $discontinued_items . "\n\n" . $after_message . "\n" . $this->generate_context( $this->tool_name );
 
 		return $this;
 	}

@@ -27,19 +27,19 @@ class Sct_Check_Rinker extends Sct_Base {
 	}
 
 	/**
-	 * Controller method called by WP-Cron that executes the check_rinker_exists_items method and calls each chat class.
+	 * Controller method called by WP-Cron that executes the check_rinker_discontinued_items method and calls each chat class.
 	 */
 	public function controller() {
-		$exists_items = $this->check_rinker_exists_items();
+		$discontinued_items = $this->check_rinker_discontinued_items();
 
-		if ( ! empty( $exists_items ) ) {
+		if ( ! empty( $discontinued_items ) ) {
 			$sct_options = $this->get_sct_options();
 
 			foreach ( $this->get_chat_tools() as $tool ) {
 				$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
 
 				if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['rinker_notify'] ) {
-					$this->call_chat_tool_class( $tool, 'generate_rinker_message', 'rinker_notify', $exists_items );
+					$this->call_chat_tool_class( $tool, 'generate_rinker_content', 'rinker_notify', $discontinued_items );
 				} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
 					$this->logger( 1001, $tool, '1' );
 				} elseif ( 'chatwork' === $tool && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
@@ -49,10 +49,10 @@ class Sct_Check_Rinker extends Sct_Base {
 		}
 	}
 	/**
-	 * Check Amazon and Rakuten for discontinued products for Rinker.
+	 * Check Amazon and Rakuten for discontinued items for Rinker.
 	 */
-	public function check_rinker_exists_items(): array {
-		$exists_items = [];
+	public function check_rinker_discontinued_items(): array {
+		$discontinued_items = [];
 
 		foreach ( [ 'amazon', 'rakuten' ] as $shop ) {
 			$query = new WP_Query(
@@ -68,7 +68,7 @@ class Sct_Check_Rinker extends Sct_Base {
 				$query->the_post();
 				$item = get_post();
 
-				$exists_items[ $item->ID ] = [
+				$discontinued_items[ $item->ID ] = [
 					'item_id'   => $item->ID,
 					'item_shop' => $shop,
 					'item_name' => $item->post_title,
@@ -78,29 +78,29 @@ class Sct_Check_Rinker extends Sct_Base {
 			wp_reset_postdata();
 		}
 
-		return $exists_items;
+		return $discontinued_items;
 	}
 
 	/**
 	 * WP-cron check.
 	 */
 	public function check_cron_time(): void {
-		$get_next_schedule     = wp_get_scheduled_event( 'sct_rinker_exists_items_check' );
+		$get_next_schedule     = wp_get_scheduled_event( $this->add_prefix( 'rinker_discontinued_items_check' ) );
 		$sct_options           = $this->get_sct_options();
-		$to_datetime_string    = gmdate( 'Y-m-d ' . $sct_options['check_rinker_exists_items_cron'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+		$to_datetime_string    = gmdate( 'Y-m-d ' . $sct_options['rinker_cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
 		$sct_options_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $to_datetime_string ) );
 
 		if ( ! $get_next_schedule ) {
-			wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_rinker_exists_items_check' );
+			wp_schedule_event( $sct_options_timestamp, 'daily', $this->add_prefix( 'rinker_discontinued_items_check' ) );
 		} else {
 			if ( isset( $sct_options['cron_time'] ) ) {
 				if ( $get_next_schedule->timestamp !== $sct_options_timestamp ) {
 					$sct_options_timestamp <= time() ? $sct_options_timestamp = strtotime( '+1 day', $sct_options_timestamp ) : $sct_options_timestamp;
 					wp_clear_scheduled_hook( 'sct_rinker_exists_items_check' );
-					wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_rinker_exists_items_check' );
+					wp_schedule_event( $sct_options_timestamp, 'daily', $this->add_prefix( 'rinker_discontinued_items_check' ) );
 				}
 			} else {
-				$sct_options['check_rinker_exists_items_cron'] = '19:00';
+				$sct_options['rinker_cron_time'] = '19:00';
 				$this->set_sct_options( $sct_options );
 			}
 		}
