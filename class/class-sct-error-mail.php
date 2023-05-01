@@ -78,7 +78,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate comment notify for Error Mail.
+	 * Generate comment content for Error Mail.
 	 */
 	public function generate_comment_content(): Sct_Error_Mail {
 		$this->mail_title = esc_html__( 'You have received a new comment', 'send-chat-tools' );
@@ -105,7 +105,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate update notify for Error Mail.
+	 * Generate update content for Error Mail.
 	 */
 	public function generate_update_content(): Sct_Error_Mail {
 		$this->mail_title = $this->get_send_text( 'update_notify', 'title' );
@@ -125,7 +125,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate developer notify for Error Mail.
+	 * Generate developer content for Error Mail.
 	 */
 	public function generate_developer_content(): Sct_Error_Mail {
 		$this->mail_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
@@ -162,7 +162,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate login notify for Error Mail.
+	 * Generate login content for Error Mail.
 	 */
 	public function generate_login_content(): Sct_Error_Mail {
 		$this->mail_title = $this->get_send_text( 'login_notify', 'title' );
