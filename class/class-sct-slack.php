@@ -147,7 +147,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	/**
 	 * Generate developer message for Slack.
 	 */
-	public function generate_developer_message(): Sct_Slack {
+	public function generate_developer_content(): Sct_Slack {
 		if ( isset( $this->original_data['title'] ) && isset( $this->original_data['message'] ) && array_key_exists( 'url', $this->original_data ) ) {
 			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
 			$content       = '';
