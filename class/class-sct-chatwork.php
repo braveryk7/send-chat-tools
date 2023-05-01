@@ -53,18 +53,18 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		$article_title  = get_the_title( $this->original_data->comment_post_ID );
 		$article_url    = get_permalink( $this->original_data->comment_post_ID );
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $this->original_data );
-		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'comment', 'title' ) );
+		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'comment_notify', 'title' ) );
 
 		$this->content = [
 			'body' =>
 				'[info]' . $header_message .
-				$this->get_send_text( 'comment', 'article' ) . ': ' . $article_title . ' - ' . $article_url . "\n" .
-				$this->get_send_text( 'comment', 'commenter' ) . ': ' . $this->original_data->comment_author . '<' . $this->original_data->comment_author_email . ">\n" .
+				$this->get_send_text( 'comment_notify', 'article' ) . ': ' . $article_title . ' - ' . $article_url . "\n" .
+				$this->get_send_text( 'comment_notify', 'commenter' ) . ': ' . $this->original_data->comment_author . '<' . $this->original_data->comment_author_email . ">\n" .
 				$this->get_send_text( 'constant', 'date' ) . ': ' . $this->original_data->comment_date . "\n" .
-				$this->get_send_text( 'comment', 'comment' ) . ': ' . "\n" . $this->original_data->comment_content . "\n\n" .
-				$this->get_send_text( 'comment', 'url' ) . ': ' . $article_url . '#comment-' . $this->original_data->comment_ID . "\n" .
+				$this->get_send_text( 'comment_notify', 'comment' ) . ': ' . "\n" . $this->original_data->comment_content . "\n\n" .
+				$this->get_send_text( 'comment_notify', 'url' ) . ': ' . $article_url . '#comment-' . $this->original_data->comment_ID . "\n" .
 				'[hr]' .
-				$this->get_send_text( 'comment', 'status' ) . ': ' . $comment_status .
+				$this->get_send_text( 'comment_notify', 'status' ) . ': ' . $comment_status .
 				$this->generate_context( $this->tool_name ) . '[/info]',
 		];
 

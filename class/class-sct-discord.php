@@ -57,16 +57,16 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $this->original_data );
 
 		$header_emoji   = ':mailbox_with_mail:';
-		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment', 'title' ) );
+		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment_notify', 'title' ) );
 
 		$this->content =
 			$header_message . "\n\n" .
-			'**' . $this->get_send_text( 'comment', 'article' ) . '**: ' . $article_title . ' - <' . $article_url . '>' . "\n" .
-			'**' . $this->get_send_text( 'comment', 'commenter' ) . '**: ' . $this->original_data->comment_author . '<' . $this->original_data->comment_author_email . ">\n" .
+			'**' . $this->get_send_text( 'comment_notify', 'article' ) . '**: ' . $article_title . ' - <' . $article_url . '>' . "\n" .
+			'**' . $this->get_send_text( 'comment_notify', 'commenter' ) . '**: ' . $this->original_data->comment_author . '<' . $this->original_data->comment_author_email . ">\n" .
 			'**' . $this->get_send_text( 'constant', 'date' ) . '**: ' . $this->original_data->comment_date . "\n" .
-			'**' . $this->get_send_text( 'comment', 'comment' ) . '**: ' . "\n" . $this->original_data->comment_content . "\n\n" .
-			'**' . $this->get_send_text( 'comment', 'url' ) . '**: <' . $article_url . '#comment-' . $this->original_data->comment_ID . '>' . "\n\n" .
-			'**' . $this->get_send_text( 'comment', 'status' ) . '**: ' . $comment_status . "\n\n" .
+			'**' . $this->get_send_text( 'comment_notify', 'comment' ) . '**: ' . "\n" . $this->original_data->comment_content . "\n\n" .
+			'**' . $this->get_send_text( 'comment_notify', 'url' ) . '**: <' . $article_url . '#comment-' . $this->original_data->comment_ID . '>' . "\n\n" .
+			'**' . $this->get_send_text( 'comment_notify', 'status' ) . '**: ' . $comment_status . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
 		return $this;

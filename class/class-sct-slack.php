@@ -55,13 +55,13 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $this->original_data );
 
 		$header_emoji     = ':mailbox_with_mail:';
-		$header_message   = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment', 'title' ) );
-		$comment_article  = '*' . $this->get_send_text( 'comment', 'article' ) . ": *<{$article_url}|{$article_title}>";
-		$author           = '*' . $this->get_send_text( 'comment', 'commenter' ) . "*\n{$this->original_data->comment_author}<{$this->original_data->comment_author_email}>";
+		$header_message   = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment_notify', 'title' ) );
+		$comment_article  = '*' . $this->get_send_text( 'comment_notify', 'article' ) . ": *<{$article_url}|{$article_title}>";
+		$author           = '*' . $this->get_send_text( 'comment_notify', 'commenter' ) . "*\n{$this->original_data->comment_author}<{$this->original_data->comment_author_email}>";
 		$date             = '*' . $this->get_send_text( 'constant', 'date' ) . "*\n{$this->original_data->comment_date}";
-		$comment_content  = '*' . $this->get_send_text( 'comment', 'comment' ) . "*\n{$this->original_data->comment_content}";
-		$comment_url      = '*' . $this->get_send_text( 'comment', 'url' ) . "*\n{$article_url}#comment-{$this->original_data->comment_ID}";
-		$comment_statuses = '*' . $this->get_send_text( 'comment', 'status' ) . "*\n{$comment_status}";
+		$comment_content  = '*' . $this->get_send_text( 'comment_notify', 'comment' ) . "*\n{$this->original_data->comment_content}";
+		$comment_url      = '*' . $this->get_send_text( 'comment_notify', 'url' ) . "*\n{$article_url}#comment-{$this->original_data->comment_ID}";
+		$comment_statuses = '*' . $this->get_send_text( 'comment_notify', 'status' ) . "*\n{$comment_status}";
 		$context          = $this->generate_context( $this->tool_name );
 
 		$this->content = [
