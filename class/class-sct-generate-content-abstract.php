@@ -174,7 +174,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	}
 
 	/**
-	 * Generate plain update messages.
+	 * Generate update raw data.
 	 *
 	 * @param array $update_content Update data.
 	 */
