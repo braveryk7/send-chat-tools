@@ -53,7 +53,7 @@ class Sct_Base {
 		'version',
 		'cron_time',
 		'ignore_key',
-		'check_rinker_exists_items_cron',
+		'rinker_cron_time',
 	];
 
 	public const OLD_OPTIONS_COLUMN = [
