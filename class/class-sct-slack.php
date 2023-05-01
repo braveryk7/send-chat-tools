@@ -274,7 +274,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$header_emoji   = ':package:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'rinker_notify', 'title' ) );
 
-		$items = $this->format_rinker_items( $this->original_data );
+		$discontinued_items = $this->format_rinker_items( $this->original_data );
 
 		$after_message = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
 
@@ -282,7 +282,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 			'text'   => $header_message,
 			'blocks' => [
 				$this->header( 'plain_text', $header_message, true ),
-				$this->single_column( 'mrkdwn', $items ),
+				$this->single_column( 'mrkdwn', $discontinued_items ),
 				$this->divider(),
 				$this->single_column( 'mrkdwn', $after_message ),
 				$this->divider(),
