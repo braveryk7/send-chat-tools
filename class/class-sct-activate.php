@@ -78,7 +78,7 @@ class Sct_Activate extends Sct_Base {
 					if ( 'ignore_key' === $key_name ) {
 						$sct_options[ $key_name ] = [];
 					}
-					if ( 'check_rinker_exists_items_cron' === $key_name ) {
+					if ( 'rinker_cron_time' === $key_name ) {
 						$sct_options[ $key_name ] = '19:00';
 					}
 				} elseif ( 'slack' === $key_name || 'discord' === $key_name || 'chatwork' === $key_name ) {
