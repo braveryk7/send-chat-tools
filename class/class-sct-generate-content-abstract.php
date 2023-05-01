@@ -227,7 +227,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	}
 
 	/**
-	 * Get comment notify content.
+	 * Method to retrieve text to be used during content generation.
 	 *
 	 * @param string $type  Message type.
 	 * @param string $param Item parameter.
