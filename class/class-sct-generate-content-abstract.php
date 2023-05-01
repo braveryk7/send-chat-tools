@@ -188,13 +188,13 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 			${ "add_$value[attribute]$is_core" } .= "   $value[name] ( $value[current_version] -> $value[new_version] )\n";
 		};
 
-		$plain_update_message            = new stdClass();
-		$plain_update_message->core      = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
-		$plain_update_message->themes    = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
-		$plain_update_message->plugins   = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
-		$plain_update_message->admin_url = admin_url() . 'update-core.php';
+		$update_raw_data            = new stdClass();
+		$update_raw_data->core      = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
+		$update_raw_data->themes    = isset( $add_themes ) ? esc_html__( 'Themes:', 'send-chat-tools' ) . "\n" . $add_themes . "\n" : null;
+		$update_raw_data->plugins   = isset( $add_plugins ) ? esc_html__( 'Plugins:', 'send-chat-tools' ) . "\n" . $add_plugins . "\n" : null;
+		$update_raw_data->admin_url = admin_url() . 'update-core.php';
 
-		return $plain_update_message;
+		return $update_raw_data;
 	}
 
 	/**
