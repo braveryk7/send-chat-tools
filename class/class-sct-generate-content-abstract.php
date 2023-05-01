@@ -202,7 +202,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 *
 	 * @param array $rinker_exists_items Rinker exists items.
 	 */
-	protected function generate_rinker_content( array $rinker_exists_items ): string {
+	protected function format_rinker_items( array $rinker_exists_items ): string {
 		$format = $this->is_error_mail ? "    ・ %2\$s\n         %1\$s\n" : match ( $this->tool_name ) {
 			'slack'                => "    ・ <%s|%s>\n",
 			'discord', 'chatwork'  => "    ・ %2\$s - %1\$s\n",
