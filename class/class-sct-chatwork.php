@@ -161,13 +161,13 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	 * Generate Rinker content for Chatwork.
 	 */
 	public function generate_rinker_content(): Sct_Chatwork {
-		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'rinker_notify', 'title' ) );
-		$items          = $this->format_rinker_items( $this->original_data );
-		$after_message  = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
+		$header_message     = $this->generate_header_message( header_message: $this->get_send_text( 'rinker_notify', 'title' ) );
+		$discontinued_items = $this->format_rinker_items( $this->original_data );
+		$after_message      = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
 
 		$this->content = [
 			'body' =>
-				'[info]' . $header_message . $items . "\n" . $after_message . "\n" . $this->generate_context( $this->tool_name ) . '[/info]',
+				'[info]' . $header_message . $discontinued_items . "\n" . $after_message . "\n" . $this->generate_context( $this->tool_name ) . '[/info]',
 		];
 
 		return $this;

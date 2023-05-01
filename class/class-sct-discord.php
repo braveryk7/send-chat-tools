@@ -175,11 +175,11 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$header_emoji   = ':package:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'rinker_notify', 'title' ) );
 
-		$items = $this->format_rinker_items( $this->original_data );
+		$discontinued_items = $this->format_rinker_items( $this->original_data );
 
 		$after_message = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
 
-		$this->content = $header_message . "\n\n" . $items . "\n\n" . $after_message . "\n" . $this->generate_context( $this->tool_name );
+		$this->content = $header_message . "\n\n" . $discontinued_items . "\n\n" . $after_message . "\n" . $this->generate_context( $this->tool_name );
 
 		return $this;
 	}
