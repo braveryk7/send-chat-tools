@@ -36,7 +36,7 @@ class Sct_Activate extends Sct_Base {
 			'use'           => false,
 			'webhook_url'   => '',
 			'send_author'   => false,
-			'send_update'   => false,
+			'update_notify' => false,
 			'login_notify'  => false,
 			'rinker_notify' => false,
 			'log'           => [],
@@ -46,7 +46,7 @@ class Sct_Activate extends Sct_Base {
 			'api_token'     => '',
 			'room_id'       => '',
 			'send_author'   => false,
-			'send_update'   => false,
+			'update_notify' => false,
 			'login_notify'  => false,
 			'rinker_notify' => false,
 			'log'           => [],
@@ -87,6 +87,10 @@ class Sct_Activate extends Sct_Base {
 					}
 					if ( ! $sct_options[ $key_name ]['rinker_notify'] ) {
 						$sct_options[ $key_name ]['rinker_notify'] = true;
+					}
+					if ( $sct_options[ $key_name ]['send_update'] ) {
+						$sct_options[ $key_name ]['update_notify'] = $sct_options[ $key_name ]['send_update'];
+						unset( $sct_options[ $key_name ]['send_update'] );
 					}
 				}
 			}
@@ -153,13 +157,13 @@ class Sct_Activate extends Sct_Base {
 						$sct_options['chatwork']['send_author'] = (bool) $old_value;
 						break;
 					case 'send_slack_update':
-						$sct_options['slack']['send_update'] = (bool) $old_value;
+						$sct_options['slack']['update_notify'] = (bool) $old_value;
 						break;
 					case 'send_discord_update':
-						$sct_options['discord']['send_update'] = (bool) $old_value;
+						$sct_options['discord']['update_notify'] = (bool) $old_value;
 						break;
 					case 'send_chatwork_update':
-						$sct_options['chatwork']['send_update'] = (bool) $old_value;
+						$sct_options['chatwork']['update_notify'] = (bool) $old_value;
 						break;
 					case 'slack_log':
 						$sct_options['slack']['log'] = [];

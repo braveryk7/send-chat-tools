@@ -40,7 +40,7 @@ class Sct_Developer_Notify extends Sct_Base {
 					foreach ( $tools as $tool ) {
 						$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
 
-						if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['send_update'] ) {
+						if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['update_notify'] ) {
 							$this->call_chat_tool_class( $tool, 'generate_developer_content', 'dev_notify', $developer_message );
 						} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
 							$this->logger( 1001, $tool, '1' );
