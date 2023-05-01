@@ -158,7 +158,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate Rinker exists items content for Chatwork.
+	 * Generate Rinker content for Chatwork.
 	 */
 	public function generate_rinker_content(): Sct_Chatwork {
 		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'rinker_notify', 'title' ) );

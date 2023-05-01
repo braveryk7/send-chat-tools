@@ -268,7 +268,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate Rinker exists items content for Slack.
+	 * Generate Rinker content for Slack.
 	 */
 	public function generate_rinker_content(): Sct_Slack {
 		$header_emoji   = ':package:';

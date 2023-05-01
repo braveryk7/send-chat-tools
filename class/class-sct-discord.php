@@ -169,7 +169,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate Rinker exists items content for Discord.
+	 * Generate Rinker content for Discord.
 	 */
 	public function generate_rinker_content(): Sct_Discord {
 		$header_emoji   = ':package:';
