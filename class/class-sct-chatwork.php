@@ -129,7 +129,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	/**
 	 * Generate login message for Slack.
 	 */
-	public function generate_login_message(): Sct_Chatwork {
+	public function generate_login_content(): Sct_Chatwork {
 		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'login_notify', 'title' ) );
 
 		$user_name       = $this->original_data->data->user_login;

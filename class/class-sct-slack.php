@@ -229,7 +229,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	/**
 	 * Generate login message for Slack.
 	 */
-	public function generate_login_message(): Sct_Slack {
+	public function generate_login_content(): Sct_Slack {
 		$header_emoji   = ':door:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'login_notify', 'title' ) );
 

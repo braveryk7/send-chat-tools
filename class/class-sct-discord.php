@@ -141,7 +141,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	/**
 	 * Generate login message for Slack.
 	 */
-	public function generate_login_message(): Sct_Discord {
+	public function generate_login_content(): Sct_Discord {
 		$header_emoji   = ':unlock:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'login_notify', 'title' ) );
 
