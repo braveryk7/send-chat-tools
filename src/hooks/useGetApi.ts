@@ -23,7 +23,7 @@ export const useGetApi = (
 
 	useEffect( () => {
 		apiFetch< boolean >(
-			{ path: '/send-chat-tools/v1/rinker-exists' }
+			{ path: '/send-chat-tools/v1/is-rinker-activated' }
 		).then( ( response ) => {
 			setApiError( false );
 			setIsRinkerExists( response );
