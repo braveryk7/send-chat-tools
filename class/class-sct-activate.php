@@ -88,6 +88,10 @@ class Sct_Activate extends Sct_Base {
 					if ( ! $sct_options[ $key_name ]['rinker_notify'] ) {
 						$sct_options[ $key_name ]['rinker_notify'] = true;
 					}
+					if ( $sct_options[ $key_name ]['send_update'] ) {
+						$sct_options[ $key_name ]['update_notify'] = $sct_options[ $key_name ]['send_update'];
+						unset( $sct_options[ $key_name ]['send_update'] );
+					}
 				}
 			}
 			$this->set_sct_options( $sct_options );
