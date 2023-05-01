@@ -30,16 +30,16 @@ class Sct_Check_Rinker extends Sct_Base {
 	 * Controller method called by WP-Cron that executes the check_rinker_discontinued_items method and calls each chat class.
 	 */
 	public function controller() {
-		$exists_items = $this->check_rinker_discontinued_items();
+		$discontinued_items = $this->check_rinker_discontinued_items();
 
-		if ( ! empty( $exists_items ) ) {
+		if ( ! empty( $discontinued_items ) ) {
 			$sct_options = $this->get_sct_options();
 
 			foreach ( $this->get_chat_tools() as $tool ) {
 				$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
 
 				if ( $sct_options[ $tool ]['use'] && $sct_options[ $tool ]['rinker_notify'] ) {
-					$this->call_chat_tool_class( $tool, 'generate_rinker_message', 'rinker_notify', $exists_items );
+					$this->call_chat_tool_class( $tool, 'generate_rinker_message', 'rinker_notify', $discontinued_items );
 				} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
 					$this->logger( 1001, $tool, '1' );
 				} elseif ( 'chatwork' === $tool && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
