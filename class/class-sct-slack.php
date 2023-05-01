@@ -47,7 +47,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Abstract method to create comment data to be sent to chat tools.
+	 * Generate comment content for Slack.
 	 */
 	public function generate_comment_content(): Sct_Slack {
 		$article_title  = get_the_title( $this->original_data->comment_post_ID );
@@ -82,7 +82,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate update notifications for Slack.
+	 * Generate update content for Slack.
 	 */
 	public function generate_update_content(): Sct_Slack {
 		$plain_data = $this->generate_plain_update_message( $this->original_data );
@@ -145,7 +145,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate developer message for Slack.
+	 * Generate developer content for Slack.
 	 */
 	public function generate_developer_content(): Sct_Slack {
 		if ( isset( $this->original_data['title'] ) && isset( $this->original_data['message'] ) && array_key_exists( 'url', $this->original_data ) ) {
@@ -227,7 +227,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate login message for Slack.
+	 * Generate login content for Slack.
 	 */
 	public function generate_login_content(): Sct_Slack {
 		$header_emoji   = ':door:';
@@ -268,7 +268,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate Rinker exists items message for Slack.
+	 * Generate Rinker exists items content for Slack.
 	 */
 	public function generate_rinker_content(): Sct_Slack {
 		$header_emoji   = ':package:';
