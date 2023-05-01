@@ -196,7 +196,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	/**
 	 * Generate Rinker notify for Error Mail.
 	 */
-	public function generate_rinker_message(): Sct_Error_Mail {
+	public function generate_rinker_content(): Sct_Error_Mail {
 		$this->mail_title = $this->get_send_text( 'rinker_notify', 'title' );
 
 		$items = $this->format_rinker_items( $this->original_data );
