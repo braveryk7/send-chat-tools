@@ -85,7 +85,7 @@ export const useTabItems = ( props: TabItemsType ) => {
 				},
 				{
 					itemKey,
-					optionName: 'send_update',
+					optionName: 'update_notify',
 					label: __( 'Use Update notify', 'send-chat-tools' ),
 				},
 				{
