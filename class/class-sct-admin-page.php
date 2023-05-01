@@ -130,7 +130,7 @@ class Sct_Admin_Page extends Sct_Base {
 			'/rinker-exists',
 			[
 				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'check_rinker_exists' ],
+				'callback'            => [ $this, 'is_rinker_activated' ],
 				'permission_callback' => [ $this, 'get_wordpress_permission' ],
 			]
 		);
@@ -183,7 +183,7 @@ class Sct_Admin_Page extends Sct_Base {
 	/**
 	 * Check if Rinker is activated.
 	 */
-	public function check_rinker_exists(): WP_REST_Response {
+	public function is_rinker_activated(): WP_REST_Response {
 		$get_plugins         = get_option( 'active_plugins' );
 		$is_rinker_activated = false;
 
