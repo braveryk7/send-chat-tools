@@ -184,17 +184,17 @@ class Sct_Admin_Page extends Sct_Base {
 	 * Check if Rinker is activated.
 	 */
 	public function check_rinker_exists(): WP_REST_Response {
-		$get_plugins   = get_option( 'active_plugins' );
-		$rinker_exists = false;
+		$get_plugins         = get_option( 'active_plugins' );
+		$is_rinker_activated = false;
 
 		foreach ( $get_plugins as $value ) {
 			if ( 'yyi-rinker/yyi-rinker.php' === $value ) {
-				$rinker_exists = true;
+				$is_rinker_activated = true;
 				continue;
 			}
 		}
 
-		return new WP_REST_Response( $rinker_exists, 200 );
+		return new WP_REST_Response( $is_rinker_activated, 200 );
 	}
 
 	/**
