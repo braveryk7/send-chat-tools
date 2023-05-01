@@ -100,7 +100,7 @@ class Sct_Check_Rinker extends Sct_Base {
 					wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_rinker_exists_items_check' );
 				}
 			} else {
-				$sct_options['check_rinker_exists_items_cron'] = '19:00';
+				$sct_options['rinker_cron_time'] = '19:00';
 				$this->set_sct_options( $sct_options );
 			}
 		}
