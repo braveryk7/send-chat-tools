@@ -11,7 +11,7 @@ import { TogglePropsType } from 'src/types/ComponentsType';
 export const Toggle = ( props: TogglePropsType ) => {
 	const { itemKey, optionName, label } = props;
 	const { apiData, changeValue } = useChangeValue( itemKey, optionName );
-	const { isRinkerExists } = useContext( apiContext );
+	const { isRinkerActivated } = useContext( apiContext );
 
 	const isOptionNameRinker = () => {
 		return 'rinker_notify' === optionName ? true : false;
@@ -31,14 +31,14 @@ export const Toggle = ( props: TogglePropsType ) => {
 				<ToggleControl
 					label={ label }
 					checked={ apiData[ itemKey ][ optionName ] }
-					disabled={ isOptionNameRinker() && ! isRinkerExists }
+					disabled={ isOptionNameRinker() && ! isRinkerActivated }
 					onChange={ ( value ) => {
 						changeValue( value );
 					} }
 				/>
 			}
 			{
-				isOptionNameRinker() && ! isRinkerExists &&
+				isOptionNameRinker() && ! isRinkerActivated &&
 					<div className="sct-rinker-notice">
 						<p>
 							{ rinkerExistMessage + ' ' + rinkerRecommendMessage } <br />
