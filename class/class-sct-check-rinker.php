@@ -27,7 +27,7 @@ class Sct_Check_Rinker extends Sct_Base {
 	}
 
 	/**
-	 * Controller method called by WP-Cron that executes the check_rinker_exists_items method and calls each chat class.
+	 * Controller method called by WP-Cron that executes the check_rinker_discontinued_items method and calls each chat class.
 	 */
 	public function controller() {
 		$exists_items = $this->check_rinker_discontinued_items();
@@ -49,7 +49,7 @@ class Sct_Check_Rinker extends Sct_Base {
 		}
 	}
 	/**
-	 * Check Amazon and Rakuten for discontinued products for Rinker.
+	 * Check Amazon and Rakuten for discontinued items for Rinker.
 	 */
 	public function check_rinker_discontinued_items(): array {
 		$exists_items = [];
