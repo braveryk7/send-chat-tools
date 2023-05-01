@@ -200,9 +200,9 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
 	 * A method to format the list of items that are no longer handled by Rinker into a string type.
 	 *
-	 * @param array $rinker_exists_items Rinker exists items.
+	 * @param array $rinker_discontinued_items Rinker discontinued items.
 	 */
-	protected function format_rinker_items( array $rinker_exists_items ): string {
+	protected function format_rinker_items( array $rinker_discontinued_items ): string {
 		$format = $this->is_error_mail ? "    ・ %2\$s\n         %1\$s\n" : match ( $this->tool_name ) {
 			'slack'                => "    ・ <%s|%s>\n",
 			'discord', 'chatwork'  => "    ・ %2\$s - %1\$s\n",
@@ -211,7 +211,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		$amazon  = '';
 		$rakuten = '';
 
-		foreach ( $rinker_exists_items as $item ) {
+		foreach ( $rinker_discontinued_items as $item ) {
 			if ( 'amazon' === $item['item_shop'] ) {
 				$amazon = $amazon . sprintf( $format, $item['item_url'], $item['item_name'] );
 			} elseif ( 'rakuten' === $item['item_shop'] ) {
