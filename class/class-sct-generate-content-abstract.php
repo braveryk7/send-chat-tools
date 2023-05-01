@@ -312,21 +312,21 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 * Methods to send to chat tools.
 	 *
 	 * @param string $notification_type Notification type.
-	 * @param string $tool              Use chat tools prefix.
+	 * @param string $tool_name         Use chat tools prefix.
 	 */
-	public function send_tools( string $notification_type, string $tool ): bool {
+	public function send_tools( string $notification_type, string $tool_name ): bool {
 
 		$sct_options = $this->get_sct_options();
 
-		switch ( $tool ) {
+		switch ( $tool_name ) {
 			case 'slack':
 			case 'discord':
-				$url   = $sct_options[ $tool ]['webhook_url'];
-				$regex = $this->api_regex( $tool, $url );
+				$url   = $sct_options[ $tool_name ]['webhook_url'];
+				$regex = $this->api_regex( $tool_name, $url );
 				break;
 			case 'chatwork':
-				$url   = 'https://api.chatwork.com/v2/rooms/' . $sct_options[ $tool ]['room_id'] . '/messages';
-				$regex = $this->api_regex( 'chatworkid', $sct_options[ $tool ]['room_id'] );
+				$url   = 'https://api.chatwork.com/v2/rooms/' . $sct_options[ $tool_name ]['room_id'] . '/messages';
+				$regex = $this->api_regex( 'chatworkid', $sct_options[ $tool_name ]['room_id'] );
 				break;
 		}
 
@@ -345,10 +345,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 					],
 				];
 
-				if ( '3' <= count( $sct_options[ $tool ]['log'] ) ) {
-					array_pop( $sct_options[ $tool ]['log'] );
+				if ( '3' <= count( $sct_options[ $tool_name ]['log'] ) ) {
+					array_pop( $sct_options[ $tool_name ]['log'] );
 				}
-				$sct_options[ $tool ]['log'] = $logs + $sct_options[ $tool ]['log'];
+				$sct_options[ $tool_name ]['log'] = $logs + $sct_options[ $tool_name ]['log'];
 				$this->set_sct_options( $sct_options );
 			}
 		}
@@ -361,10 +361,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 
 		if ( 200 !== $status_code && 204 !== $status_code ) {
 			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
-			$this->call_error_mail_class( $status_code, $tool );
+			$this->call_error_mail_class( $status_code, $tool_name );
 		}
 
-		return $this->logger( $status_code, $tool, $notification_type );
+		return $this->logger( $status_code, $tool_name, $notification_type );
 	}
 
 	/**
