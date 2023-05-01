@@ -76,7 +76,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	 * Generate update content for Discord.
 	 */
 	public function generate_update_content(): Sct_Discord {
-		$plain_data = $this->generate_update_raw_data( $this->original_data );
+		$raw_data = $this->generate_update_raw_data( $this->original_data );
 
 		$header_emoji    = ':zap:';
 		$header_message  = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update_notify', 'title' ) );
@@ -84,22 +84,22 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$themes_content  = null;
 		$plugins_content = null;
 
-		if ( $plain_data->core ) {
-			$core_content = ':star: ' . $plain_data->core;
+		if ( $raw_data->core ) {
+			$core_content = ':star: ' . $raw_data->core;
 		}
 
-		if ( $plain_data->themes ) {
-			$themes_content = ':art: ' . $plain_data->themes;
+		if ( $raw_data->themes ) {
+			$themes_content = ':art: ' . $raw_data->themes;
 		}
 
-		if ( $plain_data->plugins ) {
-			$plugins_content = ':wrench: ' . $plain_data->plugins;
+		if ( $raw_data->plugins ) {
+			$plugins_content = ':wrench: ' . $raw_data->plugins;
 		}
 
 		$this->content =
 			$header_message . "\n\n" .
 			$core_content . $themes_content . $plugins_content .
-			$this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ': <' . $plain_data->admin_url . '>' . "\n\n" .
+			$this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ': <' . $raw_data->admin_url . '>' . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
 		return $this;

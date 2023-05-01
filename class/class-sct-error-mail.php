@@ -110,13 +110,13 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	public function generate_update_content(): Sct_Error_Mail {
 		$this->mail_title = $this->get_send_text( 'update_notify', 'title' );
 
-		$plain_data = $this->generate_update_raw_data( $this->original_data );
+		$raw_data = $this->generate_update_raw_data( $this->original_data );
 
 		$header_message = $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'update_notify', 'title' );
 
 		$this->content =
-			$header_message . "\n\n" . $plain_data->core . $plain_data->themes . $plain_data->plugins .
-			$this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ': ' . $plain_data->admin_url . "\n\n" .
+			$header_message . "\n\n" . $raw_data->core . $raw_data->themes . $raw_data->plugins .
+			$this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ': ' . $raw_data->admin_url . "\n\n" .
 			$this->generate_context( 'error_mail' ) . "\n" .
 			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
 			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;

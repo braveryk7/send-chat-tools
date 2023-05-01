@@ -75,18 +75,18 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	 * Generate update content for Chatwork.
 	 */
 	public function generate_update_content(): Sct_Chatwork {
-		$plain_data = $this->generate_update_raw_data( $this->original_data );
+		$raw_data = $this->generate_update_raw_data( $this->original_data );
 
-		$core    = isset( $plain_data->core ) ? rtrim( $plain_data->core ) . '[hr]' : $plain_data->core;
-		$themes  = isset( $plain_data->themes ) ? rtrim( $plain_data->themes ) . '[hr]' : $plain_data->themes;
-		$plugins = isset( $plain_data->plugins ) ? rtrim( $plain_data->plugins ) . '[hr]' : $plain_data->plugins;
+		$core    = isset( $raw_data->core ) ? rtrim( $raw_data->core ) . '[hr]' : $raw_data->core;
+		$themes  = isset( $raw_data->themes ) ? rtrim( $raw_data->themes ) . '[hr]' : $raw_data->themes;
+		$plugins = isset( $raw_data->plugins ) ? rtrim( $raw_data->plugins ) . '[hr]' : $raw_data->plugins;
 
 		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'update_notify', 'title' ) );
 
 		$this->content = [
 			'body' =>
 				'[info]' . $header_message . $core . $themes . $plugins .
-				$this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ': ' . $plain_data->admin_url . "\n" .
+				$this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ': ' . $raw_data->admin_url . "\n" .
 				$this->generate_context( $this->tool_name ) . '[/info]',
 		];
 		return $this;

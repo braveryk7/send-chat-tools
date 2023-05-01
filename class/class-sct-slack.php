@@ -85,11 +85,11 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 * Generate update content for Slack.
 	 */
 	public function generate_update_content(): Sct_Slack {
-		$plain_data = $this->generate_update_raw_data( $this->original_data );
+		$raw_data = $this->generate_update_raw_data( $this->original_data );
 
 		$header_emoji   = ':zap:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update_notify', 'title' ) );
-		$update_message = $this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ": <{$plain_data->admin_url}>";
+		$update_message = $this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ": <{$raw_data->admin_url}>";
 		$context        = $this->generate_context( $this->tool_name );
 
 		$message = [
@@ -99,30 +99,30 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 			],
 		];
 
-		if ( isset( $plain_data->core ) ) {
+		if ( isset( $raw_data->core ) ) {
 			$core_message = [
 				'blocks' => [
-					$this->single_column( 'mrkdwn', ':star: ' . $plain_data->core ),
+					$this->single_column( 'mrkdwn', ':star: ' . $raw_data->core ),
 				],
 			];
 
 			$message = array_merge_recursive( $message, $core_message );
 		}
 
-		if ( isset( $plain_data->themes ) ) {
+		if ( isset( $raw_data->themes ) ) {
 			$themes_message = [
 				'blocks' => [
-					$this->single_column( 'mrkdwn', ':art: ' . $plain_data->themes ),
+					$this->single_column( 'mrkdwn', ':art: ' . $raw_data->themes ),
 				],
 			];
 
 			$message = array_merge_recursive( $message, $themes_message );
 		}
 
-		if ( isset( $plain_data->plugins ) ) {
+		if ( isset( $raw_data->plugins ) ) {
 			$plugins_message = [
 				'blocks' => [
-					$this->single_column( 'mrkdwn', ':wrench: ' . $plain_data->plugins ),
+					$this->single_column( 'mrkdwn', ':wrench: ' . $raw_data->plugins ),
 				],
 			];
 
