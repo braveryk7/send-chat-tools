@@ -311,10 +311,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
 	 * Methods to send to chat tools.
 	 *
-	 * @param string $id      ID(Comment/Update).
-	 * @param string $tool    Use chat tools prefix.
+	 * @param string $notification_type Notification type.
+	 * @param string $tool              Use chat tools prefix.
 	 */
-	public function send_tools( string $id, string $tool ): bool {
+	public function send_tools( string $notification_type, string $tool ): bool {
 
 		$sct_options = $this->get_sct_options();
 
@@ -364,7 +364,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 			$this->call_error_mail_class( $status_code, $tool );
 		}
 
-		return $this->logger( $status_code, $tool, $id );
+		return $this->logger( $status_code, $tool, $notification_type );
 	}
 
 	/**
