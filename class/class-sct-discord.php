@@ -139,7 +139,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate login message for Slack.
+	 * Generate login message for Discord.
 	 */
 	public function generate_login_content(): Sct_Discord {
 		$header_emoji   = ':unlock:';
