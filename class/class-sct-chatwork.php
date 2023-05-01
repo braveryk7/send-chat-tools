@@ -81,12 +81,12 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 		$themes  = isset( $plain_data->themes ) ? rtrim( $plain_data->themes ) . '[hr]' : $plain_data->themes;
 		$plugins = isset( $plain_data->plugins ) ? rtrim( $plain_data->plugins ) . '[hr]' : $plain_data->plugins;
 
-		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'update', 'title' ) );
+		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'update_notify', 'title' ) );
 
 		$this->content = [
 			'body' =>
 				'[info]' . $header_message . $core . $themes . $plugins .
-				$this->get_send_text( 'update', 'update' ) . "\n" . $this->get_send_text( 'update', 'page' ) . ': ' . $plain_data->admin_url . "\n" .
+				$this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ': ' . $plain_data->admin_url . "\n" .
 				$this->generate_context( $this->tool_name ) . '[/info]',
 		];
 		return $this;

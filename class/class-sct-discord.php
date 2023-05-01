@@ -79,7 +79,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$plain_data = $this->generate_plain_update_message( $this->original_data );
 
 		$header_emoji    = ':zap:';
-		$header_message  = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update', 'title' ) );
+		$header_message  = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update_notify', 'title' ) );
 		$core_content    = null;
 		$themes_content  = null;
 		$plugins_content = null;
@@ -99,7 +99,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 		$this->content =
 			$header_message . "\n\n" .
 			$core_content . $themes_content . $plugins_content .
-			$this->get_send_text( 'update', 'update' ) . "\n" . $this->get_send_text( 'update', 'page' ) . ': <' . $plain_data->admin_url . '>' . "\n\n" .
+			$this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ': <' . $plain_data->admin_url . '>' . "\n\n" .
 			$this->generate_context( $this->tool_name );
 
 		return $this;

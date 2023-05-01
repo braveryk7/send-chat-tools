@@ -249,7 +249,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'click'      => esc_html__( 'Click here to approve', 'send-chat-tools' ),
 				'spam'       => esc_html__( 'Spam', 'send-chat-tools' ),
 			],
-			'update'        => [
+			'update_notify' => [
 				'title'  => esc_html__( 'Notification of new updates', 'send-chat-tools' ),
 				'update' => esc_html__( 'Please login to the admin panel to update.', 'send-chat-tools' ),
 				'page'   => esc_html__( 'Update Page', 'send-chat-tools' ),
