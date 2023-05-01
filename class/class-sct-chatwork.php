@@ -75,7 +75,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 	 * Generate update content for Chatwork.
 	 */
 	public function generate_update_content(): Sct_Chatwork {
-		$plain_data = $this->generate_plain_update_message( $this->original_data );
+		$plain_data = $this->generate_update_raw_data( $this->original_data );
 
 		$core    = isset( $plain_data->core ) ? rtrim( $plain_data->core ) . '[hr]' : $plain_data->core;
 		$themes  = isset( $plain_data->themes ) ? rtrim( $plain_data->themes ) . '[hr]' : $plain_data->themes;

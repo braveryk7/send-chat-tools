@@ -110,7 +110,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	public function generate_update_content(): Sct_Error_Mail {
 		$this->mail_title = $this->get_send_text( 'update_notify', 'title' );
 
-		$plain_data = $this->generate_plain_update_message( $this->original_data );
+		$plain_data = $this->generate_update_raw_data( $this->original_data );
 
 		$header_message = $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'update_notify', 'title' );
 

@@ -85,7 +85,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	 * Generate update content for Slack.
 	 */
 	public function generate_update_content(): Sct_Slack {
-		$plain_data = $this->generate_plain_update_message( $this->original_data );
+		$plain_data = $this->generate_update_raw_data( $this->original_data );
 
 		$header_emoji   = ':zap:';
 		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update_notify', 'title' ) );

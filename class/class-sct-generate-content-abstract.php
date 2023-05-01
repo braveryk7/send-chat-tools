@@ -178,7 +178,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 *
 	 * @param array $update_content Update data.
 	 */
-	protected function generate_plain_update_message( array $update_content ): stdClass {
+	protected function generate_update_raw_data( array $update_content ): stdClass {
 		$add_core    = null;
 		$add_themes  = null;
 		$add_plugins = null;
