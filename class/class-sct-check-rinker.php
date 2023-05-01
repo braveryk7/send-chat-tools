@@ -52,7 +52,7 @@ class Sct_Check_Rinker extends Sct_Base {
 	 * Check Amazon and Rakuten for discontinued items for Rinker.
 	 */
 	public function check_rinker_discontinued_items(): array {
-		$exists_items = [];
+		$discontinued_items = [];
 
 		foreach ( [ 'amazon', 'rakuten' ] as $shop ) {
 			$query = new WP_Query(
@@ -68,7 +68,7 @@ class Sct_Check_Rinker extends Sct_Base {
 				$query->the_post();
 				$item = get_post();
 
-				$exists_items[ $item->ID ] = [
+				$discontinued_items[ $item->ID ] = [
 					'item_id'   => $item->ID,
 					'item_shop' => $shop,
 					'item_name' => $item->post_title,
@@ -78,7 +78,7 @@ class Sct_Check_Rinker extends Sct_Base {
 			wp_reset_postdata();
 		}
 
-		return $exists_items;
+		return $discontinued_items;
 	}
 
 	/**
