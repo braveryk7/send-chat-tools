@@ -24,7 +24,7 @@ export type ChatToolsBaseType = {
 
 export type ChatLogType = {
 	[ key: string ]: {
-		author: string,
+		commenter: string,
 		comment: string,
 		email: string,
 		status: number,

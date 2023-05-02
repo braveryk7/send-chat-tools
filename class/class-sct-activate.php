@@ -92,6 +92,14 @@ class Sct_Activate extends Sct_Base {
 						$sct_options[ $key_name ]['update_notify'] = $sct_options[ $key_name ]['send_update'];
 						unset( $sct_options[ $key_name ]['send_update'] );
 					}
+					if ( $sct_options[ $key_name ]['log'] ) {
+						foreach ( $sct_options[ $key_name ]['log'] as $key => $log ) {
+							if ( array_key_exists( 'author', $log ) ) {
+								$sct_options[ $key_name ]['log'][ $key ]['commenter'] = $log['author'];
+								unset( $sct_options [ $key_name ]['log'][ $key ]['author'] );
+							}
+						}
+					}
 				}
 			}
 			$this->set_sct_options( $sct_options );
