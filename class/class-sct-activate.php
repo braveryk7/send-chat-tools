@@ -82,13 +82,13 @@ class Sct_Activate extends Sct_Base {
 						$sct_options[ $key_name ] = '19:00';
 					}
 				} elseif ( 'slack' === $key_name || 'discord' === $key_name || 'chatwork' === $key_name ) {
-					if ( ! $sct_options[ $key_name ]['login_notify'] ) {
+					if ( ! array_key_exists( 'login_notify', $sct_options[ $key_name ] ) ) {
 						$sct_options[ $key_name ]['login_notify'] = true;
 					}
-					if ( ! $sct_options[ $key_name ]['rinker_notify'] ) {
+					if ( ! array_key_exists( 'rinker_notify', $sct_options[ $key_name ] ) ) {
 						$sct_options[ $key_name ]['rinker_notify'] = true;
 					}
-					if ( $sct_options[ $key_name ]['send_update'] ) {
+					if ( array_key_exists( 'send_update', $sct_options[ $key_name ] ) ) {
 						$sct_options[ $key_name ]['update_notify'] = $sct_options[ $key_name ]['send_update'];
 						unset( $sct_options[ $key_name ]['send_update'] );
 					}
