@@ -30,7 +30,7 @@ export const LogDetail = ( props: { itemKey: ChatToolsItemKeyType } ) => {
 							{ `${ __(
 								'Commenter',
 								'send-chat-tools'
-							) }: ${ value.author } <${ value.email }>` }
+							) }: ${ value.commenter } <${ value.email }>` }
 						</CardHeader>
 						<CardBody className="sct-tools-log-body">
 							{ value.comment }
