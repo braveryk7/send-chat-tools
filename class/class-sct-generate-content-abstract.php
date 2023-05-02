@@ -279,6 +279,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'temporary' => __( 'Amazon and Rakuten may have temporarily withdrawn sales.', 'send-chat-tools' ),
 				'resume'    => __( 'Note that sales may resume after this notice is received, and there is no promise of an end of sales.', 'send-chat-tools' ),
 			],
+			'error_mail'     => [
+				'tool_name'  => __( 'Tool name', 'send-chat-tools' ),
+				'error_code' => __( 'Error code', 'send-chat-tools' ),
+			],
 		];
 
 		return $message[ $type ][ $param ];
