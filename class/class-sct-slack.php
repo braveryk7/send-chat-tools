@@ -57,7 +57,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 		$header_emoji     = ':mailbox_with_mail:';
 		$header_message   = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment_notify', 'title' ) );
 		$comment_article  = '*' . $this->get_send_text( 'comment_notify', 'article' ) . ": *<{$article_url}|{$article_title}>";
-		$author           = '*' . $this->get_send_text( 'comment_notify', 'commenter' ) . "*\n{$this->original_data->comment_author}<{$this->original_data->comment_author_email}>";
+		$commenter        = '*' . $this->get_send_text( 'comment_notify', 'commenter' ) . "*\n{$this->original_data->comment_author}<{$this->original_data->comment_author_email}>";
 		$date             = '*' . $this->get_send_text( 'constant', 'date' ) . "*\n{$this->original_data->comment_date}";
 		$comment_content  = '*' . $this->get_send_text( 'comment_notify', 'comment' ) . "*\n{$this->original_data->comment_content}";
 		$comment_url      = '*' . $this->get_send_text( 'comment_notify', 'url' ) . "*\n{$article_url}#comment-{$this->original_data->comment_ID}";
@@ -70,7 +70,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 				$this->header( 'plain_text', $header_message, true ),
 				$this->single_column( 'mrkdwn', $comment_article ),
 				$this->divider(),
-				$this->two_column( [ 'mrkdwn', $author ], [ 'mrkdwn', $date ] ),
+				$this->two_column( [ 'mrkdwn', $commenter ], [ 'mrkdwn', $date ] ),
 				$this->single_column( 'mrkdwn', $comment_content ),
 				$this->two_column( [ 'mrkdwn', $comment_url ], [ 'mrkdwn', $comment_statuses ] ),
 				$this->divider(),
