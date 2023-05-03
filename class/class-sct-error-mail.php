@@ -213,6 +213,13 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
+	 * Method to generate tool name and error code for error mail.
+	 */
+	private function generate_error_message(): string {
+		return __( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" . __( 'Error code:', 'send-chat-tools' ) . $this->error_code;
+	}
+
+	/**
 	 * Send mail.
 	 */
 	public function send_mail(): void {
