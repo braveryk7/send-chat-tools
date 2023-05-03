@@ -86,7 +86,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 		$article_title  = get_the_title( $this->original_data->comment_post_ID );
 		$article_url    = get_permalink( $this->original_data->comment_post_ID );
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $this->original_data );
-		$header_message = $this->site_name . '(' . $this->site_url . ') ' . $this->get_send_text( 'comment_notify', 'title' );
+		$header_message = $this->generate_header_message( header_message: $this->get_send_text( 'comment_notify', 'title' ) );
 
 		$this->content =
 			$header_message . "\n\n" .
