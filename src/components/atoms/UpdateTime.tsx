@@ -1,6 +1,9 @@
-import { useEffect, useState } from '@wordpress/element';
+import { useContext, useEffect, useState } from '@wordpress/element';
 
+import { RinkerNotActive } from 'src/components/atoms/RinkerNotActive';
 import { useChangeValue } from 'src/hooks/useChangeValue';
+import { apiContext } from 'src/index';
+
 type timeItemKey = 'cron_time' | 'rinker_cron_time';
 
 export const UpdateTime = (
@@ -9,6 +12,7 @@ export const UpdateTime = (
 	const { itemKey, title, id, message } = props;
 	const { apiData, changeValue } = useChangeValue( itemKey );
 	const [ inputValue, setInputValue ] = useState( '' );
+	const { isRinkerActivated } = useContext( apiContext );
 
 	useEffect( () => {
 		if ( apiData ) {
@@ -20,6 +24,10 @@ export const UpdateTime = (
 		}
 	}, [ apiData, itemKey ] );
 
+	const isItemKeyNameRinker = ( itemKeyName: timeItemKey ): boolean => {
+		return 'rinker_cron_time' === itemKeyName ? true : false;
+	};
+
 	return (
 		<>
 			<h4>{ title }</h4>
@@ -28,11 +36,15 @@ export const UpdateTime = (
 					id={ id }
 					className="update-time"
 					type="time"
+					disabled={ isItemKeyNameRinker( itemKey ) && ! isRinkerActivated }
 					value={ inputValue }
 					onChange={ ( newTime ) => changeValue( newTime ) }
 				/>
 			) }
 			{ message }
+			{
+				isItemKeyNameRinker( itemKey ) && ! isRinkerActivated && <RinkerNotActive />
+			}
 		</>
 	);
 };
