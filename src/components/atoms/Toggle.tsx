@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 
-import { ExternalLink, ToggleControl } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { ToggleControl } from '@wordpress/components';
 
+import { RinkerNotActive } from 'src/components/atoms/RinkerNotActive';
 import { useChangeValue } from 'src/hooks/useChangeValue';
 import { apiContext } from 'src/index';
-import { isOptionNameRinker, rinkerMessages } from 'src/utils/rinkerUtils';
+import { isOptionNameRinker } from 'src/utils/rinkerUtils';
 
 import { TogglePropsType } from 'src/types/ComponentsType';
 
@@ -13,12 +13,6 @@ export const Toggle = ( props: TogglePropsType ) => {
 	const { itemKey, optionName, label } = props;
 	const { apiData, changeValue } = useChangeValue( itemKey, optionName );
 	const { isRinkerActivated } = useContext( apiContext );
-	const [
-		rinkerExistMessage,
-		rinkerRecommendMessage,
-		rinkerUrl,
-		rinkerFanboxUrl,
-	] = rinkerMessages();
 
 	return (
 		<>
@@ -33,28 +27,7 @@ export const Toggle = ( props: TogglePropsType ) => {
 				/>
 			}
 			{
-				isOptionNameRinker( optionName ) && ! isRinkerActivated &&
-					<div className="sct-rinker-notice">
-						<p>
-							{ rinkerExistMessage + ' ' + rinkerRecommendMessage } <br />
-							{ __( 'Download', 'send-chat-tools' ) + ' >>> ' }
-							{ 'string' === typeof rinkerUrl &&
-								<ExternalLink
-									href={ rinkerUrl }
-								>
-									{ __( 'Rinker Official Web Site', 'send-chat-tools' ) }
-								</ExternalLink>
-							}
-							{ ' / ' }
-							{ 'string' === typeof rinkerFanboxUrl &&
-								<ExternalLink
-									href={ rinkerFanboxUrl }
-								>
-									{ __( 'Rinker Official FANBOX', 'send-chat-tools' ) }
-								</ExternalLink>
-							}
-						</p>
-					</div>
+				isOptionNameRinker( optionName ) && ! isRinkerActivated && <RinkerNotActive />
 			}
 		</>
 	);
