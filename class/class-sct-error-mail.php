@@ -121,7 +121,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_developer_content(): Sct_Error_Mail {
 		$this->mail_title = $this->generate_header_message(
-			header_message: sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ) )
+			header_message: sprintf( $this->get_send_text( 'dev_notify', 'title' ), $this->original_data['title'] )
 		);
 
 		$content = '';

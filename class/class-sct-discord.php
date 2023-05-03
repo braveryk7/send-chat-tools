@@ -110,7 +110,7 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	 */
 	public function generate_developer_content(): Sct_Discord {
 		if ( isset( $this->original_data['title'] ) && isset( $this->original_data['message'] ) && array_key_exists( 'url', $this->original_data ) ) {
-			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
+			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), $this->original_data['title'] );
 			$content       = '';
 
 			$i = 0;
