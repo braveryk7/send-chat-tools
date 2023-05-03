@@ -24,8 +24,8 @@ export const UpdateTime = (
 		}
 	}, [ apiData, itemKey ] );
 
-	const isItemKeyNameRinker = ( itemKeyName: timeItemKey ): boolean => {
-		return 'rinker_cron_time' === itemKeyName ? true : false;
+	const isItemKeyNameRinker = (): boolean => {
+		return 'rinker_cron_time' === itemKey ? true : false;
 	};
 
 	return (
@@ -36,14 +36,14 @@ export const UpdateTime = (
 					id={ id }
 					className="update-time"
 					type="time"
-					disabled={ isItemKeyNameRinker( itemKey ) && ! isRinkerActivated }
+					disabled={ isItemKeyNameRinker() && ! isRinkerActivated }
 					value={ inputValue }
 					onChange={ ( newTime ) => changeValue( newTime ) }
 				/>
 			) }
 			{ message }
 			{
-				isItemKeyNameRinker( itemKey ) && ! isRinkerActivated && <RinkerNotActive />
+				isItemKeyNameRinker() && ! isRinkerActivated && <RinkerNotActive />
 			}
 		</>
 	);
