@@ -145,9 +145,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 */
 	protected function generate_header_message( string $header_emoji = null, string $header_message ): string {
 		return match ( $this->tool_name ) {
-			'slack'    => "{$header_emoji} {$this->site_name}({$this->site_url}) " . $header_message,
-			'discord'  => "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $header_message . '***__',
-			'chatwork' => '[title]' . $this->site_name . '(' . $this->site_url . ') ' . $header_message . '[/title]',
+			'slack'      => "{$header_emoji} {$this->site_name}({$this->site_url}) " . $header_message,
+			'discord'    => "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $header_message . '***__',
+			'chatwork'   => '[title]' . $this->site_name . '(' . $this->site_url . ') ' . $header_message . '[/title]',
+			'error_mail' => "{$this->site_name}({$this->site_url}) {$$header_message}",
 		};
 	}
 
@@ -278,6 +279,10 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				'rakuten'   => __( 'Rakuten', 'send-chat-tools' ),
 				'temporary' => __( 'Amazon and Rakuten may have temporarily withdrawn sales.', 'send-chat-tools' ),
 				'resume'    => __( 'Note that sales may resume after this notice is received, and there is no promise of an end of sales.', 'send-chat-tools' ),
+			],
+			'error_mail'     => [
+				'tool_name'  => __( 'Tool name', 'send-chat-tools' ),
+				'error_code' => __( 'Error code', 'send-chat-tools' ),
 			],
 		];
 
