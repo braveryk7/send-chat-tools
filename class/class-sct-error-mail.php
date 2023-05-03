@@ -96,8 +96,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 			$this->get_send_text( 'comment_notify', 'comment' ) . ': ' . "\n" . $this->original_data->comment_content . "\n\n" .
 			$this->get_send_text( 'comment_notify', 'url' ) . ': ' . $article_url . '#comment-' . $this->original_data->comment_ID . "\n" .
 			$this->get_send_text( 'comment_notify', 'status' ) . ': ' . $comment_status . "\n\n" .
-			esc_html__( 'This message was sent by Send Chat Tools.', 'send-chat-tools' ) . "\n" .
-			esc_html__( 'Possible that the message was not sent to the chat tool correctly.', 'send-chat-tools' ) . "\n\n" .
+			$this->generate_context( 'error_mail' ) . "\n\n" .
 			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
 			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
 
