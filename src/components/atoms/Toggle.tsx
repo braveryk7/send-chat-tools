@@ -5,7 +5,7 @@ import { ToggleControl } from '@wordpress/components';
 import { RinkerNotActive } from 'src/components/atoms/RinkerNotActive';
 import { useChangeValue } from 'src/hooks/useChangeValue';
 import { apiContext } from 'src/index';
-import { isOptionNameRinker } from 'src/utils/rinkerUtils';
+import { isOptionNameRinker } from 'src/utils/constant';
 
 import { TogglePropsType } from 'src/types/ComponentsType';
 
