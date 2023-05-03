@@ -128,7 +128,6 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 		$this->mail_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
 
 		$content = '';
-		update_option( 'sct_dev_error', 'called' );
 
 		$i = 0;
 		foreach ( $this->original_data['message'] as $value ) {
