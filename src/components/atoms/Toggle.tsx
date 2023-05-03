@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 
-import { ExternalLink, ToggleControl } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { ToggleControl } from '@wordpress/components';
 
+import { RinkerNotActive } from 'src/components/atoms/RinkerNotActive';
 import { useChangeValue } from 'src/hooks/useChangeValue';
 import { apiContext } from 'src/index';
 
@@ -17,14 +17,6 @@ export const Toggle = ( props: TogglePropsType ) => {
 		return 'rinker_notify' === optionName ? true : false;
 	};
 
-	const rinkerExistMessage = __( 'Rinker is not activated.', 'send-chat-tools' );
-	const rinkerRecommendMessage = __(
-		'Rinker is a very popular product management plug-in for Amazon and Rakuten.',
-		'send-chat-tools'
-	);
-	const rinkerUrl = 'https://oyakosodate.com/rinker/';
-	const rinkerFanboxUrl = 'https://oyayoi.fanbox.cc/';
-
 	return (
 		<>
 			{ apiData &&
@@ -38,24 +30,7 @@ export const Toggle = ( props: TogglePropsType ) => {
 				/>
 			}
 			{
-				isOptionNameRinker() && ! isRinkerActivated &&
-					<div className="sct-rinker-notice">
-						<p>
-							{ rinkerExistMessage + ' ' + rinkerRecommendMessage } <br />
-							{ __( 'Download', 'send-chat-tools' ) + ' >>> ' }
-							<ExternalLink
-								href={ rinkerUrl }
-							>
-								{ __( 'Rinker Official Web Site', 'send-chat-tools' ) }
-							</ExternalLink>
-							{ ' / ' }
-							<ExternalLink
-								href={ rinkerFanboxUrl }
-							>
-								{ __( 'Rinker Official FANBOX', 'send-chat-tools' ) }
-							</ExternalLink>
-						</p>
-					</div>
+				isOptionNameRinker() && ! isRinkerActivated && <RinkerNotActive />
 			}
 		</>
 	);
