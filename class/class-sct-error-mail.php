@@ -97,8 +97,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 			$this->get_send_text( 'comment_notify', 'url' ) . ': ' . $article_url . '#comment-' . $this->original_data->comment_ID . "\n" .
 			$this->get_send_text( 'comment_notify', 'status' ) . ': ' . $comment_status . "\n\n" .
 			$this->generate_context( 'error_mail' ) . "\n\n" .
-			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
-			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
+			$this->generate_error_message();
 
 		return $this;
 	}
@@ -117,8 +116,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 			$header_message . "\n\n" . $raw_data->core . $raw_data->themes . $raw_data->plugins .
 			$this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ': ' . $raw_data->admin_url . "\n\n" .
 			$this->generate_context( 'error_mail' ) . "\n" .
-			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
-			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
+			$this->generate_error_message();
 
 		return $this;
 	}
@@ -154,8 +152,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 		$this->content =
 			$title . $main_content . $website . $update_page . $ignore . "\n" .
 			$this->generate_context( 'error_mail' ) . "\n" .
-			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
-			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
+			$this->generate_error_message();
 
 		return $this;
 	}
@@ -186,8 +183,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 			$this->get_send_text( 'login_notify', 'disconnect' ) . "\n" .
 			$this->site_url . '/wp-admin/profile.php' . "\n\n" .
 			$this->generate_context( 'error_mail' ) . "\n" .
-			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
-			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
+			$this->generate_error_message();
 
 		return $this;
 	}
@@ -206,8 +202,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 			$this->site_name . '(' . $this->site_url . ') ' . $this->mail_title . "\n\n" .
 			$items . "\n\n" . $after_message . "\n\n" .
 			$this->generate_context( 'error_mail' ) . "\n" .
-			esc_html__( 'Tool name:', 'send-chat-tools' ) . ucfirst( $this->tool_name ) . "\n" .
-			esc_html__( 'Error code:', 'send-chat-tools' ) . $this->error_code;
+			$this->generate_error_message();
 
 		return $this;
 	}
