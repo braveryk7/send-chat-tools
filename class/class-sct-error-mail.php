@@ -120,7 +120,9 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 	 * Generate developer content for Error Mail.
 	 */
 	public function generate_developer_content(): Sct_Error_Mail {
-		$this->mail_title = $this->site_name . '(' . $this->site_url . ') ' . sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ), );
+		$this->mail_title = $this->generate_header_message(
+			header_message: sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $this->original_data['title'] ) )
+		);
 
 		$content = '';
 
