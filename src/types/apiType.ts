@@ -16,6 +16,7 @@ export type apiType = {
 export type ChatToolsBaseType = {
 	use: boolean;
 	send_author: boolean;
+	comment_notify: boolean;
 	update_notify: boolean;
 	login_notify: boolean;
 	rinker_notify: boolean;
