@@ -1,6 +1,5 @@
-import { useContext } from 'react';
-
 import { ToggleControl } from '@wordpress/components';
+import { useContext, useEffect, useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 
 import { RinkerNotActive } from 'src/components/atoms/RinkerNotActive';
@@ -13,6 +12,13 @@ export const Toggle = ( props: TogglePropsType ) => {
 	const { itemKey, optionName, label } = props;
 	const { apiData, changeValue } = useChangeValue( itemKey, optionName );
 	const { isRinkerActivated } = useContext( apiContext );
+	const [ isUseStatus, setIsUseStatus ] = useState( false );
+
+	useEffect( () => {
+		if ( apiData ) {
+			setIsUseStatus( apiData[ itemKey ].use );
+		}
+	}, [ itemKey, apiData ] );
 
 	const h4Titles = {
 		use: sprintf(
@@ -38,7 +44,10 @@ export const Toggle = ( props: TogglePropsType ) => {
 					<ToggleControl
 						label={ label }
 						checked={ apiData[ itemKey ][ optionName ] }
-						disabled={ isOptionNameRinker() && ! isRinkerActivated }
+						disabled={
+							( 'use' !== optionName && ! isUseStatus ) ||
+							( isOptionNameRinker() && ! isRinkerActivated )
+						}
 						onChange={ ( value ) => {
 							changeValue( value );
 						} }
