@@ -37,7 +37,7 @@ class Sct_Check_Comment extends Sct_Base {
 		foreach ( $this->get_chat_tools() as $tool ) {
 			$api_column = 'chatwork' === $tool ? 'api_token' : 'webhook_url';
 
-			if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) ) {
+			if ( $this->get_send_status( $tool, $sct_options[ $tool ], $comment->user_id ) && $sct_options[ $tool ]['comment_notify'] ) {
 				$this->call_chat_tool_class( $tool, 'generate_comment_content', $comment->comment_ID, $comment );
 			} elseif ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ][ $api_column ] ) ) {
 				$this->logger( 1001, $tool, '1' );
