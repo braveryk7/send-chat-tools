@@ -33,23 +33,25 @@ class Sct_Activate extends Sct_Base {
 	 */
 	public function register_options(): void {
 		$chat_tools_value = [
-			'use'           => false,
-			'webhook_url'   => '',
-			'send_author'   => false,
-			'update_notify' => false,
-			'login_notify'  => false,
-			'rinker_notify' => false,
-			'log'           => [],
+			'use'            => false,
+			'webhook_url'    => '',
+			'send_author'    => false,
+			'comment_notify' => false,
+			'update_notify'  => false,
+			'login_notify'   => false,
+			'rinker_notify'  => false,
+			'log'            => [],
 		];
 		$chatwork_value   = [
-			'use'           => false,
-			'api_token'     => '',
-			'room_id'       => '',
-			'send_author'   => false,
-			'update_notify' => false,
-			'login_notify'  => false,
-			'rinker_notify' => false,
-			'log'           => [],
+			'use'            => false,
+			'api_token'      => '',
+			'room_id'        => '',
+			'send_author'    => false,
+			'comment_notify' => false,
+			'update_notify'  => false,
+			'login_notify'   => false,
+			'rinker_notify'  => false,
+			'log'            => [],
 		];
 
 		$options = [
