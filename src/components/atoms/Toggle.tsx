@@ -33,7 +33,7 @@ export const Toggle = ( props: TogglePropsType ) => {
 	return (
 		<>
 			{ apiData &&
-				<div>
+				<section>
 					<h4>{ h4Titles[ optionName ] }</h4>
 					<ToggleControl
 						label={ label }
@@ -43,7 +43,7 @@ export const Toggle = ( props: TogglePropsType ) => {
 							changeValue( value );
 						} }
 					/>
-				</div>
+				</section>
 			}
 			{
 				isOptionNameRinker() && ! isRinkerActivated && <RinkerNotActive />
