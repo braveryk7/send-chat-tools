@@ -82,6 +82,9 @@ class Sct_Activate extends Sct_Base {
 						$sct_options[ $key_name ] = '19:00';
 					}
 				} elseif ( 'slack' === $key_name || 'discord' === $key_name || 'chatwork' === $key_name ) {
+					if ( ! array_key_exists( 'comment_notify', $sct_options[ $key_name ] ) ) {
+						$sct_options[ $key_name ]['comment_notify'] = true;
+					}
 					if ( ! array_key_exists( 'login_notify', $sct_options[ $key_name ] ) ) {
 						$sct_options[ $key_name ]['login_notify'] = true;
 					}
