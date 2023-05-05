@@ -39,7 +39,7 @@ export const useTabItems = ( props: TabItemsType ) => {
 		const labelContent = ( toolName: string ) => {
 			return sprintf(
 				/* translators: Chat tool name. */
-				__( 'Sends various notifications to %s.', 'send-chat-tools' ),
+				__( 'Enable %d notifications.', 'send-chat-tools' ),
 				toolName.charAt( 0 ).toUpperCase() + toolName.slice( 1 ),
 			);
 		};
