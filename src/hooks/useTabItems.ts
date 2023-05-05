@@ -1,5 +1,5 @@
 import { useEffect, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 
 import {
 	apiOptionNameType,
@@ -36,13 +36,21 @@ export const useTabItems = ( props: TabItemsType ) => {
 			setTextLabel( text );
 		};
 
+		const labelContent = ( toolName: string ) => {
+			return sprintf(
+				/* translators: Chat tool name. */
+				__( 'Enable %s notifications.', 'send-chat-tools' ),
+				toolName.charAt( 0 ).toUpperCase() + toolName.slice( 1 ),
+			);
+		};
+
 		if ( 'basic' === id ) {
 			setComponentName( 'basic' );
 			setTitleText( __( 'Basic settings', 'send-chat-tools' ), );
 		} else if ( 'slack' === id ) {
 			setUseState(
 				'slack',
-				__( 'Use Slack notify', 'send-chat-tools' ),
+				labelContent( id ),
 				'webhook_url',
 				__( 'Slack settings', 'send-chat-tools' ),
 				__( 'Slack Webhook URL', 'send-chat-tools' ),
@@ -50,7 +58,7 @@ export const useTabItems = ( props: TabItemsType ) => {
 		} else if ( 'discord' === id ) {
 			setUseState(
 				'discord',
-				__( 'Use Discord notify', 'send-chat-tools' ),
+				labelContent( id ),
 				'webhook_url',
 				__( 'Discord settings', 'send-chat-tools' ),
 				__( 'Discord Webhook URL', 'send-chat-tools' ),
@@ -58,7 +66,7 @@ export const useTabItems = ( props: TabItemsType ) => {
 		} else if ( 'chatwork' === id ) {
 			setUseState(
 				'chatwork',
-				__( 'Use Chatwork notify', 'send-chat-tools' ),
+				labelContent( id ),
 				'api_token',
 				__( 'Chatwork settings', 'send-chat-tools' ),
 				__( 'Chatwork API token', 'send-chat-tools' ),
@@ -79,24 +87,30 @@ export const useTabItems = ( props: TabItemsType ) => {
 					itemKey,
 					optionName: 'send_author',
 					label: __(
-						"Don't send your own comments",
+						'If you comment while logged into WordPress,' +
+						'you will not be notified of your own comment.',
 						'send-chat-tools'
 					),
 				},
 				{
 					itemKey,
 					optionName: 'update_notify',
-					label: __( 'Use Update notify', 'send-chat-tools' ),
+					label: __(
+						'Notify you when there are updates to WordPress Core, themes, and plugins.',
+						'send-chat-tools' ),
 				},
 				{
 					itemKey,
 					optionName: 'login_notify',
-					label: __( 'Use login notify', 'send-chat-tools' ),
+					label: __( 'Notify you when a WordPress user logs in.', 'send-chat-tools' ),
 				},
 				{
 					itemKey,
 					optionName: 'rinker_notify',
-					label: __( 'Use Rinker notify', 'send-chat-tools' ),
+					label: __(
+						'Notify you when an item managed by Rinker' +
+						'becomes end-of-life on Amazon or Rakuten.',
+						'send-chat-tools' ),
 				},
 			];
 			setTabItems( items );

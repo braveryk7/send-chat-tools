@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-04-29T05:21:30+00:00\n"
+"POT-Creation-Date: 2023-05-05T14:37:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: send-chat-tools\n"
@@ -55,8 +55,8 @@ msgid "API connection failed."
 msgstr ""
 
 #: build/index.js:82
-#: build/index.js:700
-#: build/index.js:1078
+#: build/index.js:747
+#: build/index.js:1129
 msgid "Logs"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgid "Date"
 msgstr ""
 
 #: build/index.js:232
-#: build/index.js:1015
+#: build/index.js:1062
 msgid "Success"
 msgstr ""
 
@@ -120,150 +120,164 @@ msgstr ""
 msgid "Detail"
 msgstr ""
 
-#: build/index.js:386
+#: build/index.js:309
 msgid "Rinker is not activated."
 msgstr ""
 
-#: build/index.js:387
+#: build/index.js:310
 msgid "Rinker is a very popular product management plug-in for Amazon and Rakuten."
 msgstr ""
 
-#: build/index.js:401
+#: build/index.js:316
 msgid "Download"
 msgstr ""
 
-#: build/index.js:405
+#: build/index.js:318
 msgid "Rinker Official Web Site"
 msgstr ""
 
-#: build/index.js:410
+#: build/index.js:321
 msgid "Rinker Official FANBOX"
 msgstr ""
 
-#: build/index.js:544
+#. translators: Chat tool name.
+#: build/index.js:428
+msgid "Use %s"
+msgstr ""
+
+#: build/index.js:429
+msgid "Comment notification"
+msgstr ""
+
+#: build/index.js:430
+msgid "Update notification"
+msgstr ""
+
+#: build/index.js:431
+msgid "Login notification"
+msgstr ""
+
+#: build/index.js:432
+msgid "Rinker notification"
+msgstr ""
+
+#: build/index.js:591
 msgid "Update and Rinker notifications are made using wp-cron."
 msgstr ""
 
-#: build/index.js:545
+#: build/index.js:592
 msgid "wp-cron will be executed on the first access after this time."
 msgstr ""
 
-#: build/index.js:554
+#: build/index.js:601
 msgid "Set time to check for updates"
 msgstr ""
 
-#: build/index.js:556
+#: build/index.js:603
 msgid "Time to send Updates notifications"
 msgstr ""
 
-#: build/index.js:562
+#: build/index.js:609
 msgid "Set time to check for Rinker exists items"
 msgstr ""
 
-#: build/index.js:564
+#: build/index.js:611
 msgid "Time to send Rinker end-of-sale notifications"
 msgstr ""
 
-#: build/index.js:575
+#: build/index.js:622
 msgid "Theme/plugin key to remove update notifications"
 msgstr ""
 
-#: build/index.js:684
+#: build/index.js:731
 msgid "Basic Settings"
 msgstr ""
 
-#: build/index.js:688
+#: build/index.js:735
 msgid "Slack"
 msgstr ""
 
-#: build/index.js:692
+#: build/index.js:739
 msgid "Discord"
 msgstr ""
 
-#: build/index.js:696
+#: build/index.js:743
 msgid "Chatwork"
 msgstr ""
 
-#: build/index.js:886
+#: build/index.js:933
 msgid "Copy to clipboard"
 msgstr ""
 
-#: build/index.js:890
+#: build/index.js:937
 msgid "Export text"
 msgstr ""
 
-#: build/index.js:894
+#: build/index.js:941
 msgid "Export CSV"
 msgstr ""
 
-#: build/index.js:955
+#: build/index.js:1002
 msgid "Copied"
 msgstr ""
 
-#: build/index.js:1018
+#: build/index.js:1065
 msgid "Error"
 msgstr ""
 
-#: build/index.js:1067
+#. translators: Chat tool name.
+#: build/index.js:1114
+msgid "Enable %s notifications."
+msgstr ""
+
+#: build/index.js:1118
 msgid "Basic settings"
 msgstr ""
 
-#: build/index.js:1069
-msgid "Use Slack notify"
-msgstr ""
-
-#: build/index.js:1069
+#: build/index.js:1120
 msgid "Slack settings"
 msgstr ""
 
-#: build/index.js:1069
+#: build/index.js:1120
 msgid "Slack Webhook URL"
 msgstr ""
 
-#: build/index.js:1071
-msgid "Use Discord notify"
-msgstr ""
-
-#: build/index.js:1071
+#: build/index.js:1122
 msgid "Discord settings"
 msgstr ""
 
-#: build/index.js:1071
+#: build/index.js:1122
 msgid "Discord Webhook URL"
 msgstr ""
 
-#: build/index.js:1073
-msgid "Use Chatwork notify"
-msgstr ""
-
-#: build/index.js:1073
+#: build/index.js:1124
 msgid "Chatwork settings"
 msgstr ""
 
-#: build/index.js:1073
+#: build/index.js:1124
 msgid "Chatwork API token"
 msgstr ""
 
-#: build/index.js:1075
+#: build/index.js:1126
 msgid "Chatwork Room ID"
 msgstr ""
 
-#: build/index.js:1090
-msgid "Don't send your own comments"
+#: build/index.js:1141
+msgid "If you comment while logged into WordPress,you will not be notified of your own comment."
 msgstr ""
 
-#: build/index.js:1094
-msgid "Use Update notify"
+#: build/index.js:1145
+msgid "Notify you when there are updates to WordPress Core, themes, and plugins."
 msgstr ""
 
-#: build/index.js:1098
-msgid "Use login notify"
+#: build/index.js:1149
+msgid "Notify you when a WordPress user logs in."
 msgstr ""
 
-#: build/index.js:1102
-msgid "Use Rinker notify"
+#: build/index.js:1153
+msgid "Notify you when an item managed by Rinkerbecomes end-of-life on Amazon or Rakuten."
 msgstr ""
 
-#: build/index.js:1171
+#: build/index.js:1222
 msgid "Send Chat Tools Settings"
 msgstr ""
