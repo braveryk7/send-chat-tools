@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Send Chat Tools 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/send-chat-tools\n"
-"POT-Creation-Date: 2023-05-05T08:30:52+00:00\n"
-"PO-Revision-Date: 2023-05-05 17:38+0900\n"
+"POT-Creation-Date: 2023-05-05T14:37:10+00:00\n"
+"PO-Revision-Date: 2023-05-05 23:37+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -65,7 +65,7 @@ msgstr "WordPress REST APIを有効化して再度アクセスしてください
 msgid "API connection failed."
 msgstr "API接続に失敗しました。"
 
-#: build/index.js:82 build/index.js:747 build/index.js:1125
+#: build/index.js:82 build/index.js:747 build/index.js:1129
 msgid "Logs"
 msgstr "ログ"
 
@@ -165,7 +165,7 @@ msgstr "ログイン通知"
 
 #: build/index.js:432
 msgid "Rinker notification"
-msgstr "Rinker通知を"
+msgstr "Rinker通知"
 
 #: build/index.js:591
 msgid "Update and Rinker notifications are made using wp-cron."
@@ -231,69 +231,95 @@ msgstr "コピーしました"
 msgid "Error"
 msgstr "エラー"
 
+#. translators: Chat tool name.
 #: build/index.js:1114
+msgid "Enable %s notifications."
+msgstr "%s通知を有効化します。"
+
+#: build/index.js:1118
 msgid "Basic settings"
 msgstr "基本設定"
 
-#: build/index.js:1116
-msgid "Use Slack notify"
-msgstr "Slack通知を使用する"
-
-#: build/index.js:1116
+#: build/index.js:1120
 msgid "Slack settings"
 msgstr "Slack設定"
 
-#: build/index.js:1116
+#: build/index.js:1120
 msgid "Slack Webhook URL"
 msgstr "Slack Webhook URL"
 
-#: build/index.js:1118
-msgid "Use Discord notify"
-msgstr "Discord通知を使用する"
-
-#: build/index.js:1118
+#: build/index.js:1122
 msgid "Discord settings"
 msgstr "Discord設定"
 
-#: build/index.js:1118
+#: build/index.js:1122
 msgid "Discord Webhook URL"
 msgstr "Discord Webhook URL"
 
-#: build/index.js:1120
-msgid "Use Chatwork notify"
-msgstr "Chatwork通知を使用する"
-
-#: build/index.js:1120
+#: build/index.js:1124
 msgid "Chatwork settings"
 msgstr "Chatwork設定"
 
-#: build/index.js:1120
+#: build/index.js:1124
 msgid "Chatwork API token"
 msgstr "Chatwork APIトークン"
 
-#: build/index.js:1122
+#: build/index.js:1126
 msgid "Chatwork Room ID"
 msgstr "Chatwork ルームID"
 
-#: build/index.js:1137
-msgid "Don't send your own comments"
-msgstr "自分自身のコメントを送信しない"
-
 #: build/index.js:1141
-msgid "Use Update notify"
-msgstr "アップデート通知を使用する"
+msgid ""
+"If you comment while logged into WordPress,you will not be notified of your "
+"own comment."
+msgstr ""
+"WordPressにログインしている状態でコメントすると、自分のコメントが通知されませ"
+"ん。"
 
 #: build/index.js:1145
-msgid "Use login notify"
-msgstr "ログイン通知を使用する"
+msgid ""
+"Notify you when there are updates to WordPress Core, themes, and plugins."
+msgstr ""
+"WordPresコア、テーマ、プラグインにアップデートがあった場合に通知します。"
 
 #: build/index.js:1149
-msgid "Use Rinker notify"
-msgstr "Rinker通知を使用する"
+msgid "Notify you when a WordPress user logs in."
+msgstr "WordPressユーザーがログインした際に通知します。"
 
-#: build/index.js:1218
+#: build/index.js:1153
+msgid ""
+"Notify you when an item managed by Rinkerbecomes end-of-life on Amazon or "
+"Rakuten."
+msgstr ""
+"Rinkerが管理している商品がAmazonや楽天で販売終了になった際に通知します。"
+
+#: build/index.js:1222
 msgid "Send Chat Tools Settings"
 msgstr "Send Chat Tools設定"
+
+#~ msgid "Sends various notifications to Slack."
+#~ msgstr "Slackに各種通知を送信します。"
+
+#~ msgid "Use Discord notify"
+#~ msgstr "Discord通知を使用する"
+
+#~ msgid "Use Chatwork notify"
+#~ msgstr "Chatwork通知を使用する"
+
+#~ msgid "Use Slack notify"
+#~ msgstr "Slack通知を使用する"
+
+#~ msgid "Don't send your own comments"
+#~ msgstr "自分自身のコメントを送信しない"
+
+#~ msgid "Use Update notify"
+#~ msgstr "アップデート通知を使用する"
+
+#~ msgid "Use login notify"
+#~ msgstr "ログイン通知を使用する"
+
+#~ msgid "Use Rinker notify"
+#~ msgstr "Rinker通知を使用する"
 
 #~ msgid "Comment Author"
 #~ msgstr "コメント投稿者"
