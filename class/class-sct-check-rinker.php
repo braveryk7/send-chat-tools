@@ -139,7 +139,7 @@ class Sct_Check_Rinker extends Sct_Base {
 			'/get-rinker-activated',
 			[
 				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'is_rinker_activated' ],
+				'callback'            => [ $this, 'register_rinker_status' ],
 				'permission_callback' => fn() => current_user_can( 'administrator' ),
 			]
 		);
@@ -148,7 +148,7 @@ class Sct_Check_Rinker extends Sct_Base {
 	/**
 	 * Check if Rinker is activated.
 	 */
-	public function is_rinker_activated(): WP_REST_Response {
+	public function register_rinker_status(): WP_REST_Response {
 		$get_plugins         = get_option( 'active_plugins' );
 		$is_rinker_activated = false;
 
