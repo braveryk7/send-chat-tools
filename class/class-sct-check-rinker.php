@@ -166,16 +166,6 @@ class Sct_Check_Rinker extends Sct_Base {
 	 * Check if Rinker is activated.
 	 */
 	public function register_rinker_status(): WP_REST_Response {
-		$get_plugins         = get_option( 'active_plugins' );
-		$is_rinker_activated = false;
-
-		foreach ( $get_plugins as $value ) {
-			if ( 'yyi-rinker/yyi-rinker.php' === $value ) {
-				$is_rinker_activated = true;
-				continue;
-			}
-		}
-
-		return new WP_REST_Response( $is_rinker_activated, 200 );
+		return new WP_REST_Response( $this->is_rinker_activated(), 200 );
 	}
 }
