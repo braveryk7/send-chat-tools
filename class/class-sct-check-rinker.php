@@ -126,8 +126,8 @@ class Sct_Check_Rinker extends Sct_Base {
 		$active_plugins      = get_option( 'active_plugins' );
 		$is_rinker_activated = false;
 
-		foreach ( $active_plugins as $value ) {
-			if ( 'yyi-rinker/yyi-rinker.php' === $value ) {
+		foreach ( $active_plugins as $plugin ) {
+			if ( 'yyi-rinker/yyi-rinker.php' === $plugin ) {
 				$is_rinker_activated = true;
 				continue;
 			}
