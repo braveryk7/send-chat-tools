@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-05-05T14:37:10+00:00\n"
+"POT-Creation-Date: 2023-05-06T01:42:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: send-chat-tools\n"
@@ -55,8 +55,8 @@ msgid "API connection failed."
 msgstr ""
 
 #: build/index.js:82
-#: build/index.js:747
-#: build/index.js:1129
+#: build/index.js:753
+#: build/index.js:1135
 msgid "Logs"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgid "Date"
 msgstr ""
 
 #: build/index.js:232
-#: build/index.js:1062
+#: build/index.js:1068
 msgid "Success"
 msgstr ""
 
@@ -141,143 +141,147 @@ msgid "Rinker Official FANBOX"
 msgstr ""
 
 #. translators: Chat tool name.
-#: build/index.js:428
+#: build/index.js:434
 msgid "Use %s"
 msgstr ""
 
-#: build/index.js:429
+#: build/index.js:435
 msgid "Comment notification"
 msgstr ""
 
-#: build/index.js:430
+#: build/index.js:436
 msgid "Update notification"
 msgstr ""
 
-#: build/index.js:431
+#: build/index.js:437
 msgid "Login notification"
 msgstr ""
 
-#: build/index.js:432
+#: build/index.js:438
 msgid "Rinker notification"
 msgstr ""
 
-#: build/index.js:591
+#: build/index.js:597
 msgid "Update and Rinker notifications are made using wp-cron."
 msgstr ""
 
-#: build/index.js:592
+#: build/index.js:598
 msgid "wp-cron will be executed on the first access after this time."
 msgstr ""
 
-#: build/index.js:601
+#: build/index.js:607
 msgid "Set time to check for updates"
 msgstr ""
 
-#: build/index.js:603
+#: build/index.js:609
 msgid "Time to send Updates notifications"
 msgstr ""
 
-#: build/index.js:609
+#: build/index.js:615
 msgid "Set time to check for Rinker exists items"
 msgstr ""
 
-#: build/index.js:611
+#: build/index.js:617
 msgid "Time to send Rinker end-of-sale notifications"
 msgstr ""
 
-#: build/index.js:622
+#: build/index.js:628
 msgid "Theme/plugin key to remove update notifications"
 msgstr ""
 
-#: build/index.js:731
+#: build/index.js:737
 msgid "Basic Settings"
 msgstr ""
 
-#: build/index.js:735
+#: build/index.js:741
 msgid "Slack"
 msgstr ""
 
-#: build/index.js:739
+#: build/index.js:745
 msgid "Discord"
 msgstr ""
 
-#: build/index.js:743
+#: build/index.js:749
 msgid "Chatwork"
 msgstr ""
 
-#: build/index.js:933
+#: build/index.js:939
 msgid "Copy to clipboard"
 msgstr ""
 
-#: build/index.js:937
+#: build/index.js:943
 msgid "Export text"
 msgstr ""
 
-#: build/index.js:941
+#: build/index.js:947
 msgid "Export CSV"
 msgstr ""
 
-#: build/index.js:1002
+#: build/index.js:1008
 msgid "Copied"
 msgstr ""
 
-#: build/index.js:1065
+#: build/index.js:1071
 msgid "Error"
 msgstr ""
 
 #. translators: Chat tool name.
-#: build/index.js:1114
+#: build/index.js:1120
 msgid "Enable %s notifications."
 msgstr ""
 
-#: build/index.js:1118
+#: build/index.js:1124
 msgid "Basic settings"
 msgstr ""
 
-#: build/index.js:1120
+#: build/index.js:1126
 msgid "Slack settings"
 msgstr ""
 
-#: build/index.js:1120
+#: build/index.js:1126
 msgid "Slack Webhook URL"
 msgstr ""
 
-#: build/index.js:1122
+#: build/index.js:1128
 msgid "Discord settings"
 msgstr ""
 
-#: build/index.js:1122
+#: build/index.js:1128
 msgid "Discord Webhook URL"
 msgstr ""
 
-#: build/index.js:1124
+#: build/index.js:1130
 msgid "Chatwork settings"
 msgstr ""
 
-#: build/index.js:1124
+#: build/index.js:1130
 msgid "Chatwork API token"
 msgstr ""
 
-#: build/index.js:1126
+#: build/index.js:1132
 msgid "Chatwork Room ID"
 msgstr ""
 
-#: build/index.js:1141
+#: build/index.js:1147
+msgid "Notify when new comments are received."
+msgstr ""
+
+#: build/index.js:1151
 msgid "If you comment while logged into WordPress,you will not be notified of your own comment."
 msgstr ""
 
-#: build/index.js:1145
+#: build/index.js:1155
 msgid "Notify you when there are updates to WordPress Core, themes, and plugins."
 msgstr ""
 
-#: build/index.js:1149
+#: build/index.js:1159
 msgid "Notify you when a WordPress user logs in."
 msgstr ""
 
-#: build/index.js:1153
+#: build/index.js:1163
 msgid "Notify you when an item managed by Rinkerbecomes end-of-life on Amazon or Rakuten."
 msgstr ""
 
-#: build/index.js:1222
+#: build/index.js:1232
 msgid "Send Chat Tools Settings"
 msgstr ""
