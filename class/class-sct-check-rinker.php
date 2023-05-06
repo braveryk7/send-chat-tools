@@ -140,7 +140,6 @@ class Sct_Check_Rinker extends Sct_Base {
 	 * Create custom endpoint.
 	 */
 	public function register_rest_api(): void {
-
 		register_rest_route(
 			$this->get_api_namespace(),
 			'/get-rinker-activated',
