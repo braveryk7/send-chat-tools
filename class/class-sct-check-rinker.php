@@ -93,7 +93,6 @@ class Sct_Check_Rinker extends Sct_Base {
 	 * WP-cron check.
 	 */
 	public function check_cron_time(): void {
-		$cron_event_name     = $this->add_prefix( 'rinker_discontinued_items_check' );
 		$get_plugins         = get_option( 'active_plugins' );
 		$is_rinker_activated = false;
 
