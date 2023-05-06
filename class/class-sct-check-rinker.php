@@ -30,7 +30,7 @@ class Sct_Check_Rinker extends Sct_Base {
 	 */
 	public function __construct() {
 		$this->cron_event_name = $this->add_prefix( 'rinker_discontinued_items_check' );
-		add_action( $this->add_prefix( 'rinker_discontinued_items_check' ), [ $this, 'controller' ] );
+		add_action( $this->cron_event_name, [ $this, 'controller' ] );
 		add_action( 'admin_init', [ $this, 'check_cron_time' ] );
 	}
 
@@ -105,19 +105,19 @@ class Sct_Check_Rinker extends Sct_Base {
 		}
 
 		if ( $is_rinker_activated ) {
-			$get_next_schedule     = wp_get_scheduled_event( $cron_event_name );
+			$get_next_schedule     = wp_get_scheduled_event( $this->cron_event_name );
 			$sct_options           = $this->get_sct_options();
 			$to_datetime_string    = gmdate( 'Y-m-d ' . $sct_options['rinker_cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
 			$sct_options_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $to_datetime_string ) );
 
 			if ( ! $get_next_schedule ) {
-				wp_schedule_event( $sct_options_timestamp, 'daily', $cron_event_name );
+				wp_schedule_event( $sct_options_timestamp, 'daily', $this->cron_event_name );
 			} else {
 				if ( isset( $sct_options['cron_time'] ) ) {
 					if ( $get_next_schedule->timestamp !== $sct_options_timestamp ) {
 						$sct_options_timestamp <= time() ? $sct_options_timestamp = strtotime( '+1 day', $sct_options_timestamp ) : $sct_options_timestamp;
-						wp_clear_scheduled_hook( $cron_event_name );
-						wp_schedule_event( $sct_options_timestamp, 'daily', $cron_event_name );
+						wp_clear_scheduled_hook( $this->cron_event_name );
+						wp_schedule_event( $sct_options_timestamp, 'daily', $this->cron_event_name );
 					}
 				} else {
 					$sct_options['rinker_cron_time'] = '19:00';
@@ -125,7 +125,7 @@ class Sct_Check_Rinker extends Sct_Base {
 				}
 			}
 		} else {
-			wp_clear_scheduled_hook( $cron_event_name );
+			wp_clear_scheduled_hook( $this->cron_event_name );
 		}
 	}
 }
