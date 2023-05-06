@@ -23,7 +23,7 @@ class Sct_Check_Rinker extends Sct_Base {
 	 *
 	 * @var string $cron_event_name
 	 */
-	private $cron_event_name = 'rinker_discontinued_items_check';
+	private $cron_event_name;
 
 	/**
 	 * WordPress hook.
