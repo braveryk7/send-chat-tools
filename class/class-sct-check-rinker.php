@@ -130,6 +130,23 @@ class Sct_Check_Rinker extends Sct_Base {
 	}
 
 	/**
+	 * Check if Rinker is activated.
+	 */
+	private function is_rinker_activated() {
+		$get_plugins         = get_option( 'active_plugins' );
+		$is_rinker_activated = false;
+
+		foreach ( $get_plugins as $value ) {
+			if ( 'yyi-rinker/yyi-rinker.php' === $value ) {
+				$is_rinker_activated = true;
+				continue;
+			}
+		}
+
+		return $is_rinker_activated;
+	}
+
+	/**
 	 * Create custom endpoint.
 	 */
 	public function register_rest_api(): void {
