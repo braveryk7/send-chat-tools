@@ -124,16 +124,6 @@ class Sct_Admin_Page extends Sct_Base {
 				'permission_callback' => [ $this, 'get_wordpress_permission' ],
 			]
 		);
-
-		register_rest_route(
-			$this->get_api_namespace(),
-			'/get-rinker-activated',
-			[
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => [ $this, 'is_rinker_activated' ],
-				'permission_callback' => [ $this, 'get_wordpress_permission' ],
-			]
-		);
 	}
 
 	/**
@@ -178,23 +168,6 @@ class Sct_Admin_Page extends Sct_Base {
 		$this->set_sct_options( $sct_options );
 
 		return new WP_REST_Response( $params, 200 );
-	}
-
-	/**
-	 * Check if Rinker is activated.
-	 */
-	public function is_rinker_activated(): WP_REST_Response {
-		$get_plugins         = get_option( 'active_plugins' );
-		$is_rinker_activated = false;
-
-		foreach ( $get_plugins as $value ) {
-			if ( 'yyi-rinker/yyi-rinker.php' === $value ) {
-				$is_rinker_activated = true;
-				continue;
-			}
-		}
-
-		return new WP_REST_Response( $is_rinker_activated, 200 );
 	}
 
 	/**
