@@ -91,7 +91,9 @@ class Sct_Check_Rinker extends Sct_Base {
 	}
 
 	/**
-	 * WP-cron check.
+	 * Check the execution time of the WP-Cron event and set it if not already set.
+	 * If the time is different from the event already registered, set a new time.
+	 * If Rinker is not enabled, remove the event.
 	 */
 	public function check_cron_time(): void {
 		if ( $this->is_rinker_activated() ) {
