@@ -97,8 +97,9 @@ class Sct_Check_Rinker extends Sct_Base {
 		if ( $this->is_rinker_activated() ) {
 			$get_next_schedule     = wp_get_scheduled_event( $this->cron_event_name );
 			$sct_options           = $this->get_sct_options();
-			$to_datetime_string    = gmdate( 'Y-m-d ' . $sct_options['rinker_cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-			$sct_options_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $to_datetime_string ) );
+			$datetime_string       = gmdate( 'Y-m-d ' . $sct_options['rinker_cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+			$sct_options_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $datetime_string ) );
+			update_option( 'sct_cron', gettype( $datetime_string ) );
 
 			if ( ! $get_next_schedule ) {
 				wp_schedule_event( $sct_options_timestamp, 'daily', $this->cron_event_name );
