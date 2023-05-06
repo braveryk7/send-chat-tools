@@ -152,7 +152,7 @@ class Sct_Check_Rinker extends Sct_Base {
 	}
 
 	/**
-	 * Check if Rinker is activated.
+	 * Return the result of the is_rinker_activated method in WP_REST_Response.
 	 */
 	public function register_rinker_status(): WP_REST_Response {
 		return new WP_REST_Response( $this->is_rinker_activated(), 200 );
