@@ -21,11 +21,17 @@ export const useChangeValue = ( itemKey: itemKeyType, optionName?: optionNameTyp
 			const isString = ( option: unknown ): option is string => {
 				return typeof option === 'string' ? true : false;
 			};
+
 			const isBaseOption = (
 				option: optionNameType
 			): option is keyof Omit< ChatToolsBaseType, 'log' > => {
 				return [
-					'use', 'send_author', 'update_notify', 'login_notify', 'rinker_notify',
+					'use',
+					'send_author',
+					'comment_notify',
+					'update_notify',
+					'login_notify',
+					'rinker_notify',
 				].includes( option );
 			};
 

@@ -33,23 +33,25 @@ class Sct_Activate extends Sct_Base {
 	 */
 	public function register_options(): void {
 		$chat_tools_value = [
-			'use'           => false,
-			'webhook_url'   => '',
-			'send_author'   => false,
-			'update_notify' => false,
-			'login_notify'  => false,
-			'rinker_notify' => false,
-			'log'           => [],
+			'use'            => false,
+			'webhook_url'    => '',
+			'send_author'    => false,
+			'comment_notify' => false,
+			'update_notify'  => false,
+			'login_notify'   => false,
+			'rinker_notify'  => false,
+			'log'            => [],
 		];
 		$chatwork_value   = [
-			'use'           => false,
-			'api_token'     => '',
-			'room_id'       => '',
-			'send_author'   => false,
-			'update_notify' => false,
-			'login_notify'  => false,
-			'rinker_notify' => false,
-			'log'           => [],
+			'use'            => false,
+			'api_token'      => '',
+			'room_id'        => '',
+			'send_author'    => false,
+			'comment_notify' => false,
+			'update_notify'  => false,
+			'login_notify'   => false,
+			'rinker_notify'  => false,
+			'log'            => [],
 		];
 
 		$options = [
@@ -82,6 +84,9 @@ class Sct_Activate extends Sct_Base {
 						$sct_options[ $key_name ] = '19:00';
 					}
 				} elseif ( 'slack' === $key_name || 'discord' === $key_name || 'chatwork' === $key_name ) {
+					if ( ! array_key_exists( 'comment_notify', $sct_options[ $key_name ] ) ) {
+						$sct_options[ $key_name ]['comment_notify'] = true;
+					}
 					if ( ! array_key_exists( 'login_notify', $sct_options[ $key_name ] ) ) {
 						$sct_options[ $key_name ]['login_notify'] = true;
 					}

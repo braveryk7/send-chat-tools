@@ -26,7 +26,7 @@ export const Toggle = ( props: TogglePropsType ) => {
 			__( 'Use %s', 'send-chat-tools' ),
 			itemKey.charAt( 0 ).toUpperCase() + itemKey.slice( 1 )
 		),
-		send_author: __( 'Comment notification', 'send-chat-tools' ),
+		comment_notify: __( 'Comment notification', 'send-chat-tools' ),
 		update_notify: __( 'Update notification', 'send-chat-tools' ),
 		login_notify: __( 'Login notification', 'send-chat-tools' ),
 		rinker_notify: __( 'Rinker notification', 'send-chat-tools' ),
@@ -40,7 +40,7 @@ export const Toggle = ( props: TogglePropsType ) => {
 		<>
 			{ apiData &&
 				<section>
-					<h4>{ h4Titles[ optionName ] }</h4>
+					{ 'send_author' !== optionName && <h4>{ h4Titles[ optionName ] }</h4> }
 					<ToggleControl
 						label={ label }
 						checked={ apiData[ itemKey ][ optionName ] }

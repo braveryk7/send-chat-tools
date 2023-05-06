@@ -85,6 +85,14 @@ export const useTabItems = ( props: TabItemsType ) => {
 				{ itemKey, optionName: 'use', label: itemLabel },
 				{
 					itemKey,
+					optionName: 'comment_notify',
+					label: __(
+						'Notify when new comments are received.',
+						'send-chat-tools'
+					),
+				},
+				{
+					itemKey,
 					optionName: 'send_author',
 					label: __(
 						'If you comment while logged into WordPress,' +
