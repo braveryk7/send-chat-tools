@@ -32,6 +32,7 @@ class Sct_Check_Rinker extends Sct_Base {
 		$this->cron_event_name = $this->add_prefix( 'rinker_discontinued_items_check' );
 		add_action( $this->cron_event_name, [ $this, 'controller' ] );
 		add_action( 'admin_init', [ $this, 'check_cron_time' ] );
+		add_action( 'rest_api_init', [ $this, 'register_rest_api' ] );
 	}
 
 	/**
@@ -126,5 +127,38 @@ class Sct_Check_Rinker extends Sct_Base {
 		} else {
 			wp_clear_scheduled_hook( $this->cron_event_name );
 		}
+	}
+
+	/**
+	 * Create custom endpoint.
+	 */
+	public function register_rest_api(): void {
+
+		register_rest_route(
+			$this->get_api_namespace(),
+			'/get-rinker-activated',
+			[
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => [ $this, 'is_rinker_activated' ],
+				'permission_callback' => fn() => current_user_can( 'administrator' ),
+			]
+		);
+	}
+
+	/**
+	 * Check if Rinker is activated.
+	 */
+	public function is_rinker_activated(): WP_REST_Response {
+		$get_plugins         = get_option( 'active_plugins' );
+		$is_rinker_activated = false;
+
+		foreach ( $get_plugins as $value ) {
+			if ( 'yyi-rinker/yyi-rinker.php' === $value ) {
+				$is_rinker_activated = true;
+				continue;
+			}
+		}
+
+		return new WP_REST_Response( $is_rinker_activated, 200 );
 	}
 }
