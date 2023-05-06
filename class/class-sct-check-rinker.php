@@ -105,9 +105,9 @@ class Sct_Check_Rinker extends Sct_Base {
 			} else {
 				if ( isset( $sct_options['cron_time'] ) ) {
 					if ( $get_next_schedule->timestamp !== $datetime_timestamp ) {
-						$datetime_timestamp <= time() ? $sct_options_timestamp = strtotime( '+1 day', $datetime_timestamp ) : $datetime_timestamp;
+						$datetime_timestamp <= time() ? $datetime_timestamp = strtotime( '+1 day', $datetime_timestamp ) : $datetime_timestamp;
 						wp_clear_scheduled_hook( $this->cron_event_name );
-						wp_schedule_event( $sct_options_timestamp, 'daily', $this->cron_event_name );
+						wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
 					}
 				} else {
 					$sct_options['rinker_cron_time'] = '19:00';
