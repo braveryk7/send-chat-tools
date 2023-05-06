@@ -19,6 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Check_Rinker extends Sct_Base {
 	/**
+	 * Property that holds the name of the Rinker's cron event.
+	 *
+	 * @var string $cron_event_name
+	 */
+	private $cron_event_name = 'rinker_discontinued_items_check';
+
+	/**
 	 * WordPress hook.
 	 */
 	public function __construct() {
