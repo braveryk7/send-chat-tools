@@ -1,17 +1,17 @@
-# Copyright (C) 2022 Ken-chan
+# Copyright (C) 2023 Ken-chan
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Send Chat Tools 1.3.0\n"
+"Project-Id-Version: Send Chat Tools 1.4.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/send-chat-tools\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-11-26T18:43:56+00:00\n"
+"POT-Creation-Date: 2023-05-06T01:42:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.6.0\n"
+"X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: send-chat-tools\n"
 
 #. Plugin Name of the plugin
@@ -34,195 +34,254 @@ msgstr ""
 msgid "https://twitter.com/braveryk7"
 msgstr ""
 
-#: build/index.js:22
+#: build/index.js:26
 msgid "Send Chat Tools uses the WordPress REST API for setting loading."
 msgstr ""
 
-#: build/index.js:22
+#: build/index.js:26
 msgid "If you continue to see this error, the WordPress REST API may be disabled."
 msgstr ""
 
-#: build/index.js:22
+#: build/index.js:26
 msgid "The WordPress REST API can be set up in a plugin or in your theme's functions.php file."
 msgstr ""
 
-#: build/index.js:22
+#: build/index.js:28
 msgid "Please activate the WordPress REST API and try accessing it again."
 msgstr ""
 
-#: build/index.js:24
+#: build/index.js:30
 msgid "API connection failed."
 msgstr ""
 
-#: build/index.js:68
-#: build/index.js:537
-#: build/index.js:951
+#: build/index.js:82
+#: build/index.js:753
+#: build/index.js:1135
 msgid "Logs"
 msgstr ""
 
-#: build/index.js:69
+#: build/index.js:83
 msgid "Last three cases"
 msgstr ""
 
-#: build/index.js:74
-msgid "Comment Author"
+#: build/index.js:89
+msgid "Commenter"
 msgstr ""
 
-#: build/index.js:80
+#: build/index.js:97
 msgid "Comment ID"
 msgstr ""
 
-#: build/index.js:82
-#: build/index.js:230
+#: build/index.js:100
+#: build/index.js:260
 msgid "Status"
 msgstr ""
 
-#: build/index.js:84
-#: build/index.js:230
+#: build/index.js:103
+#: build/index.js:254
 msgid "Date"
 msgstr ""
 
-#: build/index.js:207
-msgid "Response OK!"
+#: build/index.js:232
+#: build/index.js:1068
+msgid "Success"
 msgstr ""
 
-#: build/index.js:210
-#: build/index.js:222
+#: build/index.js:234
+#: build/index.js:242
 msgid "Could not communicate."
 msgstr ""
 
-#: build/index.js:213
+#: build/index.js:236
 msgid "Webhook URL/API Token not entered."
 msgstr ""
 
-#: build/index.js:216
+#: build/index.js:238
 msgid "RoomID not entered."
 msgstr ""
 
-#: build/index.js:219
+#: build/index.js:240
 msgid "API system value is incorrect."
 msgstr ""
 
-#: build/index.js:228
-msgid "Communication logs."
+#: build/index.js:248
+msgid "Communication logs"
 msgstr ""
 
-#: build/index.js:230
+#: build/index.js:256
 msgid "Tool"
 msgstr ""
 
-#: build/index.js:230
+#: build/index.js:258
 msgid "Type"
 msgstr ""
 
-#: build/index.js:230
+#: build/index.js:262
 msgid "Detail"
 msgstr ""
 
-#: build/index.js:390
-msgid "Updates will be confirmed on the first access made after this time."
+#: build/index.js:309
+msgid "Rinker is not activated."
 msgstr ""
 
-#: build/index.js:424
+#: build/index.js:310
+msgid "Rinker is a very popular product management plug-in for Amazon and Rakuten."
+msgstr ""
+
+#: build/index.js:316
+msgid "Download"
+msgstr ""
+
+#: build/index.js:318
+msgid "Rinker Official Web Site"
+msgstr ""
+
+#: build/index.js:321
+msgid "Rinker Official FANBOX"
+msgstr ""
+
+#. translators: Chat tool name.
+#: build/index.js:434
+msgid "Use %s"
+msgstr ""
+
+#: build/index.js:435
+msgid "Comment notification"
+msgstr ""
+
+#: build/index.js:436
+msgid "Update notification"
+msgstr ""
+
+#: build/index.js:437
+msgid "Login notification"
+msgstr ""
+
+#: build/index.js:438
+msgid "Rinker notification"
+msgstr ""
+
+#: build/index.js:597
+msgid "Update and Rinker notifications are made using wp-cron."
+msgstr ""
+
+#: build/index.js:598
+msgid "wp-cron will be executed on the first access after this time."
+msgstr ""
+
+#: build/index.js:607
 msgid "Set time to check for updates"
 msgstr ""
 
-#: build/index.js:429
+#: build/index.js:609
+msgid "Time to send Updates notifications"
+msgstr ""
+
+#: build/index.js:615
+msgid "Set time to check for Rinker exists items"
+msgstr ""
+
+#: build/index.js:617
+msgid "Time to send Rinker end-of-sale notifications"
+msgstr ""
+
+#: build/index.js:628
 msgid "Theme/plugin key to remove update notifications"
 msgstr ""
 
-#: build/index.js:521
+#: build/index.js:737
 msgid "Basic Settings"
 msgstr ""
 
-#: build/index.js:525
+#: build/index.js:741
 msgid "Slack"
 msgstr ""
 
-#: build/index.js:529
+#: build/index.js:745
 msgid "Discord"
 msgstr ""
 
-#: build/index.js:533
+#: build/index.js:749
 msgid "Chatwork"
 msgstr ""
 
-#: build/index.js:736
+#: build/index.js:939
 msgid "Copy to clipboard"
 msgstr ""
 
-#: build/index.js:740
+#: build/index.js:943
 msgid "Export text"
 msgstr ""
 
-#: build/index.js:744
+#: build/index.js:947
 msgid "Export CSV"
 msgstr ""
 
-#: build/index.js:823
-msgid "Copyed!"
+#: build/index.js:1008
+msgid "Copied"
 msgstr ""
 
-#: build/index.js:880
-msgid "Success."
+#: build/index.js:1071
+msgid "Error"
 msgstr ""
 
-#: build/index.js:883
-msgid "Error."
+#. translators: Chat tool name.
+#: build/index.js:1120
+msgid "Enable %s notifications."
 msgstr ""
 
-#: build/index.js:932
+#: build/index.js:1124
 msgid "Basic settings"
 msgstr ""
 
-#: build/index.js:936
-msgid "Use Slack notify"
-msgstr ""
-
-#: build/index.js:936
+#: build/index.js:1126
 msgid "Slack settings"
 msgstr ""
 
-#: build/index.js:936
+#: build/index.js:1126
 msgid "Slack Webhook URL"
 msgstr ""
 
-#: build/index.js:940
-msgid "Use Discord notify"
-msgstr ""
-
-#: build/index.js:940
+#: build/index.js:1128
 msgid "Discord settings"
 msgstr ""
 
-#: build/index.js:940
+#: build/index.js:1128
 msgid "Discord Webhook URL"
 msgstr ""
 
-#: build/index.js:944
-msgid "Use Chatwork notify"
-msgstr ""
-
-#: build/index.js:944
+#: build/index.js:1130
 msgid "Chatwork settings"
 msgstr ""
 
-#: build/index.js:944
+#: build/index.js:1130
 msgid "Chatwork API token"
 msgstr ""
 
-#: build/index.js:946
+#: build/index.js:1132
 msgid "Chatwork Room ID"
 msgstr ""
 
-#: build/index.js:964
-msgid "Don't send your own comments"
+#: build/index.js:1147
+msgid "Notify when new comments are received."
 msgstr ""
 
-#: build/index.js:968
-msgid "Use Update notify"
+#: build/index.js:1151
+msgid "If you comment while logged into WordPress,you will not be notified of your own comment."
 msgstr ""
 
-#: build/index.js:1032
+#: build/index.js:1155
+msgid "Notify you when there are updates to WordPress Core, themes, and plugins."
+msgstr ""
+
+#: build/index.js:1159
+msgid "Notify you when a WordPress user logs in."
+msgstr ""
+
+#: build/index.js:1163
+msgid "Notify you when an item managed by Rinkerbecomes end-of-life on Amazon or Rakuten."
+msgstr ""
+
+#: build/index.js:1232
 msgid "Send Chat Tools Settings"
 msgstr ""

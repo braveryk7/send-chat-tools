@@ -28,9 +28,9 @@ export const LogDetail = ( props: { itemKey: ChatToolsItemKeyType } ) => {
 					<Card className="sct-tools-log" key={ i }>
 						<CardHeader>
 							{ `${ __(
-								'Comment Author',
+								'Commenter',
 								'send-chat-tools'
-							) }: ${ value.author } <${ value.email }>` }
+							) }: ${ value.commenter } <${ value.email }>` }
 						</CardHeader>
 						<CardBody className="sct-tools-log-body">
 							{ value.comment }

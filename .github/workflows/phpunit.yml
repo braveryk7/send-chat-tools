@@ -7,6 +7,9 @@ on:
       - 'tests/**'
       - 'send-chat-tools.php'
 
+env:
+  CACHE_TAG: v1
+
 jobs:
   test:
     name: PHPUnit
@@ -28,9 +31,12 @@ jobs:
         id: vendor_cache
         uses: actions/cache@v3
         with:
-          path: ~/.vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+          path: ${{ github.workspace }}/vendor
+          key: ${{ runner.os }}-composer-${{ env.CACHE_TAG }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-${{ env.CACHE_TAG }}-
+            ${{ runner.os }}-composer-
+            ${{ runner.os }}
 
       - name: Install dependencies
         if: steps.vendor_cache.outputs.cache-hit != 'true'

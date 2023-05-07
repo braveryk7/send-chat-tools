@@ -33,30 +33,35 @@ class Sct_Activate extends Sct_Base {
 	 */
 	public function register_options(): void {
 		$chat_tools_value = [
-			'use'          => false,
-			'webhook_url'  => '',
-			'send_author'  => false,
-			'send_update'  => false,
-			'login_notify' => false,
-			'log'          => [],
+			'use'            => false,
+			'webhook_url'    => '',
+			'send_author'    => false,
+			'comment_notify' => false,
+			'update_notify'  => false,
+			'login_notify'   => false,
+			'rinker_notify'  => false,
+			'log'            => [],
 		];
 		$chatwork_value   = [
-			'use'          => false,
-			'api_token'    => '',
-			'room_id'      => '',
-			'send_author'  => false,
-			'send_update'  => false,
-			'login_notify' => false,
-			'log'          => [],
+			'use'            => false,
+			'api_token'      => '',
+			'room_id'        => '',
+			'send_author'    => false,
+			'comment_notify' => false,
+			'update_notify'  => false,
+			'login_notify'   => false,
+			'rinker_notify'  => false,
+			'log'            => [],
 		];
 
 		$options = [
-			'slack'      => $chat_tools_value,
-			'discord'    => $chat_tools_value,
-			'chatwork'   => $chatwork_value,
-			'version'    => self::VERSION,
-			'cron_time'  => '18:00',
-			'ignore_key' => [],
+			'slack'            => $chat_tools_value,
+			'discord'          => $chat_tools_value,
+			'chatwork'         => $chatwork_value,
+			'version'          => self::VERSION,
+			'cron_time'        => '18:00',
+			'rinker_cron_time' => '19:00',
+			'ignore_key'       => [],
 		];
 
 		add_option( $this->add_prefix( 'options' ), $options );
@@ -75,9 +80,30 @@ class Sct_Activate extends Sct_Base {
 					if ( 'ignore_key' === $key_name ) {
 						$sct_options[ $key_name ] = [];
 					}
+					if ( 'rinker_cron_time' === $key_name ) {
+						$sct_options[ $key_name ] = '19:00';
+					}
 				} elseif ( 'slack' === $key_name || 'discord' === $key_name || 'chatwork' === $key_name ) {
-					if ( ! $sct_options[ $key_name ]['login_notify'] ) {
+					if ( ! array_key_exists( 'comment_notify', $sct_options[ $key_name ] ) ) {
+						$sct_options[ $key_name ]['comment_notify'] = true;
+					}
+					if ( ! array_key_exists( 'login_notify', $sct_options[ $key_name ] ) ) {
 						$sct_options[ $key_name ]['login_notify'] = true;
+					}
+					if ( ! array_key_exists( 'rinker_notify', $sct_options[ $key_name ] ) ) {
+						$sct_options[ $key_name ]['rinker_notify'] = true;
+					}
+					if ( array_key_exists( 'send_update', $sct_options[ $key_name ] ) ) {
+						$sct_options[ $key_name ]['update_notify'] = $sct_options[ $key_name ]['send_update'];
+						unset( $sct_options[ $key_name ]['send_update'] );
+					}
+					if ( $sct_options[ $key_name ]['log'] ) {
+						foreach ( $sct_options[ $key_name ]['log'] as $key => $log ) {
+							if ( array_key_exists( 'author', $log ) ) {
+								$sct_options[ $key_name ]['log'][ $key ]['commenter'] = $log['author'];
+								unset( $sct_options [ $key_name ]['log'][ $key ]['author'] );
+							}
+						}
 					}
 				}
 			}
@@ -144,13 +170,13 @@ class Sct_Activate extends Sct_Base {
 						$sct_options['chatwork']['send_author'] = (bool) $old_value;
 						break;
 					case 'send_slack_update':
-						$sct_options['slack']['send_update'] = (bool) $old_value;
+						$sct_options['slack']['update_notify'] = (bool) $old_value;
 						break;
 					case 'send_discord_update':
-						$sct_options['discord']['send_update'] = (bool) $old_value;
+						$sct_options['discord']['update_notify'] = (bool) $old_value;
 						break;
 					case 'send_chatwork_update':
-						$sct_options['chatwork']['send_update'] = (bool) $old_value;
+						$sct_options['chatwork']['update_notify'] = (bool) $old_value;
 						break;
 					case 'slack_log':
 						$sct_options['slack']['log'] = [];

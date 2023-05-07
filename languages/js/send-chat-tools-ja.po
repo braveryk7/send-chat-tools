@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Send Chat Tools 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/send-chat-tools\n"
-"POT-Creation-Date: 2022-11-26T18:43:56+00:00\n"
-"PO-Revision-Date: 2022-11-27 03:51+0900\n"
+"POT-Creation-Date: 2023-05-06T01:42:04+00:00\n"
+"PO-Revision-Date: 2023-05-06 10:42+0900\n"
 "Last-Translator: Ken-chan\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Domain: send-chat-tools\n"
 "X-Poedit-KeywordsList: __;_x;_n;_nx\n"
 
@@ -38,18 +38,18 @@ msgstr "けんちゃん"
 msgid "https://twitter.com/braveryk7"
 msgstr "https://twitter.com/braveryk7"
 
-#: build/index.js:22
+#: build/index.js:26
 msgid "Send Chat Tools uses the WordPress REST API for setting loading."
 msgstr "Send Chat Toolsは、設定読み込みにWordPress REST APIを使用しています。"
 
-#: build/index.js:22
+#: build/index.js:26
 msgid ""
 "If you continue to see this error, the WordPress REST API may be disabled."
 msgstr ""
 "もしこのエラーが続けて表示される場合は、WordPress REST APIが無効化されている"
 "可能性があります。"
 
-#: build/index.js:22
+#: build/index.js:26
 msgid ""
 "The WordPress REST API can be set up in a plugin or in your theme's "
 "functions.php file."
@@ -57,181 +57,282 @@ msgstr ""
 "WordPress REST APIはプラグインやテーマのfunctions.phpファイルで設定することが"
 "できます。"
 
-#: build/index.js:22
+#: build/index.js:28
 msgid "Please activate the WordPress REST API and try accessing it again."
 msgstr "WordPress REST APIを有効化して再度アクセスしてください。"
 
-#: build/index.js:24
+#: build/index.js:30
 msgid "API connection failed."
 msgstr "API接続に失敗しました。"
 
-#: build/index.js:68 build/index.js:537 build/index.js:951
+#: build/index.js:82 build/index.js:753 build/index.js:1135
 msgid "Logs"
 msgstr "ログ"
 
-#: build/index.js:69
+#: build/index.js:83
 msgid "Last three cases"
 msgstr "最後の3件"
 
-#: build/index.js:74
-msgid "Comment Author"
+#: build/index.js:89
+msgid "Commenter"
 msgstr "コメント投稿者"
 
-#: build/index.js:80
+#: build/index.js:97
 msgid "Comment ID"
 msgstr "コメントID"
 
-#: build/index.js:82 build/index.js:230
+#: build/index.js:100 build/index.js:260
 msgid "Status"
 msgstr "ステータス"
 
-#: build/index.js:84 build/index.js:230
+#: build/index.js:103 build/index.js:254
 msgid "Date"
 msgstr "日時"
 
-#: build/index.js:207
-msgid "Response OK!"
-msgstr "レスポンスOK!"
+#: build/index.js:232 build/index.js:1068
+msgid "Success"
+msgstr "成功"
 
-#: build/index.js:210 build/index.js:222
+#: build/index.js:234 build/index.js:242
 msgid "Could not communicate."
 msgstr "通信できませんでした。"
 
-#: build/index.js:213
+#: build/index.js:236
 msgid "Webhook URL/API Token not entered."
 msgstr "Webhook URL/APIトークンが入力されていません。"
 
-#: build/index.js:216
+#: build/index.js:238
 msgid "RoomID not entered."
 msgstr "ルームIDが入力されていません。"
 
-#: build/index.js:219
+#: build/index.js:240
 msgid "API system value is incorrect."
 msgstr "APIシステムの値が正しくありません。"
 
-#: build/index.js:228
-msgid "Communication logs."
+#: build/index.js:248
+msgid "Communication logs"
 msgstr "通信ログ"
 
-#: build/index.js:230
+#: build/index.js:256
 msgid "Tool"
 msgstr "ツール"
 
-#: build/index.js:230
+#: build/index.js:258
 msgid "Type"
 msgstr "タイプ"
 
-#: build/index.js:230
+#: build/index.js:262
 msgid "Detail"
 msgstr "詳細"
 
-#: build/index.js:390
-msgid "Updates will be confirmed on the first access made after this time."
-msgstr "この時間以降最初のアクセス時にアップデート確認されます。"
+#: build/index.js:309
+msgid "Rinker is not activated."
+msgstr "Rinkerがアクティベートされていません。"
 
-#: build/index.js:424
+#: build/index.js:310
+msgid ""
+"Rinker is a very popular product management plug-in for Amazon and Rakuten."
+msgstr "Rinkerは、非常に人気のあるAmazonや楽天の商品管理プラグインです。"
+
+#: build/index.js:316
+msgid "Download"
+msgstr "ダウンロード"
+
+#: build/index.js:318
+msgid "Rinker Official Web Site"
+msgstr "Rinker公式Webサイト"
+
+#: build/index.js:321
+msgid "Rinker Official FANBOX"
+msgstr "Rinker公式FANBOX"
+
+#. translators: Chat tool name.
+#: build/index.js:434
+msgid "Use %s"
+msgstr "%sを使用する"
+
+#: build/index.js:435
+msgid "Comment notification"
+msgstr "コメント通知"
+
+#: build/index.js:436
+msgid "Update notification"
+msgstr "アップデート通知"
+
+#: build/index.js:437
+msgid "Login notification"
+msgstr "ログイン通知"
+
+#: build/index.js:438
+msgid "Rinker notification"
+msgstr "Rinker通知"
+
+#: build/index.js:597
+msgid "Update and Rinker notifications are made using wp-cron."
+msgstr "アップデート、Rinker通知はwp-cronを使用しています。"
+
+#: build/index.js:598
+msgid "wp-cron will be executed on the first access after this time."
+msgstr "wp-cronはこの時間以降最初のアクセス時に実行されます。"
+
+#: build/index.js:607
 msgid "Set time to check for updates"
 msgstr "アップデート確認をする時間を設定"
 
-#: build/index.js:429
+#: build/index.js:609
+msgid "Time to send Updates notifications"
+msgstr "アップデート通知を送信する時間"
+
+#: build/index.js:615
+msgid "Set time to check for Rinker exists items"
+msgstr "Rinkerの確認をする時間を設定"
+
+#: build/index.js:617
+msgid "Time to send Rinker end-of-sale notifications"
+msgstr "Rinkerの終売通知を送信する時間"
+
+#: build/index.js:628
 msgid "Theme/plugin key to remove update notifications"
 msgstr "更新通知を除外するテーマ/プラグインのキー"
 
-#: build/index.js:521
+#: build/index.js:737
 msgid "Basic Settings"
 msgstr "基本設定"
 
-#: build/index.js:525
+#: build/index.js:741
 msgid "Slack"
 msgstr "Slack"
 
-#: build/index.js:529
+#: build/index.js:745
 msgid "Discord"
 msgstr "Discord"
 
-#: build/index.js:533
+#: build/index.js:749
 msgid "Chatwork"
 msgstr "Chatwork"
 
-#: build/index.js:736
+#: build/index.js:939
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
-#: build/index.js:740
+#: build/index.js:943
 msgid "Export text"
 msgstr "テキストでエクスポート"
 
-#: build/index.js:744
+#: build/index.js:947
 msgid "Export CSV"
 msgstr "CSVでエクスポート"
 
-#: build/index.js:823
-msgid "Copyed!"
-msgstr "コピー完了！"
+#: build/index.js:1008
+msgid "Copied"
+msgstr "コピーしました"
 
-#: build/index.js:880
-msgid "Success."
-msgstr "成功"
-
-#: build/index.js:883
-msgid "Error."
+#: build/index.js:1071
+msgid "Error"
 msgstr "エラー"
 
-#: build/index.js:932
+#. translators: Chat tool name.
+#: build/index.js:1120
+msgid "Enable %s notifications."
+msgstr "%s通知を有効化します。"
+
+#: build/index.js:1124
 msgid "Basic settings"
 msgstr "基本設定"
 
-#: build/index.js:936
-msgid "Use Slack notify"
-msgstr "Slack通知を使用する"
-
-#: build/index.js:936
+#: build/index.js:1126
 msgid "Slack settings"
 msgstr "Slack設定"
 
-#: build/index.js:936
+#: build/index.js:1126
 msgid "Slack Webhook URL"
 msgstr "Slack Webhook URL"
 
-#: build/index.js:940
-msgid "Use Discord notify"
-msgstr "Discord通知を使用する"
-
-#: build/index.js:940
+#: build/index.js:1128
 msgid "Discord settings"
 msgstr "Discord設定"
 
-#: build/index.js:940
+#: build/index.js:1128
 msgid "Discord Webhook URL"
 msgstr "Discord Webhook URL"
 
-#: build/index.js:944
-msgid "Use Chatwork notify"
-msgstr "Chatwork通知を使用する"
-
-#: build/index.js:944
+#: build/index.js:1130
 msgid "Chatwork settings"
 msgstr "Chatwork設定"
 
-#: build/index.js:944
+#: build/index.js:1130
 msgid "Chatwork API token"
 msgstr "Chatwork APIトークン"
 
-#: build/index.js:946
+#: build/index.js:1132
 msgid "Chatwork Room ID"
 msgstr "Chatwork ルームID"
 
-#: build/index.js:964
-msgid "Don't send your own comments"
-msgstr "自分自身のコメントを送信しない"
+#: build/index.js:1147
+msgid "Notify when new comments are received."
+msgstr "新規コメントがあった際に通知します。"
 
-#: build/index.js:968
-msgid "Use Update notify"
-msgstr "アップデート通知を使用する"
+#: build/index.js:1151
+msgid ""
+"If you comment while logged into WordPress,you will not be notified of your "
+"own comment."
+msgstr ""
+"WordPressにログインしている状態でコメントすると、自分のコメントが通知されませ"
+"ん。"
 
-#: build/index.js:1032
+#: build/index.js:1155
+msgid ""
+"Notify you when there are updates to WordPress Core, themes, and plugins."
+msgstr ""
+"WordPresコア、テーマ、プラグインにアップデートがあった場合に通知します。"
+
+#: build/index.js:1159
+msgid "Notify you when a WordPress user logs in."
+msgstr "WordPressユーザーがログインした際に通知します。"
+
+#: build/index.js:1163
+msgid ""
+"Notify you when an item managed by Rinkerbecomes end-of-life on Amazon or "
+"Rakuten."
+msgstr ""
+"Rinkerが管理している商品がAmazonや楽天で販売終了になった際に通知します。"
+
+#: build/index.js:1232
 msgid "Send Chat Tools Settings"
 msgstr "Send Chat Tools設定"
 
-#~ msgid "Update notify settings"
-#~ msgstr "アップデート通知設定"
+#~ msgid "Sends various notifications to Slack."
+#~ msgstr "Slackに各種通知を送信します。"
+
+#~ msgid "Use Discord notify"
+#~ msgstr "Discord通知を使用する"
+
+#~ msgid "Use Chatwork notify"
+#~ msgstr "Chatwork通知を使用する"
+
+#~ msgid "Use Slack notify"
+#~ msgstr "Slack通知を使用する"
+
+#~ msgid "Don't send your own comments"
+#~ msgstr "自分自身のコメントを送信しない"
+
+#~ msgid "Use Update notify"
+#~ msgstr "アップデート通知を使用する"
+
+#~ msgid "Use login notify"
+#~ msgstr "ログイン通知を使用する"
+
+#~ msgid "Use Rinker notify"
+#~ msgstr "Rinker通知を使用する"
+
+#~ msgid "Comment Author"
+#~ msgstr "コメント投稿者"
+
+#~ msgid "Response OK!"
+#~ msgstr "レスポンスOK!"
+
+#~ msgid "Rinker items will be checked on first access after this time."
+#~ msgstr "この時間以降最初のアクセス時にRinkerの確認がされます。"
+
+#~ msgid "Copyed!"
+#~ msgstr "コピー完了！"

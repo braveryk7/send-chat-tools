@@ -12,4 +12,5 @@ export type apiContextType = {
 	setNoticeMessage: Dispatch< SetStateAction< string > >;
 	snackbarTimer: number;
 	setSnackbarTimer: Dispatch< SetStateAction< number > >;
+	isRinkerActivated: boolean;
 };

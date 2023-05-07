@@ -24,7 +24,7 @@ class Sct_Base {
 	protected const PLUGIN_FILE          = self::PLUGIN_SLUG . '.php';
 	protected const API_NAME             = self::PLUGIN_SLUG;
 	protected const API_VERSION          = 'v1';
-	protected const VERSION              = '1.4.0';
+	protected const VERSION              = '1.5.0';
 	protected const OPTIONS_COLUMN_NAME  = 'options';
 	protected const REQUIRED_PHP_VERSION = '8.0.0';
 	protected const OFFICIAL_DIRECTORY   = 'https://wordpress.org/plugins/' . self::PLUGIN_SLUG . '/';
@@ -40,6 +40,12 @@ class Sct_Base {
 		'logs',
 	];
 
+	private const CHAT_TOOLS = [
+		'slack',
+		'discord',
+		'chatwork',
+	];
+
 	protected const OPTIONS_KEY = [
 		'slack',
 		'discord',
@@ -47,6 +53,7 @@ class Sct_Base {
 		'version',
 		'cron_time',
 		'ignore_key',
+		'rinker_cron_time',
 	];
 
 	public const OLD_OPTIONS_COLUMN = [
@@ -196,10 +203,40 @@ class Sct_Base {
 	}
 
 	/**
+	 * Method to return the value of CHAT_TOOLS.
+	 * e.g [ 'slack', 'discord', 'chatwork' ]
+	 */
+	protected function get_chat_tools(): array {
+		return self::CHAT_TOOLS;
+	}
+
+	/**
 	 * Get WP-cron event name.
 	 */
 	public static function get_wpcron_event_name(): string {
 		return self::add_prefix( self::WP_CRON_EVENT_NAME );
+	}
+
+	/**
+	 * A common method that calls the class for each chat tool.
+	 *
+	 * @param string       $tool_name   Tool name.
+	 * @param string       $method_name Method name.
+	 * @param string       $type        Comment ID/update/dev_notify/login_notify.
+	 * @param object|array $data        An object or array for generating data to be sent.
+	 */
+	protected function call_chat_tool_class( string $tool_name, string $method_name, string $type, object | array $data ): void {
+		$class = match ( $tool_name ) {
+			'slack'    => 'Sct_Slack',
+			'discord'  => 'Sct_Discord',
+			'chatwork' => 'Sct_Chatwork',
+		};
+
+		$class::get_instance()
+			?->set_notification_type_original_data( $method_name, $data )
+			?->$method_name()
+			?->generate_header()
+			?->send_tools( $type, $tool_name );
 	}
 
 	/**
@@ -211,19 +248,28 @@ class Sct_Base {
 			'type'    => 'plugin',
 			'title'   => esc_html__( 'Send Chat Tools', 'send-chat-tools' ),
 			'message' => [
-				__( 'Updated to version 1.4.0!', 'send-chat-tools' ),
+				__( 'Updated to version 1.5.0!', 'send-chat-tools' ),
 				__( 'Here are the main changes...', 'send-chat-tools' ),
 				'',
 				__( 'Important:', 'send-chat-tools' ),
-				__( '- We no longer support PHP7 series. This plugin can only be activated with PHP8 or higher.', 'send-chat-tools' ),
-				__( '- The chat log limit has been changed to 300 entries.', 'send-chat-tools' ),
+				__( '- PHP8.0 is required for v1.4.0 and later.', 'send-chat-tools' ),
+				'',
+				__( 'Feature:', 'send-chat-tools' ),
+				__( '- Added the ability to notify when a user logs in.', 'send-chat-tools' ),
+				__( '- Added a function to notify when an Amazon/Rakuten product is no longer available in the Rinker product management plugin.', 'send-chat-tools' ),
 				'',
 				__( 'Improvements:', 'send-chat-tools' ),
-				__( '- The PHP versioning logic has been revised..', 'send-chat-tools' ),
-				__( '- We have expanded the testing of various methods.', 'send-chat-tools' ),
+				__( '- We added more items to the settings screen and made it easier to understand by adding labels and headings.', 'send-chat-tools' ),
+				__( '- We have added a feature to turn off comment notifications.', 'send-chat-tools' ),
+				__( '- Improved so that other setting items cannot be operated if the Use chat tool is not checked in the settings screen.', 'send-chat-tools' ),
+				__( '- Added pictograms and text decoration to Discord notifications to improve visibility.', 'send-chat-tools' ),
+				'',
+				__( 'Fixes:', 'send-chat-tools' ),
+				__( '- Changed the name of the comment contributor from Author to Commenter.', 'send-chat-tools' ),
 				'',
 				__( 'Development:', 'send-chat-tools' ),
-				__( '- The genuine WordPress wp-env environment has been installed.', 'send-chat-tools' ),
+				__( '- Generation of sent data has been split for each chat tool to improve maintainability.', 'send-chat-tools' ),
+				__( '- The internal design was reviewed mainly in the generation of outgoing messages.', 'send-chat-tools' ),
 			],
 			'url'     => [
 				'website'     => 'https://www.braveryk7.com/portfolio/send-chat-tools/',

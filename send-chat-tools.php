@@ -3,7 +3,7 @@
  * Plugin Name: Send Chat Tools
  * Plugin URI:  https://www.braveryk7.com/
  * Description: A plugin that allows you to send WordPress announcements to chat tools.
- * Version:     1.4.0
+ * Version:     1.5.0
  * Author:      Ken-chan
  * Author URI:  https://twitter.com/braveryk7
  * Text Domain: send-chat-tools
@@ -41,6 +41,7 @@ if ( ! $sct_phpver_judge->judgment( $sct_require_php_version ) ) {
 	require_once dirname( __FILE__ ) . '/class/class-sct-admin-page.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-comment.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-login.php';
+	require_once dirname( __FILE__ ) . '/class/class-sct-check-rinker.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
 	require_once dirname( __FILE__ ) . '/class/class-sct-activate.php';
@@ -60,6 +61,11 @@ if ( ! $sct_phpver_judge->judgment( $sct_require_php_version ) ) {
 	 * Start login process.
 	 */
 	new Sct_Check_Login();
+
+	/**
+	 * Start Rinker process.
+	 */
+	new Sct_Check_Rinker();
 
 	/**
 	 * Start update process.

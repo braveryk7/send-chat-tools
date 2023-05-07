@@ -21,10 +21,18 @@ export const useChangeValue = ( itemKey: itemKeyType, optionName?: optionNameTyp
 			const isString = ( option: unknown ): option is string => {
 				return typeof option === 'string' ? true : false;
 			};
+
 			const isBaseOption = (
 				option: optionNameType
 			): option is keyof Omit< ChatToolsBaseType, 'log' > => {
-				return [ 'use', 'send_author', 'send_update', 'login_notify' ].includes( option );
+				return [
+					'use',
+					'send_author',
+					'comment_notify',
+					'update_notify',
+					'login_notify',
+					'rinker_notify',
+				].includes( option );
 			};
 
 			const isWebhook = ( option: optionNameType ): option is 'webhook_url' => {
@@ -55,9 +63,13 @@ export const useChangeValue = ( itemKey: itemKeyType, optionName?: optionNameTyp
 			chatTools( 'discord' );
 		} else if ( itemKey === 'chatwork' ) {
 			chatTools( 'chatwork' );
-		} else if ( itemKey === 'cron_time' ) {
+		} else if ( itemKey === 'cron_time' || 'rinker_cron_time' ) {
 			if ( typeof value === 'object' && 'target' in value ) {
-				newItem.cron_time = value.target.value;
+				if ( value.target.id === 'cron_time' ) {
+					newItem.cron_time = value.target.value;
+				} else if ( value.target.id === 'rinker_cron_time' ) {
+					newItem.rinker_cron_time = value.target.value;
+				}
 			}
 		} else if ( itemKey === 'ignore_key' ) {
 			if ( Array.isArray( value ) ) {

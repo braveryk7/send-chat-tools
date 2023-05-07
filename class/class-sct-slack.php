@@ -47,25 +47,21 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Abstract method to create comment data to be sent to chat tools.
-	 *
-	 * @param object $comment Comment data.
+	 * Generate comment content for Slack.
 	 */
-	public function generate_comment_content( object $comment, ): Sct_Slack {
-		$this->comment = $comment;
-
-		$article_title  = get_the_title( $comment->comment_post_ID );
-		$article_url    = get_permalink( $comment->comment_post_ID );
-		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $comment );
+	public function generate_comment_content(): Sct_Slack {
+		$article_title  = get_the_title( $this->original_data->comment_post_ID );
+		$article_url    = get_permalink( $this->original_data->comment_post_ID );
+		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $this->original_data );
 
 		$header_emoji     = ':mailbox_with_mail:';
-		$header_message   = "{$header_emoji} {$this->site_name}({$this->site_url})" . $this->get_send_text( 'comment', 'title' );
-		$comment_article  = '*' . $this->get_send_text( 'comment', 'article' ) . "*<{$article_url}|{$article_title}>";
-		$author           = '*' . $this->get_send_text( 'comment', 'author' ) . "*\n{$comment->comment_author}<{$comment->comment_author_email}>";
-		$date             = '*' . $this->get_send_text( 'comment', 'date' ) . "*\n{$comment->comment_date}";
-		$comment_content  = '*' . $this->get_send_text( 'comment', 'content' ) . "*\n{$comment->comment_content}";
-		$comment_url      = '*' . $this->get_send_text( 'comment', 'url' ) . "*\n{$article_url}#comment-{$comment->comment_ID}";
-		$comment_statuses = '*' . $this->get_send_text( 'comment', 'status' ) . "*\n{$comment_status}";
+		$header_message   = $this->generate_header_message( $header_emoji, $this->get_send_text( 'comment_notify', 'title' ) );
+		$comment_article  = '*' . $this->get_send_text( 'comment_notify', 'article' ) . ": *<{$article_url}|{$article_title}>";
+		$commenter        = '*' . $this->get_send_text( 'comment_notify', 'commenter' ) . "*\n{$this->original_data->comment_author}<{$this->original_data->comment_author_email}>";
+		$date             = '*' . $this->get_send_text( 'constant', 'date' ) . "*\n{$this->original_data->comment_date}";
+		$comment_content  = '*' . $this->get_send_text( 'comment_notify', 'comment' ) . "*\n{$this->original_data->comment_content}";
+		$comment_url      = '*' . $this->get_send_text( 'comment_notify', 'url' ) . "*\n{$article_url}#comment-{$this->original_data->comment_ID}";
+		$comment_statuses = '*' . $this->get_send_text( 'comment_notify', 'status' ) . "*\n{$comment_status}";
 		$context          = $this->generate_context( $this->tool_name );
 
 		$this->content = [
@@ -74,7 +70,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 				$this->header( 'plain_text', $header_message, true ),
 				$this->single_column( 'mrkdwn', $comment_article ),
 				$this->divider(),
-				$this->two_column( [ 'mrkdwn', $author ], [ 'mrkdwn', $date ] ),
+				$this->two_column( [ 'mrkdwn', $commenter ], [ 'mrkdwn', $date ] ),
 				$this->single_column( 'mrkdwn', $comment_content ),
 				$this->two_column( [ 'mrkdwn', $comment_url ], [ 'mrkdwn', $comment_statuses ] ),
 				$this->divider(),
@@ -86,15 +82,14 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate update notifications for Slack.
-	 *
-	 * @param array $update_content Update data.
+	 * Generate update content for Slack.
 	 */
-	public function generate_update_content( array $update_content ): Sct_Slack {
-		$plain_data     = $this->generate_plain_update_message( $update_content );
+	public function generate_update_content(): Sct_Slack {
+		$raw_data = $this->generate_update_raw_data( $this->original_data );
+
 		$header_emoji   = ':zap:';
-		$header_message = "{$header_emoji} {$plain_data->site_name}({$plain_data->site_url})" . $plain_data->update_title;
-		$update_message = $plain_data->update_text . "\n" . $plain_data->update_page . "<{$plain_data->admin_url}>";
+		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'update_notify', 'title' ) );
+		$update_message = $this->get_send_text( 'update_notify', 'update' ) . "\n" . $this->get_send_text( 'update_notify', 'page' ) . ": <{$raw_data->admin_url}>";
 		$context        = $this->generate_context( $this->tool_name );
 
 		$message = [
@@ -104,30 +99,30 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 			],
 		];
 
-		if ( isset( $plain_data->core ) ) {
+		if ( isset( $raw_data->core ) ) {
 			$core_message = [
 				'blocks' => [
-					$this->single_column( 'mrkdwn', ':star: ' . $plain_data->core ),
+					$this->single_column( 'mrkdwn', ':star: ' . $raw_data->core ),
 				],
 			];
 
 			$message = array_merge_recursive( $message, $core_message );
 		}
 
-		if ( isset( $plain_data->themes ) ) {
+		if ( isset( $raw_data->themes ) ) {
 			$themes_message = [
 				'blocks' => [
-					$this->single_column( 'mrkdwn', ':art: ' . $plain_data->themes ),
+					$this->single_column( 'mrkdwn', ':art: ' . $raw_data->themes ),
 				],
 			];
 
 			$message = array_merge_recursive( $message, $themes_message );
 		}
 
-		if ( isset( $plain_data->plugins ) ) {
+		if ( isset( $raw_data->plugins ) ) {
 			$plugins_message = [
 				'blocks' => [
-					$this->single_column( 'mrkdwn', ':wrench: ' . $plain_data->plugins ),
+					$this->single_column( 'mrkdwn', ':wrench: ' . $raw_data->plugins ),
 				],
 			];
 
@@ -150,17 +145,15 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate developer message for Slack.
-	 *
-	 * @param array $developer_message Developer message.
+	 * Generate developer content for Slack.
 	 */
-	public function generate_developer_message( array $developer_message ): Sct_Slack {
-		if ( isset( $developer_message['title'] ) && isset( $developer_message['message'] ) && array_key_exists( 'url', $developer_message ) ) {
-			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), esc_html( $developer_message['title'] ), );
+	public function generate_developer_content(): Sct_Slack {
+		if ( isset( $this->original_data['title'] ) && isset( $this->original_data['message'] ) && array_key_exists( 'url', $this->original_data ) ) {
+			$message_title = sprintf( $this->get_send_text( 'dev_notify', 'title' ), $this->original_data['title'] );
 			$content       = '';
 
 			$i = 0;
-			foreach ( $developer_message['message'] as $value ) {
+			foreach ( $this->original_data['message'] as $value ) {
 				if ( $i >= 50 ) {
 					break;
 				}
@@ -169,9 +162,9 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 			}
 
 			$header_emoji    = ':tada:';
-			$header_message  = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $message_title;
-			$website_url     = $developer_message['url']['website'];
-			$update_page_url = $developer_message['url']['update_page'];
+			$header_message  = $this->generate_header_message( $header_emoji, $message_title );
+			$website_url     = $this->original_data['url']['website'];
+			$update_page_url = $this->original_data['url']['update_page'];
 
 			$context = $this->generate_context( $this->tool_name );
 
@@ -221,7 +214,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 					$this->divider(),
 					$this->context(
 						'mrkdwn',
-						$this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $developer_message['key'],
+						$this->get_send_text( 'dev_notify', 'ignore' ) . ': ' . $this->original_data['key'],
 					),
 					$this->context( 'mrkdwn', $context ),
 				],
@@ -234,26 +227,29 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 	}
 
 	/**
-	 * Generate login message for Slack.
-	 *
-	 * @param object $user User object.
+	 * Generate login content for Slack.
 	 */
-	public function generate_login_message( object $user ): Sct_Slack {
+	public function generate_login_content(): Sct_Slack {
 		$header_emoji   = ':door:';
-		$header_message = "{$header_emoji} {$this->site_name}({$this->site_url}) " . $this->get_send_text( 'login_notify', 'title' );
+		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'login_notify', 'title' ) );
 
-		$user_name       = $user->data->user_login;
-		$user_email      = $user->data->user_email;
-		$login_user_name = '*' . $this->get_send_text( 'login_notify', 'user_name' ) . ":*\n{$user_name}<$user_email>";
+		$user_name       = $this->original_data->data->user_login;
+		$user_email      = $this->original_data->data->user_email;
+		$login_user_name = '*' . $this->get_send_text( 'login_notify', 'user_name' ) . "*\n{$user_name}<$user_email>";
 
 		$now_date   = gmdate( 'Y-m-d H:i:s', strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-		$login_date = '*' . $this->get_send_text( 'login_notify', 'date' ) . ":*\n{$now_date}";
+		$login_date = '*' . $this->get_send_text( 'constant', 'date' ) . "*\n{$now_date}";
 
 		$os_browser = getenv( 'HTTP_USER_AGENT' );
-		$login_env  = '*' . $this->get_send_text( 'login_notify', 'login_env' ) . ":*\n{$os_browser}";
+		$login_env  = '*' . $this->get_send_text( 'login_notify', 'login_env' ) . "*\n{$os_browser}";
 
 		$ip_address       = getenv( 'REMOTE_ADDR' );
-		$login_ip_address = '*' . $this->get_send_text( 'login_notify', 'ip_address' ) . ":*\n{$ip_address}";
+		$login_ip_address = '*' . $this->get_send_text( 'login_notify', 'ip_address' ) . "*\n{$ip_address}";
+
+		$message =
+			$this->get_send_text( 'login_notify', 'unauthorized_login' ) . "\n" .
+			$this->get_send_text( 'login_notify', 'disconnect' ) . "\n" .
+			$this->site_url . '/wp-admin/profile.php';
 
 		$this->content = [
 			'text'   => $header_message,
@@ -262,9 +258,33 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 				$this->two_column( [ 'mrkdwn', $login_user_name ], [ 'mrkdwn', $login_date ] ),
 				$this->two_column( [ 'mrkdwn', $login_env ], [ 'mrkdwn', $login_ip_address ] ),
 				$this->divider(),
-				$this->single_column( 'mrkdwn', $this->get_send_text( 'login_notify', 'unauthorized_login' ), ),
-				$this->single_column( 'mrkdwn', $this->get_send_text( 'login_notify', 'disconnect' ), ),
-				$this->single_column( 'mrkdwn', $this->site_url . '/wp-admin/profile.php' ),
+				$this->single_column( 'mrkdwn', $message, ),
+				$this->divider(),
+				$this->context( 'mrkdwn', $this->generate_context( $this->tool_name ) ),
+			],
+		];
+
+		return $this;
+	}
+
+	/**
+	 * Generate Rinker content for Slack.
+	 */
+	public function generate_rinker_content(): Sct_Slack {
+		$header_emoji   = ':package:';
+		$header_message = $this->generate_header_message( $header_emoji, $this->get_send_text( 'rinker_notify', 'title' ) );
+
+		$discontinued_items = $this->format_rinker_items( $this->original_data );
+
+		$after_message = $this->get_send_text( 'rinker_notify', 'temporary' ) . "\n" . $this->get_send_text( 'rinker_notify', 'resume' );
+
+		$this->content = [
+			'text'   => $header_message,
+			'blocks' => [
+				$this->header( 'plain_text', $header_message, true ),
+				$this->single_column( 'mrkdwn', $discontinued_items ),
+				$this->divider(),
+				$this->single_column( 'mrkdwn', $after_message ),
 				$this->divider(),
 				$this->context( 'mrkdwn', $this->generate_context( $this->tool_name ) ),
 			],

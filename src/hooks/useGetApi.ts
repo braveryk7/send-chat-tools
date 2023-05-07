@@ -8,6 +8,7 @@ import { apiType } from 'src/types/apiType';
 export const useGetApi = (
 	stateFunc: Dispatch< SetStateAction< apiType | undefined > >,
 	setApiError: Dispatch< SetStateAction< boolean > >,
+	setIsRinkerExists: Dispatch< SetStateAction< boolean > >,
 ) => {
 	useEffect( () => {
 		apiFetch< apiType >(
@@ -19,4 +20,15 @@ export const useGetApi = (
 			setApiError( true );
 		} );
 	}, [ stateFunc, setApiError ] );
+
+	useEffect( () => {
+		apiFetch< boolean >(
+			{ path: '/send-chat-tools/v1/get-rinker-activated' }
+		).then( ( response ) => {
+			setApiError( false );
+			setIsRinkerExists( response );
+		} ).catch( () => {
+			setApiError( true );
+		} );
+	}, [ setIsRinkerExists, setApiError ] );
 };
