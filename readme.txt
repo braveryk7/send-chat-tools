@@ -16,6 +16,17 @@ You can instantly check comments that you didn't notice with the default email n
 
 === Changelog ===
 
+= 1.5.1 =
+
+Important:
+
+* PHP8.0 is required for v1.4.0 and later.
+
+Fixes:
+
+* Fixed wp-cron settings.
+* A problem with missing translation files has been corrected.
+
 = 1.5.0 =
 
 Important:
