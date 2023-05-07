@@ -105,7 +105,7 @@ class Sct_Check_Rinker extends Sct_Base {
 			if ( ! $get_next_schedule ) {
 				wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
 			} else {
-				if ( isset( $sct_options['cron_time'] ) ) {
+				if ( isset( $sct_options['rinker_cron_time'] ) ) {
 					if ( $get_next_schedule->timestamp !== $datetime_timestamp ) {
 						$datetime_timestamp <= time() ? $datetime_timestamp = strtotime( '+1 day', $datetime_timestamp ) : $datetime_timestamp;
 						wp_clear_scheduled_hook( $this->cron_event_name );
