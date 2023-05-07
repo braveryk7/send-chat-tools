@@ -19,13 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
-	 * Property with WordPress comment data.
-	 *
-	 * @var object Comment data.
-	 */
-	protected $comment;
-
-	/**
 	 * Property to store generated header.
 	 *
 	 * @var array Generated header.

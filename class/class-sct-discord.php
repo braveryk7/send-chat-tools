@@ -50,8 +50,6 @@ class Sct_Discord extends Sct_Generate_Content_Abstract {
 	 * Generate comment content for Discord.
 	 */
 	public function generate_comment_content(): Sct_Discord {
-		$this->comment = $this->original_data;
-
 		$article_title  = get_the_title( $this->original_data->comment_post_ID );
 		$article_url    = get_permalink( $this->original_data->comment_post_ID );
 		$comment_status = $this->generate_comment_approved_message( $this->tool_name, $this->original_data );
