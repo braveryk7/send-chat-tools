@@ -143,7 +143,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 * @param string|null $header_emoji Header emoji.
 	 * @param string      $header_message Header message.
 	 */
-	protected function generate_header_message( string $header_emoji = null, string $header_message ): string {
+	protected function generate_header_message( string $header_emoji = null, string $header_message = '' ): string {
 		return match ( $this->tool_name ) {
 			'slack'      => "{$header_emoji} {$this->site_name}({$this->site_url}) " . $header_message,
 			'discord'    => "{$header_emoji} __***{$this->site_name}({$this->site_url}) " . $header_message . '***__',
