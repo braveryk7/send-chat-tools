@@ -24,7 +24,7 @@ class Sct_Base {
 	protected const PLUGIN_FILE          = self::PLUGIN_SLUG . '.php';
 	protected const API_NAME             = self::PLUGIN_SLUG;
 	protected const API_VERSION          = 'v1';
-	protected const VERSION              = '1.5.0';
+	protected const VERSION              = '1.5.1';
 	protected const OPTIONS_COLUMN_NAME  = 'options';
 	protected const REQUIRED_PHP_VERSION = '8.0.0';
 	protected const OFFICIAL_DIRECTORY   = 'https://wordpress.org/plugins/' . self::PLUGIN_SLUG . '/';
@@ -248,28 +248,15 @@ class Sct_Base {
 			'type'    => 'plugin',
 			'title'   => esc_html__( 'Send Chat Tools', 'send-chat-tools' ),
 			'message' => [
-				__( 'Updated to version 1.5.0!', 'send-chat-tools' ),
+				__( 'Updated to version 1.5.1!', 'send-chat-tools' ),
 				__( 'Here are the main changes...', 'send-chat-tools' ),
 				'',
 				__( 'Important:', 'send-chat-tools' ),
 				__( '- PHP8.0 is required for v1.4.0 and later.', 'send-chat-tools' ),
 				'',
-				__( 'Feature:', 'send-chat-tools' ),
-				__( '- Added the ability to notify when a user logs in.', 'send-chat-tools' ),
-				__( '- Added a function to notify when an Amazon/Rakuten product is no longer available in the Rinker product management plugin.', 'send-chat-tools' ),
-				'',
-				__( 'Improvements:', 'send-chat-tools' ),
-				__( '- We added more items to the settings screen and made it easier to understand by adding labels and headings.', 'send-chat-tools' ),
-				__( '- We have added a feature to turn off comment notifications.', 'send-chat-tools' ),
-				__( '- Improved so that other setting items cannot be operated if the Use chat tool is not checked in the settings screen.', 'send-chat-tools' ),
-				__( '- Added pictograms and text decoration to Discord notifications to improve visibility.', 'send-chat-tools' ),
-				'',
 				__( 'Fixes:', 'send-chat-tools' ),
-				__( '- Changed the name of the comment contributor from Author to Commenter.', 'send-chat-tools' ),
-				'',
-				__( 'Development:', 'send-chat-tools' ),
-				__( '- Generation of sent data has been split for each chat tool to improve maintainability.', 'send-chat-tools' ),
-				__( '- The internal design was reviewed mainly in the generation of outgoing messages.', 'send-chat-tools' ),
+				__( '- Fixed wp-cron settings.', 'send-chat-tools' ),
+				__( '- A problem with missing translation files has been corrected.', 'send-chat-tools' ),
 			],
 			'url'     => [
 				'website'     => 'https://www.braveryk7.com/portfolio/send-chat-tools/',
