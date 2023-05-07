@@ -19,13 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	/**
-	 * Property with WordPress comment data.
-	 *
-	 * @var object Comment data.
-	 */
-	protected $comment;
-
-	/**
 	 * Property to store generated header.
 	 *
 	 * @var array Generated header.
@@ -320,7 +313,6 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 	 * @param string $tool_name         Use chat tools prefix.
 	 */
 	public function send_tools( string $notification_type, string $tool_name ): bool {
-
 		$sct_options = $this->get_sct_options();
 
 		switch ( $tool_name ) {
@@ -338,14 +330,14 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		if ( $regex ) {
 			$result = wp_remote_post( $url, $this->header );
 
-			if ( ! is_null( $this->comment ) ) {
+			if ( ctype_digit( $notification_type ) ) {
 				$logs = [
-					$this->comment->comment_date => [
-						'id'      => $this->comment->comment_ID,
-						'author'  => $this->comment->comment_author,
-						'email'   => $this->comment->comment_author_email,
-						'url'     => $this->comment->comment_author_url,
-						'comment' => $this->comment->comment_content,
+					$this->original_data->comment_date => [
+						'id'      => $this->original_data->comment_ID,
+						'author'  => $this->original_data->comment_author,
+						'email'   => $this->original_data->comment_author_email,
+						'url'     => $this->original_data->comment_author_url,
+						'comment' => $this->original_data->comment_content,
 						'status'  => $result['response']['code'],
 					],
 				];
