@@ -16,6 +16,33 @@ You can instantly check comments that you didn't notice with the default email n
 
 === Changelog ===
 
+= 1.5.0 =
+
+Important:
+
+* PHP8.0 is required for v1.4.0 and later.
+
+Feature:
+
+* Added the ability to notify when a user logs in.
+* Added a function to notify when an Amazon/Rakuten product is no longer available in the Rinker product management plugin.
+
+Improvements:
+
+* We added more items to the settings screen and made it easier to understand by adding labels and headings.
+* We have added a feature to turn off comment notifications.
+* Improved so that other setting items cannot be operated if the Use chat tool is not checked in the settings screen.
+* Added pictograms and text decoration to Discord notifications to improve visibility.
+
+Fixes:
+
+* Changed the name of the comment contributor from Author to Commenter.
+
+Development:
+
+* Generation of sent data has been split for each chat tool to improve maintainability.
+* The internal design was reviewed mainly in the generation of outgoing messages.
+
 = 1.4.0 =
 
 Important:
