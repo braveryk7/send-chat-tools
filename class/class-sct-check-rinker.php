@@ -97,16 +97,16 @@ class Sct_Check_Rinker extends Sct_Base {
 	 */
 	public function check_cron_time(): void {
 		if ( $this->is_rinker_activated() ) {
-			$get_next_schedule  = wp_get_scheduled_event( $this->cron_event_name );
+			$next_schedule      = wp_get_scheduled_event( $this->cron_event_name );
 			$sct_options        = $this->get_sct_options();
 			$datetime_string    = gmdate( 'Y-m-d ' . $sct_options['rinker_cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
 			$datetime_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $datetime_string ) );
 
-			if ( ! $get_next_schedule ) {
+			if ( ! $next_schedule ) {
 				wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
 			} else {
 				if ( isset( $sct_options['rinker_cron_time'] ) ) {
-					if ( $get_next_schedule->timestamp !== $datetime_timestamp ) {
+					if ( $next_schedule->timestamp !== $datetime_timestamp ) {
 						$datetime_timestamp <= time() ? $datetime_timestamp = strtotime( '+1 day', $datetime_timestamp ) : $datetime_timestamp;
 						wp_clear_scheduled_hook( $this->cron_event_name );
 						wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
