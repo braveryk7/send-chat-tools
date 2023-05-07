@@ -6,7 +6,7 @@ assignee="@me"
 
 body="
 - [ ] readme.txtの更新（バージョン情報、更新履歴）
-- [ ] send-chat-tools.phpの更新（バージョン情報）
+- [ ] admin-bar-tools.phpの更新（バージョン情報）
 - [ ] GitHub Releaseの作成
 - [ ] 記事反映
 - [ ] SVN trunkへの追加
