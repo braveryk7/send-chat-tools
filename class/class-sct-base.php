@@ -253,7 +253,6 @@ class Sct_Base {
 				'',
 				__( 'Important:', 'send-chat-tools' ),
 				__( '- PHP8.0 is required for v1.4.0 and later.', 'send-chat-tools' ),
-				__( '- The chat log limit has been changed to 300 entries.', 'send-chat-tools' ),
 				'',
 				__( 'Feature:', 'send-chat-tools' ),
 				__( '- Added the ability to notify when a user logs in.', 'send-chat-tools' ),
