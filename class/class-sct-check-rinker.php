@@ -68,7 +68,7 @@ class Sct_Check_Rinker extends Sct_Base {
 				[
 					'post_type'      => 'yyi_rinker',
 					'meta_key'       => 'yyi_rinker_is_' . $shop . '_no_exist', //phpcs:ignore
-					'meta_value_num' => 1,
+					'meta_value'     => '1', //phpcs:ignore
 					'posts_per_page' => -1,
 				],
 			);
