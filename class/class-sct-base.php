@@ -87,7 +87,7 @@ class Sct_Base {
 	];
 
 	protected const THEME_OPTION_NAME  = [
-		'Cocoon'    => 'external_theme_updates-cocoon-master',
+		'Cocoon'    => 'puc_external_updates_theme-cocoon-master',
 		'SANGO'     => 'puc_external_updates_theme-sango-theme',
 		'THE SONIC' => 'puc_external_updates_theme-tsnc-main-theme-updater',
 	];
