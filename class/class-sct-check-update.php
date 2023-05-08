@@ -95,12 +95,17 @@ class Sct_Check_Update extends Sct_Base {
 
 		if ( array_key_exists( $current_theme, self::THEME_OPTION_NAME ) ) {
 			$update_themes = get_option( self::THEME_OPTION_NAME[ $current_theme ] );
-			if ( version_compare( $current_version, $update_themes->update->version, '<' ) ) {
+
+			$is_incomplete_class = fn () => '__PHP_Incomplete_Class' === get_class( $update_themes->update );
+
+			$latest_version = $is_incomplete_class() ? get_object_vars( $update_themes->update )['version'] : $update_themes->update->version;
+
+			if ( version_compare( $current_version, $latest_version, '<' ) ) {
 				$theme_data[ $current_theme ] = [
 					'name'            => $current_theme,
 					'attribute'       => 'theme',
 					'current_version' => $current_version,
-					'new_version'     => $update_themes->update->version,
+					'new_version'     => $latest_version,
 				];
 			}
 		}
