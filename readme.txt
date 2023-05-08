@@ -16,6 +16,16 @@ You can instantly check comments that you didn't notice with the default email n
 
 === Changelog ===
 
+= 1.5.2 =
+
+Important:
+
+* PHP8.0 is required for v1.4.0 and later.
+
+Fixes:
+
+* Fixed an issue where notification was sent despite the end-of-sale flag not being set in the Rinker end-of-sale notification.
+
 = 1.5.1 =
 
 Important:
