@@ -167,16 +167,16 @@ class Sct_Check_Update extends Sct_Base {
 	 * WP-cron check.
 	 */
 	public function check_cron_time(): void {
-		$get_next_schedule     = wp_get_scheduled_event( 'sct_update_check' );
+		$next_schedule         = wp_get_scheduled_event( 'sct_update_check' );
 		$sct_options           = $this->get_sct_options();
 		$to_datetime_string    = gmdate( 'Y-m-d ' . $sct_options['cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
 		$sct_options_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $to_datetime_string ) );
 
-		if ( ! $get_next_schedule ) {
+		if ( ! $next_schedule ) {
 			wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
 		} else {
 			if ( isset( $sct_options['cron_time'] ) ) {
-				if ( $get_next_schedule->timestamp !== $sct_options_timestamp ) {
+				if ( $next_schedule->timestamp !== $sct_options_timestamp ) {
 					$sct_options_timestamp <= time() ? $sct_options_timestamp = strtotime( '+1 day', $sct_options_timestamp ) : $sct_options_timestamp;
 					wp_clear_scheduled_hook( 'sct_update_check' );
 					wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
