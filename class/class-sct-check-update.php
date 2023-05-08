@@ -94,13 +94,13 @@ class Sct_Check_Update extends Sct_Base {
 		$current_version = is_child_theme() ? wp_get_theme()->parent()->Version : wp_get_theme()->Version;
 
 		if ( array_key_exists( $current_theme, self::THEME_OPTION_NAME ) ) {
-			$get_update = get_option( self::THEME_OPTION_NAME[ $current_theme ] );
-			if ( version_compare( $current_version, $get_update->update->version, '<' ) ) {
+			$update_themes = get_option( self::THEME_OPTION_NAME[ $current_theme ] );
+			if ( version_compare( $current_version, $update_themes->update->version, '<' ) ) {
 				$theme_data[ $current_theme ] = [
 					'name'            => $current_theme,
 					'attribute'       => 'theme',
 					'current_version' => $current_version,
-					'new_version'     => $get_update->update->version,
+					'new_version'     => $update_themes->update->version,
 				];
 			}
 		}
