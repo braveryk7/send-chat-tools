@@ -167,19 +167,19 @@ class Sct_Check_Update extends Sct_Base {
 	 * WP-cron check.
 	 */
 	public function check_cron_time(): void {
-		$next_schedule         = wp_get_scheduled_event( 'sct_update_check' );
-		$sct_options           = $this->get_sct_options();
-		$datetime_string       = gmdate( 'Y-m-d ' . $sct_options['cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-		$sct_options_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $datetime_string ) );
+		$next_schedule      = wp_get_scheduled_event( 'sct_update_check' );
+		$sct_options        = $this->get_sct_options();
+		$datetime_string    = gmdate( 'Y-m-d ' . $sct_options['cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+		$datetime_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $datetime_string ) );
 
 		if ( ! $next_schedule ) {
-			wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
+			wp_schedule_event( $datetime_timestamp, 'daily', 'sct_update_check' );
 		} else {
 			if ( isset( $sct_options['cron_time'] ) ) {
-				if ( $next_schedule->timestamp !== $sct_options_timestamp ) {
-					$sct_options_timestamp <= time() ? $sct_options_timestamp = strtotime( '+1 day', $sct_options_timestamp ) : $sct_options_timestamp;
+				if ( $next_schedule->timestamp !== $datetime_timestamp ) {
+					$datetime_timestamp <= time() ? $datetime_timestamp = strtotime( '+1 day', $datetime_timestamp ) : $datetime_timestamp;
 					wp_clear_scheduled_hook( 'sct_update_check' );
-					wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
+					wp_schedule_event( $datetime_timestamp, 'daily', 'sct_update_check' );
 				}
 			} else {
 				$sct_options['cron_time'] = '18:00';
