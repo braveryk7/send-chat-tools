@@ -19,10 +19,18 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Check_Update extends Sct_Base {
 	/**
+	 * Property that holds the name of the updates cron event.
+	 *
+	 * @var string $cron_event_name
+	 */
+	private $cron_event_name;
+
+	/**
 	 * WordPress hook.
 	 * Add WP-Cron.
 	 */
 	public function __construct() {
+		$this->cron_event_name = $this->add_prefix( 'update_check' );
 		add_action( $this->add_prefix( 'update_check' ), [ $this, 'controller' ] );
 		add_action( 'admin_init', [ $this, 'check_cron_time' ] );
 	}
@@ -61,11 +69,11 @@ class Sct_Check_Update extends Sct_Base {
 	 * WordPress Core.
 	 */
 	private function check_core(): ?array {
-		$get_core_status = get_option( '_site_transient_update_core' );
-		$core_data       = null;
+		$update_core = get_option( '_site_transient_update_core' );
+		$core_data   = null;
 
-		if ( ! empty( $get_core_status ) && 'upgrade' === $get_core_status->updates[0]->response ) {
-			$update_information = $get_core_status->updates[0];
+		if ( ! empty( $update_core ) && 'upgrade' === $update_core->updates[0]->response ) {
+			$update_information = $update_core->updates[0];
 			$core_data['core']  = [
 				'name'            => 'WordPress Core',
 				'attribute'       => 'core',
@@ -81,26 +89,26 @@ class Sct_Check_Update extends Sct_Base {
 	 * Themes.
 	 */
 	private function check_themes(): ?array {
-		$theme_data      = null;
 		$current_theme   = is_child_theme() ? wp_get_theme()->parent()->name : wp_get_theme()->Name;
 		$current_version = is_child_theme() ? wp_get_theme()->parent()->Version : wp_get_theme()->Version;
+		$theme_data      = null;
 
 		if ( array_key_exists( $current_theme, self::THEME_OPTION_NAME ) ) {
-			$get_update = get_option( self::THEME_OPTION_NAME[ $current_theme ] );
-			if ( version_compare( $current_version, $get_update->update->version, '<' ) ) {
+			$update_themes = get_option( self::THEME_OPTION_NAME[ $current_theme ] );
+			if ( version_compare( $current_version, $update_themes->update->version, '<' ) ) {
 				$theme_data[ $current_theme ] = [
 					'name'            => $current_theme,
 					'attribute'       => 'theme',
 					'current_version' => $current_version,
-					'new_version'     => $get_update->update->version,
+					'new_version'     => $update_themes->update->version,
 				];
 			}
 		}
 
-		$get_theme_status = get_option( '_site_transient_update_themes' );
+		$update_official_themes = get_option( '_site_transient_update_themes' );
 
-		if ( ! empty( $get_theme_status->response ) ) {
-			foreach ( $get_theme_status->response as $key => $value ) {
+		if ( ! empty( $update_official_themes->response ) ) {
+			foreach ( $update_official_themes->response as $key => $value ) {
 				$theme_date                      = wp_get_theme( $key );
 				$theme_data[ $theme_date->name ] = [
 					'name'            => $theme_date->name,
@@ -119,11 +127,11 @@ class Sct_Check_Update extends Sct_Base {
 	 * Plugins.
 	 */
 	private function check_plugins(): ?array {
-		$get_plugin_status = get_option( '_site_transient_update_plugins' );
-		$plugin_data       = null;
+		$update_plugins = get_option( '_site_transient_update_plugins' );
+		$plugin_data    = null;
 
-		if ( ! empty( $get_plugin_status->response ) ) {
-			foreach ( $get_plugin_status->response as $key ) {
+		if ( ! empty( $update_plugins->response ) ) {
+			foreach ( $update_plugins->response as $key ) {
 				$path                      = $this->get_plugin_dir( $key->plugin );
 				$plugin_date               = get_file_data(
 					$path,
@@ -144,14 +152,14 @@ class Sct_Check_Update extends Sct_Base {
 
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-		foreach ( get_plugins() as $value ) {
-			if ( array_key_exists( $value['Name'], self::PLUGIN_OPTION_NAME ) ) {
-				$get_update = get_option( self::PLUGIN_OPTION_NAME[ $value['Name'] ] );
-				if ( ! empty( $get_update ) && version_compare( $value['Version'], $get_update->update->version, '<' ) ) {
-					$plugin_data[ $value['Name'] ] = [
-						'name'            => $value['Name'],
+		foreach ( get_plugins() as $plugin ) {
+			if ( array_key_exists( $plugin['Name'], self::PLUGIN_OPTION_NAME ) ) {
+				$get_update = get_option( self::PLUGIN_OPTION_NAME[ $plugin['Name'] ] );
+				if ( ! empty( $get_update ) && version_compare( $plugin['Version'], $get_update->update->version, '<' ) ) {
+					$plugin_data[ $plugin['Name'] ] = [
+						'name'            => $plugin['Name'],
 						'attribute'       => 'plugin',
-						'current_version' => $value['Version'],
+						'current_version' => $plugin['Version'],
 						'new_version'     => $get_update->update->version,
 					];
 				}
@@ -164,22 +172,23 @@ class Sct_Check_Update extends Sct_Base {
 	}
 
 	/**
-	 * WP-cron check.
+	 * Check the execution time of the WP-Cron event and set it if not already set.
+	 * If the time is different from the event already registered, set a new time.
 	 */
 	public function check_cron_time(): void {
-		$get_next_schedule     = wp_get_scheduled_event( 'sct_update_check' );
-		$sct_options           = $this->get_sct_options();
-		$to_datetime_string    = gmdate( 'Y-m-d ' . $sct_options['cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
-		$sct_options_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $to_datetime_string ) );
+		$next_schedule      = wp_get_scheduled_event( $this->cron_event_name );
+		$sct_options        = $this->get_sct_options();
+		$datetime_string    = gmdate( 'Y-m-d ' . $sct_options['cron_time'], strtotime( current_datetime()->format( 'Y-m-d H:i:s' ) ) );
+		$datetime_timestamp = strtotime( -1 * (int) current_datetime()->format( 'O' ) / 100 . 'hour', strtotime( $datetime_string ) );
 
-		if ( ! $get_next_schedule ) {
-			wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
+		if ( ! $next_schedule ) {
+			wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
 		} else {
 			if ( isset( $sct_options['cron_time'] ) ) {
-				if ( $get_next_schedule->timestamp !== $sct_options_timestamp ) {
-					$sct_options_timestamp <= time() ? $sct_options_timestamp = strtotime( '+1 day', $sct_options_timestamp ) : $sct_options_timestamp;
-					wp_clear_scheduled_hook( 'sct_update_check' );
-					wp_schedule_event( $sct_options_timestamp, 'daily', 'sct_update_check' );
+				if ( $next_schedule->timestamp !== $datetime_timestamp ) {
+					$datetime_timestamp <= time() ? $datetime_timestamp = strtotime( '+1 day', $datetime_timestamp ) : $datetime_timestamp;
+					wp_clear_scheduled_hook( $this->cron_event_name );
+					wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
 				}
 			} else {
 				$sct_options['cron_time'] = '18:00';
