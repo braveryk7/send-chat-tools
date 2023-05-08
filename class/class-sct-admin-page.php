@@ -175,7 +175,6 @@ class Sct_Admin_Page extends Sct_Base {
 	 */
 	public function settings_page(): void {
 		echo '<div id="' . esc_attr( $this->get_option_group() ) . '"></div>';
-		$this->console( get_option( 'sct_sango' )->update->version );
 	}
 
 	/**
