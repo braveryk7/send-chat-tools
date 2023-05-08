@@ -89,9 +89,9 @@ class Sct_Check_Update extends Sct_Base {
 	 * Themes.
 	 */
 	private function check_themes(): ?array {
-		$theme_data      = null;
 		$current_theme   = is_child_theme() ? wp_get_theme()->parent()->name : wp_get_theme()->Name;
 		$current_version = is_child_theme() ? wp_get_theme()->parent()->Version : wp_get_theme()->Version;
+		$theme_data      = null;
 
 		if ( array_key_exists( $current_theme, self::THEME_OPTION_NAME ) ) {
 			$update_themes = get_option( self::THEME_OPTION_NAME[ $current_theme ] );
