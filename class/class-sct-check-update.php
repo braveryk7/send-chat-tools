@@ -172,7 +172,8 @@ class Sct_Check_Update extends Sct_Base {
 	}
 
 	/**
-	 * WP-cron check.
+	 * Check the execution time of the WP-Cron event and set it if not already set.
+	 * If the time is different from the event already registered, set a new time.
 	 */
 	public function check_cron_time(): void {
 		$next_schedule      = wp_get_scheduled_event( $this->cron_event_name );
