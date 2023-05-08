@@ -19,6 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sct_Check_Update extends Sct_Base {
 	/**
+	 * Property that holds the name of the updates cron event.
+	 *
+	 * @var string $cron_event_name
+	 */
+	private $cron_event_name;
+
+	/**
 	 * WordPress hook.
 	 * Add WP-Cron.
 	 */
