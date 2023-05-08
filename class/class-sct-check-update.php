@@ -105,10 +105,10 @@ class Sct_Check_Update extends Sct_Base {
 			}
 		}
 
-		$get_theme_status = get_option( '_site_transient_update_themes' );
+		$update_official_themes = get_option( '_site_transient_update_themes' );
 
-		if ( ! empty( $get_theme_status->response ) ) {
-			foreach ( $get_theme_status->response as $key => $value ) {
+		if ( ! empty( $update_official_themes->response ) ) {
+			foreach ( $update_official_themes->response as $key => $value ) {
 				$theme_date                      = wp_get_theme( $key );
 				$theme_data[ $theme_date->name ] = [
 					'name'            => $theme_date->name,
