@@ -127,11 +127,11 @@ class Sct_Check_Update extends Sct_Base {
 	 * Plugins.
 	 */
 	private function check_plugins(): ?array {
-		$get_plugin_status = get_option( '_site_transient_update_plugins' );
-		$plugin_data       = null;
+		$update_plugins = get_option( '_site_transient_update_plugins' );
+		$plugin_data    = null;
 
-		if ( ! empty( $get_plugin_status->response ) ) {
-			foreach ( $get_plugin_status->response as $key ) {
+		if ( ! empty( $update_plugins->response ) ) {
+			foreach ( $update_plugins->response as $key ) {
 				$path                      = $this->get_plugin_dir( $key->plugin );
 				$plugin_date               = get_file_data(
 					$path,
@@ -152,14 +152,14 @@ class Sct_Check_Update extends Sct_Base {
 
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-		foreach ( get_plugins() as $value ) {
-			if ( array_key_exists( $value['Name'], self::PLUGIN_OPTION_NAME ) ) {
-				$get_update = get_option( self::PLUGIN_OPTION_NAME[ $value['Name'] ] );
-				if ( ! empty( $get_update ) && version_compare( $value['Version'], $get_update->update->version, '<' ) ) {
-					$plugin_data[ $value['Name'] ] = [
-						'name'            => $value['Name'],
+		foreach ( get_plugins() as $plugin ) {
+			if ( array_key_exists( $plugin['Name'], self::PLUGIN_OPTION_NAME ) ) {
+				$get_update = get_option( self::PLUGIN_OPTION_NAME[ $plugin['Name'] ] );
+				if ( ! empty( $get_update ) && version_compare( $plugin['Version'], $get_update->update->version, '<' ) ) {
+					$plugin_data[ $plugin['Name'] ] = [
+						'name'            => $plugin['Name'],
 						'attribute'       => 'plugin',
-						'current_version' => $value['Version'],
+						'current_version' => $plugin['Version'],
 						'new_version'     => $get_update->update->version,
 					];
 				}
