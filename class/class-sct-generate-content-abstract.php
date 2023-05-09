@@ -331,22 +331,9 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 			$result = wp_remote_post( $url, $this->header );
 
 			if ( ctype_digit( $notification_type ) ) {
-				$logs = [
-					$this->original_data->comment_date => [
-						'id'      => $this->original_data->comment_ID,
-						'author'  => $this->original_data->comment_author,
-						'email'   => $this->original_data->comment_author_email,
-						'url'     => $this->original_data->comment_author_url,
-						'comment' => $this->original_data->comment_content,
-						'status'  => $result['response']['code'],
-					],
-				];
-
-				if ( '3' <= count( $sct_options[ $tool_name ]['log'] ) ) {
-					array_pop( $sct_options[ $tool_name ]['log'] );
-				}
-				$sct_options[ $tool_name ]['log'] = $logs + $sct_options[ $tool_name ]['log'];
-				$this->set_sct_options( $sct_options );
+				Sct_Logger::get_instance()
+					?->individual_log( $this->original_data, $result['response']['code'], $tool_name, $sct_options )
+					?->is_saved();
 			}
 		}
 
