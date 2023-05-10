@@ -30,7 +30,7 @@ class Sct_Check_Update extends Sct_Base {
 	 * Add WP-Cron.
 	 */
 	public function __construct() {
-		$this->cron_event_name = $this->add_prefix( 'update_check' );
+		$this->cron_event_name = $this->get_wpcron_event_name( 'update_notify' );
 		add_action( $this->add_prefix( 'update_check' ), [ $this, 'controller' ] );
 		add_action( 'admin_init', [ $this, 'check_cron_time' ] );
 	}
