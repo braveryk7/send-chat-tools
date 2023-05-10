@@ -90,6 +90,7 @@ class Sct_Base {
 		'Cocoon'    => 'puc_external_updates_theme-cocoon-master',
 		'SANGO'     => 'puc_external_updates_theme-sango-theme',
 		'THE SONIC' => 'puc_external_updates_theme-tsnc-main-theme-updater',
+		'JIN:R'     => 'external_theme_updates-jinr',
 	];
 	protected const PLUGIN_OPTION_NAME = [
 		'Rinker'                     => 'external_updates-yyi-rinker',
