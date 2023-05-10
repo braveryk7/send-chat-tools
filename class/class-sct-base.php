@@ -213,9 +213,14 @@ class Sct_Base {
 
 	/**
 	 * Get WP-cron event name.
+	 *
+	 * @param string $event_type Event type.
 	 */
-	public static function get_wpcron_event_name(): string {
-		return self::add_prefix( self::WP_CRON_EVENT_NAME );
+	public static function get_wpcron_event_name( string $event_type ): string {
+		return match ( $event_type ) {
+			'update_notify' => self::add_prefix( self::WP_CRON_EVENT_NAME ),
+			'rinker_notify' => self::add_prefix( 'rinker_discontinued_items_check' ),
+		};
 	}
 
 	/**
