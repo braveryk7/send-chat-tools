@@ -33,7 +33,8 @@ class Sct_Base {
 
 	protected const ENCRYPT_METHOD = 'AES-256-CBC';
 
-	private const WP_CRON_EVENT_NAME = 'update_check';
+	private const WP_CRON_EVENT_NAME               = 'update_check';
+	private const WP_CRON_RINKER_NOTIFY_EVENT_NAME = 'rinker_discontinued_items_check';
 
 	public const OPTIONS_COLUMN = [
 		'options',
