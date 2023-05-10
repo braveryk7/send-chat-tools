@@ -118,8 +118,11 @@ class Sct_Activate extends Sct_Base {
 		foreach ( self::OPTIONS_COLUMN as $option_name ) {
 			delete_option( self::add_prefix( $option_name ) );
 		}
-		if ( wp_get_scheduled_event( self::get_wpcron_event_name() ) ) {
-			wp_clear_scheduled_hook( self::get_wpcron_event_name() );
+
+		foreach ( [ self::get_wpcron_event_name(), self::add_prefix( 'rinker_discontinued_items_check' ) ] as $cron_event ) {
+			if ( wp_get_scheduled_event( $cron_event ) ) {
+				wp_clear_scheduled_hook( $cron_event );
+			}
 		}
 	}
 
