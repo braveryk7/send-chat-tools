@@ -220,7 +220,7 @@ class Sct_Base {
 	public static function get_wpcron_event_name( string $event_type ): string {
 		return match ( $event_type ) {
 			'update_notify' => self::add_prefix( self::WP_CRON_EVENT_NAME ),
-			'rinker_notify' => self::add_prefix( 'rinker_discontinued_items_check' ),
+			'rinker_notify' => self::add_prefix( self::WP_CRON_RINKER_NOTIFY_EVENT_NAME ),
 		};
 	}
 
