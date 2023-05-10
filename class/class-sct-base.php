@@ -33,7 +33,7 @@ class Sct_Base {
 
 	protected const ENCRYPT_METHOD = 'AES-256-CBC';
 
-	public const WP_CRON_EVENT_NAME = 'update_check';
+	private const WP_CRON_EVENT_NAME = 'update_check';
 
 	public const OPTIONS_COLUMN = [
 		'options',
