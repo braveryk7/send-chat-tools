@@ -29,7 +29,7 @@ class Sct_Check_Rinker extends Sct_Base {
 	 * WordPress hook.
 	 */
 	public function __construct() {
-		$this->cron_event_name = $this->add_prefix( 'rinker_discontinued_items_check' );
+		$this->cron_event_name = $$this->get_wpcron_event_name( 'rinker_notify' );
 		add_action( $this->cron_event_name, [ $this, 'controller' ] );
 		add_action( 'admin_init', [ $this, 'check_cron_time' ] );
 		add_action( 'rest_api_init', [ $this, 'register_rest_api' ] );
