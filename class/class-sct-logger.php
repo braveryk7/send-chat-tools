@@ -108,4 +108,35 @@ class Sct_Logger extends Sct_Base {
 	public function is_saved() {
 		return $this->result;
 	}
+
+	/**
+	 * Method for storing individual logs.
+	 *
+	 * @param object $original_data Comment data.
+	 * @param int    $status_code   HTTP status code.
+	 * @param string $tool_name     Use tool name.
+	 * @param array  $sct_options   Send Chat Tools options.
+	 */
+	public function individual_log( object $original_data, int $status_code, string $tool_name, array $sct_options ) {
+		$logs = [
+			$original_data->comment_date => [
+				'id'      => $original_data->comment_ID,
+				'author'  => $original_data->comment_author,
+				'email'   => $original_data->comment_author_email,
+				'url'     => $original_data->comment_author_url,
+				'comment' => $original_data->comment_content,
+				'status'  => $status_code,
+			],
+		];
+
+		if ( '3' <= count( $sct_options[ $tool_name ]['log'] ) ) {
+			array_pop( $sct_options[ $tool_name ]['log'] );
+		}
+
+		$sct_options[ $tool_name ]['log'] = $logs + $sct_options[ $tool_name ]['log'];
+
+		$this->result = $this->set_sct_options( $sct_options );
+
+		return $this;
+	}
 }

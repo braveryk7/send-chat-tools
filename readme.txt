@@ -4,7 +4,7 @@ Tags: send chat tools, send, chat, slack, discord, chatwork, update
 Requires at least: 5.7.2
 Tested up to: 6.2
 Requires PHP: 8.0.0
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 License: GpLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -15,6 +15,25 @@ Currently, it sends an announcement when a comment is received.
 You can instantly check comments that you didn't notice with the default email notification. 
 
 === Changelog ===
+
+= 1.5.3 =
+
+Important:
+
+* PHP8.0 is required for v1.4.0 and later.
+
+Feature:
+
+* Added JIN:R to update notifications.
+
+Improvements:
+
+* The process of generating and saving logs has been changed.
+
+Fixes:
+
+* Fixed problem with update notifications not being sent when Cocoon is enabled.
+* Fixed to remove WP-Cron from Rinker notifications upon uninstallation.
 
 = 1.5.2 =
 

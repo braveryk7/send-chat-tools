@@ -24,7 +24,7 @@ class Sct_Base {
 	protected const PLUGIN_FILE          = self::PLUGIN_SLUG . '.php';
 	protected const API_NAME             = self::PLUGIN_SLUG;
 	protected const API_VERSION          = 'v1';
-	protected const VERSION              = '1.5.2';
+	protected const VERSION              = '1.5.3';
 	protected const OPTIONS_COLUMN_NAME  = 'options';
 	protected const REQUIRED_PHP_VERSION = '8.0.0';
 	protected const OFFICIAL_DIRECTORY   = 'https://wordpress.org/plugins/' . self::PLUGIN_SLUG . '/';
@@ -33,7 +33,8 @@ class Sct_Base {
 
 	protected const ENCRYPT_METHOD = 'AES-256-CBC';
 
-	public const WP_CRON_EVENT_NAME = 'update_check';
+	private const WP_CRON_EVENT_NAME               = 'update_check';
+	private const WP_CRON_RINKER_NOTIFY_EVENT_NAME = 'rinker_discontinued_items_check';
 
 	public const OPTIONS_COLUMN = [
 		'options',
@@ -87,9 +88,10 @@ class Sct_Base {
 	];
 
 	protected const THEME_OPTION_NAME  = [
-		'Cocoon'    => 'external_theme_updates-cocoon-master',
+		'Cocoon'    => 'puc_external_updates_theme-cocoon-master',
 		'SANGO'     => 'puc_external_updates_theme-sango-theme',
 		'THE SONIC' => 'puc_external_updates_theme-tsnc-main-theme-updater',
+		'JIN:R'     => 'external_theme_updates-jinr',
 	];
 	protected const PLUGIN_OPTION_NAME = [
 		'Rinker'                     => 'external_updates-yyi-rinker',
@@ -212,9 +214,14 @@ class Sct_Base {
 
 	/**
 	 * Get WP-cron event name.
+	 *
+	 * @param string $event_type Event type.
 	 */
-	public static function get_wpcron_event_name(): string {
-		return self::add_prefix( self::WP_CRON_EVENT_NAME );
+	public static function get_wpcron_event_name( string $event_type ): string {
+		return match ( $event_type ) {
+			'update_notify' => self::add_prefix( self::WP_CRON_EVENT_NAME ),
+			'rinker_notify' => self::add_prefix( self::WP_CRON_RINKER_NOTIFY_EVENT_NAME ),
+		};
 	}
 
 	/**
@@ -248,14 +255,21 @@ class Sct_Base {
 			'type'    => 'plugin',
 			'title'   => esc_html__( 'Send Chat Tools', 'send-chat-tools' ),
 			'message' => [
-				__( 'Updated to version 1.5.2!', 'send-chat-tools' ),
+				__( 'Updated to version 1.5.3!', 'send-chat-tools' ),
 				__( 'Here are the main changes...', 'send-chat-tools' ),
 				'',
 				__( 'Important:', 'send-chat-tools' ),
 				__( '- PHP8.0 is required for v1.4.0 and later.', 'send-chat-tools' ),
 				'',
+				__( 'Feature:', 'send-chat-tools' ),
+				__( '- Added JIN:R to update notifications.', 'send-chat-tools' ),
+				'',
+				__( 'Improvements:', 'send-chat-tools' ),
+				__( '- The process of generating and saving logs has been changed.', 'send-chat-tools' ),
+				'',
 				__( 'Fixes:', 'send-chat-tools' ),
-				__( '- Fixed an issue where notification was sent despite the end-of-sale flag not being set in the Rinker end-of-sale notification.', 'send-chat-tools' ),
+				__( '- Fixed problem with update notifications not being sent when Cocoon is enabled.', 'send-chat-tools' ),
+				__( '- Fixed to remove WP-Cron from Rinker notifications upon uninstallation.', 'send-chat-tools' ),
 			],
 			'url'     => [
 				'website'     => 'https://www.braveryk7.com/portfolio/send-chat-tools/',
