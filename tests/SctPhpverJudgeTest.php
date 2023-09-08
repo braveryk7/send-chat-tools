@@ -28,7 +28,7 @@ class SctPhpverJudgeTest extends PHPUnit\Framework\TestCase {
 	 * SetUp.
 	 * Create instance.
 	 */
-	protected function setUp() :void {
+	protected function setUp(): void {
 		$this->instance = new Sct_Phpver_Judge();
 	}
 

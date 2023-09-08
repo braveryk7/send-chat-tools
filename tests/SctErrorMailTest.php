@@ -29,7 +29,7 @@ class SctErrorMailTest extends PHPUnit\Framework\TestCase {
 	 * SetUp.
 	 * Create instance.
 	 */
-	protected function setUp() :void {
+	protected function setUp(): void {
 	}
 
 	/**

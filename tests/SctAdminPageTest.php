@@ -28,7 +28,7 @@ class SctAdminPageTest extends PHPUnit\Framework\TestCase {
 	 * SetUp.
 	 * Create instance.
 	 */
-	protected function setUp() :void {
+	protected function setUp(): void {
 		$this->instance = new Sct_Admin_Page();
 	}
 
