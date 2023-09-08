@@ -2,6 +2,7 @@
 <ruleset name="Custom WordPress">
     <rule ref="WordPress">
         <exclude name="Universal.Arrays.DisallowShortArraySyntax" />
+        <exclude name="Universal.Operators.TypeSeparatorSpacing" />
     </rule>
 
     <!-- Start: Exclude tests directory -->
