@@ -106,7 +106,7 @@ class Sct_Chatwork extends Sct_Generate_Content_Abstract {
 					break;
 				}
 				$content .= $value . "\n";
-				$i++;
+				++$i;
 			}
 
 			$header_message  = $this->generate_header_message( header_message: $message_title );
