@@ -50,14 +50,6 @@ function get_comment( $comment ) {
 	return $comment_data;
 }
 
-function get_permalink( $id ) {
-	return 'https://www.example.com/my-post';
-}
-
-function get_the_title( $id ) {
-	return 'Test article';
-}
-
 function do_action() {
 	return true;
 }
