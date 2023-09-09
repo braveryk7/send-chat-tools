@@ -180,7 +180,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		foreach ( $update_content as $value ) {
 			$is_core                              = 'core' === $value['attribute'] ? null : 's';
 			${ "add_$value[attribute]$is_core" } .= "   $value[name] ( $value[current_version] -> $value[new_version] )\n";
-		};
+		}
 
 		$update_raw_data            = new stdClass();
 		$update_raw_data->core      = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
