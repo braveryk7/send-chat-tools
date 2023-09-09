@@ -344,7 +344,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		};
 
 		if ( 200 !== $status_code && 204 !== $status_code ) {
-			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
+			require_once __DIR__ . '/class-sct-error-mail.php';
 			$this->call_error_mail_class( $status_code, $tool_name );
 		}
 
