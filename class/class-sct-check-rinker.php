@@ -148,7 +148,7 @@ class Sct_Check_Rinker extends Sct_Base {
 			[
 				'methods'             => WP_REST_Server::READABLE,
 				'callback'            => [ $this, 'register_rinker_status' ],
-				'permission_callback' => fn() => current_user_can( 'administrator' ),
+				'permission_callback' => fn() => current_user_can( 'manage_options' ),
 			]
 		);
 	}
