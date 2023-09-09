@@ -36,7 +36,7 @@ class Sct_Admin_Page extends Sct_Base {
 		add_options_page(
 			__( 'Send Chat Tools', 'send-chat-tools' ),
 			__( 'Send Chat Tools', 'send-chat-tools' ),
-			'administrator',
+			'manage_options',
 			self::PLUGIN_SLUG,
 			[ $this, 'settings_page' ],
 		);
@@ -49,7 +49,7 @@ class Sct_Admin_Page extends Sct_Base {
 			add_options_page(
 				__( 'Old Send Chat Tools', 'send-chat-tools' ),
 				__( 'Old Send Chat Tools', 'send-chat-tools' ),
-				'administrator',
+				'manage_options',
 				'send-chat-tools-settings',
 				[ $this, 'old_settings_page' ]
 			);
@@ -130,7 +130,7 @@ class Sct_Admin_Page extends Sct_Base {
 	 * Return WordPress  administrator permission.
 	 */
 	public function get_wordpress_permission(): bool {
-		return current_user_can( 'administrator' );
+		return current_user_can( 'manage_options' );
 	}
 
 	/**
