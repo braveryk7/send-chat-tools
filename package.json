@@ -29,7 +29,7 @@
     "@wordpress/env": "^5.16.0",
     "@wordpress/scripts": "^26.2.0",
     "esbuild-loader": "^3.0.1",
-    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-import-resolver-typescript": "^3.6.0",
     "fork-ts-checker-webpack-plugin": "^8.0.0",
     "stylelint-order": "^6.0.3",
     "thread-loader": "^4.0.2",
