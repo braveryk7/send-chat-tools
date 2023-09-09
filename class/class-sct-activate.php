@@ -216,7 +216,7 @@ class Sct_Activate extends Sct_Base {
 		 */
 		if ( ! get_option( $this->add_prefix( 'logs' ) ) ) {
 			global $wpdb;
-			$get_table = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->get_table_name() ) ); // db call ok; no-cache ok.
+			$get_table = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $this->get_table_name() ) ); // phpcs:ignore
 
 			if ( $get_table ) {
 				$result = $wpdb->get_results( 'SELECT * FROM wp_sct' ); // phpcs:ignore
@@ -240,7 +240,7 @@ class Sct_Activate extends Sct_Base {
 				update_option( $this->add_prefix( 'logs' ), $sct_logs );
 
 				$sql = 'DROP TABLE IF EXISTS ' . $wpdb->prefix . self::TABLE_NAME;
-				$wpdb->query( "${sql}" ); // db call ok; no-cache ok.
+				$wpdb->query( "${sql}" );
 			}
 		}
 	}
