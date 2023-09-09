@@ -7,7 +7,8 @@
         "phpcompatibility/php-compatibility": "^9.3",
         "phpunit/phpunit": "^9.5",
         "szepeviktor/phpstan-wordpress": "^1.1",
-        "phpstan/phpstan": "^1.8"
+        "phpstan/phpstan": "^1.8",
+        "slevomat/coding-standard": "^8.13"
     },
     "scripts": {
         "post-autoload-dump": [
