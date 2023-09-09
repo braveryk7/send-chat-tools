@@ -104,17 +104,15 @@ class Sct_Check_Rinker extends Sct_Base {
 
 			if ( ! $next_schedule ) {
 				wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
-			} else {
-				if ( isset( $sct_options['rinker_cron_time'] ) ) {
-					if ( $next_schedule->timestamp !== $datetime_timestamp ) {
-						$datetime_timestamp <= time() ? $datetime_timestamp = strtotime( '+1 day', $datetime_timestamp ) : $datetime_timestamp;
-						wp_clear_scheduled_hook( $this->cron_event_name );
-						wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
-					}
-				} else {
-					$sct_options['rinker_cron_time'] = '19:00';
-					$this->set_sct_options( $sct_options );
+			} elseif ( isset( $sct_options['rinker_cron_time'] ) ) {
+				if ( $next_schedule->timestamp !== $datetime_timestamp ) {
+					$datetime_timestamp <= time() ? $datetime_timestamp = strtotime( '+1 day', $datetime_timestamp ) : $datetime_timestamp;
+					wp_clear_scheduled_hook( $this->cron_event_name );
+					wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
 				}
+			} else {
+				$sct_options['rinker_cron_time'] = '19:00';
+				$this->set_sct_options( $sct_options );
 			}
 		} else {
 			wp_clear_scheduled_hook( $this->cron_event_name );
