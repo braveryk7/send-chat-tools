@@ -3,7 +3,7 @@
         "squizlabs/php_codesniffer": "^3.7",
         "wp-coding-standards/wpcs": "^3.0.0",
         "phpcompatibility/php-compatibility": "^9.3",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.6",
         "szepeviktor/phpstan-wordpress": "^1.1",
         "phpstan/phpstan": "^1.10",
         "slevomat/coding-standard": "^8.13"
