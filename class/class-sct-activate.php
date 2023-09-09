@@ -240,7 +240,7 @@ class Sct_Activate extends Sct_Base {
 				update_option( $this->add_prefix( 'logs' ), $sct_logs );
 
 				$sql = 'DROP TABLE IF EXISTS ' . $wpdb->prefix . self::TABLE_NAME;
-				$wpdb->query( "${sql}" );
+				$wpdb->query( "${sql}" ); // phpcs:ignore
 			}
 		}
 	}
