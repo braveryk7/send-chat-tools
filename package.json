@@ -16,24 +16,24 @@
     "zip": "sh cmd/zip.sh"
   },
   "dependencies": {
-    "@wordpress/api-fetch": "^6.28.0",
-    "@wordpress/components": "^23.8.0",
+    "@wordpress/api-fetch": "^6.38.0",
+    "@wordpress/components": "^25.7.0",
     "@wordpress/element": "^5.8.0",
-    "@wordpress/i18n": "^4.2.3"
+    "@wordpress/i18n": "^4.41.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.37",
-    "@types/wordpress__components": "^23.0.1",
+    "@types/react": "^18.2.21",
+    "@types/wordpress__components": "^23.0.2",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
-    "@wordpress/env": "^5.16.0",
-    "@wordpress/scripts": "^26.2.0",
-    "esbuild-loader": "^3.0.1",
-    "eslint-import-resolver-typescript": "^3.5.5",
+    "@wordpress/env": "^8.7.0",
+    "@wordpress/scripts": "^26.12.0",
+    "esbuild-loader": "^4.0.2",
+    "eslint-import-resolver-typescript": "^3.6.0",
     "fork-ts-checker-webpack-plugin": "^8.0.0",
     "stylelint-order": "^6.0.3",
-    "thread-loader": "^4.0.0",
-    "ts-loader": "^9.4.2",
-    "typescript": "^5.0.4"
+    "thread-loader": "^4.0.2",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2"
   }
 }
