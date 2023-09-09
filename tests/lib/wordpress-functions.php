@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types = 1);
+
 function get_option( $str ) {
 	$value = [];
 
@@ -45,14 +48,6 @@ function get_comment( $comment ) {
 	$comment_data->user_id              = 0;
 
 	return $comment_data;
-}
-
-function get_permalink( $id ) {
-	return 'https://www.example.com/my-post';
-}
-
-function get_the_title( $id ) {
-	return 'Test article';
 }
 
 function do_action() {

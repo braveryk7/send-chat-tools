@@ -1,4 +1,5 @@
 <?php
+
 declare( strict_types = 1 );
 
 /**
@@ -32,7 +33,7 @@ class SctActivateTest extends PHPUnit\Framework\TestCase {
 	 * SetUp.
 	 * Create instance.
 	 */
-	protected function setUp() :void {
+	protected function setUp(): void {
 		$this->instance = new Sct_Activate();
 	}
 

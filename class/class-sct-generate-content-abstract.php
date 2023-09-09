@@ -180,7 +180,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		foreach ( $update_content as $value ) {
 			$is_core                              = 'core' === $value['attribute'] ? null : 's';
 			${ "add_$value[attribute]$is_core" } .= "   $value[name] ( $value[current_version] -> $value[new_version] )\n";
-		};
+		}
 
 		$update_raw_data            = new stdClass();
 		$update_raw_data->core      = isset( $add_core ) ? esc_html__( 'WordPress Core:', 'send-chat-tools' ) . "\n" . $add_core . "\n" : null;
@@ -344,7 +344,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		};
 
 		if ( 200 !== $status_code && 204 !== $status_code ) {
-			require_once dirname( __FILE__ ) . '/class-sct-error-mail.php';
+			require_once __DIR__ . '/class-sct-error-mail.php';
 			$this->call_error_mail_class( $status_code, $tool_name );
 		}
 
