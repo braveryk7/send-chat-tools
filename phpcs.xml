@@ -4,6 +4,7 @@
         <exclude name="Universal.Arrays.DisallowShortArraySyntax" />
         <exclude name="Universal.Operators.TypeSeparatorSpacing" />
     </rule>
+    <rule ref="Universal.Operators.StrictComparisons" />
 
     <!-- Start: Exclude tests directory -->
     <!-- Class name rule -->
