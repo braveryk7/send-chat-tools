@@ -2,9 +2,9 @@
 Contributors: braveryk7
 Tags: send chat tools, send, chat, slack, discord, chatwork, update
 Requires at least: 5.7.2
-Tested up to: 6.2
+Tested up to: 6.3.1
 Requires PHP: 8.0.0
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: GpLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -15,6 +15,24 @@ Currently, it sends an announcement when a comment is received.
 You can instantly check comments that you didn't notice with the default email notification. 
 
 === Changelog ===
+
+= 1.5.4 =
+
+Important:
+
+* Active support for PHP 8.1 ends November 25, 2023. Therefore, PHP 8.2 will become a requirement around November 2023.
+
+Improvements:
+
+* WordPress 6.3.1 is now supported.
+
+Fixes:
+
+* Fixed deprecated options in new WordPress packages.
+
+Development:
+
+* Existing packages have been modernized.
 
 = 1.5.3 =
 
