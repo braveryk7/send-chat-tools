@@ -24,7 +24,7 @@ class Sct_Base {
 	protected const PLUGIN_FILE          = self::PLUGIN_SLUG . '.php';
 	protected const API_NAME             = self::PLUGIN_SLUG;
 	protected const API_VERSION          = 'v1';
-	protected const VERSION              = '1.5.3';
+	protected const VERSION              = '1.5.4';
 	protected const OPTIONS_COLUMN_NAME  = 'options';
 	protected const REQUIRED_PHP_VERSION = '8.0.0';
 	protected const OFFICIAL_DIRECTORY   = 'https://wordpress.org/plugins/' . self::PLUGIN_SLUG . '/';
@@ -255,21 +255,20 @@ class Sct_Base {
 			'type'    => 'plugin',
 			'title'   => esc_html__( 'Send Chat Tools', 'send-chat-tools' ),
 			'message' => [
-				__( 'Updated to version 1.5.3!', 'send-chat-tools' ),
+				__( 'Updated to version 1.5.4!', 'send-chat-tools' ),
 				__( 'Here are the main changes...', 'send-chat-tools' ),
 				'',
 				__( 'Important:', 'send-chat-tools' ),
-				__( '- PHP8.0 is required for v1.4.0 and later.', 'send-chat-tools' ),
-				'',
-				__( 'Feature:', 'send-chat-tools' ),
-				__( '- Added JIN:R to update notifications.', 'send-chat-tools' ),
+				__( '- Active support for PHP 8.1 ends November 25, 2023. Therefore, PHP 8.2 will become a requirement around November 2023.', 'send-chat-tools' ),
 				'',
 				__( 'Improvements:', 'send-chat-tools' ),
-				__( '- The process of generating and saving logs has been changed.', 'send-chat-tools' ),
+				__( '- WordPress 6.3.1 is now supported.', 'send-chat-tools' ),
 				'',
 				__( 'Fixes:', 'send-chat-tools' ),
-				__( '- Fixed problem with update notifications not being sent when Cocoon is enabled.', 'send-chat-tools' ),
-				__( '- Fixed to remove WP-Cron from Rinker notifications upon uninstallation.', 'send-chat-tools' ),
+				__( '- Fixed deprecated options in new WordPress packages.', 'send-chat-tools' ),
+				'',
+				__( 'Development:', 'send-chat-tools' ),
+				__( '- Existing packages have been modernized.', 'send-chat-tools' ),
 			],
 			'url'     => [
 				'website'     => 'https://www.braveryk7.com/portfolio/send-chat-tools/',
