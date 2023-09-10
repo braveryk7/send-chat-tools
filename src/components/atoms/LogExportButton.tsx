@@ -1,4 +1,4 @@
-import { Button, Dropdown, MenuGroup, MenuItem } from '@wordpress/components';
+import { Button, Dashicon, Dropdown, MenuGroup, MenuItem } from '@wordpress/components';
 
 import { useLogExport } from 'src/hooks/useLogExport';
 
@@ -10,7 +10,7 @@ export const LogExportButton = () => {
 	return (
 		<Dropdown
 			className="sct-logs__export-button"
-			position="bottom right"
+			popoverProps={ { placement: 'right-start' } }
 			renderToggle={ ( { isOpen, onToggle } ) => (
 				<Button
 					onClick={ onToggle }
@@ -24,7 +24,7 @@ export const LogExportButton = () => {
 					{ items.map( ( item: itemType, index ) => (
 						<MenuItem
 							key={ index }
-							icon={ item.icon }
+							icon={ <Dashicon icon={ item.icon } /> }
 							onClick={ () => copyLogs( item.key ) }
 						>
 							{ item.text }

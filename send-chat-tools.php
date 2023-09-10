@@ -3,7 +3,7 @@
  * Plugin Name: Send Chat Tools
  * Plugin URI:  https://www.braveryk7.com/
  * Description: A plugin that allows you to send WordPress announcements to chat tools.
- * Version:     1.5.3
+ * Version:     1.5.4
  * Author:      Ken-chan
  * Author URI:  https://twitter.com/braveryk7
  * Text Domain: send-chat-tools
@@ -22,9 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'You do not have access rights.' );
 }
 
-load_plugin_textdomain( 'send-chat-tools', false, basename( dirname( __FILE__ ) ) . '/languages' );
+load_plugin_textdomain( 'send-chat-tools', false, basename( __DIR__ ) . '/languages' );
 
-require_once dirname( __FILE__ ) . '/class/class-sct-phpver-judge.php';
+require_once __DIR__ . '/class/class-sct-phpver-judge.php';
 
 $sct_phpver_judge        = new Sct_Phpver_Judge();
 $sct_require_php_version = '8.0.0';
@@ -36,21 +36,21 @@ if ( ! $sct_phpver_judge->judgment( $sct_require_php_version ) ) {
 		$sct_require_php_version,
 	);
 } else {
-	require_once dirname( __FILE__ ) . '/class/class-sct-base.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-encryption.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-admin-page.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-check-comment.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-check-login.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-check-rinker.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-check-update.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-logger.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-activate.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-dashboard-notify.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-developer-notify.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-generate-content-abstract.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-slack.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-discord.php';
-	require_once dirname( __FILE__ ) . '/class/class-sct-chatwork.php';
+	require_once __DIR__ . '/class/class-sct-base.php';
+	require_once __DIR__ . '/class/class-sct-encryption.php';
+	require_once __DIR__ . '/class/class-sct-admin-page.php';
+	require_once __DIR__ . '/class/class-sct-check-comment.php';
+	require_once __DIR__ . '/class/class-sct-check-login.php';
+	require_once __DIR__ . '/class/class-sct-check-rinker.php';
+	require_once __DIR__ . '/class/class-sct-check-update.php';
+	require_once __DIR__ . '/class/class-sct-logger.php';
+	require_once __DIR__ . '/class/class-sct-activate.php';
+	require_once __DIR__ . '/class/class-sct-dashboard-notify.php';
+	require_once __DIR__ . '/class/class-sct-developer-notify.php';
+	require_once __DIR__ . '/class/class-sct-generate-content-abstract.php';
+	require_once __DIR__ . '/class/class-sct-slack.php';
+	require_once __DIR__ . '/class/class-sct-discord.php';
+	require_once __DIR__ . '/class/class-sct-chatwork.php';
 
 	/**
 	 * Start comment process.

@@ -46,7 +46,7 @@ class Sct_Developer_Notify extends Sct_Base {
 							$this->logger( 1001, $tool, '1' );
 						} elseif ( 'chatwork' === $tools && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
 							$this->logger( 1002, 'chatwork', '1' );
-						};
+						}
 					}
 				}
 			}

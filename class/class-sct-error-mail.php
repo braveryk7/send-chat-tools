@@ -132,7 +132,7 @@ class Sct_Error_Mail extends Sct_Generate_Content_Abstract {
 				break;
 			}
 			$content .= $value . "\n";
-			$i++;
+			++$i;
 		}
 
 		$website_url     = $this->original_data['url']['website'];

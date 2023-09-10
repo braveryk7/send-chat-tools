@@ -60,7 +60,7 @@ class Sct_Check_Update extends Sct_Base {
 					$this->logger( 1001, $tool, '1' );
 				} elseif ( 'chatwork' === $tool && ( $sct_options[ $tool ]['use'] && empty( $sct_options[ $tool ]['room_id'] ) ) ) {
 					$this->logger( 1002, 'chatwork', '1' );
-				};
+				}
 			}
 		}
 	}
@@ -183,17 +183,15 @@ class Sct_Check_Update extends Sct_Base {
 
 		if ( ! $next_schedule ) {
 			wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
-		} else {
-			if ( isset( $sct_options['cron_time'] ) ) {
-				if ( $next_schedule->timestamp !== $datetime_timestamp ) {
-					$datetime_timestamp <= time() ? $datetime_timestamp = strtotime( '+1 day', $datetime_timestamp ) : $datetime_timestamp;
-					wp_clear_scheduled_hook( $this->cron_event_name );
-					wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
-				}
-			} else {
-				$sct_options['cron_time'] = '18:00';
-				$this->set_sct_options( $sct_options );
+		} elseif ( isset( $sct_options['cron_time'] ) ) {
+			if ( $next_schedule->timestamp !== $datetime_timestamp ) {
+				$datetime_timestamp <= time() ? $datetime_timestamp = strtotime( '+1 day', $datetime_timestamp ) : $datetime_timestamp;
+				wp_clear_scheduled_hook( $this->cron_event_name );
+				wp_schedule_event( $datetime_timestamp, 'daily', $this->cron_event_name );
 			}
+		} else {
+			$sct_options['cron_time'] = '18:00';
+			$this->set_sct_options( $sct_options );
 		}
 	}
 }

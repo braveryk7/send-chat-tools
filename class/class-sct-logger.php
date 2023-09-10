@@ -33,13 +33,6 @@ class Sct_Logger extends Sct_Base {
 	public $result;
 
 	/**
-	 * Constructor.
-	 */
-	private function __construct() {
-		return $this;
-	}
-
-	/**
 	 * Instantiate and return itself.
 	 */
 	public static function get_instance(): Sct_Logger {

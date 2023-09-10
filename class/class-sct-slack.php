@@ -158,7 +158,7 @@ class Sct_Slack extends Sct_Generate_Content_Abstract {
 					break;
 				}
 				$content .= $value . "\n";
-				$i++;
+				++$i;
 			}
 
 			$header_emoji    = ':tada:';
