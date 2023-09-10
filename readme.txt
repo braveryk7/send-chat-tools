@@ -16,6 +16,24 @@ You can instantly check comments that you didn't notice with the default email n
 
 === Changelog ===
 
+= 1.5.4 =
+
+Important:
+
+* Active support for PHP 8.1 ends November 25, 2023. Therefore, PHP 8.2 will become a requirement around November 2023.
+
+Improvements:
+
+* WordPress 6.3.1 is now supported.
+
+Fixes:
+
+* Fixed deprecated options in new WordPress packages.
+
+Development:
+
+* Existing packages have been modernized.
+
 = 1.5.3 =
 
 Important:
