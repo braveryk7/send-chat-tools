@@ -10,7 +10,7 @@ export const LogExportButton = () => {
 	return (
 		<Dropdown
 			className="sct-logs__export-button"
-			position="bottom right"
+			popoverProps={ { placement: 'right-start' } }
 			renderToggle={ ( { isOpen, onToggle } ) => (
 				<Button
 					onClick={ onToggle }
