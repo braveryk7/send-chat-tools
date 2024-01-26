@@ -6,7 +6,7 @@
         "phpunit/phpunit": "^9.6",
         "szepeviktor/phpstan-wordpress": "^1.1",
         "phpstan/phpstan": "^1.10",
-        "slevomat/coding-standard": "^8.13"
+        "slevomat/coding-standard": "^8.14"
     },
     "scripts": {
         "post-autoload-dump": [
