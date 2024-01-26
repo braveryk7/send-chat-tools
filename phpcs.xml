@@ -7,7 +7,6 @@
     <rule ref="Universal.Operators.StrictComparisons" />
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <properties>
-            <property name="newlinesCountBetweenOpenTagAndDeclare" value="0" />
             <property name="linesCountBeforeDeclare" value="1" />
             <property name="linesCountAfterDeclare" value="1" />
             <property name="spacesCountAroundEqualsSign" value="1" />
