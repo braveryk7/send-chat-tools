@@ -33,7 +33,6 @@
     "fork-ts-checker-webpack-plugin": "^8.0.0",
     "stylelint-order": "^6.0.3",
     "thread-loader": "^4.0.2",
-    "ts-loader": "^9.4.4",
-    "typescript": "^5.2.2"
+    "ts-loader": "^9.4.4"
   }
 }
