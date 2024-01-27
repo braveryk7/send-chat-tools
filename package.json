@@ -16,7 +16,6 @@
     "zip": "sh cmd/zip.sh"
   },
   "dependencies": {
-    "@wordpress/api-fetch": "^6.38.0",
     "@wordpress/components": "^25.7.0",
     "@wordpress/element": "^5.8.0",
     "@wordpress/i18n": "^4.41.0"
