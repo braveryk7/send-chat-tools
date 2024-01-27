@@ -47,6 +47,11 @@ rules:
       alphabetize:
         order: asc
       newlines-between: always
+  import/no-extraneous-dependencies:
+    - error
+    - packageDir:
+        - ./
+        - ./node_modules/@wordpress/scripts/
 settings: 
   import/resolver: 
     typescript: 
