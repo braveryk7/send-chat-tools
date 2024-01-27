@@ -16,7 +16,7 @@
     "zip": "sh cmd/zip.sh"
   },
   "dependencies": {
-    "@wordpress/components": "^25.7.0"
+    "@wordpress/components": "^25.16.0"
   },
   "devDependencies": {
     "@wordpress/env": "^8.7.0",
