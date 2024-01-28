@@ -1,14 +1,12 @@
 import apiFetch from '@wordpress/api-fetch';
-import { useContext, useEffect, useRef, useState } from '@wordpress/element';
+import { useContext, useEffect, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 import { apiContext } from 'src/index';
 
-import { apiType, useSetApiType } from 'src/types/apiType';
+import { useSetApiType } from 'src/types/apiType';
 
 export const useSetApi: useSetApiType = ( itemKey, value ) => {
-	const [ currentValue, setCurrentValue ] = useState< apiType | undefined >( undefined );
-
 	const {
 		apiData,
 		setNoticeValue,
@@ -17,14 +15,15 @@ export const useSetApi: useSetApiType = ( itemKey, value ) => {
 	} = useContext( apiContext );
 
 	const isFirstRender = useRef( true );
+	const apiDataRef = useRef( apiData );
 
 	useEffect( () => {
 		if ( isFirstRender.current ) {
 			isFirstRender.current = false;
-		} else if ( value && value !== currentValue ) {
+		} else if ( value && apiData !== apiDataRef.current ) {
 			setNoticeValue( undefined );
 			clearTimeout( snackbarTimer );
-			setCurrentValue( value );
+			apiDataRef.current = apiData;
 
 			apiFetch( {
 				path: '/send-chat-tools/v1/update',
@@ -38,5 +37,5 @@ export const useSetApi: useSetApiType = ( itemKey, value ) => {
 				setNoticeMessage( __( 'Error', 'send-chat-tools' ) );
 			} );
 		}
-	}, [ apiData, itemKey, value, setNoticeMessage, setNoticeValue, snackbarTimer, currentValue ] );
+	}, [ apiData, itemKey, value, setNoticeMessage, setNoticeValue, snackbarTimer ] );
 };
