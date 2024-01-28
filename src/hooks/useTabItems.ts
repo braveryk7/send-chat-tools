@@ -74,6 +74,7 @@ export const useTabItems = ( props: TabItemsType ) => {
 			setChatworkRoomId( 'room_id' );
 			setChatworkText( __( 'Chatwork Room ID', 'send-chat-tools' ) );
 		} else if ( 'logs' === id ) {
+			setUseState( undefined, '', undefined, '', '' );
 			setComponentName( 'logs' );
 			setTitleText( __( 'Logs', 'send-chat-tools' ) );
 		}

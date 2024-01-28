@@ -45,9 +45,9 @@ export type apiOptionNameType = Extract< optionNameType, 'webhook_url' | 'api_to
 export type chatworkRoomIdType = Extract< optionNameType, 'room_id' >;
 
 export type setUseStateType = (
-	itemName: ChatToolsItemKeyType,
+	itemName: ChatToolsItemKeyType | undefined,
 	label: string,
-	optionName: apiOptionNameType,
+	optionName: apiOptionNameType | undefined,
 	title: string,
 	text: string,
 ) => void;
