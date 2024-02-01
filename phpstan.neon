@@ -1,5 +1,7 @@
 includes:
     - vendor/szepeviktor/phpstan-wordpress/extension.neon
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
 parameters:
     excludePaths:
         - ./vendor/
@@ -9,3 +11,11 @@ parameters:
     paths:
         - ./send-chat-tools.php
         - class/
+    scanDirectories:
+        - class/
+        - tests/
+    scanFiles:
+        - vendor/yoast/wp-test-utils/src/WPIntegration/bootstrap-functions.php
+        - vendor/yoast/wp-test-utils/src/WPIntegration/TestCase.php
+        - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+        - vendor/php-stubs/wordpress-tests-stubs/wordpress-tests-stubs.php
