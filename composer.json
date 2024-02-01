@@ -8,7 +8,8 @@
         "phpstan/phpstan": "^1.10",
         "slevomat/coding-standard": "^8.14",
         "yoast/phpunit-polyfills": "1.1",
-        "yoast/wp-test-utils": "^1.2"
+        "yoast/wp-test-utils": "^1.2",
+        "php-stubs/wordpress-tests-stubs": "^6.3"
     },
     "scripts": {
         "post-autoload-dump": [
