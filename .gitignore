@@ -46,3 +46,4 @@ build/
 #   etc
 #-------------------------------
 send-chat-tools.zip
+.env
