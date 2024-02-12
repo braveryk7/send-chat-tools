@@ -57,7 +57,7 @@ class Sct_Base_Test extends TestCase {
 		$method->setAccessible( true );
 
 		$this->assertSame(
-			'https://example.com/wp-content/plugins/send-chat-tools',
+			home_url( '/wp-content/plugins/send-chat-tools' ),
 			$method->invoke( $this->instance, 'send-chat-tools' ),
 		);
 	}
