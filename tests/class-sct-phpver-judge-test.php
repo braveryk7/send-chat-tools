@@ -33,6 +33,7 @@ class Sct_Phpver_Judge_Test extends TestCase {
 	public function set_up(): void {
 		parent::set_up();
 		$this->instance = new Sct_Phpver_Judge();
+		switch_to_locale( 'en_US' );
 	}
 
 	/**
