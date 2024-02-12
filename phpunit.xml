@@ -1,6 +1,15 @@
-<phpunit colors="true" cacheResultFile="./.cache/phpunit/.phpunit.result.cache">
-	<php>
-		<const name="WP_PLUGIN_URL" value="https://example.com/wp-content/plugins" />
-		<const name="WP_PLUGIN_DIR" value="/DocumentRoot/wp-content/plugins" />
-	</php>
+<phpunit bootstrap="tests/bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Plugin Tests">
+            <directory suffix="-test.php">tests</directory>
+        </testsuite>
+    </testsuites>
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./class</directory>
+        </include>
+        <report>
+            <clover outputFile="coverage/reports/clover.xml" />
+        </report>
+    </coverage>
 </phpunit>

@@ -11,36 +11,68 @@ env:
   CACHE_TAG: v1
 
 jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install composer packages & cache vendor directory
+        uses: ./.github/actions/vendor-dependencies
+        with:
+          cache_tag: ${{ env.CACHE_TAG }}
+
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-nodejs
+      
+      - name: Install npm packages & cache node_modules directory
+        uses: ./.github/actions/node_modules-dependencies
+        with:
+          cache_tag: ${{ env.CACHE_TAG }}
+
   test:
     name: PHPUnit
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php-version: ['8.0', '8.1', '8.2']
+        wp-version:  ['5.9', '6.0', '6.1', '6.2', 'master']
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Setup -> PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          extensions: mbstring, xdebug, dom
 
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-nodejs
 
-      - name: Cache composer packages
-        id: vendor_cache
-        uses: actions/cache@v3
+      - name: Install composer packages & cache vendor directory
+        uses: ./.github/actions/vendor-dependencies
         with:
-          path: ${{ github.workspace }}/vendor
-          key: ${{ runner.os }}-composer-${{ env.CACHE_TAG }}-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-${{ env.CACHE_TAG }}-
-            ${{ runner.os }}-composer-
-            ${{ runner.os }}
+          cache_tag: ${{ env.CACHE_TAG }}
 
-      - name: Install dependencies
-        if: steps.vendor_cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-scripts --no-progress
+      - name: Install npm packages & cache node_modules directory
+        uses: ./.github/actions/node_modules-dependencies
+        with:
+          cache_tag: ${{ env.CACHE_TAG }}
+
+      - name: TypeScript compile
+        run: npm run build
+
+      - name: Generate .wp-env.override.json
+        run: |
+          echo '{"config": {},"core": "WordPress/WordPress#${{ matrix.wp-version }}","env": {},"mappings": {},"phpVersion": "${{ matrix.php-version }}","plugins": ["."],"themes": []}' > .wp-env.override.json
+
+      - name: Start wp-env
+        run: npm run wp-env start -- --xdebug=coverage
 
       - name: Run test suite
-        run: composer run-script test
+        run: npm run test:env
+
+      - name: Upload coverage reports to Codecov
+        if: matrix.php-version == '8.2' && matrix.wp-version == 'master'
+        uses: codecov/codecov-action@v3

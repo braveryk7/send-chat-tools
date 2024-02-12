@@ -1,0 +1,31 @@
+volumes:
+  maildir: {}
+
+services:
+  adminer:
+    image: adminer
+    container_name: ${WP_ENV_NETWORK_HASH}_adminer
+    restart: always
+    ports:
+      - 8080
+    networks:
+      - wpnetwork
+
+  mail:
+    image: axllent/mailpit
+    container_name: ${MAILPIT_SMTP_HOST}
+    restart: always
+    ports:
+      - 8025
+    environment:
+      MP_DATA_FILE: /tmp/mail.db
+      MP_SMTP_BIND_ADDR: 0.0.0.0:${WP_ENV_SMTP_PORT}
+    volumes:
+      - maildir:/tmp
+    networks:
+      - wpnetwork
+
+networks:
+  wpnetwork:
+    name: ${WP_ENV_NETWORK_HASH}_default
+    external: true

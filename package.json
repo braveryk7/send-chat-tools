@@ -12,7 +12,12 @@
     "lint:js": "wp-scripts lint-js",
     "start": "wp-scripts start",
     "wp-env": "wp-env",
-    "packages-update": "wp-scripts packages-update",
+    "env-start": "wp-env start",
+    "env-stop": "docker compose down && wp-env stop",
+    "env-restart": "docker compose down && wp-env start --update",
+    "env-rm": "docker compose down && wp-env destroy",
+		"test:env": "wp-env run --env-cwd='wp-content/plugins/send-chat-tools' tests-cli vendor/bin/phpunit -c phpunit.xml --verbose --testdox",
+		"packages-update": "wp-scripts packages-update",
     "zip": "sh cmd/zip.sh"
   },
   "dependencies": {
