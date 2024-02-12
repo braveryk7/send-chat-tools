@@ -1,0 +1,26 @@
+name: Cache vendor dependencies
+description: Cache vendor directories and make them reusable
+
+inputs:
+  cache_tag:
+    description: Cache tag
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Cache vendor dependencies
+      id: cache_vendor_dependencies
+      uses: actions/cache@v3
+      with:
+        path: ${{ github.workspace }}/vendor
+        key: ${{ runner.os }}-vendor-dependencies-${{ inputs.cache_tag }}-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-vendor-dependencies-${{ env.cache_tag }}-
+          ${{ runner.os }}-vendor-dependencies-
+          ${{ runner.os }}
+
+    - name: Install composer packages
+      shell: bash
+      if: steps.cache_vendor_dependencies.outputs.cache-hit != 'true'
+      run: composer install --prefer-dist --no-scripts --no-progress
