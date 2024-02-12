@@ -2,10 +2,12 @@
 
 declare( strict_types = 1 );
 
+use Yoast\WPTestUtils\WPIntegration\TestCase;
+
 /**
  * Test: Sct_Developer_Notify
  */
-class SctDeveloperNotifyTest extends PHPUnit\Framework\TestCase {
+class Sct_Developer_Notify_Test extends TestCase {
 	/**
 	 * This test class instance.
 	 *
@@ -17,23 +19,19 @@ class SctDeveloperNotifyTest extends PHPUnit\Framework\TestCase {
 	 * Settings: ABSPATH, test class file, WordPress functions.
 	 */
 	public static function setUpBeforeClass(): void {
-		if ( ! defined( 'ABSPATH' ) ) {
-			define( 'ABSPATH', '' );
-		}
-
 		if ( ! class_exists( 'Sct_Base ' ) ) {
 			require_once './class/class-sct-base.php';
 		}
 
 		require_once './class/class-sct-developer-notify.php';
-		require_once './tests/lib/wordpress-functions.php';
 	}
 
 	/**
 	 * SetUp.
 	 * Create instance.
 	 */
-	protected function setUp(): void {
+	public function set_up(): void {
+		parent::set_up();
 		$this->instance = new Sct_Developer_Notify();
 	}
 
