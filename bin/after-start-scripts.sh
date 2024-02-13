@@ -1,4 +1,5 @@
 npm run wp-env run cli -- wp plugin delete akismet hello
+npm run wp-env run cli -- wp theme install twentytwentyfour
 
 network_hash=$(basename "$(npm run wp-env install-path)")
 mailpit_host="mailpit-${network_hash:0:8}"
