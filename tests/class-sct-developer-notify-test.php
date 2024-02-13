@@ -94,6 +94,10 @@ class Sct_Developer_Notify_Test extends TestCase {
 		$method = new ReflectionMethod( $this->instance, 'developer_message_key_exists' );
 		$method->setAccessible( true );
 
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+		activate_plugin( plugin_dir_path( ROOT_DIR ) . 'send-chat-tools/send-chat-tools.php' );
+
 		$this->assertSame(
 			$expected,
 			$method->invoke( $this->instance, $developer_message ),
@@ -219,21 +223,21 @@ class Sct_Developer_Notify_Test extends TestCase {
 		return [
 			'theme'     => [
 				[
-					'key'  => 'my-theme',
+					'key'  => 'twentytwentyfour',
 					'type' => 'theme',
 				],
 				true,
 			],
 			'plugin'    => [
 				[
-					'key'  => 'my-plugin/my-plugin.php',
+					'key'  => 'send-chat-tools/send-chat-tools.php',
 					'type' => 'plugin',
 				],
 				true,
 			],
 			'type less' => [
 				[
-					'key'  => 'my-theme',
+					'key'  => 'twentytwentyfour',
 					'type' => '',
 				],
 				false,
