@@ -23,3 +23,5 @@ function _manually_load_plugin() {
 tests_add_filter( 'plugins_loaded', '_manually_load_plugin' );
 
 WPIntegration\bootstrap_it();
+
+define( 'ROOT_DIR', dirname( __DIR__ ) );
