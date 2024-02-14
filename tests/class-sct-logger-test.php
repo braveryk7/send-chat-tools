@@ -2,10 +2,12 @@
 
 declare( strict_types = 1 );
 
+use Yoast\WPTestUtils\WPIntegration\TestCase;
+
 /**
- * Test: Sct_Encryption
+ * Test: Sct_Logger
  */
-class SctEncryptionTest extends PHPUnit\Framework\TestCase {
+class Sct_Logger_Test extends TestCase {
 	/**
 	 * This test class instance.
 	 *
@@ -17,32 +19,33 @@ class SctEncryptionTest extends PHPUnit\Framework\TestCase {
 	 * Settings: ABSPATH, test class file, WordPress functions.
 	 */
 	public static function setUpBeforeClass(): void {
-		if ( ! defined( 'ABSPATH' ) ) {
-			define( 'ABSPATH', '' );
+		if ( ! class_exists( 'Sct_Base ' ) ) {
+			require_once './class/class-sct-base.php';
 		}
 
-		require_once './class/class-sct-encryption.php';
-		require_once './tests/lib/wordpress-functions.php';
+		require_once './class/class-sct-logger.php';
 	}
 
 	/**
 	 * SetUp.
 	 * Create instance.
 	 */
-	protected function setUp(): void {
-		$this->instance = new Sct_Encryption();
+	public function set_up(): void {
+		parent::set_up();
+		$this->instance = Sct_Logger::get_instance();
 	}
 
 	/**
-	 * TEST: make_vector()
+	 * TEST: create_log()
 	 */
-	public function test_make_vector() {
+	public function test_create_log() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
+
 	/**
-	 * TEST: decrypt()
+	 * TEST: save_log()
 	 */
-	public function test_decrypt() {
+	public function test_save_log() {
 		$this->markTestIncomplete( 'This test is incomplete.' );
 	}
 }

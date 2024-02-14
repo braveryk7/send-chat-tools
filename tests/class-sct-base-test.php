@@ -2,10 +2,12 @@
 
 declare( strict_types = 1 );
 
+use Yoast\WPTestUtils\WPIntegration\TestCase;
+
 /**
  * Test: Sct_Base
  */
-class SctBaseTest extends PHPUnit\Framework\TestCase {
+class Sct_Base_Test extends TestCase {
 	/**
 	 * This test class instance.
 	 *
@@ -17,19 +19,19 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 	 * Settings: ABSPATH, test class file, WordPress functions.
 	 */
 	public static function setUpBeforeClass(): void {
-		if ( ! defined( 'ABSPATH' ) ) {
-			define( 'ABSPATH', '' );
+		if ( ! class_exists( 'Sct_Base ' ) ) {
+			require_once './class/class-sct-base.php';
 		}
 
 		require_once './class/class-sct-base.php';
-		require_once './tests/lib/wordpress-functions.php';
 	}
 
 	/**
 	 * SetUp.
 	 * Create instance.
 	 */
-	protected function setUp(): void {
+	public function set_up(): void {
+		parent::set_up();
 		$this->instance = new Sct_Base();
 	}
 
@@ -55,7 +57,7 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 		$method->setAccessible( true );
 
 		$this->assertSame(
-			'https://example.com/wp-content/plugins/send-chat-tools',
+			home_url( '/wp-content/plugins/send-chat-tools' ),
 			$method->invoke( $this->instance, 'send-chat-tools' ),
 		);
 	}
@@ -68,7 +70,7 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 		$method->setAccessible( true );
 
 		$this->assertSame(
-			'/DocumentRoot/wp-content/plugins/send-chat-tools',
+			get_home_path() . 'wp-content/plugins/send-chat-tools',
 			$method->invoke( $this->instance, 'send-chat-tools' ),
 		);
 	}
@@ -81,7 +83,7 @@ class SctBaseTest extends PHPUnit\Framework\TestCase {
 		$method->setAccessible( true );
 
 		$this->assertSame(
-			'/DocumentRoot/wp-content/plugins/send-chat-tools/send-chat-tools.php',
+			plugin_dir_path( ROOT_DIR ) . 'send-chat-tools/send-chat-tools.php',
 			$method->invoke( $this->instance )
 		);
 	}
