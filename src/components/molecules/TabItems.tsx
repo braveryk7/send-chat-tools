@@ -56,7 +56,7 @@ export const TabItems = ( props: TabItemsType ) => {
 					<LogDetail itemKey={ itemKey } />
 				</div>
 			) }
-			{ componentName === 'logs' && (
+			{ componentName === 'logs' && props.id === 'logs' && (
 				<div className="sct-items">
 					<LogView />
 				</div>
