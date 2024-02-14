@@ -42,7 +42,7 @@ export const TabItems = ( props: TabItemsType ) => {
 					/>
 				</div>
 			) }
-			{ itemKey && chatworkRoomId && (
+			{ itemKey && itemKey === 'chatwork' && chatworkRoomId && (
 				<div className="sct-items">
 					<TextControlForm
 						itemKey={ itemKey }
