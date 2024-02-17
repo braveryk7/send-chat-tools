@@ -327,7 +327,7 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 				break;
 		}
 
-		if ( $regex ) {
+		if ( $url && $regex ) {
 			$result = wp_remote_post( $url, $this->header );
 
 			if ( ctype_digit( $notification_type ) ) {
@@ -338,9 +338,9 @@ abstract class Sct_Generate_Content_Abstract extends Sct_Base {
 		}
 
 		$status_code = match ( true ) {
-			! isset( $result->errors ) => $result['response']['code'],
-			! $regex                   => 1003,
-			default                    => 1000,
+			isset( $result->errors ) => $result['response']['code'],
+			! $regex                 => 1003,
+			default                  => 1000,
 		};
 
 		if ( 200 !== $status_code && 204 !== $status_code ) {
